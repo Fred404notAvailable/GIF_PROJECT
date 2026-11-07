@@ -1,0 +1,14 @@
+---
+type: tech-cluster
+generated: true
+tag: "Next.js"
+skill_count: 3
+---
+# Technology: Next.js
+
+Selected skills in the DevCrew vault tagged with **Next.js**, grouped by architecture module:
+
+## [[Module 2 - Frontend & UI Engine Frameworks|Module 2: Frontend & UI Engine Frameworks]]
+- [[frontend-patterns]]: Frontend development patterns for React, Next.js, state management, performan...
+- [[next-dev-loop]]: Verify Next.js runtime behavior after editing app code. Use this skill to con...
+- [[react-best-practices]]: Comprehensive performance optimization guide for React and Next.js applicatio...

@@ -1,0 +1,61 @@
+{
+  "skill": "fix-issue",
+  "version": "2.1.0",
+  "testCases": [
+    {
+      "id": "bug-fix-rca",
+      "rule": "rca-five-whys",
+      "query": "Fix issue #123 where users get a 500 error on login",
+      "expectedBehavior": [
+        "Uses 5 Whys iterative causal analysis",
+        "Forms hypotheses with confidence scores (0-100%)",
+        "Launches 5 parallel RCA agents to investigate different failure hypotheses",
+        "Creates regression test BEFORE implementing fix",
+        "Creates feature branch, never commits to main/dev"
+      ]
+    },
+    {
+      "id": "regression-detection",
+      "rule": "rca-fishbone",
+      "query": "Fix issue #456 that was already fixed in #101 but came back",
+      "expectedBehavior": [
+        "Brainstorms potential causes per category before prioritizing root causes",
+        "Identifies this as a regression from a previously closed issue",
+        "Uses multi-factor Ishikawa analysis for root cause",
+        "Includes cross-category actions to verify and fix confirmed root causes"
+      ]
+    },
+    {
+      "id": "multi-file-fix",
+      "rule": "rca-fault-tree",
+      "query": "Fix issue #789 that affects both the API endpoint and the React component",
+      "expectedBehavior": [
+        "Uses fault tree analysis with AND/OR gates",
+        "Launches both backend-system-architect and frontend-ui-developer agents",
+        "Designs fix across multiple files with rollback plan",
+        "Decomposes failure into basic events and identifies minimal cut sets for the fix"
+      ]
+    },
+    {
+      "id": "should-not-trigger-feature",
+      "rule": null,
+      "query": "Add a new dashboard widget for analytics",
+      "expectedBehavior": [
+        "Does NOT trigger fix-issue workflow since this is a feature request",
+        "Recognizes this is a feature request, not a bug",
+        "Suggests using the implement skill instead"
+      ]
+    },
+    {
+      "id": "evidence-gathering",
+      "rule": "evidence-gathering",
+      "query": "Before diving into fixing issue #500, what evidence should I gather and what approach options exist?",
+      "expectedBehavior": [
+        "Uses AskUserQuestion to clarify fix approach: proper fix, quick fix, investigate, hotfix, or plan mode",
+        "Gathers evidence from issue description, git history, and code before forming fix hypotheses",
+        "Warns that fixing without evidence leads to wrong root cause, wasted effort, and regressions",
+        "Offers investigate-first option that produces root cause analysis without making code changes"
+      ]
+    }
+  ]
+}

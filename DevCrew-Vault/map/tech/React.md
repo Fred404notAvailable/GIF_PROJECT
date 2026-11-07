@@ -1,0 +1,16 @@
+---
+type: tech-cluster
+generated: true
+tag: "React"
+skill_count: 5
+---
+# Technology: React
+
+Selected skills in the DevCrew vault tagged with **React**, grouped by architecture module:
+
+## [[Module 2 - Frontend & UI Engine Frameworks|Module 2: Frontend & UI Engine Frameworks]]
+- [[frameworks-on-cloudflare]]: Build, migrate, and deploy web-framework applications on Cloudflare Workers. ...
+- [[frontend-patterns]]: Frontend development patterns for React, Next.js, state management, performan...
+- [[react-best-practices]]: Comprehensive performance optimization guide for React and Next.js applicatio...
+- [[react-native-best-practices]]: Provides React Native performance optimization guidelines for FPS, TTI, bundl...
+- [[web-artifacts-builder]]: Suite of tools for creating elaborate, multi-component claude.ai HTML artifac...

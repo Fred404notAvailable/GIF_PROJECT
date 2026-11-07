@@ -1,0 +1,16 @@
+---
+type: tech-cluster
+generated: true
+tag: "LangChain"
+skill_count: 5
+---
+# Technology: LangChain
+
+Selected skills in the DevCrew vault tagged with **LangChain**, grouped by architecture module:
+
+## [[Module 5 - AI Architecture, LLM & Prompt Engineering|Module 5: AI Architecture, LLM & Prompt Engineering]]
+- [[langchain-architecture]]: Master the LangChain framework for building sophisticated LLM applications wi...
+- [[langchain-fundamentals]]: Create LangChain agents with create_agent, define tools, and use middleware f...
+- [[langchain-middleware]]: INVOKE THIS SKILL when you need human-in-the-loop approval, custom middleware...
+- [[langchain-rag]]: INVOKE THIS SKILL when building ANY retrieval-augmented generation (RAG) syst...
+- [[langfuse]]: Expert in Langfuse - the open-source LLM observability platform. Covers traci...

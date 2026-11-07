@@ -1,0 +1,157 @@
+# NIST SP 800-53 Rev. 5 and FedRAMP reference
+
+For `control-audit`. NIST publications are U.S. government works and free to use; control text is still summarized here rather than reproduced, because the catalog is long and changes by release. Pull the current catalog from NIST's Cybersecurity and Privacy Reference Tool (CPRT) or the OSCAL content repo before fieldwork.
+
+## Versions
+
+| Document | Current | Notes |
+|---|---|---|
+| SP 800-53 Rev. 5 (controls catalog) | **Release 5.2.0**, 27 August 2025 | Patch release driven by EO 14306, on software update and patch integrity: new SA-15(13), SA-24, SI-2(7); SI-7(12) revised; discussion and related-control updates elsewhere. Earlier: 5.1.1 (7 November 2023, added IA-13 Identity Providers and Authorization Servers), 5.1 (2020 final with errata) |
+| SP 800-53A Rev. 5 (assessment procedures) | Release 5.2.0, August 2025 | New procedures for the 5.2.0 additions. The examine / interview / test methods come from here |
+| SP 800-53B (control baselines) | Re-issued with 5.2.0 for consistency; **baselines unchanged** | Low, Moderate, High security baselines and a privacy baseline |
+| SP 800-37 Rev. 2 (Risk Management Framework) | 2018 | Prepare, Categorize, Select, Implement, Assess, Authorize, Monitor |
+| FIPS 199 / FIPS 200 | 2004 / 2006 | Security categorization; minimum requirements that point to 800-53 |
+
+No release after 5.2.0 as of 2026-10-30: NIST's OSCAL catalog, last modified 2026-10-22, is still 5.2.0. Check CSRC before citing a release number.
+
+Not the same thing: **SP 800-171 Rev. 3** (CUI in non-federal systems, the basis for CMMC) is derived from 800-53 but is its own set of requirements. Use it for defense contractors; this reference doesn't cover it.
+
+## Control families (20)
+
+| ID | Family | Repo / hand off |
+|---|---|---|
+| AC | Access Control | `iam-audit`; app authz via `owasp-audit`, `api-audit` |
+| AT | Awareness and Training | — (training records) |
+| AU | Audit and Accountability | Logging config, retention; `siem-detection`, `cloud-audit` |
+| CA | Assessment, Authorization, and Monitoring | Assessment reports, POA&M, continuous monitoring |
+| CM | Configuration Management | IaC, baselines, change control (CM-3), branch protection; `cloud-audit`, `container-audit` |
+| CP | Contingency Planning | Backup and DR IaC, restore tests |
+| IA | Identification and Authentication | IdP and MFA policy; `iam-audit`, `secrets-audit` |
+| IR | Incident Response | IR plan and tests; `incident-triage` |
+| MA | Maintenance | — |
+| MP | Media Protection | Cloud provider inheritance |
+| PE | Physical and Environmental Protection | Cloud provider inheritance |
+| PL | Planning | System security plan, rules of behavior |
+| PM | Program Management | Organization-level, not system-level |
+| PS | Personnel Security | — (HR records) |
+| PT | PII Processing and Transparency | `privacy-engineering` |
+| RA | Risk Assessment | Risk assessment, vulnerability scanning (RA-5); `dependency-audit`, `patch-sweep`, `threat-modeling` |
+| SA | System and Services Acquisition | SDLC, developer testing (SA-11), supply chain in acquisition; `owasp-audit`, `agent-supply-chain-audit` |
+| SC | System and Communications Protection | Encryption in transit and at rest (SC-8, SC-28), boundary protection (SC-7); `crypto-audit`, `cloud-audit` |
+| SI | System and Information Integrity | Flaw remediation (SI-2), malware protection, monitoring (SI-4), integrity (SI-7); `siem-detection`, `dependency-audit` |
+| SR | Supply Chain Risk Management | Supplier assessment, SBOMs, provenance; `dependency-audit`, `agent-supply-chain-audit` |
+
+Each control has a base control and optional **enhancements**, written `AC-2(1)`. Many controls carry **organization-defined parameters** (ODPs): frequencies, time limits, roles. The ODP values are what make a control testable; an SSP that leaves them blank can't be assessed. In fingerprints, write enhancements with a dot: `AC-2.1`.
+
+## Baselines (SP 800-53B)
+
+Select a baseline from the system's FIPS 199 categorization (the high-water mark of confidentiality, integrity and availability impact), then **tailor**: scope out what doesn't apply, set ODPs, add compensating or supplemental controls, and apply overlays.
+
+| Baseline | Approximate size (controls + enhancements) |
+|---|---|
+| Low | 149 |
+| Moderate | 287 |
+| High | 370 |
+| Privacy | Separate baseline, applied whenever the system processes PII (count: verify) |
+
+Counts are as commonly cited for 800-53B; check them against the current CPRT export, since tooling counts differ on whether withdrawn items are included.
+
+**Common controls and inheritance.** Controls provided by the platform (cloud provider physical security, an enterprise IdP) are inherited. The SSP must say which controls are inherited, from whom, and which parts stay with the system (hybrid). A customer responsibility matrix (CRM) states what customers of a cloud service must do.
+
+## Assessment methods (SP 800-53A)
+
+800-53A assessment procedures use three methods. They map onto the methods in `control-audit` Step 3:
+
+| 800-53A | `control-audit` | Example |
+|---|---|---|
+| Examine | Inspection | Read the SSP section, the IdP policy export, the scan report |
+| Interview | Inquiry | Ask the ISSO how account reviews run |
+| Test | Reperformance / observation | Attempt a login without MFA in a test account; rerun a leaver comparison |
+
+Depth and coverage attributes (basic, focused, comprehensive) set how much examining and testing is done; higher baselines expect more.
+
+## Artifacts
+
+| Artifact | What it is | Readiness check |
+|---|---|---|
+| **SSP** (system security plan) | System description, boundary, data flows, categorization, and the implementation statement for every control in the baseline, with ODP values and responsibility (system / inherited / hybrid / customer) | Every control has an implementation statement that describes what happens, not that it's "in place"; ODPs filled; boundary diagram matches the IaC |
+| **SAP** (security assessment plan) | What the assessor will test and how | Scope and sampling agreed before testing |
+| **SAR** (security assessment report) | Assessor's results per control, with risk ratings for weaknesses | Exists for the latest assessment; open items carried into the POA&M |
+| **POA&M** (plan of action and milestones) | Every open weakness, with owner, milestones, scheduled completion date, and source (scan, assessment, incident) | Items past their dates have a justification; scan findings flow in within the required timeframe |
+| **ConMon** deliverables | Monthly vulnerability scans, POA&M updates, annual assessment, significant change requests | Scans authenticated and complete for the inventory |
+
+Map `findings.json` records to POA&M rows when the organization keeps one: one confirmed gap → one POA&M item, with the fingerprint in the item so re-runs match.
+
+### OSCAL
+
+NIST's Open Security Controls Assessment Language expresses catalogs, profiles (baselines), component definitions, SSPs, assessment plans and results, and POA&Ms in JSON, XML or YAML. NIST publishes 800-53 and 800-53B in OSCAL, and FedRAMP has published its baselines as OSCAL profiles. If the organization keeps its SSP in OSCAL, read it directly: `implemented-requirements` gives you the control inventory, and `by-components` gives you the responsibility split. Validate against the OSCAL schemas for the version the file declares.
+
+## FedRAMP
+
+### Where things stand (October 2026)
+
+FedRAMP is mid-transition. Check `fedramp.gov` for the current rules before any FedRAMP-specific advice; the program has been changing rules on a monthly cadence.
+
+- **Consolidated Rules for 2026 (CR26).** Published June 2026; optional early adoption from 4 July 2026; **mandatory from 1 January 2027**, with per-ruleset dates and grace periods running into 2027–2028. One rulebook for both the Rev5 path and FedRAMP 20x.
+- **Terminology.** "FedRAMP Certification" replaces "FedRAMP authorization" (agencies still issue their own ATOs). Under CR26 the SSP-and-appendices package moves to a **Certification Package Overview** and a **Security Decision Record**; **POA&Ms are replaced by "Accepted Weaknesses"**; continuous monitoring becomes **Ongoing Certification**, plus Collaborative Continuous Monitoring with agencies. Packages move from Word/Excel templates to simplified JSON, with OSCAL optional.
+- **Classes replace impact levels.** Certification Classes A, B, C and D replace Low / Moderate / High. FedRAMP says the classes "loosely align" with the 800-53B baselines and "there is not a direct correlation": Class B covers most Low objectives, C most Low and Moderate, D most use cases regardless of objective, and A is a new entry class. On the Rev5 path the minimum control lists line up closely with the old baselines (next section), Rev5 has no Class A, and Class D is available only through the agency path.
+- **Rev5 path.** Still open, and being changed toward 20x: FedRAMP removed most FedRAMP-assigned ODP values from the Rev5 baselines (providers now set and document their own), and expects FIPS 140 validated encryption for sensitive data. **No new Rev5 certifications after 11 June 2027**; existing ones stay active until at least 31 December 2028 unless FedRAMP directs otherwise.
+- **FedRAMP 20x.** Assessment against **Key Security Indicators (KSIs)**, outcome-based and validated largely by automation, grouped in themes such as cybersecurity education, cloud-native architecture, identity and access, incident response, monitoring and logging, policy and inventory, supply chain risk, and service configuration. Class A pipeline opened 3 August 2026; Class B and C pipelines 31 August 2026; a Class D (High) pilot is in progress (RFC-0036, October 2026). FedRAMP Ready went legacy on 28 July 2026, replaced by Class A.
+
+### FedRAMP Rev5 baselines
+
+FedRAMP baselines are 800-53 Rev. 5 baselines plus FedRAMP additions: Low, Moderate, High, and LI-SaaS (Low-impact SaaS, a tailored Low). They are larger than the NIST baselines; commonly cited sizes were 156 (Low), 323 (Moderate) and 410 (High) controls and enhancements. Under CR26 the Rev5 minimum lists (`FRC-CSF-BSL` in FedRAMP's machine-readable rules, version 2026.10.13.01) are **155 for Class B, 322 for Class C and 409 for Class D**. Read the current list from `fedramp-consolidated-rules.json` in `github.com/FedRAMP/rules` rather than from a count.
+
+Readiness points specific to FedRAMP Rev5:
+
+- **Boundary.** Every component that stores, processes or transmits federal data, and every external service it depends on, is either inside the boundary or a documented external service with its own FedRAMP status. Undocumented SaaS in the data path is the most common boundary problem.
+- **Cryptography.** FIPS 140 validated modules wherever federal data is protected by encryption. A library that's FIPS-capable but not running in FIPS mode doesn't count. Hand to `crypto-audit`.
+- **Vulnerability scanning.** Authenticated scans of the full inventory (OS, database, web app, containers), with remediation inside FedRAMP's timeframes; under CR26 the Vulnerability Detection and Response rules apply (check the current timelines on `fedramp.gov`).
+- **Independent assessment.** By a FedRAMP-recognized assessor (3PAO under the Rev5 terminology). Readiness work prepares for it and doesn't replace it.
+- **Multi-factor and identity.** Phishing-resistant MFA expectations follow OMB M-22-09 for federal users; check the IdP config with `iam-audit`.
+
+### Readiness for 20x
+
+The 20x shift moves evidence from narrative to machine-validated: for each KSI, the question is what automated, repeatable evidence shows it's met, and how often it's re-validated. That fits this skill's evidence-request model directly. For each KSI in the class being pursued, write the request as "what system produces this evidence automatically, at what frequency", and treat a KSI met only by a document as a gap to close before applying.
+
+## Fingerprints and ext
+
+- Framework slugs: `nist80053` for 800-53 assessments (`ext.framework`: `"nist-800-53r5-5.2.0"`), `fedramp` for FedRAMP (`ext.framework`: `"fedramp-rev5-moderate"`, `"fedramp-20x-class-c"`).
+- Control IDs as NIST writes them, enhancements with a dot: `AC-2.1`, `SC-28.1`. KSIs by their published ID.
+- Optional `ext` keys for this framework: `baseline` (`"moderate"`), `responsibility` (`"system"`, `"inherited"`, `"hybrid"`, `"customer"`), `poam_id` when a POA&M row exists.
+
+```
+control-audit/nist80053/AC-2.3/okta-workforce
+control-audit/fedramp/SC-28.1/aws/123456789012/prod-db
+control-audit/fedramp/CM-3/github/acme/api
+```
+
+## Severity, not POA&M risk rating
+
+POA&M and SAR risk ratings follow the assessor's method and drive remediation deadlines. Keep them in `ext` or the POA&M, not in `severity`. `severity` reflects the exposure, using the shared calibration:
+
+| Gap | Record |
+|---|---|
+| Federal data store encrypted with a non-validated module (SC-13, SC-28) | `confirmed` if the config shows it; rate by the exposure (often Medium: the data is encrypted, just not with a validated module). The FedRAMP consequence is separate and can be blocking |
+| Inactive accounts not disabled within the SSP's ODP period (AC-2(3)), including one with admin | `confirmed`, rated by what the accounts reach |
+| SSP implementation statements missing or saying only "implemented" | Documentation gap; blocks assessment |
+| POA&M items past due with no justification | Documentation gap, unless the underlying weakness is itself a confirmed exposure (then it's that finding) |
+| Unauthenticated vulnerability scans only | `needs_validation` for the hosts not covered: blocker is what an authenticated scan finds; plan is the authenticated scan |
+
+## Crosswalks
+
+- 800-53 ↔ NIST CSF 2.0: NIST publishes the mapping as CSF 2.0 informative references (CPRT / OLIR). Use `csf-mapping` and put the CSF subcategory in `ext.csf`.
+- 800-53 ↔ ISO/IEC 27001: NIST publishes "Crosswalk: 800-53 Rev. 5 to ISO/IEC 27001:2022" in OLIR, linked from the SP 800-53 Rev. 5 page's supplemental material.
+- 800-53 ↔ SOC 2: the AICPA publishes "Mapping 2017 Trust Services Criteria to NIST 800-53" (`tsc_to_nist_800-53.xlsx`, free AICPA account), mapped to the TSC with the 2022 points of focus. Check which 800-53 release the copy you download names.
+- One control, one evidence set: a single access-review control, evidenced once, can be cited for CC6.3, A.5.18 and AC-2(j) at the same time.
+
+## Sources
+
+- NIST SP 800-53 Rev. 5 Release 5.2.0, SP 800-53A Rev. 5 Release 5.2.0, SP 800-53B — `csrc.nist.gov` (CSRC news, 27 August 2025; CPRT).
+- NIST SP 800-37 Rev. 2; FIPS 199; FIPS 200; NIST OSCAL — `pages.nist.gov/OSCAL`.
+- FedRAMP Consolidated Rules for 2026: "What's Changing", "Important Dates", "Rev5 Deadlines", Key Security Indicators — `fedramp.gov/2026/` (read October 2026).
+- FedRAMP notice NTC-0013 (16 June 2026), outcome of RFC-0026 to RFC-0030 on Rev5 baselines and parameters.
+- FedRAMP RFC-0036, 20x Class D pilot requirements (15 October 2026).
+- OMB M-24-15 (FedRAMP modernization, 2024); OMB M-22-09 (zero trust, 2022).
+- FedRAMP machine-readable rules, `github.com/FedRAMP/rules` (`fedramp-consolidated-rules.json`, version 2026.10.13.01), and "Choosing a Certification Class" — `fedramp.gov/2026/providers/start/class/` (read 2026-10-30).
+- NIST OSCAL content, `github.com/usnistgov/oscal-content` (SP 800-53 Rev. 5 catalog revision history).

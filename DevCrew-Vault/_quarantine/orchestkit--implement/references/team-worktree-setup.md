@@ -1,0 +1,188 @@
+# Team Worktree Setup
+
+Per-teammate git worktree management for Agent Teams. Extends the general [Worktree Workflow](worktree-workflow.md) with team-specific patterns.
+
+---
+
+## Branch Naming Convention
+
+```
+feat/{feature}-{role}
+```
+
+Examples:
+- `feat/user-auth-backend`
+- `feat/user-auth-frontend`
+- `feat/user-auth-tests`
+- `feat/dashboard-backend`
+- `feat/dashboard-frontend`
+
+Role branches sit BESIDE the feature branch (`feat/{feature}-backend`), never
+under it: git cannot hold `feat/{feature}` and `feat/{feature}/backend` at the
+same time. Each role branch is created once, by `git worktree add -b` below.
+
+---
+
+## Worktree Setup Commands
+
+The **lead** creates worktrees before spawning teammates:
+
+Worktrees go INSIDE the repo at `.worktrees/<task>`. A sibling path (`../{project}-backend`)
+sits outside the session's project directory, so the harness silently bounces any `cd` into it
+and the teammate ends up operating on the PRIMARY tree — platform#9870 (#3319).
+
+```bash
+# Create worktrees — one per implementing teammate
+git worktree add .worktrees/backend  -b feat/{feature}-backend  feat/{feature}
+git worktree add .worktrees/frontend -b feat/{feature}-frontend feat/{feature}
+git worktree add .worktrees/tests    -b feat/{feature}-tests    feat/{feature}
+
+# Verify — both the registration AND that each branch is the one you asked for
+git worktree list
+```
+
+**Directory layout after setup:**
+
+<!-- ascii-lint-disable: balanced-corners -->
+```
+{project}/                  ← Primary tree (lead + code-reviewer)
+└── .worktrees/
+    ├── backend/            ← backend-architect works here
+    ├── frontend/           ← frontend-dev works here
+    └── tests/              ← test-engineer works here
+```
+
+`.worktrees/` is gitignored. Nesting inside the repo is what keeps each teammate's `cd` from
+being bounced back to the project root.
+
+---
+
+## Teammate Assignment
+
+Include the worktree path in each teammate's spawn prompt:
+
+| Teammate | Worktree | Working Directory |
+|----------|----------|-------------------|
+| backend-architect | `{project}/.worktrees/backend/` | Full project access, writes to backend dirs |
+| frontend-dev | `{project}/.worktrees/frontend/` | Full project access, writes to frontend dirs |
+| test-engineer | `{project}/.worktrees/tests/` | Full project access, writes to test dirs |
+| code-reviewer | Main worktree | Read-only, reviews across all worktrees |
+
+**Spawn prompt addition:**
+
+```
+## Your Working Directory
+Work EXCLUSIVELY in: /path/to/{project}/.worktrees/backend/
+Before any write, run `pwd` and `git branch --show-current`. If they are not
+that path and feat/{feature}-backend, stop and message the lead.
+Do NOT modify files in other worktrees.
+Commit your changes to the feat/{feature}-backend branch.
+```
+
+---
+
+## Merge Strategy
+
+After all teammates complete, the lead merges each role branch:
+
+### Squash Merge Per Role (Recommended)
+
+```bash
+# Switch to feature branch
+git checkout feat/{feature}
+
+# Merge each role as a single commit
+git merge --squash feat/{feature}-backend
+git commit -m "feat({feature}): backend implementation"
+
+git merge --squash feat/{feature}-frontend
+git commit -m "feat({feature}): frontend implementation"
+
+git merge --squash feat/{feature}-tests
+git commit -m "test({feature}): complete test suite"
+```
+
+### Handling Merge Conflicts
+
+Conflicts typically occur in shared files:
+- **Type definitions** — backend and frontend may define overlapping types
+- **Package files** — both may add dependencies
+- **Config files** — shared configuration
+
+Resolution priority:
+1. Backend types are authoritative (they own the API contract)
+2. For package conflicts, combine both additions
+3. For config conflicts, merge manually
+
+---
+
+## Cleanup
+
+After successful merge and verification:
+
+```bash
+# Remove worktrees
+git worktree remove ../{project}-backend
+git worktree remove ../{project}-frontend
+git worktree remove ../{project}-tests
+
+# Delete role branches
+git branch -d feat/{feature}-backend
+git branch -d feat/{feature}-frontend
+git branch -d feat/{feature}-tests
+
+# Verify cleanup
+git worktree list
+git branch --list "feat/{feature}-*"
+```
+
+---
+
+## When to Skip Worktrees
+
+Not every Agent Teams session needs worktrees. Skip when:
+
+| Condition | Skip Worktrees? | Reason |
+|-----------|-----------------|--------|
+| Read-only roles only (audit, review) | Yes | No file writes = no conflicts |
+| Single-stack scope (backend-only or frontend-only) | Yes | One writer, others are reviewers |
+| Research/debugging task | Yes | Exploration, not implementation |
+
+Two or more teammates that write at the same time ALWAYS need worktrees (#4557): ork agents carry no frontmatter isolation, and a small feature or separate directories still share the lockfile, the build output and the git index. Skip only for the rows above (no writer, or a single writer). Then the other teammates read, and the lead still assigns **clear file ownership** in spawn prompts:
+
+```
+## File Ownership
+You own: src/api/, src/models/, src/services/
+Do NOT modify: src/components/, src/features/, src/hooks/
+```
+
+---
+
+## Config Sharing (CC 2.1.63+)
+
+Project configs and auto-memory are **automatically shared** across worktrees (CC 2.1.63+). No manual setup needed:
+
+- `.claude/settings.json` and `CLAUDE.md` available in every worktree
+- Auto-memory persists — teammates inherit learned patterns
+- Plugins are discovered from any worktree
+
+---
+
+## Worktree + Agent Teams Checklist
+
+Before spawning teammates:
+
+- [ ] Feature branch exists (`feat/{feature}`)
+- [ ] Role branches created from feature branch
+- [ ] Worktrees added for each implementing teammate
+- [ ] Each teammate's spawn prompt includes worktree path
+- [ ] Code-reviewer assigned to main worktree (read-only)
+
+After all teammates complete:
+
+- [ ] All role branches have commits
+- [ ] Squash merge each role into feature branch
+- [ ] Merge conflicts resolved
+- [ ] Integration tests pass on merged branch
+- [ ] Worktrees removed
+- [ ] Role branches deleted

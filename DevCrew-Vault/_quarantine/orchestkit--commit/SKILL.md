@@ -1,0 +1,271 @@
+---
+name: commit
+license: MIT
+compatibility: "Claude Code 2.1.277+."
+description: "Creates Conventional Commits with scope detection, co-author lines and hook compliance; blocks secrets and generated-only files. Use when asked to commit, save progress or write a commit message, not for incidental commits."
+argument-hint: "[message]"
+context: inherit
+user-invocable: true
+disable-model-invocation: false
+allowed-tools: "Bash Read Write AskUserQuestion"
+skills: [chain-patterns]
+effort: low
+hooks:
+  PreToolUse:
+    - matcher: "Bash"
+      hooks:
+        - type: command
+          command: "${CLAUDE_PLUGIN_ROOT}/hooks/bin/run-hook.mjs skill/commit-convention-loader"
+          once: true
+metadata:
+  category: workflow-automation
+  version: "1.2.0"
+  author: "OrchestKit"
+  complexity: "low"
+  tags: "git, commit, version-control, conventional-commits"
+triggers:
+  keywords: [commit, comit, "commit message", "stage and commit", "save progress", "save my progress", "wrap it up", "conventional commit"]
+  examples:
+    - "commit my changes"
+    - "create a conventional commit for these files"
+    - "stage and commit the new tests"
+  anti-triggers: [push, pr, "pull request", review, rebase, merge]
+invocation_hooks:
+  - "git rev-parse --is-inside-work-tree >/dev/null 2>&1 || echo 'Warning: not inside a git repository'"
+---
+
+# Smart Commit
+
+Host-neutral workflow. Invoke by skill name (`commit`). Claude Code slash routing, YAML hook loaders, and `.claude/chain` live in `references/claude-code.md`.
+
+Simple, validated commit creation. Run checks locally, no agents needed for standard commits.
+
+> **Note:** If `disableSkillShellExecution` is enabled (CC 2.1.91), the git repository check won't run. This skill requires a git repository.
+
+## Quick Start
+
+```bash
+commit
+commit fix typo in auth module
+```
+
+## Argument Resolution
+
+```python
+COMMIT_MSG = "$ARGUMENTS"  # Optional commit message, e.g., "fix typo in auth module"
+# If provided, use as commit message. If empty, generate from staged changes.
+# $ARGUMENTS[0] is the first token (CC 2.1.59 indexed access)
+```
+
+## STEP 0: Choose Commit Mode (AskUserQuestion — M118 #1465)
+
+Default is "new commit", but voice-flow needs explicit choice when amend / push / stash is wanted:
+
+```python
+# Skip when a flag in the invocation makes the mode unambiguous:
+#   commit --amend  → skip, mode=amend
+#   commit --push   → skip, mode=new+push
+#   commit --stash  → skip, mode=stash-first
+#   ORK_COMMIT_DEFAULT_MODE=new (or amend|push|stash) → skip, use env value
+#
+# Otherwise, ask:
+AskUserQuestion(questions=[{
+  "question": "How should this commit land?",
+  "header": "Commit mode",
+  "options": [
+    {"label": "New commit (default)", "description": "Create a new commit, leave HEAD intact"},
+    {"label": "Amend HEAD", "description": "Fold staged changes into the last commit (LOCAL ONLY — refuses if HEAD is published)"},
+    {"label": "New commit + push", "description": "Commit then `git push` (refuses on protected branches)"},
+    {"label": "Stash first", "description": "Stash unrelated working-tree changes, then commit only what was already staged"}
+  ]
+}])
+```
+
+**Mode-specific guards:**
+
+- **Amend HEAD** — verify HEAD is not on origin (`git rev-list HEAD..origin/<branch>` empty); if it is published, refuse and recommend "New commit" instead.
+- **New commit + push** — re-check the protected-branch rule from Phase 1 before pushing; if HEAD's branch is `main`/`master`/`dev`, abort.
+- **Stash first** — `git stash push -k -m "ork:commit autostash"` (keep-index), commit, then `git stash pop` after push success.
+
+## Workflow
+
+### Phase 0: Confirm there is a repository to act on
+
+Before any guard, run `git rev-parse --is-inside-work-tree`. If it fails, or
+if the Bash tool is not available in this session, say so in one sentence and
+produce the commit message text only. Skip Phases 1 to 3 entirely.
+
+Never print a branch guard, a validation status, or any other repository fact
+you did not observe. Measured with `claude plugin eval` on 2026-09-12: in a
+sandbox with no repository and no Bash, this skill rendered a "pre-commit
+guard" box claiming the branch was `main` and protected. Nothing had been
+checked. A message-only answer that says "I could not verify branch or lint
+state" is correct; an invented guard is a defect.
+
+### Phase 1: Pre-Commit Safety Check
+
+```bash
+# CRITICAL: Verify we're not on dev/main
+BRANCH=$(git branch --show-current)
+if [[ "$BRANCH" == "dev" || "$BRANCH" == "main" || "$BRANCH" == "master" ]]; then
+  echo "STOP! Cannot commit directly to $BRANCH"
+  echo "Create a feature branch: git checkout -b issue/<number>-<description>"
+  exit 1
+fi
+```
+
+### Phase 2: Run Validation Locally
+
+Run every check that CI runs:
+
+```bash
+# Backend (Python)
+poetry run ruff format --check app/
+poetry run ruff check app/
+poetry run mypy app/
+
+# Frontend (Node.js)
+npm run format:check
+npm run lint
+npm run typecheck
+```
+
+Fix any failures before proceeding.
+
+### Phase 3: Review Changes
+
+```bash
+git status
+git diff --staged   # What will be committed
+git diff            # Unstaged changes
+```
+
+### Phase 3b: Agent Attribution (automatic)
+
+Before committing, check for the branch activity ledger at `.claude/agents/activity/{branch}.jsonl`.
+If it exists and has entries since the last commit, include them in the commit message:
+
+1. Read `.claude/agents/activity/{branch}.jsonl` (one JSON object per line)
+2. Filter entries where `ts` is after the last commit timestamp (`git log -1 --format=%cI`)
+3. Skip agents with `duration_ms < 5000` (advisory-only agents go in PR, not commits)
+4. Add an **"Agents Involved:"** section between the commit body and the Co-Authored-By trailer
+5. Add per-agent `Co-Authored-By` trailers: `Co-Authored-By: ork:{agent} <noreply@orchestkit.dev>`
+
+If the ledger doesn't exist or is empty, skip this step — commit normally.
+
+### Phase 4: Stage and Commit
+
+> **CC 2.1.113 idiom:** Multi-line Bash with leading `# intent:` comments now shows the full command in the transcript — prefix complex scripts with a one-line intent comment so future readers (and `/recap` scans) can grep the transcript for what happened without re-reading the diff.
+
+```bash
+# intent: stage the hook change + its test + built artifacts
+# Stage files
+git add <files>
+# Or all: git add .
+
+# Commit with conventional format (with agent attribution if ledger exists)
+git commit -m "<type>(#<issue>): <brief description>
+
+- [Change 1]
+- [Change 2]
+
+Agents Involved:
+  backend-system-architect — API design + data models (2m14s)
+  security-auditor — Dependency audit (0m42s)
+
+Co-Authored-By: Claude <noreply@anthropic.com>
+Co-Authored-By: ork:backend-system-architect <noreply@orchestkit.dev>
+Co-Authored-By: ork:security-auditor <noreply@orchestkit.dev>"
+
+# Verify
+git log -1 --stat
+```
+
+> **CC 2.1.183 — `attribution.sessionUrl`:** In web and Remote Control sessions, CC appends a claude.ai session link to commit/PR attribution. Set `attribution.sessionUrl: false` (`/config attribution.sessionUrl=false`) to omit it — useful for public repos where the session link should not leak. The `Co-Authored-By` trailers above are unaffected.
+
+### Handoff File
+
+After successful commit, write handoff:
+
+```python
+Write(".claude/chain/committed.json", JSON.stringify({
+  "phase": "commit", "sha": "<commit-sha>",
+  "message": "<commit-message>", "branch": "<branch>",
+  "files": [<staged-files>]
+}))
+```
+
+## Commit Types
+
+| Type | Use For |
+|------|---------|
+| `feat` | New feature |
+| `fix` | Bug fix |
+| `refactor` | Code improvement |
+| `docs` | Documentation |
+| `test` | Tests only |
+| `chore` | Build/deps/CI |
+
+## Quick Rules
+
+1. **Run validation locally** - Don't spawn agents to run lint/test
+2. **NO file creation** - Don't create MD files or documentation
+3. **One logical change per commit** - Keep commits focused
+4. **Reference issues** - Use `#123` format in commit message
+5. **Subject line < 72 chars** - Keep it concise
+
+## Quick Commit
+
+For trivial changes (typos, single-line fixes):
+
+```bash
+git add . && git commit -m "fix(#123): Fix typo in error message
+
+Co-Authored-By: Claude <noreply@anthropic.com>"
+```
+
+## Verification Gate
+
+Before committing, apply the 5-step gate: `Read("../../shared/rules/verification-gate.md")`. Run tests fresh. Read the output. Only commit if tests pass. "Should be fine" is not evidence.
+
+## Quality Bar
+
+Done means all of these hold:
+- Commit landed on a feature branch, never dev/main/master (Phase 1 guard held)
+- Subject uses a conventional type (feat/fix/docs/refactor/test/chore) matching the diff content, <=72 chars
+- Issue reference (#N) present in the message whenever HEAD is on an issue branch
+- Local validation for the touched stack (lint/type/test) ran and passed before the commit
+- `Co-Authored-By: Claude` trailer present; per-agent trailers added only when the activity ledger has post-last-commit entries
+- `git log -1 --stat` shows exactly the intended files, no secrets and no generated-only-noise commit
+
+## Related Skills
+- `ork:create-pr`: Create pull requests from commits
+- `ork:review-pr`: Review changes before committing
+- `ork:fix-issue`: Fix issues and commit the fixes
+- `ork:issue-progress-tracking`: Auto-updates GitHub issues with commit progress
+
+## Rules
+
+Each category has individual rule files in `rules/` loaded on-demand:
+
+| Category | Rule | Impact | Key Pattern |
+|----------|------|--------|-------------|
+| Atomic Commits | `rules/atomic-commit.md` | CRITICAL | One logical change per commit, atomicity test |
+| Branch Protection | `rules/branch-protection.md` | CRITICAL | Protected branches, required PR workflow |
+| Commit Splitting | `rules/commit-splitting.md` | HIGH | `git add -p`, interactive staging, separation strategies |
+| Conventional Format | `rules/conventional-format.md` | HIGH | type(scope): description, breaking changes |
+| History Hygiene | `rules/history-hygiene.md` | HIGH | Squash WIP, fixup commits, clean history |
+| Issue Reference | `rules/issue-reference-required.md` | HIGH | Reference issue `#N` in commits on issue branches |
+| Merge Strategy | `rules/merge-strategy.md` | HIGH | Rebase-first, conflict resolution, force-with-lease |
+| Stacked PRs | `rules/stacked-pr-workflow.md` | HIGH | Stack planning, PR creation, dependency tracking |
+| Stacked PRs | `rules/stacked-pr-rebase.md` | HIGH | Rebase management, force-with-lease, retargeting |
+
+**Total: 9 rules across 8 categories**
+
+## References
+
+Load on demand with `Read("references/<file>")`:
+| File | Content |
+|------|---------|
+| `references/conventional-commits.md` | Conventional commits specification |
+| `references/recovery.md` | Recovery procedures |

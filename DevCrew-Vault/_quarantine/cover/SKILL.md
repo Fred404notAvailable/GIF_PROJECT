@@ -1,0 +1,501 @@
+---
+name: cover
+license: MIT
+compatibility: "Claude Code 2.1.277+. Requires network access."
+description: "Writes tests that do not exist yet across unit, integration and end-to-end tiers, healing failures up to 3 times. Use when code lacks tests. Not for grading existing tests (use verify) or running a suite."
+argument-hint: "[scope-or-feature]"
+user-invocable: true
+allowed-tools: "SendMessage AskUserQuestion Bash Read Write Edit Grep Glob Agent TaskCreate TaskUpdate TaskList TaskStop ToolSearch Workflow CronCreate CronDelete Monitor PushNotification mcp__memory__search_nodes mcp__context7__resolve-library-id mcp__context7__query-docs"
+skills: [testing-unit, testing-integration, testing-e2e, testing-perf, testing-llm, chain-patterns, memory, quality-gates]
+effort: high
+model: sonnet
+hooks:
+  PreToolUse:
+    - matcher: "Bash"
+      hooks:
+        - type: command
+          command: "${CLAUDE_PLUGIN_ROOT}/hooks/bin/run-hook.mjs skill/test-framework-detector"
+          once: true
+metadata:
+  category: workflow-automation
+  mcp-server: memory, context7
+  version: "1.3.0"
+  author: "OrchestKit"
+  complexity: "high"
+  tags: "testing, coverage, unit, integration, e2e, test-generation, real-services, testcontainers"
+triggers:
+  keywords: [cover, "generate tests", "test suite", "test coverage", "write tests for", "add tests", "need tests"]
+  examples:
+    - "generate tests for the authentication service"
+    - "cover the payment module with unit and integration tests"
+    - "I just finished implementing checkout, now write tests"
+  anti-triggers: [verify, run tests, npm test, fix, implement, review]
+paths: ["src/**/*.test.{ts,tsx,js}", "**/.coveragerc", "vitest.config.*", "jest.config.*"]
+invocation_hooks:
+  - "command -v vitest >/dev/null 2>&1 || command -v jest >/dev/null 2>&1 || echo 'Warning: no test runner found: run npm install first'"
+---
+
+# Cover: Test Suite Generator
+
+Host-neutral workflow. Invoke by skill name (`cover`). Claude Code slash routing, YAML hook loaders, and `.claude/chain` live in `references/claude-code.md`.
+
+Generate comprehensive test suites for existing code with real-service integration testing and automated failure healing.
+
+> **Note:** If `disableSkillShellExecution` is enabled (CC 2.1.91), the precondition check for vitest/jest won't run. Verify a test runner is installed before proceeding: `npx vitest --version` or `npx jest --version`.
+
+## Quick Start
+
+```bash
+cover authentication flow
+cover --model=opus payment processing
+cover --tier=unit,integration user service
+cover --real-services checkout pipeline
+```
+
+## Argument Resolution
+
+A pronoun target (`this`, `them`, `the above`) is read back from the conversation, announced in one line, and used: `Read("../../shared/rules/target-resolution.md")`, inline half.
+
+```python
+SCOPE = "$ARGUMENTS"  # e.g., "authentication flow"
+
+# Flag parsing
+MODEL_OVERRIDE = None
+TIERS = ["unit", "integration", "e2e"]  # default: all three
+REAL_SERVICES = False
+
+for token in "$ARGUMENTS".split():
+    if token.startswith("--model="):
+        MODEL_OVERRIDE = token.split("=", 1)[1]
+        SCOPE = SCOPE.replace(token, "").strip()
+    elif token.startswith("--tier="):
+        TIERS = token.split("=", 1)[1].split(",")
+        SCOPE = SCOPE.replace(token, "").strip()
+    elif token == "--real-services":
+        REAL_SERVICES = True
+        SCOPE = SCOPE.replace(token, "").strip()
+```
+
+---
+
+## Step -0.5: Effort-Aware Coverage Scaling (CC 2.1.76, env var since 2.1.120)
+
+Read `$CLAUDE_EFFORT` (CC 2.1.120+) first; explicit `--effort=` token wins as override. Default `high` when CC < 2.1.120 and no flag. Pattern matches assess + explore (#1540). Scale test generation depth:
+
+| Effort Level | Tiers Generated | Agents | `maxIterations` to pass Phase 5 |
+|-------------|----------------|--------|-----------------|
+| **low** | Unit only | 1 agent | 2 (1 repair + 1 verify) |
+| **medium** | Unit + Integration | 2 agents | 2 (1 repair + 1 verify) |
+| **high** (default) | Unit + Integration + E2E | 3 agents | 3 (2 repairs + 1 verify) |
+| **xhigh** (CC 2.1.111+) | Unit + Integration + E2E | 3 agents | 3 (the ceiling; xhigh adds agents, not heal passes) |
+
+Values are what you pass as `maxIterations` in Phase 5. The script clamps to `[2, 3]`
+(`heal-loop.js`), so anything outside that range is coerced, and the final iteration always
+verifies rather than repairing. There is no 4-iteration mode.
+
+> **Override:** Explicit `--tier=` flag or user selection overrides `/effort` downscaling.
+
+## Step -1: MCP Probe + Resume Check
+
+```python
+# Probe MCPs (parallel):
+# memory is alwaysLoad in .mcp.json (CC 2.1.121+, #1541). Probe below kept as fallback for older CC:
+ToolSearch(query="select:mcp__memory__search_nodes")
+ToolSearch(query="select:mcp__context7__resolve-library-id")
+
+Write(".claude/chain/capabilities.json", {
+  "memory": <true if found>,
+  "context7": <true if found>,
+  "skill": "cover",
+  "timestamp": now()
+})
+
+# Resume check:
+Read(".claude/chain/state.json")
+# If exists and skill == "cover": resume from current_phase
+# Otherwise: initialize state
+```
+
+---
+
+## Step 0: Scope & Tier Selection
+
+```python
+AskUserQuestion(
+  questions=[
+    {
+      "question": "What test tiers should I generate?",
+      "header": "Test Tiers",
+      "options": [
+        {"label": "Full coverage (Recommended)", "description": "Unit + Integration (real services) + E2E"},
+        {"label": "Unit + Integration", "description": "Skip E2E, focus on logic and service boundaries"},
+        {"label": "Unit only", "description": "Fast isolated tests for business logic"},
+        {"label": "E2E only", "description": "Playwright browser tests"}
+      ],
+      "multiSelect": false
+    },
+    {
+      "question": "Healing strategy for failing tests?",
+      "header": "Failure Handling",
+      "options": [
+        {"label": "Auto-heal (Recommended)", "description": "Fix failing tests up to 3 iterations"},
+        {"label": "Generate only", "description": "Write tests, report failures, don't fix (skips the heal loop)"},
+        {"label": "Strict", "description": "All tests must pass or abort"}
+      ],
+      "multiSelect": false
+    }
+  ]
+)
+```
+
+Override TIERS based on selection. Skip this step if `--tier=` flag was provided.
+
+---
+
+**Finish line.** Done means: every generated test runs, the suite is green or each remaining failure is reported with its heal-loop classification, and the coverage report is written. Follow `Read("../../shared/rules/long-run-protocol.md")`: keep going when a step needs no input from the user, stop and ask only when you can't continue without them or before anything destructive, check each subagent's evidence before accepting it, and mark anything you couldn't confirm with where you looked.
+
+## Task Management (MANDATORY)
+
+```python
+# 1. Create main task IMMEDIATELY
+TaskCreate(subject=f"Cover: {SCOPE}", description="Generate comprehensive test suite with real-service testing", activeForm=f"Generating tests for {SCOPE}")
+
+# 2. Create subtasks for each phase
+TaskCreate(subject="Discover scope and detect frameworks", activeForm="Discovering test scope")    # id=2
+TaskCreate(subject="Analyze coverage gaps", activeForm="Analyzing coverage gaps")                  # id=3
+TaskCreate(subject="Generate tests (parallel per tier)", activeForm="Generating tests")            # id=4
+TaskCreate(subject="Execute generated tests", activeForm="Running tests")                          # id=5
+TaskCreate(subject="Heal failing tests", activeForm="Healing test failures")                       # id=6
+TaskCreate(subject="Generate coverage report", activeForm="Generating report")                     # id=7
+
+# 3. Set dependencies for sequential phases
+TaskUpdate(taskId="3", addBlockedBy=["2"])  # Analysis needs discovery first
+TaskUpdate(taskId="4", addBlockedBy=["3"])  # Generation needs gap map
+TaskUpdate(taskId="5", addBlockedBy=["4"])  # Execution needs generated tests
+TaskUpdate(taskId="6", addBlockedBy=["5"])  # Healing needs test results
+TaskUpdate(taskId="7", addBlockedBy=["6"])  # Report needs healed suite
+
+# 4. Update status as you progress
+TaskUpdate(taskId="2", status="in_progress")  # When starting
+TaskUpdate(taskId="2", status="completed")    # When done, repeat for each subtask
+```
+
+---
+
+## 6-Phase Workflow
+
+| Phase | Activities | Output |
+|-------|------------|--------|
+| **1. Discovery** | Detect frameworks, scan scope, find untested code | Framework map, file list |
+| **2. Coverage Analysis** | Run existing tests, rank risk targets per tier | Coverage baseline, risk targets with why |
+| **3. Generation** | Parallel test-generator agents per tier, then behaviour gate | Test files created, gate verdicts |
+| **4. Execution** | Run all generated tests | Pass/fail results |
+| **5. Heal** | Fix failures, re-run (max 3 iterations) | Green test suite |
+| **6. Report** | Coverage delta, test count, summary | Coverage report |
+
+### Phase Handoffs
+
+| After Phase | Handoff File | Key Outputs |
+|-------------|-------------|-------------|
+| 1. Discovery | `01-cover-discovery.json` | Frameworks, scope files, tier plan |
+| 2. Analysis | `02-cover-analysis.json` | Baseline coverage, risk targets with why |
+| 3. Generation | `03-cover-generation.json` | Files created, test count per tier, behaviour gate verdicts |
+| 5. Heal | `05-cover-healed.json` | Final pass/fail, iterations used |
+
+---
+
+### Phase 1: Discovery
+
+Detect the project's test infrastructure and scope the work.
+
+```python
+# PARALLEL, all in ONE message:
+# 1. Framework detection (hook handles this, but also scan manually)
+Grep(pattern="vitest|jest|mocha|playwright|cypress", glob="package.json", output_mode="content")
+Grep(pattern="pytest|unittest|hypothesis", glob="pyproject.toml", output_mode="content")
+Grep(pattern="pytest|unittest|hypothesis", glob="requirements*.txt", output_mode="content")
+
+# 2. Real-service infrastructure
+Glob(pattern="**/docker-compose*.yml")
+Glob(pattern="**/testcontainers*")
+Grep(pattern="testcontainers", glob="**/package.json", output_mode="content")
+Grep(pattern="testcontainers", glob="**/requirements*.txt", output_mode="content")
+
+# 3. Existing test structure
+Glob(pattern="**/tests/**/*.test.*")
+Glob(pattern="**/tests/**/*.spec.*")
+Glob(pattern="**/__tests__/**/*")
+Glob(pattern="**/test_*.py")
+
+# 4. Scope files (what to test)
+# If SCOPE specified, find matching source files
+Grep(pattern=SCOPE, output_mode="files_with_matches")
+```
+
+**Real-service decision:**
+- `docker-compose*.yml` found → integration tests use real services
+- `testcontainers` in deps → use testcontainers for isolated service instances
+- Neither found + `--real-services` flag → error: "No docker-compose or testcontainers found. Install testcontainers or remove --real-services flag."
+- Neither found, no flag → integration tests use mocks (MSW/VCR)
+
+Load real-service detection details: `Read("references/real-service-detection.md")`
+
+### Phase 2: Coverage Analysis and Risk Targets
+
+Run existing tests for a baseline, then pick targets by RISK. Coverage is information for the report, never a target.
+
+```python
+# Baseline: npx vitest run --coverage --reporter=json | pytest --cov=<scope> --cov-report=json | go test -coverprofile=coverage.out ./...
+# Rank uncovered code by risk and record WHY each target was chosen:
+# changed code, complex branches, error paths, security and money paths, past bugs
+# gap_map[tier] = [{"target": "src/billing/refund.ts:roundRefund", "why": "money path, fixed in #812"}]
+```
+
+Output the baseline and the risk-ranked targets, each with its why, immediately (progressive output). Signals and how to find them: `Read("references/behaviour-gate.md")`.
+
+### Phase 3: Generation (Parallel Agents)
+
+Spawn test-generator agents per tier. Launch ALL in ONE message with `run_in_background=true`.
+
+> **Isolation:** spawn each tier agent with `Agent(isolation="worktree")`, one
+> worktree per tier (unit / integration / e2e) so they don't conflict. The
+> subagent bypass of the worktree-isolation guard was fixed in CC 2.1.154 and
+> completed in 2.1.203; ork's floor is >= 2.1.220, so every supported session
+> gets real isolation. Do not create worktrees by hand before spawning.
+>
+> The new branch's base comes from the `worktree.baseRef` setting, never from a
+> hardcoded branch name. **ork does not set it**: a plugin cannot, and no ork
+> settings file carries it. Unless the operator put `"baseRef": "head"` in
+> `.claude/settings.json` or `~/.claude/settings.json`, CC's default `"fresh"`
+> applies: every tier agent branches from `origin/<default>`, unpushed local
+> commits are invisible to it, and `tsc` fails with "cannot find module" for
+> code you just wrote. Verify the setting before spawning. Full pattern:
+> `Read("../chain-patterns/references/worktree-agent-pattern.md")`
+
+```python
+# Unit tests agent (worktree-isolated)
+if "unit" in TIERS:
+    Agent(
+        subagent_type="ork:test-generator",
+        isolation="worktree",
+        prompt=f"""Generate unit tests for: {SCOPE}
+        Risk targets, each with why: {gap_map["unit"]}
+        Framework: {detected_framework}
+        Existing tests: {existing_test_files}
+
+        Focus on:
+        - AAA pattern (Arrange-Act-Assert)
+        - Parametrized tests for multiple inputs
+        - MSW/VCR for HTTP mocking (never mock fetch directly)
+        - Factory-based test data (FactoryBoy/faker-js)
+        - Edge cases: empty input, errors, timeouts, boundary values
+        - BEHAVIOUR GATE: write a test ONLY if it asserts an observable result. Never write a
+          mock-call-only, assertion-free, tautological, or source-reading test (references/behaviour-gate.md)""",
+        run_in_background=True,
+        max_turns=50,
+        model=MODEL_OVERRIDE
+    )
+
+# Integration + E2E agents follow the same pattern:
+# - subagent_type="ork:test-generator", isolation="worktree", run_in_background=True, same targets + BEHAVIOUR GATE lines
+# - Integration focus: API endpoints (Supertest/httpx), real DB, contract tests (Pact), Zod schema validation
+# - E2E focus: Playwright, semantic locators, Page Object Model, axe-core a11y, visual regression
+#
+# Special case: emulate (Vercel Labs stateful API emulation):
+# When integration tests need GitHub/Stripe/Resend/Okta/etc. emulated
+# (HMAC webhooks, parallel port isolation, full config from scratch),
+# spawn emulate-engineer instead of test-generator for that tier:
+# - subagent_type="ork:emulate-engineer" (same isolation="worktree" form)
+# - Pairs with emulate-seed skill for seed YAML patterns
+```
+
+Output each agent's results **as soon as it returns**. Don't wait for all agents.
+
+### Phase 3b: Behaviour Gate
+
+Before Phase 4, run `node "${CLAUDE_SKILL_DIR}/scripts/check-behaviour-tests.mjs" --json <new test files>` over the NEW test files only. Exit 1 lists each rejected test with its rule: (a) only mock-call assertions, (b) no assertion, only tautologies (`expect(true).toBe(true)`), or only not-to-throw when not throwing is not the stated contract, (c) reads or greps source instead of executing it. Delete each rejected test (the whole file on `drop`, which means every recognised test was rejected) or rewrite it to assert an observable result, and re-run until exit 0. Never delete an `unchecked` file or test (no test recognised, or its body is declared elsewhere): review it by hand. Run it again after Phase 5. Record the verdicts in `03-cover-generation.json`. Rules and limits: `Read("references/behaviour-gate.md")`.
+
+> **Focus mode (CC 2.1.101):** In focus mode, include the full coverage report (before/after delta, test count per tier, files created) in your final message.
+
+### Phase 4: Execution
+
+Run all generated tests and collect results.
+
+```python
+# Run test commands per tier (PARALLEL if independent):
+# Unit: npx vitest run tests/unit/ OR pytest tests/unit/
+# Integration: npx vitest run tests/integration/ OR pytest tests/integration/
+# E2E: npx playwright test
+
+# Collect: pass count, fail count, error details, coverage delta
+```
+
+### Phase 5: Heal Loop
+
+Do NOT hand-roll the loop. Run the real executor:
+
+```python
+Workflow(
+  scriptPath="${CLAUDE_SKILL_DIR}/workflows/heal-loop.js",
+  args={"testCommand": "<tier test command>", "tier": "unit", "testGlob": "tests/unit/",
+        "maxIterations": 3}   # from the effort table above; omitted defaults to 3
+)
+# One invocation per tier that has failures.
+```
+
+**Fan-out rule:** a single pass is never a fallback when the selected failure handling runs the heal loop. Each tier with failures goes through the heal-loop Workflow call; if it does not run, end the run as BLOCKED and say why. "Generate only" skips the heal loop, so it is not a violation.
+
+**The iteration bound is enforced by the script, not by instruction.** `heal-loop.js`
+runs a real counted loop clamped to `[2, 3]`: each iteration spawns a diagnose agent that
+actually executes the test command and returns structured pass/fail plus the verbatim
+failure output, then a repair agent that receives *that failure text* and edits test files
+only. It exits early the moment the suite is green.
+
+The **final iteration diagnoses but does not repair** - there would be no run left to verify
+that repair. So `maxIterations: N` means N diagnose runs and N-1 repair passes, and the
+default 3 means 2 repairs. A ceiling of 1 is coerced to 2, since 1 would mean zero repairs.
+
+Every failure is classified into the taxonomy (`assertion`, `import`, `setup`, `timeout`,
+`stale-selector`, `type`, `flaky`, plus `source-bug`), which selects the fix strategy.
+
+The workflow returns `status: "healed"` or a **structured failure** (`status: "failed"`,
+`healed: false`) carrying `remaining_failures`, `failure_categories`, and the per-iteration
+ledger. Never report a `"failed"` result as a success: surface the still-failing tests in
+the Phase 6 report.
+
+Strategy detail (taxonomy table, fix rules, flaky prevention): `Read("references/heal-loop-strategy.md")`
+
+**Boundary: heal fixes TESTS, not source code.** If a test fails because the source code has a bug, report it. Don't silently fix production code.
+
+### Phase 6: Report
+
+Generate coverage report with before/after comparison.
+
+Full report layout (baseline→after table, tests-generated counts, heal iterations, files created, remaining gaps, next-steps commands): `Read("references/coverage-report-template.md")`.
+
+### PushNotification on Completion (CC 2.1.110+)
+
+Full `cover` runs (unit + integration + E2E with heal loop) take 15-45 min. After the Phase 6 report is assembled, call `PushNotification(message=f"ork:cover complete, {SCOPE}: {tests_kept} tests kept · {tests_dropped} dropped by behaviour gate · {heal_loops} heal iters", status="proactive")`. Full rule: `Read("../chain-patterns/rules/push-notification-on-completion.md")`.
+
+### Coverage Drift Monitor (CC 2.1.71)
+
+Optionally schedule a weekly check that the risk targets keep their behaviour tests:
+
+```python
+# Guard: Skip cron in headless/CI (CLAUDE_CODE_DISABLE_CRON)
+# if env CLAUDE_CODE_DISABLE_CRON is set, run a single check instead
+CronCreate(
+  schedule="0 2 * * 0",
+  prompt="Weekly drift check for {SCOPE}: run the tests covering the risk targets in 02-cover-analysis.json.
+    Alert if one was deleted or fails, or if newly changed code has no behaviour test. Coverage is reported as information only."
+)
+```
+
+---
+
+## Key Principles
+
+- **Output limits (CC 2.1.77+):** Opus 4.8 defaults to 64k output tokens (128k upper bound). For large test suites, chunk generation across multiple agent turns if output approaches the limit.
+- **Partial reads (CC 2.1.144+):** Read returns a `[PARTIAL view]` first page (not an error) on oversized files. Re-read with explicit `offset`/`limit` so coverage analysis sees the whole file.
+- **Tests only**: never modify production source code, only generate test files
+- **Real services when available**: prefer testcontainers/docker-compose over mocks for integration tests because mock/prod divergence causes silent failures in production
+- **Parallel generation**: spawn one test-generator agent per tier in ONE message
+- **Heal, don't loop forever**: max 3 iterations, then report remaining failures
+- **Progressive output**: show results as each agent completes
+- **Factory over fixtures**: use FactoryBoy/faker-js for test data, not hardcoded values
+- **Mock at network level**: MSW/VCR, never mock fetch/axios directly
+
+---
+
+## Agent Coordination
+
+### Context Passing
+
+Each test-generator agent receives: risk targets (each with why) for its tier, the behaviour gate rules, test framework config, real-service infrastructure (testcontainers, docker-compose), and fixture patterns from the project.
+
+### Monitor + Partial Results (CC 2.1.98)
+
+Use `Monitor` for streaming test execution output from background agents:
+
+```python
+# Stream test suite output in real-time
+Bash(command="npm test -- --coverage 2>&1", run_in_background=true)
+Monitor(pid=test_task_id)  # Each line → notification
+```
+
+Full pattern reference (until-condition gates, partial-result salvage, `TaskOutput` vs `Monitor` decision): `Read("../chain-patterns/references/monitor-patterns.md")`.
+
+**Partial results (CC 2.1.98):** If a test-generator crashes mid-generation, synthesize what it produced:
+
+```python
+for agent_result in test_gen_results:
+    if "[PARTIAL RESULT]" in agent_result.output:
+        # Agent crashed: check if it wrote any test files before dying
+        partial_tests = Glob(pattern="**/tests/**/*.test.*", path=agent_result.worktree)
+        if partial_tests:
+            # 6 passing tests from a crashed agent > 0 tests
+            # Copy partial tests to main worktree, run them in Phase 4
+            for test_file in partial_tests:
+                Bash(command=f"cp {test_file} {main_worktree}/{test_file}")
+            # Flag as partial in report
+```
+
+A `maxTurns` stop is also partial since CC 2.1.246 (summary: "stopped at its N-turn limit (partial result; continue it with SendMessage to the task-id)"); continue that agent with `SendMessage` instead of re-spawning it.
+
+### SendMessage (Test Healing)
+
+> **Cross-session replies land in the parent (CC 2.1.248):** when a subagent sends `SendMessage` to another session, the reply is delivered to the parent session's conversation, never to the subagent; a subagent sends and moves on, the parent reads the answer. Cross-session `SendMessage` / `ListAgents` also work on Bedrock, Vertex and Foundry and with telemetry disabled (CC 2.1.248).
+
+When a generated test fails, the healer agent can request context from the generator:
+
+```python
+SendMessage(to="test-generator-unit", message="Test user_service_test.py:42 fails: TypeError on mock return. What's the expected shape?")
+```
+
+### Skill Chain
+
+Standard chain: `implement → cover → verify → commit`. Use `addBlockedBy` between each.
+
+### Verification Gate
+
+Before claiming coverage is complete, apply: `Read("../../shared/rules/verification-gate.md")`. Run the coverage report fresh. "Should pass" is not evidence.
+
+### Agent Status Protocol
+
+All test-generator agents report using: `Read("../../shared/status-protocol.md")`. BLOCKED if tests can't be written due to missing interfaces. NEEDS_CONTEXT if test expectations are unclear.
+
+## Quality Bar
+
+Done means all of these hold:
+- coverage report shows the before→after delta from the actual coverage command output, not an estimate
+- every generated test file was executed; final pass/fail counts pasted from the runner
+- the behaviour gate exited 0 on the new test files after Phase 5, and every target states why it was chosen
+- no production source modified (only test files created); a source bug is reported, never silently patched
+- failures healed within the iteration budget (≤3, effort-scaled) or reported explicitly with the remaining-failure count
+- each requested tier (unit/integration/e2e) either produced tests or has a stated reason it was skipped
+
+## Related Skills
+
+- `ork:implement`: generates tests during implementation (Phase 5); use `cover` after for deeper coverage
+- `ork:verify`: grades existing tests 0-10; chain: `implement → cover → verify`
+- `testing-unit` / `testing-integration` / `testing-e2e`: knowledge skills loaded by test-generator agents
+- `ork:commit`: commit generated test files
+
+> **Session recovery (CC 2.1.108+):** After idle periods or interruptions, use `/recap` to restore conversational context alongside checkpoint-resume state. Enabled by default since CC 2.1.110 (even with telemetry disabled).
+
+## References
+
+Load on demand with `Read("references/<file>")`:
+
+| File | Content |
+|------|---------|
+| `real-service-detection.md` | Docker-compose/testcontainers detection, service startup, teardown |
+| `heal-loop-strategy.md` | Failure classification, fix patterns, iteration budget |
+| `coverage-report-template.md` | Report format, delta calculation, gap analysis |
+| `behaviour-gate.md` | Risk target signals, the three reject rules, checker usage and limits |
+| `scripts/check-behaviour-tests.mjs` | Phase 3b checker: per-test keep or reject verdicts for new test files |
+| `workflows/heal-loop.js` | Phase 5 executor: script-enforced 3-iteration repair loop (run via the Workflow tool) |
+
+---
+
+**Version:** 1.3.0 (September 2026): behaviour gate (Phase 3b checker) and risk-based targets replace percentage coverage targets

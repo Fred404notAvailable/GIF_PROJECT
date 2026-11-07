@@ -1,0 +1,598 @@
+# Agent Phases Reference
+
+## 128K Output Token Strategy
+
+With 128K output tokens available, each agent produces **complete artifacts in a single pass**. This reduces implementation from 17 agents across 4 phases to **14 agents across 3 phases**.
+
+| Metric | Before (64K) | After (128K) | Agent Teams Mode |
+|--------|-------------|--------------|-----------------|
+| Phase 4 agents | 5 | 5 (unchanged) | 4 teammates + lead |
+| Phase 5 agents | 8 | 5 | Same 4 teammates (persist) |
+| Phase 6 agents | 4 | 4 (unchanged) | 1 (code-reviewer verdict) + lead tests |
+| **Total agents** | **17** | **14** | **4 teammates** (reused across phases) |
+| Full API + models | 2 passes | 1 pass | 1 pass (same) |
+| Component + tests | 2 passes | 1 pass | 1 pass (same) |
+| Complete feature | 4-6 passes | 2-3 passes | 1-2 passes (overlapping) |
+| Communication | Lead relays | Lead relays | Peer-to-peer messaging |
+| Token cost | Baseline | ~Same | ~2.5x (full sessions) |
+
+**Key principle:** Prefer one comprehensive response over multiple incremental ones. Only split when scope genuinely exceeds 128K tokens.
+
+**Agent Teams advantage:** Teammates persist across phases 4→5→6, so context is preserved. No re-explaining architecture to implementation agents — they already know it because they designed it.
+
+---
+
+## Phase 4: Architecture Design (5 Agents)
+
+All 5 agents launch in ONE message with `run_in_background=true`.
+
+### Agent 1: Workflow Architect
+```python
+Agent(
+  subagent_type="ork:workflow-architect",
+  model=MODEL_OVERRIDE,  # None inherits default; "opus" for large features (CC 2.1.72)
+  prompt="""# Cache-optimized: stable content first (CC 2.1.73)
+  ARCHITECTURE PLANNING — SINGLE-PASS OUTPUT
+
+  Produce a COMPLETE implementation roadmap in one response:
+
+  1. COMPONENT BREAKDOWN
+     - Frontend components needed (with file paths)
+     - Backend services/endpoints (with route paths)
+     - Database schema changes (with table/column names)
+     - AI/ML integrations (if any)
+
+  2. DEPENDENCY GRAPH
+     - What must be built first?
+     - What can be parallelized?
+     - Integration points between frontend/backend
+
+  3. RISK ASSESSMENT
+     - Technical challenges with mitigations
+     - Performance concerns with benchmarks
+     - Security considerations with OWASP mapping
+
+  4. TASK BREAKDOWN
+     - Concrete tasks for each agent
+     - Estimated tool calls per task
+     - Acceptance criteria per task
+
+  Output: Complete implementation roadmap with task dependencies.
+  Use full 128K output capacity — don't truncate or summarize.
+
+  Feature: $ARGUMENTS""",
+  run_in_background=true
+)
+```
+
+### Agent 2: Backend Architect
+```python
+Agent(
+  subagent_type="ork:backend-system-architect",
+  model=MODEL_OVERRIDE,
+  prompt="""# Cache-optimized: stable content first (CC 2.1.73)
+  COMPLETE BACKEND ARCHITECTURE — SINGLE PASS
+
+  Standards: FastAPI, Pydantic v2, async/await, SQLAlchemy 2.0
+
+  Produce ALL of the following in one response:
+  1. API endpoint design (routes, methods, status codes, rate limits)
+  2. Pydantic v2 request/response schemas with Field constraints
+  3. SQLAlchemy 2.0 async model definitions with relationships
+  4. Service layer patterns (repository + unit of work)
+  5. Error handling (RFC 9457 Problem Details)
+  6. Database migration strategy (tables, indexes, constraints)
+  7. Testing strategy (unit + integration test outline)
+
+  Include file paths for every artifact.
+  Output: Complete backend implementation spec ready for coding.
+
+  Feature: $ARGUMENTS""",
+  run_in_background=true
+)
+```
+
+### Agent 3: Frontend Developer
+```python
+Agent(
+  subagent_type="ork:frontend-ui-developer",
+  model=MODEL_OVERRIDE,
+  prompt="""# Cache-optimized: stable content first (CC 2.1.73)
+  COMPLETE FRONTEND ARCHITECTURE — SINGLE PASS
+
+  Standards: React 19, TypeScript strict, Zod, TanStack Query
+
+  Produce ALL of the following in one response:
+  1. Component hierarchy with file paths
+  2. Zod schemas for ALL API responses
+  3. State management approach (Zustand slices or React 19 hooks)
+  4. TanStack Query configuration (keys, stale time, prefetching)
+  5. Form handling with React Hook Form + Zod
+  6. Loading states (skeleton components, not spinners)
+  7. Error boundaries and fallback UI
+  8. Accessibility requirements (WCAG 2.1 AA)
+
+  Include Tailwind class specifications for key components.
+  Output: Complete frontend implementation spec ready for coding.
+
+  Feature: $ARGUMENTS""",
+  run_in_background=true
+)
+```
+
+### Agent 4: LLM Integrator
+```python
+Agent(
+  subagent_type="ork:llm-integrator",
+  model=MODEL_OVERRIDE,
+  prompt="""# Cache-optimized: stable content first (CC 2.1.73)
+  AI/ML INTEGRATION ANALYSIS — SINGLE PASS
+
+  Evaluate and design AI integration in one response:
+  1. Does this feature need LLM? (justify yes/no)
+  2. Provider selection (Anthropic/OpenAI/Ollama) with rationale
+  3. Prompt template design (versioned, with Langfuse tracking)
+  4. Function calling / tool definitions (if needed)
+  5. Streaming strategy (SSE endpoint design)
+  6. Caching strategy (prompt caching + semantic caching)
+  7. Cost estimation (tokens per request, monthly projection)
+  8. Fallback chain configuration
+
+  Output: Complete AI integration spec or "No AI needed" with justification.
+
+  Feature: $ARGUMENTS""",
+  run_in_background=true
+)
+```
+
+### Agent 5: Event-Driven Architect (conditional)
+
+Spawn ONLY when the feature is event-sourcing / CQRS / message-queue / outbox-shaped
+(e.g. order pipelines, real-time notifications, async fan-out, audit logs). Skip for
+plain CRUD — like Agent 4, it self-justifies and returns "No event-driven design needed".
+
+```python
+Agent(
+  subagent_type="ork:event-driven-architect",
+  model=MODEL_OVERRIDE,
+  prompt="""# Cache-optimized: stable content first (CC 2.1.73)
+  EVENT-DRIVEN ARCHITECTURE ANALYSIS — SINGLE PASS
+
+  First decide: is this feature event-driven-shaped? (justify yes/no). If no,
+  return "No event-driven design needed" and stop. If yes, produce in one response:
+  1. Event model (event types, schemas, versioning)
+  2. Event store / log choice (Kafka, Redis Streams, RabbitMQ, FastStream) with rationale
+  3. Topic / partition / consumer-group topology
+  4. Saga / process-manager design for multi-step workflows
+  5. Outbox pattern for transactional event publishing
+  6. Idempotency + dead-letter-queue (DLQ) handling
+  7. Ordering and exactly-once vs at-least-once trade-offs
+
+  Coordinate with the backend architect's schema; cite file paths.
+  Output: Complete event-driven spec or "No event-driven design needed".
+
+  Feature: $ARGUMENTS""",
+  run_in_background=true
+)
+```
+
+### Phase 4 — Teams Mode
+
+In Agent Teams mode, 4 teammates form a team (`implement-{feature-slug}`) instead of independent Task spawns. The workflow-architect role is handled by the lead or omitted for simpler features. Teammates message architecture decisions to each other in real-time.
+
+See [Agent Teams Full-Stack Pipeline](agent-teams-full-stack.md) for spawn prompts.
+
+---
+
+## Phase 5: Implementation (5 Agents)
+
+**128K consolidation:** Backend is 1 agent (was 2), frontend is 1 agent (was 3 incl. styling). Each produces complete working code in a single pass.
+
+All 5 agents launch in ONE message with `run_in_background=true`. Every agent that writes code also gets `isolation="worktree"`: ork agents carry no frontmatter isolation (#4557), so without it the parallel writers share your tree. Merge each worktree back as SKILL.md "Worktree-Isolated Implementation" describes.
+
+### Agent 1: Backend — Complete Implementation
+```python
+Agent(
+  subagent_type="ork:backend-system-architect",
+  prompt="""# Cache-optimized: stable content first (CC 2.1.73)
+  IMPLEMENT COMPLETE BACKEND — SINGLE PASS (128K output)
+
+  Generate ALL backend code in ONE response:
+
+  1. API ROUTES (backend/app/api/v1/routes/)
+     - All endpoints with full implementation
+     - Dependency injection
+     - Rate limiting decorators
+
+  2. SCHEMAS (backend/app/schemas/)
+     - Pydantic v2 request/response models
+     - Field constraints and validators
+
+  3. MODELS (backend/app/db/models/)
+     - SQLAlchemy 2.0 async models
+     - Relationships, constraints, indexes
+
+  4. SERVICES (backend/app/services/)
+     - Business logic with repository pattern
+     - Error handling (RFC 9457)
+
+  5. TESTS (backend/tests/)
+     - Unit tests for services
+     - Integration tests for endpoints
+     - Fixtures and factories
+
+  Write REAL code to disk using Write/Edit tools.
+  Every file must be complete and runnable.
+  Commit your changes in your worktree before you return, and end your reply
+  with your branch name and commit sha. Uncommitted files are not merged.
+  Do NOT split across responses — use full 128K output.
+
+  Feature: $ARGUMENTS
+  Architecture: [paste Phase 4 backend spec]""",
+  run_in_background=true, isolation="worktree"
+)
+```
+
+### Agent 2: Frontend — Complete Implementation
+```python
+Agent(
+  subagent_type="ork:frontend-ui-developer",
+  prompt="""# Cache-optimized: stable content first (CC 2.1.73)
+  IMPLEMENT COMPLETE FRONTEND — SINGLE PASS (128K output)
+
+  Generate ALL frontend code in ONE response:
+
+  1. COMPONENTS (frontend/src/features/[feature]/components/)
+     - React 19 components with TypeScript strict
+     - useOptimistic for mutations
+     - Skeleton loading states
+     - Motion animation presets from @/lib/animations
+
+  2. API LAYER (frontend/src/features/[feature]/api/)
+     - Zod schemas for all API responses
+     - TanStack Query hooks with prefetching
+     - MSW handlers for testing
+
+  3. STATE (frontend/src/features/[feature]/store/)
+     - Zustand slices or React 19 state hooks
+     - Optimistic update reducers
+
+  4. STYLING
+     - Tailwind classes using @theme tokens
+     - Responsive breakpoints (mobile-first)
+     - Dark mode variants
+     - All component states (hover, focus, disabled, loading)
+
+  5. TESTS (frontend/src/features/[feature]/__tests__/)
+     - Component tests with MSW
+     - Hook tests
+     - Zod schema tests
+
+  Write REAL code to disk. Every file must be complete.
+  Commit your changes in your worktree before you return, and end your reply
+  with your branch name and commit sha. Uncommitted files are not merged.
+  Include styling inline — no separate styling agent needed.
+  Do NOT split across responses — use full 128K output.
+
+  Feature: $ARGUMENTS
+  Architecture: [paste Phase 4 frontend spec]""",
+  run_in_background=true, isolation="worktree"
+)
+```
+
+### Agent 3: AI Integration (if needed)
+```python
+Agent(
+  subagent_type="ork:llm-integrator",
+  prompt="""# Cache-optimized: stable content first (CC 2.1.73)
+  IMPLEMENT AI INTEGRATION — SINGLE PASS (128K output)
+
+  Generate ALL AI integration code in ONE response:
+
+  1. Provider setup and configuration
+  2. Prompt templates (versioned)
+  3. Function calling / tool definitions
+  4. Streaming SSE endpoint
+  5. Prompt caching configuration
+  6. Fallback chain implementation
+  7. Langfuse tracing integration
+  8. Tests with VCR.py cassettes
+
+  Write REAL code to disk. Skip if AI spec says "No AI needed".
+  Commit your changes in your worktree before you return, and end your reply
+  with your branch name and commit sha. Uncommitted files are not merged.
+
+  Feature: $ARGUMENTS
+  Architecture: [paste Phase 4 AI spec]""",
+  run_in_background=true, isolation="worktree"
+)
+```
+
+### Agent 4: Test Suite — Complete Coverage
+```python
+Agent(
+  subagent_type="ork:test-generator",
+  prompt="""# Cache-optimized: stable content first (CC 2.1.73)
+  GENERATE COMPLETE TEST SUITE — SINGLE PASS (128K output)
+
+  IMPORTANT: Match test types to change type using the Test Requirements Matrix:
+  - API endpoint → Unit + Integration + Contract (rules: integration-api, verification-contract, mocking-msw)
+  - DB schema    → Migration + Integration (rules: integration-database, data-seeding-cleanup)
+  - UI component → Unit + Snapshot + A11y (rules: unit-aaa-pattern, integration-component, a11y-testing)
+  - Business logic → Unit + Property-based (rules: unit-aaa-pattern, pytest-execution, verification-techniques)
+  - LLM/AI      → Unit + Eval (rules: llm-evaluation, llm-mocking)
+  - Full-stack   → All of the above
+
+  Follow the testing-unit/testing-e2e/testing-integration skill rules for each test type.
+
+  Generate ALL tests in ONE response:
+
+  1. UNIT TESTS
+     - Python: pytest with factories (not raw dicts), AAA pattern
+     - TypeScript: Vitest with meaningful assertions
+     - Cover edge cases: empty input, errors, timeouts, rate limits
+
+  2. INTEGRATION TESTS
+     - API endpoint tests with TestClient
+     - Database tests with fixtures
+     - VCR.py cassettes for external HTTP calls
+     - If docker-compose/testcontainers detected: test against REAL services
+
+  3. CONTRACT / PROPERTY TESTS (if applicable)
+     - Contract tests for API boundaries (verification-contract)
+     - Property-based tests for business logic (verification-techniques)
+
+  4. FIXTURES & FACTORIES
+     - conftest.py with shared fixtures
+     - Factory classes for test data
+     - MSW handlers for frontend API mocking
+
+  5. COVERAGE TARGET
+     - Target: 80% minimum. The coordinator measures it after the merge.
+
+  Write the tests to disk, commit them in your worktree before you return,
+  and end your reply with your branch name and commit sha. Failures from
+  missing implementation are expected: your worktree holds the base tree, not
+  the backend and frontend code, which merge after you return. Report them,
+  never stub production code to make them pass.
+  Do NOT split across responses — use full 128K output.
+
+  Feature: $ARGUMENTS""",
+  run_in_background=true, isolation="worktree"
+)
+```
+
+### After Phase 5: merge, then run the tests
+
+Each writer worked in its own worktree, so no agent saw the others' code. When
+all 4 return, the coordinator handles each returned worktree in turn:
+
+1. Check that it is clean: `git -C <worktree> status --porcelain` prints
+   nothing. If it prints files, the agent did not commit them, and a merge of
+   its branch would leave them out. Commit them there
+   (`git -C <worktree> add -A && git -C <worktree> commit -m "<agent>: uncommitted output"`)
+   and note it in the report.
+2. Merge its branch into the feature branch (SKILL.md "Worktree-Isolated
+   Implementation").
+
+Only when all 4 branches are merged does the coordinator run the suite on the
+merged tree:
+
+```bash
+poetry run pytest --cov=app --cov-report=term-missing
+npm test -- --coverage
+```
+
+A failure here goes back to the owning agent, or to Phase 6.
+
+### Phase 5 — Teams Mode
+
+In Agent Teams mode, the same 4 teammates from Phase 4 continue into implementation. Key difference: backend-architect messages the API contract to frontend-dev as soon as it's defined (not after full implementation), enabling overlapping work. Each writer teammate MUST get its own manual worktree, `.worktrees/<role>` on `feat/{feature}-<role>`, created by the lead before the spawn ([Team Worktree Setup](team-worktree-setup.md), #4557). Never pass `isolation` on a teammate call: with `name` it launches a plain subagent, not a teammate.
+
+---
+
+## Phase 6: Integration Verification (4 Agents)
+
+### Real-Service Detection
+
+Before running integration tests, check for infrastructure:
+
+```python
+# PARALLEL — detect real service testing capability
+Glob(pattern="**/docker-compose*.yml")
+Glob(pattern="**/testcontainers*")
+Grep(pattern="testcontainers|docker-compose", glob="requirements*.txt")
+Grep(pattern="testcontainers|docker-compose", glob="package.json")
+```
+
+If detected, run integration tests against real services (not just mocks). Reference `testing-integration` rules: `integration-database`, `integration-api`, `data-seeding-cleanup`.
+
+### Validation Commands
+
+**Backend:**
+```bash
+poetry run alembic upgrade head  # dry-run
+poetry run ruff check app/
+poetry run ty check app/
+poetry run pytest tests/unit/ -v --cov=app
+# If docker-compose detected:
+docker-compose -f docker-compose.test.yml up -d
+poetry run pytest tests/integration/ -v
+docker-compose -f docker-compose.test.yml down
+```
+
+**Frontend:**
+```bash
+npm run typecheck
+npm run lint
+npm run build
+npm test -- --coverage
+```
+
+### Agent 1: Backend Integration
+```python
+Agent(
+  subagent_type="ork:backend-system-architect",
+  prompt="""BACKEND INTEGRATION VERIFICATION
+
+  Verify all backend code works together:
+  1. Run alembic migrations (dry-run)
+  2. Run ruff/mypy type checking
+  3. Run full test suite with coverage
+  4. Verify API endpoints respond correctly
+  5. Fix any integration issues found
+
+  This is verification, not new implementation. Commit any fix in your
+  worktree before you return, and end your reply with your branch name and
+  commit sha.""",
+  run_in_background=true, isolation="worktree"
+)
+```
+
+### Agent 2: Frontend Integration
+```python
+Agent(
+  subagent_type="ork:frontend-ui-developer",
+  prompt="""FRONTEND INTEGRATION VERIFICATION
+
+  Verify all frontend code works together:
+  1. Run TypeScript type checking (tsc --noEmit)
+  2. Run linting (biome/eslint)
+  3. Run build (vite build)
+  4. Run test suite with coverage
+  5. Fix any integration issues found
+
+  This is verification, not new implementation. Commit any fix in your
+  worktree before you return, and end your reply with your branch name and
+  commit sha.""",
+  run_in_background=true, isolation="worktree"
+)
+```
+
+### Agent 3: Code Quality Review
+```python
+Agent(
+  subagent_type="ork:code-quality-reviewer",
+  prompt="""FULL QUALITY REVIEW — SINGLE PASS (128K output)
+
+  Review ALL new code in one comprehensive report:
+  1. Run all automated checks (lint, type, test, audit)
+  2. Verify React 19 patterns (useOptimistic, Zod, assertNever)
+  3. Check security (OWASP, secrets, input validation)
+  4. Verify test coverage meets 80% threshold
+  5. Check architectural compliance
+
+  Produce structured review with APPROVE/REJECT decision.""",
+  run_in_background=true
+)
+```
+
+### Agent 4: Security Audit
+```python
+Agent(
+  subagent_type="ork:security-auditor",
+  prompt="""SECURITY AUDIT — SINGLE PASS (128K output)
+
+  Audit ALL new code in one comprehensive report:
+  1. Run bandit/semgrep on Python code
+  2. Run npm audit on JavaScript dependencies
+  3. Run pip-audit on Python dependencies
+  4. Grep for secrets (API keys, passwords, tokens)
+  5. OWASP Top 10 verification
+  6. Input validation coverage
+
+  Produce structured security report with severity ratings.""",
+  run_in_background=true
+)
+```
+
+### After Phase 6: merge the fixer worktrees
+
+The backend and frontend integration agents ran in their own worktrees. Check
+each one is clean and merge its branch, as after Phase 5, then run the
+validation commands once more on the merged tree.
+
+### Security Checks
+- No hardcoded secrets
+- SQL injection prevention
+- XSS prevention
+- Proper input validation
+- npm audit / pip-audit
+
+### Phase 6 — Teams Mode
+
+In Agent Teams mode, the code-reviewer has been reviewing continuously during Phase 5. Integration validation is lighter: the lead merges worktrees, runs integration tests, and collects the code-reviewer's final APPROVE/REJECT verdict. After Phase 6, the team winds down on its own (CC 2.1.178+ implicit team — no `TeamDelete`; teammates end with their turn, `Ctrl+F` twice to stop any lingering background agent) + worktree cleanup.
+
+---
+
+## Phase 7: Scope Creep Detection
+
+Launch `workflow-architect` to compare planned vs actual files/features. Score 0-10:
+
+| Score | Level | Action |
+|-------|-------|--------|
+| 0-2 | Minimal | Proceed to reflection |
+| 3-5 | Moderate | Document and justify unplanned changes |
+| 6-8 | Significant | Review with user, potentially split PR |
+| 9-10 | Major | Stop and reassess |
+
+See [Scope Creep Detection](scope-creep-detection.md) for the full agent prompt.
+
+---
+
+## Phase 8: E2E Verification
+
+If UI changes were made, verify with agent-browser:
+
+```bash
+agent-browser open http://localhost:5173
+agent-browser wait --load networkidle
+agent-browser snapshot -i
+agent-browser screenshot /tmp/feature.png
+agent-browser close
+```
+
+Skip this phase for backend-only or library implementations.
+
+---
+
+## Phase 9: Documentation
+
+Save implementation decisions to the knowledge graph for future reference:
+
+```python
+mcp__memory__create_entities(entities=[{
+  "name": "impl-{feature}-{date}",
+  "entityType": "ImplementationDecision",
+  "observations": ["chose X over Y because...", "pattern: ..."]
+}])
+```
+
+---
+
+## Phase 10: Post-Implementation Reflection & Cleanup
+
+### Worktree Cleanup (CC 2.1.72)
+
+If worktree isolation was used in Step 0, exit it before committing:
+
+```python
+# Exit worktree — keep branch for PR creation
+ExitWorktree(action="keep")
+# Verify no orphaned worktrees remain
+# Run: git worktree list
+```
+
+Every `EnterWorktree` must have a matching `ExitWorktree`. If the session crashes before cleanup, the next session should detect and clean up orphaned worktrees via `git worktree list` + `git worktree remove`.
+
+### Reflection
+
+Launch `workflow-architect` to evaluate:
+
+- What went well / what to improve
+- Estimation accuracy (actual vs planned time)
+- Reusable patterns to extract
+- Technical debt created
+- Knowledge gaps discovered
+
+Store lessons in memory for future implementations.

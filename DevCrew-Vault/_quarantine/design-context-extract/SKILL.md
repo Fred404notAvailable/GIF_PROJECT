@@ -1,0 +1,308 @@
+---
+name: design-context-extract
+license: MIT
+compatibility: "Claude Code 2.1.277+. Optional: stitch (official Google Stitch) MCP server."
+description: "Extracts design DNA from screenshots, URLs or recordings: colors, type, spacing, components and motion as tokens or Tailwind config. Use when asked to extract or audit a design or match a visual identity."
+argument-hint: "[screenshot-path | video-path | url | 'current project']"
+context: fork
+# user-typed commands stay interactive; CC >= 2.1.218 backgrounds forks by default (#3093)
+background: false
+user-invocable: true
+model: sonnet
+agent: design-context-extractor
+allowed-tools: "Read Write Glob Grep Bash WebFetch AskUserQuestion TaskCreate TaskUpdate TaskList mcp__stitch__list_projects mcp__plugin_hq-ext_stitch__list_projects mcp__stitch__get_project mcp__plugin_hq-ext_stitch__get_project mcp__stitch__list_screens mcp__plugin_hq-ext_stitch__list_screens mcp__stitch__get_screen mcp__plugin_hq-ext_stitch__get_screen mcp__stitch__generate_screen_from_text mcp__plugin_hq-ext_stitch__generate_screen_from_text"
+  # Stitch: body names these five (live stitch.googleapis.com/mcp roster).
+  # Grant BOTH prefixes: standalone stitch (mcp__stitch__*) and hq-ext plugin
+  # (mcp__plugin_hq-ext_stitch__*). See https://code.claude.com/docs/en/mcp-servers
+skills:
+  - design-system-tokens
+  - remember
+  - memory
+metadata:
+  category: document-asset-creation
+  mcp-server: stitch
+  version: "1.0.1"
+  author: "OrchestKit"
+  complexity: "medium"
+  tags: "design-context, design-tokens, stitch, extraction, colors, typography, audit, visual-identity"
+triggers:
+  keywords: ["extract design", "design tokens", "color palette", "typography", "design dna", "visual identity", "design system from", "screen recording", "motion spec", "analyze this video"]
+  examples:
+    - "extract the design tokens from this screenshot"
+    - "what colors and fonts does this app use"
+    - "create a design system from this live URL"
+    - "analyze the animations in this screen recording"
+  anti-triggers: [implement, build, component, explore, brainstorm]
+---
+
+# Design Context Extract
+
+Extract the "Design DNA" from existing applications — colors, typography, spacing, and component patterns — and output as structured tokens.
+
+```bash
+design-context-extract /tmp/screenshot.png       # From screenshot
+design-context-extract /tmp/recording.mp4         # From screen recording (motion spec)
+design-context-extract https://example.com        # From live URL
+design-context-extract current project            # Scan project's existing styles
+```
+
+## Pipeline
+
+```
+Input (screenshot/URL/project)
+  │
+  ▼
+┌──────────────────────────────┐
+│ Capture                       │  Screenshot or fetch HTML/CSS
+└──────────┬───────────────────┘
+           │
+           ▼
+┌──────────────────────────────┐
+│ Extract                       │  Stitch get_screen + generate_screen_from_text
+│                               │  OR multimodal analysis (fallback)
+│ → Colors (hex + oklch)        │
+│ → Typography (families, scale)│
+│ → Spacing (padding, gaps)     │
+│ → Components (structure)      │
+└──────────┬───────────────────┘
+           │
+           ▼
+┌──────────────────────────────┐
+│ Output                        │  Choose format:
+│ → design-tokens.json (W3C)    │
+│ → @theme (Tailwind v4)        │
+│ → tokens.css (CSS variables)  │
+│ → Markdown spec               │
+└──────────────────────────────┘
+```
+
+## Step 0: Detect Input and Context
+
+```python
+INPUT = ""
+
+# 1. Create main task IMMEDIATELY
+TaskCreate(subject="Extract design context: {INPUT}", description="Extract design DNA", activeForm="Extracting design from {INPUT}")
+
+# 2. Create subtasks for each phase
+TaskCreate(subject="Detect input type and context", activeForm="Detecting input type")             # id=2
+TaskCreate(subject="Capture source material", activeForm="Capturing source")                       # id=3
+TaskCreate(subject="Extract design tokens", activeForm="Extracting tokens")                        # id=4
+TaskCreate(subject="Choose output format and generate", activeForm="Generating output")            # id=5
+TaskCreate(subject="Recommend shadcn/ui style", activeForm="Recommending style")                   # id=6
+
+# 3. Set dependencies for sequential phases
+TaskUpdate(taskId="3", addBlockedBy=["2"])  # Capture needs input type detected
+TaskUpdate(taskId="4", addBlockedBy=["3"])  # Extraction needs captured source
+TaskUpdate(taskId="5", addBlockedBy=["4"])  # Output needs extracted tokens
+TaskUpdate(taskId="6", addBlockedBy=["5"])  # Style recommendation needs output
+
+# 4. Update status as you progress
+TaskUpdate(taskId="2", status="in_progress")  # When starting
+TaskUpdate(taskId="2", status="completed")    # When done — repeat for each subtask
+
+# Determine input type
+# "/path/to/file.png" → screenshot
+# "/path/to/file.mp4|.mov|.webm|.gif" → screen recording (video pipeline)
+# "http..." → URL
+# "current project" → scan project styles
+```
+
+## Step 1: Capture Source
+
+**For screenshots:** Read the image directly (Claude is multimodal). Pasted/attached images are compressed to the same token budget as Read tool images (CC 2.1.97), so both workflows are equally efficient.
+
+> **Resolution budget (Opus 5.5 / CC 2.1.111+):** Max input is **2,576 px on the long edge** (~3.75 MP) — roughly 3× the Opus 4.6 ceiling. Dense dashboards, dark-mode UIs, and technical diagrams benefit the most from the higher ceiling; extraction reads tiny labels, spacing ticks, and component boundaries that were previously blurred. Below 1,024 px, don't upscale — the source bitmap is the ceiling. Resize only when input exceeds 2,576 px.
+
+**For URLs:**
+```python
+# If stitch available:
+#   list_projects / get_project to locate the project
+#   generate_screen_from_text once for the URL goal (can take minutes; DO NOT RETRY;
+#     on timeout poll get_screen every 30 s up to 10 times)
+#   list_screens, then get_screen(name="projects/{projectId}/screens/{screenId}")
+#   fetch download URLs from the response
+# If not: WebFetch the URL and analyze HTML/CSS
+```
+
+**For current project:**
+```python
+Grep("@theme", glob="**/*.css")   # Tailwind v4: theme lives in CSS, not a config file
+Glob("**/tailwind.config.*")      # Tailwind v3 only (v4 ignores this file)
+Glob("**/tokens.css")
+Glob("**/*.css")  # Look for design token files
+Glob("**/theme.*")
+# Read and analyze existing style definitions
+```
+
+**For screen recordings (video):** the only input mode that carries motion — easing, scroll
+choreography, transitions. Requires `ffmpeg`/`ffprobe` (skip with an install hint if missing).
+
+```bash
+# 1. Probe: duration, dimensions, frame rate
+ffprobe -v error -show_entries format=duration,size:stream=width,height,r_frame_rate -of json "$VIDEO"
+
+# 2. Extract frames at timeline beats — NOT uniform thumbnails.
+#    Pass A: 1fps sweep to locate transitions; Pass B: re-extract around detected beats.
+mkdir -p "$SCRATCHPAD/video-frames"
+ffmpeg -y -i "$VIDEO" -vf fps=1 "$SCRATCHPAD/video-frames/frame-%03d.jpg"
+# For scroll-heavy or long videos also grab start / middle / end explicitly.
+```
+
+Then Read the extracted frames (multimodal) and analyze in layers:
+
+| Layer | What to capture |
+|-------|-----------------|
+| Layout | viewport framing, grids, sticky zones, section order |
+| Motion | reveal timing, easing curves, parallax, pinned/scrubbed sections, hover states, loops |
+| Visual | same token extraction as screenshots (colors, type, spacing) |
+| Rebuild | name the mechanism: CSS transition, IntersectionObserver, GSAP ScrollTrigger, `video.currentTime` scrub, WebGL |
+
+Video inputs additionally emit a **motion-spec.md** alongside the token output: per-interaction
+durations (ms), easing, trigger (scroll/hover/load), and a reduced-motion fallback for each entry.
+Never describe motion as "smooth" or "nice" — convert taste into mechanism + numbers.
+
+## Step 2: Extract Design Context
+
+**If stitch MCP is available:**
+```python
+# Live Stitch MCP tools (https://stitch.googleapis.com/mcp), matching
+# design-context-extractor agent grants:
+#   - list_projects() / get_project(projectId)
+#   - list_screens(projectId)
+#   - get_screen(name="projects/{projectId}/screens/{screenId}")
+#       ONE required param: name. Returns screen details including download URLs
+#   - generate_screen_from_text(projectId, prompt)
+#       quota-costing write; can take a few minutes. DO NOT RETRY.
+#       On timeout: poll get_screen(name=...) every 30 s, up to 10 times.
+#
+# Flow: generate_screen_from_text once (or reuse an existing screen) →
+# list_screens → get_screen(name=...) → fetch download URLs for multimodal extract.
+#
+# Also consider Figma Dev Mode MCP as a complementary extraction path
+# when the source is a Figma file:
+#   - get_variable_defs    → design tokens straight from Figma variables
+#   - get_design_context   → layout + typography + spacing
+#   - search_design_system → locate existing tokens/components
+```
+
+**If stitch MCP is NOT available (fallback):**
+```python
+# Multimodal analysis of screenshot:
+# - Identify dominant colors (sample from regions)
+# - Detect font families and size hierarchy
+# - Measure spacing patterns
+# - Catalog component types (cards, buttons, headers, etc.)
+#
+# For URLs: parse CSS custom properties, Tailwind config, computed styles
+```
+
+Extracted data structure:
+```json
+{
+  "colors": {
+    "primary": { "hex": "#3B82F6", "oklch": "oklch(0.62 0.21 255)" },
+    "secondary": { "hex": "#10B981", "oklch": "oklch(0.69 0.17 163)" },
+    "background": { "hex": "#FFFFFF" },
+    "text": { "hex": "#1F2937" },
+    "muted": { "hex": "#9CA3AF" }
+  },
+  "typography": {
+    "heading": { "family": "Inter", "weight": 700 },
+    "body": { "family": "Inter", "weight": 400 },
+    "scale": [12, 14, 16, 18, 24, 30, 36, 48]
+  },
+  "spacing": {
+    "base": 4,
+    "scale": [4, 8, 12, 16, 24, 32, 48, 64]
+  },
+  "components": ["navbar", "hero", "card", "button", "footer"]
+}
+```
+
+## Step 3: Choose Output Format
+
+```python
+AskUserQuestion(questions=[{
+  "question": "Output format for extracted tokens?",
+  "header": "Format",
+  "options": [
+    {"label": "Tailwind @theme (Recommended)", "description": "@theme block in the CSS entry (app.css) with extracted theme values"},
+    {"label": "W3C Design Tokens", "description": "design-tokens.json following W3C DTCG spec"},
+    {"label": "CSS Variables", "description": "tokens.css with CSS custom properties"},
+    {"label": "Markdown spec", "description": "Human-readable design specification document"}
+  ],
+  "multiSelect": false
+}])
+```
+
+Tailwind v4 is CSS-first: theme values go in an `@theme` block, and `tailwind.config.js`
+is ignored entirely (see `ui-components/rules/tailwind-v4-patterns.md`).
+
+```css
+/* app.css: the recommended Tailwind output */
+@import "tailwindcss";
+
+@theme {
+  --color-primary: oklch(0.62 0.21 255);
+  --font-sans: "Inter", system-ui, sans-serif;
+  --spacing: 0.25rem;
+}
+```
+
+**Legacy (Tailwind v3 only):** if the project pins v3, emit `tailwind.config.ts` with the
+same values under `theme.extend`. Offer this only after confirming the v3 pin in
+`package.json`. It is never the default.
+
+## Step 4: Generate Output
+
+Write the extracted tokens in the chosen format. If the project already has tokens, show a diff of what's new vs existing.
+
+## Step 5: Recommend Best-Fit shadcn/ui Style
+
+After extracting design DNA, map the extracted characteristics to the best-fit shadcn/ui v4 style:
+
+```python
+# Map extracted design DNA → shadcn style recommendation
+radius = extracted["radius"]      # e.g., "large", "pill", "none", "small"
+density = extracted["spacing"]    # e.g., "generous", "balanced", "compact", "dense"
+elevation = extracted["shadows"]  # e.g., "layered", "subtle", "none"
+
+STYLE_MAP = {
+    # (radius, density, elevation) → style
+    ("pill/large", "generous", "layered"):  "Luma — polished, macOS-like",
+    ("medium",     "balanced", "subtle"):   "Vega — general purpose",
+    ("medium",     "compact",  "subtle"):   "Nova — dense dashboards",
+    ("large",      "generous", "subtle"):   "Maia — soft, consumer-facing",
+    ("none/sharp", "balanced", "none"):     "Lyra — editorial, dev tools",
+    ("small",      "dense",    "none"):     "Mira — ultra-dense data",
+}
+# Present recommendation with the style picker URL:
+# "Based on extracted design DNA, recommended style: Luma"
+# "Pick and install: https://ui.shadcn.com/create  (select 'Luma' style)"
+# Apply to existing project (CLI v4 apply command, Apr 2026):
+# "$ npx shadcn@latest apply luma"
+```
+
+**Skip condition:** If the user only needs raw tokens (not a shadcn project), skip this step.
+
+## Anti-Patterns
+
+- **NEVER** guess colors without analyzing the actual source — use precise extraction
+- **NEVER** skip the oklch conversion — all colors must have oklch equivalents
+- **NEVER** output flat token structures — use three-tier hierarchy (global/alias/component)
+
+## Quality Bar
+
+Done means all of these hold:
+- Every color was sampled from the actual source, has an oklch equivalent, and carries a role name
+- Typography includes family, weight, and the observed size scale — not "modern sans-serif"
+- Output file written in the chosen format and verified to parse (JSON/TS/CSS)
+- Video inputs: motion-spec.md names mechanism + duration + easing + reduced-motion fallback per interaction
+- If the project already had tokens, the diff of new-vs-existing was shown
+
+## Related Skills
+
+- `ork:design-to-code` — Full pipeline that uses this as Stage 1
+- `ork:design-system-tokens` — Token architecture and W3C spec compliance
+- `ork:component-search` — Find components that match extracted patterns

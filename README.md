@@ -1,0 +1,264 @@
+# DevCrew AI Skill Vault
+
+A local-first, real-time-indexed vault of open-source AI agent skills organized into 7 professional modules.
+
+---
+
+## Overview
+
+The DevCrew Vault ingests, validates, classifies, and indexes [SKILL.md](https://agentskills.io)-format skill packages from verified open-source repositories. Skills are organized into 7 modules covering the full modern engineering stack, with a target of **100 curated skills**.
+
+| # | Module | Target |
+|---|--------|--------|
+| 1 | Modern Backend & API Development | 15 |
+| 2 | Frontend & UI Engine Frameworks | 15 |
+| 3 | Database, Vector & Storage Management | 15 |
+| 4 | Security, Auditing & SecOps | 15 |
+| 5 | AI Architecture, LLM & Prompt Engineering | 15 |
+| 6 | Testing, QA & Reliability Engineering | 10 |
+| 7 | DevOps, Containers & Cloud Automation | 15 |
+
+---
+
+## Quick Start
+
+### 1. Set up environment
+
+```bash
+python -m venv .venv
+
+# Windows
+.venv\Scripts\activate
+
+# macOS/Linux
+source .venv/bin/activate
+
+pip install -r requirements.txt
+```
+
+### 2. Scaffold the vault
+
+```bash
+python tools/scaffold.py
+```
+
+### 3. Sync skills from upstream repos (dry run first)
+
+```bash
+python tools/sync_skills.py --dry-run
+python tools/sync_skills.py
+```
+
+### 4. Validate all skills
+
+```bash
+python tools/validate_skills.py --report
+```
+
+Produces `validation-report.json` and prints a human-readable summary. Invalid skills are quarantined to `DevCrew-Vault/_quarantine/`.
+
+Apply safe normalizations:
+
+```bash
+python tools/validate_skills.py --fix --report
+```
+
+### 5. Check module coverage
+
+```bash
+python tools/sync_skills.py --coverage
+```
+
+Writes `coverage-report.md` showing `selected/target` per module with shortfalls clearly marked.
+
+### 6. Start the real-time watcher
+
+In one terminal:
+
+```bash
+python tools/watcher.py run
+```
+
+In another terminal, verify the registry is updating:
+
+```bash
+# List all indexed skills
+python tools/watcher.py list
+
+# FTS5 search
+python tools/watcher.py search "terraform kubernetes"
+
+# Show one skill's details
+python tools/watcher.py show terraform-skill
+
+# View module breakdown
+python tools/watcher.py modules
+
+# View skills in a specific module
+python tools/watcher.py module 7
+```
+
+### 7. Obsidian Map Layer & Graph View
+
+Generate the structured knowledge graph connecting selected skills across modules, technologies, sources, and licenses:
+
+```bash
+# 1. Preview changes
+python tools/build_map.py --dry-run
+
+# 2. Build map notes & configure Obsidian
+python tools/build_map.py
+
+# 3. Verify graph integrity and link resolution
+python tools/build_map.py --check
+```
+
+Then open `DevCrew-Vault/` in Obsidian:
+- Restart Obsidian once if open so `.obsidian/app.json` ignore filters take effect (hiding ~4,000 raw candidate & quarantine folders from graph/search).
+- Open `00-Home.md` as your root navigation dashboard.
+- Press `Ctrl+G` (or `Cmd+G` on macOS) to open the graph view:
+  - **Module Hubs:** Purple
+  - **Skill Proxies:** Blue
+  - **Tech Clusters:** Emerald
+  - **Sources:** Amber
+  - **Licenses:** Red
+  - **Crews / Playbooks:** Cyan / Pink
+
+### 8. Headless Agent CLI Queries
+
+Agents can query technology clusters and typed relations directly without running Obsidian:
+
+```bash
+# Show typed relationships for a skill (complements, alternate-of, precedes)
+python tools/watcher.py related api-design-principles
+
+# Show all selected skills tagged with a technology
+python tools/watcher.py tech PostgreSQL
+```
+
+#### Equivalent SQL Queries
+
+```sql
+-- Query outgoing typed relationships
+SELECT relation, dst_slug, reason FROM skill_links WHERE src_slug = 'api-design-principles';
+
+-- Query selected skills by technology
+SELECT t.slug FROM tech_tags t
+JOIN skill_modules sm ON t.slug = sm.slug
+WHERE t.tag = 'PostgreSQL' AND sm.status = 'selected';
+```
+
+### 9. Query the SQLite registry directly
+
+```bash
+sqlite3 DevCrew-Vault/registry.db "SELECT slug, validation_status FROM skills;"
+sqlite3 DevCrew-Vault/registry.db "SELECT module_id, status, COUNT(*) FROM skill_modules GROUP BY 1,2;"
+```
+
+### 10. Run tests
+
+```bash
+pytest
+```
+
+---
+
+## Tools Reference
+
+| Script | Purpose |
+|--------|---------|
+| `tools/scaffold.py` | Create vault directory layout (idempotent) |
+| `tools/sync_skills.py` | Clone/fetch sources and copy skills into vault |
+| `tools/validate_skills.py` | Validate SKILL.md packages; quarantine invalid |
+| `tools/watcher.py` | Real-time file watcher + SQLite FTS5 registry |
+| `tools/build_map.py` | Obsidian map layer generator (modules, tech, proxies) |
+| `tools/verify_vault.py` | Vault consistency gate (checks license, disk, status) |
+| `tools/catalog.py` | Module classification, ranking, dedup, coverage |
+| `tools/config.py` | Load `devcrew.config.yaml` |
+| `tools/parsing.py` | Parse SKILL.md frontmatter, compute SHA-256 |
+| `tools/db.py` | SQLite schema, upsert/delete, FTS5 search |
+| `tools/git_ops.py` | Git clone, sparse checkout, zip fallback |
+
+---
+
+## Module Classification
+
+Skills are automatically classified into modules by keyword scoring. The classifier:
+- Scores each skill against each module's keyword list
+- Awards bonus points for vendor-published sources
+- Respects manual override entries in `catalog.yaml`
+
+The `catalog.yaml` file contains:
+- Module metadata and keyword lists
+- 100 pinned slot assignments (one slot per target skill)
+- Alternate skill lists per module
+- Manual override map (`slug → module_id`)
+
+---
+
+## License Gating
+
+| License | Policy |
+|---------|--------|
+| MIT, Apache-2.0, BSD-3-Clause, CC-BY-4.0 | ✅ Allowed |
+| CC-BY-SA-4.0 (Trail of Bits, netresearch) | ⚠️ Needs explicit user approval |
+| UNKNOWN / no license | ❌ Quarantined |
+
+> **Important:** Trail of Bits skills (slots 50–58) are CC-BY-SA-4.0 (share-alike). These are not in `allowed_licenses` by default. Add `CC-BY-SA-4.0` to `allowed_licenses` in `devcrew.config.yaml` only after reviewing the share-alike requirements.
+
+---
+
+## Layout
+
+```
+UPS_project/
+├── devcrew.config.yaml          # Sources, paths, allowed licenses, DB path
+├── requirements.txt
+├── README.md
+├── catalog.yaml → DevCrew-Vault/catalog.yaml
+├── coverage-report.md           # Generated by --coverage
+├── DevCrew-Vault/
+│   ├── skills/
+│   │   └── <skill-slug>/
+│   │       ├── SKILL.md
+│   │       ├── scripts/         # Optional
+│   │       ├── references/      # Optional
+│   │       ├── assets/          # Optional
+│   │       └── .source.json     # Provenance (source, commit, license, SHA-256)
+│   ├── _quarantine/             # Failed validation or license gate
+│   ├── catalog.yaml             # Module catalog with pinned slots
+│   └── registry.db              # SQLite (FTS5) index
+├── tools/
+│   ├── scaffold.py
+│   ├── sync_skills.py
+│   ├── validate_skills.py
+│   ├── watcher.py
+│   ├── catalog.py
+│   ├── config.py
+│   ├── parsing.py
+│   ├── db.py
+│   └── git_ops.py
+├── tests/
+│   ├── conftest.py
+│   ├── test_validator.py
+│   ├── test_classify.py
+│   ├── test_ranking.py
+│   ├── test_coverage.py
+│   └── test_skill_modules_sync.py
+└── .staging/                    # Temp git clones (gitignored)
+```
+
+---
+
+## Obsidian
+
+Open `DevCrew-Vault/` as an Obsidian vault for a visual knowledge graph of all skills. `.obsidian` is in the watcher's ignore list so Obsidian config changes don't trigger re-indexing.
+
+---
+
+## Notes
+
+- **Never execute ingested scripts.** The safety scanner (`validate_skills.py`) flags dangerous patterns but never runs them.
+- **Idempotent.** All scripts can be re-run safely. Skills are only re-copied when their `content_sha256` changes.
+- **Local-first.** After the initial sync, everything works offline.
+- **Windows support.** `pathlib` is used throughout; no shell-specific commands.

@@ -1,0 +1,94 @@
+{
+  "skill": "accessibility",
+  "version": "2.0.0",
+  "testCases": [
+    {
+      "id": "wcag-color-contrast",
+      "rule": "wcag-color-contrast",
+      "query": "Set up color contrast tokens for a design system",
+      "expectedBehavior": [
+        "Uses 4.5:1 ratio for normal text",
+        "Uses 3:1 ratio for large text and UI components",
+        "Focus indicator has 3:1 contrast against background",
+        "Includes CSS custom properties with documented contrast ratios"
+      ]
+    },
+    {
+      "id": "wcag-semantic-html",
+      "rule": "wcag-semantic-html",
+      "query": "Build an accessible page layout with navigation",
+      "expectedBehavior": [
+        "Uses semantic landmarks (main, nav, header, footer, article)",
+        "Heading hierarchy follows h1-h6 order without skipping",
+        "Form inputs have associated labels with htmlFor",
+        "ARIA attributes used only when semantic HTML is insufficient"
+      ]
+    },
+    {
+      "id": "wcag-testing",
+      "rule": "wcag-testing",
+      "query": "Add accessibility testing to a React application",
+      "expectedBehavior": [
+        "Includes jest-axe for automated component-level accessibility testing",
+        "Includes Playwright axe-core for page-level scanning",
+        "Tests keyboard navigation programmatically using automated focus tracking assertions",
+        "Includes screen reader testing checklist covering NVDA and VoiceOver"
+      ]
+    },
+    {
+      "id": "focus-keyboard-nav",
+      "rule": "focus-keyboard-nav",
+      "query": "Add keyboard navigation to a toolbar component",
+      "expectedBehavior": [
+        "Uses roving tabindex pattern (active=0, others=-1)",
+        "Arrow keys navigate between toolbar items with wrapping behavior",
+        "Home/End keys jump to first/last item",
+        "Includes skip link for bypassing navigation"
+      ]
+    },
+    {
+      "id": "aria-components",
+      "rule": "aria-components",
+      "query": "Build an accessible button with React Aria",
+      "expectedBehavior": [
+        "Uses useButton hook instead of div+onClick",
+        "Includes useFocusRing for keyboard focus indicator",
+        "Uses mergeProps to combine props safely",
+        "Supports onPress handler for unified click/tap/Enter/Space interactions"
+      ]
+    },
+    {
+      "id": "aria-forms",
+      "rule": "aria-forms",
+      "query": "Create an accessible combobox/autocomplete component",
+      "expectedBehavior": [
+        "Uses useComboBox + useComboBoxState from React Aria",
+        "Label properly associated with input via labelProps",
+        "Arrow keys navigate options, Enter selects",
+        "Uses useFilter hook for locale-aware type-ahead filtering"
+      ]
+    },
+    {
+      "id": "wcag-native-html-first",
+      "rule": "wcag-native-html-first",
+      "query": "I built a custom modal component with manual focus trap and ARIA attributes. Is there a simpler approach?",
+      "expectedBehavior": [
+        "Recommends replacing custom modal with native HTML dialog element and showModal method",
+        "Explains that dialog provides built-in focus trap, Escape close, and inert backdrop for free",
+        "Recommends replacing custom accordions with native details and summary HTML elements",
+        "Only uses custom ARIA widgets when no native HTML equivalent exists such as combobox or tree view"
+      ]
+    },
+    {
+      "id": "wcag-user-preferences",
+      "rule": "wcag-user-preferences",
+      "query": "How do I respect user OS preferences for reduced motion, dark mode, and high contrast in my CSS?",
+      "expectedBehavior": [
+        "Wraps all animations in prefers-reduced-motion media query with reduced or no motion fallback",
+        "Implements dark mode via prefers-color-scheme media query with CSS custom properties",
+        "Supports Windows High Contrast Mode with forced-colors active media query and system colors",
+        "Uses rem and em units for all text sizes ensuring usability at 200 percent browser zoom"
+      ]
+    }
+  ]
+}

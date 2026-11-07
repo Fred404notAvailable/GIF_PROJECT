@@ -1,0 +1,6 @@
+# Validation Report — hipaa-audit
+**Status:** invalid
+## Errors
+- Optional field 'allowed-tools' has wrong type (expected list, got str)
+## Warnings
+- Body is 27575 chars (>8000); consider moving large content to references/

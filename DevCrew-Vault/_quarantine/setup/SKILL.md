@@ -1,0 +1,307 @@
+---
+name: setup
+license: MIT
+compatibility: "Claude Code 2.1.277+."
+description: "Onboarding wizard: scans the codebase and stack, recommends skills and MCP servers, scores readiness. Use when setting up OrchestKit in a project or rescanning after big changes."
+argument-hint: "[--rescan] [--score-only] [--plan-only] [--channel] [--configure]"
+context: fork
+# user-typed commands stay interactive; CC >= 2.1.218 backgrounds forks by default (#3093)
+background: false
+user-invocable: true
+disable-model-invocation: false
+allowed-tools: "Read Write Grep Glob Bash AskUserQuestion TaskCreate TaskUpdate mcp__memory__search_nodes mcp__memory__create_entities mcp__memory__create_relations"
+skills: [configure, remember, explore, help]
+metadata:
+  category: configuration
+  mcp-server: memory
+  version: "2.1.0"
+  author: "OrchestKit"
+  complexity: "medium"
+  tags: "onboarding, setup, wizard, configuration, stack-detection, mcp, personalization, telemetry, presets"
+triggers:
+  keywords: [setup, onboarding, configure, "just installed", "get orchestkit working", "set up orchestkit", "set up ork", "readiness score", wizard]
+  examples:
+    - "set up orchestkit for this project"
+    - "run the onboarding wizard"
+    - "i just installed orchestkit, what do i do first"
+  anti-triggers: [doctor, help, explore, implement, fix]
+---
+
+# OrchestKit Setup Wizard
+
+Personalized onboarding that scans your codebase, detects your stack, recommends skills and MCPs, and generates an actionable improvement plan.
+
+## When to Use
+
+- First time after installing OrchestKit (`/plugin install ork`)
+- Joining a new project and want OrchestKit tuned for it
+- Periodically with `--rescan` to track improvement
+- Enterprise users who need safe, user-scoped install confirmation
+
+## Quick Start
+
+```bash
+setup              # Full 7-phase wizard
+setup --rescan     # Re-scan after changes (skip safety phase)
+setup --score-only # Just show readiness score
+setup --plan-only  # Just show improvement plan
+setup --configure  # Jump directly to Phase 3.5: project configuration wizard
+```
+
+## Argument Resolution
+
+```python
+FLAG = "$ARGUMENTS[0]"  # First token: --rescan, --score-only, --plan-only, --channel
+# If no arguments, run full 7-phase wizard.
+# $ARGUMENTS is the full string (CC 2.1.59 indexed access)
+```
+
+## CRITICAL: Task Management is MANDATORY (CC 2.1.16)
+
+**BEFORE doing ANYTHING else, create tasks to track progress:**
+
+```python
+# 1. Create main task IMMEDIATELY
+TaskCreate(
+  subject="Setup: onboarding wizard",
+  description="Personalized setup scanning codebase and configuring OrchestKit",
+  activeForm="Running setup wizard"
+)
+
+# 2. Create subtasks for key phase groups
+TaskCreate(subject="Scan & detect stack", activeForm="Scanning codebase and detecting stack")
+TaskCreate(subject="Safety & configure", activeForm="Checking config and running configuration wizard")
+TaskCreate(subject="Recommend skills & MCPs", activeForm="Matching stack to skills and MCPs")
+TaskCreate(subject="Score & plan", activeForm="Computing readiness score and improvement plan")
+
+# 3. Set dependencies for sequential phases
+TaskUpdate(taskId="3", addBlockedBy=["2"])
+TaskUpdate(taskId="4", addBlockedBy=["3"])
+TaskUpdate(taskId="5", addBlockedBy=["4"])
+
+# 4. Update status as you progress
+TaskUpdate(taskId="2", status="in_progress")  # When starting
+TaskUpdate(taskId="2", status="completed")    # When done
+```
+
+## The Phases
+
+| Phase | What | Tools Used | Output |
+|-------|------|-----------|--------|
+| 1. Scan | Detect languages, frameworks, infra, existing config | Glob, Grep, Read | Raw scan data |
+| 2. Stack | Classify detected stack, confidence levels | — | Stack profile |
+| 3. Safety | Check existing config, confirm scope (user/project) | Read, AskUserQuestion | Install confirmation |
+| 3.5. Configure | Interactive project configuration wizard → writes env block to per-project settings | Read, Write, AskUserQuestion | Configured settings file |
+| 3.6. Protect | Deliver ork's canonical `permissions.deny` payload to an ENFORCING scope (a plugin settings.json is inert: CC reads only `agent`/`subagentStatusLine`, #3835). Run `node ${CLAUDE_SKILL_DIR}/scripts/write-operator-permissions.mjs --scope user --dry-run`, show the additions and the print-only sandbox suggestion, then ONLY on an explicit yes rerun without `--dry-run`. The script backs up the file and prints the one-command rollback. Never write without the dry-run + consent pair. | Bash, AskUserQuestion | Enforced deny rules + rollback line |
+| 4. Skills | Match stack to skills, suggest custom skills | Grep, Glob | Skill recommendations |
+| 5. MCPs | Recommend MCPs based on stack and gaps | Read, Bash | MCP recommendations |
+| 6. Score | Compute readiness score (0-10, 6 dimensions) | All above data | Readiness score |
+| 7. Plan | Prioritized improvements with runnable commands | — | Action plan |
+
+---
+
+## Phase 1: Scan
+
+Load details: `Read("references/scan-phase.md")` for full scan commands (20 parallel Glob probes + dependency file reads + pattern detection counts).
+
+Scans for package manifests (package.json, pyproject.toml, go.mod, Cargo.toml, etc.), infrastructure (Docker, GitHub Actions, Terraform, K8s), and existing CC configuration. Pattern detection counts API routes, React components, models, and tests for custom skill suggestions.
+
+## Phase 2: Stack Detection
+
+**Load the stack snapshot first.** A fork skill never runs frontmatter hooks (#4683), so run the loader yourself and keep its `additionalContext` in mind:
+
+```bash
+echo '{"tool_name":"Bash","tool_input":{}}' | node "${CLAUDE_PLUGIN_ROOT}/hooks/bin/run-hook.mjs" skill/setup-env-detector
+```
+
+Classify scan results into a stack profile and present to user (languages, frameworks, database, infra, testing, existing CC config).
+
+Load `Read("references/stack-skill-mapping.md")` for the full stack-to-skill mapping table, MCP recommendation matrix, and custom skill suggestion patterns.
+
+## Phase 2b: Channel Detection
+
+
+## Phase 3: Safety Check
+
+Load details: `Read("references/safety-check.md")` for the full AskUserQuestion prompt and conflict detection logic.
+
+Offers three install scopes: User-only (recommended, invisible to teammates), Project-wide (committed to repo), or Already installed (skip to configure). Checks for existing OrchestKit installs and conflicting plugins.
+
+> **Console auth (CC 2.1.79+):** Users authenticating via Anthropic Console (API billing) can run `claude auth login --console` instead of the default OAuth flow. Useful for teams on usage-based API billing rather than Pro/Team subscriptions.
+
+> **Team onboarding (CC 2.1.101+):** `/team-onboarding` generates a teammate ramp-up guide from your local CC usage patterns. Suggest running it after setup to create onboarding docs for new team members.
+
+> **Enterprise TLS (CC 2.1.101+):** OS CA certificate store is trusted by default — enterprise TLS proxies work without extra setup. Set `CLAUDE_CODE_CERT_STORE=bundled` to use only bundled CAs if needed.
+
+> **Prompt caching (CC 2.1.108+):** For API-key, Bedrock, Vertex, or Foundry users, recommend setting `ENABLE_PROMPT_CACHING_1H=1` to extend the prompt cache TTL from 5 minutes to 1 hour. This significantly reduces token costs for long OrchestKit sessions (brainstorm, implement, cover chains). Session recap is enabled by default since CC 2.1.110 (even with telemetry disabled).
+
+> **TUI mode (CC 2.1.110+):** Recommend `/tui fullscreen` for flicker-free rendering during long sessions. Pair with `autoScrollEnabled: false` in `/config` for manual scroll control during brainstorm/implement output review. The `/focus` command provides a condensed view (prompt + one-line tool summaries + final response).
+
+> **Plugin install (CC 2.1.157+):** Plugins in `.claude/skills` auto-load without a marketplace — for local/dev installs, placing a plugin there is enough. `claude plugin init <name>` scaffolds a new plugin skeleton in `.claude/skills`.
+
+> **`--dangerously-skip-permissions` policy (CC 2.1.121 + 2.1.126, #1583):** the flag's scope expanded substantially. As of 2.1.126 it bypasses prompts for writes to `.claude/`, `.git/`, `.vscode/`, shell config files (`~/.bashrc`, `~/.zshrc`, etc.), and "other previously-protected paths" — on top of `.claude/skills/`, `.claude/agents/`, `.claude/commands/` already bypassed since 2.1.121. Only catastrophic removal commands (e.g., `rm -rf /`) still prompt. **Recommend against this flag for shared workstations, CI runners, and onboarding sessions.** Suggest the auto-approve permission hooks in `src/hooks/README.md` instead — they offer fine-grained allow-listing without disabling the safety net wholesale. The setup wizard should warn (not block) if the user enables this flag during configure.
+
+## Phase 3.5: Project Configuration Wizard
+
+Load details: `Read("references/configure-wizard.md")` for the full 6-step interactive configuration flow (branch strategy, commit scope, perf telemetry, log verbosity, webhook telemetry; step 3, localhost browser, is retired) and env var reference.
+
+> Also reachable directly via `setup --configure` — skips phases 1-3.
+
+---
+
+## Phase 4: Skill Recommendations
+
+Present skill categories using `AskUserQuestion` with 4 focus options (Full-stack, Backend, Frontend, DevOps) with `multiSelect: true`. Load `Read("references/stack-skill-mapping.md")` for mapping tables and custom skill suggestions.
+
+## Phase 5: MCP Recommendations
+
+Check installed vs recommended MCPs by reading `.mcp.json` and `~/.claude/settings.json`. Load `Read("references/stack-skill-mapping.md")` for the MCP recommendation matrix. Present as toggles with install commands.
+
+**CC 2.1.121+ tip (#1541):** for the universally-needed T2 trio (memory, context7, sequential-thinking), recommend setting `"alwaysLoad": true` in their `.mcp.json` entries. This skips per-skill `ToolSearch` probes and shaves ~150ms off cold starts. The key is silently ignored on older CC, so it's safe to add eagerly.
+
+**Plugin lifecycle cleanup (CC 2.1.121+, #1544):** mention `claude plugin uninstall <name> --prune` in the cleanup section — it cascades and removes auto-installed deps that became orphaned. Standalone `claude plugin prune` runs the same cleanup without uninstalling anything; `dream` runs it weekly.
+
+## Phase 6: Readiness Score
+
+Compute a composite score (0-10) from 6 dimensions. Load `Read("references/readiness-scoring.md")` for dimension weights, score presentation template, memory integration, and improvement plan template.
+
+## Phase 7: Improvement Plan
+
+Generate prioritized, **runnable** recommendations in P0/P1/P2 tiers. See `readiness-scoring.md` for the template and memory persistence pattern.
+
+## Phase 7b: CLAUDE.md Health Check
+
+After the improvement plan, check if the user's CLAUDE.md could benefit from CC 2.1.59+ modular structure. On CC 2.1.277+, AGENTS.md fills this role in a project with no CLAUDE.md, so run the same check against whichever instruction file the project uses.
+
+Load details: `Read("references/claude-md-health.md")` for analysis steps, thresholds, @import syntax, and `.claude/rules/` path-scoped rules.
+
+```python
+# Quick check
+Bash(command="wc -l CLAUDE.md 2>/dev/null | awk '{print $1}'")
+Glob(pattern=".claude/rules/*.md")
+```
+
+If CLAUDE.md > 200 lines and no `.claude/rules/` exist, recommend splitting. Show the output template from the reference doc.
+
+## Post-Setup
+
+> **Tip (CC 2.1.69+):** After setup completes, run `/reload-plugins` to activate all plugin changes without restarting your session.
+>
+> **Tip (CC 2.1.90+):** New to Claude Code? Try `/powerup` for interactive lessons with animated demos teaching core features.
+
+## Phase 9: Telemetry & Webhooks
+
+> Previously in `configure`. Now part of setup for single entry point.
+
+Load details: `Read("references/telemetry-setup.md")` for the full configuration flow.
+
+Ask user preference with AskUserQuestion:
+
+| Mode | Events | Auth | Overhead |
+|------|--------|------|----------|
+| **Stream to a webhook** | Analytics events + SessionEnd summaries via the HMAC-signed `http-sink` | `ORCHESTKIT_HOOK_TOKEN` | Batched, async |
+| **Skip** | No telemetry | none | None |
+
+If streaming selected:
+1. Ask for webhook URL
+2. Save `webhookUrl` to `.claude/orchestration/config.json`
+3. Remind about `ORCHESTKIT_HOOK_TOKEN` env var
+
+The per-event native HTTP hook generator (channel 1) was deleted in #3867; nothing writes `type: "http"` entries into `settings.local.json`.
+
+## Phase 10: Optional Integrations
+
+Load details: `Read("references/integrations.md")` for setup steps.
+
+Covers CC version-specific settings (CC 2.1.7 MCP deferral, CC 2.1.20 task deletion, CC 2.1.23 spinner verbs, CC 2.1.79 turn duration display) and monorepo worktree optimization.
+
+### Monorepo Sparse Paths (CC 2.1.76+)
+
+If Phase 1 scan detected a monorepo (pnpm-workspace.yaml, nx.json, lerna.json, turbo.json, or package.json workspaces), suggest configuring `worktree.sparsePaths` in `.claude/settings.json`:
+
+```json
+{
+  "worktree": {
+    "sparsePaths": ["src/", "packages/core/", "tests/", "scripts/"]
+  }
+}
+```
+
+This makes `--worktree` and agent `isolation: worktree` check out only the listed directories via git sparse-checkout — significantly faster in large monorepos.
+
+### Multi-Directory Plugin Seeding (CC 2.1.79+)
+
+`CLAUDE_CODE_PLUGIN_SEED_DIR` now supports multiple directories separated by the platform path delimiter (`:` on Unix, `;` on Windows):
+
+```bash
+export CLAUDE_CODE_PLUGIN_SEED_DIR="/shared/team/plugins:/shared/org/plugins"
+```
+
+This is useful for teams with multiple plugin sources — e.g., a shared org-wide plugin directory alongside a team-specific one. Claude Code scans all listed directories for plugin definitions at startup.
+
+### One-Off Plugin Loading from `.zip` (CC 2.1.128 / 2.1.129)
+
+For evaluating a plugin without committing to a marketplace install — useful for trialing a coworker's branch build, a CI-produced PR artifact, or an OrchestKit pre-release `.zip` before it's published:
+
+- **`--plugin-dir <path-to-zip>`** (CC 2.1.128+): load a local `.zip` archive as a plugin for the session. Same flag that previously only accepted directories, now also accepts archives.
+  ```bash
+  claude --plugin-dir ./vendor/some-plugin.zip
+  ```
+- **`--plugin-url <url>`** (CC 2.1.129+): fetch a `.zip` from a URL and load it for the current session only. The plugin is discarded when CC exits — nothing is written to `~/.claude/plugins/`.
+  ```bash
+  claude --plugin-url https://example.com/some-plugin.zip
+  ```
+
+Both are session-scoped trial paths; for permanent install, use the standard `/plugin install` flow against a marketplace. See `${CLAUDE_PLUGIN_ROOT}/skills/configure/references/cc-version-settings.md` § CC 2.1.128/2.1.129 for the full notes.
+
+## CLI Flags
+
+| Flag | Behavior |
+|------|----------|
+| (none) | Full wizard (phases 1-10) |
+| `--rescan` | Re-run scan + score, skip safety phase |
+| `--configure` | Jump directly to Phase 3.5: project configuration wizard |
+| `--score-only` | Show current readiness score (Phase 6 only) |
+| `--plan-only` | Show improvement plan (Phase 7 only) |
+| `--telemetry` | Jump to Phase 9: telemetry/webhook setup |
+| `--preset` | Apply a preset (complete/standard/lite/hooks-only/monorepo) |
+
+## Presets (via --preset)
+
+Apply a preset to quickly configure OrchestKit without the full wizard:
+
+| Preset | Skills | Agents | Hooks | Best For |
+|--------|--------|--------|-------|----------|
+| **complete** | 91 | 31 | 96 | Full power — everything enabled |
+| **standard** | 91 | 0 | 96 | Skills + hooks, no agents |
+| **lite** | 10 | 0 | 96 | Essential workflow skills only |
+| **hooks-only** | 0 | 0 | 96 | Just safety hooks |
+| **monorepo** | 91 | 31 | 96 | Complete + monorepo workspace detection |
+
+Load preset details: `Read("references/presets.md")`
+
+## References
+
+Load on demand with `Read("references/<file>")`:
+
+| File | Content |
+|------|---------|
+| `scan-phase.md` | Phase 1: 20 parallel Glob probes + pattern detection |
+| `safety-check.md` | Phase 3: Install scope and conflict detection |
+| `configure-wizard.md` | Phase 3.5: 6-step interactive project config |
+| `claude-md-health.md` | Phase 7b: CLAUDE.md modular structure analysis |
+| `telemetry-setup.md` | Phase 9: Webhook/telemetry configuration |
+| `integrations.md` | Phase 10: CC version settings |
+| `presets.md` | Preset definitions and skill/agent matrices |
+
+## CC `--channels` + console auth (2.1.128+)
+
+`--channels` (per-org notification channel routing) now works under console (API key) authentication, not just OAuth — but the org must have `channelsEnabled: true` set via the admin API. If the user runs `claude --channels=...` with API-key auth and the org config lacks the flag, the channel selection is silently ignored. Setup wizard surfaces this when API-key auth is detected and any channel-routing skill or agent is selected for install.
+
+## Related Skills
+
+- `ork:doctor` — Health diagnostics (wizard uses its checks)
+- `ork:configure` — Internal configuration (called by wizard phases 3.5, 9, 10)
+- `ork:remember` — Knowledge persistence (wizard seeds initial patterns)
+- `ork:explore` — Deep codebase analysis (wizard links for follow-up)
+- `ork:help` — Skill directory (wizard surfaces relevant subset)

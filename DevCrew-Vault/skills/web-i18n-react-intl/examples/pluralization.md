@@ -1,0 +1,423 @@
+# React-Intl Pluralization Examples
+
+> ICU Message Format pluralization, select, and ordinal patterns. See [core.md](core.md) for setup and basic patterns.
+
+---
+
+## Cardinal Pluralization
+
+### Good Example - Basic Plural with All Cases
+
+```typescript
+// src/components/notification-badge.tsx
+import { FormattedMessage } from "react-intl";
+
+type Props = {
+  count: number;
+};
+
+export function NotificationBadge({ count }: Props) {
+  return (
+    <span aria-label={`${count} notifications`} role="status">
+      <FormattedMessage
+        id="notifications.count"
+        defaultMessage="{count, plural, =0 {No notifications} one {# notification} other {# notifications}}"
+        values={{ count }}
+      />
+    </span>
+  );
+}
+
+// Output (count=0): "No notifications"
+// Output (count=1): "1 notification"
+// Output (count=5): "5 notifications"
+
+```
+
+**Why good:** `=0` provides zero-specific message, `#` formats the count with locale-appropriate separators, `other` category is REQUIRED (omission causes runtime error), accessible with aria-label and role
+
+### Good Example - Plural with Multiple Variables
+
+```typescript
+// src/components/shopping-cart-summary.tsx
+import { FormattedMessage } from "react-intl";
+
+type Props = {
+  itemCount: number;
+  totalPrice: string;
+};
+
+export function ShoppingCartSummary({ itemCount, totalPrice }: Props) {
+  return (
+    <p>
+      <FormattedMessage
+        id="cart.summary"
+        defaultMessage="{itemCount, plural, =0 {Your cart is empty} one {# item in cart - {total}} other {# items in cart - {total}}}"
+        values={{ itemCount, total: totalPrice }}
+      />
+    </p>
+  );
+}
+
+// Output (itemCount=0): "Your cart is empty"
+// Output (itemCount=1): "1 item in cart - $29.99"
+// Output (itemCount=3): "3 items in cart - $89.97"
+
+```
+
+**Why good:** combines pluralization with other variables, `total` interpolated in plural branches, zero case provides meaningful empty state
+
+### Good Example - Nested Pluralization
+
+```typescript
+// src/components/activity-summary.tsx
+import { FormattedMessage } from "react-intl";
+
+type Props = {
+  followerCount: number;
+  postCount: number;
+};
+
+export function ActivitySummary({ followerCount, postCount }: Props) {
+  return (
+    <p>
+      <FormattedMessage
+        id="activity.summary"
+        defaultMessage="{followerCount, plural, =0 {No followers yet} one {# follower} other {# followers}} and {postCount, plural, =0 {no posts} one {# post} other {# posts}}"
+        values={{ followerCount, postCount }}
+      />
+    </p>
+  );
+}
+
+// Output: "5 followers and 3 posts"
+// Output: "1 follower and no posts"
+// Output: "No followers yet and 1 post"
+
+```
+
+**Why good:** multiple plural expressions in one message, maintains sentence structure for translators
+
+---
+
+## Ordinal Pluralization
+
+### Good Example - Ordinal Numbers (1st, 2nd, 3rd)
+
+```typescript
+// src/components/ranking-badge.tsx
+import { FormattedMessage } from "react-intl";
+
+type Props = {
+  position: number;
+};
+
+export function RankingBadge({ position }: Props) {
+  return (
+    <span>
+      <FormattedMessage
+        id="ranking.position"
+        defaultMessage="{position, selectordinal, one {#st} two {#nd} few {#rd} other {#th}} place"
+        values={{ position }}
+      />
+    </span>
+  );
+}
+
+// Output (position=1): "1st place"
+// Output (position=2): "2nd place"
+// Output (position=3): "3rd place"
+// Output (position=4): "4th place"
+// Output (position=21): "21st place"
+
+```
+
+**Why good:** `selectordinal` handles language-specific ordinal rules, English has four categories (one, two, few, other), `#` is replaced with formatted number
+
+---
+
+## Select (Enum/Gender)
+
+### Good Example - Gender Selection
+
+```typescript
+// src/components/profile-action.tsx
+import { FormattedMessage } from "react-intl";
+
+type Gender = "male" | "female" | "other";
+
+type Props = {
+  userName: string;
+  gender: Gender;
+  action: "like" | "comment" | "share";
+};
+
+export function ProfileAction({ userName, gender, action }: Props) {
+  return (
+    <p>
+      <FormattedMessage
+        id="profile.action"
+        defaultMessage="{gender, select, male {He} female {She} other {They}} {action, select, like {liked} comment {commented on} share {shared} other {interacted with}} your post."
+        values={{ gender, action }}
+      />
+    </p>
+  );
+}
+
+// Output (male, like): "He liked your post."
+// Output (female, comment): "She commented on your post."
+// Output (other, share): "They shared your post."
+
+```
+
+**Why good:** `other` category is REQUIRED as fallback, multiple select expressions compose well, type-safe enum values
+
+### Good Example - Status Selection
+
+```typescript
+// src/components/order-status.tsx
+import { FormattedMessage } from "react-intl";
+
+type OrderStatus = "pending" | "processing" | "shipped" | "delivered" | "cancelled";
+
+type Props = {
+  status: OrderStatus;
+  orderNumber: string;
+};
+
+export function OrderStatusMessage({ status, orderNumber }: Props) {
+  return (
+    <p>
+      <FormattedMessage
+        id="order.statusMessage"
+        defaultMessage="Order {orderNumber}: {status, select, pending {is awaiting confirmation} processing {is being prepared} shipped {is on its way} delivered {has been delivered} cancelled {has been cancelled} other {status unknown}}"
+        values={{ status, orderNumber }}
+      />
+    </p>
+  );
+}
+
+// Output: "Order #12345: is on its way"
+// Output: "Order #12345: has been delivered"
+
+```
+
+**Why good:** enum-like status maps to full phrases, `other` handles unexpected values gracefully, order number interpolated
+
+---
+
+## Complex Nested Patterns
+
+### Good Example - Gender with Plural
+
+```typescript
+// src/components/follower-notification.tsx
+import { FormattedMessage } from "react-intl";
+
+type Gender = "male" | "female" | "other";
+
+type Props = {
+  userName: string;
+  gender: Gender;
+  followerCount: number;
+};
+
+export function FollowerNotification({ userName, gender, followerCount }: Props) {
+  return (
+    <p>
+      <FormattedMessage
+        id="follower.notification"
+        defaultMessage="{gender, select, male {He has {count, plural, =0 {no followers} one {# follower} other {# followers}}} female {She has {count, plural, =0 {no followers} one {# follower} other {# followers}}} other {They have {count, plural, =0 {no followers} one {# follower} other {# followers}}}}"
+        values={{ gender, count: followerCount }}
+      />
+    </p>
+  );
+}
+
+// Output (male, 5): "He has 5 followers"
+// Output (female, 1): "She has 1 follower"
+// Output (other, 0): "They have no followers"
+
+```
+
+**Why good:** nested plural inside select handles both dimensions, verb agreement ("has" vs "have") varies with gender
+
+### Good Example - Plural with Date
+
+```typescript
+// src/components/expiration-notice.tsx
+import { FormattedMessage } from "react-intl";
+
+type Props = {
+  daysRemaining: number;
+  expirationDate: Date;
+};
+
+export function ExpirationNotice({ daysRemaining, expirationDate }: Props) {
+  return (
+    <p>
+      <FormattedMessage
+        id="subscription.expiration"
+        defaultMessage="{days, plural, =0 {Your subscription expires today ({date, date, medium})} =1 {Your subscription expires tomorrow ({date, date, medium})} other {Your subscription expires in # days ({date, date, medium})}}"
+        values={{ days: daysRemaining, date: expirationDate }}
+      />
+    </p>
+  );
+}
+
+// Output (days=0): "Your subscription expires today (Jan 15, 2024)"
+// Output (days=1): "Your subscription expires tomorrow (Jan 16, 2024)"
+// Output (days=5): "Your subscription expires in 5 days (Jan 20, 2024)"
+
+```
+
+**Why good:** special cases for 0 and 1 days, date formatting embedded in message, contextual information preserved
+
+---
+
+## Language-Specific Plural Rules
+
+> See [reference.md](../reference.md) for the full plural categories by language table.
+
+### Good Example - Language-Aware Pluralization
+
+```typescript
+// messages/en.json
+{
+  "items.count": "{count, plural, one {# item} other {# items}}"
+}
+
+// messages/ru.json (Russian has 4 categories)
+{
+  "items.count": "{count, plural, one {# товар} few {# товара} many {# товаров} other {# товара}}"
+}
+
+// messages/ar.json (Arabic has 6 categories)
+{
+  "items.count": "{count, plural, zero {لا عناصر} one {عنصر واحد} two {عنصران} few {# عناصر} many {# عنصرًا} other {# عنصر}}"
+}
+
+// messages/ja.json (Japanese has no plural forms)
+{
+  "items.count": "{count}個のアイテム"
+}
+```
+
+**Why good:** each language file uses appropriate categories, translators handle language-specific rules, `other` is always required as fallback
+
+---
+
+## Splitting a Message That Changes Shape
+
+When the sentence itself differs rather than just a count, use separate message IDs — a single
+message with every branch inside it is unreadable for the translator.
+
+### Good Example - Time Durations
+
+```typescript
+// src/components/duration-display.tsx
+import { FormattedMessage } from "react-intl";
+
+type Props = {
+  hours: number;
+  minutes: number;
+};
+
+export function DurationDisplay({ hours, minutes }: Props) {
+  if (hours === 0) {
+    return (
+      <span>
+        <FormattedMessage
+          id="duration.minutesOnly"
+          defaultMessage="{minutes, plural, one {# minute} other {# minutes}}"
+          values={{ minutes }}
+        />
+      </span>
+    );
+  }
+
+  if (minutes === 0) {
+    return (
+      <span>
+        <FormattedMessage
+          id="duration.hoursOnly"
+          defaultMessage="{hours, plural, one {# hour} other {# hours}}"
+          values={{ hours }}
+        />
+      </span>
+    );
+  }
+
+  return (
+    <span>
+      <FormattedMessage
+        id="duration.hoursAndMinutes"
+        defaultMessage="{hours, plural, one {# hour} other {# hours}} and {minutes, plural, one {# minute} other {# minutes}}"
+        values={{ hours, minutes }}
+      />
+    </span>
+  );
+}
+
+// Output: "2 hours and 30 minutes"
+// Output: "1 hour"
+// Output: "45 minutes"
+
+```
+
+**Why good:** each shape is its own message, so a translator sees three short sentences rather than one nested expression, and the zero cases read naturally
+
+---
+
+## ICU Message Escaping
+
+### Good Example - Escaping Special Characters
+
+```typescript
+// src/components/syntax-help.tsx
+import { FormattedMessage } from "react-intl";
+
+export function SyntaxHelp() {
+  return (
+    <div>
+      <p>
+        <FormattedMessage
+          id="syntax.braces"
+          defaultMessage="To display literal braces, use ''{'' and ''}''"
+        />
+      </p>
+      <p>
+        <FormattedMessage
+          id="syntax.apostrophe"
+          defaultMessage="It''s a nice day! (double apostrophe for literal)"
+        />
+      </p>
+    </div>
+  );
+}
+
+// Output: "To display literal braces, use '{' and '}'"
+// Output: "It's a nice day! (double apostrophe for literal)"
+
+```
+
+**Why good:** single quotes escape syntax characters, double single quotes produce literal apostrophe, clear examples for edge cases
+
+---
+
+## Testing Pluralization
+
+### Testing Plural Branches
+
+When testing components with pluralization, verify all branches:
+
+- **Zero case** (`=0`): e.g. "No notifications"
+- **Singular** (`one`): e.g. "1 notification"
+- **Plural** (`other`): e.g. "5 notifications"
+- **Large numbers**: locale formatting applies (en-US: "1,000 notifications")
+
+Create a custom render wrapper that wraps components with `IntlProvider` so tests have i18n context. Test each plural branch explicitly to catch missing `other` categories.
+
+---
+
+_For date, number, and currency formatting, see [formatting.md](formatting.md). For setup and basic patterns, see [core.md](core.md)._

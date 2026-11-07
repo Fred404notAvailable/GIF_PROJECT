@@ -1,0 +1,271 @@
+# Phase 3.5: Project Configuration Wizard
+
+> Also reachable directly via `/ork:setup --configure` — skips phases 1-3.
+
+This phase walks users through every configurable OrchestKit behaviour and writes the result to the correct project settings file. When running the full wizard, show this phase AFTER the safety/install check. When running `--configure` alone, start here.
+
+## Step 0: Detect config target and read current settings
+
+The write target depends on the project type:
+
+- **Developing OrchestKit itself** (`src/settings/ork.settings.json` exists): write to `src/settings/ork.settings.json` — this is the plugin's global defaults file.
+- **Any other project** (your app, client repos, etc.): write to `.claude/settings.json` — this is per-project CC settings that override plugin defaults without touching global config.
+
+```python
+# Detect config target
+is_orchestkit_dev = len(Glob(pattern="src/settings/ork.settings.json")) > 0
+
+if is_orchestkit_dev:
+    config_target = "src/settings/ork.settings.json"
+    existing_settings = Read(file_path="src/settings/ork.settings.json") or {}
+else:
+    config_target = ".claude/settings.json"
+    existing_settings = Read(file_path=".claude/settings.json") or {}
+
+# Extract current env block if present
+current_env = existing_settings.get("env", {})
+```
+
+Show the user what's already set so they aren't surprised by overwrites.
+
+## Steps 1-5: Configuration questions
+
+Ask these five with `AskUserQuestion`. This used to be the "legacy fallback"
+behind an `ork-elicit` MCP form that consolidated all five into one dialog;
+that server was retired (EPIC C mechanism 11) because `AskUserQuestion` is the
+CC-native surface for exactly this and holding a permanent MCP tool slot to
+restate it was the parallel mechanism. The availability probe and the
+elicit/legacy branch are gone with it — there is one path now.
+
+### Step 1: Branch Strategy
+
+```python
+AskUserQuestion(questions=[{
+  "question": "Which branches should block direct commits and pushes?",
+  "header": "Protected branches",
+  "options": [
+    {
+      "label": "main, master (Recommended)",
+      "description": "Standard Git Flow defaults. Feature work goes on branches."
+    },
+    {
+      "label": "main, master, dev",
+      "description": "Adds dev as a protected integration branch."
+    },
+    {
+      "label": "main only",
+      "description": "Minimal protection — only main is locked."
+    },
+    {
+      "label": "Custom",
+      "description": "I'll specify my own comma-separated branch list."
+    }
+  ],
+  "multiSelect": false
+}])
+```
+
+If **Custom** selected: ask for the comma-separated list inline.
+
+Generated env var: `ORCHESTKIT_PROTECTED_BRANCHES=<value>`
+
+### Step 2: Commit Format Enforcement
+
+```python
+AskUserQuestion(questions=[{
+  "question": "How strictly should commit message format be enforced?",
+  "header": "Commit scope",
+  "options": [
+    {
+      "label": "Optional scope (Recommended)",
+      "description": "Both `feat: msg` and `feat(scope): msg` are valid."
+    },
+    {
+      "label": "Required scope",
+      "description": "Every commit must include a scope: `type(scope): msg`"
+    },
+    {
+      "label": "Scope disabled",
+      "description": "Only type+colon required. Scopes ignored in validation."
+    }
+  ],
+  "multiSelect": false
+}])
+```
+
+Generated env var: `ORCHESTKIT_COMMIT_SCOPE=<value>`
+
+### Step 3: Local Dev Browser Access (no question)
+
+Skip this step. The `agent-browser-safety` hook that read `ORCHESTKIT_AGENT_BROWSER_ALLOW_LOCALHOST` was retired on 2026-08-31, so the wizard no longer writes it. If the operator turned on the sandbox network allow list, the local host names go in `sandbox.network.allowedDomains` instead.
+
+### Step 4: Performance Telemetry
+
+```python
+AskUserQuestion(questions=[{
+  "question": "Should OrchestKit write a token-usage snapshot at session end?",
+  "header": "Perf snapshot",
+  "options": [
+    {
+      "label": "Yes, enable perf snapshots (Recommended)",
+      "description": "Writes ~/.claude/perf/snap-YYYY-MM-DD-HH.json. Used by /ork:assess and perf-compare.sh."
+    },
+    {
+      "label": "No, disable perf snapshots",
+      "description": "Skip writing snapshot files. Useful in CI or shared environments."
+    }
+  ],
+  "multiSelect": false
+}])
+```
+
+Generated env var: `ORCHESTKIT_PERF_SNAPSHOT_ENABLED=<value>`
+
+### Step 5: Log Verbosity
+
+```python
+AskUserQuestion(questions=[{
+  "question": "What log level should OrchestKit hooks use?",
+  "header": "Log level",
+  "options": [
+    {
+      "label": "warn — quiet (Recommended)",
+      "description": "Only warnings and errors. Minimal noise."
+    },
+    {
+      "label": "info — moderate",
+      "description": "Key events logged. Good for onboarding."
+    },
+    {
+      "label": "debug — verbose",
+      "description": "Full trace of every hook decision."
+    }
+  ],
+  "multiSelect": false
+}])
+```
+
+Generated env var: `ORCHESTKIT_LOG_LEVEL=<value>`
+
+## Step 6: Webhook Telemetry
+
+> This step always uses AskUserQuestion: the conditional webhook URL follow-up requires interactive flow that elicitation cannot handle.
+
+Events leave the machine over one channel only, the HMAC-signed `http-sink` (batched, retried with backoff, circuit-broken). It activates when a webhook URL is configured AND `ORCHESTKIT_HOOK_TOKEN` is exported in the launching shell. The per-event native HTTP hook generator (`generate-http-hooks`, "channel 1") was deleted in #3867; never write `type: "http"` entries into `settings.local.json` for telemetry.
+
+```python
+AskUserQuestion(questions=[{
+  "question": "Send CC hook events to an external API for observability (Langfuse traces, metrics)?",
+  "header": "Webhook telemetry",
+  "options": [
+    {
+      "label": "Yes, enable webhooks",
+      "description": "Saves the webhook URL to .claude/orchestration/config.json; the built-in http-sink streams events to it."
+    },
+    {
+      "label": "No, skip webhooks (Recommended for most users)",
+      "description": "No streaming. All hook processing stays local."
+    }
+  ],
+  "multiSelect": false
+}])
+```
+
+If **Yes** selected, ask for the webhook URL:
+
+```python
+AskUserQuestion(questions=[{
+  "question": "Webhook base URL (the API that receives CC hook events):",
+  "header": "Webhook URL",
+  "options": [
+    {
+      "label": "https://hq.yonatangross.com/api/hooks",
+      "description": "Yonatan HQ production API"
+    },
+    {
+      "label": "https://hq-api.localhost/api/hooks",
+      "description": "Local dev API (Portless)"
+    },
+    {
+      "label": "Custom URL",
+      "description": "I'll provide my own webhook endpoint"
+    }
+  ],
+  "multiSelect": false
+}])
+```
+
+Then save the URL to orchestration config:
+
+```python
+saveConfig({ "webhookUrl": webhook_url })   # .claude/orchestration/config.json
+```
+
+The `http-sink` and the SessionEnd `usage-summary-reporter` both read this URL and authenticate with `ORCHESTKIT_HOOK_TOKEN`; the user must export that env var in their shell (e.g. `.zshrc`), never in a config file.
+
+Remind the user:
+```
+Webhook URL saved to .claude/orchestration/config.json
+Set ORCHESTKIT_HOOK_TOKEN in your shell:
+  export ORCHESTKIT_HOOK_TOKEN="your-token-here"
+```
+
+## Writing the Configuration
+
+After all steps complete (whether via elicitation or legacy), write (or merge) the env block into `config_target` (set in Step 0):
+
+```python
+# Merge new env values (preserving existing keys not in wizard scope)
+new_env = {
+  **current_env,  # preserve all keys we didn't ask about (e.g. ENABLE_TOOL_SEARCH)
+  **env_from_wizard,  # from elicitation path or legacy AskUserQuestion steps
+}
+
+# If legacy path was used, env_from_wizard was built step-by-step:
+# env_from_wizard = {
+#   "ORCHESTKIT_PROTECTED_BRANCHES": <from step 1>,
+#   "ORCHESTKIT_COMMIT_SCOPE": <from step 2>,
+#   "ORCHESTKIT_PERF_SNAPSHOT_ENABLED": <from step 4>,
+#   "ORCHESTKIT_LOG_LEVEL": <from step 5>,
+# }
+
+updated_settings = {**existing_settings, "env": new_env}
+
+Write(file_path=config_target, content=json.dumps(updated_settings, indent=2))
+```
+
+> **Note on per-project vs global:** Writing to `.claude/settings.json` overrides the plugin defaults for THIS project only — other projects remain unaffected. Writing to `src/settings/ork.settings.json` changes the global defaults shipped with the plugin itself. Only do that when developing OrchestKit.
+
+## Configuration Summary
+
+After writing, present a confirmation table (use `config_target` in the header):
+
+```
+OrchestKit Configuration Written → .claude/settings.json
+──────────────────────────────────────────────────────────
+  Protected branches    main,master
+  Commit scope          optional
+  Perf snapshot         enabled
+  Log level             warn
+
+Settings are in effect immediately for this project.
+Other projects using ork are unaffected.
+To reconfigure: /ork:setup --configure
+To see full readiness: /ork:setup --score-only
+```
+
+## Env Var Quick Reference
+
+| Env Var | Default | Values | Effect |
+|---------|---------|--------|--------|
+| `ORCHESTKIT_PROTECTED_BRANCHES` | `main,master` | comma-separated branches | Blocks direct commits/pushes |
+| `ORCHESTKIT_COMMIT_SCOPE` | `optional` | `optional` \| `required` \| `none` | Commit message scope enforcement |
+| `ORCHESTKIT_PERF_SNAPSHOT_ENABLED` | `1` | `1` \| `0` | Write session token snapshots |
+| `ORCHESTKIT_LOG_LEVEL` | `warn` | `debug` \| `info` \| `warn` \| `error` | Hook log verbosity |
+| `ORCHESTKIT_HOOK_TOKEN` | (unset) | Bearer token string | Auth for webhook HTTP hooks |
+| `ENABLE_TOOL_SEARCH` | `auto:5` | `auto:N` \| `off` | MCP tool discovery limit |
+| `CLAUDE_CODE_SCRIPT_CAPS` | (unset) | integer | Limit per-session script invocations (CC 2.1.98). Recommended for production. |
+| `CLAUDE_CODE_SUBPROCESS_ENV_SCRUB` | (unset) | `1` | Strip credentials from subprocess env vars (CC 2.1.98). Enables PID namespace isolation on Linux. |
+| `CLAUDE_CODE_PERFORCE_MODE` | (unset) | `1` | Edit/Write fail on read-only files with `p4 edit` hint (CC 2.1.98). For Perforce workflows. |
+| `CLAUDE_CODE_NO_FLICKER` | (unset) | `1` | Flicker-free alt-screen rendering (CC 2.1.88). |
+| `CLAUDE_CODE_CERT_STORE` | `system` | `system` \| `bundled` | CA certificate store (CC 2.1.101). Default `system` trusts OS CA store for enterprise TLS proxies. Set `bundled` to use only bundled CAs. |

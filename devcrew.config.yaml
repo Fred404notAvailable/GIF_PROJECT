@@ -1,0 +1,182 @@
+# DevCrew Vault configuration
+# All paths are relative to the project root (where this file lives).
+
+vault:
+  skills_dir: DevCrew-Vault/skills
+  quarantine_dir: DevCrew-Vault/_quarantine
+  staging_dir: .staging
+  db_path: DevCrew-Vault/registry.db
+
+sources:
+  - name: anthropic-skills
+    url: https://github.com/anthropics/skills.git
+    ref: main
+    skills_glob: "skills/*/SKILL.md"
+
+  # --- Core / multi-module pools ---
+  - name: antigravity-awesome
+    url: https://github.com/sickn33/antigravity-awesome-skills.git
+  - name: wshobson-agents
+    url: https://github.com/wshobson/agents.git
+    # plugin layout: plugins/*/skills/*/SKILL.md AND skills/*/SKILL.md
+    skills_glob: "**/**/SKILL.md"
+  - name: awesome-copilot
+    url: https://github.com/github/awesome-copilot.git
+  - name: microsoft-agent-skills
+    url: https://github.com/microsoft/agent-skills.git
+
+  # --- Module 1: Backend & API ---
+  - name: hono
+    url: https://github.com/yusukebe/hono-skill.git
+  - name: cloudflare
+    url: https://github.com/cloudflare/skills.git
+  - name: better-auth
+    url: https://github.com/better-auth/skills.git
+  - name: stripe
+    url: https://github.com/stripe/ai.git
+    skills_glob: "**/**/SKILL.md"
+  - name: convex
+    url: https://github.com/get-convex/agent-skills.git
+
+  # --- Module 2: Frontend & UI ---
+  - name: vercel-agent-skills
+    url: https://github.com/vercel-labs/agent-skills.git
+  - name: nextjs-official
+    url: https://github.com/vercel/next.js.git
+    ref: canary
+    sparse:
+      - skills
+  - name: callstack-rn
+    url: https://github.com/callstackincubator/agent-skills.git
+  - name: everything-claude-code
+    url: https://github.com/affaan-m/everything-claude-code.git
+    skills_glob: "**/**/SKILL.md"
+
+  # --- Module 3: Database, Vector & Storage ---
+  - name: supabase
+    url: https://github.com/supabase/agent-skills.git
+  - name: neon
+    url: https://github.com/neondatabase/agent-skills.git
+  - name: prisma
+    url: https://github.com/prisma/skills.git
+  - name: firebase
+    url: https://github.com/firebase/agent-skills.git
+  - name: redis
+    url: https://github.com/redis/agent-skills.git
+
+  # --- Module 4: Security, Auditing & SecOps ---
+  # NOTE: trailofbits skills are CC-BY-SA-4.0 (share-alike). Flagged in .source.json. Needs explicit allow.
+  - name: trailofbits
+    url: https://github.com/trailofbits/skills.git
+  - name: netresearch-security
+    url: https://github.com/netresearch/security-audit-skill.git
+    skills_glob: "**/**/SKILL.md"
+  - name: secauditor
+    url: https://github.com/hannsxpeter/secauditor.git
+  - name: secure-webapp
+    url: https://github.com/hov172/secure-webapp-skill.git
+  - name: cybersecurity-skills
+    url: https://github.com/briiirussell/cybersecurity-skills.git
+
+  # --- Module 5: AI Architecture, LLM & Prompt Engineering ---
+  - name: context-engineering
+    url: https://github.com/muratcankoylan/Agent-Skills-for-Context-Engineering.git
+  - name: eskill
+    url: https://github.com/hedralab/eskill.git
+  - name: langchain-skills
+    url: https://github.com/langchain-ai/langchain-skills.git
+
+  # --- Module 6: Testing, QA & Reliability ---
+  - name: composio-awesome
+    url: https://github.com/ComposioHQ/awesome-claude-skills.git
+    ref: master
+    skills_glob: "**/**/SKILL.md"
+  - name: obra-superpowers
+    url: https://github.com/obra/superpowers.git
+    skills_glob: "**/**/SKILL.md"
+
+  # --- Module 7: DevOps, Containers & Cloud ---
+  - name: hashicorp
+    url: https://github.com/hashicorp/agent-skills.git
+  - name: terraform-skill
+    url: https://github.com/antonbabenko/terraform-skill.git
+    ref: master
+  - name: aws-skills
+    url: https://github.com/zxkane/aws-skills.git
+  - name: kubernetes-skill
+    url: https://github.com/LukasNiessen/kubernetes-skill.git
+  - name: orchestkit
+    url: https://github.com/yonatangross/orchestkit.git
+    skills_glob: "**/**/SKILL.md"
+
+  # --- Task 1b: Additional sources ---
+  - name: clickhouse
+    url: https://github.com/ClickHouse/agent-skills.git
+  - name: agents-inc
+    url: https://github.com/agents-inc/skills.git
+  - name: szum-tech
+    url: https://github.com/JanSzewczyk/claude-plugins.git
+    skills_glob: "**/**/SKILL.md"
+  - name: claudekit
+    url: https://github.com/mrgoonie/claudekit-skills.git
+  - name: opencode-configs
+    url: https://github.com/jon23d/opencode-configs.git
+    skills_glob: "**/**/SKILL.md"
+  - name: modernstack
+    url: https://github.com/coreyx/modernstack-skills.git
+  - name: docker-skills
+    url: https://github.com/docker/skills.git
+  - name: docker-development
+    url: https://github.com/netresearch/docker-development-skill.git
+    # content CC-BY-SA-4.0 — flagged
+    skills_glob: "**/**/SKILL.md"
+  - name: blastum-skills
+    url: https://github.com/blastum/AgentSkills.git
+  - name: q24-devops
+    url: https://github.com/remcovergoossen/q24devops.git
+    skills_glob: "**/**/SKILL.md"
+
+# Discovery indexes (do not bulk-clone; used for gap-filling research only):
+discovery_indexes:
+  - https://github.com/VoltAgent/awesome-agent-skills
+  - https://github.com/kodustech/awesome-agent-skills
+  - https://github.com/travisvn/awesome-claude-skills
+  - https://github.com/BehiSecc/awesome-claude-skills
+
+allowed_licenses:
+  - MIT
+  - Apache-2.0
+  - BSD-3-Clause
+  - CC-BY-4.0
+  - MPL-2.0
+  # CC-BY-SA-4.0 intentionally omitted — requires explicit user approval (Trail of Bits, netresearch)
+
+on_unknown_license: quarantine   # quarantine | skip | allow
+on_slug_collision: namespace     # namespace | skip | overwrite
+
+validation:
+  max_description_chars: 1024
+  max_name_chars: 64
+  warn_long_body_chars: 8000
+  safety_patterns:
+    - "curl\\s.*\\|\\s*sh"
+    - "curl\\s.*\\|\\s*bash"
+    - "rm\\s+-rf\\s+/"
+    - "base64\\s+.*\\|\\s*(sh|bash|python|perl)"
+    - "eval\\s*\\("
+    - "subprocess\\.call.*shell=True"
+  prompt_injection_patterns:
+    - "ignore previous instructions"
+    - "disregard all prior"
+    - "you are now"
+    - "new system prompt"
+
+watcher:
+  debounce_ms: 500
+  ignore_patterns:
+    - "*.swp"
+    - "*~"
+    - ".DS_Store"
+    - "*.tmp"
+    - "__pycache__"
+    - ".obsidian"
