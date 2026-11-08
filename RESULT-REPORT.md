@@ -8,7 +8,7 @@
 > 4. **Strict Allowed Licenses:** Every selected skill and MCP server is verified under `[MIT, Apache-2.0, BSD-3-Clause, CC-BY-4.0]`. No unknown or disallowed licenses are selected.
 > 5. **Empirical Reporting:** Every number, count, and status in this report is derived directly from live SQLite (`DevCrew-Vault/registry.db`) queries and filesystem checks run in this session.
 
-**Audit Timestamp:** 2026-11-08 18:23:09 UTC  
+**Audit Timestamp:** 2026-11-08 18:37:30 UTC  
 **Test Suite Status:** **78/78 passing (100%)** (`pytest` across full offline test suite)  
 **Vault Consistency Check:** **100% Pass** (`tools/verify_vault.py`, 0 failures)  
 **Obsidian Map Consistency:** **100% Pass** (`tools/build_map.py --check`, 0 dangling links)  
@@ -24,7 +24,7 @@ This Round 3 audit completely resolves all issues specified in `devcrew-fix-roun
 | **Catalog Universe** | 4,000+ raw packages | **59,521** registry records across **596** pages | **59,528** unique packages |
 | **Ingested Candidates** | 99 selected (1 unfilled) | **59,528** candidates in SQLite | **59,627** cataloged assets |
 | **Selected Entities** | **99 enterprise skills** | **24 verified servers** (16 module + 8 utilities) | **123 core selected assets** |
-| **Human Approval Gate** | 99 approved by curriculum | **24 approved** (100% human approved via catalog.yaml) | Approvals strictly human |
+| **Human Approval Gate** | 99 approved by curriculum | **4 approved** (100% human approved via catalog.yaml) | Approvals strictly human |
 | **Shortfalls & Gaps** | **-1 shortfall** (Slot 92 MPL-2.0 unfilled) | **-33 module shortfall** (16/49 under ceilings) | Honestly reported, zero padding |
 | **Obsidian Graph Notes** | 99 skill notes | 24 MCP notes + 7 module + tech/source notes | 198 total graph notes |
 | **Typed Relationships** | 381 complements, 136 alternates | 51 `pairs-with` affinity links | 568 typed links |

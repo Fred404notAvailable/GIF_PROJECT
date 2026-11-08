@@ -881,7 +881,7 @@ def run_vetting(config: dict[str, Any], dry_run: bool = False) -> dict[str, Any]
         srv_updated["tags"] = tags
 
         status = srv.get("status", "candidate")
-        app_ver = approvals.get(srv["name"]) or srv.get("approved_version")
+        app_ver = approvals.get(srv["name"])
         if srv.get("repo_archived") or "Schema validation failed" in (srv.get("vetting_notes") or ""):
             status = "retired"
         elif app_ver and app_ver == srv.get("version"):
@@ -889,6 +889,12 @@ def run_vetting(config: dict[str, Any], dry_run: bool = False) -> dict[str, Any]
             srv_updated["approved_version"] = app_ver
             srv_updated["approved_by"] = "catalog.yaml"
             srv_updated["approved_at"] = srv.get("approved_at") or datetime.now(timezone.utc).isoformat()
+        else:
+            srv_updated["approved_version"] = None
+            srv_updated["approved_by"] = None
+            srv_updated["approved_at"] = None
+            if status == "approved":
+                status = "candidate"
 
         # Explicit exclusions per Problem 5 & Problem 2
         if srv["name"] == "io.github.modelcontextprotocol/everything":

@@ -6,7 +6,7 @@ name: "io.github.modelcontextprotocol/time"
 slug: modelcontextprotocol-time-mcp-2
 maintainer_class: reference
 capability_class: read-only
-status: approved
+status: selected
 module_id: 1
 vetting_score: 75
 source: src-reference
@@ -20,7 +20,7 @@ Time and timezone conversion tools with IANA timezone database integration.
 **Source / Publisher:** [[src-reference]]  
 **License:** [[lic-MIT]]  
 **Capability Class:** `read-only`  
-**Status:** **approved** | **Version:** `0.6.2` | **Vetting Score:** 75/100
+**Status:** **selected** | **Version:** `0.6.2` | **Vetting Score:** 75/100
 
 ## Paired Agent Skills (pairs-with)
 - [[neon-postgres-branches]]

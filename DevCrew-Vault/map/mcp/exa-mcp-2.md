@@ -6,7 +6,7 @@ name: "ai.exa/exa"
 slug: exa-mcp-2
 maintainer_class: official-vendor
 capability_class: read-only
-status: approved
+status: selected
 module_id: 5
 vetting_score: 75
 source: src-mcp-registry
@@ -20,7 +20,7 @@ Connect AI agents to Exa for web search, content fetching, and multi-step resear
 **Source / Publisher:** [[src-mcp-registry]]  
 **License:** [[lic-MIT]]  
 **Capability Class:** `read-only`  
-**Status:** **approved** | **Version:** `3.4.1` | **Vetting Score:** 75/100
+**Status:** **selected** | **Version:** `3.4.1` | **Vetting Score:** 75/100
 
 ## Paired Agent Skills (pairs-with)
 - [[next-dev-loop]]

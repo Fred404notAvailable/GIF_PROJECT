@@ -6,7 +6,7 @@ name: "io.github.modelcontextprotocol/memory"
 slug: modelcontextprotocol-memory-mcp-2
 maintainer_class: reference
 capability_class: read-write
-status: approved
+status: selected
 module_id: 1
 vetting_score: 75
 source: src-reference
@@ -20,7 +20,7 @@ Knowledge graph-based persistent memory system using entities, relations, and ob
 **Source / Publisher:** [[src-reference]]  
 **License:** [[lic-MIT]]  
 **Capability Class:** `read-write`  
-**Status:** **approved** | **Version:** `2.1.0` | **Vetting Score:** 75/100
+**Status:** **selected** | **Version:** `2.1.0` | **Vetting Score:** 75/100
 
 ## Paired Agent Skills (pairs-with)
 - [[autonomous-agent-patterns]]

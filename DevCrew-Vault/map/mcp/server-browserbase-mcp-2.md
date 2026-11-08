@@ -6,7 +6,7 @@ name: "io.github.browserbase/mcp-server-browserbase"
 slug: server-browserbase-mcp-2
 maintainer_class: official-vendor
 capability_class: read-write
-status: approved
+status: selected
 module_id: 6
 vetting_score: 70
 source: src-mcp-registry
@@ -20,7 +20,7 @@ MCP server for AI web browser automation using Browserbase and Stagehand
 **Source / Publisher:** [[src-mcp-registry]]  
 **License:** [[lic-MIT]]  
 **Capability Class:** `read-write`  
-**Status:** **approved** | **Version:** `2.1.1` | **Vetting Score:** 70/100
+**Status:** **selected** | **Version:** `2.1.1` | **Vetting Score:** 70/100
 
 ## Paired Agent Skills (pairs-with)
 _No direct skill pairings registered._

@@ -22,8 +22,8 @@ generated: true
 | Metric | Count |
 |---|:---:|
 | **Total Selected MCP Servers** | 24 |
-| **Approved by Human (catalog.yaml)** | 24 |
-| **Awaiting Human Approval** | 0 |
+| **Approved by Human (catalog.yaml)** | 4 |
+| **Awaiting Human Approval** | 20 |
 | **Read-Only Capability Class** | 6 |
 | **Read-Write Capability Class** | 17 |
 | **Destructive Capability Class** | 0 |

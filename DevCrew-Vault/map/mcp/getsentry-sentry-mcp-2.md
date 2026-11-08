@@ -6,7 +6,7 @@ name: "io.github.getsentry/sentry-mcp"
 slug: getsentry-sentry-mcp-2
 maintainer_class: official-vendor
 capability_class: read-write
-status: approved
+status: selected
 module_id: 4
 vetting_score: 75
 source: src-mcp-registry
@@ -20,7 +20,7 @@ MCP server for Sentry - error monitoring, issue tracking, and debugging for AI a
 **Source / Publisher:** [[src-mcp-registry]]  
 **License:** [[lic-MIT]]  
 **Capability Class:** `read-write`  
-**Status:** **approved** | **Version:** `0.49.0` | **Vetting Score:** 75/100
+**Status:** **selected** | **Version:** `0.49.0` | **Vetting Score:** 75/100
 
 ## Paired Agent Skills (pairs-with)
 - [[dotnet-backend-patterns]]

@@ -6,7 +6,7 @@ name: "io.github.firecrawl/firecrawl-mcp-server"
 slug: firecrawl-mcp-server-mcp-2
 maintainer_class: official-vendor
 capability_class: read-only
-status: approved
+status: selected
 module_id: 1
 vetting_score: 75
 source: src-mcp-registry
@@ -20,7 +20,7 @@ Firecrawl, the context API for AI agents: search, scrape, interact with the web,
 **Source / Publisher:** [[src-mcp-registry]]  
 **License:** [[lic-Apache-2.0]]  
 **Capability Class:** `read-only`  
-**Status:** **approved** | **Version:** `3.38.0` | **Vetting Score:** 75/100
+**Status:** **selected** | **Version:** `3.38.0` | **Vetting Score:** 75/100
 
 ## Paired Agent Skills (pairs-with)
 - [[autonomous-agent-patterns]]

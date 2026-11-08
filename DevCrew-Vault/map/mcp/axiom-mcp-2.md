@@ -6,7 +6,7 @@ name: "co.axiom/mcp"
 slug: axiom-mcp-2
 maintainer_class: official-vendor
 capability_class: read-write
-status: approved
+status: selected
 module_id: 5
 vetting_score: 75
 source: src-mcp-registry
@@ -20,7 +20,7 @@ List datasets, schemas, run APL queries, and use prompts for exploration, anomal
 **Source / Publisher:** [[src-mcp-registry]]  
 **License:** [[lic-Apache-2.0]]  
 **Capability Class:** `read-write`  
-**Status:** **approved** | **Version:** `1.0.0` | **Vetting Score:** 75/100
+**Status:** **selected** | **Version:** `1.0.0` | **Vetting Score:** 75/100
 
 ## Paired Agent Skills (pairs-with)
 - [[convex]]

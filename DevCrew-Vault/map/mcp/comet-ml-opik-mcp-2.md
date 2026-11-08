@@ -6,7 +6,7 @@ name: "io.github.comet-ml/opik-mcp"
 slug: comet-ml-opik-mcp-2
 maintainer_class: official-vendor
 capability_class: read-write
-status: approved
+status: selected
 module_id: 5
 vetting_score: 75
 source: src-mcp-registry
@@ -20,7 +20,7 @@ Read and score Opik traces, experiments, datasets and prompts from your AI assis
 **Source / Publisher:** [[src-mcp-registry]]  
 **License:** [[lic-Apache-2.0]]  
 **Capability Class:** `read-write`  
-**Status:** **approved** | **Version:** `3.0.9` | **Vetting Score:** 75/100
+**Status:** **selected** | **Version:** `3.0.9` | **Vetting Score:** 75/100
 
 ## Paired Agent Skills (pairs-with)
 - [[autonomous-agent-patterns]]

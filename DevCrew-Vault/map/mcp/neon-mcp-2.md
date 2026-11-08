@@ -6,7 +6,7 @@ name: "com.neon/mcp"
 slug: neon-mcp-2
 maintainer_class: official-vendor
 capability_class: read-write
-status: approved
+status: selected
 module_id: 3
 vetting_score: 75
 source: src-mcp-registry
@@ -20,7 +20,7 @@ Official Neon MCP server for managing Neon projects and Lakebase Postgres databa
 **Source / Publisher:** [[src-mcp-registry]]  
 **License:** [[lic-Apache-2.0]]  
 **Capability Class:** `read-write`  
-**Status:** **approved** | **Version:** `2.0.0` | **Vetting Score:** 75/100
+**Status:** **selected** | **Version:** `2.0.0` | **Vetting Score:** 75/100
 
 ## Paired Agent Skills (pairs-with)
 - [[neon-postgres]]

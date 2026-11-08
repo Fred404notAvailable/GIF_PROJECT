@@ -6,7 +6,7 @@ name: "io.github.modelcontextprotocol/fetch"
 slug: modelcontextprotocol-fetch-mcp-2
 maintainer_class: reference
 capability_class: read-only
-status: approved
+status: selected
 module_id: 1
 vetting_score: 75
 source: src-reference
@@ -20,7 +20,7 @@ Web content fetching and conversion for LLMs using Readability and markdown.
 **Source / Publisher:** [[src-reference]]  
 **License:** [[lic-MIT]]  
 **Capability Class:** `read-only`  
-**Status:** **approved** | **Version:** `0.6.2` | **Vetting Score:** 75/100
+**Status:** **selected** | **Version:** `0.6.2` | **Vetting Score:** 75/100
 
 ## Paired Agent Skills (pairs-with)
 _No direct skill pairings registered._

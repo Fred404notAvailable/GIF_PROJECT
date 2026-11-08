@@ -6,7 +6,7 @@ name: "io.github.modelcontextprotocol/sequential-thinking"
 slug: modelcontextprotocol-sequential-thinking-mcp-2
 maintainer_class: reference
 capability_class: read-only
-status: approved
+status: selected
 module_id: 1
 vetting_score: 75
 source: src-reference
@@ -20,7 +20,7 @@ Dynamic reasoning canvas for problem-solving with branching, revision, and hypot
 **Source / Publisher:** [[src-reference]]  
 **License:** [[lic-MIT]]  
 **Capability Class:** `read-only`  
-**Status:** **approved** | **Version:** `2.1.1` | **Vetting Score:** 75/100
+**Status:** **selected** | **Version:** `2.1.1` | **Vetting Score:** 75/100
 
 ## Paired Agent Skills (pairs-with)
 - [[architecture-patterns]]

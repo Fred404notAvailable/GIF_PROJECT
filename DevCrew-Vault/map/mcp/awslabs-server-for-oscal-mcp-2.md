@@ -6,7 +6,7 @@ name: "io.github.awslabs/mcp-server-for-oscal"
 slug: awslabs-server-for-oscal-mcp-2
 maintainer_class: official-vendor
 capability_class: unknown-treat-as-write
-status: approved
+status: selected
 module_id: 4
 vetting_score: 70
 source: src-mcp-registry
@@ -20,7 +20,7 @@ AI agent tools for Open Security Controls Assessment Language (OSCAL)
 **Source / Publisher:** [[src-mcp-registry]]  
 **License:** [[lic-Apache-2.0]]  
 **Capability Class:** `unknown-treat-as-write`  
-**Status:** **approved** | **Version:** `0.4.0` | **Vetting Score:** 70/100
+**Status:** **selected** | **Version:** `0.4.0` | **Vetting Score:** 70/100
 
 ## Paired Agent Skills (pairs-with)
 - [[autonomous-agent-patterns]]

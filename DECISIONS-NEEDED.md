@@ -108,4 +108,4 @@ Servers whose license cannot be verified or is outside `allowed_licenses` (`MIT`
 | **MPL-2.0 License** | **Disallowed** | Slot 92 (`terraform-policy`), Terraform MCP server | Add `MPL-2.0` to `allowed_licenses` in `devcrew.config.yaml` to fill Slot 92 |
 | **CC-BY-SA-4.0 License** | **Disallowed** | 98 Trail of Bits skills, `docker-development` | Add `CC-BY-SA-4.0` to `allowed_licenses` to unlock Trail of Bits |
 | **Unlicensed Repositories** | **Quarantined** | `better-auth`, `claudekit`, `modernstack` (75 skills) | Await upstream licensing or grant private in-house exception |
-| **MCP Server Approvals** | **24 Approved, 0 Pending** | 24 approved servers configured | 100% human approved via catalog.yaml |
+| **MCP Server Approvals** | **4 Approved, 20 Pending** | 4 approved servers configured, 20 candidate servers | Review `MCP-APPROVALS-NEEDED.md` to approve remaining servers |

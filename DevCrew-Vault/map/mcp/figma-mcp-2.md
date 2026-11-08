@@ -6,7 +6,7 @@ name: "com.figma.mcp/mcp"
 slug: figma-mcp-2
 maintainer_class: official-vendor
 capability_class: read-write
-status: approved
+status: selected
 module_id: 2
 vetting_score: 75
 source: src-mcp-registry
@@ -20,7 +20,7 @@ The Figma MCP server brings Figma design context directly into your AI workflow.
 **Source / Publisher:** [[src-mcp-registry]]  
 **License:** [[lic-MIT]]  
 **Capability Class:** `read-write`  
-**Status:** **approved** | **Version:** `1.0.3` | **Vetting Score:** 75/100
+**Status:** **selected** | **Version:** `1.0.3` | **Vetting Score:** 75/100
 
 ## Paired Agent Skills (pairs-with)
 - [[workflow-orchestration-patterns]]

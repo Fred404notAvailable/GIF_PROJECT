@@ -6,7 +6,7 @@
 > Every server below has been vetted by static analysis, verified against the registry snapshot, and recommended by the catalog.
 > To approve a server, copy its exact version pin into `DevCrew-Vault/catalog.yaml` under `approvals:`.
 
-**Generated:** 2026-11-08 15:04:33 UTC
+**Generated:** 2026-11-08 18:36:38 UTC
 **Selected Module Servers Awaiting Approval:** 15
 **General / Utility Servers Awaiting Approval:** 5
 **Already Approved Servers:** 4
