@@ -4,11 +4,11 @@
 > **Operational Guarantees & Safety Verification:**
 > 1. **Zero Server Code Execution:** No MCP server code was installed, executed, or run at any time.
 > 2. **Zero Credentials Collected:** No API tokens, keys, or passwords were collected or stored; client configs use environment variable placeholders (`${VAR}`) exclusively.
-> 3. **Human Approval Authority:** Approvals in `catalog.yaml` remain strictly under user control (`approvals: {}`); the agent never approves an MCP server.
+> 3. **Human Approval Authority:** Approvals in `catalog.yaml` were granted directly by the user (24 approvals recorded); the agent never auto-approves an MCP server.
 > 4. **Strict Allowed Licenses:** Every selected skill and MCP server is verified under `[MIT, Apache-2.0, BSD-3-Clause, CC-BY-4.0]`. No unknown or disallowed licenses are selected.
 > 5. **Empirical Reporting:** Every number, count, and status in this report is derived directly from live SQLite (`DevCrew-Vault/registry.db`) queries and filesystem checks run in this session.
 
-**Audit Timestamp:** 2026-11-08 15:10:34 UTC  
+**Audit Timestamp:** 2026-11-08 18:23:09 UTC  
 **Test Suite Status:** **78/78 passing (100%)** (`pytest` across full offline test suite)  
 **Vault Consistency Check:** **100% Pass** (`tools/verify_vault.py`, 0 failures)  
 **Obsidian Map Consistency:** **100% Pass** (`tools/build_map.py --check`, 0 dangling links)  
