@@ -1,16 +1,13 @@
 ---
 name: stride-analysis-patterns
-description: "Apply STRIDE methodology to systematically identify threats. Use when analyzing system security, conducting threat modeling sessions, or creating security documentation."
-risk: safe
-source: community
-date_added: "2026-02-27"
+description: Apply STRIDE methodology to systematically identify threats. Use when analyzing system security, conducting threat modeling sessions, or creating security documentation.
 ---
 
 # STRIDE Analysis Patterns
 
 Systematic threat identification using the STRIDE methodology.
 
-## Use this skill when
+## When to Use This Skill
 
 - Starting new threat modeling sessions
 - Analyzing existing system architecture
@@ -19,27 +16,51 @@ Systematic threat identification using the STRIDE methodology.
 - Training teams on threat identification
 - Compliance and audit preparation
 
-## Do not use this skill when
+## Core Concepts
 
-- The task is unrelated to stride analysis patterns
-- You need a different domain or tool outside this scope
+### 1. STRIDE Categories
 
-## Instructions
+```
+S - Spoofing       → Authentication threats
+T - Tampering      → Integrity threats
+R - Repudiation    → Non-repudiation threats
+I - Information    → Confidentiality threats
+    Disclosure
+D - Denial of      → Availability threats
+    Service
+E - Elevation of   → Authorization threats
+    Privilege
+```
 
-- Clarify goals, constraints, and required inputs.
-- Apply relevant best practices and validate outcomes.
-- Provide actionable steps and verification.
-- If detailed examples are required, open `resources/implementation-playbook.md`.
+### 2. Threat Analysis Matrix
 
-## Resources
+| Category            | Question                                  | Control Family |
+| ------------------- | ----------------------------------------- | -------------- |
+| **Spoofing**        | Can attacker pretend to be someone else?  | Authentication |
+| **Tampering**       | Can attacker modify data in transit/rest? | Integrity      |
+| **Repudiation**     | Can attacker deny actions?                | Logging/Audit  |
+| **Info Disclosure** | Can attacker access unauthorized data?    | Encryption     |
+| **DoS**             | Can attacker disrupt availability?        | Rate limiting  |
+| **Elevation**       | Can attacker gain higher privileges?      | Authorization  |
 
-- `resources/implementation-playbook.md` for detailed patterns and examples.
+## Templates and detailed worked examples
 
-## Limitations
-- Use this skill only when the task clearly matches the scope described above.
-- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
-- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
+Full template library lives in `references/details.md`. Read that file when you need concrete templates for this skill.
 
-## Modeling and scoring limits
+## Best Practices
 
-The Python helpers produce prompts from user-supplied model data; they do not inspect software or establish actual vulnerabilities, control effectiveness or compliance. Impact×likelihood and all severities/deadlines in examples are illustrative ordinal policy choices, not CVSS or calibrated probabilities. Record evidence, assumptions, assets, trust boundaries, owners and residual-risk acceptance for each candidate. Equal numeric trust levels can still cross tenant/identity/administrative boundaries; model explicit boundary membership rather than relying solely on inequality. Encryption does not prevent authorized-but-abusive access, and authentication lockouts can create denial-of-service risks. Missing elements or unmodeled interaction types must be surfaced, not silently treated as no threats. Templates are partial independent blocks; validate imports, duplicate IDs and structured model inputs before use. Keep secret-bearing diagrams/logs private and do not run attack simulations without separate authorization.
+### Do's
+
+- **Involve stakeholders** - Security, dev, and ops perspectives
+- **Be systematic** - Cover all STRIDE categories
+- **Prioritize realistically** - Focus on high-impact threats
+- **Update regularly** - Threat models are living documents
+- **Use visual aids** - DFDs help communication
+
+### Don'ts
+
+- **Don't skip categories** - Each reveals different threats
+- **Don't assume security** - Question every component
+- **Don't work in isolation** - Collaborative modeling is better
+- **Don't ignore low-probability** - High-impact threats matter
+- **Don't stop at identification** - Follow through with mitigations

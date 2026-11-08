@@ -18,7 +18,7 @@ Playwright E2E testing patterns - test structure, Page Object Model, locator str
 **Tech:** [[TDD]], [[Architecture]], [[Playwright]]
 
 ## Related Skills
-- **Complements:** [[api-design-principles]], [[api-security]], [[docker-compose-patterns]], [[web-tooling-storybook]]
+- **Complements:** [[architecture-patterns]], [[docker-compose-patterns]], [[dotnet-backend-patterns]], [[sql-optimization-patterns]]
 - **Alternate of:** [[web-testing-cypress-e2e]], [[webapp-testing]]
 
 Real skill file: `skills/web-testing-playwright-e2e/SKILL.md`

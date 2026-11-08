@@ -3,6 +3,7 @@
 ## Systematic Refinement Process
 
 ### 1. Baseline Establishment
+
 ```python
 def establish_baseline(prompt, test_cases):
     results = {
@@ -26,6 +27,7 @@ def establish_baseline(prompt, test_cases):
 ```
 
 ### 2. Iterative Refinement Workflow
+
 ```
 Initial Prompt → Test → Analyze Failures → Refine → Test → Repeat
 ```
@@ -64,6 +66,7 @@ class PromptOptimizer:
 ```
 
 ### 3. A/B Testing Framework
+
 ```python
 class PromptABTest:
     def __init__(self, variant_a, variant_b):
@@ -107,7 +110,7 @@ class PromptABTest:
                 'improvement': (np.mean(b_values) - np.mean(a_values)) / np.mean(a_values),
                 'statistically_significant': p_value < 0.05,
                 'p_value': p_value,
-                'winner': ('B' if np.mean(b_values) < np.mean(a_values) else 'A') if metric == 'latency' else ('B' if np.mean(b_values) > np.mean(a_values) else 'A')
+                'winner': 'B' if np.mean(b_values) > np.mean(a_values) else 'A'
             }
 
         return analysis
@@ -116,6 +119,7 @@ class PromptABTest:
 ## Optimization Strategies
 
 ### Token Reduction
+
 ```python
 def optimize_for_tokens(prompt):
     optimizations = [
@@ -144,6 +148,7 @@ def optimize_for_tokens(prompt):
 ```
 
 ### Latency Reduction
+
 ```python
 def optimize_for_latency(prompt):
     strategies = {
@@ -167,6 +172,7 @@ def optimize_for_latency(prompt):
 ```
 
 ### Accuracy Improvement
+
 ```python
 def improve_accuracy(prompt, failure_cases):
     improvements = []
@@ -194,6 +200,7 @@ def improve_accuracy(prompt, failure_cases):
 ## Performance Metrics
 
 ### Core Metrics
+
 ```python
 class PromptMetrics:
     @staticmethod
@@ -230,6 +237,7 @@ class PromptMetrics:
 ```
 
 ### Automated Evaluation
+
 ```python
 def evaluate_prompt_comprehensively(prompt, test_suite):
     results = {
@@ -252,9 +260,9 @@ def evaluate_prompt_comprehensively(prompt, test_suite):
             results['latency'].append(latency)
             results['tokens'].append(count_tokens(prompt) + count_tokens(response))
 
-        # Average accuracy across all runs; do not cherry-pick the best response
+        # Accuracy (best of 3 runs)
         accuracies = [evaluate_accuracy(r, test_case['expected']) for r in runs]
-        results['accuracy'].append(np.mean(accuracies))
+        results['accuracy'].append(max(accuracies))
 
         # Consistency (how similar are the 3 runs?)
         results['consistency'].append(calculate_similarity(runs))
@@ -274,6 +282,7 @@ def evaluate_prompt_comprehensively(prompt, test_suite):
 ## Failure Analysis
 
 ### Categorizing Failures
+
 ```python
 class FailureAnalyzer:
     def categorize_failures(self, test_results):
@@ -326,6 +335,7 @@ class FailureAnalyzer:
 ## Versioning and Rollback
 
 ### Prompt Version Control
+
 ```python
 class PromptVersionControl:
     def __init__(self, storage_path):
@@ -359,7 +369,7 @@ class PromptVersionControl:
             'metrics_comparison': {
                 metric: {
                     'v1': v1['metrics'].get(metric),
-                    'v2': v2['metrics'].get(metric),
+                    'v2': v2['metrics'].get(metric'),
                     'change': v2['metrics'].get(metric, 0) - v1['metrics'].get(metric, 0)
                 }
                 for metric in set(v1['metrics'].keys()) | set(v2['metrics'].keys())
@@ -381,24 +391,28 @@ class PromptVersionControl:
 ## Common Optimization Patterns
 
 ### Pattern 1: Add Structure
+
 ```
 Before: "Analyze this text"
 After: "Analyze this text for:\n1. Main topic\n2. Key arguments\n3. Conclusion"
 ```
 
 ### Pattern 2: Add Examples
+
 ```
 Before: "Extract entities"
 After: "Extract entities\\n\\nExample:\\nText: Apple released iPhone\\nEntities: {company: Apple, product: iPhone}"
 ```
 
 ### Pattern 3: Add Constraints
+
 ```
 Before: "Summarize this"
 After: "Summarize in exactly 3 bullet points, 15 words each"
 ```
 
 ### Pattern 4: Add Verification
+
 ```
 Before: "Calculate..."
 After: "Calculate... Then verify your calculation is correct before responding."

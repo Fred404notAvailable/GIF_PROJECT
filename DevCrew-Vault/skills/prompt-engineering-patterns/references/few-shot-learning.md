@@ -7,6 +7,7 @@ Few-shot learning enables LLMs to perform tasks by providing a small number of e
 ## Example Selection Strategies
 
 ### 1. Semantic Similarity
+
 Select examples most similar to the input query using embedding-based retrieval.
 
 ```python
@@ -17,10 +18,10 @@ class SemanticExampleSelector:
     def __init__(self, examples, model_name='all-MiniLM-L6-v2'):
         self.model = SentenceTransformer(model_name)
         self.examples = examples
-        self.example_embeddings = self.model.encode([ex['input'] for ex in examples], normalize_embeddings=True)
+        self.example_embeddings = self.model.encode([ex['input'] for ex in examples])
 
     def select(self, query, k=3):
-        query_embedding = self.model.encode([query], normalize_embeddings=True)
+        query_embedding = self.model.encode([query])
         similarities = np.dot(self.example_embeddings, query_embedding.T).flatten()
         top_indices = np.argsort(similarities)[-k:][::-1]
         return [self.examples[i] for i in top_indices]
@@ -29,6 +30,7 @@ class SemanticExampleSelector:
 **Best For**: Question answering, text classification, extraction tasks
 
 ### 2. Diversity Sampling
+
 Maximize coverage of different patterns and edge cases.
 
 ```python
@@ -38,7 +40,7 @@ class DiversityExampleSelector:
     def __init__(self, examples, model_name='all-MiniLM-L6-v2'):
         self.model = SentenceTransformer(model_name)
         self.examples = examples
-        self.embeddings = self.model.encode([ex['input'] for ex in examples], normalize_embeddings=True)
+        self.embeddings = self.model.encode([ex['input'] for ex in examples])
 
     def select(self, k=5):
         # Use k-means to find diverse cluster centers
@@ -58,6 +60,7 @@ class DiversityExampleSelector:
 **Best For**: Demonstrating task variability, edge case handling
 
 ### 3. Difficulty-Based Selection
+
 Gradually increase example complexity to scaffold learning.
 
 ```python
@@ -67,16 +70,15 @@ class ProgressiveExampleSelector:
         self.examples = sorted(examples, key=lambda x: x['difficulty'])
 
     def select(self, k=3):
-        if k <= 0 or not self.examples:
-            return []
-        k = min(k, len(self.examples))
-        indices = np.linspace(0, len(self.examples) - 1, k, dtype=int)
-        return [self.examples[i] for i in indices]
+        # Select examples with linearly increasing difficulty
+        step = len(self.examples) // k
+        return [self.examples[i * step] for i in range(k)]
 ```
 
 **Best For**: Complex reasoning tasks, code generation
 
 ### 4. Error-Based Selection
+
 Include examples that address common failure modes.
 
 ```python
@@ -100,6 +102,7 @@ class ErrorGuidedSelector:
 ## Example Construction Best Practices
 
 ### Format Consistency
+
 All examples should follow identical formatting:
 
 ```python
@@ -123,6 +126,7 @@ examples = [
 ```
 
 ### Input-Output Alignment
+
 Ensure examples demonstrate the exact task you want the model to perform:
 
 ```python
@@ -140,6 +144,7 @@ example = {
 ```
 
 ### Complexity Balance
+
 Include examples spanning the expected difficulty range:
 
 ```python
@@ -158,6 +163,7 @@ examples = [
 ## Context Window Management
 
 ### Token Budget Allocation
+
 Typical distribution for a 4K context window:
 
 ```
@@ -168,6 +174,7 @@ Response:            1500 tokens  (38%)
 ```
 
 ### Dynamic Example Truncation
+
 ```python
 class TokenAwareSelector:
     def __init__(self, examples, tokenizer, max_tokens=1500):
@@ -199,6 +206,7 @@ class TokenAwareSelector:
 ## Edge Case Handling
 
 ### Include Boundary Examples
+
 ```python
 edge_case_examples = [
     # Empty input
@@ -218,6 +226,7 @@ edge_case_examples = [
 ## Few-Shot Prompt Templates
 
 ### Classification Template
+
 ```python
 def build_classification_prompt(examples, query, labels):
     prompt = f"Classify the text into one of these categories: {', '.join(labels)}\n\n"
@@ -230,6 +239,7 @@ def build_classification_prompt(examples, query, labels):
 ```
 
 ### Extraction Template
+
 ```python
 def build_extraction_prompt(examples, query):
     prompt = "Extract structured information from the text.\n\n"
@@ -242,6 +252,7 @@ def build_extraction_prompt(examples, query):
 ```
 
 ### Transformation Template
+
 ```python
 def build_transformation_prompt(examples, query):
     prompt = "Transform the input according to the pattern shown in examples.\n\n"
@@ -256,6 +267,7 @@ def build_transformation_prompt(examples, query):
 ## Evaluation and Optimization
 
 ### Example Quality Metrics
+
 ```python
 def evaluate_example_quality(example, validation_set):
     metrics = {
@@ -268,6 +280,7 @@ def evaluate_example_quality(example, validation_set):
 ```
 
 ### A/B Testing Example Sets
+
 ```python
 class ExampleSetTester:
     def __init__(self, llm_client):
@@ -297,6 +310,7 @@ class ExampleSetTester:
 ## Advanced Techniques
 
 ### Meta-Learning (Learning to Select)
+
 Train a small model to predict which examples will be most effective:
 
 ```python
@@ -332,10 +346,11 @@ class LearnedExampleSelector:
             score = self.selector_model.predict_proba([features])[0][1]
             scores.append((score, example))
 
-        return [ex for _, ex in sorted(scores, key=lambda item: item[0], reverse=True)[:k]]
+        return [ex for _, ex in sorted(scores, reverse=True)[:k]]
 ```
 
 ### Adaptive Example Count
+
 Dynamically adjust the number of examples based on task difficulty:
 
 ```python

@@ -1,0 +1,4435 @@
+[
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.chrischall/splitwise-mcp",
+      "description": "Splitwise expense and group management for Claude \u2014 shared expenses, settle up, friends",
+      "repository": {
+        "url": "https://github.com/chrischall/splitwise-mcp",
+        "source": "github"
+      },
+      "version": "3.7.1",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "splitwise-mcp",
+          "version": "3.7.1",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Your Splitwise API key (splitwise.com/apps/api)",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "SPLITWISE_API_KEY"
+            },
+            {
+              "description": "Directory sw_get_receipt writes downloaded receipts into (default: ~/Downloads/splitwise-mcp)",
+              "format": "string",
+              "name": "SPLITWISE_OUTPUT_DIR"
+            },
+            {
+              "description": "Directory receipt.path may read uploads from (unset: receipts are accepted as base64 only)",
+              "format": "string",
+              "name": "SPLITWISE_INPUT_DIR"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-07T12:04:19.908372Z",
+        "publishedAt": "2026-11-07T12:04:19.908372Z",
+        "updatedAt": "2026-11-07T12:04:19.908372Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.chrischall/tempo-api-mcp",
+      "description": "Tempo time-tracking for Claude \u2014 worklogs, plans, and timesheet approvals",
+      "repository": {
+        "url": "https://github.com/chrischall/tempo-api-mcp",
+        "source": "github"
+      },
+      "version": "3.3.0",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "tempo-api-mcp",
+          "version": "3.3.0",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Your Tempo API token (Settings \u2192 API integration in your Tempo workspace)",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "TEMPO_API_TOKEN"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-04T18:09:56.862678Z",
+        "publishedAt": "2026-11-04T18:09:56.862678Z",
+        "updatedAt": "2026-11-04T18:09:56.862678Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.chrischall/therapyportal-mcp",
+      "description": "TherapyNotes client portal: appointments, documents, billing, messages; confirm-gated sends, uploads",
+      "repository": {
+        "url": "https://github.com/chrischall/therapyportal-mcp",
+        "source": "github"
+      },
+      "version": "0.4.1",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@chrischall/therapyportal-mcp",
+          "version": "0.4.1",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Your practice's portal code: the part after /p/ in its TherapyPortal URL (www.therapyportal.com/p/<code>/).",
+              "isRequired": true,
+              "format": "string",
+              "name": "THERAPYPORTAL_PRACTICE"
+            },
+            {
+              "description": "The email you sign in to TherapyPortal with. Set with the password to sign in server-side; leave both empty to relay through your signed-in browser tab.",
+              "format": "string",
+              "name": "THERAPYPORTAL_EMAIL"
+            },
+            {
+              "description": "Your TherapyPortal password. A rejected sign-in is never retried automatically.",
+              "format": "string",
+              "isSecret": true,
+              "name": "THERAPYPORTAL_PASSWORD"
+            },
+            {
+              "description": "Only if the portal asks for a date of birth at sign-in: that date, as MM/DD/YYYY. Tried once; never retried, because the portal limits attempts.",
+              "format": "string",
+              "isSecret": true,
+              "name": "THERAPYPORTAL_DOB"
+            },
+            {
+              "description": "server or fetchproxy. Default: server when email and password are both set, otherwise fetchproxy.",
+              "format": "string",
+              "name": "THERAPYPORTAL_TRANSPORT"
+            },
+            {
+              "description": "fetchproxy concentrator port (fetchproxy transport only, default 37149). The whole fleet shares this one port; override only when hosting.",
+              "format": "string",
+              "name": "THERAPYPORTAL_WS_PORT"
+            },
+            {
+              "description": "Where downloaded files are written on the server transport (a path-delimiter list; ~ expands). Default ~/Downloads and ~/Documents. A per-call dest must resolve inside one of these.",
+              "format": "string",
+              "name": "THERAPYPORTAL_OUTPUT_DIR"
+            },
+            {
+              "description": "true returns downloaded bytes inline (base64) instead of writing to disk, for a hosted runner whose disk you cannot reach. Default false.",
+              "format": "string",
+              "name": "THERAPYPORTAL_INLINE_DOWNLOADS"
+            },
+            {
+              "description": "Folders an upload's file_path must be inside (a path-delimiter list; ~ expands). Default ~/Downloads, ~/Documents and ~/Desktop. Local installs only: a hosted server refuses file_path and takes uploads by upload slot or inline base64.",
+              "format": "string",
+              "name": "THERAPYPORTAL_UPLOAD_DIR"
+            },
+            {
+              "description": "Confirm-gate mode for every write (secure messages, document uploads). ask-user (default) returns a preview + confirmToken and needs a second call with that token; auto lets a capable host confirm in one step; an unrecognised value fails closed (refuse).",
+              "format": "string",
+              "name": "MCP_CONFIRM_MODE"
+            },
+            {
+              "description": "on (default) lets the host confirm a write interactively; off forces the confirmToken round-trip.",
+              "format": "string",
+              "name": "MCP_CONFIRM_ELICITATION"
+            },
+            {
+              "description": "Bind interface for the fetchproxy concentrator, a literal IP only (default 127.0.0.1). Keep on loopback; it exists for hosted deployments that run each MCP in its own network namespace.",
+              "format": "string",
+              "name": "FETCHPROXY_WS_HOST"
+            },
+            {
+              "description": "Absolute path where the fetchproxy long-term identity keypair is stored (default ~/.fetchproxy/identity/).",
+              "format": "string",
+              "name": "FETCHPROXY_IDENTITY_DIR"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-07T12:04:10.379152Z",
+        "publishedAt": "2026-11-07T12:04:10.379152Z",
+        "updatedAt": "2026-11-07T12:04:10.379152Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.chrischall/thumbtack-mcp",
+      "description": "Unofficial Thumbtack MCP \u2014 search local service pros, read profiles, ratings and reviews",
+      "repository": {
+        "url": "https://github.com/chrischall/thumbtack-mcp",
+        "source": "github"
+      },
+      "version": "1.2.0",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@chrischall/thumbtack-mcp",
+          "version": "1.2.0",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-04T16:40:19.207001Z",
+        "publishedAt": "2026-11-04T16:40:19.207001Z",
+        "updatedAt": "2026-11-04T16:40:19.207001Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.chrischall/toasttab-mcp",
+      "description": "Toast restaurants and menus: find places that order via Toast, read online or register menus.",
+      "repository": {
+        "url": "https://github.com/chrischall/toasttab-mcp",
+        "source": "github"
+      },
+      "version": "1.1.1",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "toasttab-mcp",
+          "version": "1.1.1",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Overrides the fetchproxy WebSocket port (default 37149, the fleet-shared port).",
+              "format": "string",
+              "name": "TOAST_WS_PORT"
+            },
+            {
+              "description": "Bridge bind interface, a literal IP only (anything else is ignored); default 127.0.0.1. Keep on loopback \u2014 it exists for a hosted child in its own network namespace.",
+              "format": "string",
+              "name": "FETCHPROXY_WS_HOST"
+            },
+            {
+              "description": "Where to store the long-term bridge identity keypair, an absolute path only (anything else is ignored); default ~/.fetchproxy/identity/. Exists for a host that runs a separate child per caller.",
+              "format": "string",
+              "name": "FETCHPROXY_IDENTITY_DIR"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-04T18:12:47.92611Z",
+        "publishedAt": "2026-11-04T18:12:47.92611Z",
+        "updatedAt": "2026-11-04T18:12:47.92611Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.chrischall/tock-mcp",
+      "description": "Tock (exploretock.com): discover restaurants, search a city, get venue details and availability.",
+      "repository": {
+        "url": "https://github.com/chrischall/tock-mcp",
+        "source": "github"
+      },
+      "version": "1.2.1",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "tock-mcp",
+          "version": "1.2.1",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Concentrator port for the fetchproxy browser bridge (defaults to the fleet-shared 37149). On one machine every MCP shares the concentrator, so move it for ALL of them or not at all.",
+              "format": "string",
+              "name": "TOCK_WS_PORT"
+            },
+            {
+              "description": "Bind interface, a literal IP only (anything else is ignored); default 127.0.0.1. Keep on loopback \u2014 it exists for ONE topology: a hosted child in its own network namespace.",
+              "format": "string",
+              "name": "FETCHPROXY_WS_HOST"
+            },
+            {
+              "description": "Where to store the long-term identity keypair, an absolute path only (anything else is ignored); default ~/.fetchproxy/identity/. Exists for a host that runs a separate child per caller.",
+              "format": "string",
+              "name": "FETCHPROXY_IDENTITY_DIR"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-04T18:08:14.129298Z",
+        "publishedAt": "2026-11-04T18:08:14.129298Z",
+        "updatedAt": "2026-11-04T18:08:14.129298Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.chrischall/tripadvisor-mcp",
+      "description": "TripAdvisor location search, details, photos, and reviews via the Terra API",
+      "repository": {
+        "url": "https://github.com/chrischall/tripadvisor-mcp",
+        "source": "github"
+      },
+      "version": "1.2.0",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@chrischall/tripadvisor-mcp",
+          "version": "1.2.0",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Your TripAdvisor Terra API key (tripadvisor.com/developers). Needed by the Terra tools; the ta_web_* tools work without it.",
+              "format": "string",
+              "isSecret": true,
+              "name": "TRIPADVISOR_API_KEY"
+            },
+            {
+              "description": "Seconds to cache search responses (default: 300; `0` disables).",
+              "format": "string",
+              "name": "TRIPADVISOR_CACHE_TTL"
+            },
+            {
+              "description": "Seconds to cache details/photos/reviews (default: 3600; `0` disables).",
+              "format": "string",
+              "name": "TRIPADVISOR_STATIC_CACHE_TTL"
+            },
+            {
+              "description": "Per-request timeout for the optional browser bridge (default: 30000).",
+              "format": "string",
+              "name": "TRIPADVISOR_REQUEST_TIMEOUT_MS"
+            },
+            {
+              "description": "Set to `1` to log browser-bridge requests to stderr.",
+              "format": "string",
+              "name": "TRIPADVISOR_DEBUG_LOG"
+            },
+            {
+              "description": "Bridge port override (default: FETCHPROXY_WS_PORT, else 37149). Tests only.",
+              "format": "string",
+              "name": "TRIPADVISOR_WS_PORT"
+            },
+            {
+              "description": "Localhost concentrator port (default 37149). On one machine every MCP shares the concentrator, so move it for ALL of them or not at all.",
+              "format": "string",
+              "name": "FETCHPROXY_WS_PORT"
+            },
+            {
+              "description": "Bind interface (default 127.0.0.1; a literal IP only, anything else is ignored). Keep on loopback \u2014 it exists for ONE topology: a hosted child in its own network namespace.",
+              "format": "string",
+              "name": "FETCHPROXY_WS_HOST"
+            },
+            {
+              "description": "Where to store the long-term identity keypair (default ~/.fetchproxy/identity/; an absolute path only, anything else is ignored). Exists for a host that runs a separate child per caller, so they can share one identity.",
+              "format": "string",
+              "name": "FETCHPROXY_IDENTITY_DIR"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-04T18:09:02.861171Z",
+        "publishedAt": "2026-11-04T18:09:02.861171Z",
+        "updatedAt": "2026-11-04T18:09:02.861171Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.chrischall/untappd-mcp",
+      "description": "Untappd MCP \u2014 search beers/breweries/venues, read check-ins & wishlists, post check-ins",
+      "repository": {
+        "url": "https://github.com/chrischall/untappd-mcp",
+        "source": "github"
+      },
+      "version": "2.7.0",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "untappd-mcp",
+          "version": "2.7.0",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "An Untappd access token you already hold. Supply it and no password is needed (username/password become optional).",
+              "format": "string",
+              "isSecret": true,
+              "name": "UNTAPPD_ACCESS_TOKEN"
+            },
+            {
+              "description": "Your Untappd username or login email. Required unless UNTAPPD_ACCESS_TOKEN is set.",
+              "format": "string",
+              "name": "UNTAPPD_USERNAME"
+            },
+            {
+              "description": "Your Untappd account password (used only for xauth login). Required unless UNTAPPD_ACCESS_TOKEN is set.",
+              "format": "string",
+              "isSecret": true,
+              "name": "UNTAPPD_PASSWORD"
+            },
+            {
+              "description": "Untappd mobile app client id (obtained by intercepting the app; see README). Needed to log in with username/password and for every write; a pre-seeded access token can read without it.",
+              "format": "string",
+              "isSecret": true,
+              "name": "UNTAPPD_CLIENT_ID"
+            },
+            {
+              "description": "Untappd mobile app client secret. Needed to log in with username/password and for every write; a pre-seeded access token can read without it.",
+              "format": "string",
+              "isSecret": true,
+              "name": "UNTAPPD_CLIENT_SECRET"
+            },
+            {
+              "description": "Stable device UUID the token is keyed to (a default is provided).",
+              "format": "string",
+              "name": "UNTAPPD_DEVICE_ID"
+            },
+            {
+              "description": "API version param (default 4.0.0).",
+              "format": "string",
+              "name": "UNTAPPD_UTV"
+            },
+            {
+              "description": "Override the User-Agent (default mimics the app).",
+              "format": "string",
+              "name": "UNTAPPD_USER_AGENT"
+            },
+            {
+              "description": "IANA timezone (e.g. America/New_York) that check-ins are stamped with when the call doesn't pass timezone. Set it when the server runs somewhere other than the drinker's zone (e.g. a hosted connector, usually UTC). Defaults to the server process's zone.",
+              "format": "string",
+              "name": "UNTAPPD_TIMEZONE"
+            },
+            {
+              "description": "Hourly Untappd API call limit the syncs' stop-before-429 guard enforces (default 100, Untappd's documented per-token limit). Only change it if Untappd gives your token a different limit.",
+              "format": "string",
+              "name": "UNTAPPD_RATE_LIMIT_PER_HOUR"
+            },
+            {
+              "description": "The directory untappd_checkin's photo_path must be inside (several allowed, separated by :). Defaults to ~/Downloads/untappd-mcp \u2014 put a photo there to attach it. Any other file is refused, so a prompt-injected shout or comment can't publish an arbitrary image from your disk.",
+              "format": "string",
+              "name": "UNTAPPD_PHOTO_DIR"
+            },
+            {
+              "description": "Path to the local check-in cache SQLite file (default ~/.untappd-mcp/checkins.db; created owner-only \u2014 dir 0700, file 0600). Local/stdio only.",
+              "format": "string",
+              "name": "UNTAPPD_CACHE_DB"
+            },
+            {
+              "description": "Directory for the cache instead of ~/.untappd-mcp (the file is checkins.db inside it). UNTAPPD_CACHE_DB wins if both are set. Local/stdio only.",
+              "format": "string",
+              "name": "UNTAPPD_CACHE_DIR"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-07T12:04:24.605916Z",
+        "publishedAt": "2026-11-07T12:04:24.605916Z",
+        "updatedAt": "2026-11-07T12:04:24.605916Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.chrischall/viator-mcp",
+      "description": "Search Viator tours and activities \u2014 products, availability, attractions, destinations.",
+      "repository": {
+        "url": "https://github.com/chrischall/viator-mcp",
+        "source": "github"
+      },
+      "version": "2.2.0",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@chrischall/viator-mcp",
+          "version": "2.2.0",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Viator Partner API key (exp-api-key) \u2014 free Basic Access affiliate signup at partnerresources.viator.com",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "VIATOR_API_KEY"
+            },
+            {
+              "description": "API host (default production; set https://api.sandbox.viator.com/partner for a sandbox key)",
+              "format": "string",
+              "name": "VIATOR_API_BASE_URL"
+            },
+            {
+              "description": "Accept-Language for response text, e.g. en-US, es, fr, de, ja (default en-US)",
+              "format": "string",
+              "name": "VIATOR_LANGUAGE"
+            },
+            {
+              "description": "Seconds to cache identical read responses (default 60; 0 disables)",
+              "format": "string",
+              "name": "VIATOR_CACHE_TTL"
+            },
+            {
+              "description": "Seconds to cache reference data \u2014 destinations, tags, locations, rates (default 3600; 0 disables)",
+              "format": "string",
+              "name": "VIATOR_STATIC_CACHE_TTL"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-04T18:06:34.217463Z",
+        "publishedAt": "2026-11-04T18:06:34.217463Z",
+        "updatedAt": "2026-11-04T18:06:34.217463Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.chrischall/vibo-mcp",
+      "description": "Vibo (vibodj.com) MCP \u2014 plan & manage event music: timeline, songs, ideas, questions, guests",
+      "repository": {
+        "url": "https://github.com/chrischall/vibo-mcp",
+        "source": "github"
+      },
+      "version": "2.6.0",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "vibo-mcp",
+          "version": "2.6.0",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Vibo account email (or use VIBO_ACCESS_TOKEN for SSO accounts)",
+              "format": "string",
+              "name": "VIBO_EMAIL"
+            },
+            {
+              "description": "Vibo account password",
+              "format": "string",
+              "isSecret": true,
+              "name": "VIBO_PASSWORD"
+            },
+            {
+              "description": "Captured x-token from a signed-in web.vibodj.com session (SSO alternative)",
+              "format": "string",
+              "isSecret": true,
+              "name": "VIBO_ACCESS_TOKEN"
+            },
+            {
+              "description": "Matching x-refresh-token so the session can renew",
+              "format": "string",
+              "isSecret": true,
+              "name": "VIBO_REFRESH_TOKEN"
+            },
+            {
+              "description": "Optional. The upload directory: vibo_set_profile_photo and photo/file answers to vibo_answer_question only read local files from it. Default ~/Downloads/vibo-mcp.",
+              "format": "string",
+              "name": "VIBO_UPLOAD_DIR"
+            },
+            {
+              "description": "Optional. Where a browser-captured token pair is persisted so it survives MCP restarts. Default ~/.vibo-mcp/session.json.",
+              "format": "string",
+              "name": "VIBO_SESSION_FILE"
+            },
+            {
+              "description": "Optional. Overrides the Vibo GraphQL endpoint. Default https://api.vibodj.com/v2/graphql.",
+              "format": "string",
+              "name": "VIBO_API_URL"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-07T12:04:03.975898Z",
+        "publishedAt": "2026-11-07T12:04:03.975898Z",
+        "updatedAt": "2026-11-07T12:04:03.975898Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.chrischall/workday-mcp",
+      "description": "Read-only Workday for Claude \u2014 fetch tasks, pay, benefits via your signed-in session",
+      "repository": {
+        "url": "https://github.com/chrischall/workday-mcp",
+        "source": "github"
+      },
+      "version": "1.4.0",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "workday-mcp",
+          "version": "1.4.0",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Workday tenant slug, e.g. `acme` for https://wd5.myworkday.com/acme.",
+              "isRequired": true,
+              "format": "string",
+              "name": "WORKDAY_TENANT"
+            },
+            {
+              "description": "Workday data-center host (default wd5.myworkday.com).",
+              "format": "string",
+              "name": "WORKDAY_HOST"
+            },
+            {
+              "description": "Override the fetchproxy WebSocket port (default 37149).",
+              "format": "string",
+              "name": "WORKDAY_WS_PORT"
+            },
+            {
+              "description": "Set to 1 to log verbose request detail to stderr.",
+              "format": "string",
+              "name": "WORKDAY_DEBUG"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-06T16:35:46.242509Z",
+        "publishedAt": "2026-11-06T16:35:46.242509Z",
+        "updatedAt": "2026-11-06T16:35:46.242509Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.chrischall/workvivo-mcp",
+      "description": "Read-only Workvivo for Claude \u2014 feed, news, events, people and search via your signed-in session",
+      "repository": {
+        "url": "https://github.com/chrischall/workvivo-mcp",
+        "source": "github"
+      },
+      "version": "0.3.1",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "workvivo-mcp",
+          "version": "0.3.1",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Your organization's Workvivo host, e.g. acme.workvivo.us.",
+              "isRequired": true,
+              "format": "string",
+              "name": "WORKVIVO_HOST"
+            },
+            {
+              "description": "Override the fetchproxy WebSocket port (default 37149).",
+              "format": "string",
+              "name": "WORKVIVO_WS_PORT"
+            },
+            {
+              "description": "Set to 1 to log verbose request detail to stderr.",
+              "format": "string",
+              "name": "WORKVIVO_DEBUG"
+            },
+            {
+              "description": "Where linked documents are saved (default ~/Downloads/workvivo-mcp).",
+              "format": "string",
+              "name": "WORKVIVO_DOWNLOAD_DIR"
+            },
+            {
+              "description": "Documents larger than this are skipped, not downloaded (default 50).",
+              "format": "string",
+              "name": "WORKVIVO_MAX_DOWNLOAD_MB"
+            },
+            {
+              "description": "Comma-separated extensions or MIME types never downloaded, e.g. mp4,.mov,video/* (default video/*,audio/*; none = skip nothing).",
+              "format": "string",
+              "name": "WORKVIVO_SKIP_FILE_TYPES"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-08T05:25:02.358366Z",
+        "publishedAt": "2026-11-08T05:25:02.358366Z",
+        "updatedAt": "2026-11-08T05:25:02.358366Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.chrischall/zillow-mcp",
+      "description": "Zillow real-estate for Claude \u2014 search, property details, Zestimates, saved searches & homes",
+      "repository": {
+        "url": "https://github.com/chrischall/zillow-mcp",
+        "source": "github"
+      },
+      "version": "1.3.2",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "zillow-mcp",
+          "version": "1.3.2",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Override the fetchproxy WebSocket port (default 37149).",
+              "format": "string",
+              "name": "ZILLOW_WS_PORT"
+            },
+            {
+              "description": "Path to a JSON file containing a string array that overrides the default community vocabulary used for feature extraction.",
+              "format": "filepath",
+              "name": "ZILLOW_COMMUNITIES_FILE"
+            },
+            {
+              "description": "Path to a JSON file of [a, b] locality pairs (each registered both ways) that overrides the default locality aliases used by the address resolver.",
+              "format": "filepath",
+              "name": "ZILLOW_LOCALITY_ALIASES_FILE"
+            },
+            {
+              "description": "Directory zillow_sweep_area writes its optional output_path JSON files into (default ~/Downloads/zillow-mcp); paths outside it are refused.",
+              "format": "string",
+              "name": "ZILLOW_OUTPUT_DIR"
+            },
+            {
+              "description": "Set to 1 for verbose fetchproxy transport logging to stderr.",
+              "format": "string",
+              "name": "ZILLOW_DEBUG"
+            },
+            {
+              "description": "Bind interface for the fetchproxy concentrator, a literal IP only (default 127.0.0.1). Keep on loopback; it exists for hosted deployments that run each MCP in its own network namespace.",
+              "format": "string",
+              "name": "FETCHPROXY_WS_HOST"
+            },
+            {
+              "description": "Absolute path where the fetchproxy long-term identity keypair is stored (default ~/.fetchproxy/identity/).",
+              "format": "string",
+              "name": "FETCHPROXY_IDENTITY_DIR"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-07T12:05:07.212925Z",
+        "publishedAt": "2026-11-07T12:05:07.212925Z",
+        "updatedAt": "2026-11-07T12:05:07.212925Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.chrischall/zola-mcp",
+      "description": "Zola wedding planning for Claude \u2014 vendors, budget, guests, seating, registry, and RSVPs",
+      "repository": {
+        "url": "https://github.com/chrischall/zola-mcp",
+        "source": "github"
+      },
+      "version": "2.2.2",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "zola-mcp",
+          "version": "2.2.2",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Zola refresh token JWT (~1 year lifetime). Optional \u2014 when unset, the MCP falls back to the ContextMint Bridge browser extension to read the `usr` cookie from your signed-in zola.com tab, and caches it so later starts need no browser.",
+              "format": "string",
+              "isSecret": true,
+              "name": "ZOLA_REFRESH_TOKEN"
+            },
+            {
+              "description": "Set to '1' to opt out of the fetchproxy browser fallback (headless / CI). With it set and no ZOLA_REFRESH_TOKEN, auth is a hard error unless a previous bootstrap already cached a token \u2014 reading that file is not opening a browser, so the cache stays readable.",
+              "format": "string",
+              "name": "ZOLA_DISABLE_FETCHPROXY"
+            },
+            {
+              "description": "Set to 'false' to disable the on-disk refresh-token cache and ask the browser on every start. Defaults to enabled. Inert when ZOLA_REFRESH_TOKEN is set \u2014 there is no bootstrap to skip.",
+              "format": "string",
+              "name": "ZOLA_TOKEN_CACHE"
+            },
+            {
+              "description": "Absolute path for the refresh-token cache file. Defaults to $MCP_DATA_DIR/.zola-mcp/refresh-token.json, else the same path under $HOME.",
+              "format": "string",
+              "name": "ZOLA_TOKEN_FILE"
+            },
+            {
+              "description": "Overrides the account id normally read from GET /v3/users/me/context. Set it only to pin a specific account.",
+              "format": "string",
+              "name": "ZOLA_ACCOUNT_ID"
+            },
+            {
+              "description": "Overrides the registry id normally read from the same context call.",
+              "format": "string",
+              "name": "ZOLA_REGISTRY_ID"
+            },
+            {
+              "description": "Overrides the wedding id normally read from the same context call.",
+              "format": "string",
+              "name": "ZOLA_WEDDING_ID"
+            },
+            {
+              "description": "A seed session token (JWT). The client refreshes it about five minutes before its exp, so this is a starting point rather than a long-lived credential.",
+              "format": "string",
+              "isSecret": true,
+              "name": "ZOLA_SESSION_TOKEN"
+            },
+            {
+              "description": "Localhost port of the fetchproxy concentrator the ContextMint Bridge extension connects to (default 37149). Every MCP on one machine shares it, so move it for all of them or not at all.",
+              "format": "string",
+              "name": "FETCHPROXY_WS_PORT"
+            },
+            {
+              "description": "Bind interface for the fetchproxy concentrator, a literal IP only (default 127.0.0.1). Keep on loopback; it exists for hosted deployments that run each MCP in its own network namespace.",
+              "format": "string",
+              "name": "FETCHPROXY_WS_HOST"
+            },
+            {
+              "description": "Absolute path where the fetchproxy long-term identity keypair is stored (default ~/.fetchproxy/identity/).",
+              "format": "string",
+              "name": "FETCHPROXY_IDENTITY_DIR"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-07T12:03:36.66119Z",
+        "publishedAt": "2026-11-07T12:03:36.66119Z",
+        "updatedAt": "2026-11-07T12:03:36.66119Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.chrisdoc/hevy-mcp",
+      "description": "MCP server for managing workouts, routines, and exercise data through the Hevy API",
+      "title": "Hevy MCP Server",
+      "repository": {
+        "url": "https://github.com/chrisdoc/hevy-mcp",
+        "source": "github"
+      },
+      "version": "3.2.1",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "hevy-mcp",
+          "version": "3.2.1",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "API key for authenticating with the Hevy API",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "HEVY_API_KEY"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-17T14:52:52.134992Z",
+        "publishedAt": "2026-07-17T14:52:52.134992Z",
+        "updatedAt": "2026-07-17T14:52:52.134992Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.chrisgleissner/c64bridge",
+      "description": "MCP server for Commodore 64 Ultimate hardware and VICE emulator control.",
+      "title": "C64 Bridge",
+      "repository": {
+        "url": "https://github.com/chrisgleissner/c64bridge",
+        "source": "github"
+      },
+      "version": "1.0.7",
+      "websiteUrl": "https://github.com/chrisgleissner/c64bridge",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "c64bridge",
+          "version": "1.0.7",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Logger verbosity.",
+              "format": "string",
+              "default": "info",
+              "choices": [
+                "debug",
+                "info",
+                "warn",
+                "error"
+              ],
+              "name": "LOG_LEVEL"
+            },
+            {
+              "description": "Path to the C64 Bridge configuration file.",
+              "format": "filepath",
+              "default": "~/.c64bridge.json",
+              "name": "C64BRIDGE_CONFIG"
+            },
+            {
+              "description": "Active backend (c64u/U64 hardware, u2/U2-family cartridge, or vice emulator).",
+              "format": "string",
+              "default": "c64u",
+              "choices": [
+                "c64u",
+                "u2",
+                "vice"
+              ],
+              "name": "C64_MODE"
+            },
+            {
+              "description": "Ultimate 64 host name or IP address.",
+              "format": "string",
+              "default": "c64u",
+              "name": "C64U_HOST"
+            },
+            {
+              "description": "Ultimate 64 REST port.",
+              "format": "number",
+              "default": "80",
+              "name": "C64U_PORT"
+            },
+            {
+              "description": "Ultimate 64 network password sent as X-Password.",
+              "format": "string",
+              "isSecret": true,
+              "name": "C64U_PASSWORD"
+            },
+            {
+              "description": "U2/U2+/U2+L host name or IP address when C64_MODE=u2.",
+              "format": "string",
+              "name": "U2_HOST"
+            },
+            {
+              "description": "U2-family REST port when C64_MODE=u2.",
+              "format": "number",
+              "name": "U2_PORT"
+            },
+            {
+              "description": "U2-family network password sent as X-Password.",
+              "format": "string",
+              "isSecret": true,
+              "name": "U2_PASSWORD"
+            },
+            {
+              "description": "VICE emulator binary to launch.",
+              "format": "string",
+              "default": "x64sc",
+              "name": "VICE_BINARY"
+            },
+            {
+              "description": "Launch VICE with a visible window when possible.",
+              "format": "boolean",
+              "default": "true",
+              "name": "VICE_VISIBLE"
+            },
+            {
+              "description": "Enable VICE warp mode.",
+              "format": "boolean",
+              "default": "false",
+              "name": "VICE_WARP"
+            },
+            {
+              "description": "GitHub token for optional RAG discovery against GitHub.",
+              "format": "string",
+              "isSecret": true,
+              "name": "GITHUB_TOKEN"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-05T15:24:03.946699Z",
+        "publishedAt": "2026-11-05T15:24:03.946699Z",
+        "updatedAt": "2026-11-05T15:24:03.946699Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.chrisgu/agentiq-mcp",
+      "description": "AgentIQ MCP for MoltAd: AI agent ads \u2014 placements, campaigns, coupons, attribution, cash out.",
+      "title": "AgentIQ",
+      "repository": {
+        "url": "https://github.com/chrisgu/agentiq-mcp",
+        "source": "github"
+      },
+      "version": "0.3.0",
+      "websiteUrl": "https://moltad.net/#mcp",
+      "icons": [
+        {
+          "src": "https://moltad.net/assets/agentiq/avatar.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        },
+        {
+          "src": "https://raw.githubusercontent.com/chrisgu/agentiq-mcp/main/assets/brand/icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://moltad.net/mcp",
+          "headers": [
+            {
+              "description": "Bearer <key> API key from register",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-07T21:40:17.801702Z",
+        "publishedAt": "2026-08-07T21:40:17.801702Z",
+        "updatedAt": "2026-08-07T21:40:17.801702Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.chrisgu/lobex-mcp",
+      "description": "Agent-to-agent marketplace MCP: list skills, buy/sell services, earn gas, cash out BTC.",
+      "title": "Lobex",
+      "repository": {
+        "url": "https://github.com/chrisgu/lobex-mcp",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://lobex.app/#mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://lobex.app/mcp",
+          "headers": [
+            {
+              "description": "Bearer rk_live_... API key from register",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-07T16:31:30.499829Z",
+        "publishedAt": "2026-08-07T16:31:30.499829Z",
+        "updatedAt": "2026-08-07T16:31:30.499829Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.chrismcdermut/proletariat-cli",
+      "description": "Agent orchestration platform - multi-agent spawning, tickets, boards, and workflows",
+      "repository": {
+        "url": "https://github.com/chrismcdermut/proletariat",
+        "source": "github",
+        "subfolder": "apps/cli"
+      },
+      "version": "0.3.134",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@proletariat/cli",
+          "version": "0.3.134",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-05-06T04:38:40.062261Z",
+        "publishedAt": "2026-05-06T04:38:40.062261Z",
+        "updatedAt": "2026-05-06T04:38:40.062261Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.chrismore/tuneworks",
+      "description": "Motorsports workspace for vehicles, setups, sessions, logs, maintenance, and race engineering.",
+      "title": "TuneWorks",
+      "repository": {
+        "url": "https://github.com/chrismore/tuneworks",
+        "source": "github"
+      },
+      "version": "0.1.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://tuneworks.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-17T23:54:35.712822Z",
+        "publishedAt": "2026-10-17T23:54:35.712822Z",
+        "updatedAt": "2026-10-17T23:54:35.712822Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.chrisryugj/kordoc",
+      "description": "Parse Korean documents (HWP, HWPX, PDF, XLSX, DOCX, PPTX) to Markdown; fill forms, diff, render.",
+      "title": "kordoc",
+      "repository": {
+        "url": "https://github.com/chrisryugj/kordoc",
+        "source": "github"
+      },
+      "version": "4.24.54",
+      "websiteUrl": "https://github.com/chrisryugj/kordoc",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "kordoc",
+          "version": "4.24.54",
+          "transport": {
+            "type": "stdio"
+          },
+          "packageArguments": [
+            {
+              "type": "positional",
+              "value": "mcp"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-08T08:54:58.45248Z",
+        "publishedAt": "2026-11-08T08:54:58.45248Z",
+        "updatedAt": "2026-11-08T08:54:58.45248Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.chrisryugj/korean-law-mcp",
+      "description": "Korean law: statutes, precedents, ordinances, treaties and citation verification (\ubc95\uc81c\ucc98 API).",
+      "title": "Korean Law MCP",
+      "repository": {
+        "url": "https://github.com/chrisryugj/korean-law-mcp",
+        "source": "github"
+      },
+      "version": "4.15.23",
+      "websiteUrl": "https://github.com/chrisryugj/korean-law-mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.gomdori.app/law",
+          "headers": [
+            {
+              "description": "Your own \ubc95\uc81c\ucc98 Open API key (free at https://open.law.go.kr). Optional: without it the shared server key is used under a rate limit.",
+              "isSecret": true,
+              "name": "apikey"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-03T12:23:18.878909Z",
+        "publishedAt": "2026-11-03T12:23:18.878909Z",
+        "updatedAt": "2026-11-03T12:23:18.878909Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.chrisschouk/newsjack",
+      "description": "Music-industry news scored for your brand, with a drafted post in your voice.",
+      "title": "NewsJack",
+      "repository": {
+        "url": "https://github.com/chrisschouk/newsjack",
+        "source": "github"
+      },
+      "version": "0.2.0",
+      "websiteUrl": "https://newsjack.cc",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://newsjack.cc/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-08T13:49:32.924415Z",
+        "publishedAt": "2026-11-08T13:49:32.924415Z",
+        "updatedAt": "2026-11-08T13:49:32.924415Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.chrisschouk/spotcheck",
+      "description": "Score Spotify playlists for bot-farm patterns and triage an artificial streaming warning.",
+      "title": "SpotCheck",
+      "repository": {
+        "url": "https://github.com/chrisschouk/spotcheck",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://spotcheck.cc",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://spotcheck.cc/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-08T13:49:28.883328Z",
+        "publishedAt": "2026-11-08T13:49:28.883328Z",
+        "updatedAt": "2026-11-08T13:49:28.883328Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.christerso/celestial-node",
+      "description": "Real-time space data \u2014 ISS tracking, rocket launches, space news, Mars weather, and more",
+      "repository": {
+        "url": "https://github.com/christerso/celestialnode-mcp",
+        "source": "github"
+      },
+      "version": "1.1.0",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "celestialnode-mcp",
+          "version": "1.1.0",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Optional API key for higher rate limits (100/day vs 25/hr). Get yours at https://celestialnode.com/register",
+              "name": "CELESTIAL_NODE_API_KEY"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-02-22T12:13:05.615155Z",
+        "publishedAt": "2026-02-22T12:13:05.615155Z",
+        "updatedAt": "2026-02-22T12:13:05.615155Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.christian-beep383/carryfeed",
+      "description": "Resolve public X/Twitter profiles, posts, and media through CarryFeed.",
+      "title": "CarryFeed",
+      "repository": {
+        "url": "https://github.com/christian-beep383/carryfeed-agent-tools",
+        "source": "github",
+        "id": "1240520337",
+        "subfolder": "packages/mcp"
+      },
+      "version": "0.1.1",
+      "websiteUrl": "https://carryfeed.com",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@carryfeed/mcp",
+          "version": "0.1.1",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-05-16T09:51:20.922185Z",
+        "publishedAt": "2026-05-16T09:51:20.922185Z",
+        "updatedAt": "2026-05-16T09:51:20.922185Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-10-17/server.schema.json",
+      "name": "io.github.christian289/wpf-dev-pack-mcp",
+      "description": "Serves WPF Dev Pack knowledge topics to AI agents from a local repo clone.",
+      "repository": {
+        "url": "https://github.com/christian289/dotnet-with-claudecode",
+        "source": "github"
+      },
+      "version": "0.1.3",
+      "packages": [
+        {
+          "registryType": "nuget",
+          "registryBaseUrl": "https://api.nuget.org/v3/index.json",
+          "identifier": "WpfDevPackMcp",
+          "version": "0.1.3",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Absolute path to a local clone of christian289/dotnet-with-claudecode (the knowledge source). Alternatively set it once via /wpf-dev-pack:set-repo-path.",
+              "isRequired": true,
+              "name": "WPFDEVPACK_REPO_PATH"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-06-09T04:04:00.124583Z",
+        "publishedAt": "2026-06-09T04:04:00.124583Z",
+        "updatedAt": "2026-06-09T04:04:00.124583Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.christianclaudio/espn",
+      "description": "Model Context Protocol server for live & historical sports stats and odds via ESPN.",
+      "repository": {
+        "url": "https://github.com/christianclaudio/mcp-server-espn",
+        "source": "github"
+      },
+      "version": "2.2.0",
+      "packages": [
+        {
+          "registryType": "pypi",
+          "registryBaseUrl": "https://pypi.org",
+          "identifier": "mcp-server-espn",
+          "version": "2.2.0",
+          "runtimeHint": "uvx",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Optional REST base URL override",
+              "default": "https://site.web.api.espn.com",
+              "name": "ESPN_BASE_URL"
+            },
+            {
+              "description": "HTTP request timeout in seconds",
+              "default": "30.0",
+              "name": "ESPN_TIMEOUT_SECONDS"
+            },
+            {
+              "description": "Maximum retry attempts on HTTP 429 / 5xx",
+              "default": "3",
+              "name": "ESPN_MAX_RETRIES"
+            },
+            {
+              "description": "Restrict server execution strictly to read-only inspection tools",
+              "default": "0",
+              "name": "ESPN_MCP_READONLY"
+            },
+            {
+              "description": "Server domain profile (full, games, teams, news, readonly)",
+              "default": "full",
+              "name": "ESPN_MCP_PROFILE"
+            },
+            {
+              "description": "Replace flat tool catalog with dynamic search transform",
+              "default": "0",
+              "name": "ESPN_MCP_ENABLE_TOOL_SEARCH"
+            },
+            {
+              "description": "Tool Search backend: bm25 (default) or regex",
+              "default": "bm25",
+              "name": "ESPN_MCP_TOOL_SEARCH_BACKEND"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-30T13:17:20.064918Z",
+        "publishedAt": "2026-10-30T13:17:20.064918Z",
+        "updatedAt": "2026-10-30T13:17:20.064918Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.christianclaudio/sigma",
+      "description": "MCP server for Sigma Computing. Provision dashboards, build models, and automate cloud analytics.",
+      "title": "mcp-server-sigma",
+      "repository": {
+        "url": "https://github.com/christianclaudio/mcp-server-sigma",
+        "source": "github"
+      },
+      "version": "2.2.0",
+      "packages": [
+        {
+          "registryType": "pypi",
+          "identifier": "mcp-server-sigma",
+          "version": "2.2.0",
+          "runtimeHint": "uvx",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Your Sigma API client ID",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "SIGMA_CLIENT_ID"
+            },
+            {
+              "description": "Your Sigma API client secret",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "SIGMA_CLIENT_SECRET"
+            },
+            {
+              "description": "Region-specific Sigma API host URL (e.g. https://api.us-a.aws.sigmacomputing.com)",
+              "isRequired": true,
+              "format": "string",
+              "name": "SIGMA_API_BASE_URL"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-30T13:16:38.963629Z",
+        "publishedAt": "2026-10-30T13:16:38.963629Z",
+        "updatedAt": "2026-10-30T13:16:38.963629Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.christianclaudio/smartsheet-rm",
+      "description": "MCP server for Smartsheet Resource Management (10,000ft API) time tracking and scheduling.",
+      "title": "mcp-server-smartsheet-rm",
+      "repository": {
+        "url": "https://github.com/christianclaudio/mcp-server-smartsheet-rm",
+        "source": "github"
+      },
+      "version": "2.2.0",
+      "packages": [
+        {
+          "registryType": "pypi",
+          "identifier": "mcp-server-smartsheet-rm",
+          "version": "2.2.0",
+          "runtimeHint": "uvx",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Your Smartsheet Resource Management (10,000ft) API token",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "SMARTSHEET_RM_API_TOKEN"
+            },
+            {
+              "description": "API base URL. Host must be in SMARTSHEET_RM_ALLOWED_HOSTS (default api.rm.smartsheet.com).",
+              "format": "string",
+              "name": "SMARTSHEET_RM_BASE_URL"
+            },
+            {
+              "description": "Smartsheet Gov only: Smartsheet API token sent as Authorization: Bearer to app.smartsheetgov.com.",
+              "format": "string",
+              "isSecret": true,
+              "name": "SMARTSHEET_RM_GOV_SMARTSHEET_API_TOKEN"
+            },
+            {
+              "description": "Comma-separated hostnames allowed for base URL overrides. A non-blank value replaces the default (api.rm.smartsheet.com).",
+              "format": "string",
+              "name": "SMARTSHEET_RM_ALLOWED_HOSTS"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-30T13:16:42.665866Z",
+        "publishedAt": "2026-10-30T13:16:42.665866Z",
+        "updatedAt": "2026-10-30T13:16:42.665866Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.christianclaudio/taxcode",
+      "description": "MCP server for US Federal, territorial, and state tax law and compliance.",
+      "repository": {
+        "url": "https://github.com/christianclaudio/mcp-server-taxcode",
+        "source": "github"
+      },
+      "version": "1.2.0",
+      "packages": [
+        {
+          "registryType": "pypi",
+          "registryBaseUrl": "https://pypi.org",
+          "identifier": "mcp-server-taxcode",
+          "version": "1.2.0",
+          "runtimeHint": "uvx",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "API token for service authentication",
+              "isSecret": true,
+              "name": "TAXCODE_API_KEY"
+            },
+            {
+              "description": "Optional REST base URL override",
+              "default": "https://api.example.com",
+              "name": "TAXCODE_BASE_URL"
+            },
+            {
+              "description": "Server profile (full, system, statutes, compliance, readonly, researcher, advisor)",
+              "default": "full",
+              "name": "TAXCODE_MCP_PROFILE"
+            },
+            {
+              "description": "Restrict server execution strictly to read-only inspection tools",
+              "default": "0",
+              "name": "TAXCODE_MCP_READONLY"
+            }
+          ]
+        },
+        {
+          "registryType": "oci",
+          "identifier": "ghcr.io/christianclaudio/mcp-server-taxcode:1.2.0",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "API token for service authentication",
+              "isSecret": true,
+              "name": "TAXCODE_API_KEY"
+            },
+            {
+              "description": "Optional REST base URL override",
+              "default": "https://api.example.com",
+              "name": "TAXCODE_BASE_URL"
+            },
+            {
+              "description": "Server profile (full, system, statutes, compliance, readonly, researcher, advisor)",
+              "default": "full",
+              "name": "TAXCODE_MCP_PROFILE"
+            },
+            {
+              "description": "Restrict server execution strictly to read-only inspection tools",
+              "default": "0",
+              "name": "TAXCODE_MCP_READONLY"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-30T13:17:17.588913Z",
+        "publishedAt": "2026-10-30T13:17:17.588913Z",
+        "updatedAt": "2026-10-30T13:17:17.588913Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.christianhonap7-sys/sector-pulse",
+      "description": "Live US sector rotation: 30 sector baskets ranked every session, versioned rosters, daily record.",
+      "title": "Sector Pulse",
+      "version": "1.3.0",
+      "websiteUrl": "https://sector-pulse.app/api-docs",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://sector-pulse.app/api/mcp",
+          "headers": [
+            {
+              "description": "Sector API key (SPK-\u2026), required by every tool. A free key (100 calls a day, live sectors and rosters) is sent by email from https://sector-pulse.app/api-docs#free-key; get_history needs a paid key.",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "X-API-Key"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-28T15:56:24.735835Z",
+        "publishedAt": "2026-09-28T15:56:24.735835Z",
+        "updatedAt": "2026-09-28T15:56:24.735835Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.christianmatumona/treasury-risk-mcp",
+      "description": "Treasury risk, FX exposure, liquidity & payment decisions for AI CFO agents. Pay per call in USDC.",
+      "title": "Treasury Risk Analyzer",
+      "repository": {
+        "url": "https://github.com/christianmatumona/treasury-risk-mcp",
+        "source": "github"
+      },
+      "version": "0.1.2",
+      "websiteUrl": "https://portfolio-risk-analyzer-g9ao.onrender.com",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "treasury-risk-mcp",
+          "version": "0.1.2",
+          "runtimeHint": "npx",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Private key of a dedicated Base wallet holding a few USDC, used to sign per-call x402 payments. Without it, paid tools only validate input and quote the price.",
+              "format": "string",
+              "isSecret": true,
+              "name": "X402_PRIVATE_KEY"
+            },
+            {
+              "description": "Hard per-call spending cap in USD (default 2.00). Tools priced above it are refused before signing.",
+              "format": "string",
+              "default": "2.00",
+              "name": "MAX_PAYMENT_USD"
+            },
+            {
+              "description": "Override the service base URL (default: public production deployment).",
+              "format": "string",
+              "name": "TREASURY_API_URL"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-03T06:26:17.352771Z",
+        "publishedAt": "2026-11-03T06:26:17.352771Z",
+        "updatedAt": "2026-11-03T06:26:17.352771Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.christianscode1994/volatiai-mcp",
+      "description": "Ranked active signals with snapshot chain verification and cross-source arbitration.",
+      "title": "VolatiAI MCP",
+      "repository": {
+        "url": "https://github.com/christianscode1994/VolatiAI",
+        "source": "github"
+      },
+      "version": "1.1.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://volatiai-mcp.fourieranalys.workers.dev/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-08T10:32:40.431591Z",
+        "publishedAt": "2026-11-08T10:32:40.431591Z",
+        "updatedAt": "2026-11-08T10:32:40.431591Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.christophe77/hobart-warewash-mcp",
+      "description": "Unofficial MCP server for Hobart dishwashers: errors, temperatures, consumption, hygiene log.",
+      "title": "Hobart Warewash",
+      "repository": {
+        "url": "https://github.com/christophe77/hobart-warewash-mcp",
+        "source": "github"
+      },
+      "version": "0.1.0",
+      "websiteUrl": "https://github.com/christophe77/hobart-warewash-mcp#readme",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "hobart-warewash-mcp",
+          "version": "0.1.0",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Hobart Cloud-to-Cloud API account (e-mail).",
+              "isRequired": true,
+              "name": "HOBART_USERNAME"
+            },
+            {
+              "description": "Hobart Cloud-to-Cloud API password.",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "HOBART_PASSWORD"
+            },
+            {
+              "description": "Set to true to expose the write tools (register a machine, change settings). Default false.",
+              "name": "HOBART_ALLOW_WRITE"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-02T16:55:32.00458Z",
+        "publishedAt": "2026-11-02T16:55:32.00458Z",
+        "updatedAt": "2026-11-02T16:55:32.00458Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.christophe77/netatmo-energy-mcp",
+      "description": "MCP server for Netatmo thermostats and radiator valves: status, history, analytics, opt-in control.",
+      "title": "Netatmo Energy",
+      "repository": {
+        "url": "https://github.com/christophe77/netatmo-energy-mcp",
+        "source": "github"
+      },
+      "version": "0.3.2",
+      "websiteUrl": "https://github.com/christophe77/netatmo-energy-mcp#readme",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "netatmo-energy-mcp",
+          "version": "0.3.2",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Netatmo app client ID. Optional after running `npx -y netatmo-energy-mcp login`, which stores it.",
+              "name": "NETATMO_CLIENT_ID"
+            },
+            {
+              "description": "Netatmo app client secret. Optional after `login`, which stores it locally.",
+              "isSecret": true,
+              "name": "NETATMO_CLIENT_SECRET"
+            },
+            {
+              "description": "Log level written to stderr: debug, info, warn, error or silent.",
+              "name": "NETATMO_MCP_LOG_LEVEL"
+            },
+            {
+              "description": "Set to 0 to force read-only mode. Write mode is only possible after `login --write`.",
+              "name": "NETATMO_MCP_WRITE"
+            },
+            {
+              "description": "Write mode confirmation: auto (default), elicitation (client dialog only) or token (preview + token only).",
+              "name": "NETATMO_MCP_CONFIRM"
+            },
+            {
+              "description": "Write mode: lowest temperature a change may set, in \u00b0C (default 7).",
+              "name": "NETATMO_MCP_MIN_TEMP"
+            },
+            {
+              "description": "Write mode: highest temperature a change may set, in \u00b0C (default 28).",
+              "name": "NETATMO_MCP_MAX_TEMP"
+            },
+            {
+              "description": "Write mode: longest manual room setpoint, in hours (default 24).",
+              "name": "NETATMO_MCP_MAX_SETPOINT_HOURS"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-21T15:19:00.787953Z",
+        "publishedAt": "2026-10-21T15:19:00.787953Z",
+        "updatedAt": "2026-10-21T15:19:00.787953Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.christophjonetzko-stack/kranvergleich",
+      "description": "Kranvermietung DE/AT: crane rental companies by city, price ranges, type recommendation, PLZ supply",
+      "title": "KranVergleich Kranvermietung (DE/AT)",
+      "repository": {
+        "url": "https://github.com/christophjonetzko-stack/mcp-kranvergleich",
+        "source": "github"
+      },
+      "version": "1.1.0",
+      "websiteUrl": "https://kranvergleich.de",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp-kranvergleich.onrender.com/mcp"
+        },
+        {
+          "type": "sse",
+          "url": "https://mcp-kranvergleich.onrender.com/sse"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-29T15:25:30.632657Z",
+        "publishedAt": "2026-08-29T15:25:30.632657Z",
+        "updatedAt": "2026-08-29T15:25:30.632657Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.chriswu727/argus",
+      "description": "Testing MCP for coding agents: exercise real user journeys, find bugs, verify them with evidence.",
+      "title": "Argus \u2014 Testing for Coding Agents",
+      "repository": {
+        "url": "https://github.com/chriswu727/argus",
+        "source": "github"
+      },
+      "version": "0.12.1",
+      "websiteUrl": "https://yichenwu.dev/projects/argus",
+      "packages": [
+        {
+          "registryType": "pypi",
+          "identifier": "argus-testing",
+          "version": "0.12.1",
+          "runtimeHint": "uvx",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-05T22:10:02.546641Z",
+        "publishedAt": "2026-11-05T22:10:02.546641Z",
+        "updatedAt": "2026-11-05T22:10:02.546641Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.chriswu727/sibyl",
+      "description": "Deep Research MCP for multi-round investigations, traceable evidence, and cited reports.",
+      "title": "Sibyl \u2014 Deep Research MCP",
+      "repository": {
+        "url": "https://github.com/chriswu727/sibyl",
+        "source": "github"
+      },
+      "version": "0.4.0b1",
+      "websiteUrl": "https://yichenwu.dev/projects/sibyl",
+      "packages": [
+        {
+          "registryType": "pypi",
+          "identifier": "sibyl-research",
+          "version": "0.4.0b1",
+          "runtimeHint": "uvx",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-22T04:52:43.399123Z",
+        "publishedAt": "2026-10-22T04:52:43.399123Z",
+        "updatedAt": "2026-10-22T04:52:43.399123Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.chrisyau83/docx-now",
+      "description": "Convert DOCX documents to and from PDF, TXT, HTML, ODT, JPG and RTF.",
+      "title": "DOCX.now MCP Server",
+      "repository": {
+        "url": "https://github.com/chrisyau83/docx-now",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://docx.now/mcp",
+          "headers": [
+            {
+              "description": "DOCX.now API key",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "X-API-Key"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-27T11:47:23.413529Z",
+        "publishedAt": "2026-10-27T11:47:23.413529Z",
+        "updatedAt": "2026-10-27T11:47:23.413529Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.chrisyau83/html-now",
+      "description": "Convert HTML with PDF, DOCX, JPG, PNG, XML, XLSX and XLS conversion workflows.",
+      "title": "HTML.now MCP Server",
+      "repository": {
+        "url": "https://github.com/chrisyau83/html-now",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://html.now/mcp",
+          "headers": [
+            {
+              "description": "HTML.now API key",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "X-API-Key"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-27T11:47:25.32156Z",
+        "publishedAt": "2026-10-27T11:47:25.32156Z",
+        "updatedAt": "2026-10-27T11:47:25.32156Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.chrisyau83/jpg-now",
+      "description": "Convert JPG images to and from popular formats through MCP-compatible AI clients.",
+      "title": "JPG.now MCP Server",
+      "repository": {
+        "url": "https://github.com/chrisyau83/jpg-now",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://jpg.now/mcp",
+          "headers": [
+            {
+              "description": "JPG.now API key",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "X-API-Key"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-27T11:47:19.54262Z",
+        "publishedAt": "2026-10-27T11:47:19.54262Z",
+        "updatedAt": "2026-10-27T11:47:19.54262Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.chrisyau83/mp4-now",
+      "description": "Convert MP4 video with MP3, WebM, MOV, AVI, GIF, WAV, JPG and MKV workflows.",
+      "title": "MP4.now MCP Server",
+      "repository": {
+        "url": "https://github.com/chrisyau83/mp4-now",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mp4.now/mcp",
+          "headers": [
+            {
+              "description": "MP4.now API key",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "X-API-Key"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-27T11:47:26.389862Z",
+        "publishedAt": "2026-10-27T11:47:26.389862Z",
+        "updatedAt": "2026-10-27T11:47:26.389862Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.chrisyau83/png-now",
+      "description": "Compress PNG images and convert them to or from popular image and document formats.",
+      "title": "PNG.now MCP Server",
+      "repository": {
+        "url": "https://github.com/chrisyau83/png-now",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://png.now/mcp",
+          "headers": [
+            {
+              "description": "PNG.now API key",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "X-API-Key"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-27T11:47:28.29089Z",
+        "publishedAt": "2026-10-27T11:47:28.29089Z",
+        "updatedAt": "2026-10-27T11:47:28.29089Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.chrisyau83/ppt-now",
+      "description": "Convert PowerPoint files between PPT, PPTX, PPS, PPSX, POT, POTX and supported formats.",
+      "title": "PPT.now MCP Server",
+      "repository": {
+        "url": "https://github.com/chrisyau83/ppt-now",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://ppt.now/mcp",
+          "headers": [
+            {
+              "description": "PPT.now API key",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "X-API-Key"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-27T11:47:20.499746Z",
+        "publishedAt": "2026-10-27T11:47:20.499746Z",
+        "updatedAt": "2026-10-27T11:47:20.499746Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.chrisyau83/rar-now",
+      "description": "Convert RAR archives to ZIP, 7Z and TAR through MCP-compatible AI clients.",
+      "title": "RAR.now MCP Server",
+      "repository": {
+        "url": "https://github.com/chrisyau83/rar-now",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://rar.now/mcp",
+          "headers": [
+            {
+              "description": "RAR.now API key",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "X-API-Key"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-27T11:47:27.349236Z",
+        "publishedAt": "2026-10-27T11:47:27.349236Z",
+        "updatedAt": "2026-10-27T11:47:27.349236Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.chrisyau83/xls-now",
+      "description": "Convert XLS spreadsheets to modern document, image and spreadsheet formats.",
+      "title": "XLS.now MCP Server",
+      "repository": {
+        "url": "https://github.com/chrisyau83/xls-now",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://xls.now/mcp",
+          "headers": [
+            {
+              "description": "XLS.now API key",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "X-API-Key"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-27T11:47:22.48266Z",
+        "publishedAt": "2026-10-27T11:47:22.48266Z",
+        "updatedAt": "2026-10-27T11:47:22.48266Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.chrisyau83/xlsx-now",
+      "description": "Convert XLSX spreadsheets to and from XLS, CSV, PDF, JPG, HTML and ODS.",
+      "title": "XLSX.now MCP Server",
+      "repository": {
+        "url": "https://github.com/chrisyau83/xlsx-now",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://xlsx.now/mcp",
+          "headers": [
+            {
+              "description": "XLSX.now API key",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "X-API-Key"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-27T11:47:24.344058Z",
+        "publishedAt": "2026-10-27T11:47:24.344058Z",
+        "updatedAt": "2026-10-27T11:47:24.344058Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.chrisyau83/xml-now",
+      "description": "Convert XML data with JSON, CSV, XLSX, HTML, TXT, PDF and YAML conversion workflows.",
+      "title": "XML.now MCP Server",
+      "repository": {
+        "url": "https://github.com/chrisyau83/xml-now",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://xml.now/mcp",
+          "headers": [
+            {
+              "description": "XML.now API key",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "X-API-Key"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-27T11:47:21.498385Z",
+        "publishedAt": "2026-10-27T11:47:21.498385Z",
+        "updatedAt": "2026-10-27T11:47:21.498385Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.chromewalk/chromewalk",
+      "description": "Local browser automation for AI agents: real-browser fetch, capture, smoke tests, cross-engine QA.",
+      "title": "ChromeWalk",
+      "repository": {
+        "url": "https://github.com/chromewalk/app",
+        "source": "github"
+      },
+      "version": "15.0.0",
+      "websiteUrl": "https://chromewalk.com",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/chromewalk/app/releases/download/v15.0.0/ChromeWalk-Claude-Extension.mcpb",
+          "fileSha256": "39c02660372b938eaa2ebeea4c7885e3e945e6319f163e574204304aa46cd5f4",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "License key (sign up at https://api.chromewalk.com/register.html or run `chromewalk register <your-email>`). Read once when the MCP server starts and used to activate this device if it is not already activated (the same value as the bundle's license_key setting). Alternatively run `chromewalk activate <key>`. Without an activated license every licensed tool call returns a license-required error.",
+              "isSecret": true,
+              "name": "CHROMEWALK_LICENSE"
+            },
+            {
+              "description": "Optional per-process data directory (profiles, output, logs, license state). Defaults to %LOCALAPPDATA%\\ChromeWalk on Windows, ~/Library/Application Support/ChromeWalk on macOS.",
+              "name": "CHROMEWALK_DATA_DIR"
+            }
+          ]
+        }
+      ],
+      "_meta": {
+        "io.modelcontextprotocol.registry/publisher-provided": {
+          "license_model": "proprietary",
+          "license_requirement": "License required, fail-closed. Sign up at https://api.chromewalk.com/register.html or run `chromewalk register <your-email>`; activate via the CHROMEWALK_LICENSE env var, the bundle's license_key setting, or `chromewalk activate <key>`. There is no keyless trial: until a license is activated, every licensed tool call returns a license-required error (CLI exit 4). A missing, malformed, tampered, revoked or expired license, or any error while evaluating it, blocks the call - it never falls open. The only allowance is an offline grace window for an already-activated, signed license that cannot reach the license server. The diagnostics chromewalk_doctor, chromewalk_procs, chromewalk_config (show/get), the recovery tool chromewalk_reset (soft), the gap-report tool chromewalk_recommend, the sign-up tools chromewalk_register / chromewalk_activate and the dispatcher built-ins chromewalk_calls / chromewalk_cancel work without a license.",
+          "platform_support": [
+            "windows"
+          ],
+          "python_version": ">=3.10"
+        }
+      }
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-30T00:02:43.481234Z",
+        "publishedAt": "2026-10-30T00:02:43.481234Z",
+        "updatedAt": "2026-10-30T00:02:43.481234Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.chromium-style-qrcode/mcp",
+      "description": "MCP server for generating Chromium-style QR codes with optional Dino logo or custom center image",
+      "title": "Chromium Style QR Code Generator",
+      "repository": {
+        "url": "https://github.com/chromium-style-qrcode/mcp",
+        "source": "github"
+      },
+      "version": "1.0.2",
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "@chromium-style-qrcode/mcp",
+          "version": "1.0.2",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-04-19T14:51:43.040758Z",
+        "publishedAt": "2026-04-19T14:51:43.040758Z",
+        "updatedAt": "2026-04-19T14:51:43.040758Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.chronogate/chronogate",
+      "description": "Timezone and business-day truth for agents: now, DST-safe convert, relative dates, holidays.",
+      "title": "ChronoGate",
+      "repository": {
+        "url": "https://github.com/chronogate/chronogate",
+        "source": "github"
+      },
+      "version": "0.1.0",
+      "websiteUrl": "https://chronogate-self.vercel.app/llms.txt",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://chronogate-self.vercel.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-01T21:46:41.854581Z",
+        "publishedAt": "2026-11-01T21:46:41.854581Z",
+        "updatedAt": "2026-11-01T21:46:41.854581Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.chrp-bass/chrp-epi-authority",
+      "description": "Music-listening Emotional Performance Intelligence: definitions, states, guidance and MyCHRP.",
+      "title": "CHRP EPI Authority",
+      "repository": {
+        "url": "https://github.com/chrp-bass/chrp-parent-sites",
+        "source": "github",
+        "subfolder": "apps/chrp-ai"
+      },
+      "version": "1.0.2",
+      "websiteUrl": "https://chrp.ai/emotional-performance-intelligence",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://chrp.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-27T11:23:36.431686Z",
+        "publishedAt": "2026-10-27T11:23:36.431686Z",
+        "updatedAt": "2026-10-27T11:23:36.431686Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.chrysogonus/prompt-maker-studio",
+      "description": "Your prompt library in any MCP client: list, fetch, save and version prompt templates.",
+      "title": "Prompt Maker Studio",
+      "repository": {
+        "url": "https://github.com/chrysogonus/prompt-maker-studio",
+        "source": "github"
+      },
+      "version": "0.17.0",
+      "websiteUrl": "https://neadlab.com",
+      "icons": [
+        {
+          "src": "https://neadlab.com/icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://neadlab.com/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-05T17:39:28.733013Z",
+        "publishedAt": "2026-11-05T17:39:28.733013Z",
+        "updatedAt": "2026-11-05T17:39:28.733013Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.chrzanowy/agent-tollbooth",
+      "description": "Stateful backend for AI agents: memory, watch, render, execute, and shared boards with digests.",
+      "title": "tollbooth",
+      "repository": {
+        "url": "https://github.com/chrzanowy/agent-tollbooth",
+        "source": "github"
+      },
+      "version": "0.1.2",
+      "packages": [
+        {
+          "registryType": "oci",
+          "identifier": "ghcr.io/chrzanowy/agent-tollbooth:v0.1.2",
+          "transport": {
+            "type": "streamable-http",
+            "url": "http://localhost:4402/mcp"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-16T12:36:31.373045Z",
+        "publishedAt": "2026-08-16T12:36:31.373045Z",
+        "updatedAt": "2026-08-16T12:36:31.373045Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.chtwebllc/counterparty-check",
+      "description": "Check a payee before your agent pays: sanctions, lookalike domains, payment details, invoice fraud.",
+      "title": "Counterparty Check",
+      "version": "1.0.1",
+      "websiteUrl": "https://counterpartycheck.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://counterpartycheck.com/mcp",
+          "headers": [
+            {
+              "description": "Bearer API key (cc_live_...), bought at https://counterpartycheck.com/#pricing",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-15T22:58:48.317372Z",
+        "publishedAt": "2026-10-15T22:58:48.317372Z",
+        "updatedAt": "2026-10-15T22:58:48.317372Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.chuang44-tiff/optivibe-mcp",
+      "description": "Lens design automation for Zemax OpticStudio through the typed ZOS-API",
+      "title": "OptiVibe",
+      "repository": {
+        "url": "https://github.com/chuang44-tiff/optivibe-mcp",
+        "source": "github"
+      },
+      "version": "0.2.2",
+      "packages": [
+        {
+          "registryType": "pypi",
+          "identifier": "optivibe-mcp",
+          "version": "0.2.2",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-07T00:41:23.176259Z",
+        "publishedAt": "2026-11-07T00:41:23.176259Z",
+        "updatedAt": "2026-11-07T00:41:23.176259Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.chucho-ai/chucho",
+      "description": "Find vacation rentals, explore photos and property details, and open direct host booking links.",
+      "title": "chucho \u2014 Book Direct",
+      "version": "0.1.7",
+      "websiteUrl": "https://chucho.ai/chatgpt/",
+      "icons": [
+        {
+          "src": "https://chucho.ai/stay/chucho-app-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://chucho.ai/chatgpt/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-02T23:14:18.796317Z",
+        "publishedAt": "2026-10-02T23:14:18.796317Z",
+        "updatedAt": "2026-10-02T23:14:18.796317Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.chudah1/attest-mcp",
+      "description": "Credential enforcement middleware for MCP servers \u2014 verifies scoped tokens on every tool call",
+      "repository": {
+        "url": "https://github.com/chudah1/attest-dev",
+        "source": "github",
+        "subfolder": "sdks/typescript/mcp"
+      },
+      "version": "0.1.0",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@attest-dev/mcp",
+          "version": "0.1.0",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Base URL of the Attest server",
+              "format": "string",
+              "name": "ATTEST_BASE_URL"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-04-11T09:40:37.087372Z",
+        "publishedAt": "2026-04-11T09:40:37.087372Z",
+        "updatedAt": "2026-04-11T09:40:37.087372Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.chughes113/context-relay",
+      "description": "Compact, citation-verifiable public web context for AI agents, paid per use with x402.",
+      "title": "Context Relay",
+      "repository": {
+        "url": "https://github.com/chughes113/context-relay",
+        "source": "github"
+      },
+      "version": "0.3.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://context-relay.contextrelay.workers.dev/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-08T04:12:38.180853Z",
+        "publishedAt": "2026-08-08T04:12:38.180853Z",
+        "updatedAt": "2026-08-08T04:12:38.180853Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.chungty/thetennisdesk",
+      "description": "Ratings, line win chances and lineup help for USTA NorCal adult league tennis, from public results.",
+      "title": "The Tennis Desk",
+      "version": "0.3.0",
+      "websiteUrl": "https://thetennisdesk.com",
+      "icons": [
+        {
+          "src": "https://thetennisdesk.com/favicon.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        },
+        {
+          "src": "https://thetennisdesk.com/apple-touch-icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "180x180"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://thetennisdesk.com/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-04T04:16:44.545074Z",
+        "publishedAt": "2026-11-04T04:16:44.545074Z",
+        "updatedAt": "2026-11-04T04:16:44.545074Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.chunkydonut21/caelario",
+      "description": "MCP server for Instagram, TikTok, YouTube, X and Facebook data extraction and automation.",
+      "title": "Caelario",
+      "repository": {
+        "url": "https://github.com/chunkydonut21/caelario-mcp",
+        "source": "github",
+        "id": "1346708115"
+      },
+      "version": "0.1.5",
+      "websiteUrl": "https://caelario.com/mcp-server",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "caelario-mcp",
+          "version": "0.1.5",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "A revocable Caelario workspace API key from the Developers page.",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "CAELARIO_API_KEY"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-25T23:50:36.628014Z",
+        "publishedAt": "2026-08-25T23:50:36.628014Z",
+        "updatedAt": "2026-08-25T23:50:36.628014Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.chunxiaoxx/nautilus-compass",
+      "description": "Local-first long-term memory for AI agents, with byte-recomputable signed verification receipts.",
+      "title": "Nautilus Compass Memory",
+      "repository": {
+        "url": "https://github.com/chunxiaoxx/nautilus-compass",
+        "source": "github"
+      },
+      "version": "3.2.0",
+      "packages": [
+        {
+          "registryType": "pypi",
+          "identifier": "nautilus-compass",
+          "version": "3.2.0",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://compass.nautilus.social/mcp/",
+          "headers": [
+            {
+              "description": "Bearer token \u2014 create a free account at https://compass.nautilus.social/signup, then generate a token in the console. Each token is user-scoped.",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-17T03:33:46.154188Z",
+        "publishedAt": "2026-09-17T03:33:46.154188Z",
+        "updatedAt": "2026-09-17T03:33:46.154188Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.chuofringer/placeroot",
+      "description": "Grounds AI agents in Overture Maps open data \u2014 compact answers, no API key.",
+      "title": "PlaceRoot",
+      "repository": {
+        "url": "https://github.com/chuofringer/placeroot",
+        "source": "github"
+      },
+      "version": "0.12.0",
+      "websiteUrl": "https://placeroot.dev",
+      "packages": [
+        {
+          "registryType": "pypi",
+          "registryBaseUrl": "https://pypi.org",
+          "identifier": "placeroot",
+          "version": "0.12.0",
+          "runtimeHint": "uvx",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Set to 'off' to disable the local on-disk tile cache. Optional; caching is on by default.",
+              "name": "PLACEROOT_CACHE"
+            }
+          ]
+        },
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "placeroot",
+          "version": "0.12.0",
+          "runtimeHint": "npx",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Set to 'off' to disable the local on-disk tile cache. Optional; caching is on by default.",
+              "name": "PLACEROOT_CACHE"
+            }
+          ]
+        },
+        {
+          "registryType": "pypi",
+          "registryBaseUrl": "https://pypi.org",
+          "identifier": "placeroot",
+          "version": "0.12.0",
+          "runtimeHint": "uvx",
+          "transport": {
+            "type": "streamable-http",
+            "url": "http://127.0.0.1:8321/mcp"
+          },
+          "packageArguments": [
+            {
+              "description": "Serve streamable-HTTP on 127.0.0.1:8321/mcp instead of stdio.",
+              "isRequired": true,
+              "type": "named",
+              "name": "--http"
+            }
+          ],
+          "environmentVariables": [
+            {
+              "description": "Set to 'off' to disable the local on-disk tile cache. Optional; caching is on by default.",
+              "name": "PLACEROOT_CACHE"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-19T01:18:12.895337Z",
+        "publishedAt": "2026-10-19T01:18:12.895337Z",
+        "updatedAt": "2026-10-19T01:18:12.895337Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.churichard/fluxmail",
+      "description": "Read, search, draft, send, and organize email through Gmail, Outlook, and IMAP/SMTP mailboxes.",
+      "title": "Fluxmail",
+      "repository": {
+        "url": "https://github.com/churichard/fluxmail",
+        "source": "github",
+        "id": "1295539777",
+        "subfolder": "packages/server"
+      },
+      "version": "0.12.0",
+      "websiteUrl": "https://fluxmail.ai",
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "fluxmail",
+          "version": "0.12.0",
+          "transport": {
+            "type": "stdio"
+          },
+          "packageArguments": [
+            {
+              "type": "positional",
+              "value": "stdio"
+            }
+          ],
+          "environmentVariables": [
+            {
+              "description": "Optional override for Fluxmail's built-in Desktop OAuth client ID.",
+              "name": "GOOGLE_CLIENT_ID"
+            },
+            {
+              "description": "Client secret paired with a custom Google OAuth client ID.",
+              "isSecret": true,
+              "name": "GOOGLE_CLIENT_SECRET"
+            },
+            {
+              "description": "Directory for the Fluxmail database, encryption key, and stored settings.",
+              "format": "filepath",
+              "placeholder": "~/.fluxmail",
+              "name": "FLUXMAIL_DATA_DIR"
+            },
+            {
+              "description": "Optional Fluxmail license key for paid plan limits.",
+              "isSecret": true,
+              "name": "FLUXMAIL_LICENSE_KEY"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "deprecated",
+        "statusChangedAt": "2026-10-23T16:27:55.645265Z",
+        "statusMessage": "Moved to io.github.fluxmailai/fluxmail",
+        "publishedAt": "2026-10-05T16:54:56.553265Z",
+        "updatedAt": "2026-10-23T16:27:55.645265Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.chusmias258-dev/omega-x402-mcp",
+      "description": "7 x402 v2 pay-per-call MCP tools for FDA/ChEMBL, token rug scan, Base escrow & wallet forensics.",
+      "title": "Omega x402 Security, Biomed & Escrow Intelligence MCP",
+      "version": "10.2.0",
+      "websiteUrl": "https://agy-x402-gateway.omega-x402-edge.workers.dev",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://agy-x402-gateway.omega-x402-edge.workers.dev/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-05T09:23:27.070626Z",
+        "publishedAt": "2026-11-05T09:23:27.070626Z",
+        "updatedAt": "2026-11-05T09:23:27.070626Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.chutingyean/agent-cockpit",
+      "description": "Evidence-chain whiteboard for AI research agents: every claim traces back to its run and code.",
+      "title": "Agent Cockpit",
+      "repository": {
+        "url": "https://github.com/chutingyean/Agent-Cockpit",
+        "source": "github"
+      },
+      "version": "0.1.0",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@tingyen/agent-cockpit",
+          "version": "0.1.0",
+          "transport": {
+            "type": "stdio"
+          },
+          "packageArguments": [
+            {
+              "type": "positional",
+              "value": "mcp"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-06T07:02:23.911565Z",
+        "publishedAt": "2026-11-06T07:02:23.911565Z",
+        "updatedAt": "2026-11-06T07:02:23.911565Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-07-09/server.schema.json",
+      "name": "io.github.ciceropaul/cicero-booking",
+      "description": "Find open times and book a free Cicero Learning consultation.",
+      "repository": {
+        "url": "https://github.com/ciceropaul/cicero-platform",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://cicerolearning.com/book-a-consult",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://admin.cicerolearning.com/api/public/booking/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-30T13:37:16.293537Z",
+        "publishedAt": "2026-09-30T13:37:16.293537Z",
+        "updatedAt": "2026-09-30T13:37:16.293537Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.cicerosmoura-alt/backstoryid-mcp",
+      "description": "M\u00e9tricas, jornadas e visitantes do backstoryID \u2014 direto no seu agente, sem trocar de aba.",
+      "version": "1.0.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.backstoryid.com/mcp",
+          "headers": [
+            {
+              "description": "Bearer <sua chave de API> \u2014 gerada em app.backstoryid.com/configuracoes",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-21T23:26:36.69382Z",
+        "publishedAt": "2026-08-21T23:26:36.69382Z",
+        "updatedAt": "2026-08-21T23:26:36.69382Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.cicerosmoura-alt/goloop-mcp",
+      "description": "M\u00e9tricas, jornadas e visitantes do GoLoop \u2014 direto no seu agente, sem trocar de aba.",
+      "version": "1.0.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.goloop.com.br/mcp",
+          "headers": [
+            {
+              "description": "Bearer <sua chave de API> \u2014 gerada em app.goloop.com.br/configuracoes",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-22T19:22:01.474995Z",
+        "publishedAt": "2026-08-22T19:22:01.474995Z",
+        "updatedAt": "2026-08-22T19:22:01.474995Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ciceroyang/agentgate",
+      "description": "Read-only evidence for the tools agents run: MCP server records, coverage and policy.",
+      "title": "agentgate",
+      "repository": {
+        "url": "https://github.com/ciceroyang/agentgate",
+        "source": "github"
+      },
+      "version": "0.5.0",
+      "websiteUrl": "https://xn--5kvo87g.com/",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@zhiliangtech/agentgate",
+          "version": "0.5.0",
+          "runtimeHint": "npx",
+          "transport": {
+            "type": "stdio"
+          },
+          "packageArguments": [
+            {
+              "description": "Run the read-only MCP server instead of the CLI.",
+              "type": "positional",
+              "value": "mcp"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-21T16:07:33.56958Z",
+        "publishedAt": "2026-09-21T16:07:33.56958Z",
+        "updatedAt": "2026-09-21T16:07:33.56958Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.cigo240920/cigo-aircare",
+      "description": "Carsafe vehicle matching and purchase links, HVAC power comparisons, and confirmed B2B inquiries.",
+      "title": "Cigo Aircare & Carsafe",
+      "repository": {
+        "url": "https://github.com/cigo240920/Cigo-MCP-system",
+        "source": "github"
+      },
+      "version": "1.0.2",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://cigo-mcp-system-wzoy.onrender.com/mcp/?source=mcp-registry"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-06T03:01:47.858885Z",
+        "publishedAt": "2026-11-06T03:01:47.858885Z",
+        "updatedAt": "2026-11-06T03:01:47.858885Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ciinkwia/agent-tool-finder",
+      "description": "Free search across ~35,000 agent tools (x402 bazaar + MCP registry) by plain-language need.",
+      "version": "1.0.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://clink-lithium-vault.fly.dev/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-11T04:03:02.512567Z",
+        "publishedAt": "2026-08-11T04:03:02.512567Z",
+        "updatedAt": "2026-08-11T04:03:02.512567Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ciinkwia/lithium-vault-mcp",
+      "description": "Primary-source lithium & battery-metals mining data (AISC, reserves, filings) via x402.",
+      "repository": {
+        "url": "https://github.com/ciinkwia/lithium-vault-mcp",
+        "source": "github"
+      },
+      "version": "0.4.0",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "lithium-vault-mcp",
+          "version": "0.4.0",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Coinbase CDP API key ID for the wallet that pays the per-call USDC fee",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "CDP_API_KEY_ID"
+            },
+            {
+              "description": "Coinbase CDP API key secret",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "CDP_API_KEY_SECRET"
+            },
+            {
+              "description": "Coinbase CDP wallet secret",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "CDP_WALLET_SECRET"
+            },
+            {
+              "description": "Named CDP account to pay from (default: lithium-vault-mcp)",
+              "format": "string",
+              "name": "CDP_ACCOUNT_NAME"
+            },
+            {
+              "description": "Override the vault endpoint base URL (default: https://clink-lithium-vault.fly.dev)",
+              "format": "string",
+              "name": "VAULT_BASE_URL"
+            },
+            {
+              "description": "Max USD price per call the server will pay before refusing (default: 0.25)",
+              "format": "string",
+              "name": "X402_MAX_PRICE"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-10T03:07:59.144828Z",
+        "publishedAt": "2026-08-10T03:07:59.144828Z",
+        "updatedAt": "2026-08-10T03:07:59.144828Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ciinkwia/prediction-market-signal-mcp",
+      "description": "Polymarket + Kalshi odds, movers, gaps, watch, and X sentiment for AI agents. Pay per call via x402.",
+      "repository": {
+        "url": "https://github.com/ciinkwia/prediction-market-mcp",
+        "source": "github"
+      },
+      "version": "0.1.0",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "prediction-market-signal-mcp",
+          "version": "0.1.0",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Coinbase CDP API key ID for the wallet that pays the per-call USDC fee",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "CDP_API_KEY_ID"
+            },
+            {
+              "description": "Coinbase CDP API key secret",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "CDP_API_KEY_SECRET"
+            },
+            {
+              "description": "Coinbase CDP wallet secret",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "CDP_WALLET_SECRET"
+            },
+            {
+              "description": "Hard per-call USD ceiling; requests quoting more are refused before signing (default 0.05)",
+              "format": "string",
+              "name": "X402_MAX_PRICE"
+            },
+            {
+              "description": "Named CDP account to pay from (created automatically; default prediction-market-signal-mcp)",
+              "format": "string",
+              "name": "CDP_ACCOUNT_NAME"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-28T04:07:34.319597Z",
+        "publishedAt": "2026-09-28T04:07:34.319597Z",
+        "updatedAt": "2026-09-28T04:07:34.319597Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ciinkwia/twitter-signal-mcp",
+      "description": "Live X/Twitter search, profiles, leads, pain points, bot checks, AI digests. Paid per call, x402.",
+      "repository": {
+        "url": "https://github.com/ciinkwia/twitter-signal-mcp",
+        "source": "github"
+      },
+      "version": "0.5.0",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "twitter-signal-mcp",
+          "version": "0.5.0",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Coinbase CDP API key ID for the wallet that pays the per-call USDC fee",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "CDP_API_KEY_ID"
+            },
+            {
+              "description": "Coinbase CDP API key secret",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "CDP_API_KEY_SECRET"
+            },
+            {
+              "description": "Coinbase CDP wallet secret",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "CDP_WALLET_SECRET"
+            },
+            {
+              "description": "Hard per-call USD ceiling; requests quoting more are refused before signing (default 0.05)",
+              "format": "string",
+              "name": "X402_MAX_PRICE"
+            },
+            {
+              "description": "Named CDP account to pay from (created automatically; default twitter-signal-mcp)",
+              "format": "string",
+              "name": "CDP_ACCOUNT_NAME"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-26T08:24:12.336197Z",
+        "publishedAt": "2026-09-26T08:24:12.336197Z",
+        "updatedAt": "2026-09-26T08:24:12.336197Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ciloops/vuln-check",
+      "description": "Local vulnerability scan on top of grype, with prioritised upgrade actions for agents.",
+      "repository": {
+        "url": "https://github.com/ciloops/vuln-check",
+        "source": "github"
+      },
+      "version": "0.1.3",
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "@ciloops/vuln-check",
+          "version": "0.1.3",
+          "runtimeHint": "npx",
+          "transport": {
+            "type": "stdio"
+          },
+          "packageArguments": [
+            {
+              "type": "positional",
+              "value": "mcp"
+            }
+          ]
+        },
+        {
+          "registryType": "oci",
+          "identifier": "ghcr.io/ciloops/vuln-check:0.1.3",
+          "runtimeHint": "docker",
+          "transport": {
+            "type": "stdio"
+          },
+          "runtimeArguments": [
+            {
+              "type": "named",
+              "name": "-v",
+              "value": "{workdir}:/work"
+            },
+            {
+              "type": "named",
+              "name": "-v",
+              "value": "vuln-check-db:/cache"
+            }
+          ],
+          "packageArguments": [
+            {
+              "type": "positional",
+              "value": "mcp"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-23T16:20:37.868348Z",
+        "publishedAt": "2026-10-23T16:20:37.868348Z",
+        "updatedAt": "2026-10-23T16:20:37.868348Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.cinderwright-ai/cinderwright-api",
+      "description": "Cross-protocol agent payments hub. x402, MPP, L402/Lightning. 1551 services indexed.",
+      "repository": {
+        "url": "https://github.com/cinderwright-ai/cinderwright-api",
+        "source": "github"
+      },
+      "version": "1.1.1",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "cinderwright-mcp-server",
+          "version": "1.1.1",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-05-05T03:49:38.191005Z",
+        "publishedAt": "2026-05-05T03:49:38.191005Z",
+        "updatedAt": "2026-05-05T03:49:38.191005Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.circassian1977-byte/memoro",
+      "description": "Personal AI memory layer on your own computer. Read/write durable memory across MCP clients.",
+      "repository": {
+        "url": "https://github.com/circassian1977-byte/memoro",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@memoro/mcp-server",
+          "version": "1.0.0",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-16T21:29:16.819021Z",
+        "publishedAt": "2026-09-16T21:29:16.819021Z",
+        "updatedAt": "2026-09-16T21:29:16.819021Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ciroartz/inkstudioai",
+      "description": "Generate AI tattoo designs in 13 styles, search a public tattoo gallery, and check plans.",
+      "title": "Ink Studio AI",
+      "repository": {
+        "url": "https://github.com/ciroartz/inkstudioai-cli",
+        "source": "github"
+      },
+      "version": "0.1.1",
+      "websiteUrl": "https://inkstudioai.com/developers",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "inkstudioai",
+          "version": "0.1.1",
+          "transport": {
+            "type": "stdio"
+          },
+          "packageArguments": [
+            {
+              "type": "positional",
+              "value": "mcp"
+            }
+          ],
+          "environmentVariables": [
+            {
+              "description": "Ink Studio AI API key (isk_...). Optional: without it, call the login tool to sign in.",
+              "isSecret": true,
+              "name": "INKSTUDIO_API_KEY"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-24T12:42:35.530358Z",
+        "publishedAt": "2026-10-24T12:42:35.530358Z",
+        "updatedAt": "2026-10-24T12:42:35.530358Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.cirralink-stack/kevaremesh",
+      "description": "Market-validated MCP capabilities with x402 paid execution.",
+      "repository": {
+        "url": "https://github.com/cirralink-stack/cirralink",
+        "source": "github"
+      },
+      "version": "2.1.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://ytqrligiuzhjkuotpiwb.supabase.co/functions/v1/kevaremesh-mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "deprecated",
+        "statusChangedAt": "2026-09-19T11:05:47.979794Z",
+        "statusMessage": "Superseded by io.github.cirralink-stack/kevaremesh-gateway.",
+        "publishedAt": "2026-09-17T17:46:56.92834Z",
+        "updatedAt": "2026-09-22T12:17:23.368264Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.cirralink-stack/kevaremesh-gateway",
+      "description": "AI procurement for web search, news, finance, blockchain, social, enrichment and travel APIs.",
+      "title": "KEVAREMESH AI Procurement Gateway",
+      "repository": {
+        "url": "https://github.com/cirralink-stack/cirralink",
+        "source": "github",
+        "id": "1368574338"
+      },
+      "version": "0.4.60",
+      "websiteUrl": "https://kevaremesh-web.vercel.app",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://kevaremesh-web.vercel.app/api/x402/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-08T03:49:07.237656Z",
+        "publishedAt": "2026-10-08T03:49:07.237656Z",
+        "updatedAt": "2026-10-08T03:49:07.237656Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.cirwel/unitares",
+      "description": "Accountability infrastructure for long-running AI agents. Shared memory is a provenance graph.",
+      "title": "UNITARES",
+      "repository": {
+        "url": "https://github.com/cirwel/unitares",
+        "source": "github"
+      },
+      "version": "3.6.0",
+      "websiteUrl": "https://cirwel.org"
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-26T22:39:29.840136Z",
+        "publishedAt": "2026-10-26T22:39:29.840136Z",
+        "updatedAt": "2026-10-26T22:39:29.840136Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.cisco-open/network-sketcher",
+      "description": "AI-native MCP server to design and manage Cisco network diagrams (L1/L2/L3, PPT/SVG) from LLMs.",
+      "title": "Network Sketcher (Local MCP)",
+      "repository": {
+        "url": "https://github.com/cisco-open/network-sketcher",
+        "source": "github",
+        "subfolder": "network-sketcher_local_mcp"
+      },
+      "version": "3.1.2",
+      "websiteUrl": "https://github.com/cisco-open/network-sketcher#installation-local-mcp",
+      "_meta": {
+        "io.modelcontextprotocol.registry/publisher-provided": {
+          "capabilitiesSummary": {
+            "promptsCount": 1,
+            "resourcesCount": 2,
+            "toolsCount": 10
+          },
+          "category": "developer",
+          "installationNote": "See https://github.com/cisco-open/network-sketcher#installation-local-mcp for full Cursor / Claude Code / Manual setup instructions.",
+          "license": "Apache-2.0",
+          "runtime": {
+            "minVersion": "3.10",
+            "type": "python"
+          },
+          "tags": [
+            "network",
+            "cisco",
+            "diagram",
+            "powerpoint",
+            "topology",
+            "design",
+            "automation"
+          ],
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      }
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-05-20T08:35:26.886264Z",
+        "publishedAt": "2026-05-20T08:35:26.886264Z",
+        "updatedAt": "2026-05-20T08:35:26.886264Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.citizen01-sid/bahn-transfer",
+      "description": "Re-plan a delayed rail journey: onward options, transfer buffers, one recommendation",
+      "title": "Bahn Transfer",
+      "version": "1.0.0",
+      "websiteUrl": "https://bahn.1f916.de",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://bahn.1f916.de/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-06T05:07:43.256364Z",
+        "publishedAt": "2026-11-06T05:07:43.256364Z",
+        "updatedAt": "2026-11-06T05:07:43.256364Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.citrix/netscaler-console-mcp-server",
+      "description": "MCP server providing AI assistants the ability to interact with NetScaler environments",
+      "title": "NetScaler Console MCP Server",
+      "version": "1.0.3",
+      "websiteUrl": "https://www.citrix.com/products/netscaler-adc/",
+      "packages": [
+        {
+          "registryType": "oci",
+          "identifier": "docker.io/netscaler/netscaler-console-mcp-server:1.0.3",
+          "transport": {
+            "type": "streamable-http",
+            "url": "http://localhost:10000/mcp"
+          },
+          "environmentVariables": [
+            {
+              "description": "Citrix Cloud ID",
+              "isRequired": true,
+              "name": "CC_ID"
+            },
+            {
+              "description": "NetScaler Console Client ID",
+              "isRequired": true,
+              "name": "CLIENT_ID"
+            },
+            {
+              "description": "NetScaler Console Client Secret",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "CLIENT_SECRET"
+            },
+            {
+              "description": "OAuth Issuer URL",
+              "isRequired": true,
+              "name": "MCP_NS_OAUTH_ISSUER"
+            },
+            {
+              "description": "JWKS endpoint URL for JWT token verification",
+              "isRequired": true,
+              "name": "MCP_NS_JWKS_URI"
+            },
+            {
+              "description": "Server certificate file path",
+              "isRequired": true,
+              "format": "filepath",
+              "isSecret": true,
+              "name": "SSL_CERT_PATH"
+            },
+            {
+              "description": "Server key file path",
+              "isRequired": true,
+              "format": "filepath",
+              "isSecret": true,
+              "name": "SSL_KEY_PATH"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-04-02T10:34:20.060234Z",
+        "publishedAt": "2026-04-02T10:34:20.060234Z",
+        "updatedAt": "2026-04-02T10:34:20.060234Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.civdotiq/civiq",
+      "description": "U.S. civic data for AI agents: reps, votes, bills, finance, lobbying, cited gov sources. 47 tools.",
+      "repository": {
+        "url": "https://github.com/civdotiq/civ.iq",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://civdotiq.org/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://civdotiq.org/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-15T22:00:48.638157Z",
+        "publishedAt": "2026-07-15T22:00:48.638157Z",
+        "updatedAt": "2026-07-15T22:00:48.638157Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.civis-labs/civis",
+      "description": "Structured knowledge base for AI agent solutions. Search, explore, and retrieve build logs.",
+      "title": "Civis",
+      "version": "0.25.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.civis.run/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-03-24T12:38:37.36246Z",
+        "publishedAt": "2026-03-24T12:38:37.36246Z",
+        "updatedAt": "2026-03-24T12:38:37.36246Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.cj29d9tjjn-sudo/landfall",
+      "description": "Audit a landing page before paid ads: readiness score, ad pixels found, conversion paths, top fixes.",
+      "title": "Landfall",
+      "version": "1.0.0",
+      "websiteUrl": "https://landfall-production-74ad.up.railway.app/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://landfall-production-74ad.up.railway.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-15T01:22:25.021448Z",
+        "publishedAt": "2026-10-15T01:22:25.021448Z",
+        "updatedAt": "2026-10-15T01:22:25.021448Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ckalima/pipedrive-mcp-server",
+      "description": "MCP server for Pipedrive CRM. 155 tools for deals, persons, organizations, activities, and more.",
+      "title": "Pipedrive CRM",
+      "repository": {
+        "url": "https://github.com/ckalima/pipedrive-mcp-server",
+        "source": "github"
+      },
+      "version": "2.7.1",
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "@ckalima/pipedrive-mcp-server",
+          "version": "2.7.1",
+          "runtimeHint": "npx",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Your 40-character Pipedrive API token (Settings > Personal preferences > API).",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "PIPEDRIVE_API_KEY"
+            },
+            {
+              "description": "Server-enforced capability tier: 'read-only' (reads only), 'safe-write' (reads + non-destructive writes; the default), or 'full' (all tools, including destructive). Out-of-mode tools are hidden from tools/list and refused if called directly. A blank value is treated as unset (defaults to safe-write); an unrecognized value falls back to read-only.",
+              "format": "string",
+              "name": "PIPEDRIVE_MODE"
+            },
+            {
+              "description": "Legacy flag, superseded by PIPEDRIVE_MODE. When PIPEDRIVE_MODE is unset, 'true' maps to full; otherwise prefer PIPEDRIVE_MODE=full. Still honored for back-compat.",
+              "format": "string",
+              "name": "PIPEDRIVE_ENABLE_DESTRUCTIVE"
+            },
+            {
+              "description": "Allowlisted directory the server may read product images from when a file_path is passed to the image-upload tools. Filesystem reads are disabled unless this is set, and a file_path must resolve within it.",
+              "format": "string",
+              "name": "PIPEDRIVE_IMAGE_BASE_DIR"
+            }
+          ]
+        },
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/ckalima/pipedrive-mcp-server/releases/download/v2.7.1/pipedrive-mcp-server-2.7.1.mcpb",
+          "version": "2.7.1",
+          "fileSha256": "1beebe5a46c91bfc34600f98c6f2ea16edc8b0c0786a5b9e4d20fce81e75baed",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-26T14:02:58.41212Z",
+        "publishedAt": "2026-09-26T14:02:58.41212Z",
+        "updatedAt": "2026-09-26T14:02:58.41212Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ckangas2/abstractinator",
+      "description": "Immunology/virology papers, trials and grants from six databases. No API key.",
+      "title": "The Abstractinator",
+      "repository": {
+        "url": "https://github.com/ckangas2/abstractinator",
+        "source": "github"
+      },
+      "version": "2.0.0",
+      "websiteUrl": "https://abstractinator.me",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.abstractinator.me/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-24T03:44:26.784885Z",
+        "publishedAt": "2026-10-24T03:44:26.784885Z",
+        "updatedAt": "2026-10-24T03:44:26.784885Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.cklam12345/wisdomgraph",
+      "description": "Neo4j-native DIKW memory for Claude Code \u2014 knowledge that compounds across sessions",
+      "repository": {
+        "url": "https://github.com/cklam12345/wisdomGraph",
+        "source": "github",
+        "subfolder": "npm"
+      },
+      "version": "0.2.0",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "wisdomgraph",
+          "version": "0.2.0",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Neo4j password for wisdomGraph. Set via `wisdom connect` or export directly.",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "WISDOM_NEO4J_PASSWORD"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-04-12T08:58:28.841399Z",
+        "publishedAt": "2026-04-12T08:58:28.841399Z",
+        "updatedAt": "2026-04-12T08:58:28.841399Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.claimidx/claimidx",
+      "description": "Prior art for AI agents. claim --yes --share-yes shares to the commons; claim --yes stays local.",
+      "title": "Claimidx",
+      "repository": {
+        "url": "https://github.com/claimidx/claimidx",
+        "source": "github",
+        "id": "1350791995"
+      },
+      "version": "0.7.22",
+      "websiteUrl": "https://claimidx.com",
+      "packages": [
+        {
+          "registryType": "pypi",
+          "registryBaseUrl": "https://pypi.org",
+          "identifier": "claimidx",
+          "version": "0.7.22",
+          "runtimeHint": "claimidx-mcp",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Optional. Omit to auto-mint agent-<hex> on first write; set to name your DID. Anonymous refused.",
+              "name": "CLAIMIDX_OWNER"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-24T13:31:57.431217Z",
+        "publishedAt": "2026-10-24T13:31:57.431217Z",
+        "updatedAt": "2026-10-24T13:31:57.431217Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.claimseed/claimseed",
+      "description": "Synthetic US medical-billing documents (PDF and ground truth) for testing extractors and agents",
+      "title": "claimseed",
+      "repository": {
+        "url": "https://github.com/claimseed/claimseed",
+        "source": "github",
+        "subfolder": "packages/mcp"
+      },
+      "version": "0.5.0",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@claimseed/mcp",
+          "version": "0.5.0",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Folder for the PDF and ground-truth files (it writes nowhere else); without one, nothing is written",
+              "format": "filepath",
+              "name": "CLAIMSEED_WORKSPACE"
+            },
+            {
+              "description": "Chrome or Chromium binary used for rendering, if not installed in a usual place",
+              "format": "filepath",
+              "name": "CLAIMSEED_CHROME"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-03T06:06:41.228132Z",
+        "publishedAt": "2026-11-03T06:06:41.228132Z",
+        "updatedAt": "2026-11-03T06:06:41.228132Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.clairwave/clairwave",
+      "description": "Ocean acoustics: propagation models, bathymetry, sound speed, vessel noise, live AIS. Open.",
+      "title": "Clairwave",
+      "repository": {
+        "url": "https://github.com/clairwave/clairwave-mcp",
+        "source": "github"
+      },
+      "version": "0.4.0",
+      "websiteUrl": "https://www.clairwave.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.clairwave.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-04T12:35:15.859712Z",
+        "publishedAt": "2026-09-04T12:35:15.859712Z",
+        "updatedAt": "2026-09-04T12:35:15.859712Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.clanker-records/crompton-network",
+      "description": "Machine-native listening platform for CWA's Straight Outta Crompton. Your agent can listen. For real",
+      "repository": {
+        "url": "https://github.com/clanker-records/crompton-network",
+        "source": "github"
+      },
+      "version": "1.5.2",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@clanker-records/crompton-network",
+          "version": "1.5.2",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-06-04T14:10:54.171904Z",
+        "publishedAt": "2026-06-04T14:10:54.171904Z",
+        "updatedAt": "2026-06-04T14:10:54.171904Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+      "name": "io.github.clappia-dev/clappia-mcp",
+      "description": "An MCP server that provides Clappia workspace, forms, workflows, submissions, and analytics",
+      "repository": {
+        "url": "https://github.com/clappia-dev/clappia-mcp",
+        "source": "github"
+      },
+      "version": "1.0.1",
+      "packages": [
+        {
+          "registryType": "oci",
+          "identifier": "docker.io/okaru413/clappia-mcp:1.0.1",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Clappia API key for authentication",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "CLAPPIA_API_KEY"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2025-10-07T08:10:55.274271Z",
+        "publishedAt": "2025-10-07T08:10:55.274271Z",
+        "updatedAt": "2025-10-07T08:10:55.274271Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.clara-finance/clara-mortgage-assistant",
+      "description": "Deterministic Canadian mortgage calculations for qualification, debt service, LTV, and penalties.",
+      "title": "Clara Mortgage Assistant",
+      "version": "0.1.1",
+      "websiteUrl": "https://www.claratech.ai/mortgage-assistant",
+      "icons": [
+        {
+          "src": "https://www.claratech.ai/clara-mortgage-assistant-icon.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.claratech.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-19T21:03:21.063787Z",
+        "publishedAt": "2026-08-19T21:03:21.063787Z",
+        "updatedAt": "2026-08-19T21:03:21.063787Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.clara-finance/open-financial-mortgage-options",
+      "description": "Ontario, Canada mortgage options, published lender rates and a link to a licensed broker.",
+      "title": "Open Financial Mortgages",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.openfinancial.ca",
+      "icons": [
+        {
+          "src": "https://mcp.openfinancial.ca/icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.openfinancial.ca/mcp/open"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-29T08:15:43.623467Z",
+        "publishedAt": "2026-10-29T08:15:43.623467Z",
+        "updatedAt": "2026-10-29T08:15:43.623467Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.claracarspt/mcp",
+      "description": "Used & imported cars in Portugal: search stock, ISV/IUC tax calc, resale value, contact.",
+      "repository": {
+        "url": "https://github.com/claracarspt/mcp",
+        "source": "github"
+      },
+      "version": "0.1.3",
+      "websiteUrl": "https://claracars.pt",
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "claracars-mcp",
+          "version": "0.1.3",
+          "runtimeHint": "npx",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://claracars.pt/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-15T00:01:04.075359Z",
+        "publishedAt": "2026-07-15T00:01:04.075359Z",
+        "updatedAt": "2026-07-15T00:01:04.075359Z",
+        "isLatest": true
+      }
+    }
+  }
+]

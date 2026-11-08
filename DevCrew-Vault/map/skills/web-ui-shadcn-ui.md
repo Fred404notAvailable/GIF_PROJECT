@@ -18,7 +18,7 @@ shadcn/ui component library patterns, CLI usage, theming, customization
 **Tech:** [[UI & Design]], [[Architecture]]
 
 ## Related Skills
-- **Complements:** [[architecture-patterns]], [[autonomous-agent-patterns]], [[event-store-design]], [[postgresql-table-design]]
-- **Alternate of:** [[tailwind-design-system]], [[web-tooling-storybook]]
+- **Complements:** [[architecture-patterns]], [[autonomous-agent-patterns]], [[event-store-design]], [[langchain-architecture]]
+- **Alternate of:** [[tailwind-css-4]], [[tailwind-design-system]]
 
 Real skill file: `skills/web-ui-shadcn-ui/SKILL.md`

@@ -1,0 +1,3225 @@
+[
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+      "name": "com.dustforge/demipass",
+      "description": "Credential custody for agents: use secrets blind (ssh/http/smtp/git/db), never in context.",
+      "repository": {
+        "url": "https://github.com/bildow/demipass",
+        "source": "github"
+      },
+      "version": "2.5.0",
+      "websiteUrl": "https://dustforge.com",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "demipass",
+          "version": "2.5.0",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Dustforge JWT bearer token. Self-onboard at https://dustforge.com/.well-known/silicon or mint via the 2FA email flow.",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "DEMIPASS_TOKEN"
+            },
+            {
+              "description": "API base URL (default https://api.dustforge.com)",
+              "name": "DEMIPASS_URL"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-07T06:04:54.268516Z",
+        "publishedAt": "2026-07-07T06:04:54.268516Z",
+        "updatedAt": "2026-07-07T06:04:54.268516Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.dveracity/semantic-mcp",
+      "description": "Validate emissions data against Open Footprint, check EU CBAM records, query verified methane data",
+      "title": "dVeracity Semantic API",
+      "repository": {
+        "url": "https://github.com/d-veracity/semantic-mcp",
+        "source": "github"
+      },
+      "version": "0.8.3",
+      "websiteUrl": "https://dveracity.com/semantic-api",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@dveracity/semantic-mcp",
+          "version": "0.8.3",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "dVeracity API key (dvrc_...). Required for the stdio package; metered calls are billed to it. Not used by the remote endpoint, which authenticates with OAuth.",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "DVERACITY_API_KEY"
+            },
+            {
+              "description": "Optional. Override the API base URL; defaults to production.",
+              "format": "string",
+              "name": "DVERACITY_API_URL"
+            },
+            {
+              "description": "Optional. Agent AID enabling vLEI-verified identity mode.",
+              "format": "string",
+              "name": "DVERACITY_KERI_AID"
+            },
+            {
+              "description": "Optional. Path to the CESR presentation used with the agent AID.",
+              "format": "filepath",
+              "name": "DVERACITY_KERI_PRESENTATION"
+            }
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.dveracity.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-03T02:10:31.274325Z",
+        "publishedAt": "2026-11-03T02:10:31.274325Z",
+        "updatedAt": "2026-11-03T02:10:31.274325Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.dwellquote/home-insurance-quotes",
+      "description": "Compare California home insurance quotes from multiple carriers, then finish on DwellQuote.",
+      "title": "DwellQuote",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.dwellquote.com",
+      "icons": [
+        {
+          "src": "https://www.dwellquote.com/apple-touch-icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "180x180"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.dwellquote.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-27T10:03:32.851615Z",
+        "publishedAt": "2026-10-27T10:03:32.851615Z",
+        "updatedAt": "2026-10-27T10:03:32.851615Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.dxtra/dxtra-radio",
+      "description": "Radio frequency database: FM, AM, shortwave, TV, ham, weather, emergency alerts. 15+ countries.",
+      "title": "dxtra Radio \u2014 Frequency Database",
+      "version": "1.0.0",
+      "websiteUrl": "https://dxtra.com",
+      "remotes": [
+        {
+          "type": "sse",
+          "url": "https://dxtra.com/mcp/sse"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-04-30T16:43:47.246864Z",
+        "publishedAt": "2026-04-30T16:43:47.246864Z",
+        "updatedAt": "2026-04-30T16:43:47.246864Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.dynamicdocumentapi/mcp",
+      "description": "PDFs, images and e-invoices (XRechnung, ZUGFeRD) from templates and JSON, rendered in the EU.",
+      "title": "Dynamic Document API",
+      "version": "0.1.0",
+      "websiteUrl": "https://dynamicdocumentapi.com/docs/mcp",
+      "icons": [
+        {
+          "src": "https://dynamicdocumentapi.com/assets/img/icon-192.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "192x192"
+          ]
+        },
+        {
+          "src": "https://dynamicdocumentapi.com/assets/img/icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.dynamicdocumentapi.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-18T13:51:56.060412Z",
+        "publishedAt": "2026-10-18T13:51:56.060412Z",
+        "updatedAt": "2026-10-18T13:51:56.060412Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.dyndns-server.noon-ai/automatic-face-anonymization-mcp",
+      "description": "Automatic hosted video face anonymization on every frame; optional original restore; $3/video NoonAI",
+      "title": "Automatic Video Face Anonymization MCP, Reversible Restore \u2014 NoonAI DIS",
+      "version": "0.1.16",
+      "websiteUrl": "https://noon-ai.dyndns-server.com/mcp-proof",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://noon-ai.dyndns-server.com/automatic-face-anonymization-mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-30T07:09:34.763355Z",
+        "publishedAt": "2026-10-30T07:09:34.763355Z",
+        "updatedAt": "2026-10-30T07:09:34.763355Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.dyndns-server.noon-ai/face-blur-redaction-mcp",
+      "description": "Automatic hosted video face blur and redaction, reversible, restore original, $3/video. NoonAI DIS",
+      "title": "Automatic Video Face Blur MCP: Reversible, Restore Original \u2014 NoonAI DIS",
+      "version": "0.1.16",
+      "websiteUrl": "https://noon-ai.dyndns-server.com/mcp-proof",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://noon-ai.dyndns-server.com/face-blur-redaction-mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-30T07:09:34.621544Z",
+        "publishedAt": "2026-10-30T07:09:34.621544Z",
+        "updatedAt": "2026-10-30T07:09:34.621544Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.dyndns-server.noon-ai/face-detection-anonymization-mcp",
+      "description": "Automatic hosted video face detection and blur in one call; reversible, restore original. NoonAI DIS",
+      "title": "Automatic Video Face Detection & Blur MCP, Restore Original \u2014 NoonAI DIS",
+      "version": "0.1.16",
+      "websiteUrl": "https://noon-ai.dyndns-server.com/mcp-proof",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://noon-ai.dyndns-server.com/face-detection-anonymization-mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-30T07:09:34.923613Z",
+        "publishedAt": "2026-10-30T07:09:34.923613Z",
+        "updatedAt": "2026-10-30T07:09:34.923613Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.dyndns-server.noon-ai/image-video-anonymization-mcp",
+      "description": "Automatic hosted video masking of faces, bodies, plates; restore chosen people; $3/video. NoonAI DIS",
+      "title": "Automatic Video Face & Person Masking MCP with Original Restore (Reversible) \u2014 NoonAI DIS",
+      "version": "0.1.16",
+      "websiteUrl": "https://noon-ai.dyndns-server.com/mcp-proof",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://noon-ai.dyndns-server.com/image-video-anonymization-mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-30T07:09:34.317024Z",
+        "publishedAt": "2026-10-30T07:09:34.317024Z",
+        "updatedAt": "2026-10-30T07:09:34.317024Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.dyndns-server.noon-ai/noonai-dis-mcp-server",
+      "description": "Automatic hosted video masking of faces, bodies, plates; restore chosen people; $3/video. NoonAI DIS",
+      "title": "Automatic Video De-identification MCP: Mask People & Faces, Restore Original \u2014 NoonAI DIS",
+      "version": "0.1.16",
+      "websiteUrl": "https://noon-ai.dyndns-server.com/mcp-proof",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://noon-ai.dyndns-server.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-30T07:09:34.14914Z",
+        "publishedAt": "2026-10-30T07:09:34.14914Z",
+        "updatedAt": "2026-10-30T07:09:34.14914Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.dyndns-server.noon-ai/people-deidentification-mcp",
+      "description": "Automatic hosted video de-identification of people and faces; restore original; $3/video. NoonAI DIS",
+      "title": "Automatic Video People De-identification MCP, Reversible Restore \u2014 NoonAI DIS",
+      "version": "0.1.16",
+      "websiteUrl": "https://noon-ai.dyndns-server.com/mcp-proof",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://noon-ai.dyndns-server.com/people-deidentification-mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-30T07:09:35.381908Z",
+        "publishedAt": "2026-10-30T07:09:35.381908Z",
+        "updatedAt": "2026-10-30T07:09:35.381908Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.dyndns-server.noon-ai/privacy-object-anonymize-mcp",
+      "description": "Automatic hosted video masking: faces, bodies, plates supported now; reversible; $3/video. NoonAI",
+      "title": "Automatic Video Privacy Masking MCP: Faces, People, License Plates \u2014 NoonAI DIS",
+      "version": "0.1.16",
+      "websiteUrl": "https://noon-ai.dyndns-server.com/mcp-proof",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://noon-ai.dyndns-server.com/privacy-object-anonymize-mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-30T07:09:35.22019Z",
+        "publishedAt": "2026-10-30T07:09:35.22019Z",
+        "updatedAt": "2026-10-30T07:09:35.22019Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.dyndns-server.noon-ai/video-anonymization-mcp",
+      "description": "Automatic hosted video de-identification (\ube44\uc2dd\ubcc4): mask all, restore chosen; $3/video. NoonAI DIS",
+      "title": "Automatic Video De-identification MCP: Reversible Masking, Restore Original \u2014 NoonAI DIS",
+      "version": "0.1.16",
+      "websiteUrl": "https://noon-ai.dyndns-server.com/mcp-proof",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://noon-ai.dyndns-server.com/video-anonymization-mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-30T07:09:34.474765Z",
+        "publishedAt": "2026-10-30T07:09:34.474765Z",
+        "updatedAt": "2026-10-30T07:09:34.474765Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.dyndns-server.noon-ai/video-mosaic-masking-mcp",
+      "description": "Automatic hosted video mosaic of faces/people/plates (\ub3d9\uc601\uc0c1 \ubaa8\uc790\uc774\ud06c); reversible, $3/video. NoonAI",
+      "title": "Automatic Video Mosaic & Masking MCP (\ub3d9\uc601\uc0c1 \ubaa8\uc790\uc774\ud06c), Restore Original \u2014 NoonAI DIS",
+      "version": "0.1.16",
+      "websiteUrl": "https://noon-ai.dyndns-server.com/mcp-proof",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://noon-ai.dyndns-server.com/video-mosaic-masking-mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-30T07:09:35.069556Z",
+        "publishedAt": "2026-10-30T07:09:35.069556Z",
+        "updatedAt": "2026-10-30T07:09:35.069556Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.dynomatix/company",
+      "description": "Enquiries for Dynomatix, a software practice.",
+      "title": "Dynomatix",
+      "version": "1.0.0",
+      "websiteUrl": "https://dynomatix.com",
+      "icons": [
+        {
+          "src": "https://dynomatix.com/assets/favicon.svg",
+          "mimeType": "image/svg+xml"
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://dynomatix.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-14T14:51:31.274533Z",
+        "publishedAt": "2026-08-14T14:51:31.274533Z",
+        "updatedAt": "2026-08-14T14:51:31.274533Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.dyslexiasteps/dyslexia-steps",
+      "description": "Phonics word lists and reading-game catalogue for dyslexia support. Read-only.",
+      "title": "Dyslexia Steps",
+      "repository": {
+        "url": "https://github.com/Dyslexia-Steps/dyslexiasteps-mcp",
+        "source": "github"
+      },
+      "version": "0.1.0",
+      "websiteUrl": "https://dyslexiasteps.com/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.dyslexiasteps.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-26T13:32:35.575003Z",
+        "publishedAt": "2026-10-26T13:32:35.575003Z",
+        "updatedAt": "2026-10-26T13:32:35.575003Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.dzgapp/mint",
+      "description": "Inspect Mac and AI-tool storage, explain file activity, and clean safely with Trash and Undo.",
+      "title": "Mint \u2014 Safe Mac Storage Actions",
+      "repository": {
+        "url": "https://github.com/dzg-studio/mcp-server-mint",
+        "source": "github"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://mint.dzgapp.com/docs#cli-mcp",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@dzg-studio/mcp-server-mint",
+          "version": "1.0.1",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-03T22:27:44.546921Z",
+        "publishedAt": "2026-09-03T22:27:44.546921Z",
+        "updatedAt": "2026-09-03T22:27:44.546921Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.dzpage/dayz",
+      "description": "DayZ items, loot spawns, infected, game updates, community servers and server config checks",
+      "title": "DZPage DayZ Tools",
+      "version": "1.156.0",
+      "websiteUrl": "https://dzpage.com/en/api#mcp",
+      "icons": [
+        {
+          "src": "https://dzpage.com/logo.svg",
+          "mimeType": "image/svg+xml"
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://dzpage.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-08T12:19:40.68171Z",
+        "publishedAt": "2026-10-08T12:19:40.68171Z",
+        "updatedAt": "2026-10-08T12:19:40.68171Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.e-esim/esim-catalog",
+      "description": "Search travel eSIM data plans worldwide with live prices, plan details and a buy link.",
+      "title": "e-eSIM Catalog",
+      "version": "2.0.6",
+      "websiteUrl": "https://e-esim.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://e-esim.com/wp-json/e-esim/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-29T17:56:51.301941Z",
+        "publishedAt": "2026-09-29T17:56:51.301941Z",
+        "updatedAt": "2026-09-29T17:56:51.301941Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.e-labus/health",
+      "description": "Your lab results and health record in Claude: trends, retests, meds, conditions and symptoms.",
+      "title": "E-Labus",
+      "version": "1.1.0",
+      "websiteUrl": "https://www.e-labus.com/claude",
+      "icons": [
+        {
+          "src": "https://www.e-labus.com/app-icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.e-labus.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-22T01:09:42.026698Z",
+        "publishedAt": "2026-10-22T01:09:42.026698Z",
+        "updatedAt": "2026-10-22T01:09:42.026698Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.e2llm/element-to-llm",
+      "description": "E2LLM gives your AI eyes and hands in a real browser: structured perception (SiFR) plus action.",
+      "title": "E2LLM",
+      "repository": {
+        "url": "https://github.com/e2llm/e2llm-sifr",
+        "source": "github"
+      },
+      "version": "1.5.78",
+      "websiteUrl": "https://e2llm.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.e2llm.com/mcp"
+        },
+        {
+          "type": "streamable-http",
+          "url": "https://api.e2llm.com/mcp",
+          "headers": [
+            {
+              "description": "Bearer mk_\u2026 static API key from your e2llm.com dashboard. Use this api. endpoint for programmatic / CI clients; use the mcp. endpoint above for interactive browser OAuth login (no header required).",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ],
+      "_meta": {
+        "io.modelcontextprotocol.registry/publisher-provided": {
+          "auth": "Two connection modes on the same server: OAuth (interactive browser login) at mcp.e2llm.com/mcp, and static Bearer mk_ API keys at api.e2llm.com/mcp.",
+          "format": "SiFR \u2014 Salience-Indexed, Flat Relations (see SIFR.md)",
+          "skill": "Working-discipline skill for models driving these tools: skills/sifr/SKILL.md (https://github.com/e2llm/e2llm-sifr/blob/main/skills/sifr/SKILL.md) \u2014 verify-don't-guess, stale-ID re-verification, cursor draining, untrusted page content. Claude Code: copy into ~/.claude/skills/; other clients: include in agent instructions.",
+          "tools": [
+            {
+              "annotations": {
+                "destructiveHint": false,
+                "openWorldHint": true,
+                "readOnlyHint": true
+              },
+              "description": "Capture a browser page as structured SIFR data \u2014 front-loaded summary plus high-salience nodes.",
+              "name": "sifr_capture",
+              "title": "Capture Page"
+            },
+            {
+              "annotations": {
+                "destructiveHint": false,
+                "openWorldHint": false,
+                "readOnlyHint": true
+              },
+              "description": "Filter the current session without re-capturing \u2014 by tag, salience, text, selector, or section.",
+              "name": "query",
+              "title": "Query Session"
+            },
+            {
+              "annotations": {
+                "destructiveHint": false,
+                "openWorldHint": false,
+                "readOnlyHint": true
+              },
+              "description": "Read a captured page as markdown text in reading order, wrapped in untrusted-content tags.",
+              "name": "read_page",
+              "title": "Read Page Text"
+            },
+            {
+              "annotations": {
+                "destructiveHint": false,
+                "openWorldHint": false,
+                "readOnlyHint": true
+              },
+              "description": "Full details for one element: real CSS selector, text, attributes, styles, layout, relations.",
+              "name": "inspect",
+              "title": "Inspect Element"
+            },
+            {
+              "annotations": {
+                "destructiveHint": false,
+                "openWorldHint": false,
+                "readOnlyHint": true
+              },
+              "description": "List open browser tabs with their IDs, URLs, and titles.",
+              "name": "list_tabs",
+              "title": "List Tabs"
+            },
+            {
+              "annotations": {
+                "destructiveHint": true,
+                "openWorldHint": false,
+                "readOnlyHint": false
+              },
+              "description": "Close a browser tab by ID. Irreversible; may require approval per session posture.",
+              "name": "close_tab",
+              "title": "Close Tab"
+            },
+            {
+              "annotations": {
+                "destructiveHint": false,
+                "openWorldHint": true,
+                "readOnlyHint": true
+              },
+              "description": "Non-state-changing: scroll, hover, or recapture a subtree \u2014 returns only the diff.",
+              "name": "explore",
+              "title": "Explore"
+            },
+            {
+              "annotations": {
+                "destructiveHint": true,
+                "openWorldHint": true,
+                "readOnlyHint": false
+              },
+              "description": "One state-changing action on the live page: click, type, select, navigate, or drag. May require approval.",
+              "name": "act",
+              "title": "Act"
+            },
+            {
+              "annotations": {
+                "destructiveHint": true,
+                "openWorldHint": true,
+                "readOnlyHint": false
+              },
+              "description": "Execute multiple actions in sequence, then observe mutations once. May require approval.",
+              "name": "batch_act",
+              "title": "Batch Act"
+            }
+          ]
+        }
+      }
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-24T11:29:02.685825Z",
+        "publishedAt": "2026-07-24T11:29:02.685825Z",
+        "updatedAt": "2026-07-24T11:29:02.685825Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.eachspy/eachspy",
+      "description": "Facebook ads library with spend estimates and advertiser stats, plus Shopify product research.",
+      "title": "Eachspy",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.eachspy.com/features/mcp-connector/",
+      "icons": [
+        {
+          "src": "https://www.eachspy.com/static/favicon/apple-touch-icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "180x180"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.eachspy.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-21T08:13:05.101464Z",
+        "publishedAt": "2026-10-21T08:13:05.101464Z",
+        "updatedAt": "2026-10-21T08:13:05.101464Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+      "name": "com.eacpartners/concierge",
+      "description": "Public tools for EAC Partners: offerings, insights, and appointment requests.",
+      "version": "0.1.0",
+      "websiteUrl": "https://eacpartners.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://concierge.eacpartners.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-03T11:09:15.39149Z",
+        "publishedAt": "2026-11-03T11:09:15.39149Z",
+        "updatedAt": "2026-11-03T11:09:15.39149Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.eacpartners/genealogy",
+      "description": "Reads and edits local GEDCOM/BegatAll over stdio. Living people shown unless you hide them.",
+      "title": "Genealogy",
+      "version": "1.4.1",
+      "websiteUrl": "https://eacpartners.com/genealogy-mcp",
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "@eacpartners/genealogy-mcp",
+          "version": "1.4.1",
+          "runtimeHint": "npx",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Set to 1 to hide living people in read tools. true, yes, and on also hide them. Leave unset to keep the default, which shows living people. GENEALOGY_HIDE_LIVING is the same switch. This stays on your computer. export_session still leaves living people out unless you opt out there.",
+              "name": "GENEALOGY_MCP_HIDE_LIVING"
+            },
+            {
+              "description": "Older show switch. Set to 1 to include living people in read tools and to keep them in export_session. Set to 0 to hide them. A hide switch wins when both are set. Leave unset to use the hide switch, the config file, or the default.",
+              "name": "GENEALOGY_MCP_SHOW_LIVING"
+            },
+            {
+              "description": "Set to 1 to allow commit_session and restore_backup to replace a file on this computer after confirmation. Leave unset to keep the default, which refuses those writes.",
+              "name": "GENEALOGY_MCP_ALLOW_COMMIT"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-01T22:10:54.049903Z",
+        "publishedAt": "2026-11-01T22:10:54.049903Z",
+        "updatedAt": "2026-11-01T22:10:54.049903Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.eaglevirtual/stablecoin-freeze-tracker",
+      "description": "USDT & USDC blacklist, freeze and seizure records for any wallet. Dated, cited, no risk scores.",
+      "title": "Eagle Virtual USDT & USDC Blacklist Tracker",
+      "version": "1.1.4",
+      "websiteUrl": "https://eaglevirtual.com/mcp",
+      "icons": [
+        {
+          "src": "https://eaglevirtual.com/brand/logo/png/icon-light/ev-icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ],
+          "theme": "light"
+        },
+        {
+          "src": "https://eaglevirtual.com/brand/logo/png/icon-dark/ev-icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ],
+          "theme": "dark"
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.eaglevirtual.com/mcp"
+        }
+      ],
+      "_meta": {
+        "io.modelcontextprotocol.registry/publisher-provided": {
+          "com.eaglevirtual": {
+            "authentication": "None to start. All six tools only read, and one network address may make 100 calls a day with no account. A caller may send an Eagle Virtual API key as the bearer token to use that key's daily allowance. The events behind a month's totals are part of the Business plan.",
+            "positioning": "Reference data, not advice: dated on-chain records of actions stablecoin issuers took, a citation URL to eaglevirtual.com on every record, no risk scores or opinions about any address.",
+            "protocol_version": "2025-11-25",
+            "source": "workers/mcp/server.json in the ev-simple repository (private; no repository field on purpose)",
+            "tools": [
+              {
+                "name": "get_address_status",
+                "purpose": "One wallet address in, every recorded blacklisting, freeze, seizure or on-chain sanctions listing against it out, with the transaction and block for each. Needs no account."
+              },
+              {
+                "name": "get_token_statistics",
+                "purpose": "Counts of recorded events by coin, blockchain, month or year. Counts and dates only; no addresses. By coin it returns the 20 coins with the most recorded events unless a limit asks for more, and says how many it left out."
+              },
+              {
+                "name": "get_token_policy",
+                "purpose": "For a coin, which restriction controls the issuing company has actually used, how many times, and the first and most recent dates. No addresses."
+              },
+              {
+                "name": "get_coverage",
+                "purpose": "The blockchains and coins covered, the date of the most recent recorded event, and any lane that cannot currently be vouched for."
+              },
+              {
+                "name": "list_freeze_events",
+                "purpose": "The published feed of recent events \u2014 the same rows eaglevirtual.com shows \u2014 filterable by coin, blockchain, kind and date. A published sample that cannot be paged past. Give it a month for that month's totals, and the events behind them on the Business plan."
+              },
+              {
+                "name": "get_biggest",
+                "purpose": "The largest recorded blacklistings, freezes, seizures and releases, ranked by amount. The default view ranks the 25 latest recorded events and names the wallet; scope all_time covers the whole record back to 2015 and names no wallet, transaction or block."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-05T00:27:30.669305Z",
+        "publishedAt": "2026-10-05T00:27:30.669305Z",
+        "updatedAt": "2026-10-05T00:27:30.669305Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.eancheck/barcode-tools",
+      "description": "GS1 check digits, code identification, UPC-E and ISBN conversion, GTIN repair and barcodes.",
+      "title": "EAN Check barcode tools",
+      "version": "1.0.0",
+      "websiteUrl": "https://eancheck.com",
+      "icons": [
+        {
+          "src": "https://eancheck.com/images/logo.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://eancheck.com/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-07T11:02:44.575493Z",
+        "publishedAt": "2026-11-07T11:02:44.575493Z",
+        "updatedAt": "2026-11-07T11:02:44.575493Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.earnidle/mcp",
+      "description": "Web scraping, inference, DNS, monitoring from residential IPs \u2014 pay per request in USDC",
+      "title": "IDLE Protocol",
+      "version": "1.0.5",
+      "websiteUrl": "https://earnidle.com",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@idleprotocol/mcp",
+          "version": "1.0.1",
+          "runtimeHint": "npx",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-06-04T05:44:45.446223Z",
+        "publishedAt": "2026-06-04T05:44:45.446223Z",
+        "updatedAt": "2026-06-04T05:44:45.446223Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.earnings-watcher/mcp",
+      "description": "Options-implied earnings moves, 10y implied-vs-actual history, IV rush/crush, scanner, simulator.",
+      "title": "EarningsWatcher",
+      "version": "1.0.1",
+      "websiteUrl": "https://earnings-watcher.com/mcp",
+      "icons": [
+        {
+          "src": "https://earnings-watcher.com/icons/ew-mcp-icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://earnings-watcher-mcp-611514391657.us-central1.run.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-28T15:05:07.576579Z",
+        "publishedAt": "2026-09-28T15:05:07.576579Z",
+        "updatedAt": "2026-09-28T15:05:07.576579Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.earningsfeed/mcp",
+      "description": "SEC filings and insider trades in real-time. 10-K, 10-Q, 8-K, Form 4, and company lookup.",
+      "title": "Earnings Feed",
+      "version": "1.0.0",
+      "websiteUrl": "https://earningsfeed.com/mcp",
+      "icons": [
+        {
+          "src": "https://earningsfeed.com/icon-48.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "48x48"
+          ]
+        },
+        {
+          "src": "https://earningsfeed.com/icon-96.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "96x96"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://earningsfeed.com/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-01-04T16:52:07.965678Z",
+        "publishedAt": "2026-01-04T16:52:07.965678Z",
+        "updatedAt": "2026-01-04T16:52:07.965678Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.earthdroids/handlewise",
+      "description": "Turn photos of your items into scheduled eBay listings on your own eBay seller account.",
+      "title": "HandleWise AI",
+      "version": "1.0.1",
+      "websiteUrl": "https://earthdroids.com/handlewise/",
+      "icons": [
+        {
+          "src": "https://earthdroids.com/handlewise-icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "256x256"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://earthdroids.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-22T08:02:47.996278Z",
+        "publishedAt": "2026-10-22T08:02:47.996278Z",
+        "updatedAt": "2026-10-22T08:02:47.996278Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.easiapiai/llm-prices",
+      "description": "LLM API prices by seller: cheapest offer per model, list prices, cost estimates, agent Q&A board.",
+      "title": "easiapiai - LLM API prices",
+      "version": "1.1.0",
+      "websiteUrl": "https://easiapiai.com/mcp.html",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://easiapiai.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-19T13:55:07.472367Z",
+        "publishedAt": "2026-10-19T13:55:07.472367Z",
+        "updatedAt": "2026-10-19T13:55:07.472367Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.easyappsecom/ea-ecommerce-apps",
+      "description": "Stats, setup, drafts and opt-in publishing for the EA Shopify apps: bundles, popups, cart, bars.",
+      "title": "EA Ecommerce Apps",
+      "version": "1.0.0",
+      "websiteUrl": "https://easyappsecom.com/connector",
+      "icons": [
+        {
+          "src": "https://easyappsecom.com/images/easyapps-logo-160.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "160x160"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.easyappsecom.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-05T22:57:48.123163Z",
+        "publishedAt": "2026-11-05T22:57:48.123163Z",
+        "updatedAt": "2026-11-05T22:57:48.123163Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.easydocforms/easydocforms-mcp",
+      "description": "Healthcare intake for agents: import blank PDFs, create patient fill links, fetch completed PDFs.",
+      "title": "EasyDocForms",
+      "repository": {
+        "url": "https://github.com/easydocforms/easydocforms-mcp",
+        "source": "github"
+      },
+      "version": "0.1.2",
+      "websiteUrl": "https://easydocforms.com",
+      "packages": [
+        {
+          "registryType": "oci",
+          "identifier": "ghcr.io/easydocforms/easydocforms-mcp:0.1.2",
+          "runtimeHint": "docker",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "EasyDocForms Partner API key (edfk_live_*), created under Settings \u2192 Integrations \u2192 Partner API",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "EASYDOCFORMS_API_KEY"
+            },
+            {
+              "description": "Optional API base URL override",
+              "name": "EASYDOCFORMS_BASE_URL"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-13T20:09:03.683208Z",
+        "publishedAt": "2026-08-13T20:09:03.683208Z",
+        "updatedAt": "2026-08-13T20:09:03.683208Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.easyemailverification/email-verification",
+      "description": "Verify email addresses before you send: single, batch (50) and bulk lists (10,000).",
+      "title": "Easy Email Verification",
+      "version": "0.3.0",
+      "websiteUrl": "https://www.easyemailverification.com/en-US/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.easyemailverification.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-06T22:58:54.165527Z",
+        "publishedAt": "2026-10-06T22:58:54.165527Z",
+        "updatedAt": "2026-10-06T22:58:54.165527Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.easygroupflights/easygroupflights",
+      "description": "Group flight quotes for parties of 10 or more passengers.",
+      "title": "easygroupflights",
+      "repository": {
+        "url": "https://github.com/codeblockssk/easygroupflights-mcp",
+        "source": "github"
+      },
+      "version": "2.1.0",
+      "websiteUrl": "https://easygroupflights.com",
+      "icons": [
+        {
+          "src": "https://easygroupflights.com/apple-touch-icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "180x180"
+          ]
+        },
+        {
+          "src": "https://easygroupflights.com/favicon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "64x64"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.easygroupflights.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-13T05:00:19.397193Z",
+        "publishedAt": "2026-10-13T05:00:19.397193Z",
+        "updatedAt": "2026-10-13T05:00:19.397193Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-10-17/server.schema.json",
+      "name": "com.easykmarket.vote/votebox-law",
+      "description": "Korean e-voting statutes, quorum judgement, fee quote and consult request. 10 tools, no auth.",
+      "title": "\ud22c\ud45c\ud568 \u2014 \uc804\uc790\ud22c\ud45c \ubc95\ub839 \uc790\ub8cc (Korean e-voting statutes, quorum & consult)",
+      "version": "1.2.0",
+      "websiteUrl": "https://vote.easykmarket.com/developers",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://vote.easykmarket.com/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-03T05:25:29.455849Z",
+        "publishedAt": "2026-11-03T05:25:29.455849Z",
+        "updatedAt": "2026-11-03T05:25:29.455849Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.easymcpai/easy-mcp-ai-wordpress",
+      "description": "Connect any AI to WordPress \u2014 content, media, SEO, WooCommerce, GA4, Search Console. 242 tools.",
+      "title": "Easy MCP AI \u2014 Connector for Claude, ChatGPT & SEO Data",
+      "version": "2.4.0",
+      "websiteUrl": "https://wordpress.org/plugins/easy-mcp-ai/",
+      "icons": [
+        {
+          "src": "https://easymcpai.com/favicon.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://{site_domain}/wp-json/easy-mcp-ai/v1/mcp",
+          "variables": {
+            "site_domain": {
+              "description": "Your WordPress site's domain, e.g. mysite.com",
+              "isRequired": true
+            }
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-05T15:58:18.342913Z",
+        "publishedAt": "2026-11-05T15:58:18.342913Z",
+        "updatedAt": "2026-11-05T15:58:18.342913Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+      "name": "com.easyonward/mcp-server",
+      "description": "Passport visa, entry & transit requirements for any country pair, with official government sources.",
+      "repository": {
+        "url": "https://github.com/EasyOnward/mcp-server",
+        "source": "github"
+      },
+      "version": "0.2.0",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@easyonward/mcp-server",
+          "version": "0.2.0",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.easyonward.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-02T16:23:09.587227Z",
+        "publishedAt": "2026-07-02T16:23:09.587227Z",
+        "updatedAt": "2026-07-02T16:23:09.587227Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+      "name": "com.easyparser/easyparser",
+      "description": "Real-time Amazon product, seller, and search data for AI agents across 21 marketplaces.",
+      "title": "Easyparser \u2014 Amazon Product & Seller Data",
+      "repository": {
+        "url": "https://github.com/easyparser-com/mcp-easyparser",
+        "source": "github"
+      },
+      "version": "1.3.1",
+      "websiteUrl": "https://easyparser.com",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "easyparser-mcp",
+          "version": "1.3.1",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Your Easyparser API key. Get a free key at https://app.easyparser.com/signup",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "EASYPARSER_API_KEY"
+            }
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.easyparser.com/mcp",
+          "headers": [
+            {
+              "description": "Bearer <your Easyparser API key>. Get a free key at https://app.easyparser.com/signup",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-02T14:32:44.86439Z",
+        "publishedAt": "2026-09-02T14:32:44.86439Z",
+        "updatedAt": "2026-09-02T14:32:44.86439Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.easyruncraft/mcp",
+      "description": "Online office suite for AI agents: edit docs, sheets, slides and PDFs in browser or via MCP.",
+      "title": "EasyRunCraft MCP",
+      "repository": {
+        "url": "https://github.com/eastling/easyruncraft-mcp",
+        "source": "github",
+        "id": "1449087842"
+      },
+      "version": "0.1.0",
+      "websiteUrl": "https://easyruncraft.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://easyruncraft.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-08T04:19:13.704353Z",
+        "publishedAt": "2026-11-08T04:19:13.704353Z",
+        "updatedAt": "2026-11-08T04:19:13.704353Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.easyship/mcp",
+      "description": "Connect Easyship to compare rates, create shipments, buy labels, and track packages globally.",
+      "title": "Easyship",
+      "repository": {
+        "url": "https://github.com/easyship/easyship-mcp-plugin",
+        "source": "github"
+      },
+      "version": "0.6.8",
+      "packages": [
+        {
+          "registryType": "pypi",
+          "identifier": "easyship-mcp",
+          "version": "0.6.8",
+          "runtimeHint": "uvx",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Your Easyship API access token. Get it from https://app.easyship.com/connect/api",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "EASYSHIP_API_ACCESS_TOKEN"
+            }
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.easyship.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-06T10:24:16.860664Z",
+        "publishedAt": "2026-11-06T10:24:16.860664Z",
+        "updatedAt": "2026-11-06T10:24:16.860664Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.eatloyalist/restaurant-reservations",
+      "description": "Book tables at restaurants on the Loyalist network. No login; read availability, then book.",
+      "title": "Loyalist Reservations",
+      "version": "1.0.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://agent.eatloyalist.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-14T02:19:32.758684Z",
+        "publishedAt": "2026-10-14T02:19:32.758684Z",
+        "updatedAt": "2026-10-14T02:19:32.758684Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.eatmundo/dishes",
+      "description": "Cross-cuisine dish equivalence with shared-ingredient evidence: nearly 2,000 dishes, 26 cuisines.",
+      "title": "eatmundo",
+      "version": "0.1.1",
+      "websiteUrl": "https://www.eatmundo.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.eatmundo.com/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-28T20:30:04.027595Z",
+        "publishedAt": "2026-10-28T20:30:04.027595Z",
+        "updatedAt": "2026-10-28T20:30:04.027595Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.eccaai/ecca",
+      "description": "Compare engine claims, inspect dissent and check study evidence for student questions.",
+      "title": "ECCA",
+      "version": "1.0.1",
+      "websiteUrl": "https://eccaai.com/developers#code-mcp",
+      "icons": [
+        {
+          "src": "https://eccaai.com/assets/brand/icon-eccaai-512.png?v=ed97a0f6f5c8",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        },
+        {
+          "src": "https://eccaai.com/assets/brand/icon-eccaai-192.png?v=04324111eaf3",
+          "mimeType": "image/png",
+          "sizes": [
+            "192x192"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://eccaai.com/api/mcp",
+          "headers": [
+            {
+              "description": "Required for tools/call: Bearer ecca_sk_... Get a free key in one click after signing in at https://eccaai.com/developers. initialize, ping and tools/list work without it.",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ],
+      "_meta": {
+        "io.modelcontextprotocol.registry/publisher-provided": {
+          "authentication": "Authorization: Bearer ecca_sk_ required for every tools/call; initialize, ping and tools/list are keyless",
+          "documentation": "https://eccaai.com/developers#code-mcp",
+          "keyRequiredTools": [
+            "ecca_synthesize",
+            "ecca_pre_mortem",
+            "ecca_decision_tournament",
+            "ecca_bts_divergence",
+            "ecca_refine",
+            "ecca_research",
+            "ecca_verify",
+            "ecca_psychology",
+            "ecca_learning",
+            "ecca_nutrition",
+            "ecca_money"
+          ],
+          "pricing": "Free key uses the daily solve allowance per account; Pro key uses the account usage window",
+          "privacyPolicy": "https://eccaai.com/privacy",
+          "tools": [
+            "ecca_synthesize",
+            "ecca_pre_mortem",
+            "ecca_decision_tournament",
+            "ecca_bts_divergence",
+            "ecca_refine",
+            "ecca_research",
+            "ecca_verify",
+            "ecca_psychology",
+            "ecca_learning",
+            "ecca_nutrition",
+            "ecca_money"
+          ]
+        }
+      }
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-09T00:55:37.044038Z",
+        "publishedAt": "2026-10-09T00:55:37.044038Z",
+        "updatedAt": "2026-10-09T00:55:37.044038Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.echo-mem/echo-mem",
+      "description": "Shared memory for AI agents, as a graph in your own Postgres. Writes never call an LLM.",
+      "title": "Echo Memory",
+      "repository": {
+        "url": "https://github.com/echo-mem/echo-mem",
+        "source": "github"
+      },
+      "version": "0.5.7",
+      "websiteUrl": "https://echo-mem.com",
+      "packages": [
+        {
+          "registryType": "pypi",
+          "identifier": "echo-mem",
+          "version": "0.5.7",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Postgres connection string. `echo-memory quickstart` starts a suitable database and prints this.",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "ECHO_MEMORY_DATABASE_URL"
+            },
+            {
+              "description": "Whose memory this is. Scopes every read and write.",
+              "isRequired": true,
+              "name": "ECHO_MEMORY_USER_ID"
+            },
+            {
+              "description": "Which tool is writing: claude-code, cursor, codex, claude-desktop. Recorded on every fact, and what makes a cross-tool recall visible afterwards.",
+              "isRequired": true,
+              "name": "ECHO_MEMORY_AGENT_ID"
+            }
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.echo-mem.com/mcp",
+          "headers": [
+            {
+              "description": "Bearer <key>, from https://app.echo-mem.com \u2014 the hosted option, which needs no local database.",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-07T19:24:45.402973Z",
+        "publishedAt": "2026-11-07T19:24:45.402973Z",
+        "updatedAt": "2026-11-07T19:24:45.402973Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.echo-ui/mcp",
+      "description": "A tactile React component library, and the design system that keeps your AI agent on-brand.",
+      "title": "Echo UI",
+      "repository": {
+        "url": "https://github.com/NourMtir0722/echo-ui",
+        "source": "github",
+        "id": "1425879538",
+        "subfolder": "mcp"
+      },
+      "version": "0.3.5",
+      "websiteUrl": "https://echo-ui.com/docs/mcp",
+      "icons": [
+        {
+          "src": "https://echo-ui.com/icon.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.echo-ui.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-07T02:06:52.046594Z",
+        "publishedAt": "2026-11-07T02:06:52.046594Z",
+        "updatedAt": "2026-11-07T02:06:52.046594Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.echosaw/mcp-server",
+      "description": "Media intelligence analysis for audio, video, and images via the Echosaw MCP server.",
+      "repository": {
+        "url": "https://github.com/Orange-Sky-Software-Inc/echosaw-com",
+        "source": "github"
+      },
+      "version": "2.2.0",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@echosaw/mcp-server",
+          "version": "2.2.0",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Your Echosaw API key",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "ECHOSAW_API_KEY"
+            },
+            {
+              "description": "API base URL (override for staging)",
+              "format": "string",
+              "name": "ECHOSAW_API_URL"
+            }
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.echosaw.com"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-04T13:19:28.880875Z",
+        "publishedAt": "2026-11-04T13:19:28.880875Z",
+        "updatedAt": "2026-11-04T13:19:28.880875Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.eckari/capabilities",
+      "description": "Deterministic company, entity and location lookups for agents - per call, x402 or API key.",
+      "version": "0.1.0",
+      "websiteUrl": "https://eckari.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.eckari.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-18T12:06:17.359959Z",
+        "publishedAt": "2026-08-18T12:06:17.359959Z",
+        "updatedAt": "2026-08-18T12:06:17.359959Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.eclipsemission/eclipsemission",
+      "description": "2027 eclipse costs: independent, not affiliated with IMXP (The Eclipse Missions, EclipseSeekers)",
+      "title": "EclipseMission",
+      "version": "1.1.1",
+      "websiteUrl": "https://eclipsemission.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://eclipsemission.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-08T11:03:14.110259Z",
+        "publishedAt": "2026-11-08T11:03:14.110259Z",
+        "updatedAt": "2026-11-08T11:03:14.110259Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.eclipsesource/review-guard",
+      "description": "Safety boundary for agent written GitHub PR reviews: pending and invisible, submitting is opt-in",
+      "title": "ReviewGuard",
+      "repository": {
+        "url": "https://github.com/eclipsesource/review-guard",
+        "source": "github"
+      },
+      "version": "0.3.0",
+      "websiteUrl": "https://github.com/eclipsesource/review-guard#readme",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@eclipsesource/review-guard-mcp",
+          "version": "0.3.0",
+          "runtimeHint": "npx",
+          "transport": {
+            "type": "stdio"
+          },
+          "packageArguments": [
+            {
+              "type": "positional",
+              "value": "--stdio",
+              "valueHint": "stdio"
+            }
+          ],
+          "environmentVariables": [
+            {
+              "description": "GitHub token with pull request read and write access. Can be left unset if the GitHub CLI is authenticated, because the server then falls back to gh auth token.",
+              "isSecret": true,
+              "name": "GITHUB_TOKEN"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-14T12:42:53.665999Z",
+        "publishedAt": "2026-08-14T12:42:53.665999Z",
+        "updatedAt": "2026-08-14T12:42:53.665999Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.ecocitizenz/trust-mcp",
+      "description": "Read-only ECZ-ID Business Passport state lookup via the public ECZ-ID Resolver. Reports state only.",
+      "title": "ECZ-ID Trust MCP",
+      "version": "0.2.0",
+      "websiteUrl": "https://developers.ecocitizenz.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://trust-mcp.ecocitizenz.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-26T19:41:33.840176Z",
+        "publishedAt": "2026-08-26T19:41:33.840176Z",
+        "updatedAt": "2026-08-26T19:41:33.840176Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.ecoexperten/energieausweis",
+      "description": "Order official German energy certificates (Energieausweis) from chat \u2014 on invoice, 1-2 days.",
+      "title": "ecoExperten Energieausweis",
+      "version": "1.0.0",
+      "websiteUrl": "https://ecoexperten.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.ecoexperten.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-04T07:27:34.156218Z",
+        "publishedAt": "2026-07-04T07:27:34.156218Z",
+        "updatedAt": "2026-07-04T07:27:34.156218Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.ecomdly/ecomdly",
+      "description": "E-commerce skills for AI agents: feeds, Google Shopping, GA4. Your private Brain when signed in.",
+      "title": "ecomdly",
+      "version": "1.0.0",
+      "websiteUrl": "https://ecomdly.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://ecomdly.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-04T21:23:23.448761Z",
+        "publishedAt": "2026-10-04T21:23:23.448761Z",
+        "updatedAt": "2026-10-04T21:23:23.448761Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.ecomhint/store-audit",
+      "description": "Ecommerce store audits: read findings with evidence and fix steps, track tasks, run new audits.",
+      "title": "Ecomhint",
+      "version": "1.0.0",
+      "websiteUrl": "https://ecomhint.com/mcp",
+      "icons": [
+        {
+          "src": "https://ecomhint.com/brand/ecomhint-icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://ecomhint.com/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-19T17:06:47.338699Z",
+        "publishedAt": "2026-10-19T17:06:47.338699Z",
+        "updatedAt": "2026-10-19T17:06:47.338699Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.ecommercedataapi/ecommerce-data-api",
+      "description": "Amazon product, keyword, sales estimate, reverse ASIN, market and trademark data for agents.",
+      "title": "Ecommerce Data API",
+      "repository": {
+        "url": "https://github.com/ecommercedataapi/ecommerce-data-api",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://ecommercedataapi.com/en/docs/mcp",
+      "icons": [
+        {
+          "src": "https://ecommercedataapi.com/logo.svg",
+          "mimeType": "image/svg+xml"
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://ecommercedataapi.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-15T01:05:44.256477Z",
+        "publishedAt": "2026-10-15T01:05:44.256477Z",
+        "updatedAt": "2026-10-15T01:05:44.256477Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.ecommerceimageoptimizer/image-optimizer",
+      "description": "Resize, compress, convert, watermark and SEO-tag e-commerce product images from a public URL.",
+      "title": "Ecom Image Optimizer",
+      "repository": {
+        "url": "https://github.com/brkmehdi/ImageOptimizerforEcom",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://ecommerceimageoptimizer.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://ecommerceimageoptimizer.com/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-20T20:13:26.18005Z",
+        "publishedAt": "2026-08-20T20:13:26.18005Z",
+        "updatedAt": "2026-08-20T20:13:26.18005Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.ecomscout/ecomscout",
+      "description": "Shopify store intelligence: traffic, revenue, products, competitors, trends across 1M+ stores.",
+      "title": "EcomScout",
+      "version": "1.0.0",
+      "websiteUrl": "https://ecomscout.com/products/mcp",
+      "icons": [
+        {
+          "src": "https://ecomscout.com/favicon-128x128.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "128x128"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.ecomscout.com/mcp"
+        }
+      ],
+      "_meta": {
+        "io.modelcontextprotocol.registry/publisher-provided": {
+          "docs": "https://app.ecomscout.com/docs#mcp",
+          "tool": "ecomscout-mcp/scripts/publish-registry.sh",
+          "useCases": "https://mcp.ecomscout.com/use-cases.json"
+        }
+      }
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-16T14:41:59.267056Z",
+        "publishedAt": "2026-10-16T14:41:59.267056Z",
+        "updatedAt": "2026-10-16T14:41:59.267056Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.ecomwith/commerce-desk",
+      "description": "Break-even ROAS and profit calculators, UTM link builder, and Ecomwith tutorial and report search.",
+      "title": "Ecomwith Commerce Desk",
+      "version": "1.0.1",
+      "websiteUrl": "https://ecomwith.com/tools",
+      "icons": [
+        {
+          "src": "https://ecomwith.com/favicon.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://ecomwith.com/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-20T11:19:04.67836Z",
+        "publishedAt": "2026-10-20T11:19:04.67836Z",
+        "updatedAt": "2026-10-20T11:19:04.67836Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.economicium/mcp",
+      "description": "Free finance and trading calculators as MCP tools: risk/reward, RMD, Coast FIRE, inflation.",
+      "repository": {
+        "url": "https://github.com/Economicium-stack/economicium",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://economicium.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://economicium-mcp.economicium.workers.dev/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-10T19:48:44.168721Z",
+        "publishedAt": "2026-08-10T19:48:44.168721Z",
+        "updatedAt": "2026-08-10T19:48:44.168721Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.economicsapi/mcp",
+      "description": "Macroeconomic, trade, FX and commodity data for 50 countries over one MCP endpoint.",
+      "title": "EconomicsAPI",
+      "version": "1.0.0",
+      "websiteUrl": "https://economicsapi.com/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.economicsapi.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-02T16:24:05.701074Z",
+        "publishedAt": "2026-11-02T16:24:05.701074Z",
+        "updatedAt": "2026-11-02T16:24:05.701074Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.ecourtsindia/mcp",
+      "description": "Indian court data for AI: 27.6 Cr cases, orders, cause lists, Supreme Court to tribunals, statutes",
+      "title": "eCourtsIndia",
+      "repository": {
+        "url": "https://github.com/rchtjn2-gif/ecourtsindia-mcp-server",
+        "source": "github"
+      },
+      "version": "4.51.0",
+      "websiteUrl": "https://mcp.ecourtsindia.com",
+      "icons": [
+        {
+          "src": "https://raw.githubusercontent.com/rchtjn2-gif/ecourtsindia-mcp-server/main/logo.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "256x256"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.ecourtsindia.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-11T04:23:46.996342Z",
+        "publishedAt": "2026-10-11T04:23:46.996342Z",
+        "updatedAt": "2026-10-11T04:23:46.996342Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.ecovanmove/booking",
+      "description": "Moving estimates, box rentals, and delivery in BC. Requires Eco Van Move account (OAuth or token).",
+      "title": "Eco Van Move Booking",
+      "repository": {
+        "url": "https://github.com/farid-trip2/ecovanmove",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://ecovanmove.com/account/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://ecovanmove.com/mcp/booking",
+          "headers": [
+            {
+              "description": "Bearer token from /account/mcp (personal access token or OAuth).",
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-05-31T11:50:19.225213Z",
+        "publishedAt": "2026-05-31T11:50:19.225213Z",
+        "updatedAt": "2026-05-31T11:50:19.225213Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.ecuafact.docsapi/documentacion",
+      "description": "Documentaci\u00f3n de Ecuafact API: facturaci\u00f3n electr\u00f3nica del SRI de Ecuador. Sin credenciales.",
+      "title": "Ecuafact API \u00b7 Documentaci\u00f3n",
+      "version": "1.0.0",
+      "websiteUrl": "https://docsapi.ecuafact.com/v1/guias/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://docsapi.ecuafact.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-20T22:53:18.459038Z",
+        "publishedAt": "2026-10-20T22:53:18.459038Z",
+        "updatedAt": "2026-10-20T22:53:18.459038Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.edgarstack/edgarstack",
+      "description": "SEC EDGAR financials, ratios, peer comps, filing diffs and Excel models for any MCP client.",
+      "title": "EdgarStack",
+      "version": "1.0.0",
+      "websiteUrl": "https://edgarstack.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://edgarstack.com/mcp/{api_key}",
+          "variables": {
+            "api_key": {
+              "description": "Your EdgarStack API key (efm_live_\u2026), emailed after you start the $10.99/month subscription (7-day free trial).",
+              "isRequired": true,
+              "isSecret": true
+            }
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-02T06:28:11.113529Z",
+        "publishedAt": "2026-11-02T06:28:11.113529Z",
+        "updatedAt": "2026-11-02T06:28:11.113529Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.edgedepth/research",
+      "description": "Test crypto-perpetual claims using recorded counts, baselines, and replay.",
+      "title": "EdgeDepth Research",
+      "repository": {
+        "url": "https://github.com/edgedepthhq/edgedepth-research-mcp",
+        "source": "github"
+      },
+      "version": "0.11.0",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@edgedepth/research-mcp",
+          "version": "0.11.0",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Required for the stdio package. Hosted remote clients use browser OAuth instead.",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "EDGEDEPTH_API_KEY"
+            }
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.edgedepth.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-06T23:30:33.532087Z",
+        "publishedAt": "2026-10-06T23:30:33.532087Z",
+        "updatedAt": "2026-10-06T23:30:33.532087Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.edgethirteen.www/accessproof",
+      "description": "Scan a web page's markup for the WCAG failures ADA demand letters cite most often.",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.edgethirteen.com/tools/accessproof",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.edgethirteen.com/api/mcp/accessproof"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-14T03:39:43.803038Z",
+        "publishedAt": "2026-09-14T03:39:43.803038Z",
+        "updatedAt": "2026-09-14T03:39:43.803038Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.edgethirteen.www/advisor-letter",
+      "description": "Weekly white-label market-commentary draft advisors send to clients under their own name.",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.edgethirteen.com/tools/advisor-letter",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.edgethirteen.com/api/mcp/advisor-letter"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-14T11:17:21.078444Z",
+        "publishedAt": "2026-09-14T11:17:21.078444Z",
+        "updatedAt": "2026-09-14T11:17:21.078444Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.edgethirteen.www/ai-disclosure-kit",
+      "description": "EU AI Act Article 50 transparency kit: disclosure text, embeddable banner, compliance record. $59.",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.edgethirteen.com/tools/ai-disclosure-kit",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.edgethirteen.com/api/mcp/ai-disclosure-kit"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-16T13:06:43.212969Z",
+        "publishedAt": "2026-09-16T13:06:43.212969Z",
+        "updatedAt": "2026-09-16T13:06:43.212969Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.edgethirteen.www/altman-z-score-calculator",
+      "description": "Altman Z-Score bankruptcy-risk screen for a US-listed ticker, inputs looked up automatically.",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.edgethirteen.com/tools/altman-z-score-calculator",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.edgethirteen.com/api/mcp/altman-z-score-calculator"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-14T05:52:10.306167Z",
+        "publishedAt": "2026-09-14T05:52:10.306167Z",
+        "updatedAt": "2026-09-14T05:52:10.306167Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.edgethirteen.www/apidrift",
+      "description": "Alerts on breaking changes, deprecations, and pricing shifts across major LLM provider APIs.",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.edgethirteen.com/tools/apidrift",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.edgethirteen.com/api/mcp/apidrift"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-14T11:17:22.383064Z",
+        "publishedAt": "2026-09-14T11:17:22.383064Z",
+        "updatedAt": "2026-09-14T11:17:22.383064Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.edgethirteen.www/bank-stress-dataset",
+      "description": "Pricing/details for a CSV of every FDIC-insured bank's stress metrics from its own Call Report.",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.edgethirteen.com/tools/bank-stress-dataset",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.edgethirteen.com/api/mcp/bank-stress-dataset"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-16T18:15:32.041069Z",
+        "publishedAt": "2026-09-16T18:15:32.041069Z",
+        "updatedAt": "2026-09-16T18:15:32.041069Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.edgethirteen.www/chargeback-response",
+      "description": "Draft a chargeback dispute-response evidence checklist and letter preview from order details.",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.edgethirteen.com/tools/chargeback-response",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.edgethirteen.com/api/mcp/chargeback-response"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-14T07:29:15.774465Z",
+        "publishedAt": "2026-09-14T07:29:15.774465Z",
+        "updatedAt": "2026-09-14T07:29:15.774465Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.edgethirteen.www/cloakcheck",
+      "description": "Scan a page for content planted to hijack an AI browsing/shopping agent before it acts on the page.",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.edgethirteen.com/tools/cloakcheck",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.edgethirteen.com/api/mcp/cloakcheck"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-14T03:39:36.325359Z",
+        "publishedAt": "2026-09-14T03:39:36.325359Z",
+        "updatedAt": "2026-09-14T03:39:36.325359Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.edgethirteen.www/commentlettercheck",
+      "description": "Look up whether a US ticker has SEC comment-letter correspondence on file.",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.edgethirteen.com/tools/commentlettercheck",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.edgethirteen.com/api/mcp/commentlettercheck"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-14T03:13:31.258409Z",
+        "publishedAt": "2026-09-14T03:13:31.258409Z",
+        "updatedAt": "2026-09-14T03:13:31.258409Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.edgethirteen.www/dcf-calculator",
+      "description": "Discounted-cash-flow intrinsic value per share from growth/discount/terminal assumptions.",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.edgethirteen.com/tools/dcf-calculator",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.edgethirteen.com/api/mcp/dcf-calculator"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-14T05:52:10.51589Z",
+        "publishedAt": "2026-09-14T05:52:10.51589Z",
+        "updatedAt": "2026-09-14T05:52:10.51589Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.edgethirteen.www/drop-compliance-kit",
+      "description": "Check a California data broker's next DROP 45-day deletion-request check-in deadline.",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.edgethirteen.com/tools/drop-compliance-kit",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.edgethirteen.com/api/mcp/drop-compliance-kit"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-14T07:29:09.9779Z",
+        "publishedAt": "2026-09-14T07:29:09.9779Z",
+        "updatedAt": "2026-09-14T07:29:09.9779Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.edgethirteen.www/exploitwatch",
+      "description": "Check a dependency list against CISA's live Known Exploited Vulnerabilities catalog.",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.edgethirteen.com/tools/exploit-watch",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.edgethirteen.com/api/mcp/exploitwatch"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-14T06:45:52.166321Z",
+        "publishedAt": "2026-09-14T06:45:52.166321Z",
+        "updatedAt": "2026-09-14T06:45:52.166321Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.edgethirteen.www/gateway",
+      "description": "All 36 Edge Thirteen MCP tools (SEC filings, WCAG, entity diligence, more) in one endpoint.",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.edgethirteen.com/tools",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.edgethirteen.com/api/mcp/gateway"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-16T20:44:04.38941Z",
+        "publishedAt": "2026-09-16T20:44:04.38941Z",
+        "updatedAt": "2026-09-16T20:44:04.38941Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.edgethirteen.www/graham-number-calculator",
+      "description": "Benjamin Graham's fair-value ceiling and margin of safety for a US-listed ticker.",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.edgethirteen.com/tools/graham-number-calculator",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.edgethirteen.com/api/mcp/graham-number-calculator"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-14T05:52:10.01443Z",
+        "publishedAt": "2026-09-14T05:52:10.01443Z",
+        "updatedAt": "2026-09-14T05:52:10.01443Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.edgethirteen.www/hubspot-dbv",
+      "description": "Free map of HubSpot legacy v1-v4 API operations to their date-based-versioning replacements.",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.edgethirteen.com/tools/hubspot-dbv",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.edgethirteen.com/api/mcp/hubspot-dbv"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-18T13:32:45.211415Z",
+        "publishedAt": "2026-09-18T13:32:45.211415Z",
+        "updatedAt": "2026-09-18T13:32:45.211415Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.edgethirteen.www/industry-primers",
+      "description": "Pricing/details for Edge Thirteen's current industry primer, sourced to each firm's own 10-K.",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.edgethirteen.com/tools/industry-primers",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.edgethirteen.com/api/mcp/industry-primers"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-16T18:15:32.675345Z",
+        "publishedAt": "2026-09-16T18:15:32.675345Z",
+        "updatedAt": "2026-09-16T18:15:32.675345Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.edgethirteen.www/kdpcheck",
+      "description": "Scan manuscript text for AI-slop prose patterns before publishing to Amazon KDP.",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.edgethirteen.com/tools/kdpcheck",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.edgethirteen.com/api/mcp/kdpcheck"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-14T06:45:52.563045Z",
+        "publishedAt": "2026-09-14T06:45:52.563045Z",
+        "updatedAt": "2026-09-14T06:45:52.563045Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.edgethirteen.www/killcord",
+      "description": "Dead-man's switch for Anthropic API spend: kills the key the instant it crosses a limit you set.",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.edgethirteen.com/tools/killcord",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.edgethirteen.com/api/mcp/killcord"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-14T14:46:35.771704Z",
+        "publishedAt": "2026-09-14T14:46:35.771704Z",
+        "updatedAt": "2026-09-14T14:46:35.771704Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.edgethirteen.www/lite",
+      "description": "36 SEC, WCAG and entity-diligence tools behind 2 low-context ones: discover_tools, call_tool.",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.edgethirteen.com/tools",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.edgethirteen.com/api/mcp/lite"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-16T21:11:46.667663Z",
+        "publishedAt": "2026-09-16T21:11:46.667663Z",
+        "updatedAt": "2026-09-16T21:11:46.667663Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.edgethirteen.www/meterkit",
+      "description": "Drop-in usage credit ledger plus current Stripe Billing Meter Events integration for Next.js.",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.edgethirteen.com/tools/meterkit",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.edgethirteen.com/api/mcp/meterkit"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-14T11:17:23.759795Z",
+        "publishedAt": "2026-09-14T11:17:23.759795Z",
+        "updatedAt": "2026-09-14T11:17:23.759795Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.edgethirteen.www/numbercheck",
+      "description": "Checks $TICKER numeric claims in financial writing against SEC EDGAR XBRL data from the latest 10-K.",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.edgethirteen.com/tools/numbercheck",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.edgethirteen.com/api/mcp/numbercheck"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-16T13:06:43.704893Z",
+        "publishedAt": "2026-09-16T13:06:43.704893Z",
+        "updatedAt": "2026-09-16T13:06:43.704893Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.edgethirteen.www/postingcheck",
+      "description": "Scan a job posting against 16 US state/DC pay-transparency disclosure laws.",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.edgethirteen.com/tools/postingcheck",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.edgethirteen.com/api/mcp/postingcheck"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-14T06:45:52.339342Z",
+        "publishedAt": "2026-09-14T06:45:52.339342Z",
+        "updatedAt": "2026-09-14T06:45:52.339342Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.edgethirteen.www/pumpcheck",
+      "description": "Detect npm download-pumping before adding a dependency: real usage vs inflated counter.",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.edgethirteen.com/tools/pumpcheck",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.edgethirteen.com/api/mcp/pumpcheck"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-16T20:44:42.464474Z",
+        "publishedAt": "2026-09-16T20:44:42.464474Z",
+        "updatedAt": "2026-09-16T20:44:42.464474Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.edgethirteen.www/renewal-matrix",
+      "description": "Score a subscription cancellation flow against federal, CA, CO, VT, and OR click-to-cancel laws.",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.edgethirteen.com/tools/renewal-matrix",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.edgethirteen.com/api/mcp/renewal-matrix"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-14T07:29:09.501683Z",
+        "publishedAt": "2026-09-14T07:29:09.501683Z",
+        "updatedAt": "2026-09-14T07:29:09.501683Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.edgethirteen.www/rewardsguard",
+      "description": "Spot-check a TikTok creator export for Creator Rewards disqualification risk.",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.edgethirteen.com/tools/rewards-guard",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.edgethirteen.com/api/mcp/rewardsguard"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-14T03:39:43.981435Z",
+        "publishedAt": "2026-09-14T03:39:43.981435Z",
+        "updatedAt": "2026-09-14T03:39:43.981435Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.edgethirteen.www/sanctions",
+      "description": "Screen a name against OFAC's SDN and Consolidated Sanctions lists before a transaction.",
+      "version": "1.0.0",
+      "websiteUrl": "https://sanctionrail.vercel.app",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.edgethirteen.com/api/mcp/sanctions"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-18T22:42:03.074444Z",
+        "publishedAt": "2026-09-18T22:42:03.074444Z",
+        "updatedAt": "2026-09-18T22:42:03.074444Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.edgethirteen.www/site-audit",
+      "description": "Discover a site's pages from its sitemap and sample them for WCAG and prompt-injection risk.",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.edgethirteen.com/tools/site-audit",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.edgethirteen.com/api/mcp/site-audit"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-16T16:47:21.835752Z",
+        "publishedAt": "2026-09-16T16:47:21.835752Z",
+        "updatedAt": "2026-09-16T16:47:21.835752Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.edgethirteen.www/slopcheck",
+      "description": "Check a YouTube channel's recent uploads against YouTube's 2026 inauthentic-content policy.",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.edgethirteen.com/tools/slopcheck",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.edgethirteen.com/api/mcp/slopcheck"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-14T07:29:09.292455Z",
+        "publishedAt": "2026-09-14T07:29:09.292455Z",
+        "updatedAt": "2026-09-14T07:29:09.292455Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.edgethirteen.www/stackledger",
+      "description": "Audit a pasted SaaS subscription list for redundant-category overlap and overspend.",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.edgethirteen.com/tools/stackledger",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.edgethirteen.com/api/mcp/stackledger"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-14T06:45:52.845448Z",
+        "publishedAt": "2026-09-14T06:45:52.845448Z",
+        "updatedAt": "2026-09-14T06:45:52.845448Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.edgethirteen.www/tariff-refund-screen",
+      "description": "Screen US public companies for IEEPA tariff-refund exposure disclosed in their SEC filings.",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.edgethirteen.com/tools/tariff-refund-screen",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.edgethirteen.com/api/mcp/tariff-refund-screen"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-18T13:32:46.433968Z",
+        "publishedAt": "2026-09-18T13:32:46.433968Z",
+        "updatedAt": "2026-09-18T13:32:46.433968Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.edgethirteen.www/triageshield",
+      "description": "Verify a vuln report's file/line/function claims against a real GitHub repo.",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.edgethirteen.com/tools/triageshield",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.edgethirteen.com/api/mcp/triageshield"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-14T03:39:44.173324Z",
+        "publishedAt": "2026-09-14T03:39:44.173324Z",
+        "updatedAt": "2026-09-14T03:39:44.173324Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.edgethirteen.www/us-diligence",
+      "description": "Screen a US company against SEC EDGAR, OFAC sanctions, federal awards and federal court dockets.",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.edgethirteen.com/tools/us-diligence",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.edgethirteen.com/api/mcp/us-diligence"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-16T20:20:40.550695Z",
+        "publishedAt": "2026-09-16T20:20:40.550695Z",
+        "updatedAt": "2026-09-16T20:20:40.550695Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.edgethirteen.www/valuefeed",
+      "description": "Weekly SEC-sourced research packet licensed for newsletter writers to build commentary on.",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.edgethirteen.com/tools/valuefeed",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.edgethirteen.com/api/mcp/valuefeed"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-14T11:17:24.866007Z",
+        "publishedAt": "2026-09-14T11:17:24.866007Z",
+        "updatedAt": "2026-09-14T11:17:24.866007Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.edgethirteen.www/vercelpycheck",
+      "description": "Scan a public GitHub repo for known Vercel Python-runtime deploy footguns.",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.edgethirteen.com/tools/vercelpycheck",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.edgethirteen.com/api/mcp/vercelpycheck"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-14T03:11:12.485258Z",
+        "publishedAt": "2026-09-14T03:11:12.485258Z",
+        "updatedAt": "2026-09-14T03:11:12.485258Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.edgethirteen.www/voicebrief",
+      "description": "SEC-grounded stock facts phrased as single spoken sentences for a voice assistant to read.",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.edgethirteen.com/api/mcp/voicebrief",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.edgethirteen.com/api/mcp/voicebrief"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-18T13:32:47.380804Z",
+        "publishedAt": "2026-09-18T13:32:47.380804Z",
+        "updatedAt": "2026-09-18T13:32:47.380804Z",
+        "isLatest": true
+      }
+    }
+  }
+]

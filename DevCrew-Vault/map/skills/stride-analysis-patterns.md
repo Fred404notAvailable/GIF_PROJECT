@@ -4,7 +4,7 @@ generated: true
 slug: stride-analysis-patterns
 module: 4
 slot: 51
-source: antigravity-awesome
+source: wshobson-agents
 license: MIT
 status: selected
 skill_path: skills/stride-analysis-patterns/SKILL.md
@@ -13,7 +13,7 @@ skill_path: skills/stride-analysis-patterns/SKILL.md
 Apply STRIDE methodology to systematically identify threats. Use when analyzing system security, conducting threat modeling sessions, or creating security documentation.
 
 **Module:** [[Module 4 - Security, Auditing & SecOps]]  
-**Source:** [[src-antigravity-awesome]]  
+**Source:** [[src-wshobson-agents]]  
 **License:** [[lic-MIT]]  
 **Tech:** [[Security Audit]], [[Architecture]]
 

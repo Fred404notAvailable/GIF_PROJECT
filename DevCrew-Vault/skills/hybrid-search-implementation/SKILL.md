@@ -1,16 +1,13 @@
 ---
 name: hybrid-search-implementation
-description: "Combine vector and keyword search for improved retrieval. Use when implementing RAG systems, building search engines, or when neither approach alone provides sufficient recall."
-risk: safe
-source: community
-date_added: "2026-02-27"
+description: Combine vector and keyword search for improved retrieval. Use when implementing RAG systems, building search engines, or when neither approach alone provides sufficient recall.
 ---
 
 # Hybrid Search Implementation
 
 Patterns for combining vector similarity and keyword-based search.
 
-## Use this skill when
+## When to Use This Skill
 
 - Building RAG systems with improved recall
 - Combining semantic understanding with exact matching
@@ -18,23 +15,42 @@ Patterns for combining vector similarity and keyword-based search.
 - Improving search for domain-specific vocabulary
 - When pure vector search misses keyword matches
 
-## Do not use this skill when
+## Core Concepts
 
-- The task is unrelated to hybrid search implementation
-- You need a different domain or tool outside this scope
+### 1. Hybrid Search Architecture
 
-## Instructions
+```
+Query → ┬─► Vector Search ──► Candidates ─┐
+        │                                  │
+        └─► Keyword Search ─► Candidates ─┴─► Fusion ─► Results
+```
 
-- Clarify goals, constraints, and required inputs.
-- Apply relevant best practices and validate outcomes.
-- Provide actionable steps and verification.
-- If detailed examples are required, open `resources/implementation-playbook.md`.
+### 2. Fusion Methods
 
-## Resources
+| Method            | Description              | Best For        |
+| ----------------- | ------------------------ | --------------- |
+| **RRF**           | Reciprocal Rank Fusion   | General purpose |
+| **Linear**        | Weighted sum of scores   | Tunable balance |
+| **Cross-encoder** | Rerank with neural model | Highest quality |
+| **Cascade**       | Filter then rerank       | Efficiency      |
 
-- `resources/implementation-playbook.md` for detailed patterns and examples.
+## Templates and detailed worked examples
 
-## Limitations
-- Use this skill only when the task clearly matches the scope described above.
-- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
-- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
+Full template library and detailed worked examples live in `references/details.md`. Read that file when you need the concrete templates.
+
+## Best Practices
+
+### Do's
+
+- **Tune weights empirically** - Test on your data
+- **Use RRF for simplicity** - Works well without tuning
+- **Add reranking** - Significant quality improvement
+- **Log both scores** - Helps with debugging
+- **A/B test** - Measure real user impact
+
+### Don'ts
+
+- **Don't assume one size fits all** - Different queries need different weights
+- **Don't skip keyword search** - Handles exact matches better
+- **Don't over-fetch** - Balance recall vs latency
+- **Don't ignore edge cases** - Empty results, single word queries

@@ -18,6 +18,6 @@ INVOKE THIS SKILL when your Deep Agent needs memory, persistence, or filesystem 
 **Tech:** [[Agents]]
 
 ## Related Skills
-- **Complements:** [[cloudflare]], [[next-dev-loop]], [[react-native-best-practices]], [[secure-webapp]]
+- **Complements:** [[cloudflare]], [[convex]], [[next-dev-loop]], [[react-native-best-practices]]
 
 Real skill file: `skills/deep-agents-memory/SKILL.md`

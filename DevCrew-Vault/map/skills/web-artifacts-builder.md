@@ -19,6 +19,6 @@ Suite of tools for creating elaborate, multi-component claude.ai HTML artifacts 
 
 ## Related Skills
 - **Complements:** [[agent-memory-systems]], [[api-design-principles]], [[application-performance-performance-optimization]], [[architecture-patterns]]
-- **Alternate of:** [[frontend-patterns]], [[web-styling-tailwind]]
+- **Alternate of:** [[frontend-patterns]], [[server-actions]]
 
 Real skill file: `skills/web-artifacts-builder/SKILL.md`

@@ -19,6 +19,6 @@ Comprehensive performance optimization guide for React and Next.js applications,
 
 ## Related Skills
 - **Complements:** None
-- **Alternate of:** [[frontend-patterns]]
+- **Alternate of:** [[frontend-patterns]], [[server-actions]]
 
 Real skill file: `skills/react-best-practices/SKILL.md`

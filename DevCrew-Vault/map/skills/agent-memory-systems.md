@@ -18,7 +18,7 @@ Design tenant-scoped memory, retrieval and retention for agents. Use when planni
 **Tech:** [[Agents]], [[RAG]], [[UI & Design]]
 
 ## Related Skills
-- **Complements:** [[angular-best-practices]], [[api-design-principles]], [[application-performance-performance-optimization]], [[vector-index-tuning]]
-- **Alternate of:** [[autonomous-agent-patterns]]
+- **Complements:** [[angular-best-practices]], [[api-design-principles]], [[convex]], [[vector-index-tuning]]
+- **Alternate of:** [[autonomous-agent-patterns]], [[langchain-architecture]]
 
 Real skill file: `skills/agent-memory-systems/SKILL.md`

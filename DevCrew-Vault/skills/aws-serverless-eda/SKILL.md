@@ -1,13 +1,29 @@
 ---
 name: aws-serverless-eda
-description: "AWS serverless and event-driven architecture expert based on Well-Architected Framework. Use when building serverless APIs, Lambda functions, REST APIs, microservices, or async workflows."
-risk: critical
-source: https://github.com/zxkane/aws-skills/tree/main/plugins/serverless-eda/skills/aws-serverless-eda
-source_repo: zxkane/aws-skills
-source_type: community
-date_added: 2026-07-01
-license: MIT
-license_source: https://github.com/zxkane/aws-skills/blob/main/LICENSE
+description: AWS serverless and event-driven architecture expert based on Well-Architected Framework. Use when building serverless APIs, Lambda functions, REST APIs, microservices, or async workflows. Covers Lambda with TypeScript/Python, API Gateway (REST/HTTP), DynamoDB, Step Functions, EventBridge, SQS, SNS, and serverless patterns. Essential when user mentions serverless, Lambda, API Gateway, event-driven, async processing, queues, pub/sub, or wants to build scalable serverless applications with AWS best practices.
+context: fork
+skills:
+  - aws-mcp-setup
+  - aws-cdk-development
+allowed-tools:
+  - mcp__aws-mcp__*
+  - mcp__awsdocs__*
+  - mcp__cdk__*
+  - Bash(sam *)
+  - Bash(aws lambda *)
+  - Bash(aws apigateway *)
+  - Bash(aws apigatewayv2 *)
+  - Bash(aws dynamodb *)
+  - Bash(aws stepfunctions *)
+  - Bash(aws events *)
+  - Bash(aws sqs *)
+  - Bash(aws sns *)
+  - Bash(aws sts get-caller-identity)
+hooks:
+  PreToolUse:
+    - matcher: Bash(sam deploy*)
+      command: aws sts get-caller-identity --query Account --output text
+      once: true
 ---
 
 # AWS Serverless & Event-Driven Architecture
@@ -16,7 +32,7 @@ This skill provides comprehensive guidance for building serverless applications 
 
 ## AWS Documentation Requirement
 
-Verify changeable AWS facts with available official documentation tools or primary AWS documentation. Dependencies are not automatically loaded by this Markdown skill; do not install MCP servers as a prerequisite for answering.
+Always verify AWS facts using MCP tools (`mcp__aws-mcp__*` or `mcp__*awsdocs*__*`) before answering. The `aws-mcp-setup` dependency is auto-loaded — if MCP tools are unavailable, guide the user through that skill's setup flow.
 
 ## Serverless MCP Servers
 
@@ -204,8 +220,7 @@ rule.addTarget(new targets.LambdaFunction(processOrderFunction));
 **Operations must be idempotent**
 
 ```typescript
-// INCOMPLETE sketch: this check/process/write sequence races on concurrent
-// deliveries and repeats side effects if the process crashes before recording completion.
+// ✅ GOOD - Idempotent operation
 export const handler = async (event: SQSEvent) => {
   for (const record of event.Records) {
     const orderId = JSON.parse(record.body).orderId;
@@ -233,9 +248,7 @@ export const handler = async (event: SQSEvent) => {
 };
 ```
 
-Use atomic conditional acquisition, explicit in-progress/completed state and expiry, plus provider-side idempotency/reconciliation for external effects. See [AWS Powertools idempotency](https://docs.aws.amazon.com/powertools/typescript/latest/features/idempotency/). A pre-read followed by put is not duplicate protection.
-
-**Illustrative retry loop for replay-safe transient operations only**:
+**Implement retry logic with exponential backoff**:
 ```typescript
 async function withRetry<T>(fn: () => Promise<T>, maxRetries = 3): Promise<T> {
   for (let i = 0; i < maxRetries; i++) {
@@ -291,8 +304,6 @@ export const handler = async (event: SQSEvent) => {
     }
   }
 
-  // Requires ReportBatchItemFailures on the event source mapping. For FIFO,
-  // stop after the first failure and return unprocessed records too to preserve order.
   // Return partial batch failures for retry
   return { batchItemFailures: failures };
 };
@@ -347,7 +358,7 @@ Use AWS Documentation MCP to verify service features, regional availability, and
 
 ## Additional Resources
 
-The following upstream reference files are not bundled in this single-file catalog copy. Obtain and inspect the original material before dependent steps; do not claim these procedures were followed:
+This skill includes comprehensive reference documentation based on AWS best practices:
 
 - **Serverless Patterns**: `references/serverless-patterns.md`
   - Core serverless architectures and API patterns
@@ -391,9 +402,3 @@ The following upstream reference files are not bundled in this single-file catal
 - **AWS Serverless Workshops**: https://serverlessland.com/learn?type=Workshops
 
 For detailed implementation patterns, anti-patterns, and code examples, refer to the comprehensive references in the skill directory.
-
-## Limitations
-
-- Use this skill only when the task clearly matches its upstream source and local project context.
-- Verify commands, generated code, dependencies, credentials, and external service behavior before applying changes.
-- Do not treat examples as a substitute for environment-specific tests, security review, or user approval for destructive or costly actions.

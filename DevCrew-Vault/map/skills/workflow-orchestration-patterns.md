@@ -4,21 +4,21 @@ generated: true
 slug: workflow-orchestration-patterns
 module: 1
 slot: 7
-source: antigravity-awesome
+source: wshobson-agents
 license: MIT
 status: selected
 skill_path: skills/workflow-orchestration-patterns/SKILL.md
 ---
 # workflow-orchestration-patterns
-Master workflow orchestration architecture with Temporal, covering fundamental design decisions, resilience patterns, and best practices for building reliable distributed systems.
+Design durable workflows with Temporal for distributed systems. Covers workflow vs activity separation, saga patterns, state management, and determinism constraints. Use when building long-running processes, distributed transactions, or microservice orchestration.
 
 **Module:** [[Module 1 - Modern Backend & API Development]]  
-**Source:** [[src-antigravity-awesome]]  
+**Source:** [[src-wshobson-agents]]  
 **License:** [[lic-MIT]]  
 **Tech:** [[Architecture]], [[GitHub Actions]], [[UI & Design]]
 
 ## Related Skills
-- **Complements:** [[autonomous-agent-patterns]], [[frontend-patterns]], [[postgresql-table-design]], [[tailwind-design-system]]
-- **Alternate of:** [[architecture-patterns]], [[event-store-design]]
+- **Complements:** [[autonomous-agent-patterns]], [[frontend-patterns]], [[langchain-architecture]], [[postgresql-table-design]]
+- **Alternate of:** [[architecture-patterns]], [[microservices-patterns]]
 
 Real skill file: `skills/workflow-orchestration-patterns/SKILL.md`

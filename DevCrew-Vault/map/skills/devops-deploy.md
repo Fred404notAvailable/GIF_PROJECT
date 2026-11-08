@@ -15,10 +15,10 @@ DevOps e deploy de aplicacoes — Docker, CI/CD com GitHub Actions, AWS Lambda, 
 **Module:** [[Module 7 - DevOps, Containers & Cloud Automation]]  
 **Source:** [[src-antigravity-awesome]]  
 **License:** [[lic-MIT]]  
-**Tech:** [[GitHub Actions]], [[AWS]], [[Containers]], [[Docker]], [[Terraform]]
+**Tech:** [[GitHub Actions]], [[AWS]], [[Containers]], [[Docker]], [[Git]]
 
 ## Related Skills
-- **Complements:** [[api-security-testing]], [[codeql]], [[database-design]], [[e2e-testing]]
+- **Complements:** [[api-security-testing]], [[autonomous-agent-patterns]], [[database-design]], [[e2e-testing]]
 - **Alternate of:** [[cloud-devops]], [[kubernetes-deployment]]
 
 Real skill file: `skills/devops-deploy/SKILL.md`

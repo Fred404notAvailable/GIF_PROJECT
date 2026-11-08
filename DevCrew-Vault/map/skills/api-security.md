@@ -18,7 +18,7 @@ Authorized security assessment of REST, GraphQL, WebSocket, and SOAP APIs: disco
 **Tech:** [[REST & API]], [[API Security]], [[Security Audit]], [[TDD]]
 
 ## Related Skills
-- **Complements:** [[api-design-principles]], [[aws-serverless]], [[neon-postgres]], [[stripe-best-practices]]
+- **Complements:** [[api-design-principles]], [[dotnet-backend-patterns]], [[server-actions]], [[stripe-best-practices]]
 - **Alternate of:** [[api-security-testing]], [[security-audit]]
 
 Real skill file: `skills/api-security/SKILL.md`

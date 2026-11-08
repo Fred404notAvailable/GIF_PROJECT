@@ -18,7 +18,7 @@ Audits Firebase (Firestore, Cloud Storage) security rules for vulnerabilities, p
 **Tech:** [[API Security]], [[Firebase]], [[SQL & Database]], [[Security Audit]]
 
 ## Related Skills
-- **Complements:** [[clickhouse-best-practices]], [[cloudflare]], [[convex]], [[firebase-basics]]
+- **Complements:** [[convex]], [[firebase-basics]], [[neon-postgres]], [[supabase]]
 - **Alternate of:** [[api-security-testing]], [[security-audit]]
 
 Real skill file: `skills/firebase-security-rules-auditor/SKILL.md`

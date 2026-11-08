@@ -60,7 +60,7 @@ _OPTIONAL_FIELD_TYPES: dict[str, type | tuple[type, ...]] = {
     "license": str,
     "compatibility": (str, list),
     "metadata": dict,
-    "allowed-tools": list,
+    "allowed-tools": (list, str),
 }
 
 # ---------------------------------------------------------------------------

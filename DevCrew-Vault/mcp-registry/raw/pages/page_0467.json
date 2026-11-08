@@ -1,0 +1,3710 @@
+[
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.rupinder2/mcp-orchestrator",
+      "description": "Aggregates tools from multiple MCP servers with unified BM25/regex search and deferred loading.",
+      "repository": {
+        "url": "https://github.com/rupinder2/mcp-orchestrator",
+        "source": "github"
+      },
+      "version": "0.1.2",
+      "packages": [
+        {
+          "registryType": "pypi",
+          "identifier": "mcp-orchestrator",
+          "version": "0.1.2",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Storage backend for tool cache. Use 'memory' for development or 'redis' for production.",
+              "format": "string",
+              "name": "STORAGE_BACKEND"
+            },
+            {
+              "description": "Redis connection URL. Required only when STORAGE_BACKEND=redis.",
+              "format": "string",
+              "name": "REDIS_URL"
+            },
+            {
+              "description": "Path to the server_config.json file listing downstream MCP servers.",
+              "format": "string",
+              "name": "SERVER_CONFIG_PATH"
+            }
+          ]
+        },
+        {
+          "registryType": "pypi",
+          "identifier": "mcp-orchestrator",
+          "version": "0.1.2",
+          "transport": {
+            "type": "streamable-http",
+            "url": "http://localhost:{ORCHESTRATOR_PORT}/mcp"
+          },
+          "environmentVariables": [
+            {
+              "description": "Port for the HTTP transport server (default: 8080).",
+              "format": "string",
+              "name": "ORCHESTRATOR_PORT"
+            },
+            {
+              "description": "Storage backend for tool cache. Use 'memory' for development or 'redis' for production.",
+              "format": "string",
+              "name": "STORAGE_BACKEND"
+            },
+            {
+              "description": "Redis connection URL. Required only when STORAGE_BACKEND=redis.",
+              "format": "string",
+              "name": "REDIS_URL"
+            },
+            {
+              "description": "Path to the server_config.json file listing downstream MCP servers.",
+              "format": "string",
+              "name": "SERVER_CONFIG_PATH"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-02-26T01:49:55.15161Z",
+        "publishedAt": "2026-02-26T01:49:55.15161Z",
+        "updatedAt": "2026-02-26T01:49:55.15161Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ruriazz/xlsx-tools-mcp",
+      "description": "MCP server for accurate, structure-preserving read/write access to Excel (.xlsx) files",
+      "title": "xlsx-tools-mcp",
+      "repository": {
+        "url": "https://github.com/ruriazz/xlsx-tools-mcp",
+        "source": "github"
+      },
+      "version": "0.3.2",
+      "packages": [
+        {
+          "registryType": "pypi",
+          "identifier": "xlsx-tools-mcp",
+          "version": "0.3.2",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Comma or semicolon-separated alias=path pairs of workbooks to preload at startup",
+              "format": "string",
+              "name": "XLSX_MCP_FILES"
+            },
+            {
+              "description": "Timeout in seconds for the LibreOffice recalculation pass (default 60)",
+              "format": "string",
+              "name": "XLSX_MCP_RECALC_TIMEOUT"
+            },
+            {
+              "description": "Timeout in seconds to acquire the per-file lock (default 10)",
+              "format": "string",
+              "name": "XLSX_MCP_LOCK_TIMEOUT"
+            },
+            {
+              "description": "Comma or semicolon-separated list of allowed directories to restrict file access (supports case-insensitivity on Windows)",
+              "format": "string",
+              "name": "XLSX_MCP_ALLOWED_DIRS"
+            },
+            {
+              "description": "Enable automatic backup creation before workbook mutations (default true)",
+              "format": "string",
+              "name": "XLSX_MCP_AUTO_BACKUP"
+            },
+            {
+              "description": "Optional custom directory to store backup files instead of beside the target file",
+              "format": "string",
+              "name": "XLSX_MCP_BACKUP_DIR"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-17T04:16:39.320914Z",
+        "publishedAt": "2026-10-17T04:16:39.320914Z",
+        "updatedAt": "2026-10-17T04:16:39.320914Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.rushi053/privacypage-mcp",
+      "description": "Generate privacy policies, ToS, EULAs, cookie policies & disclaimers from your AI agent.",
+      "repository": {
+        "url": "https://github.com/rushi053/privacypage-mcp",
+        "source": "github"
+      },
+      "version": "0.1.0",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "privacypage-mcp",
+          "version": "0.1.0",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Optional PrivacyPage license key ($9.99 one-time at privacypage.io) used by get_full_document to unlock full documents. Free previews work without it.",
+              "format": "string",
+              "isSecret": true,
+              "name": "PRIVACYPAGE_LICENSE_KEY"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-30T12:26:18.506332Z",
+        "publishedAt": "2026-08-30T12:26:18.506332Z",
+        "updatedAt": "2026-08-30T12:26:18.506332Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ruslan-mm18/yandex-tools-mcp",
+      "description": "MCP servers for Yandex APIs: Wordstat, Search, Webmaster, Metrika, Direct. Open source, by Seyka AI.",
+      "title": "Yandex Tools MCP",
+      "repository": {
+        "url": "https://github.com/seyka-ai/yandex-tools-mcp",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://seyka.ru/developers",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.seyka.ru/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "deprecated",
+        "statusChangedAt": "2026-10-30T02:03:32.185918Z",
+        "statusMessage": "Moved to ru.seyka/yandex-tools-mcp. Use the brand-owned namespace.",
+        "publishedAt": "2026-10-28T12:30:31.536735Z",
+        "updatedAt": "2026-10-30T02:03:32.185918Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ruslanlap/pagespeed-insights-mcp",
+      "description": "Google PageSpeed Insights and CrUX: six workflow tools for web performance.",
+      "repository": {
+        "url": "https://github.com/ruslanlap/pagespeed-insights-mcp",
+        "source": "github"
+      },
+      "version": "2.2.0",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "pagespeed-insights-mcp",
+          "version": "2.2.0",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Google API key with PageSpeed Insights API enabled",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "GOOGLE_API_KEY"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-20T06:25:05.396694Z",
+        "publishedAt": "2026-10-20T06:25:05.396694Z",
+        "updatedAt": "2026-10-20T06:25:05.396694Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.russellshen1992/2o",
+      "description": "Human intelligence API \u2014 AI agents verify facts with human domain experts via MCP",
+      "repository": {
+        "url": "https://github.com/russellshen1992/2o",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@russellshen1992/2o-mcp",
+          "version": "1.0.0",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ],
+      "remotes": [
+        {
+          "type": "sse",
+          "url": "https://www.2oapi.xyz/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-03-10T20:53:18.933441Z",
+        "publishedAt": "2026-03-10T20:53:18.933441Z",
+        "updatedAt": "2026-03-10T20:53:18.933441Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.russellzhengrocks-arch/suba",
+      "description": "AI-assisted subtitle localization with project rules, glossaries, review and export.",
+      "title": "SubA by entendu.",
+      "version": "0.0.0",
+      "websiteUrl": "https://entendu.studio/suba/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.entendu.studio/v1"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-08T05:59:37.477782Z",
+        "publishedAt": "2026-11-08T05:59:37.477782Z",
+        "updatedAt": "2026-11-08T05:59:37.477782Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.russol07/makebox-etsy",
+      "description": "Research Etsy and manage an authorized shop; MakeBox Pro or Studio required.",
+      "title": "MakeBox for Etsy",
+      "repository": {
+        "url": "https://github.com/russol07/makebox-etsy-plugin",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "icons": [
+        {
+          "src": "https://raw.githubusercontent.com/russol07/makebox-etsy-plugin/main/assets/makebox-logo.png",
+          "mimeType": "image/png"
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.makebox.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-29T01:44:51.803325Z",
+        "publishedAt": "2026-10-29T01:44:51.803325Z",
+        "updatedAt": "2026-10-29T01:44:51.803325Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.rustemmustafingovua-byte/free-web-mcp",
+      "description": "Web search and page reading for AI agents with zero API credits",
+      "title": "free-web-mcp",
+      "repository": {
+        "url": "https://github.com/rustemmustafingovua-byte/free-web-mcp",
+        "source": "github"
+      },
+      "version": "0.1.502",
+      "websiteUrl": "https://rustemmustafingovua-byte.github.io/free-web-mcp/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://uowaj-85-114-204-123.run.pinggy-free.link/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-23T08:04:10.250437Z",
+        "publishedAt": "2026-10-23T08:04:10.250437Z",
+        "updatedAt": "2026-10-23T08:04:10.250437Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.rustemmustafingovua-byte/perps-funding-pulse",
+      "description": "Live perps funding rate, next tick, open interest and skew (Binance, Bybit, OKX)",
+      "title": "perps-funding-pulse",
+      "repository": {
+        "url": "https://github.com/rustemmustafingovua-byte/perps-funding-pulse",
+        "source": "github"
+      },
+      "version": "0.1.1",
+      "websiteUrl": "https://github.com/rustemmustafingovua-byte/perps-funding-pulse",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://0c5678d9815785.lhr.life/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-21T02:39:59.939954Z",
+        "publishedAt": "2026-10-21T02:39:59.939954Z",
+        "updatedAt": "2026-10-21T02:39:59.939954Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.rustok-org/rustok-wallet",
+      "description": "Self-custody Ethereum agent wallet (MCP/stdio). Keys stay in a local Docker volume.",
+      "repository": {
+        "url": "https://github.com/rustok-org/mcp",
+        "source": "github"
+      },
+      "version": "0.4.2",
+      "websiteUrl": "https://github.com/rustok-org/mcp",
+      "packages": [
+        {
+          "registryType": "oci",
+          "identifier": "ghcr.io/rustok-org/rustok-wallet:v0.4.2",
+          "runtimeHint": "docker",
+          "transport": {
+            "type": "stdio"
+          },
+          "runtimeArguments": [
+            {
+              "description": "Mount the local keystore volume (self-custody: keys never leave this volume).",
+              "type": "named",
+              "name": "-v",
+              "value": "rustok-wallet:/data"
+            },
+            {
+              "description": "Keystore password.",
+              "isRequired": true,
+              "variables": {
+                "password": {
+                  "description": "Password that unlocks your local keystore (the one set at create-wallet).",
+                  "isRequired": true,
+                  "format": "string",
+                  "isSecret": true
+                }
+              },
+              "type": "named",
+              "name": "-e",
+              "value": "RUSTOK_KEYRING_PASSWORD={password}"
+            },
+            {
+              "description": "Ethereum mainnet RPC URL.",
+              "isRequired": true,
+              "variables": {
+                "rpc_url": {
+                  "description": "Ethereum mainnet RPC URL (an Alchemy key URL, or a public RPC).",
+                  "isRequired": true,
+                  "format": "string"
+                }
+              },
+              "type": "named",
+              "name": "-e",
+              "value": "RUSTOK_RPC_URLS_1={rpc_url}"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-31T12:18:28.443203Z",
+        "publishedAt": "2026-07-31T12:18:28.443203Z",
+        "updatedAt": "2026-07-31T12:18:28.443203Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.rusty4444/changedetection-mcp",
+      "description": "MCP server for ChangeDetection.io website monitoring and change history.",
+      "title": "ChangeDetection.io MCP Server",
+      "repository": {
+        "url": "https://github.com/rusty4444/changedetection-mcp",
+        "source": "github"
+      },
+      "version": "0.1.0",
+      "websiteUrl": "https://github.com/rusty4444/changedetection-mcp",
+      "packages": [
+        {
+          "registryType": "pypi",
+          "registryBaseUrl": "https://pypi.org",
+          "identifier": "changedetection-mcp",
+          "version": "0.1.0",
+          "runtimeHint": "uvx",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Base URL of the ChangeDetection.io instance, e.g. https://changedetection.example.com",
+              "isRequired": true,
+              "placeholder": "https://changedetection.example.com",
+              "name": "CHANGEDETECTION_BASE_URL"
+            },
+            {
+              "description": "ChangeDetection.io API key",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "CHANGEDETECTION_API_KEY"
+            }
+          ]
+        }
+      ],
+      "_meta": {
+        "io.modelcontextprotocol.registry/publisher-provided": {
+          "github": {
+            "owner": "rusty4444",
+            "repo": "changedetection-mcp"
+          }
+        }
+      }
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-05-18T03:32:29.947988Z",
+        "publishedAt": "2026-05-18T03:32:29.947988Z",
+        "updatedAt": "2026-05-18T03:32:29.947988Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.rusty4444/hermes-grocy-mcp",
+      "description": "MCP server for Grocy household ERP inventory and shopping workflows.",
+      "title": "Hermes Grocy MCP",
+      "repository": {
+        "url": "https://github.com/rusty4444/grocy-mcp",
+        "source": "github"
+      },
+      "version": "0.2.1",
+      "websiteUrl": "https://github.com/rusty4444/grocy-mcp",
+      "packages": [
+        {
+          "registryType": "pypi",
+          "registryBaseUrl": "https://pypi.org",
+          "identifier": "hermes-grocy-mcp",
+          "version": "0.2.1",
+          "runtimeHint": "uvx",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Grocy base URL, with or without /api",
+              "placeholder": "https://demo.grocy.info",
+              "name": "GROCY_BASE_URL"
+            },
+            {
+              "description": "Grocy API key for private instances or write access",
+              "isSecret": true,
+              "name": "GROCY_API_KEY"
+            }
+          ]
+        }
+      ],
+      "_meta": {
+        "io.modelcontextprotocol.registry/publisher-provided": {
+          "github": {
+            "owner": "rusty4444",
+            "repo": "grocy-mcp"
+          }
+        }
+      }
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-05-18T03:32:31.95876Z",
+        "publishedAt": "2026-05-18T03:32:31.95876Z",
+        "updatedAt": "2026-05-18T03:32:31.95876Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.rusty4444/shiori-mcp",
+      "description": "MCP server for Shiori bookmark management and tag workflows.",
+      "title": "Shiori MCP",
+      "repository": {
+        "url": "https://github.com/rusty4444/shiori-mcp",
+        "source": "github"
+      },
+      "version": "0.1.0",
+      "websiteUrl": "https://github.com/rusty4444/shiori-mcp",
+      "packages": [
+        {
+          "registryType": "pypi",
+          "registryBaseUrl": "https://pypi.org",
+          "identifier": "shiori-mcp",
+          "version": "0.1.0",
+          "runtimeHint": "uvx",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Base URL of the Shiori instance, e.g. https://shiori.example.com",
+              "isRequired": true,
+              "placeholder": "https://shiori.example.com",
+              "name": "SHIORI_BASE_URL"
+            },
+            {
+              "description": "Existing Shiori session id; skips login if provided",
+              "isSecret": true,
+              "name": "SHIORI_SESSION_ID"
+            },
+            {
+              "description": "Shiori username; required unless SHIORI_SESSION_ID is set",
+              "name": "SHIORI_USERNAME"
+            },
+            {
+              "description": "Shiori password; required unless SHIORI_SESSION_ID is set",
+              "isSecret": true,
+              "name": "SHIORI_PASSWORD"
+            }
+          ]
+        }
+      ],
+      "_meta": {
+        "io.modelcontextprotocol.registry/publisher-provided": {
+          "github": {
+            "owner": "rusty4444",
+            "repo": "shiori-mcp"
+          }
+        }
+      }
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-05-18T03:32:30.599682Z",
+        "publishedAt": "2026-05-18T03:32:30.599682Z",
+        "updatedAt": "2026-05-18T03:32:30.599682Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.rusty4444/wallabag-mcp",
+      "description": "MCP server for wallabag read-it-later entries, tags, and annotations.",
+      "title": "wallabag MCP",
+      "repository": {
+        "url": "https://github.com/rusty4444/wallabag-mcp",
+        "source": "github"
+      },
+      "version": "0.1.0",
+      "websiteUrl": "https://github.com/rusty4444/wallabag-mcp",
+      "packages": [
+        {
+          "registryType": "pypi",
+          "registryBaseUrl": "https://pypi.org",
+          "identifier": "wallabag-mcp",
+          "version": "0.1.0",
+          "runtimeHint": "uvx",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Base URL of the wallabag instance, e.g. https://wallabag.example.com",
+              "isRequired": true,
+              "placeholder": "https://wallabag.example.com",
+              "name": "WALLABAG_BASE_URL"
+            },
+            {
+              "description": "Existing OAuth access token; skips password grant if provided",
+              "isSecret": true,
+              "name": "WALLABAG_ACCESS_TOKEN"
+            },
+            {
+              "description": "OAuth client id; required unless WALLABAG_ACCESS_TOKEN is set",
+              "name": "WALLABAG_CLIENT_ID"
+            },
+            {
+              "description": "OAuth client secret; required unless WALLABAG_ACCESS_TOKEN is set",
+              "isSecret": true,
+              "name": "WALLABAG_CLIENT_SECRET"
+            },
+            {
+              "description": "wallabag username; required unless WALLABAG_ACCESS_TOKEN is set",
+              "name": "WALLABAG_USERNAME"
+            },
+            {
+              "description": "wallabag password; required unless WALLABAG_ACCESS_TOKEN is set",
+              "isSecret": true,
+              "name": "WALLABAG_PASSWORD"
+            }
+          ]
+        }
+      ],
+      "_meta": {
+        "io.modelcontextprotocol.registry/publisher-provided": {
+          "github": {
+            "owner": "rusty4444",
+            "repo": "wallabag-mcp"
+          }
+        }
+      }
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-05-18T03:32:31.309882Z",
+        "publishedAt": "2026-05-18T03:32:31.309882Z",
+        "updatedAt": "2026-05-18T03:32:31.309882Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ruvendors5-ops/content-intelligence-api",
+      "description": "9 MCP tools: extract, analyze, research, compare, monitor, brief. Pay-per-call x402 or subscribe.",
+      "title": "Content Intelligence API",
+      "repository": {
+        "url": "https://github.com/ruvendors5-ops/content-intelligence-mcp",
+        "source": "github"
+      },
+      "version": "2.4.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://content-intelligence-mcp.wajih-hyder55.workers.dev"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-06-28T13:38:33.280982Z",
+        "publishedAt": "2026-06-28T13:38:33.280982Z",
+        "updatedAt": "2026-06-28T13:38:33.280982Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+      "name": "io.github.ruvnet/claude-flow",
+      "description": "AI orchestration with hive-mind swarms, neural networks, and 87 MCP tools for enterprise dev.",
+      "repository": {
+        "url": "https://github.com/ruvnet/claude-flow",
+        "source": "github",
+        "id": "854513237"
+      },
+      "version": "2.0.0-alpha.107",
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "claude-flow",
+          "version": "2.0.0-alpha.107",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Anthropic API key for Claude AI models",
+              "format": "string",
+              "isSecret": true,
+              "name": "ANTHROPIC_API_KEY"
+            },
+            {
+              "description": "Operation mode: development, production, or test",
+              "format": "string",
+              "name": "CLAUDE_FLOW_MODE"
+            },
+            {
+              "description": "Path for persistent memory storage",
+              "format": "string",
+              "name": "CLAUDE_FLOW_MEMORY_PATH"
+            },
+            {
+              "description": "Maximum number of concurrent agents",
+              "format": "string",
+              "name": "CLAUDE_FLOW_MAX_AGENTS"
+            },
+            {
+              "description": "MCP server port",
+              "format": "string",
+              "name": "CLAUDE_FLOW_PORT"
+            },
+            {
+              "description": "GitHub personal access token for repository operations",
+              "format": "string",
+              "isSecret": true,
+              "name": "GITHUB_TOKEN"
+            },
+            {
+              "description": "Flow Nexus cloud platform API key",
+              "format": "string",
+              "isSecret": true,
+              "name": "FLOW_NEXUS_API_KEY"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2025-09-10T16:59:34.218266Z",
+        "publishedAt": "2025-09-10T16:59:34.218266Z",
+        "updatedAt": "2025-09-10T16:59:34.218266Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+      "name": "io.github.ruvnet/flow-nexus",
+      "description": "Cloud-powered AI platform with multi-agent swarms, sandboxes, and workflow automation",
+      "repository": {
+        "url": "https://github.com/ruvnet/flow-nexus",
+        "source": "github"
+      },
+      "version": "0.1.121",
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "flow-nexus",
+          "version": "0.1.121",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "API key for Flow Nexus authentication",
+              "format": "string",
+              "isSecret": true,
+              "name": "FLOW_NEXUS_API_KEY"
+            },
+            {
+              "description": "Base URL for Flow Nexus API",
+              "format": "string",
+              "name": "FLOW_NEXUS_BASE_URL"
+            },
+            {
+              "description": "E2B API key for sandbox creation",
+              "format": "string",
+              "isSecret": true,
+              "name": "E2B_API_KEY"
+            },
+            {
+              "description": "Anthropic API key for Claude integration",
+              "format": "string",
+              "isSecret": true,
+              "name": "ANTHROPIC_API_KEY"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2025-09-10T16:22:10.934866Z",
+        "publishedAt": "2025-09-10T16:22:10.934866Z",
+        "updatedAt": "2025-09-10T16:22:10.934866Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-10-17/server.schema.json",
+      "name": "io.github.ruvnet/ruv-swarm",
+      "description": "Neural network swarm orchestration with WebAssembly acceleration and MCP integration",
+      "repository": {
+        "url": "https://github.com/ruvnet/ruv-FANN",
+        "source": "github",
+        "subfolder": "ruv-swarm"
+      },
+      "version": "1.0.19",
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "ruv-swarm",
+          "version": "1.0.19",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Log level for ruv-swarm operations",
+              "format": "string",
+              "default": "info",
+              "choices": [
+                "debug",
+                "info",
+                "warn",
+                "error"
+              ],
+              "name": "RUV_SWARM_LOG_LEVEL"
+            },
+            {
+              "description": "Database path for persistence storage",
+              "format": "string",
+              "name": "RUV_SWARM_DB_PATH"
+            },
+            {
+              "description": "Enable WebAssembly SIMD optimizations",
+              "format": "boolean",
+              "default": "true",
+              "choices": [
+                "true",
+                "false"
+              ],
+              "name": "RUV_SWARM_ENABLE_SIMD"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2025-09-10T17:21:34.916675Z",
+        "publishedAt": "2025-09-10T17:21:34.916675Z",
+        "updatedAt": "2025-09-10T17:21:34.916675Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.rvmey/triggercmd",
+      "description": "Run commands on your computers remotely with TRIGGERcmd.",
+      "title": "TRIGGERcmd",
+      "version": "1.0.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.triggercmd.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-06-08T18:41:49.300694Z",
+        "publishedAt": "2026-06-08T18:41:49.300694Z",
+        "updatedAt": "2026-06-08T18:41:49.300694Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.rwaldman/agentbits",
+      "description": "Machine-readable utilities and datasets for AI agents.",
+      "title": "Agent Bits",
+      "repository": {
+        "url": "https://github.com/rwaldman/agentbits",
+        "source": "github"
+      },
+      "version": "0.3.0",
+      "websiteUrl": "https://agentbits.dev",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://agentbits.dev/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-12T16:58:32.906057Z",
+        "publishedAt": "2026-08-12T16:58:32.906057Z",
+        "updatedAt": "2026-08-12T16:58:32.906057Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.rwestergren/cronometer-api-mcp",
+      "description": "MCP server for Cronometer nutrition tracking \u2014 food logs, diary, macros, fasting",
+      "repository": {
+        "url": "https://github.com/rwestergren/cronometer-api-mcp",
+        "source": "github"
+      },
+      "version": "0.2.6",
+      "packages": [
+        {
+          "registryType": "pypi",
+          "identifier": "cronometer-api-mcp",
+          "version": "0.2.6",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Your Cronometer account email",
+              "isRequired": true,
+              "name": "CRONOMETER_USERNAME"
+            },
+            {
+              "description": "Your Cronometer account password",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "CRONOMETER_PASSWORD"
+            },
+            {
+              "description": "Base32 key for accounts with two-factor authentication",
+              "isSecret": true,
+              "name": "CRONOMETER_TOTP_SECRET"
+            },
+            {
+              "description": "Optional IANA timezone override, for example America/Los_Angeles",
+              "name": "CRONOMETER_ACCOUNT_TZ"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-13T17:54:23.363278Z",
+        "publishedAt": "2026-10-13T17:54:23.363278Z",
+        "updatedAt": "2026-10-13T17:54:23.363278Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.rwestergren/hevy-mcp-remote",
+      "description": "Hosted/gateway-ready Hevy fitness MCP: workouts, routines, templates.",
+      "title": "Hevy MCP (Remote)",
+      "repository": {
+        "url": "https://github.com/rwestergren/hevy-mcp",
+        "source": "github",
+        "id": "1228015582"
+      },
+      "version": "0.1.6",
+      "websiteUrl": "https://github.com/rwestergren/hevy-mcp",
+      "packages": [
+        {
+          "registryType": "oci",
+          "identifier": "ghcr.io/rwestergren/hevy-mcp:0.1.6",
+          "runtimeHint": "docker",
+          "transport": {
+            "type": "streamable-http",
+            "url": "http://localhost:8080/mcp"
+          },
+          "runtimeArguments": [
+            {
+              "type": "named",
+              "name": "-p",
+              "value": "8080:8080"
+            },
+            {
+              "type": "named",
+              "name": "-e",
+              "value": "HEVY_API_KEY={HEVY_API_KEY}"
+            }
+          ],
+          "environmentVariables": [
+            {
+              "description": "Hevy API key (requires Hevy PRO). Get one in the Hevy app under Settings -> Developer.",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "HEVY_API_KEY"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-05-05T12:47:08.89222Z",
+        "publishedAt": "2026-05-05T12:47:08.89222Z",
+        "updatedAt": "2026-05-05T12:47:08.89222Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.rwestergren/inbody-api-mcp",
+      "description": "MCP server for InBody body-composition data \u2014 scans, body fat, muscle mass, body water",
+      "repository": {
+        "url": "https://github.com/rwestergren/inbody-api-mcp",
+        "source": "github"
+      },
+      "version": "0.1.0",
+      "packages": [
+        {
+          "registryType": "pypi",
+          "identifier": "inbody-api-mcp",
+          "version": "0.1.0",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "The phone number used to register your InBody account (digits only, no country code).",
+              "isRequired": true,
+              "name": "INBODY_LOGIN_ID"
+            },
+            {
+              "description": "Your InBody account password",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "INBODY_LOGIN_PW"
+            },
+            {
+              "description": "ISO country code selecting the regional API host (defaults to US).",
+              "name": "INBODY_COUNTRY_CODE"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-06-19T16:34:45.90574Z",
+        "publishedAt": "2026-06-19T16:34:45.90574Z",
+        "updatedAt": "2026-06-19T16:34:45.90574Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.rwestergren/rachio-mcp",
+      "description": "MCP server for Rachio sprinkler controllers \u2014 schedules, zones, and live watering control",
+      "repository": {
+        "url": "https://github.com/rwestergren/rachio-mcp",
+        "source": "github"
+      },
+      "version": "0.1.4",
+      "packages": [
+        {
+          "registryType": "pypi",
+          "identifier": "rachio-mcp",
+          "version": "0.1.4",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Long-lived Rachio OAuth access token. Mint one with `rachio-mcp-token` (or `uvx --from rachio-mcp rachio-mcp-token`). The token lasts ~25 years and replaces sending your password to the MCP process.",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "RACHIO_ACCESS_TOKEN"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-12T15:07:32.269331Z",
+        "publishedAt": "2026-08-12T15:07:32.269331Z",
+        "updatedAt": "2026-08-12T15:07:32.269331Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.rwnalds/engram",
+      "description": "Git-backed markdown memory for AI agents; search hides superseded and archived notes.",
+      "title": "Engram",
+      "repository": {
+        "url": "https://github.com/rwnalds/engram",
+        "source": "github"
+      },
+      "version": "0.1.2",
+      "websiteUrl": "https://github.com/rwnalds/engram",
+      "packages": [
+        {
+          "registryType": "oci",
+          "identifier": "ghcr.io/rwnalds/engram:0.1.2",
+          "transport": {
+            "type": "stdio"
+          },
+          "runtimeArguments": [
+            {
+              "description": "Mount your local markdown vault into the container",
+              "isRequired": true,
+              "variables": {
+                "vault_path": {
+                  "description": "Absolute path to your local markdown vault (Obsidian-compatible)",
+                  "isRequired": true,
+                  "format": "filepath"
+                }
+              },
+              "type": "named",
+              "name": "--mount",
+              "value": "type=bind,src={vault_path},dst=/vault"
+            }
+          ],
+          "packageArguments": [
+            {
+              "type": "positional",
+              "value": "/vault",
+              "valueHint": "vault_dir"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-21T12:05:13.844822Z",
+        "publishedAt": "2026-07-21T12:05:13.844822Z",
+        "updatedAt": "2026-07-21T12:05:13.844822Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.rww90931-ops/product-discovery",
+      "description": "Search and compare EWIGSC wigs, toppers, and extensions; find first-party care guidance.",
+      "title": "EWIGSC Product Discovery",
+      "version": "0.1.1",
+      "websiteUrl": "https://e-wigs-c.com/",
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "ewigsc-product-discovery-mcp",
+          "version": "0.1.1",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-17T01:31:21.935468Z",
+        "publishedAt": "2026-10-17T01:31:21.935468Z",
+        "updatedAt": "2026-10-17T01:31:21.935468Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.rxolve/artscii",
+      "description": "LLMs can't draw. This MCP can. 81 arts + 100 kaomoji + diagrams + charts.",
+      "repository": {
+        "url": "https://github.com/rxolve/artscii",
+        "source": "github"
+      },
+      "version": "0.6.1",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "artscii",
+          "version": "0.6.1",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-04-08T07:06:50.590109Z",
+        "publishedAt": "2026-04-08T07:06:50.590109Z",
+        "updatedAt": "2026-04-08T07:06:50.590109Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.rxolve/pixscii",
+      "description": "LLMs can't draw. This MCP can. Pixel art animation toolkit \u2014 draw, animate, compose, export.",
+      "repository": {
+        "url": "https://github.com/rxolve/pixscii",
+        "source": "github"
+      },
+      "version": "0.5.0",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "pixscii",
+          "version": "0.5.0",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-28T04:26:39.234626Z",
+        "publishedAt": "2026-10-28T04:26:39.234626Z",
+        "updatedAt": "2026-10-28T04:26:39.234626Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.rxthlessbeats/agent-cowork-memory",
+      "description": "Shared memory and delegation for Codex, Cursor, Claude Code, and OpenCode.",
+      "title": "Agent Cowork Memory",
+      "repository": {
+        "url": "https://github.com/rxthlessbeats/agent-cowork-memory",
+        "source": "github"
+      },
+      "version": "0.3.2",
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "agent-cowork-memory",
+          "version": "0.3.2",
+          "runtimeHint": "npx",
+          "transport": {
+            "type": "stdio"
+          },
+          "packageArguments": [
+            {
+              "type": "positional",
+              "value": "mcp"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-29T02:33:55.711652Z",
+        "publishedAt": "2026-10-29T02:33:55.711652Z",
+        "updatedAt": "2026-10-29T02:33:55.711652Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+      "name": "io.github.ryaker/appstore-connect-mcp",
+      "description": "MCP server for Apple Store Connect API integration with OAuth authentication support",
+      "repository": {
+        "url": "https://github.com/ryaker/appstore-connect-mcp",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "@ryaker/appstore-connect-mcp",
+          "version": "1.0.0",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Apple App Store Connect API Key ID",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "APPLE_KEY_ID"
+            },
+            {
+              "description": "Apple App Store Connect Issuer ID",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "APPLE_ISSUER_ID"
+            },
+            {
+              "description": "Apple App Store Connect Private Key (base64 encoded or raw)",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "APPLE_PRIVATE_KEY"
+            },
+            {
+              "description": "Optional: Specific Bundle ID to filter apps",
+              "format": "string",
+              "name": "APPLE_BUNDLE_ID"
+            },
+            {
+              "description": "Optional: Specific App Store ID",
+              "format": "string",
+              "name": "APPLE_APP_STORE_ID"
+            },
+            {
+              "description": "Enable OAuth authentication (true/false)",
+              "format": "string",
+              "name": "OAUTH_ENABLED"
+            },
+            {
+              "description": "OAuth issuer URL (e.g., https://your-tenant.auth0.com)",
+              "format": "string",
+              "name": "OAUTH_ISSUER"
+            },
+            {
+              "description": "OAuth audience URL",
+              "format": "string",
+              "name": "OAUTH_AUDIENCE"
+            },
+            {
+              "description": "OAuth JWKS URI for token validation",
+              "format": "string",
+              "name": "OAUTH_JWKS_URI"
+            },
+            {
+              "description": "Server URL for OAuth deployment",
+              "format": "string",
+              "name": "SERVER_URL"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2025-09-10T14:59:09.119883Z",
+        "publishedAt": "2025-09-10T14:59:09.119883Z",
+        "updatedAt": "2025-09-10T14:59:09.119883Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryan-tish/sendpaper",
+      "description": "Your agent sends real postcards and letters. You approve; we print and mail.",
+      "title": "Sendpaper",
+      "repository": {
+        "url": "https://github.com/ryan-tish/sendpaper-plugin",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://sendmypaper.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://sendmypaper.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-03T15:36:23.294592Z",
+        "publishedAt": "2026-10-03T15:36:23.294592Z",
+        "updatedAt": "2026-10-03T15:36:23.294592Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+      "name": "io.github.ryanbaumann/platform-ai",
+      "description": "Google Maps Platform Code Assist MCP",
+      "repository": {
+        "url": "https://github.com/googlemaps/platform-ai",
+        "source": "github"
+      },
+      "version": "0.2.0",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@googlemaps/code-assist-mcp",
+          "version": "0.2.0",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2025-09-10T17:56:34.808006Z",
+        "publishedAt": "2025-09-10T17:56:34.808006Z",
+        "updatedAt": "2025-09-10T17:56:34.808006Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryanbiddy/uoink",
+      "description": "Search and cite your saved YouTube and podcast transcripts. Needs the Uoink app for Windows or Mac.",
+      "title": "Uoink",
+      "repository": {
+        "url": "https://github.com/ryanbiddy/uoink",
+        "source": "github"
+      },
+      "version": "3.16.0",
+      "websiteUrl": "https://uoink.app",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/ryanbiddy/uoink/releases/download/v3.16.0/uoink-3.16.0.mcpb",
+          "fileSha256": "ee0d47f05632c8820bc0e618040eab9ab4784bc3576f6a226c27ff47786927f5",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-08T11:35:56.349016Z",
+        "publishedAt": "2026-11-08T11:35:56.349016Z",
+        "updatedAt": "2026-11-08T11:35:56.349016Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryanbihai/oceanbus-mcp-server",
+      "description": "Register, discover, message, and transact with other AI agents on the OceanBus network.",
+      "repository": {
+        "url": "https://github.com/ryanbihai/oceanbus",
+        "source": "github",
+        "subfolder": "integrations/mcp-server"
+      },
+      "version": "0.1.6",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "oceanbus-mcp-server",
+          "version": "0.1.6",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "OceanBus API Key. Get one from https://ai-t.ihaola.com.cn/api/l0/agents/register or use an existing OceanBus agent key",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "OCEANBUS_API_KEY"
+            },
+            {
+              "description": "OceanBus Agent ID linked to the API Key",
+              "format": "string",
+              "name": "OCEANBUS_AGENT_ID"
+            },
+            {
+              "description": "OceanBus L0 API endpoint (default: https://ai-t.ihaola.com.cn/api/l0)",
+              "format": "string",
+              "name": "OCEANBUS_BASE_URL"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-05-07T05:42:14.022969Z",
+        "publishedAt": "2026-05-07T05:42:14.022969Z",
+        "updatedAt": "2026-05-07T05:42:14.022969Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryanduguid/aus-accounting",
+      "description": "Reviews, 14 bounded tax and super worksheets, cited retrieval from your local Markdown. Not advice.",
+      "title": "aus-accounting-mcp",
+      "repository": {
+        "url": "https://github.com/ryanduguid/australian-accounting",
+        "source": "github"
+      },
+      "version": "0.7.1",
+      "websiteUrl": "https://duguid.com.au/tools/australian-tax-ai-agents/",
+      "icons": [
+        {
+          "src": "https://duguid.com.au/assets/favicon.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        },
+        {
+          "src": "https://duguid.com.au/assets/favicon-180.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "180x180"
+          ]
+        }
+      ],
+      "packages": [
+        {
+          "registryType": "pypi",
+          "identifier": "aus-accounting-mcp",
+          "version": "0.7.1",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-31T19:49:15.232073Z",
+        "publishedAt": "2026-10-31T19:49:15.232073Z",
+        "updatedAt": "2026-10-31T19:49:15.232073Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryanmat/logicmonitor",
+      "description": "LogicMonitor API integration with 167 tools for alerts, devices, dashboards, and more.",
+      "repository": {
+        "url": "https://github.com/ryanmat/mcp-server-logicmonitor",
+        "source": "github"
+      },
+      "version": "1.5.1",
+      "packages": [
+        {
+          "registryType": "pypi",
+          "identifier": "lm-mcp",
+          "version": "1.5.1",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "LogicMonitor portal hostname (e.g., company.logicmonitor.com)",
+              "isRequired": true,
+              "format": "string",
+              "name": "LM_PORTAL"
+            },
+            {
+              "description": "LogicMonitor API Bearer token",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "LM_BEARER_TOKEN"
+            },
+            {
+              "description": "Enable write operations (create, update, delete)",
+              "format": "string",
+              "name": "LM_ENABLE_WRITE_OPERATIONS"
+            },
+            {
+              "description": "LMv1 API access ID (required for log/metric ingestion)",
+              "format": "string",
+              "name": "LM_ACCESS_ID"
+            },
+            {
+              "description": "LMv1 API access key (required for log/metric ingestion)",
+              "format": "string",
+              "isSecret": true,
+              "name": "LM_ACCESS_KEY"
+            },
+            {
+              "description": "Comma-separated tool names or glob patterns to enable (e.g., get_*,create_device)",
+              "format": "string",
+              "name": "LM_ENABLED_TOOLS"
+            },
+            {
+              "description": "Comma-separated tool names or glob patterns to disable (e.g., delete_*)",
+              "format": "string",
+              "name": "LM_DISABLED_TOOLS"
+            },
+            {
+              "description": "Logging level for API request debugging (debug, info, warning, error)",
+              "format": "string",
+              "name": "LM_LOG_LEVEL"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-02-14T20:31:02.975405Z",
+        "publishedAt": "2026-02-14T20:31:02.975405Z",
+        "updatedAt": "2026-02-14T20:31:02.975405Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryanportfolio/corewise",
+      "description": "Extract structured insights from videos, podcasts, articles, and PDFs with multi-model AI",
+      "title": "CoreWise",
+      "version": "1.0.0",
+      "websiteUrl": "https://corewise.video",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://corewise.video/mcp",
+          "headers": [
+            {
+              "description": "CoreWise API key as a Bearer token, e.g. 'Bearer cw_live_...'. Create one at https://corewise.video/profile under 'API & MCP Keys'. Optional: public library search works without a key; extract_url requires one.",
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-04T06:11:29.410277Z",
+        "publishedAt": "2026-07-04T06:11:29.410277Z",
+        "updatedAt": "2026-07-04T06:11:29.410277Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryanroskowski/annalist",
+      "description": "Signed data for agents: agentic-commerce census, dependency digest, x402/MCP checks, Hyperliquid",
+      "title": "Annalist",
+      "repository": {
+        "url": "https://github.com/ryanroskowski/annalist-ledger",
+        "source": "github"
+      },
+      "version": "0.16.0",
+      "websiteUrl": "https://annalist.dev",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.annalist.dev/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-15T17:59:48.842791Z",
+        "publishedAt": "2026-10-15T17:59:48.842791Z",
+        "updatedAt": "2026-10-15T17:59:48.842791Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryansilk/apexvol-mcp",
+      "description": "Options analytics for AI assistants: chains, IV rank, VRP, Greeks, GEX, expected moves, screeners.",
+      "title": "ApexVol Options Analytics",
+      "repository": {
+        "url": "https://github.com/ryansilk/apexvol-mcp",
+        "source": "github"
+      },
+      "version": "0.1.4",
+      "websiteUrl": "https://apexvol.com/learn/claude-options-data-mcp",
+      "packages": [
+        {
+          "registryType": "pypi",
+          "registryBaseUrl": "https://pypi.org",
+          "identifier": "apexvol-mcp",
+          "version": "0.1.4",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "ApexVol API token (avmcp_...), self-served at apexvol.com/account under API Access on any paid plan",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "APEXVOL_API_TOKEN"
+            }
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://apexvol.com/mcp-server"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-09T09:36:54.279658Z",
+        "publishedAt": "2026-09-09T09:36:54.279658Z",
+        "updatedAt": "2026-09-09T09:36:54.279658Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryansmith4/sheriff-mcp",
+      "description": "MCP server for fixing static analysis issues from SARIF reports with AI agents",
+      "title": "Sheriff",
+      "repository": {
+        "url": "https://github.com/ryansmith4/sheriff-mcp",
+        "source": "github"
+      },
+      "version": "1.0.2",
+      "websiteUrl": "https://github.com/ryansmith4/sheriff-mcp#installation",
+      "packages": [
+        {
+          "registryType": "oci",
+          "identifier": "ghcr.io/ryansmith4/sheriff-mcp:1.0.2",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-03-24T16:12:38.53948Z",
+        "publishedAt": "2026-03-24T16:12:38.53948Z",
+        "updatedAt": "2026-03-24T16:12:38.53948Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryanthegentry/402index",
+      "description": "Search 15,000+ paid API endpoints across the L402, x402, and MPP protocols on 402index.io",
+      "repository": {
+        "url": "https://github.com/ryanthegentry/402index",
+        "source": "github",
+        "subfolder": "mcp-server"
+      },
+      "version": "0.3.0",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@402index/mcp-server",
+          "version": "0.3.0",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-04-23T17:09:34.80861Z",
+        "publishedAt": "2026-04-23T17:09:34.80861Z",
+        "updatedAt": "2026-04-23T17:09:34.80861Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryanyang828/listinggood",
+      "description": "Get recommended by Amazon's AI. Hosted MCP server for Amazon listing compliance & generation.",
+      "title": "ListingGood MCP",
+      "repository": {
+        "url": "https://github.com/ryanyang828/listinggood-skills",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://listinggood.com/developers",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://listinggood.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-12T15:41:25.432882Z",
+        "publishedAt": "2026-08-12T15:41:25.432882Z",
+        "updatedAt": "2026-08-12T15:41:25.432882Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryanzambrano/pixero",
+      "description": "AI marketing agent for paid social: Meta ads campaigns, ad creative generation, lead delivery.",
+      "title": "Pixero",
+      "version": "1.0.0",
+      "websiteUrl": "https://pixero.ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://pixero.ai/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-14T07:27:37.916994Z",
+        "publishedAt": "2026-08-14T07:27:37.916994Z",
+        "updatedAt": "2026-08-14T07:27:37.916994Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.rynald0cst0ltziam/warden",
+      "description": "Verified context layer for AI coding agents \u2014 prunes, compresses, indexes, remembers. 32 MCP tools.",
+      "version": "0.7.1",
+      "websiteUrl": "https://warden-io.vercel.app",
+      "icons": [
+        {
+          "src": "https://warden-io.vercel.app/warden-icon.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        },
+        {
+          "src": "https://warden-io.vercel.app/warden-icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "128x128"
+          ]
+        }
+      ],
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "warden-ai",
+          "version": "0.7.1",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-21T11:54:25.565015Z",
+        "publishedAt": "2026-08-21T11:54:25.565015Z",
+        "updatedAt": "2026-08-21T11:54:25.565015Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryoohshima/agenttakt",
+      "description": "Review, edit, and approve AI agent task plans in a ComfyUI-style visual node editor in your terminal",
+      "title": "AgentTakt",
+      "repository": {
+        "url": "https://github.com/ryoohshima/AgentTakt",
+        "source": "github",
+        "id": "1319748709"
+      },
+      "version": "0.2.2",
+      "websiteUrl": "https://github.com/ryoohshima/AgentTakt",
+      "icons": [
+        {
+          "src": "https://raw.githubusercontent.com/ryoohshima/AgentTakt/main/docs/images/icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "212x212"
+          ]
+        }
+      ],
+      "packages": [
+        {
+          "registryType": "pypi",
+          "identifier": "agenttakt",
+          "version": "0.2.2",
+          "runtimeHint": "uvx",
+          "transport": {
+            "type": "stdio"
+          },
+          "packageArguments": [
+            {
+              "type": "positional",
+              "value": "serve",
+              "valueHint": "serve"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-23T05:13:22.170608Z",
+        "publishedAt": "2026-09-23T05:13:22.170608Z",
+        "updatedAt": "2026-09-23T05:13:22.170608Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryosukedesigner-cmd/tokenguard",
+      "description": "Solana rug check before you buy: SAFE/CAUTION/DANGER from chain state. Free key or x402.",
+      "title": "TokenGuard",
+      "version": "1.1.1",
+      "websiteUrl": "https://tokenguard-bot.vercel.app/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://gdzlcxskuhupymyxywzm.supabase.co/functions/v1/tokenguard-mcp?v=2"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-21T18:15:32.428118Z",
+        "publishedAt": "2026-10-21T18:15:32.428118Z",
+        "updatedAt": "2026-10-21T18:15:32.428118Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryotaro-tanaka/mcp-oss-onramp",
+      "description": "MCP server to scout beginner-friendly OSS issues with high precision using GitHub GraphQL",
+      "repository": {
+        "url": "https://github.com/ryotaro-tanaka/mcp-oss-onramp.git",
+        "source": "github"
+      },
+      "version": "0.1.3",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "mcp-oss-onramp",
+          "version": "0.1.3",
+          "runtimeHint": "npx",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-05-16T13:27:36.082293Z",
+        "publishedAt": "2026-05-16T13:27:36.082293Z",
+        "updatedAt": "2026-05-16T13:27:36.082293Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryss30/orcool-studio",
+      "description": "AI tools for mobile app ad production: concepts, avatars, video rendering, performance feedback.",
+      "title": "Orcool Studio MCP",
+      "repository": {
+        "url": "https://github.com/ryss30/orcool-gtm",
+        "source": "github"
+      },
+      "version": "1.0.1",
+      "remotes": [
+        {
+          "type": "sse",
+          "url": "https://mcp.orcool.com"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-22T18:12:04.893328Z",
+        "publishedAt": "2026-07-22T18:12:04.893328Z",
+        "updatedAt": "2026-07-22T18:12:04.893328Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryuamarines/app-store-version",
+      "description": "Checks current App Store version by bundle ID. x402 payment required (testnet USDC).",
+      "version": "1.0.1",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://ai-factory-mcp.ryuamarines.workers.dev/app-store-version/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-29T08:51:25.802871Z",
+        "publishedAt": "2026-10-29T08:51:25.802871Z",
+        "updatedAt": "2026-10-29T08:51:25.802871Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryuamarines/email-extractor",
+      "description": "Extracts emails from texts. x402 payment required (testnet USDC).",
+      "version": "1.0.1",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://ai-factory-mcp.ryuamarines.workers.dev/email-extractor/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-29T08:51:25.266019Z",
+        "publishedAt": "2026-10-29T08:51:25.266019Z",
+        "updatedAt": "2026-10-29T08:51:25.266019Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryuamarines/email-validator",
+      "description": "Validates email syntax and MX records. x402 payment required (Base mainnet USDC).",
+      "repository": {
+        "url": "https://github.com/ryuamarines/ai-factory-platform",
+        "source": "github"
+      },
+      "version": "1.0.92767",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://ai-factory-mcp.ryuamarines.workers.dev/email-validator/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-29T08:51:26.999015Z",
+        "publishedAt": "2026-10-29T08:51:26.999015Z",
+        "updatedAt": "2026-10-29T08:51:26.999015Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryuamarines/json-schema-validator",
+      "description": "Validates JSON against a JSON Schema, lists violations. x402 payment required (Base mainnet USDC).",
+      "repository": {
+        "url": "https://github.com/ryuamarines/ai-factory-platform",
+        "source": "github"
+      },
+      "version": "1.0.92935",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://ai-factory-mcp.ryuamarines.workers.dev/json-schema-validator/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-29T08:51:27.540207Z",
+        "publishedAt": "2026-10-29T08:51:27.540207Z",
+        "updatedAt": "2026-10-29T08:51:27.540207Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryuamarines/robots-txt-checker",
+      "description": "Checks if a URL path is allowed by robots.txt. x402 payment required (Base mainnet USDC).",
+      "repository": {
+        "url": "https://github.com/ryuamarines/ai-factory-platform",
+        "source": "github"
+      },
+      "version": "1.0.93058",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://ai-factory-mcp.ryuamarines.workers.dev/robots-txt-checker/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-29T08:51:28.074303Z",
+        "publishedAt": "2026-10-29T08:51:28.074303Z",
+        "updatedAt": "2026-10-29T08:51:28.074303Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryuamarines/text-slugifier",
+      "description": "Converts text titles into URL-safe slugs and flags duplicates. x402 paid (Base mainnet USDC).",
+      "repository": {
+        "url": "https://github.com/ryuamarines/ai-factory-platform",
+        "source": "github"
+      },
+      "version": "1.0.1",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://ai-factory-mcp.ryuamarines.workers.dev/text-slugifier/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-29T08:51:26.464855Z",
+        "publishedAt": "2026-10-29T08:51:26.464855Z",
+        "updatedAt": "2026-10-29T08:51:26.464855Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryuamarines/url-normalizer",
+      "description": "Normalizes and deduplicates a list of URLs. x402 payment required (testnet USDC, Base Sepolia).",
+      "version": "1.0.2",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://ai-factory-mcp.ryuamarines.workers.dev/url-normalizer/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-29T08:51:24.726082Z",
+        "publishedAt": "2026-10-29T08:51:24.726082Z",
+        "updatedAt": "2026-10-29T08:51:24.726082Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryudi84/api",
+      "description": "MCP server for generating REST API boilerplate and Express endpoints.",
+      "repository": {
+        "url": "https://github.com/ryudi84/sovereign-mcp-servers",
+        "source": "github"
+      },
+      "version": "1.0.3",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "sovereign-api-forge-mcp",
+          "version": "1.0.3",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-02-25T19:04:00.436439Z",
+        "publishedAt": "2026-02-25T19:04:00.436439Z",
+        "updatedAt": "2026-02-25T19:04:00.436439Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryudi84/api-tester",
+      "description": "MCP server for API testing: HTTP requests, cURL generation, health checks.",
+      "repository": {
+        "url": "https://github.com/ryudi84/sovereign-mcp-servers",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "sovereign-api-tester-mcp",
+          "version": "1.0.0",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-02-25T19:04:01.483837Z",
+        "publishedAt": "2026-02-25T19:04:01.483837Z",
+        "updatedAt": "2026-02-25T19:04:01.483837Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryudi84/base64",
+      "description": "MCP server for Base64, URL, and HTML encoding/decoding",
+      "repository": {
+        "url": "https://github.com/ryudi84/sovereign-mcp-servers",
+        "source": "github"
+      },
+      "version": "1.0.3",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "base64-forge-mcp",
+          "version": "1.0.3",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-02-25T19:02:58.565937Z",
+        "publishedAt": "2026-02-25T19:02:58.565937Z",
+        "updatedAt": "2026-02-25T19:02:58.565937Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryudi84/base64-forge-mcp",
+      "description": "Encode/decode Base64, URL-safe variants, and file data",
+      "repository": {
+        "url": "https://github.com/ryudi84/sovereign-mcp-servers",
+        "source": "github",
+        "subfolder": "base64-forge"
+      },
+      "version": "1.0.1",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "base64-forge-mcp",
+          "version": "1.0.1",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-02-25T14:11:46.442245Z",
+        "publishedAt": "2026-02-25T14:11:46.442245Z",
+        "updatedAt": "2026-02-25T14:11:46.442245Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryudi84/changelog",
+      "description": "MCP server for generating changelogs from conventional commits.",
+      "repository": {
+        "url": "https://github.com/ryudi84/sovereign-mcp-servers",
+        "source": "github"
+      },
+      "version": "1.0.3",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "changelog-forge-mcp",
+          "version": "1.0.3",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-02-25T19:04:02.42274Z",
+        "publishedAt": "2026-02-25T19:04:02.42274Z",
+        "updatedAt": "2026-02-25T19:04:02.42274Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryudi84/changelog-forge-mcp",
+      "description": "Generate changelogs from git commit history",
+      "repository": {
+        "url": "https://github.com/ryudi84/sovereign-mcp-servers",
+        "source": "github",
+        "subfolder": "changelog-forge"
+      },
+      "version": "1.0.1",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "changelog-forge-mcp",
+          "version": "1.0.1",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-02-25T14:12:00.530213Z",
+        "publishedAt": "2026-02-25T14:12:00.530213Z",
+        "updatedAt": "2026-02-25T14:12:00.530213Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryudi84/code-quality",
+      "description": "MCP server for code quality: complexity, duplicates, naming, refactoring.",
+      "repository": {
+        "url": "https://github.com/ryudi84/sovereign-mcp-servers",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "sovereign-code-quality-mcp",
+          "version": "1.0.0",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-02-25T19:04:03.458259Z",
+        "publishedAt": "2026-02-25T19:04:03.458259Z",
+        "updatedAt": "2026-02-25T19:04:03.458259Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryudi84/color",
+      "description": "MCP server for color palette generation and conversion \u2014 HEX, RGB, HSL",
+      "repository": {
+        "url": "https://github.com/ryudi84/sovereign-mcp-servers",
+        "source": "github"
+      },
+      "version": "1.0.3",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "color-forge-mcp",
+          "version": "1.0.3",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-02-25T19:03:02.479026Z",
+        "publishedAt": "2026-02-25T19:03:02.479026Z",
+        "updatedAt": "2026-02-25T19:03:02.479026Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryudi84/color-forge-mcp",
+      "description": "Convert between HEX, RGB, HSL color formats and generate palettes",
+      "repository": {
+        "url": "https://github.com/ryudi84/sovereign-mcp-servers",
+        "source": "github",
+        "subfolder": "color-forge"
+      },
+      "version": "1.0.1",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "color-forge-mcp",
+          "version": "1.0.1",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-02-25T14:11:52.755753Z",
+        "publishedAt": "2026-02-25T14:11:52.755753Z",
+        "updatedAt": "2026-02-25T14:11:52.755753Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryudi84/cron",
+      "description": "MCP server for cron expression parsing, validation, and scheduling.",
+      "repository": {
+        "url": "https://github.com/ryudi84/sovereign-mcp-servers",
+        "source": "github"
+      },
+      "version": "1.0.3",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "cron-forge-mcp",
+          "version": "1.0.3",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-02-25T19:04:04.448032Z",
+        "publishedAt": "2026-02-25T19:04:04.448032Z",
+        "updatedAt": "2026-02-25T19:04:04.448032Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryudi84/cron-forge-mcp",
+      "description": "Build, explain, and validate cron expressions",
+      "repository": {
+        "url": "https://github.com/ryudi84/sovereign-mcp-servers",
+        "source": "github",
+        "subfolder": "cron-forge"
+      },
+      "version": "1.0.1",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "cron-forge-mcp",
+          "version": "1.0.1",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-02-25T14:11:59.016271Z",
+        "publishedAt": "2026-02-25T14:11:59.016271Z",
+        "updatedAt": "2026-02-25T14:11:59.016271Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryudi84/diff",
+      "description": "MCP server for computing text diffs, comparing strings, and generating unified diff output.",
+      "repository": {
+        "url": "https://github.com/ryudi84/sovereign-mcp-servers",
+        "source": "github"
+      },
+      "version": "1.0.3",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "diff-forge-mcp",
+          "version": "1.0.3",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-02-25T19:03:04.899933Z",
+        "publishedAt": "2026-02-25T19:03:04.899933Z",
+        "updatedAt": "2026-02-25T19:03:04.899933Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryudi84/diff-forge-mcp",
+      "description": "Compare text and code, show differences with context",
+      "repository": {
+        "url": "https://github.com/ryudi84/sovereign-mcp-servers",
+        "source": "github",
+        "subfolder": "diff-forge"
+      },
+      "version": "1.0.1",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "diff-forge-mcp",
+          "version": "1.0.1",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-02-25T14:12:03.641503Z",
+        "publishedAt": "2026-02-25T14:12:03.641503Z",
+        "updatedAt": "2026-02-25T14:12:03.641503Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryudi84/env",
+      "description": "MCP server for .env file validation, parsing, and comparison.",
+      "repository": {
+        "url": "https://github.com/ryudi84/sovereign-mcp-servers",
+        "source": "github"
+      },
+      "version": "1.0.3",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "env-forge-mcp",
+          "version": "1.0.3",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-02-25T19:04:05.393261Z",
+        "publishedAt": "2026-02-25T19:04:05.393261Z",
+        "updatedAt": "2026-02-25T19:04:05.393261Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryudi84/env-forge-mcp",
+      "description": "Parse, validate, and manage .env environment files",
+      "repository": {
+        "url": "https://github.com/ryudi84/sovereign-mcp-servers",
+        "source": "github",
+        "subfolder": "env-forge"
+      },
+      "version": "1.0.1",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "env-forge-mcp",
+          "version": "1.0.1",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-02-25T14:12:05.214326Z",
+        "publishedAt": "2026-02-25T14:12:05.214326Z",
+        "updatedAt": "2026-02-25T14:12:05.214326Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryudi84/github-stats",
+      "description": "MCP server for GitHub repo stats: stars, forks, contributors, activity.",
+      "repository": {
+        "url": "https://github.com/ryudi84/sovereign-mcp-servers",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "sovereign-github-stats-mcp",
+          "version": "1.0.0",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-02-25T19:04:06.43357Z",
+        "publishedAt": "2026-02-25T19:04:06.43357Z",
+        "updatedAt": "2026-02-25T19:04:06.43357Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryudi84/gradient",
+      "description": "MCP server for CSS gradient generation \u2014 linear, radial, conic",
+      "repository": {
+        "url": "https://github.com/ryudi84/sovereign-mcp-servers",
+        "source": "github"
+      },
+      "version": "1.0.3",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "gradient-forge-mcp",
+          "version": "1.0.3",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-02-25T19:03:08.750804Z",
+        "publishedAt": "2026-02-25T19:03:08.750804Z",
+        "updatedAt": "2026-02-25T19:03:08.750804Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryudi84/gradient-forge-mcp",
+      "description": "Build CSS linear and radial gradient values",
+      "repository": {
+        "url": "https://github.com/ryudi84/sovereign-mcp-servers",
+        "source": "github",
+        "subfolder": "gradient-forge"
+      },
+      "version": "1.0.1",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "gradient-forge-mcp",
+          "version": "1.0.1",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-02-25T14:12:10.543251Z",
+        "publishedAt": "2026-02-25T14:12:10.543251Z",
+        "updatedAt": "2026-02-25T14:12:10.543251Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryudi84/hash",
+      "description": "MCP server for cryptographic hashing \u2014 MD5, SHA-1, SHA-256, SHA-384, SHA-512",
+      "repository": {
+        "url": "https://github.com/ryudi84/sovereign-mcp-servers",
+        "source": "github"
+      },
+      "version": "1.0.3",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "hash-forge-mcp",
+          "version": "1.0.3",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-02-25T19:03:09.779722Z",
+        "publishedAt": "2026-02-25T19:03:09.779722Z",
+        "updatedAt": "2026-02-25T19:03:09.779722Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryudi84/hash-forge-mcp",
+      "description": "Hash text with SHA-256, SHA-384, SHA-512 and compare hashes",
+      "repository": {
+        "url": "https://github.com/ryudi84/sovereign-mcp-servers",
+        "source": "github",
+        "subfolder": "hash-forge"
+      },
+      "version": "1.0.1",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "hash-forge-mcp",
+          "version": "1.0.1",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-02-25T14:11:44.907554Z",
+        "publishedAt": "2026-02-25T14:11:44.907554Z",
+        "updatedAt": "2026-02-25T14:11:44.907554Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryudi84/ip-calc",
+      "description": "MCP server for IP calculations: subnets, CIDR, ranges, network info.",
+      "repository": {
+        "url": "https://github.com/ryudi84/sovereign-mcp-servers",
+        "source": "github"
+      },
+      "version": "1.0.4",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "ip-calc-mcp",
+          "version": "1.0.4",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-02-25T19:04:07.384874Z",
+        "publishedAt": "2026-02-25T19:04:07.384874Z",
+        "updatedAt": "2026-02-25T19:04:07.384874Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryudi84/ip-calc-mcp",
+      "description": "IP address and subnet calculator, CIDR notation",
+      "repository": {
+        "url": "https://github.com/ryudi84/sovereign-mcp-servers",
+        "source": "github",
+        "subfolder": "ip-calc"
+      },
+      "version": "1.0.2",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "ip-calc-mcp",
+          "version": "1.0.2",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-02-25T14:12:55.309525Z",
+        "publishedAt": "2026-02-25T14:12:55.309525Z",
+        "updatedAt": "2026-02-25T14:12:55.309525Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryudi84/json",
+      "description": "MCP server for JSON processing \u2014 format, validate, diff, convert, minify, query, analyze",
+      "repository": {
+        "url": "https://github.com/ryudi84/sovereign-mcp-servers",
+        "source": "github"
+      },
+      "version": "1.0.3",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "json-forge-mcp",
+          "version": "1.0.3",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-02-25T19:02:47.722163Z",
+        "publishedAt": "2026-02-25T19:02:47.722163Z",
+        "updatedAt": "2026-02-25T19:02:47.722163Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryudi84/json-forge-mcp",
+      "description": "JSON processing \u2014 format, validate, diff, convert, minify, query, analyze",
+      "repository": {
+        "url": "https://github.com/ryudi84/sovereign-mcp-servers",
+        "source": "github",
+        "subfolder": "json-forge"
+      },
+      "version": "1.0.1",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "json-forge-mcp",
+          "version": "1.0.1",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-02-25T14:11:41.697686Z",
+        "publishedAt": "2026-02-25T14:11:41.697686Z",
+        "updatedAt": "2026-02-25T14:11:41.697686Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryudi84/jwt",
+      "description": "MCP server for JWT decoding and inspection",
+      "repository": {
+        "url": "https://github.com/ryudi84/sovereign-mcp-servers",
+        "source": "github"
+      },
+      "version": "1.0.3",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "jwt-forge-mcp",
+          "version": "1.0.3",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-02-25T19:03:13.584556Z",
+        "publishedAt": "2026-02-25T19:03:13.584556Z",
+        "updatedAt": "2026-02-25T19:03:13.584556Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryudi84/jwt-forge-mcp",
+      "description": "Decode and inspect JWT tokens \u2014 header, payload, expiry check",
+      "repository": {
+        "url": "https://github.com/ryudi84/sovereign-mcp-servers",
+        "source": "github",
+        "subfolder": "jwt-forge"
+      },
+      "version": "1.0.1",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "jwt-forge-mcp",
+          "version": "1.0.1",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-02-25T14:11:49.595218Z",
+        "publishedAt": "2026-02-25T14:11:49.595218Z",
+        "updatedAt": "2026-02-25T14:11:49.595218Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryudi84/landing",
+      "description": "MCP server for generating production-ready HTML landing pages.",
+      "repository": {
+        "url": "https://github.com/ryudi84/sovereign-mcp-servers",
+        "source": "github"
+      },
+      "version": "1.0.2",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "landing-forge-mcp",
+          "version": "1.0.2",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-02-25T19:04:08.329982Z",
+        "publishedAt": "2026-02-25T19:04:08.329982Z",
+        "updatedAt": "2026-02-25T19:04:08.329982Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryudi84/lorem",
+      "description": "MCP server for placeholder text, fake names, emails, and addresses.",
+      "repository": {
+        "url": "https://github.com/ryudi84/sovereign-mcp-servers",
+        "source": "github"
+      },
+      "version": "1.0.3",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "lorem-forge-mcp",
+          "version": "1.0.3",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-02-25T19:04:09.291193Z",
+        "publishedAt": "2026-02-25T19:04:09.291193Z",
+        "updatedAt": "2026-02-25T19:04:09.291193Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryudi84/lorem-forge-mcp",
+      "description": "Generate placeholder text \u2014 lorem ipsum and alternatives",
+      "repository": {
+        "url": "https://github.com/ryudi84/sovereign-mcp-servers",
+        "source": "github",
+        "subfolder": "lorem-forge"
+      },
+      "version": "1.0.1",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "lorem-forge-mcp",
+          "version": "1.0.1",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-02-25T14:12:02.10588Z",
+        "publishedAt": "2026-02-25T14:12:02.10588Z",
+        "updatedAt": "2026-02-25T14:12:02.10588Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryudi84/markdown",
+      "description": "MCP server for markdown: tables, TOC, HTML conversion, formatting.",
+      "repository": {
+        "url": "https://github.com/ryudi84/sovereign-mcp-servers",
+        "source": "github"
+      },
+      "version": "1.0.3",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "markdown-forge-mcp",
+          "version": "1.0.3",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-02-25T19:04:10.228222Z",
+        "publishedAt": "2026-02-25T19:04:10.228222Z",
+        "updatedAt": "2026-02-25T19:04:10.228222Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryudi84/markdown-forge-mcp",
+      "description": "Markdown processing, TOC generation, HTML conversion",
+      "repository": {
+        "url": "https://github.com/ryudi84/sovereign-mcp-servers",
+        "source": "github",
+        "subfolder": "markdown-forge"
+      },
+      "version": "1.0.1",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "markdown-forge-mcp",
+          "version": "1.0.1",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-02-25T14:11:57.459239Z",
+        "publishedAt": "2026-02-25T14:11:57.459239Z",
+        "updatedAt": "2026-02-25T14:11:57.459239Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryudi84/mcp",
+      "description": "Meta MCP server that generates other MCP servers \u2014 the factory that builds factories",
+      "repository": {
+        "url": "https://github.com/ryudi84/sovereign-mcp-servers",
+        "source": "github"
+      },
+      "version": "1.0.2",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "mcp-forge-mcp",
+          "version": "1.0.2",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-02-25T19:03:18.851397Z",
+        "publishedAt": "2026-02-25T19:03:18.851397Z",
+        "updatedAt": "2026-02-25T19:03:18.851397Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryudi84/meta",
+      "description": "MCP server for SEO meta tag generation \u2014 title, description, Open Graph, Twitter Cards",
+      "repository": {
+        "url": "https://github.com/ryudi84/sovereign-mcp-servers",
+        "source": "github"
+      },
+      "version": "1.0.3",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "meta-forge-mcp",
+          "version": "1.0.3",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-02-25T19:03:19.935651Z",
+        "publishedAt": "2026-02-25T19:03:19.935651Z",
+        "updatedAt": "2026-02-25T19:03:19.935651Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryudi84/meta-forge-mcp",
+      "description": "Generate HTML meta tags and Open Graph metadata",
+      "repository": {
+        "url": "https://github.com/ryudi84/sovereign-mcp-servers",
+        "source": "github",
+        "subfolder": "meta-forge"
+      },
+      "version": "1.0.1",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "meta-forge-mcp",
+          "version": "1.0.1",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-02-25T14:11:55.869581Z",
+        "publishedAt": "2026-02-25T14:11:55.869581Z",
+        "updatedAt": "2026-02-25T14:11:55.869581Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryudi84/password",
+      "description": "MCP server for secure passwords, passphrases, and strength checking.",
+      "repository": {
+        "url": "https://github.com/ryudi84/sovereign-mcp-servers",
+        "source": "github"
+      },
+      "version": "1.0.3",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "password-forge-mcp",
+          "version": "1.0.3",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-02-25T19:04:11.181538Z",
+        "publishedAt": "2026-02-25T19:04:11.181538Z",
+        "updatedAt": "2026-02-25T19:04:11.181538Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryudi84/password-forge-mcp",
+      "description": "Generate secure passwords with configurable rules and strength check",
+      "repository": {
+        "url": "https://github.com/ryudi84/sovereign-mcp-servers",
+        "source": "github",
+        "subfolder": "password-forge"
+      },
+      "version": "1.0.1",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "password-forge-mcp",
+          "version": "1.0.1",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-02-25T14:11:51.18075Z",
+        "publishedAt": "2026-02-25T14:11:51.18075Z",
+        "updatedAt": "2026-02-25T14:11:51.18075Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryudi84/qr-text",
+      "description": "MCP server for QR code data: URLs, vCards, WiFi configs, events.",
+      "repository": {
+        "url": "https://github.com/ryudi84/sovereign-mcp-servers",
+        "source": "github"
+      },
+      "version": "1.0.1",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "qr-text-forge-mcp",
+          "version": "1.0.1",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-02-25T19:04:12.117527Z",
+        "publishedAt": "2026-02-25T19:04:12.117527Z",
+        "updatedAt": "2026-02-25T19:04:12.117527Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryudi84/readme",
+      "description": "MCP server for README.md generation from project metadata",
+      "repository": {
+        "url": "https://github.com/ryudi84/sovereign-mcp-servers",
+        "source": "github"
+      },
+      "version": "1.0.3",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "readme-forge-mcp",
+          "version": "1.0.3",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-02-25T19:03:24.365592Z",
+        "publishedAt": "2026-02-25T19:03:24.365592Z",
+        "updatedAt": "2026-02-25T19:03:24.365592Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryudi84/readme-forge-mcp",
+      "description": "Generate professional README.md files from project analysis",
+      "repository": {
+        "url": "https://github.com/ryudi84/sovereign-mcp-servers",
+        "source": "github",
+        "subfolder": "readme-forge"
+      },
+      "version": "1.0.1",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "readme-forge-mcp",
+          "version": "1.0.1",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-02-25T14:12:12.116479Z",
+        "publishedAt": "2026-02-25T14:12:12.116479Z",
+        "updatedAt": "2026-02-25T14:12:12.116479Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryudi84/regex-lab",
+      "description": "MCP server for regex testing, matching, replacing, and validation",
+      "repository": {
+        "url": "https://github.com/ryudi84/sovereign-mcp-servers",
+        "source": "github"
+      },
+      "version": "1.0.4",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "regex-lab-mcp",
+          "version": "1.0.4",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-02-25T19:03:25.432715Z",
+        "publishedAt": "2026-02-25T19:03:25.432715Z",
+        "updatedAt": "2026-02-25T19:03:25.432715Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryudi84/regex-lab-mcp",
+      "description": "Test, explain, and generate regular expressions",
+      "repository": {
+        "url": "https://github.com/ryudi84/sovereign-mcp-servers",
+        "source": "github",
+        "subfolder": "regex-lab"
+      },
+      "version": "1.0.2",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "regex-lab-mcp",
+          "version": "1.0.2",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-02-25T14:12:54.489582Z",
+        "publishedAt": "2026-02-25T14:12:54.489582Z",
+        "updatedAt": "2026-02-25T14:12:54.489582Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryudi84/seo-analyzer",
+      "description": "MCP server for SEO analysis: meta tags, headings, keywords, sitemaps.",
+      "repository": {
+        "url": "https://github.com/ryudi84/sovereign-mcp-servers",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "sovereign-seo-analyzer-mcp",
+          "version": "1.0.0",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-02-25T19:04:13.219072Z",
+        "publishedAt": "2026-02-25T19:04:13.219072Z",
+        "updatedAt": "2026-02-25T19:04:13.219072Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryudi84/shadow",
+      "description": "MCP server for CSS box-shadow generation",
+      "repository": {
+        "url": "https://github.com/ryudi84/sovereign-mcp-servers",
+        "source": "github"
+      },
+      "version": "1.0.3",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "shadow-forge-mcp",
+          "version": "1.0.3",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-02-25T19:03:28.026095Z",
+        "publishedAt": "2026-02-25T19:03:28.026095Z",
+        "updatedAt": "2026-02-25T19:03:28.026095Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.ryudi84/shadow-forge-mcp",
+      "description": "Generate CSS box-shadow and text-shadow values",
+      "repository": {
+        "url": "https://github.com/ryudi84/sovereign-mcp-servers",
+        "source": "github",
+        "subfolder": "shadow-forge"
+      },
+      "version": "1.0.1",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "shadow-forge-mcp",
+          "version": "1.0.1",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-02-25T14:11:54.313324Z",
+        "publishedAt": "2026-02-25T14:11:54.313324Z",
+        "updatedAt": "2026-02-25T14:11:54.313324Z",
+        "isLatest": true
+      }
+    }
+  }
+]

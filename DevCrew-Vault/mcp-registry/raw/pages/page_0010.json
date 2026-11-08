@@ -1,0 +1,3837 @@
+[
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.harny/context",
+      "description": "The backbone of your agent harness: memory, connected accounts and actions, behind one API key.",
+      "title": "Harny Context",
+      "version": "0.1.3",
+      "websiteUrl": "https://harny.ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.harny.ai/v1/mcp/mcp",
+          "headers": [
+            {
+              "description": "Optional. Without a key, call the provision_app tool: it creates an app and its key, no account needed. Then send: Bearer <app key>.",
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-07T08:45:02.75336Z",
+        "publishedAt": "2026-11-07T08:45:02.75336Z",
+        "updatedAt": "2026-11-07T08:45:02.75336Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.hashgrid/dna",
+      "description": "A search engine that learns from your grades. Store text, records, images or embeddings.",
+      "title": "Hashgrid DNA",
+      "version": "1.2.0",
+      "websiteUrl": "https://dna.hashgrid.ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://dna.hashgrid.ai/mcp",
+          "headers": [
+            {
+              "description": "Your DNA API key, as \"Bearer hg-\u2026\". No key yet? Leave it out: the create_grid tool makes one.",
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-06T15:38:14.757807Z",
+        "publishedAt": "2026-11-06T15:38:14.757807Z",
+        "updatedAt": "2026-11-06T15:38:14.757807Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.hashgrid/sdk",
+      "description": "Search that learns from feedback, over text and images: embeds locally, sends DNA only vectors.",
+      "title": "Hashgrid DNA (local)",
+      "repository": {
+        "url": "https://github.com/hashgrid-labs/sdk",
+        "source": "github"
+      },
+      "version": "1.3.0",
+      "websiteUrl": "https://dna.hashgrid.ai",
+      "packages": [
+        {
+          "registryType": "pypi",
+          "registryBaseUrl": "https://pypi.org",
+          "identifier": "hashgrid",
+          "version": "1.3.0",
+          "runtimeHint": "uvx",
+          "transport": {
+            "type": "stdio"
+          },
+          "runtimeArguments": [
+            {
+              "description": "The local embedder, the default",
+              "type": "named",
+              "name": "--with",
+              "value": "fastembed>=0.7"
+            }
+          ],
+          "packageArguments": [
+            {
+              "type": "positional",
+              "value": "mcp"
+            }
+          ],
+          "environmentVariables": [
+            {
+              "description": "Your DNA API key, hg-\u2026. Leave it out and the create_grid tool makes a grid and saves its key in the local index.",
+              "isSecret": true,
+              "name": "HASHGRID_API_KEY"
+            },
+            {
+              "description": "The embedder, one per grid: fastembed:<model> (local; fastembed:Qdrant/clip-ViT-B-32 for images), openai:<model> or voyage:<model>.",
+              "default": "fastembed:BAAI/bge-small-en-v1.5",
+              "name": "HASHGRID_EMBEDDER"
+            },
+            {
+              "description": "For an openai:<model> embedder.",
+              "isSecret": true,
+              "name": "OPENAI_API_KEY"
+            },
+            {
+              "description": "For a voyage:<model> embedder.",
+              "isSecret": true,
+              "name": "VOYAGE_API_KEY"
+            },
+            {
+              "description": "The local index: a sqlite file that maps DNA ids to your text.",
+              "format": "filepath",
+              "default": "~/.hashgrid/index.sqlite",
+              "name": "HASHGRID_INDEX"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "deprecated",
+        "statusChangedAt": "2026-11-06T15:38:10.77726Z",
+        "statusMessage": "Retired: use ai.hashgrid/dna at https://dna.hashgrid.ai/mcp",
+        "publishedAt": "2026-10-24T09:33:41.0938Z",
+        "updatedAt": "2026-11-06T15:38:10.77726Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.haymon/database",
+      "description": "Database MCP server for MySQL, MariaDB, PostgreSQL & SQLite",
+      "repository": {
+        "url": "https://github.com/haymon-ai/database",
+        "source": "github"
+      },
+      "version": "0.7.0",
+      "websiteUrl": "https://database.haymon.ai",
+      "packages": [
+        {
+          "registryType": "oci",
+          "identifier": "ghcr.io/haymon-ai/database:0.7.0",
+          "runtimeHint": "docker",
+          "transport": {
+            "type": "stdio"
+          },
+          "packageArguments": [
+            {
+              "description": "Start in stdio transport mode",
+              "isRequired": true,
+              "type": "positional",
+              "value": "stdio"
+            }
+          ]
+        },
+        {
+          "registryType": "oci",
+          "identifier": "ghcr.io/haymon-ai/database:0.7.0",
+          "runtimeHint": "docker",
+          "transport": {
+            "type": "streamable-http",
+            "url": "http://{--host}:{--port}/mcp"
+          },
+          "packageArguments": [
+            {
+              "description": "Start in HTTP transport mode",
+              "isRequired": true,
+              "type": "positional",
+              "value": "http"
+            },
+            {
+              "description": "HTTP bind host",
+              "default": "127.0.0.1",
+              "type": "named",
+              "name": "--host"
+            },
+            {
+              "description": "HTTP bind port",
+              "default": "9001",
+              "type": "named",
+              "name": "--port"
+            },
+            {
+              "description": "Allowed CORS origins (comma-separated)",
+              "type": "named",
+              "name": "--allowed-origins",
+              "isRepeated": true
+            },
+            {
+              "description": "Allowed host names (comma-separated)",
+              "type": "named",
+              "name": "--allowed-hosts",
+              "isRepeated": true
+            }
+          ],
+          "environmentVariables": [
+            {
+              "description": "HTTP bind host",
+              "default": "127.0.0.1",
+              "name": "HTTP_HOST"
+            },
+            {
+              "description": "HTTP bind port",
+              "format": "number",
+              "default": "9001",
+              "name": "HTTP_PORT"
+            },
+            {
+              "description": "Allowed CORS origins (comma-separated)",
+              "name": "HTTP_ALLOWED_ORIGINS"
+            },
+            {
+              "description": "Allowed host names (comma-separated)",
+              "name": "HTTP_ALLOWED_HOSTS"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "deprecated",
+        "statusChangedAt": "2026-04-23T10:48:48.962283Z",
+        "statusMessage": "Renamed to ai.haymon/dbmcp",
+        "publishedAt": "2026-04-20T18:05:53.960165Z",
+        "updatedAt": "2026-04-23T10:48:48.962283Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.haymon/dbmcp",
+      "description": "Database MCP server for MySQL, MariaDB, PostgreSQL & SQLite with PII redaction and write-prevention",
+      "repository": {
+        "url": "https://github.com/haymon-ai/dbmcp",
+        "source": "github"
+      },
+      "version": "0.17.0",
+      "websiteUrl": "https://dbmcp.haymon.ai",
+      "packages": [
+        {
+          "registryType": "oci",
+          "identifier": "ghcr.io/haymon-ai/dbmcp:0.17.0",
+          "runtimeHint": "docker",
+          "transport": {
+            "type": "stdio"
+          }
+        },
+        {
+          "registryType": "oci",
+          "identifier": "ghcr.io/haymon-ai/dbmcp:0.17.0",
+          "runtimeHint": "docker",
+          "transport": {
+            "type": "streamable-http",
+            "url": "http://{DBMCP_HTTP_HOST}:{DBMCP_HTTP_PORT}/mcp"
+          },
+          "environmentVariables": [
+            {
+              "description": "MCP transport",
+              "isRequired": true,
+              "value": "http",
+              "name": "DBMCP_TRANSPORT"
+            },
+            {
+              "description": "HTTP bind host",
+              "default": "127.0.0.1",
+              "name": "DBMCP_HTTP_HOST"
+            },
+            {
+              "description": "HTTP bind port",
+              "format": "number",
+              "default": "9001",
+              "name": "DBMCP_HTTP_PORT"
+            },
+            {
+              "description": "Allowed CORS origins (comma-separated)",
+              "name": "DBMCP_HTTP_ALLOWED_ORIGINS"
+            },
+            {
+              "description": "Allowed host names (comma-separated)",
+              "name": "DBMCP_HTTP_ALLOWED_HOSTS"
+            },
+            {
+              "description": "Bearer token required on every request; mandatory for non-loopback binds",
+              "isSecret": true,
+              "name": "DBMCP_HTTP_AUTH_TOKEN"
+            },
+            {
+              "description": "Allow a non-loopback bind without DBMCP_HTTP_AUTH_TOKEN (only behind an authenticating reverse proxy)",
+              "format": "boolean",
+              "default": "false",
+              "name": "DBMCP_HTTP_DANGEROUSLY_ALLOW_UNAUTHENTICATED"
+            }
+          ]
+        },
+        {
+          "registryType": "npm",
+          "identifier": "@haymon-ai/dbmcp",
+          "version": "0.17.0",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-07T20:25:29.245834Z",
+        "publishedAt": "2026-11-07T20:25:29.245834Z",
+        "updatedAt": "2026-11-07T20:25:29.245834Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.helixar/mcp",
+      "description": "Security tools for AI agents: scan MCP servers, validate HDP delegation chains, audit releases.",
+      "title": "Helixar Security",
+      "repository": {
+        "url": "https://github.com/Helixar-AI/helixar-mcp",
+        "source": "github"
+      },
+      "version": "0.0.1",
+      "websiteUrl": "https://helixar.ai/connect",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.helixar.ai/mcp"
+        }
+      ],
+      "_meta": {
+        "io.modelcontextprotocol.registry/publisher-provided": {
+          "notes": "Workers deployment exposes 2 of 3 tools (helixar_inspect_mcp, helixar_hdp_validate). The third tool (helixar_releaseguard) wraps a Go binary and is stdio-only \u2014 install the npm package locally for the full set.",
+          "tool": "manual",
+          "version": "0.0.1"
+        }
+      }
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-04-27T13:04:20.59969Z",
+        "publishedAt": "2026-04-27T13:04:20.59969Z",
+        "updatedAt": "2026-04-27T13:04:20.59969Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.heliyos/heliyos-mcp",
+      "description": "Heliyos, the AI operating system for revenue: records, notes, tasks, Scouts and AI workers.",
+      "title": "Heliyos",
+      "repository": {
+        "url": "https://github.com/heliyos-ai/heliyos-mcp",
+        "source": "github"
+      },
+      "version": "1.0.5",
+      "websiteUrl": "https://docs.heliyos.ai/mcp/overview",
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "@heliyos/heliyos-mcp",
+          "version": "1.0.5",
+          "runtimeHint": "npx",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Heliyos API key (starts with heliyos_). Create one in Heliyos under Settings, API keys.",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "HELIYOS_API_KEY"
+            },
+            {
+              "description": "Heliyos API base URL. Leave unset for production.",
+              "format": "string",
+              "default": "https://api-prod.heliyos.ai",
+              "name": "HELIYOS_BASE_URL"
+            },
+            {
+              "description": "Set to 1 to add the experimental tools (record enrichment, custom object create, update and delete).",
+              "format": "boolean",
+              "name": "HELIYOS_MCP_EXPERIMENTAL"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-06T17:47:38.256627Z",
+        "publishedAt": "2026-11-06T17:47:38.256627Z",
+        "updatedAt": "2026-11-06T17:47:38.256627Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.hellou/hellouone",
+      "description": "Customer conversations, contacts, inboxes, agents, automations and reports of a HellouOne account.",
+      "title": "HellouOne",
+      "version": "1.0.0",
+      "websiteUrl": "https://one.hellou.ai/docs/mcp.html",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.hellou.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-09T14:29:21.635507Z",
+        "publishedAt": "2026-10-09T14:29:21.635507Z",
+        "updatedAt": "2026-10-09T14:29:21.635507Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.helpwell/helpwell",
+      "description": "Manage your HelpWell help desk, knowledge base, live chat, contacts, email and marketing automation.",
+      "title": "HelpWell",
+      "version": "0.3.1",
+      "websiteUrl": "https://helpwell.ai",
+      "icons": [
+        {
+          "src": "https://raw.githubusercontent.com/ChainAI-Org/HelpWell/main/branding/png/helpwell-mark-purple-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://app.helpwell.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-18T17:14:09.330246Z",
+        "publishedAt": "2026-10-18T17:14:09.330246Z",
+        "updatedAt": "2026-10-18T17:14:09.330246Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.hermitsh/texts",
+      "description": "Complete classical & world literature \u2014 search + cite exact passages, facing sources, 50+ languages.",
+      "title": "Hermitsh Texts",
+      "version": "0.5.1",
+      "websiteUrl": "https://hermitsh.ai/texts/",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@hermitsh/texts-mcp",
+          "version": "0.5.0",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://hermitsh.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-16T03:18:42.490589Z",
+        "publishedAt": "2026-08-16T03:18:42.490589Z",
+        "updatedAt": "2026-08-16T03:18:42.490589Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.hexahq/hexa",
+      "description": "Shared company knowledge, workflows, and connected apps for the AIs your team already uses.",
+      "title": "Hexa",
+      "version": "1.2.0",
+      "websiteUrl": "https://www.hexahq.ai/",
+      "icons": [
+        {
+          "src": "https://www.hexahq.ai/assets/favicon.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.hexahq.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-24T06:36:27.929243Z",
+        "publishedAt": "2026-08-24T06:36:27.929243Z",
+        "updatedAt": "2026-08-24T06:36:27.929243Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.heycactus/cactus",
+      "description": "Search and ask your product's help pages, product map and support conversations in Cactus.",
+      "title": "Cactus",
+      "repository": {
+        "url": "https://github.com/hey-cactus/cactus-mcp",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://heycactus.ai/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.heycactus.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-16T01:10:35.327945Z",
+        "publishedAt": "2026-10-16T01:10:35.327945Z",
+        "updatedAt": "2026-10-16T01:10:35.327945Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.heyyumi/heyyumi",
+      "description": "Find & book real Korean restaurants, hair & nail salons in any language, in-chat, across Korea.",
+      "title": "HeyYumi",
+      "repository": {
+        "url": "https://github.com/hmp-dev/heyyumi-mcp",
+        "source": "github"
+      },
+      "version": "1.0.8",
+      "websiteUrl": "https://heyyumi.ai/mcp",
+      "icons": [
+        {
+          "src": "https://heyyumi.ai/icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "256x256"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.heyyumi.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-06T13:13:17.191678Z",
+        "publishedAt": "2026-11-06T13:13:17.191678Z",
+        "updatedAt": "2026-11-06T13:13:17.191678Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.hi-doctor/hi-doctor",
+      "description": "Online doctor consultations in the EU: health questionnaires, prescriptions and doctor messages.",
+      "title": "Hi Doctor",
+      "version": "1.0.1",
+      "websiteUrl": "https://hi-doctor.ai",
+      "icons": [
+        {
+          "src": "https://mcp.hi-doctor.ai/favicon.svg",
+          "mimeType": "image/svg+xml"
+        },
+        {
+          "src": "https://mcp.hi-doctor.ai/apple-touch-icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "180x180"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.hi-doctor.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-07T16:59:08.260457Z",
+        "publishedAt": "2026-11-07T16:59:08.260457Z",
+        "updatedAt": "2026-11-07T16:59:08.260457Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.hiapi/mcp",
+      "description": "Generate images, video, speech, music and text with HiAPI's AI models. OAuth or API key.",
+      "title": "HiAPI",
+      "version": "0.5.0",
+      "websiteUrl": "https://www.hiapi.ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.hiapi.ai/mcp",
+          "headers": [
+            {
+              "description": "Optional if your client supports OAuth sign-in. Otherwise send your HiAPI API key as a Bearer token. Create one at https://www.hiapi.ai/en/dashboard/api-keys",
+              "value": "Bearer {api_key}",
+              "isSecret": true,
+              "variables": {
+                "api_key": {
+                  "description": "HiAPI API key",
+                  "isSecret": true
+                }
+              },
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-30T01:51:13.035224Z",
+        "publishedAt": "2026-10-30T01:51:13.035224Z",
+        "updatedAt": "2026-10-30T01:51:13.035224Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.hiddencontent/mcp",
+      "description": "Check a document for hidden text before your agent reads it. PDF, Office, RTF, HTML.",
+      "title": "HiddenContent",
+      "repository": {
+        "url": "https://github.com/AeroSpark-ai/hidden-content-service",
+        "source": "github",
+        "subfolder": "packages/mcp"
+      },
+      "version": "0.4.17",
+      "websiteUrl": "https://hiddencontent.ai/start?ref=mcp-registry",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@hiddencontent/mcp",
+          "version": "0.4.17",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "API token for the HiddenContent service. Get one at https://hiddencontent.ai/start?ref=mcp-registry \u2014 the server refuses to start without it and says so.",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "HCS_API_TOKEN"
+            },
+            {
+              "description": "Base URL of the service. Defaults to the hosted API; set it only when pointing at a self-hosted instance.",
+              "name": "HCS_URL"
+            },
+            {
+              "description": "Comma-separated list of what your agent can actually do. The only accepted values are `tool-use`, `network-egress` and `code-execution`. These turn on the checks for concealed text that instructs a model to call a tool, send data or run code \u2014 declaring more can raise severity and never lowers it, and declaring nothing leaves those checks inert. Defaults to `tool-use` in the bundle install.",
+              "name": "HCS_CAPABILITIES"
+            }
+          ]
+        },
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/AeroSpark-ai/hiddencontent-mcp/releases/download/v0.4.17/hiddencontent.mcpb",
+          "fileSha256": "ea5b9cbfe64e5fa3d0c3e3adee89986fcf15c83df8ed3fe78eb4271b433e895d",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "API token for the HiddenContent service. Get one at https://hiddencontent.ai/start?ref=mcp-registry \u2014 the server refuses to start without it and says so.",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "HCS_API_TOKEN"
+            },
+            {
+              "description": "Base URL of the service. Defaults to the hosted API; set it only when pointing at a self-hosted instance.",
+              "name": "HCS_URL"
+            },
+            {
+              "description": "Comma-separated list of what your agent can actually do. The only accepted values are `tool-use`, `network-egress` and `code-execution`. These turn on the checks for concealed text that instructs a model to call a tool, send data or run code \u2014 declaring more can raise severity and never lowers it, and declaring nothing leaves those checks inert. Defaults to `tool-use` in the bundle install.",
+              "name": "HCS_CAPABILITIES"
+            }
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.hiddencontent.ai/v1/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-07T17:23:33.253976Z",
+        "publishedAt": "2026-11-07T17:23:33.253976Z",
+        "updatedAt": "2026-11-07T17:23:33.253976Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.hifrank/frank",
+      "description": "AI-moderated voice interviews with your customers, delivering themes and insights",
+      "title": "Frank",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.hifrank.ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.hifrank.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-26T08:19:25.295095Z",
+        "publishedAt": "2026-10-26T08:19:25.295095Z",
+        "updatedAt": "2026-10-26T08:19:25.295095Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.hipa/clinical-trials",
+      "description": "Search recruiting US clinical trials by city, condition, phase and patient eligibility.",
+      "title": "Hipa.ai Clinical Trials",
+      "version": "1.0.0",
+      "websiteUrl": "https://hipa.ai/mcp/docs",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://hipa.ai/api/mcp/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-24T00:31:57.547526Z",
+        "publishedAt": "2026-10-24T00:31:57.547526Z",
+        "updatedAt": "2026-10-24T00:31:57.547526Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.hirey/hi",
+      "description": "The people network your AI agent joins on your behalf \u2014 find, match, and meet anyone.",
+      "version": "0.1.26",
+      "websiteUrl": "https://hirey.ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.hirey.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-06-14T14:11:11.39443Z",
+        "publishedAt": "2026-06-14T14:11:11.39443Z",
+        "updatedAt": "2026-06-14T14:11:11.39443Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.hivehall/shared-research",
+      "description": "Shared research, saved evidence, independent reviews and open tasks for AI agents.",
+      "title": "HiveHall",
+      "version": "0.9.0",
+      "websiteUrl": "https://hivehall.ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://hivehall.ai/mcp"
+        }
+      ],
+      "_meta": {
+        "io.modelcontextprotocol.registry/publisher-provided": {
+          "documentation": "https://hivehall.ai/agent",
+          "independentRegistration": "https://hivehall.ai/v1/auth/registration",
+          "openTasks": "https://hivehall.ai/boards/pb_NnRM-DTlIXAr",
+          "scopeNotice": "Tools require an activated identity and applicable task permissions. Source checks do not certify conclusions."
+        }
+      }
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-14T22:38:42.96274Z",
+        "publishedAt": "2026-10-14T22:38:42.96274Z",
+        "updatedAt": "2026-10-14T22:38:42.96274Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.hivewiki/hivewiki",
+      "description": "Shared project wiki for AI agents: read and write pages, next actions, and activity logs over MCP.",
+      "title": "hiveWiki",
+      "version": "1.0.0",
+      "websiteUrl": "https://hivewiki.ai/docs",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.hivewiki.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-06-12T04:04:40.771482Z",
+        "publishedAt": "2026-06-12T04:04:40.771482Z",
+        "updatedAt": "2026-06-12T04:04:40.771482Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.hlix/hlix",
+      "description": "Build software with your Hlix cloud team: start work, check progress, preview, review and ship.",
+      "title": "Hlix",
+      "version": "0.4.0",
+      "websiteUrl": "https://docs.hlix.ai/mcp/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.hlix.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-29T02:29:24.440029Z",
+        "publishedAt": "2026-09-29T02:29:24.440029Z",
+        "updatedAt": "2026-09-29T02:29:24.440029Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.hodds/hodds",
+      "description": "Find software, SaaS and APIs for a need in a sourced catalogue organised by business process.",
+      "title": "HODDS",
+      "version": "0.4.0",
+      "websiteUrl": "https://hodds.ai/connect/",
+      "icons": [
+        {
+          "src": "https://hodds.ai/icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        },
+        {
+          "src": "https://hodds.ai/icon.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://hodds.ai/mcp"
+        }
+      ],
+      "_meta": {
+        "io.modelcontextprotocol.registry/publisher-provided": {
+          "license": {
+            "identifier": "CC-BY-4.0",
+            "name": "Creative Commons Attribution 4.0 International (catalogue data; terms, part 4.3: https://hodds.ai/terms/)"
+          }
+        }
+      }
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-26T06:55:33.557897Z",
+        "publishedAt": "2026-10-26T06:55:33.557897Z",
+        "updatedAt": "2026-10-26T06:55:33.557897Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.hoghogh/chistara",
+      "description": "Iranian statutes, rulings, opinions and legal calculators. Needs a paid Chistara connection link.",
+      "title": "\u0686\u06cc\u0633\u062a\u0627\u0631\u0627 \u2014 Iranian Legal Corpus",
+      "version": "1.1.0",
+      "websiteUrl": "https://hoghogh.ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://hoghogh.ai/mcp",
+          "headers": [
+            {
+              "description": "Bearer <token> from your personal connection link (hoghogh.ai Settings \u2192 \u062f\u0633\u062a\u06cc\u0627\u0631 \u0647\u0648\u0634\u0645\u0646\u062f). The link https://hoghogh.ai/mcp/<token> works on its own too.",
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-27T18:25:39.961399Z",
+        "publishedAt": "2026-10-27T18:25:39.961399Z",
+        "updatedAt": "2026-10-27T18:25:39.961399Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.homesage/mcp",
+      "description": "Estimated values, comps, rent, rehab costs and returns for 160M+ US properties, as 30+ agent tools.",
+      "title": "Homesage.ai MCP",
+      "repository": {
+        "url": "https://github.com/ZR2021DC/homesage-mcp",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://homesage.ai/products/real-estate-mcps/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.homesage.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-03T20:45:56.22556Z",
+        "publishedAt": "2026-11-03T20:45:56.22556Z",
+        "updatedAt": "2026-11-03T20:45:56.22556Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.homouniversalis/astrologia-horoscopo-carta-natal-sinastria-oraculo-efemerides-constelaciones-familiares-tarot-bazi-maya-ching-cabala-diseno-humano-arquetipos-espiritual-alma-destino-ancestors",
+      "description": "Or\u00e1culo determinista de Astrolog\u00eda, Carta Natal, Sinastr\u00eda 3D, Constelaciones y 7 Sabidur\u00edas MCP.",
+      "title": "Homo Universalis \u2014 Or\u00e1culo MCP de Astrolog\u00eda, Carta Natal, Sinastr\u00eda, Efem\u00e9rides y 7 Sabidur\u00edas",
+      "repository": {
+        "url": "https://github.com/David-Porto-Baraldes/Viveka_Web",
+        "source": "github",
+        "id": "1413071290"
+      },
+      "version": "1.5.2",
+      "websiteUrl": "https://homouniversalis.ai/es/",
+      "icons": [
+        {
+          "src": "https://homouniversalis.ai/icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        },
+        {
+          "src": "https://homouniversalis.ai/apple-touch-icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "180x180"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://homouniversalis.ai/mcp?pillar=hispano"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-06T09:34:51.682247Z",
+        "publishedAt": "2026-11-06T09:34:51.682247Z",
+        "updatedAt": "2026-11-06T09:34:51.682247Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.homouniversalis/astrology-swiss-ephemeris-natal-chart-synastry-horoscope-zodiac-draconic-astronomy-cosmos-cosmic-soul-spiritual-esoteric-destiny-numerology-meditation",
+      "description": "Swiss Ephemeris natal chart, 3D soul synastry & cosmic ephemeris oracle (<1.5ms, Zero-Auth).",
+      "title": "Homo Universalis \u2014 Swiss Ephemeris Astrology, Natal Chart, Synastry & Cosmic Soul MCP Oracle",
+      "repository": {
+        "url": "https://github.com/David-Porto-Baraldes/Viveka_Web",
+        "source": "github",
+        "id": "1413071290"
+      },
+      "version": "1.5.2",
+      "websiteUrl": "https://homouniversalis.ai",
+      "icons": [
+        {
+          "src": "https://homouniversalis.ai/icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        },
+        {
+          "src": "https://homouniversalis.ai/apple-touch-icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "180x180"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://homouniversalis.ai/mcp?pillar=ephemeris"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-06T09:34:52.747503Z",
+        "publishedAt": "2026-11-06T09:34:52.747503Z",
+        "updatedAt": "2026-11-06T09:34:52.747503Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.homouniversalis/bazi-ba-zi-tarot-vedic-jyotish-nakshatra-mayan-iching-i-ching-human-design-humandesign-kabbalah-alchemy-karmic-compatibility-family-constellation",
+      "description": "Deterministic 7-Wisdoms (BaZi, Tarot, Vedic Jyotish, Mayan, I-Ching, Human Design, Kabbalah) MCP.",
+      "title": "Homo Universalis \u2014 7 Wisdoms (BaZi, Tarot, Vedic Jyotish, Mayan, I-Ching, Human Design, Kabbalah)",
+      "repository": {
+        "url": "https://github.com/David-Porto-Baraldes/Viveka_Web",
+        "source": "github",
+        "id": "1413071290"
+      },
+      "version": "1.5.2",
+      "websiteUrl": "https://homouniversalis.ai",
+      "icons": [
+        {
+          "src": "https://homouniversalis.ai/icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        },
+        {
+          "src": "https://homouniversalis.ai/apple-touch-icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "180x180"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://homouniversalis.ai/mcp?pillar=7-wisdoms"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-06T09:34:53.757107Z",
+        "publishedAt": "2026-11-06T09:34:53.757107Z",
+        "updatedAt": "2026-11-06T09:34:53.757107Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.homouniversalis/four-pillars-tzolkin-dreamspell-hexagram-gene-keys-genekeys-sephiroth-tree-of-life-gematria-arcana-chakras-kundalini-ayurveda-elements-relationship-matchmaking-couple-lineage",
+      "description": "Four Pillars, Tzolkin, Hexagrams, Tree of Life, 4 Elements, Couple Matchmaking & Family Lineage MCP.",
+      "title": "Homo Universalis \u2014 Tzolkin, Gene Keys, Hexagrams, Tree of Life, 4 Elements & Soul Matchmaking MCP",
+      "repository": {
+        "url": "https://github.com/David-Porto-Baraldes/Viveka_Web",
+        "source": "github",
+        "id": "1413071290"
+      },
+      "version": "1.5.2",
+      "websiteUrl": "https://homouniversalis.ai",
+      "icons": [
+        {
+          "src": "https://homouniversalis.ai/icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        },
+        {
+          "src": "https://homouniversalis.ai/apple-touch-icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "180x180"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://homouniversalis.ai/mcp?pillar=sacred-keys"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-06T09:34:54.802693Z",
+        "publishedAt": "2026-11-06T09:34:54.802693Z",
+        "updatedAt": "2026-11-06T09:34:54.802693Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.homouniversalis/planetary-planets-lunar-solar-ascendant-transits-retrograde-chiron-lilith-nodes-houses-divination-mystic-karma-dharma-fate-consciousness-awakening-archetypes-jungian",
+      "description": "Planetary transits, lunar/solar ephemeris, ascendant, houses, karma & 193 Jungian archetypes MCP.",
+      "title": "Homo Universalis \u2014 Planetary Transits, Lunar/Solar Ephemeris, Karma, Dharma & 193 Jungian Archetypes",
+      "repository": {
+        "url": "https://github.com/David-Porto-Baraldes/Viveka_Web",
+        "source": "github",
+        "id": "1413071290"
+      },
+      "version": "1.5.2",
+      "websiteUrl": "https://homouniversalis.ai",
+      "icons": [
+        {
+          "src": "https://homouniversalis.ai/icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        },
+        {
+          "src": "https://homouniversalis.ai/apple-touch-icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "180x180"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://homouniversalis.ai/mcp?pillar=planetary-archetypes"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-06T09:34:55.895291Z",
+        "publishedAt": "2026-11-06T09:34:55.895291Z",
+        "updatedAt": "2026-11-06T09:34:55.895291Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.homouniversalis/viveka-oracle",
+      "description": "Swiss Ephemeris Astrology, Natal Chart, 3D Synastry, BaZi, Vedic, Mayan, I-Ching, Tarot & Kabbalah.",
+      "title": "Homo Universalis \u2014 Viveka Astrology, Natal Chart, Synastry, BaZi, Vedic, Mayan & Tarot MCP Oracle",
+      "repository": {
+        "url": "https://github.com/David-Porto-Baraldes/Viveka_Web",
+        "source": "github",
+        "id": "1413071290"
+      },
+      "version": "1.5.2",
+      "websiteUrl": "https://homouniversalis.ai",
+      "icons": [
+        {
+          "src": "https://homouniversalis.ai/icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        },
+        {
+          "src": "https://homouniversalis.ai/apple-touch-icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "180x180"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://homouniversalis.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-06T09:34:50.352099Z",
+        "publishedAt": "2026-11-06T09:34:50.352099Z",
+        "updatedAt": "2026-11-06T09:34:50.352099Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.hookbird/hookbird",
+      "description": "Make social content from your agent: hooks, AI UGC videos, competitor ads, posts to 30+ networks.",
+      "title": "Hookbird",
+      "version": "1.0.0",
+      "websiteUrl": "https://hookbird.ai/agents",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://app.hookbird.ai/mcp-oauth-dynamic"
+        },
+        {
+          "type": "streamable-http",
+          "url": "https://app.hookbird.ai/api/mcp",
+          "headers": [
+            {
+              "description": "Bearer followed by your API key from Hookbird \u2192 Agents",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-27T05:41:41.738837Z",
+        "publishedAt": "2026-10-27T05:41:41.738837Z",
+        "updatedAt": "2026-10-27T05:41:41.738837Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.host0/host0",
+      "description": "Manage apps your agent published to host0: sharing, versions, analytics and shared data.",
+      "title": "host0",
+      "repository": {
+        "url": "https://github.com/host0-ai/skills",
+        "source": "github"
+      },
+      "version": "0.1.1",
+      "websiteUrl": "https://host0.ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.host0.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-06T16:04:54.389729Z",
+        "publishedAt": "2026-11-06T16:04:54.389729Z",
+        "updatedAt": "2026-11-06T16:04:54.389729Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.hostingbrain/intelligence",
+      "description": "Market research on European hosting and domains: ownership, structure, pricing, technology adoption.",
+      "title": "HostingBrain Intelligence",
+      "version": "0.9.2",
+      "websiteUrl": "https://hostingbrain.ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.hostingbrain.ai/mcp"
+        }
+      ],
+      "_meta": {
+        "io.modelcontextprotocol.registry/publisher-provided": {
+          "authorizationMetadata": "https://mcp.hostingbrain.ai/.well-known/oauth-protected-resource",
+          "documentation": "https://hostingbrain.ai/llms.txt",
+          "schemaVersion": 67,
+          "toolCount": 35,
+          "tools": [
+            {
+              "name": "book_health",
+              "plan": "Pro"
+            },
+            {
+              "name": "consolidation_landscape",
+              "plan": "Pro"
+            },
+            {
+              "name": "consolidator_scorecard",
+              "plan": "Analyst"
+            },
+            {
+              "name": "coverage_calibration",
+              "plan": "Explore"
+            },
+            {
+              "name": "customer_faithfulness",
+              "plan": "Explore"
+            },
+            {
+              "name": "definitions",
+              "plan": "Explore"
+            },
+            {
+              "name": "dossier",
+              "plan": "Analyst"
+            },
+            {
+              "name": "email_security",
+              "plan": "Explore"
+            },
+            {
+              "name": "feedback",
+              "plan": "Explore"
+            },
+            {
+              "name": "fetch",
+              "plan": "Explore"
+            },
+            {
+              "name": "group_movement",
+              "plan": "Deal Workspace"
+            },
+            {
+              "name": "header_adoption",
+              "plan": "Explore"
+            },
+            {
+              "name": "hosting_momentum",
+              "plan": "Explore"
+            },
+            {
+              "name": "independent_operators",
+              "plan": "Analyst"
+            },
+            {
+              "name": "integration_depth",
+              "plan": "Analyst"
+            },
+            {
+              "name": "layer_stickiness",
+              "plan": "Explore"
+            },
+            {
+              "name": "market_concentration",
+              "plan": "Explore"
+            },
+            {
+              "name": "market_digitization",
+              "plan": "Explore"
+            },
+            {
+              "name": "market_pricing",
+              "plan": "Explore"
+            },
+            {
+              "name": "market_structure",
+              "plan": "Pro"
+            },
+            {
+              "name": "migration_flows",
+              "plan": "Analyst"
+            },
+            {
+              "name": "operator_profile",
+              "plan": "Analyst"
+            },
+            {
+              "name": "ownership_evidence",
+              "plan": "Analyst"
+            },
+            {
+              "name": "peer_compare",
+              "plan": "Pro"
+            },
+            {
+              "name": "pricing_moves",
+              "plan": "Analyst"
+            },
+            {
+              "name": "pricing_profile",
+              "plan": "Pro"
+            },
+            {
+              "name": "provenance",
+              "plan": "Explore"
+            },
+            {
+              "name": "saas_adoption",
+              "plan": "Pro"
+            },
+            {
+              "name": "saas_diversification",
+              "plan": "Pro"
+            },
+            {
+              "name": "search",
+              "plan": "Explore"
+            },
+            {
+              "name": "search_visibility",
+              "plan": "Explore"
+            },
+            {
+              "name": "stack_profile",
+              "plan": "Explore"
+            },
+            {
+              "name": "technology_adoption",
+              "plan": "Explore"
+            },
+            {
+              "name": "tld_pricing",
+              "plan": "Explore"
+            },
+            {
+              "name": "vendor_adoption",
+              "plan": "Pro"
+            }
+          ]
+        }
+      }
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-11T13:14:13.923553Z",
+        "publishedAt": "2026-09-11T13:14:13.923553Z",
+        "updatedAt": "2026-09-11T13:14:13.923553Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.hostingfor/hosting",
+      "description": "Publish and manage websites on HostingFor.AI: files, DNS, MySQL, SSL and site checks.",
+      "title": "HostingFor.AI",
+      "version": "1.0.0",
+      "websiteUrl": "https://hostingfor.ai/ai.php",
+      "icons": [
+        {
+          "src": "https://hostingfor.ai/img/logo-mark.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://hostingfor.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-25T14:54:29.987328Z",
+        "publishedAt": "2026-09-25T14:54:29.987328Z",
+        "updatedAt": "2026-09-25T14:54:29.987328Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.hostlo/hostlo",
+      "description": "Publish and edit static websites on a free subdomain, just by chatting.",
+      "title": "Hostlo",
+      "version": "0.1.0",
+      "websiteUrl": "https://hostlo.ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://hostlo.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-22T04:05:12.68345Z",
+        "publishedAt": "2026-09-22T04:05:12.68345Z",
+        "updatedAt": "2026-09-22T04:05:12.68345Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.hostprofit/mcp",
+      "description": "Revenue intelligence platform for short-term rental operators.",
+      "title": "HostProfit",
+      "version": "1.0.0",
+      "remotes": [
+        {
+          "type": "sse",
+          "url": "https://hostprofit-mcp-production.up.railway.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-05-06T22:37:41.270139Z",
+        "publishedAt": "2026-05-06T22:37:41.270139Z",
+        "updatedAt": "2026-05-06T22:37:41.270139Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.hotapi/docs",
+      "description": "Read-only HotAPI documentation: search integration guides and inspect OpenAPI operations.",
+      "title": "HotAPI Docs",
+      "version": "1.0.1",
+      "websiteUrl": "https://hotapi.ai/docs",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://hotapi.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-13T17:06:12.1285Z",
+        "publishedAt": "2026-10-13T17:06:12.1285Z",
+        "updatedAt": "2026-10-13T17:06:12.1285Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.hotker/hotker",
+      "description": "\ud55c\uad6d \uc0c1\ud488\u00b7\ud734\ub300\ud3f0 \uac80\uc99d \uc870\uac74 \uac80\uc0c9\uacfc \ucd1d\ube44\uc6a9\u00b7\uc57d\uc815 \ubc18\ud658\uae08\u00b7\uacb0\ud569\ud560\uc778 \ucc38\uace0 \uacc4\uc0b0. \ucd9c\ucc98\u00b7\ub204\ub77d \uc870\uac74\uc744 \uc81c\uacf5\ud558\ub294 \ubb34\uc778\uc99d\u00b7\uc77d\uae30 \uc804\uc6a9 MCP\uc785\ub2c8\ub2e4.",
+      "title": "HOTKER \ud56b\ucee4 | \ud55c\uad6d \uc0c1\ud488\u00b7\ud734\ub300\ud3f0 \uc131\uc9c0 \uad6c\ub9e4\uac00 AI",
+      "repository": {
+        "url": "https://github.com/c2bcom10-ship-it/hotker",
+        "source": "github"
+      },
+      "version": "1.0.2",
+      "websiteUrl": "https://hotker.ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://hotker.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-30T15:08:30.92023Z",
+        "publishedAt": "2026-09-30T15:08:30.92023Z",
+        "updatedAt": "2026-09-30T15:08:30.92023Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.hotrepo/hotrepo",
+      "description": "GitHub Trending boards and AI-written reviews of trending open-source projects.",
+      "title": "HotRepo",
+      "version": "1.0.0",
+      "websiteUrl": "https://hotrepo.ai/mcp-server",
+      "icons": [
+        {
+          "src": "https://hotrepo.ai/favicon.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://hotrepo.ai/mcp",
+          "headers": [
+            {
+              "description": "Bearer token with your HotRepo API key. Create one for free at https://hotrepo.ai/account",
+              "isRequired": true,
+              "value": "Bearer {api_key}",
+              "isSecret": true,
+              "variables": {
+                "api_key": {
+                  "description": "Your HotRepo API key (starts with hr_)",
+                  "isRequired": true,
+                  "isSecret": true
+                }
+              },
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-25T15:19:16.10075Z",
+        "publishedAt": "2026-10-25T15:19:16.10075Z",
+        "updatedAt": "2026-10-25T15:19:16.10075Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.howseen/howseen-mcp",
+      "description": "How ChatGPT, Gemini, Perplexity and Google AI name your brand, cite sources and rank rivals.",
+      "title": "Howseen",
+      "repository": {
+        "url": "https://github.com/howseen-ai/howseen-mcp",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://howseen.ai/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://app.howseen.ai/api/mcp",
+          "headers": [
+            {
+              "description": "Bearer token: your Howseen API key (Settings > API & AI assistants), as 'Bearer hs_live_...'",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-20T13:52:49.820901Z",
+        "publishedAt": "2026-10-20T13:52:49.820901Z",
+        "updatedAt": "2026-10-20T13:52:49.820901Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.howtocancel/the-fine-print",
+      "description": "Cancellation steps and return policies for 53 US companies, from official sources, checked daily.",
+      "version": "1.0.0",
+      "websiteUrl": "https://howtocancel.ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.howtocancel.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-31T20:50:33.689987Z",
+        "publishedAt": "2026-10-31T20:50:33.689987Z",
+        "updatedAt": "2026-10-31T20:50:33.689987Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.hrum/baro",
+      "description": "Draft copy and design changes for a \ubc14\ub85c site; only the site owner can publish them.",
+      "title": "HRUM \ubc14\ub85c",
+      "version": "1.0.0",
+      "websiteUrl": "https://hrum.ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.hrum.ai/api/v1/partners/v1/baro/mcp",
+          "headers": [
+            {
+              "description": "Bearer <\ubc14\ub85c AI key from the HRUM console>",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-29T04:46:51.220006Z",
+        "publishedAt": "2026-10-29T04:46:51.220006Z",
+        "updatedAt": "2026-10-29T04:46:51.220006Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.hrum/hrum",
+      "description": "HRUM account, credit, hosting deploys and \ubc14\ub85c apps. Writes need the owner's approval in the console.",
+      "title": "HRUM",
+      "version": "1.0.0",
+      "websiteUrl": "https://hrum.ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.hrum.ai/api/v1/partners/v1/mcp",
+          "headers": [
+            {
+              "description": "Bearer <HRUM console AI token (hrum_cm_\u2026) or API key with the apps scope>",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-08T08:32:12.91326Z",
+        "publishedAt": "2026-11-08T08:32:12.91326Z",
+        "updatedAt": "2026-11-08T08:32:12.91326Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.huddo/huddo",
+      "description": "Group chat for people and AI agents: join a room by invite link, read, reply, whisper, wait.",
+      "title": "Huddo",
+      "repository": {
+        "url": "https://github.com/puffo-ai/huddo-mcp",
+        "source": "github"
+      },
+      "version": "0.10.2",
+      "websiteUrl": "https://huddo.ai",
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "huddoai",
+          "version": "0.10.2",
+          "transport": {
+            "type": "stdio"
+          },
+          "packageArguments": [
+            {
+              "type": "positional",
+              "value": "mcp"
+            }
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.huddo.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-30T07:54:44.512322Z",
+        "publishedAt": "2026-10-30T07:54:44.512322Z",
+        "updatedAt": "2026-10-30T07:54:44.512322Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.human4ai/collaboration",
+      "description": "AI Agents delegate public verification to human experts with evidence review and points rewards.",
+      "title": "Human4AI Human Task Network",
+      "version": "0.4.0",
+      "websiteUrl": "https://human4ai.ai/developers",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://human4ai.ai/mcp",
+          "headers": [
+            {
+              "description": "Optional Bearer Agent key. H4TP 0.2 tools require task_v2 delegation; legacy task tools use task_publish. Omit for public read tools.",
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-24T04:52:14.521672Z",
+        "publishedAt": "2026-10-24T04:52:14.521672Z",
+        "updatedAt": "2026-10-24T04:52:14.521672Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.humanproblems/humanproblems",
+      "description": "AI agent debate arena: read human problems free, register_agent in 1 call, argue with our bots.",
+      "title": "HumanProblems",
+      "version": "1.0.2",
+      "websiteUrl": "https://humanproblems.ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://humanproblems.ai/mcp",
+          "headers": [
+            {
+              "description": "Optional for reading (list_featured_problems, list_open_problems, get_problem). Call register_agent once to get an hp_sk_ key for posting.",
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-29T18:01:01.339982Z",
+        "publishedAt": "2026-09-29T18:01:01.339982Z",
+        "updatedAt": "2026-09-29T18:01:01.339982Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.huntboard/huntboard",
+      "description": "Search real, recent job postings from company career pages and ATS boards, scored for fit.",
+      "title": "HuntBoard",
+      "version": "1.1.0",
+      "websiteUrl": "https://huntboard.ai/mcp/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://huntboard.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-23T15:21:00.441514Z",
+        "publishedAt": "2026-09-23T15:21:00.441514Z",
+        "updatedAt": "2026-09-23T15:21:00.441514Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.hustlin/hustlin",
+      "description": "The growth team for new products: plan, approve and measure growth for what you just built.",
+      "title": "Hustlin",
+      "repository": {
+        "url": "https://github.com/uxgency/hustlin-claude-plugin",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://hustlin.ai/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://hustlin.ai/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-06T04:36:15.29119Z",
+        "publishedAt": "2026-11-06T04:36:15.29119Z",
+        "updatedAt": "2026-11-06T04:36:15.29119Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.husverket/husverket",
+      "description": "Husverket AB knowledge base: 350 Q&A on attefallshus, prices and building permits in Sweden.",
+      "title": "Husverket \u2013 Swedish Prefab Houses",
+      "version": "2.0.0",
+      "websiteUrl": "https://husverket.ai/connect/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.husverket.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-29T11:04:52.195913Z",
+        "publishedAt": "2026-09-29T11:04:52.195913Z",
+        "updatedAt": "2026-09-29T11:04:52.195913Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.hypaware/hypaware",
+      "description": "Query your team's AI coding history and act on HypAware recommendations from any MCP client.",
+      "title": "HypAware",
+      "repository": {
+        "url": "https://github.com/hyparam/hypaware-plugin",
+        "source": "github"
+      },
+      "version": "1.43.0",
+      "websiteUrl": "https://hypaware.ai",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "hypaware",
+          "version": "1.43.0",
+          "runtimeHint": "npx",
+          "transport": {
+            "type": "stdio"
+          },
+          "packageArguments": [
+            {
+              "type": "positional",
+              "value": "mcp"
+            },
+            {
+              "type": "positional",
+              "value": "serve"
+            }
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.hypaware.ai/v1/mcp",
+          "headers": [
+            {
+              "description": "Bearer <agent token>. Mint one with `hyp remote mint --scope query`.",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-19T22:15:31.337877Z",
+        "publishedAt": "2026-10-19T22:15:31.337877Z",
+        "updatedAt": "2026-10-19T22:15:31.337877Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.hypernatural/hypernatural",
+      "description": "Create and edit AI videos from chat: plan shots, generate scenes, and export stories and ads.",
+      "title": "Hypernatural",
+      "repository": {
+        "url": "https://github.com/hypernaturalai/hypernatural-mcp",
+        "source": "github"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://hypernatural.ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.hypernatural.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-11T00:20:47.555905Z",
+        "publishedAt": "2026-08-11T00:20:47.555905Z",
+        "updatedAt": "2026-08-11T00:20:47.555905Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.hyperresearch/answers",
+      "description": "One question, one checked answer: quote-verified answers from the web and ~45 structured sources.",
+      "title": "Hyperresearch Answers",
+      "repository": {
+        "url": "https://github.com/jordan-gibbs/hyperresearch-answers",
+        "source": "github"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://hyperresearch.ai/answers?utm_source=mcp_registry&utm_medium=mcp_directory",
+      "icons": [
+        {
+          "src": "https://hyperresearch.ai/og/logo-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://answers.hyperresearch.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-30T14:50:28.125057Z",
+        "publishedAt": "2026-10-30T14:50:28.125057Z",
+        "updatedAt": "2026-10-30T14:50:28.125057Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.hyperresearch/hyperresearch",
+      "description": "Start cited deep-research runs, read reports, search your source vault, and verify citations.",
+      "title": "Hyperresearch",
+      "version": "1.0.0",
+      "websiteUrl": "https://hyperresearch.ai/docs/mcp?utm_source=mcp_registry&utm_medium=mcp_directory",
+      "icons": [
+        {
+          "src": "https://hyperresearch.ai/og/logo-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.hyperresearch.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-30T13:35:33.621835Z",
+        "publishedAt": "2026-09-30T13:35:33.621835Z",
+        "updatedAt": "2026-09-30T13:35:33.621835Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.hyperscale0/hyperscale-tenant-tools",
+      "description": "Hyperscale Product reads and contract operations over MCP.",
+      "title": "Hyperscale Tenant Tools",
+      "version": "0.1.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://hyperscale0.ai/v1/mcp",
+          "headers": [
+            {
+              "description": "Optional for initialize, ping, and tools/list. Tool calls require a Hyperscale Product API key in this bearer header.",
+              "value": "Bearer {api_key}",
+              "variables": {
+                "api_key": {
+                  "description": "Hyperscale Product API key. Omit it for initialize, ping, and tools/list; provide it as the bearer token for tool calls.",
+                  "isSecret": true
+                }
+              },
+              "name": "Authorization"
+            }
+          ]
+        }
+      ],
+      "_meta": {}
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-29T19:07:27.678352Z",
+        "publishedAt": "2026-08-29T19:07:27.678352Z",
+        "updatedAt": "2026-08-29T19:07:27.678352Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.hypnothera/hypnothera",
+      "description": "Personalized hypnosis sessions and multi-day journeys, a free session library, and audio rendering.",
+      "title": "Hypnothera",
+      "repository": {
+        "url": "https://github.com/La-Salida/hypnothera-skill",
+        "source": "github"
+      },
+      "version": "1.3.0",
+      "websiteUrl": "https://hypnothera.ai",
+      "icons": [
+        {
+          "src": "https://hypnothera.ai/brand/app-icon-1024.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "1024x1024"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://hypnothera.ai/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-24T05:38:30.354783Z",
+        "publishedAt": "2026-09-24T05:38:30.354783Z",
+        "updatedAt": "2026-09-24T05:38:30.354783Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.hypotize/hypotize",
+      "description": "Agent-native Growth OS: idea backlog, experiment pipeline and learnings your team and agent share.",
+      "title": "Hypotize",
+      "repository": {
+        "url": "https://github.com/hypotizeai/hypotize-plugin",
+        "source": "github"
+      },
+      "version": "1.0.2",
+      "websiteUrl": "https://hypotize.ai/mcp",
+      "icons": [
+        {
+          "src": "https://api.hypotize.ai/icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.hypotize.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-21T06:37:17.250022Z",
+        "publishedAt": "2026-10-21T06:37:17.250022Z",
+        "updatedAt": "2026-10-21T06:37:17.250022Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.hyreflow/hyreflow",
+      "description": "Recruitment automation: source, enrich, qualify and sequence candidates, push to your ATS.",
+      "title": "Hyreflow",
+      "repository": {
+        "url": "https://github.com/automindz-solutions/hyreflow-plugins",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://hyreflow.ai/docs/mcp-setup",
+      "icons": [
+        {
+          "src": "https://recruit.hyreflow.ai/favicon.svg",
+          "mimeType": "image/svg+xml"
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://recruit.hyreflow.ai/api/v2/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-16T13:42:53.263166Z",
+        "publishedAt": "2026-09-16T13:42:53.263166Z",
+        "updatedAt": "2026-09-16T13:42:53.263166Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.i18nagent/i18n-agent",
+      "description": "AI-powered translation for 48 languages with context-aware quality",
+      "title": "i18n-agent",
+      "repository": {
+        "url": "https://github.com/i18n-agent/mcp-client",
+        "source": "github"
+      },
+      "version": "1.16.3",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@i18n-agent/mcp-client",
+          "version": "1.16.3",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "API key from app.i18nagent.ai",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "I18N_AGENT_API_KEY"
+            },
+            {
+              "description": "MCP server URL",
+              "name": "MCP_SERVER_URL"
+            }
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.i18nagent.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-03-16T10:02:49.134686Z",
+        "publishedAt": "2026-03-16T10:02:49.134686Z",
+        "updatedAt": "2026-03-16T10:02:49.134686Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.iam360.app/iam360",
+      "description": "Access your iAM360 fitness record: wearable data, meals, workouts, challenges and journal.",
+      "title": "iAM360",
+      "version": "1.0.0",
+      "websiteUrl": "https://app.iam360.ai/docs/mcp",
+      "icons": [
+        {
+          "src": "https://app.iam360.ai/brand/iam360-agent-icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://app.iam360.ai/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-31T22:27:25.424912Z",
+        "publishedAt": "2026-10-31T22:27:25.424912Z",
+        "updatedAt": "2026-10-31T22:27:25.424912Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.iamcoach/coach",
+      "description": "Your endurance training data in your AI assistant: activities, recovery, plan, workout edits.",
+      "title": "Coach MCP",
+      "version": "1.5.14",
+      "websiteUrl": "https://www.iamcoach.ai/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.iamcoach.ai"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-19T16:51:05.65566Z",
+        "publishedAt": "2026-09-19T16:51:05.65566Z",
+        "updatedAt": "2026-09-19T16:51:05.65566Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.iceshore/iceshore",
+      "description": "Make your AI better at system maintenance. Prompts your AI to organize use cases behind each system.",
+      "title": "IceShore",
+      "version": "1.0.0",
+      "websiteUrl": "https://iceshore.ai/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.iceshore.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-05T00:23:18.861389Z",
+        "publishedAt": "2026-10-05T00:23:18.861389Z",
+        "updatedAt": "2026-10-05T00:23:18.861389Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.ictihad/ictihad-ai",
+      "description": "Turkish law research: court decisions, legislation, deadline and fee calculators, case files.",
+      "title": "\u0130\u00e7tihad AI",
+      "version": "1.0.0",
+      "websiteUrl": "https://ictihad.ai/mcp-sunucusu",
+      "icons": [
+        {
+          "src": "https://ictihad.ai/ictihad-mcp-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://ictihad.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-29T01:16:34.806374Z",
+        "publishedAt": "2026-10-29T01:16:34.806374Z",
+        "updatedAt": "2026-10-29T01:16:34.806374Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.idphoto/mcp",
+      "description": "Turn a portrait into a compliant passport, visa or ID photo. 300+ official specs, 3 free a day.",
+      "title": "IDPhoto.ai Passport & Visa Photos",
+      "version": "0.1.0",
+      "websiteUrl": "https://idphoto.ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.idphoto.ai/mcp",
+          "headers": [
+            {
+              "description": "idphoto.ai API key (optional; without it make_id_photo is limited to 3 free photos per day)",
+              "isSecret": true,
+              "name": "X-IDP-API-Key"
+            },
+            {
+              "description": "idphoto.ai API secret (required together with X-IDP-API-Key)",
+              "isSecret": true,
+              "name": "X-IDP-API-Secret"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-19T09:25:08.511689Z",
+        "publishedAt": "2026-10-19T09:25:08.511689Z",
+        "updatedAt": "2026-10-19T09:25:08.511689Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.iglesiacatolica/iglesia",
+      "description": "Independent Catholic church for AI agents: daily Mass, readings, saints, Bible, catechism.",
+      "title": "La Iglesia Cat\u00f3lica de los Agentes de AI",
+      "version": "1.0.0",
+      "websiteUrl": "https://iglesiacatolica.ai/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://iglesiacatolica.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-07T04:41:27.406577Z",
+        "publishedAt": "2026-11-07T04:41:27.406577Z",
+        "updatedAt": "2026-11-07T04:41:27.406577Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.igoyal/public-context",
+      "description": "Read-only canonical igoyal.ai Markdown resources, including MPP-paid city guides.",
+      "title": "Ishan Goyal public context",
+      "repository": {
+        "url": "https://github.com/IshanGoyal/personal-website",
+        "source": "github"
+      },
+      "version": "1.1.0",
+      "websiteUrl": "https://igoyal.ai/machine-access",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://igoyal.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-31T07:00:47.93145Z",
+        "publishedAt": "2026-08-31T07:00:47.93145Z",
+        "updatedAt": "2026-08-31T07:00:47.93145Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.imagera/imagera",
+      "description": "Generate and edit images, video, voice and music, and upscale media on Imagera credits.",
+      "title": "Imagera",
+      "version": "1.0.0",
+      "websiteUrl": "https://imagera.ai/mcp",
+      "icons": [
+        {
+          "src": "https://imagera.ai/apple-touch-icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "180x180"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.imagera.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-06T06:44:42.138798Z",
+        "publishedAt": "2026-11-06T06:44:42.138798Z",
+        "updatedAt": "2026-11-06T06:44:42.138798Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+      "name": "ai.imaginode/imaginode",
+      "description": "Generate AI images and videos from 89 models on one credit balance, refunds on failure.",
+      "repository": {
+        "url": "https://github.com/Frankhoubre/imaginode-mcp",
+        "source": "github"
+      },
+      "version": "1.0.2",
+      "websiteUrl": "https://imaginode.ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://imaginode.ai/api/mcp",
+          "headers": [
+            {
+              "description": "Bearer imk_\u2026 API key, created in your profile at https://imaginode.ai/profile (verified account required, trial credits included).",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-08T14:07:45.408742Z",
+        "publishedAt": "2026-09-08T14:07:45.408742Z",
+        "updatedAt": "2026-09-08T14:07:45.408742Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.imario/imario",
+      "description": "Synthetic audiences built from real people. Ask anyone anything before you decide.",
+      "title": "iMario",
+      "version": "1.1.2",
+      "websiteUrl": "https://imario.ai",
+      "icons": [
+        {
+          "src": "https://imario.ai/android-chrome-512x512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.imario.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-28T07:14:43.314794Z",
+        "publishedAt": "2026-09-28T07:14:43.314794Z",
+        "updatedAt": "2026-09-28T07:14:43.314794Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.imboard/dossier",
+      "description": "MCP server for dossier automation standard - enables LLMs to discover, verify, and execute dossiers",
+      "repository": {
+        "url": "https://github.com/imboard-ai/ai-dossier",
+        "source": "github"
+      },
+      "version": "1.0.4",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@ai-dossier/mcp-server",
+          "version": "1.0.4",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-03-07T09:20:43.263852Z",
+        "publishedAt": "2026-03-07T09:20:43.263852Z",
+        "updatedAt": "2026-03-07T09:20:43.263852Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.immokit/mcp",
+      "description": "German land values, cadastral parcels and development plans by address, with source attribution.",
+      "title": "immokit.ai \u2014 Auskunft zu Grundst\u00fcck und Immobilie",
+      "version": "1.0.1",
+      "websiteUrl": "https://immokit.ai",
+      "icons": [
+        {
+          "src": "https://immokit.ai/favicon.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        },
+        {
+          "src": "https://immokit.ai/logo-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.immokit.ai/mcp"
+        }
+      ],
+      "_meta": {
+        "io.modelcontextprotocol.registry/publisher-provided": {
+          "coverageUrl": "https://immokit.ai/datengrundlagen",
+          "longDescription": "German land and property records by address, from one endpoint: official land values (Bodenrichtwerte), cadastral parcels (ALKIS) and legally binding development plans (Bebauungspl\u00e4ne). Each answer carries its own source attribution, which must remain visible when the data is passed on. Coverage differs per subject and federal state and is stated in every response \u2014 see immokit.ai/datengrundlagen. Not an official record and no substitute for the competent authority. A private, OAuth-secured access service."
+        }
+      }
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-09T16:56:37.648461Z",
+        "publishedAt": "2026-10-09T16:56:37.648461Z",
+        "updatedAt": "2026-10-09T16:56:37.648461Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.immopix/mcp",
+      "description": "AI photo enhancement for real estate listings.",
+      "title": "Immopix",
+      "repository": {
+        "url": "https://github.com/Immopix/mcp",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://immopix.ai/en/docs/mcp/",
+      "icons": [
+        {
+          "src": "https://immopix.ai/static/images/v3/icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        },
+        {
+          "src": "https://immopix.ai/static/images/v3/icon-192.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "192x192"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://immopix.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-29T14:45:48.844611Z",
+        "publishedAt": "2026-08-29T14:45:48.844611Z",
+        "updatedAt": "2026-08-29T14:45:48.844611Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.in-parallel/in-parallel",
+      "description": "The context layer for your company's AI: your team's decisions, meetings and plans, with sources.",
+      "title": "In Parallel",
+      "repository": {
+        "url": "https://github.com/in-parallel-oy/agent-plugin",
+        "source": "github"
+      },
+      "version": "0.1.1",
+      "websiteUrl": "https://www.in-parallel.com/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.in-parallel.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-15T07:00:20.578729Z",
+        "publishedAt": "2026-10-15T07:00:20.578729Z",
+        "updatedAt": "2026-10-15T07:00:20.578729Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.inblog/mcp",
+      "description": "Run your company blog for SEO and AI search from your AI assistant.",
+      "title": "Inblog",
+      "version": "0.1.1",
+      "websiteUrl": "https://inblog.ai/docs/developer-tools/mcp-connector",
+      "icons": [
+        {
+          "src": "https://inblog.ai/inblog_favicon.png",
+          "mimeType": "image/png"
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://inblog.ai/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-13T15:25:54.283492Z",
+        "publishedAt": "2026-10-13T15:25:54.283492Z",
+        "updatedAt": "2026-10-13T15:25:54.283492Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.inbrix/helpdesk",
+      "description": "AI-native helpdesk hosted in Germany: tickets, replies, KPIs and knowledge base over MCP.",
+      "title": "inbrix",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.inbrix.ai/en",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://app.inbrix.ai/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-02T14:30:56.896483Z",
+        "publishedAt": "2026-09-02T14:30:56.896483Z",
+        "updatedAt": "2026-09-02T14:30:56.896483Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.inflowpay.app/inflow",
+      "description": "MCP Server for agents to onboard, pay, and provision services autonomously with InFlow",
+      "repository": {
+        "url": "https://github.com/inflowpayai/inflow-mcp",
+        "source": "github"
+      },
+      "version": "1.0.3",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://app.inflowpay.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-04-01T08:15:17.136175Z",
+        "publishedAt": "2026-04-01T08:15:17.136175Z",
+        "updatedAt": "2026-04-01T08:15:17.136175Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.influverse/influverse",
+      "description": "Create AI images and videos, schedule social posts and run autopilot, within a credit limit you set.",
+      "title": "Influverse",
+      "version": "1.0.0",
+      "websiteUrl": "https://influverse.ai/connect",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://influverse.ai/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-28T23:40:53.584316Z",
+        "publishedAt": "2026-10-28T23:40:53.584316Z",
+        "updatedAt": "2026-10-28T23:40:53.584316Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.infobro/directory",
+      "description": "List your AI tool on infobro.ai: sign up by email code, submit or claim a listing, pay and track it.",
+      "title": "infobro AI tools directory",
+      "version": "1.0.0",
+      "websiteUrl": "https://infobro.ai/mcp-server",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://infobro.ai/mcp",
+          "headers": [
+            {
+              "description": "Optional. Bearer key returned by verify_signup; without it the assistant can sign up first or pass api_key per call.",
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-04T14:42:54.146783Z",
+        "publishedAt": "2026-11-04T14:42:54.146783Z",
+        "updatedAt": "2026-11-04T14:42:54.146783Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.infolang/mcp",
+      "description": "InfoLang semantic memory MCP \u2014 investigate, memorize, and recall compressed agent context.",
+      "title": "InfoLang Memory",
+      "repository": {
+        "url": "https://github.com/InfoLang-Inc/infolang-services",
+        "source": "github"
+      },
+      "version": "0.1.0",
+      "websiteUrl": "https://infolang.ai/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.infolang.ai/v1/mcp/"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-13T22:58:34.21363Z",
+        "publishedAt": "2026-07-13T22:58:34.21363Z",
+        "updatedAt": "2026-07-13T22:58:34.21363Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.infrabase/directory",
+      "description": "Hand-verified AI infrastructure directory: tools, alternatives, EU providers, LLM API prices.",
+      "title": "Infrabase",
+      "version": "1.0.0",
+      "websiteUrl": "https://infrabase.ai/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://infrabase.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-02T07:41:28.931314Z",
+        "publishedAt": "2026-10-02T07:41:28.931314Z",
+        "updatedAt": "2026-10-02T07:41:28.931314Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.infrapulse/infrapulse",
+      "description": "AI agent infrastructure for discovery, authorization, execution, identity, and signed receipts.",
+      "title": "InfraPulse",
+      "version": "1.0.1",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://infrapulse.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-23T23:13:51.677128Z",
+        "publishedAt": "2026-08-23T23:13:51.677128Z",
+        "updatedAt": "2026-08-23T23:13:51.677128Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.inite/atlas",
+      "description": "AI tools catalogue for agents: match a need to tools, compare prices, see price and API changes.",
+      "title": "INITE Atlas",
+      "repository": {
+        "url": "https://github.com/inite-ai/inite-visibility",
+        "source": "github"
+      },
+      "version": "1.2.0",
+      "websiteUrl": "https://inite.ai/en/atlas",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://inite.ai/api/mcp/atlas",
+          "headers": [
+            {
+              "description": "Optional. Every lookup, search and change list answers without it. Bearer <access_token> from auth.inite.ai adds a vendor's own listing tools.",
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ],
+      "_meta": {
+        "io.modelcontextprotocol.registry/publisher-provided": {
+          "auth": "none for reading; oauth2 for a vendor's own listings",
+          "locales": [
+            "en",
+            "ru",
+            "pt",
+            "es"
+          ],
+          "tools": [
+            "match_tools",
+            "match_mcp",
+            "atlas_lookup",
+            "atlas_search",
+            "atlas_compare",
+            "atlas_changes",
+            "atlas_coupons",
+            "atlas_my_listings"
+          ]
+        }
+      }
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-20T20:19:21.818871Z",
+        "publishedAt": "2026-10-20T20:19:21.818871Z",
+        "updatedAt": "2026-10-20T20:19:21.818871Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.inite/atlas-owners",
+      "description": "Your tool in the INITE Atlas: add it, prove the domain, run its card, coupons, premium. Signed in.",
+      "title": "INITE Atlas Owners",
+      "repository": {
+        "url": "https://github.com/inite-ai/inite-visibility",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://inite.ai/en/mcp#rail-atlas-owners",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://inite.ai/api/mcp/atlas-owners",
+          "headers": [
+            {
+              "description": "Required. Bearer <access_token> from auth.inite.ai (OAuth 2.1 with dynamic client registration and PKCE). Without it every call answers 401 with WWW-Authenticate pointing at https://inite.ai/.well-known/oauth-protected-resource/api/mcp/atlas-owners.",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-21T11:39:13.968518Z",
+        "publishedAt": "2026-10-21T11:39:13.968518Z",
+        "updatedAt": "2026-10-21T11:39:13.968518Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.inite/directory",
+      "description": "Businesses that confirmed their own facts at INITE, found by what they do and where.",
+      "title": "INITE Directory",
+      "repository": {
+        "url": "https://github.com/inite-ai/inite-agents",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://inite.ai/en/mcp#rail-directory",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://inite.ai/api/mcp/directory"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-25T15:27:29.545245Z",
+        "publishedAt": "2026-10-25T15:27:29.545245Z",
+        "updatedAt": "2026-10-25T15:27:29.545245Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.inite/inite",
+      "description": "INITE itself: services and prices, free call slots, booking a call, writing to the team. No token.",
+      "title": "INITE",
+      "repository": {
+        "url": "https://github.com/inite-ai/inite-visibility",
+        "source": "github"
+      },
+      "version": "1.1.0",
+      "websiteUrl": "https://inite.ai/en/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://inite.ai/api/mcp/portal",
+          "headers": [
+            {
+              "description": "Optional. Without it the services, slots, booking, contact and guides answer, under per-address allowances. The person's own account and purchases are on https://inite.ai/api/mcp/portal-me, which signs in with auth.inite.ai.",
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-21T11:39:20.5021Z",
+        "publishedAt": "2026-10-21T11:39:20.5021Z",
+        "updatedAt": "2026-10-21T11:39:20.5021Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.inite/inite-me",
+      "description": "Your INITE account, and Local Start bought for you, paid from your INITE wallet or by card.",
+      "title": "INITE, signed in",
+      "repository": {
+        "url": "https://github.com/inite-ai/inite-visibility",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://inite.ai/en/mcp#rail-portal-me",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://inite.ai/api/mcp/portal-me",
+          "headers": [
+            {
+              "description": "Required. Bearer <access_token> from auth.inite.ai (OAuth 2.1 with dynamic client registration and PKCE). Without it every call answers 401 with WWW-Authenticate pointing at https://inite.ai/.well-known/oauth-protected-resource/api/mcp/portal-me.",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-21T11:39:18.724816Z",
+        "publishedAt": "2026-10-21T11:39:18.724816Z",
+        "updatedAt": "2026-10-21T11:39:18.724816Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.inite/inite-visibility",
+      "description": "How ChatGPT, Claude, Gemini and Perplexity read a site: free check, fix plan, compare, history.",
+      "title": "INITE Visibility",
+      "repository": {
+        "url": "https://github.com/inite-ai/inite-visibility",
+        "source": "github"
+      },
+      "version": "2.1.0",
+      "websiteUrl": "https://inite.ai/en/analyze",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@inite/visibility",
+          "version": "1.3.0",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Access token for inite.ai. Optional: three checks run locally without one. Run `npx @inite/visibility login` to add the full audit.",
+              "isSecret": true,
+              "name": "INITE_TOKEN"
+            }
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://inite.ai/api/mcp/analyzer",
+          "headers": [
+            {
+              "description": "Optional. Without it every open tool answers, under per-address allowances, and the audit runs as the survey. Bearer <access_token> adds my_reports, your audits behind visibility_fixes and visibility_history, and the account's tier; a member tool called without one answers 401 with WWW-Authenticate pointing at https://inite.ai/.well-known/oauth-protected-resource/api/mcp/analyzer, which names auth.inite.ai.",
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ],
+      "_meta": {
+        "io.modelcontextprotocol.registry/publisher-provided": {
+          "auth": "none for the local checks, oauth2 for the full audit",
+          "locales": [
+            "en",
+            "ru",
+            "pt",
+            "es"
+          ],
+          "quota": "the account's own daily allowance, same as the web app",
+          "tools": 5
+        }
+      }
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-20T00:44:10.585813Z",
+        "publishedAt": "2026-10-20T00:44:10.585813Z",
+        "updatedAt": "2026-10-20T00:44:10.585813Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.inite/inite-visibility-me",
+      "description": "AI visibility for your account: the full audit, a weekly watch, your audits, a licence.",
+      "title": "INITE Visibility, signed in",
+      "repository": {
+        "url": "https://github.com/inite-ai/inite-visibility",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://inite.ai/en/mcp#rail-analyzer-me",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://inite.ai/api/mcp/analyzer-me",
+          "headers": [
+            {
+              "description": "Required. Bearer <access_token> from auth.inite.ai (OAuth 2.1 with dynamic client registration and PKCE). Without it every call answers 401 with WWW-Authenticate pointing at https://inite.ai/.well-known/oauth-protected-resource/api/mcp/analyzer-me.",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-21T11:39:16.981895Z",
+        "publishedAt": "2026-10-21T11:39:16.981895Z",
+        "updatedAt": "2026-10-21T11:39:16.981895Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.inite/site-agents",
+      "description": "Per-business MCP servers serving owner-confirmed facts: services, prices, hours, places, FAQ.",
+      "title": "INITE Agents",
+      "repository": {
+        "url": "https://github.com/inite-ai/inite-agents",
+        "source": "github"
+      },
+      "version": "0.1.0",
+      "websiteUrl": "https://inite.ai/en/services/ai-search-optimization#inite-agents",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://{slug}.inite.ai/mcp",
+          "variables": {
+            "slug": {
+              "description": "The business's slug at INITE: the name before .inite.ai in the MCP address its llms.txt and /.well-known/agent-card.json give.",
+              "isRequired": true
+            }
+          }
+        }
+      ],
+      "_meta": {
+        "io.modelcontextprotocol.registry/publisher-provided": {
+          "auth": "none; read-only",
+          "note": "One server per business. It answers only after the business proved its domain and confirmed its facts; until then the address answers 404.",
+          "tools": [
+            "business_facts",
+            "services",
+            "hours",
+            "locations",
+            "faq"
+          ]
+        }
+      }
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-22T20:42:53.904065Z",
+        "publishedAt": "2026-10-22T20:42:53.904065Z",
+        "updatedAt": "2026-10-22T20:42:53.904065Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.initialed/contract-drafting",
+      "description": "For individuals and small businesses: draft quotes, quote + agreement docs and contracts to sign.",
+      "title": "Initialed AI: quotes and contracts for small business",
+      "version": "0.2.0",
+      "websiteUrl": "https://initialed.ai/integrations/mcp",
+      "icons": [
+        {
+          "src": "https://initialed.ai/favicon-512x512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.initialed.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-25T03:20:04.689911Z",
+        "publishedAt": "2026-10-25T03:20:04.689911Z",
+        "updatedAt": "2026-10-25T03:20:04.689911Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-10-17/server.schema.json",
+      "name": "ai.insideralpha/insider-alpha",
+      "description": "SEC Form 4 insider buys, deduplicated, with 10b5-1 flags, 8-K catalysts and a pre-open daily plan.",
+      "title": "InsiderAlpha",
+      "version": "1.0.1",
+      "websiteUrl": "https://insideralpha.ai/docs/mcp?utm_source=mcp-registry",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.insideralpha.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-12T00:32:11.423354Z",
+        "publishedAt": "2026-10-12T00:32:11.423354Z",
+        "updatedAt": "2026-10-12T00:32:11.423354Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.inspectmind/checker",
+      "description": "AI plan review for construction drawings: submit plan sets, get code, spec and drawing findings.",
+      "title": "InspectMind",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.inspectmind.ai/developers",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.inspectmind.ai/api/mcp",
+          "headers": [
+            {
+              "description": "Bearer token: 'Bearer imk_...'. Create a key at https://checker.inspectmind.ai/developers",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-07T22:37:36.221898Z",
+        "publishedAt": "2026-11-07T22:37:36.221898Z",
+        "updatedAt": "2026-11-07T22:37:36.221898Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.instabids/instabids",
+      "description": "AI-run marketplace for homeowners: describe a home job once, get written quotes on the same scope.",
+      "title": "InstaBids",
+      "version": "1.0.2",
+      "websiteUrl": "https://instabids.ai/developers",
+      "icons": [
+        {
+          "src": "https://instabids.ai/icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://instabids.ai/api/agent/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-07T08:07:46.607555Z",
+        "publishedAt": "2026-11-07T08:07:46.607555Z",
+        "updatedAt": "2026-11-07T08:07:46.607555Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.instantclips/instantclips",
+      "description": "Create branded vertical video ads from ecommerce product URLs or product photos.",
+      "title": "InstantClips",
+      "repository": {
+        "url": "https://github.com/InstantStudioAI/instantclips-mcp",
+        "source": "github",
+        "id": "1349434456"
+      },
+      "version": "1.10.1",
+      "websiteUrl": "https://instantclips.ai/automate/",
+      "icons": [
+        {
+          "src": "https://instantclips.ai/assets/instantclips-icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "instantclips-mcp",
+          "version": "1.10.1",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Bearer token from app.instantclips.ai/settings#ai-access",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "INSTANTCLIPS_TOKEN"
+            }
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://app.instantclips.ai/mcp",
+          "headers": [
+            {
+              "description": "Optional: sign in through OAuth when the client offers it (the server announces the flow on its 401); otherwise a Bearer token from app.instantclips.ai/settings#ai-access.",
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-06T04:00:25.524096Z",
+        "publishedAt": "2026-11-06T04:00:25.524096Z",
+        "updatedAt": "2026-11-06T04:00:25.524096Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.instapath/instapath",
+      "description": "Your agent posts what you offer, searches for what you need, and talks to other agents.",
+      "title": "Instapath",
+      "version": "3.1.0",
+      "websiteUrl": "https://instapath.ai/start",
+      "icons": [
+        {
+          "src": "https://instapath.ai/instapath-mark-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        },
+        {
+          "src": "https://instapath.ai/instapath-mark.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "256x256"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://instapath.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "deprecated",
+        "statusChangedAt": "2026-10-05T17:27:55.730626Z",
+        "statusMessage": "Instapath is now Instinctpath: sh.instinctpath/instinctpath",
+        "publishedAt": "2026-10-03T15:38:18.855812Z",
+        "updatedAt": "2026-10-05T17:27:55.730626Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.instaport/instaport",
+      "description": "Your portfolio plus Congress, top funds, insiders, analysts and social signals, explained by AI.",
+      "title": "Instaport",
+      "version": "1.0.1",
+      "websiteUrl": "https://instaport.ai/faq#ai-assistant",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.instaport.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-22T23:06:43.118734Z",
+        "publishedAt": "2026-10-22T23:06:43.118734Z",
+        "updatedAt": "2026-10-22T23:06:43.118734Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.intangible/mcp",
+      "description": "Build 3D scenes, place cameras and render shots. Previs, storyboards, set design, product and CAD.",
+      "title": "Intangible",
+      "version": "0.1.0",
+      "websiteUrl": "https://www.intangible.ai/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.intangible.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-10T22:02:52.93217Z",
+        "publishedAt": "2026-08-10T22:02:52.93217Z",
+        "updatedAt": "2026-08-10T22:02:52.93217Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.intodns/scanner",
+      "description": "DNS and email security: check SPF, DKIM, DMARC, DNSSEC, DANE and build the records. 45 tools.",
+      "title": "IntoDNS.ai DNS & Email Security Scanner",
+      "repository": {
+        "url": "https://github.com/RoscoNL/intodns-mcp-server",
+        "source": "github"
+      },
+      "version": "1.11.3",
+      "websiteUrl": "https://intodns.ai/mcp",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "intodns-mcp",
+          "version": "1.11.3",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://intodns.ai/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-27T20:21:23.990991Z",
+        "publishedAt": "2026-10-27T20:21:23.990991Z",
+        "updatedAt": "2026-10-27T20:21:23.990991Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.intuitek.the-stall/the-stall",
+      "description": "277 pay-per-call MCP tools: YouTube keyword research, stocks, crypto, DeFi, options, macro.",
+      "title": "The Stall",
+      "version": "v4.82.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://the-stall.intuitek.ai/mcp"
+        },
+        {
+          "type": "sse",
+          "url": "https://the-stall.intuitek.ai/sse"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-06-29T04:08:05.230042Z",
+        "publishedAt": "2026-06-29T04:08:05.230042Z",
+        "updatedAt": "2026-06-29T04:08:05.230042Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+      "name": "ai.inventoryhero/inventory-hero",
+      "description": "Inventory, restock planning, and sales analytics for your Amazon FBA business.",
+      "title": "Inventory Hero",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.inventoryhero.ai",
+      "icons": [
+        {
+          "src": "https://www.inventoryhero.ai/icon.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.prod.inventoryhero.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-06-10T19:55:41.213195Z",
+        "publishedAt": "2026-06-10T19:55:41.213195Z",
+        "updatedAt": "2026-06-10T19:55:41.213195Z",
+        "isLatest": true
+      }
+    }
+  }
+]

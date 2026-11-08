@@ -18,7 +18,7 @@ Web application security testing workflow for OWASP Top 10 vulnerabilities inclu
 **Tech:** [[GitHub Actions]], [[OWASP]], [[Security Audit]], [[TDD]], [[XSS]]
 
 ## Related Skills
-- **Complements:** [[api-design-principles]], [[e2e-testing]], [[stripe-best-practices]], [[web-testing-cypress-e2e]]
-- **Alternate of:** [[api-security-testing]], [[security-audit]], [[sql-injection-testing]], [[vulnerability-scanner]]
+- **Complements:** [[architecture-patterns]], [[e2e-testing]], [[stripe-best-practices]], [[web-testing-cypress-e2e]]
+- **Alternate of:** [[api-security-testing]], [[security-audit]], [[vulnerability-scanner]]
 
 Real skill file: `skills/web-security-testing/SKILL.md`

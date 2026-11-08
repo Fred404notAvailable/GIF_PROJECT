@@ -18,6 +18,6 @@ Provides React Native performance optimization guidelines for FPS, TTI, bundle s
 **Tech:** [[React]], [[Agents]], [[TDD]]
 
 ## Related Skills
-- **Complements:** [[agent-memory-systems]], [[api-design-principles]], [[api-security]], [[langfuse]]
+- **Complements:** [[agent-memory-systems]], [[api-security]], [[api-security-testing]], [[langfuse]]
 
 Real skill file: `skills/react-native-best-practices/SKILL.md`

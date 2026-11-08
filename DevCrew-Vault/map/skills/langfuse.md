@@ -18,7 +18,7 @@ Expert in Langfuse - the open-source LLM observability platform. Covers tracing,
 **Tech:** [[Observability]], [[Agents]], [[LangChain]], [[TDD]]
 
 ## Related Skills
-- **Complements:** [[api-design-principles]], [[api-security]], [[api-security-testing]], [[react-native-best-practices]]
+- **Complements:** [[api-security]], [[api-security-testing]], [[application-performance-performance-optimization]], [[react-native-best-practices]]
 - **Alternate of:** [[langchain-architecture]], [[langchain-fundamentals]]
 
 Real skill file: `skills/langfuse/SKILL.md`

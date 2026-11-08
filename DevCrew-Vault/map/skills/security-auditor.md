@@ -18,6 +18,6 @@ Expert security auditor specializing in DevSecOps, comprehensive cybersecurity, 
 **Tech:** [[Security Audit]]
 
 ## Related Skills
-- **Complements:** [[cloudflare]], [[nodejs-best-practices]], [[stripe-best-practices]]
+- **Complements:** [[cloudflare]], [[nodejs-best-practices]], [[stripe-best-practices]], [[supabase-postgres-best-practices]]
 
 Real skill file: `skills/security-auditor/SKILL.md`

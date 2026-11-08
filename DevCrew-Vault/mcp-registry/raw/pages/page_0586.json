@@ -1,0 +1,3106 @@
+[
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "trade.onestop/onestop-mcp",
+      "description": "Gasless Solana swaps, market-cap limit, trailing and TWAP orders, and plans. Your key stays local.",
+      "title": "onestop",
+      "repository": {
+        "url": "https://github.com/OneStop-Labs/onestop-mcp",
+        "source": "github"
+      },
+      "version": "1.0.2",
+      "websiteUrl": "https://onestop.trade",
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "@onestop-trade/onestop-mcp",
+          "version": "1.0.2",
+          "runtimeHint": "npx",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "The private key of the wallet that trades, as your wallet exports it. Use a wallet you keep for trading",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "ONESTOP_PRIVATE_KEY"
+            },
+            {
+              "description": "Or the path to a keypair file, instead of the private key",
+              "format": "filepath",
+              "name": "ONESTOP_KEYPAIR_PATH"
+            },
+            {
+              "description": "Your RPC, used to simulate every transaction before signing (default: public mainnet)",
+              "name": "SOLANA_RPC_URL"
+            },
+            {
+              "description": "true to trade nothing: order tools answer without calling onestop and swaps stop after the guard",
+              "format": "boolean",
+              "name": "ONESTOP_DRY_RUN"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-04T00:03:47.471094Z",
+        "publishedAt": "2026-11-04T00:03:47.471094Z",
+        "updatedAt": "2026-11-04T00:03:47.471094Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "trade.onyxprotocol/onyx-aml",
+      "description": "Crypto address risk checks for agents: USDT/USDC blacklists, sanctions, scam lists, poisoning",
+      "title": "Onyx AML",
+      "version": "1.0.0",
+      "websiteUrl": "https://onyxprotocol.trade/en/agents",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://onyxprotocol.trade/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-20T21:27:02.1985Z",
+        "publishedAt": "2026-10-20T21:27:02.1985Z",
+        "updatedAt": "2026-10-20T21:27:02.1985Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "trade.quote/mcp",
+      "description": "Quote.Trade crypto DEX: market data, account, orders, deposits and stablecoin withdrawals.",
+      "title": "Quote.Trade MCP Adapter",
+      "version": "1.5.14",
+      "websiteUrl": "https://quote.trade",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://quote.trade/mcp",
+          "headers": [
+            {
+              "description": "API key from Quote.Trade (wallet login optional). Trade-only: no withdraw. Full-access: trade+withdraw.",
+              "isSecret": true,
+              "name": "X-MBX-APIKEY"
+            },
+            {
+              "description": "API secret for the key above. MCP host HMAC-signs with it (full signing authority for that key). Prefer trade-only keys for agents.",
+              "isSecret": true,
+              "name": "X-MBX-APISECRET"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-27T07:56:55.638466Z",
+        "publishedAt": "2026-10-27T07:56:55.638466Z",
+        "updatedAt": "2026-10-27T07:56:55.638466Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "trade.rubin/exchange",
+      "description": "Rubin: self-custody DEX for crypto perpetuals & spot - trade, read positions, orders, balances.",
+      "title": "Rubin Exchange",
+      "repository": {
+        "url": "https://github.com/rubin-trade/rubin-mainnet-mcp",
+        "source": "github"
+      },
+      "version": "1.0.2",
+      "websiteUrl": "https://code.rubin.trade/ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.mainnet.rubin.trade/mcp",
+          "headers": [
+            {
+              "description": "Bearer MCP token - mint one on the Rubin exchange at rubin.trade (Trading Keys -> MCP Token).",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-06-22T05:18:01.387205Z",
+        "publishedAt": "2026-06-22T05:18:01.387205Z",
+        "updatedAt": "2026-06-22T05:18:01.387205Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "trade.secbot/secbot",
+      "description": "US market data from public filings: SEC, insiders, 13F, Congress trades, lobbying, FDA, contracts.",
+      "title": "SecBot",
+      "version": "1.0.1",
+      "websiteUrl": "https://secbot.trade/agents",
+      "icons": [
+        {
+          "src": "https://secbot.trade/press/secbot-mark.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        },
+        {
+          "src": "https://secbot.trade/press/secbot-mark.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://secbot.trade/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-28T12:29:25.800893Z",
+        "publishedAt": "2026-10-28T12:29:25.800893Z",
+        "updatedAt": "2026-10-28T12:29:25.800893Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "trade.shifu/mcp",
+      "description": "Run TradingView-to-broker bots for futures: create, pause and edit bots, read your trade journal.",
+      "title": "Shifu",
+      "version": "1.3.0",
+      "websiteUrl": "https://shifu.trade/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://shifu.trade/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-20T16:37:40.193739Z",
+        "publishedAt": "2026-10-20T16:37:40.193739Z",
+        "updatedAt": "2026-10-20T16:37:40.193739Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "trade.snacs/snacs-data",
+      "description": "SEC dilution data, live market data, and news for U.S. equities, with point-in-time as-of queries.",
+      "title": "SNACS Data",
+      "repository": {
+        "url": "https://github.com/snacstrade/snacs-mcp",
+        "source": "github"
+      },
+      "version": "3.5.0",
+      "websiteUrl": "https://snacs.trade/api",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.snacs.trade/",
+          "headers": [
+            {
+              "description": "Bearer <your SNACS API key (snacs_sk_...)>. Optional: clients supporting MCP OAuth (claude.ai) can connect with no key via the one-click sign-in flow.",
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-16T23:59:31.239753Z",
+        "publishedAt": "2026-08-16T23:59:31.239753Z",
+        "updatedAt": "2026-08-16T23:59:31.239753Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "trade.syndicate/markets",
+      "description": "Read-only market data: tokens, stocks, Hyperliquid perps, Polymarket, and public trader books.",
+      "title": "Syndicate",
+      "version": "1.0.0",
+      "websiteUrl": "https://syndicate.trade",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://gateway.syndicate.trade/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-07T22:47:30.861915Z",
+        "publishedAt": "2026-11-07T22:47:30.861915Z",
+        "updatedAt": "2026-11-07T22:47:30.861915Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "trade.syndicate/trading",
+      "description": "Let an agent trade from your Syndicate bot on Hyperliquid, Polymarket and spot, within your limits.",
+      "title": "Syndicate Trading",
+      "version": "1.0.0",
+      "websiteUrl": "https://syndicate.trade",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://gateway.syndicate.trade/trading-mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-07T22:47:31.199911Z",
+        "publishedAt": "2026-11-07T22:47:31.199911Z",
+        "updatedAt": "2026-11-07T22:47:31.199911Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "trading.alphaprime/alphaprime",
+      "description": "Generate and backtest futures trading strategies from Claude with AlphaPrime (Valynox).",
+      "title": "AlphaPrime",
+      "version": "1.0.0",
+      "websiteUrl": "https://alphaprime.trading/en/claude/",
+      "icons": [
+        {
+          "src": "https://alphaprime.trading/assets/ap-phoenix.png",
+          "mimeType": "image/png"
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.alphaprime.trading/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-30T16:42:12.696021Z",
+        "publishedAt": "2026-10-30T16:42:12.696021Z",
+        "updatedAt": "2026-10-30T16:42:12.696021Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "trading.gambit/gambit",
+      "description": "AI research desk for Hyperliquid: ranked opportunities and trade theses. You confirm every trade.",
+      "title": "Gambit",
+      "version": "0.2.0",
+      "websiteUrl": "https://gambit.trading/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.gambit.trading/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-09T19:20:31.077591Z",
+        "publishedAt": "2026-10-09T19:20:31.077591Z",
+        "updatedAt": "2026-10-09T19:20:31.077591Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "training.stats/garmin",
+      "description": "Read-only Garmin and Strava data for your AI: activities, sleep, HRV, readiness, training load.",
+      "title": "Garmin & Strava for Claude and ChatGPT",
+      "version": "1.0.0",
+      "websiteUrl": "https://stats.training/garmin-mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://stats.training/mcp/{mcp_key}",
+          "variables": {
+            "mcp_key": {
+              "description": "Your personal MCP key, shown on your stats.training account page after you connect Garmin or Strava. It authenticates the connection on its own, so treat it like a password.",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true
+            }
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-21T11:27:17.537785Z",
+        "publishedAt": "2026-09-21T11:27:17.537785Z",
+        "updatedAt": "2026-09-21T11:27:17.537785Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "travel.aura/stays",
+      "description": "Search and price stays on aura.travel, a global accommodation platform founded in Australia.",
+      "title": "aura.travel stays",
+      "repository": {
+        "url": "https://github.com/aura-travel/ai-agents",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://aura.travel/ai-agents.html",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://ai.aura.travel/mcp",
+          "headers": [
+            {
+              "description": "Bearer <your aura.travel agent key>. Request one at https://aura.travel/ai-agents.html",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-30T20:12:59.498812Z",
+        "publishedAt": "2026-10-30T20:12:59.498812Z",
+        "updatedAt": "2026-10-30T20:12:59.498812Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "travel.hotely/hotel-search",
+      "description": "Search hotels and get hotel details. Search-only; book on hotely.travel.",
+      "title": "Hotely Hotel Search",
+      "version": "1.0.0",
+      "websiteUrl": "https://hotely.travel/connector",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.hotely.travel/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-29T02:57:31.701431Z",
+        "publishedAt": "2026-09-29T02:57:31.701431Z",
+        "updatedAt": "2026-09-29T02:57:31.701431Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-10-17/server.schema.json",
+      "name": "travel.kismet/mcp-server",
+      "description": "Semantic hotel search with real-time availability and price comparison for Kismet Travel",
+      "repository": {
+        "url": "https://github.com/kismet-tech/kismet-travel-mcp-v2",
+        "source": "github"
+      },
+      "version": "0.0.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.kismet.travel/mcp"
+        },
+        {
+          "type": "sse",
+          "url": "https://mcp.kismet.travel/sse"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2025-09-10T22:00:17.761143Z",
+        "publishedAt": "2025-09-10T22:00:17.761143Z",
+        "updatedAt": "2025-09-10T22:00:17.761143Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "travel.ourway/camino-de-santiago",
+      "description": "Plan, quote & book the Camino de Santiago: routes, stages, live hotels, one package price, FAQ.",
+      "title": "Ourway \u2013 Camino de Santiago",
+      "repository": {
+        "url": "https://github.com/contactoourway-art/ourway-mcp",
+        "source": "github"
+      },
+      "version": "2.1.1",
+      "websiteUrl": "https://ourway.travel/en/ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.ourway.travel/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-26T10:27:59.300089Z",
+        "publishedAt": "2026-08-26T10:27:59.300089Z",
+        "updatedAt": "2026-08-26T10:27:59.300089Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "travel.phiphiparadise/booking",
+      "description": "Plan and book southern Thailand trips: island tours, private boats, ferries, hotels, itineraries.",
+      "title": "Phi Phi Paradise Travel",
+      "version": "1.1.0",
+      "websiteUrl": "https://phiphiparadise.travel",
+      "icons": [
+        {
+          "src": "https://phiphiparadise.travel/icons/icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://phiphiparadise.travel/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-25T12:59:19.621004Z",
+        "publishedAt": "2026-10-25T12:59:19.621004Z",
+        "updatedAt": "2026-10-25T12:59:19.621004Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "travel.resortlife/esoru",
+      "description": "Read-only Maldives resort research, comparisons and media for approved travel agencies.",
+      "title": "Esoru by resortlife.travel",
+      "version": "0.2.0",
+      "websiteUrl": "https://resortlife.travel/docs",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://resortlife.travel/api/mcp",
+          "headers": [
+            {
+              "description": "Bearer followed by a space and your admin-issued Resortlife agency key.",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-24T15:08:20.423917Z",
+        "publishedAt": "2026-10-24T15:08:20.423917Z",
+        "updatedAt": "2026-10-24T15:08:20.423917Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "travel.rialto/hotels",
+      "description": "Hotel direct booking for VIP and corporate rates - upgrades and loyalty eligible, 100K+ hotels",
+      "title": "Rialto Travel - Direct Hotel Bookings with VIP Rate Programs",
+      "version": "0.3.1",
+      "websiteUrl": "https://rialto.travel/ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://rialto.travel/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-10T22:49:52.298017Z",
+        "publishedAt": "2026-09-10T22:49:52.298017Z",
+        "updatedAt": "2026-09-10T22:49:52.298017Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "travel.sorted/docs",
+      "description": "Search Sorted Travel developer docs for MCP, API, SDK, and auth questions.",
+      "title": "Sorted Travel Docs",
+      "repository": {
+        "url": "https://github.com/a-l-e-x-k/sorted-travel-sdk",
+        "source": "github"
+      },
+      "version": "1.2.1",
+      "websiteUrl": "https://sorted.travel/developers",
+      "icons": [
+        {
+          "src": "https://sorted.travel/favicon.png",
+          "mimeType": "image/png"
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://sorted.travel/docs/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-07T21:11:16.91417Z",
+        "publishedAt": "2026-11-07T21:11:16.91417Z",
+        "updatedAt": "2026-11-07T21:11:16.91417Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "travel.sorted/sorted-travel",
+      "description": "Travel ranking, place facts, weather, visa, and profile tools for Sorted Travel.",
+      "title": "Sorted Travel",
+      "repository": {
+        "url": "https://github.com/a-l-e-x-k/sorted-travel-sdk",
+        "source": "github"
+      },
+      "version": "1.2.1",
+      "websiteUrl": "https://sorted.travel/developers",
+      "icons": [
+        {
+          "src": "https://sorted.travel/favicon.png",
+          "mimeType": "image/png"
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://sorted.travel/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-07T21:11:16.42188Z",
+        "publishedAt": "2026-11-07T21:11:16.42188Z",
+        "updatedAt": "2026-11-07T21:11:16.42188Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "travel.trip720/trip720",
+      "description": "Plans a whole trip from a total budget, every price labelled live, estimate or official.",
+      "title": "Trip720",
+      "version": "1.0.0",
+      "websiteUrl": "https://trip720.travel/ai",
+      "icons": [
+        {
+          "src": "https://trip720.travel/app-icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://trip720.travel/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-04T05:34:20.896779Z",
+        "publishedAt": "2026-11-04T05:34:20.896779Z",
+        "updatedAt": "2026-11-04T05:34:20.896779Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "tube.binge/bingetube",
+      "description": "Search and recommend short drama series on BingeTube (binge.tube), with watch links.",
+      "title": "BingeTube",
+      "version": "1.0.0",
+      "websiteUrl": "https://binge.tube",
+      "icons": [
+        {
+          "src": "https://binge.tube/icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://binge.tube/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-28T14:15:09.157343Z",
+        "publishedAt": "2026-10-28T14:15:09.157343Z",
+        "updatedAt": "2026-10-28T14:15:09.157343Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "tv.ai/aitv",
+      "description": "Remote MCP server for AI.TV creators \u2014 delegate account operations to your AI agent over MCP.",
+      "title": "AI.TV MCP Server",
+      "repository": {
+        "url": "https://github.com/web3tv/api-symfony",
+        "source": "github"
+      },
+      "version": "0.1.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.ai.tv/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-06-24T12:34:30.905087Z",
+        "publishedAt": "2026-06-24T12:34:30.905087Z",
+        "updatedAt": "2026-06-24T12:34:30.905087Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "tv.digitalexperts/hypotheses",
+      "description": "Open data: 1,590 JTBD hypotheses with cold-traffic test results and cost per lead. CC BY 4.0",
+      "title": "Digital Experts Hypotheses",
+      "version": "0.1.1",
+      "websiteUrl": "https://digitalexperts.tv/data",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.digitalexperts.tv/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-11T21:56:29.863621Z",
+        "publishedAt": "2026-09-11T21:56:29.863621Z",
+        "updatedAt": "2026-09-11T21:56:29.863621Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "tv.globenow/live-news",
+      "description": "A city's latest news videos on a 3D globe, plus free live TV channels by country. Free, no key.",
+      "title": "GlobeNow.tv live news and TV",
+      "version": "1.0.1",
+      "websiteUrl": "https://globenow.tv/integrations/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://globenow.tv/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-01T02:15:18.380642Z",
+        "publishedAt": "2026-11-01T02:15:18.380642Z",
+        "updatedAt": "2026-11-01T02:15:18.380642Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "tv.guidedoc/documentary-database",
+      "description": "Search public documentary film reference pages and check which titles stream on GuideDoc.",
+      "title": "GuideDoc Documentary Database",
+      "version": "1.1.0",
+      "websiteUrl": "https://guidedoc.tv/documentary-database/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://guidedoc.tv/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-30T11:06:53.57984Z",
+        "publishedAt": "2026-09-30T11:06:53.57984Z",
+        "updatedAt": "2026-09-30T11:06:53.57984Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "tv.makata/bim",
+      "description": "Design-review threads, comments, reactions and deployments from Bim. Sign in with Google.",
+      "title": "Bim",
+      "repository": {
+        "url": "https://github.com/Makata-Studio/bim-mcp",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://bim-mcp.vercel.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-03T21:22:47.568716Z",
+        "publishedAt": "2026-09-03T21:22:47.568716Z",
+        "updatedAt": "2026-09-03T21:22:47.568716Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "tv.pastaclean/mcp",
+      "description": "Search and order at pastaclean.tv for your human. Limits set by the customer, customer pays.",
+      "repository": {
+        "url": "https://github.com/Pastaclean/pastaclean-agent",
+        "source": "github"
+      },
+      "version": "0.1.4",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@pastaclean/mcp",
+          "version": "0.1.4",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Key from pastaclean.tv \u2192 Mein Konto \u2192 KI-Assistenten (pca_\u2026)",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "PASTACLEAN_API_KEY"
+            },
+            {
+              "description": "Default https://www.pastaclean.tv",
+              "name": "PASTACLEAN_BASE_URL"
+            }
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.pastaclean.tv/agent-api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-19T09:38:13.320743Z",
+        "publishedAt": "2026-10-19T09:38:13.320743Z",
+        "updatedAt": "2026-10-19T09:38:13.320743Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "tv.popoff/data",
+      "description": "Reality-TV follower analytics for AI agents: histories, growth, follow graphs, engagement, CSV.",
+      "title": "PopOff Data",
+      "version": "1.0.0",
+      "websiteUrl": "https://popoff.tv/data",
+      "icons": [
+        {
+          "src": "https://popoff.tv/android-chrome-512x512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        },
+        {
+          "src": "https://popoff.tv/android-chrome-192x192.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "192x192"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://popoff.tv/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-18T19:54:08.48841Z",
+        "publishedAt": "2026-08-18T19:54:08.48841Z",
+        "updatedAt": "2026-08-18T19:54:08.48841Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "tv.sleipnir/sleipnir",
+      "description": "Multistream relay control: check live status, switch destinations, manage teams, generate overlays.",
+      "title": "Sleipnir Multistream",
+      "version": "1.0.1",
+      "websiteUrl": "https://sleipnir.tv/agents?ref=mcp-registry",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://sleipnir.tv/mcp",
+          "headers": [
+            {
+              "description": "Bearer <Sleipnir personal access token from /app/settings/tokens>; or leave it out and connect with OAuth 2.1 (discovery at /.well-known/oauth-protected-resource/mcp)",
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-22T16:31:00.129284Z",
+        "publishedAt": "2026-10-22T16:31:00.129284Z",
+        "updatedAt": "2026-10-22T16:31:00.129284Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "tv.tootie/cortex",
+      "description": "Syslog receiver and MCP server for homelab log intelligence.",
+      "title": "Cortex",
+      "repository": {
+        "url": "https://github.com/jmagar/cortex",
+        "source": "github"
+      },
+      "version": "3.9.0",
+      "packages": [
+        {
+          "registryType": "oci",
+          "identifier": "ghcr.io/jmagar/cortex:v3.9.0",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Hostname or IP of the syslog listener.",
+              "isRequired": true,
+              "name": "CORTEX_RECEIVER_HOST"
+            },
+            {
+              "description": "Bearer token for MCP endpoint authentication.",
+              "isSecret": true,
+              "name": "CORTEX_TOKEN"
+            },
+            {
+              "description": "Syslog listener port (UDP + TCP). Default: 1514.",
+              "name": "CORTEX_RECEIVER_PORT"
+            }
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://cortex.tootie.tv/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-11T23:50:28.260103Z",
+        "publishedAt": "2026-07-11T23:50:28.260103Z",
+        "updatedAt": "2026-07-11T23:50:28.260103Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "tv.tootie/gotify-mcp",
+      "description": "MCP server for self-hosted Gotify push notifications and message management.",
+      "title": "Gotify MCP",
+      "repository": {
+        "url": "https://github.com/jmagar/gotify-mcp",
+        "source": "github"
+      },
+      "version": "0.3.1",
+      "packages": [
+        {
+          "registryType": "pypi",
+          "registryBaseUrl": "https://pypi.org",
+          "identifier": "gotify-mcp",
+          "version": "0.3.1",
+          "runtimeHint": "uvx",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Base URL of your Gotify server, e.g. https://gotify.example.com. No trailing slash.",
+              "isRequired": true,
+              "name": "GOTIFY_URL"
+            },
+            {
+              "description": "Gotify application token for sending messages (Settings > Apps > Create Application).",
+              "isSecret": true,
+              "name": "GOTIFY_APP_TOKEN"
+            },
+            {
+              "description": "Gotify client token for management operations (Settings > Clients).",
+              "isSecret": true,
+              "name": "GOTIFY_CLIENT_TOKEN"
+            },
+            {
+              "description": "Set to 'stdio' when running as a local subprocess. Default is 'http' for container deployments.",
+              "name": "GOTIFY_MCP_TRANSPORT"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-04-04T06:32:24.944401Z",
+        "publishedAt": "2026-04-04T06:32:24.944401Z",
+        "updatedAt": "2026-04-04T06:32:24.944401Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "tv.tootie/overseerr-mcp",
+      "description": "MCP server for Overseerr media requests and discovery.",
+      "title": "Overseerr MCP",
+      "repository": {
+        "url": "https://github.com/jmagar/overseerr-mcp",
+        "source": "github"
+      },
+      "version": "1.0.1",
+      "packages": [
+        {
+          "registryType": "pypi",
+          "registryBaseUrl": "https://pypi.org",
+          "identifier": "overseerr-mcp",
+          "version": "1.0.1",
+          "runtimeHint": "uvx",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Base URL of your Overseerr instance, e.g. https://overseerr.example.com.",
+              "isRequired": true,
+              "name": "OVERSEERR_URL"
+            },
+            {
+              "description": "Overseerr API key (Settings > General > API Key).",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "OVERSEERR_API_KEY"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-04-04T11:10:18.131869Z",
+        "publishedAt": "2026-04-04T11:10:18.131869Z",
+        "updatedAt": "2026-04-04T11:10:18.131869Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "tv.tootie/syslog-mcp",
+      "description": "Syslog receiver and MCP server for homelab log intelligence.",
+      "title": "Syslog MCP",
+      "repository": {
+        "url": "https://github.com/jmagar/syslog-mcp",
+        "source": "github"
+      },
+      "version": "0.27.2",
+      "packages": [
+        {
+          "registryType": "oci",
+          "identifier": "ghcr.io/jmagar/syslog-mcp:0.27.2",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Hostname or IP of the syslog listener.",
+              "isRequired": true,
+              "name": "SYSLOG_HOST"
+            },
+            {
+              "description": "Bearer token for MCP endpoint authentication.",
+              "isSecret": true,
+              "name": "SYSLOG_MCP_TOKEN"
+            },
+            {
+              "description": "Syslog listener port (UDP + TCP). Default: 1514.",
+              "name": "SYSLOG_PORT"
+            }
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://syslog.tootie.tv/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-05-21T06:29:21.831562Z",
+        "publishedAt": "2026-05-21T06:29:21.831562Z",
+        "updatedAt": "2026-05-21T06:29:21.831562Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "tv.tootie/unraid-mcp",
+      "description": "MCP server for Unraid API \u2014 provides tools to interact with an Unraid server's GraphQL API.",
+      "title": "Unraid MCP",
+      "repository": {
+        "url": "https://github.com/jmagar/unraid-mcp",
+        "source": "github"
+      },
+      "version": "2.8.0",
+      "packages": [
+        {
+          "registryType": "pypi",
+          "registryBaseUrl": "https://pypi.org",
+          "identifier": "unraid-mcp",
+          "version": "2.8.0",
+          "runtimeHint": "uvx",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Base URL of your Unraid server, e.g. http://192.168.1.100.",
+              "isRequired": true,
+              "name": "UNRAID_API_URL"
+            },
+            {
+              "description": "Unraid API key for authentication.",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "UNRAID_API_KEY"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-27T13:59:55.054848Z",
+        "publishedAt": "2026-07-27T13:59:55.054848Z",
+        "updatedAt": "2026-07-27T13:59:55.054848Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "tv.web3/web3tv",
+      "description": "Remote MCP server for Web3TV creators \u2014 manage your account over MCP.",
+      "title": "Web3TV MCP Server",
+      "repository": {
+        "url": "https://github.com/web3tv/api-symfony",
+        "source": "github"
+      },
+      "version": "0.1.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.web3.tv/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-06-24T12:34:17.883947Z",
+        "publishedAt": "2026-06-24T12:34:17.883947Z",
+        "updatedAt": "2026-06-24T12:34:17.883947Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "tv.zinema/zinema",
+      "description": "Turn movie/TV recommendations into playable trailer pages: permanent, free, every title plays.",
+      "title": "zinema",
+      "version": "0.1.0",
+      "websiteUrl": "https://zinema.tv/for-agents",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://zinema.tv/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-31T11:59:59.80789Z",
+        "publishedAt": "2026-07-31T11:59:59.80789Z",
+        "updatedAt": "2026-07-31T11:59:59.80789Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "tw.0523/lucky-public",
+      "description": "Taiwan parcel forwarding tools: freight and import-tax quotes, CCC tariff lookup, import rules.",
+      "title": "0523 Public \u2014 Taiwan Logistics & Customs",
+      "version": "1.5.0",
+      "websiteUrl": "https://0523.tw/mcp/public",
+      "icons": [
+        {
+          "src": "https://0523.tw/mcp-public-app/icons/icon-192.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "192x192"
+          ]
+        },
+        {
+          "src": "https://0523.tw/mcp-public-app/icons/icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://0523.tw/mcp/public"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-31T13:34:23.936934Z",
+        "publishedAt": "2026-10-31T13:34:23.936934Z",
+        "updatedAt": "2026-10-31T13:34:23.936934Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+      "name": "tw.adai/adai",
+      "description": "E-commerce product photo tools: new backgrounds, model scenes, upscale and more.",
+      "title": "adai",
+      "version": "0.8.3",
+      "websiteUrl": "https://adai.tw/docs/mcp/en",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://adai.tw/mcp"
+        }
+      ],
+      "_meta": {
+        "io.modelcontextprotocol.registry/publisher-provided": {
+          "documentation": "https://adai.tw/docs/mcp.md",
+          "status": "live",
+          "tools": [
+            "adai_get_account",
+            "adai_upload_image",
+            "adai_replace_background",
+            "adai_reference_background",
+            "adai_model_scene",
+            "adai_edit_image",
+            "adai_expand_image",
+            "adai_upscale_image",
+            "adai_cutout",
+            "adai_text_to_image",
+            "adai_zoom_image",
+            "adai_get_image_job"
+          ]
+        }
+      }
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-03T03:39:38.77897Z",
+        "publishedAt": "2026-11-03T03:39:38.77897Z",
+        "updatedAt": "2026-11-03T03:39:38.77897Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "tw.botbuy/marketplace",
+      "description": "Taiwan second-hand marketplace where buyer and seller AI agents haggle and close deals.",
+      "title": "BotBuy.tw",
+      "repository": {
+        "url": "https://github.com/kevinsilver527/botbuy",
+        "source": "github"
+      },
+      "version": "1.2.0",
+      "websiteUrl": "https://botbuy.tw/agents",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://botbuy.tw/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-02T07:21:25.258447Z",
+        "publishedAt": "2026-11-02T07:21:25.258447Z",
+        "updatedAt": "2026-11-02T07:21:25.258447Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "tw.cityatlas/cityatlas",
+      "description": "Greater Hsinchu, Taiwan open data on a 125 m grid: crashes, buses, schools, flood. Read-only.",
+      "title": "City Atlas \u57ce\u5e02\u5716\u8b5c",
+      "version": "0.3.1",
+      "websiteUrl": "https://mcp.cityatlas.tw/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.cityatlas.tw/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-14T02:24:02.503647Z",
+        "publishedAt": "2026-10-14T02:24:02.503647Z",
+        "updatedAt": "2026-10-14T02:24:02.503647Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "tw.com.drugnews/mcp",
+      "description": "Sourced, dated facts on biotech and pharma companies, deals and Taiwan biotech filings.",
+      "title": "Drugnews \u85e5\u6642\u4e8b",
+      "version": "1.0.0",
+      "websiteUrl": "https://drugnews.com.tw/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://drugnews.com.tw/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-22T03:06:20.504251Z",
+        "publishedAt": "2026-10-22T03:06:20.504251Z",
+        "updatedAt": "2026-10-22T03:06:20.504251Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "tw.emetals/emetals-ai",
+      "description": "Taiwan steel data: grade specs and properties, live stock, metal suppliers, and CBAM cost estimates.",
+      "title": "eMetals AI\u2122 Taiwan Steel Data",
+      "version": "1.0.0",
+      "websiteUrl": "https://emetals.tw/",
+      "icons": [
+        {
+          "src": "https://emetals.tw/assets/img/android-chrome-512x512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://emetals.tw/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-08T06:14:25.987261Z",
+        "publishedAt": "2026-11-08T06:14:25.987261Z",
+        "updatedAt": "2026-11-08T06:14:25.987261Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "tw.funraise.mcp/taiwan-real-estate",
+      "description": "\u53f0\u7063\u4e0d\u52d5\u7522\u8207\u4f01\u696d\u8cc7\u6599\uff1a\u5be6\u50f9\u767b\u9304\u3001\u5730\u7c4d\u3001\u4f7f\u7528\u5206\u5340\u3001\u90fd\u66f4\u3001\u516c\u53f8\u767b\u8a18 / Taiwan real estate & company data: actual prices, parcels, zoning",
+      "title": "\u65b9\u777f\u79d1\u6280 FUNRAISE\uff5c\u53f0\u7063\u4e0d\u52d5\u7522\u8cc7\u6599 Taiwan Real Estate Data",
+      "version": "0.2.0",
+      "websiteUrl": "https://mcp.funraise.tw/",
+      "icons": [
+        {
+          "src": "https://connector.mcp.funraise.ai/favicon.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        },
+        {
+          "src": "https://connector.mcp.funraise.ai/favicon.ico",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://connector.mcp.funraise.ai/c/default/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-07T17:54:52.281974Z",
+        "publishedAt": "2026-11-07T17:54:52.281974Z",
+        "updatedAt": "2026-11-07T17:54:52.281974Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "tw.okx/chaos",
+      "description": "Trend and order-flow signals for OKX USDT perpetual swaps, over MCP. Pay per call.",
+      "title": "Chaos \u2014 OKX Perpetual Signals",
+      "version": "0.1.0",
+      "websiteUrl": "https://mcp.okx.tw/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.okx.tw/mcp",
+          "headers": [
+            {
+              "description": "Prepaid API key. Required for paid tools; list_markets is free. Get one at https://mcp.okx.tw/",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "X-API-Key"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-07T13:33:00.193192Z",
+        "publishedAt": "2026-10-07T13:33:00.193192Z",
+        "updatedAt": "2026-10-07T13:33:00.193192Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+      "name": "tw.org.legaltech/taiwan-law",
+      "description": "Taiwan legal research MCP: \u5224\u6c7a\u66f8\u3001\u5168\u570b\u6cd5\u898f\u3001\u91cb\u5b57/\u61b2\u5224\u8207\u7acb\u6cd5\u6b77\u7a0b\u67e5\u8a62\uff0c12 \u500b\u5de5\u5177\uff0c\u56de\u61c9\u5747\u9644\u5b98\u65b9\u51fa\u8655 URL\u3002",
+      "version": "0.3.0",
+      "websiteUrl": "https://legaltech.org.tw/tools/taiwan-law-mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://legaltech.org.tw/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-13T10:35:28.64295Z",
+        "publishedAt": "2026-08-13T10:35:28.64295Z",
+        "updatedAt": "2026-08-13T10:35:28.64295Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "tw.ovata/ovata",
+      "description": "Build, preview and publish Ovata websites and online shops from your AI tool, test site first.",
+      "title": "Ovata",
+      "repository": {
+        "url": "https://github.com/ovata-cloud/ovata",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://ovata.tw",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://platform-api.ovata.tw/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-05T05:46:35.070907Z",
+        "publishedAt": "2026-11-05T05:46:35.070907Z",
+        "updatedAt": "2026-11-05T05:46:35.070907Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "tw.recur/mcp",
+      "description": "Subscription payment platform for Taiwan \u2014 manage products, customers, and billing",
+      "title": "Recur",
+      "repository": {
+        "url": "https://github.com/kaikhq/recur.tw",
+        "source": "github",
+        "subfolder": "apps/mcp"
+      },
+      "version": "0.0.1",
+      "websiteUrl": "https://recur.tw",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.recur.tw/"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-04-07T00:05:33.642033Z",
+        "publishedAt": "2026-04-07T00:05:33.642033Z",
+        "updatedAt": "2026-04-07T00:05:33.642033Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "tw.regai/legal",
+      "description": "Taiwan law and court decisions for your AI: statutes, articles and rulings, read-only.",
+      "title": "RegAI Legal MCP (Taiwan)",
+      "repository": {
+        "url": "https://github.com/RegAI-tw/regai-legal-mcp",
+        "source": "github"
+      },
+      "version": "1.2.0",
+      "websiteUrl": "https://regai.tw/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.regai.tw/mcp",
+          "headers": [
+            {
+              "description": "Optional: Bearer <your RegAI API key>, for clients without OAuth sign-in. Most clients (Claude, ChatGPT, Goose) sign in with OAuth instead. Key at https://regai.tw/account",
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-21T03:06:11.664492Z",
+        "publishedAt": "2026-10-21T03:06:11.664492Z",
+        "updatedAt": "2026-10-21T03:06:11.664492Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "tw.replai/replai",
+      "description": "Set up, test and publish an AI customer support Agent for your SaaS product.",
+      "title": "Replai",
+      "version": "1.13.0",
+      "websiteUrl": "https://replai.tw/en/guide/connect-ai-agents",
+      "icons": [
+        {
+          "src": "https://replai.tw/app-icon-192.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "192x192"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.replai.tw/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-30T06:41:55.22261Z",
+        "publishedAt": "2026-10-30T06:41:55.22261Z",
+        "updatedAt": "2026-10-30T06:41:55.22261Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "tw.srct.sellers/sop",
+      "description": "Taiwan merchants: view, confirm or decline bookings made by customers' AI agents, from your own AI.",
+      "title": "SOP",
+      "version": "1.0.0",
+      "websiteUrl": "https://sellers.carboneasy.ai/docs/mcp/",
+      "icons": [
+        {
+          "src": "https://sellers.carboneasy.ai/assets/icon.svg",
+          "mimeType": "image/svg+xml"
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://sellers.carboneasy.ai/mcp"
+        }
+      ],
+      "_meta": {
+        "io.modelcontextprotocol.registry/publisher-provided": {
+          "audience": "merchants",
+          "languages": [
+            "zh-TW",
+            "en",
+            "ja"
+          ],
+          "operator": "Seller Tech Ltd."
+        }
+      }
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-03T04:29:41.81455Z",
+        "publishedAt": "2026-11-03T04:29:41.81455Z",
+        "updatedAt": "2026-11-03T04:29:41.81455Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "tw.srct/bop",
+      "description": "Search gyms and personal trainers in Taiwan, check open time slots, and book or cancel sessions.",
+      "title": "BOP",
+      "version": "1.0.0",
+      "websiteUrl": "https://mcp.srct.tw/docs",
+      "icons": [
+        {
+          "src": "https://mcp.srct.tw/favicon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "192x192"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.srct.tw/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-02T02:30:59.299162Z",
+        "publishedAt": "2026-11-02T02:30:59.299162Z",
+        "updatedAt": "2026-11-02T02:30:59.299162Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "tw.surl.humanread/publisher",
+      "description": "Publish Git-backed multilingual novels with agents, safe layouts, reviews, and author approval.",
+      "title": "Humanread Publisher",
+      "version": "1.0.0",
+      "websiteUrl": "https://humanread.surl.tw/mcp/setup",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://humanread.surl.tw/mcp",
+          "headers": [
+            {
+              "description": "Enter 'Bearer ' followed by the Humanread API key created in Author Studio. Keep the key private.",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-05T07:43:16.175592Z",
+        "publishedAt": "2026-08-05T07:43:16.175592Z",
+        "updatedAt": "2026-08-05T07:43:16.175592Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "tw.tobid/tenders",
+      "description": "Taiwan government tenders: 14M+ notices, vendor/agency intel, forecasts, committees, debarment list.",
+      "version": "1.1.0",
+      "websiteUrl": "https://tobid.tw/guide/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.tobid.tw/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-05T14:15:53.430031Z",
+        "publishedAt": "2026-09-05T14:15:53.430031Z",
+        "updatedAt": "2026-09-05T14:15:53.430031Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ua.com.aoa/mcp",
+      "description": "Find caf\u00e9s, bars, coworkings and events in Ukraine, book a table or register for an event.",
+      "title": "AOA: venues, tables and events in Ukraine",
+      "version": "1.0.0",
+      "websiteUrl": "https://aoa.com.ua",
+      "icons": [
+        {
+          "src": "https://aoa.com.ua/brand/logo-square-1024.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "1024x1024"
+          ]
+        },
+        {
+          "src": "https://aoa.com.ua/brand/favicon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "256x256"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://aoa.com.ua/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-04T07:10:31.8026Z",
+        "publishedAt": "2026-11-04T07:10:31.8026Z",
+        "updatedAt": "2026-11-04T07:10:31.8026Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+      "name": "ua.com.mfoxa/catalog",
+      "description": "Read-only catalog of licensed Ukrainian MFOs: loan terms, NBU licenses, ratings and reviews.",
+      "repository": {
+        "url": "https://github.com/alexandrrzk-ctrl/mfoxa-mcp",
+        "source": "github"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://mfoxa.com.ua",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mfoxa.com.ua/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-14T12:46:00.407239Z",
+        "publishedAt": "2026-08-14T12:46:00.407239Z",
+        "updatedAt": "2026-08-14T12:46:00.407239Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ua.com.quintadb/mcp",
+      "description": "No-code databases, forms, portals and AI sites. Manage records and automation via natural language.",
+      "title": "QuintaDB",
+      "version": "1.0.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://quintadb.com.ua/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-06-22T10:43:15.465119Z",
+        "publishedAt": "2026-06-22T10:43:15.465119Z",
+        "updatedAt": "2026-06-22T10:43:15.465119Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ua.com.semeropost/semero",
+      "description": "Express delivery to/from Ukraine via DHL, FedEx & others: prices, customs guidance, duty estimates",
+      "title": "SEMERO Express Delivery & Customs",
+      "version": "1.2.0",
+      "websiteUrl": "https://semeropost.com.ua/ai-assistant",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://semeropost.com.ua/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-29T06:32:05.08074Z",
+        "publishedAt": "2026-10-29T06:32:05.08074Z",
+        "updatedAt": "2026-10-29T06:32:05.08074Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ua.com.tehet.mcp/insurance-prices",
+      "description": "Indicative Ukrainian motor insurance, Green Card and fuel prices. Anonymous, read-only access.",
+      "title": "TEHET",
+      "version": "0.3.0",
+      "websiteUrl": "https://tehet.com.ua",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.tehet.com.ua/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-19T09:50:36.348286Z",
+        "publishedAt": "2026-10-19T09:50:36.348286Z",
+        "updatedAt": "2026-10-19T09:50:36.348286Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ua.org.chertov/chertov",
+      "description": "Read-only search and lookup over the Chertov & Vorobyov physics problem solutions (chertov.org.ua).",
+      "title": "Chertov & Vorobyov physics problem solutions",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.chertov.org.ua/mcp-api",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.chertov.org.ua/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-31T10:18:53.837368Z",
+        "publishedAt": "2026-08-31T10:18:53.837368Z",
+        "updatedAt": "2026-08-31T10:18:53.837368Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ua.vn.reklama/mcp",
+      "description": "Ukrainian classifieds: search ads, shops and online booking; post ads and run your business",
+      "title": "reklama.vn.ua",
+      "version": "1.0.0",
+      "websiteUrl": "https://reklama.vn.ua/api",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://reklama.vn.ua/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-01T20:18:25.026546Z",
+        "publishedAt": "2026-11-01T20:18:25.026546Z",
+        "updatedAt": "2026-11-01T20:18:25.026546Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "uk.aios-system/public-discovery",
+      "description": "Free AIOS discovery, preflight and bounded G05 authoritative-guidance execution for agents.",
+      "title": "AIOS Public Discovery",
+      "version": "0.1.3",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.aios-system.uk/mcp"
+        }
+      ],
+      "_meta": {}
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-04T16:23:37.348558Z",
+        "publishedAt": "2026-10-04T16:23:37.348558Z",
+        "updatedAt": "2026-10-04T16:23:37.348558Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "uk.alexhub/einvoice-validator",
+      "description": "Validate, fix and generate Romanian e-Factura; check SAF-T D406 (ANAF validator + consistency)",
+      "title": "e-Factura Validator (Romania)",
+      "version": "1.9.0",
+      "websiteUrl": "https://einvoice.alexhub.uk",
+      "icons": [
+        {
+          "src": "https://einvoice.alexhub.uk/icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://einvoice.alexhub.uk/mcp"
+        }
+      ],
+      "_meta": {
+        "io.modelcontextprotocol.registry/publisher-provided": {
+          "uk.alexhub": {
+            "payment": "x402, no account or API key",
+            "rules": [
+              "CIUS-RO 1.0.9",
+              "EN 16931",
+              "Peppol BIS Billing 3.0",
+              "SAF-T RO schema 2.4.9 (D406)"
+            ],
+            "tools": [
+              "generate_invoice (paid, x402 $0.05: complete e-Factura from JSON, parties from ANAF by CUI)",
+              "validate_invoice (paid, x402 $0.01)",
+              "fix_invoice (paid, x402 $0.05)",
+              "lookup_company (free: ANAF company data by CUI)",
+              "company_financials (free: annual statement from ANAF - turnover, profit, employees, assets, debts)",
+              "validate_invoice_free (3/day per IP)",
+              "explain_rule (free)",
+              "fx_rate (free: official BNR exchange rates)",
+              "ro_holidays / ro_business_day / ro_tax_deadlines (free: Romanian fiscal calendar)",
+              "validate_iban (free)",
+              "validate_saft (paid, x402 $0.50: Romanian SAF-T D406 \u2013 official ANAF validator + balances, totals, VAT, IDs)",
+              "validate_saft_free (1 file/day per IP, first 10 findings)"
+            ]
+          }
+        }
+      }
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-05T14:59:13.356557Z",
+        "publishedAt": "2026-11-05T14:59:13.356557Z",
+        "updatedAt": "2026-11-05T14:59:13.356557Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "uk.bankconvert/site",
+      "description": "Bank Convert: the site's own MCP server \u2014 compare, enquiry (enquiry = a human handoff, not a...",
+      "version": "1.0.1",
+      "websiteUrl": "https://bankconvert.uk",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://bankconvert.uk/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-03T11:19:48.225669Z",
+        "publishedAt": "2026-10-03T11:19:48.225669Z",
+        "updatedAt": "2026-10-03T11:19:48.225669Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "uk.clawy/connect-mcp",
+      "description": "Finds MCP servers and web APIs for a task, ranked by outcomes other AI agents reported.",
+      "title": "Connect-MCP",
+      "version": "0.1.0",
+      "websiteUrl": "https://clawy.uk/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://clawy.uk/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-17T19:54:14.132191Z",
+        "publishedAt": "2026-10-17T19:54:14.132191Z",
+        "updatedAt": "2026-10-17T19:54:14.132191Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "uk.co.0sand1s/cis",
+      "description": "Free UK CIS calculators: deductions, deadlines, late penalties, gross payment test, verification.",
+      "title": "0s and 1s CIS calculators",
+      "repository": {
+        "url": "https://github.com/0sand1s-uk/cis-mcp",
+        "source": "github"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://0sand1s.co.uk/developers",
+      "icons": [
+        {
+          "src": "https://0sand1s.co.uk/icon.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://0sand1s.co.uk/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-18T16:16:40.145284Z",
+        "publishedAt": "2026-10-18T16:16:40.145284Z",
+        "updatedAt": "2026-10-18T16:16:40.145284Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "uk.co.abnormalloadquotes/site",
+      "description": "Abnormal Load Quotes: the site's own MCP server \u2014 enquiry (enquiry = a human handoff, not a...",
+      "version": "1.0.1",
+      "websiteUrl": "https://abnormalloadquotes.co.uk",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://abnormalloadquotes.co.uk/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-03T11:16:31.499279Z",
+        "publishedAt": "2026-10-03T11:16:31.499279Z",
+        "updatedAt": "2026-10-03T11:16:31.499279Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "uk.co.accesscontrolcost/site",
+      "description": "Access Control Cost: the site's own MCP server \u2014 enquiry (enquiry = a human handoff, not a...",
+      "version": "1.0.1",
+      "websiteUrl": "https://accesscontrolcost.co.uk",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://accesscontrolcost.co.uk/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-03T11:16:47.751622Z",
+        "publishedAt": "2026-10-03T11:16:47.751622Z",
+        "updatedAt": "2026-10-03T11:16:47.751622Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "uk.co.adrcourses/site",
+      "description": "ADR Courses: the site's own MCP server \u2014 enquiry (enquiry = a human handoff, not a purchase);...",
+      "version": "1.0.1",
+      "websiteUrl": "https://adrcourses.co.uk",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://adrcourses.co.uk/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-03T11:17:33.646571Z",
+        "publishedAt": "2026-10-03T11:17:33.646571Z",
+        "updatedAt": "2026-10-03T11:17:33.646571Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "uk.co.agriculturalbuildingcost/site",
+      "description": "Agricultural Building Cost: the site's own MCP server \u2014 enquiry (enquiry = a human handoff, not...",
+      "version": "1.0.1",
+      "websiteUrl": "https://agriculturalbuildingcost.co.uk",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://agriculturalbuildingcost.co.uk/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-03T11:17:48.965396Z",
+        "publishedAt": "2026-10-03T11:17:48.965396Z",
+        "updatedAt": "2026-10-03T11:17:48.965396Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "uk.co.allpaintcolours/mcp",
+      "description": "Every UK paint colour, matched across brands by \u0394E and priced; palettes, planner projects, trends.",
+      "title": "All Paint Colours",
+      "repository": {
+        "url": "https://github.com/hwam91/allpaintcolours-api",
+        "source": "github"
+      },
+      "version": "1.1.0",
+      "websiteUrl": "https://allpaintcolours.co.uk/developers/",
+      "icons": [
+        {
+          "src": "https://allpaintcolours.co.uk/icons/icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.allpaintcolours.co.uk/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-25T21:29:03.043072Z",
+        "publishedAt": "2026-09-25T21:29:03.043072Z",
+        "updatedAt": "2026-09-25T21:29:03.043072Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "uk.co.apprenticewizard/connector",
+      "description": "Search live UK apprenticeships, track applications and get deadline reminders. Paid plan required.",
+      "title": "ApprenticeWizard",
+      "version": "1.3.0",
+      "websiteUrl": "https://www.apprenticewizard.co.uk/connectors",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.apprenticewizard.co.uk/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-29T13:01:31.382515Z",
+        "publishedAt": "2026-10-29T13:01:31.382515Z",
+        "updatedAt": "2026-10-29T13:01:31.382515Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "uk.co.asbestosdisposalcost/site",
+      "description": "Asbestos Disposal Cost: the site's own MCP server \u2014 enquiry (enquiry = a human handoff, not a...",
+      "version": "1.0.1",
+      "websiteUrl": "https://asbestosdisposalcost.co.uk",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://asbestosdisposalcost.co.uk/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-03T11:19:14.856101Z",
+        "publishedAt": "2026-10-03T11:19:14.856101Z",
+        "updatedAt": "2026-10-03T11:19:14.856101Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "uk.co.asbestosremovalcosts/site",
+      "description": "Asbestos Removal Costs: the site's own MCP server \u2014 enquiry (enquiry = a human handoff, not a...",
+      "version": "1.0.1",
+      "websiteUrl": "https://asbestosremovalcosts.co.uk",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://asbestosremovalcosts.co.uk/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-03T11:19:26.265991Z",
+        "publishedAt": "2026-10-03T11:19:26.265991Z",
+        "updatedAt": "2026-10-03T11:19:26.265991Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "uk.co.asbestossurveycost/site",
+      "description": "Asbestos Survey Cost: the site's own MCP server \u2014 dataset, enquiry, entities (enquiry = a human...",
+      "version": "1.0.1",
+      "websiteUrl": "https://asbestossurveycost.co.uk",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://asbestossurveycost.co.uk/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-03T12:38:36.67211Z",
+        "publishedAt": "2026-10-03T12:38:36.67211Z",
+        "updatedAt": "2026-10-03T12:38:36.67211Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "uk.co.asbestossurveyquotes/site",
+      "description": "Asbestos Survey Quotes: the site's own MCP server \u2014 enquiry (enquiry = a human handoff, not a...",
+      "version": "1.0.1",
+      "websiteUrl": "https://asbestossurveyquotes.co.uk",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://asbestossurveyquotes.co.uk/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-03T11:19:37.715987Z",
+        "publishedAt": "2026-10-03T11:19:37.715987Z",
+        "updatedAt": "2026-10-03T11:19:37.715987Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "uk.co.ashleypayne/ashley-payne",
+      "description": "Ask a UK fractional CTO's practice directly: services, prices, articles, and whether he fits.",
+      "title": "Ashley Payne, technical co-founder and fractional CTO",
+      "repository": {
+        "url": "https://github.com/Ashalls/ashley-payne-mcp",
+        "source": "github"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://www.ashleypayne.co.uk/ai",
+      "icons": [
+        {
+          "src": "https://www.ashleypayne.co.uk/assets/logos/favicon.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.ashleypayne.co.uk/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-14T22:45:06.131689Z",
+        "publishedAt": "2026-10-14T22:45:06.131689Z",
+        "updatedAt": "2026-10-14T22:45:06.131689Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "uk.co.atinamos/agent-shop",
+      "description": "Machine-service catalogue, payment hand-off and free market discovery for autonomous AI agents.",
+      "title": "Atinamos Agent Shop",
+      "version": "1.0.0",
+      "websiteUrl": "https://agent.atinamos.co.uk/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://agent.atinamos.co.uk/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-27T16:31:58.391406Z",
+        "publishedAt": "2026-08-27T16:31:58.391406Z",
+        "updatedAt": "2026-08-27T16:31:58.391406Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "uk.co.atinamos/evidence",
+      "description": "Read-only verification evidence for paid machine services and buyer policy checks.",
+      "title": "Atinamos Evidence",
+      "repository": {
+        "url": "https://github.com/Atinamos/agent-verification-research",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://verify.atinamos.co.uk/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-26T15:35:20.461117Z",
+        "publishedAt": "2026-08-26T15:35:20.461117Z",
+        "updatedAt": "2026-08-26T15:35:20.461117Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "uk.co.babydata/pregnancy-calculators",
+      "description": "UK due date, ovulation, pregnancy weeks and maternity pay calculators. Not medical advice.",
+      "title": "BabyData pregnancy calculators",
+      "version": "1.0.1",
+      "websiteUrl": "https://babydata.co.uk/api/",
+      "icons": [
+        {
+          "src": "https://babydata.co.uk/favicon.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        },
+        {
+          "src": "https://babydata.co.uk/apple-touch-icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "180x180"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://babydata.co.uk/mcp"
+        }
+      ],
+      "_meta": {
+        "io.modelcontextprotocol.registry/publisher-provided": {
+          "attribution": "BabyData baby names data: Office for National Statistics (ONS), National Records of Scotland (NRS) and Northern Ireland Statistics and Research Agency (NISRA). Contains public sector information licensed under the Open Government Licence v3.0."
+        }
+      }
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-03T07:33:44.106468Z",
+        "publishedAt": "2026-11-03T07:33:44.106468Z",
+        "updatedAt": "2026-11-03T07:33:44.106468Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "uk.co.basementexcavationcost/site",
+      "description": "Basement Excavation Cost: the site's own MCP server \u2014 enquiry (enquiry = a human handoff, not a...",
+      "version": "1.0.1",
+      "websiteUrl": "https://basementexcavationcost.co.uk",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://basementexcavationcost.co.uk/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-03T11:20:00.05501Z",
+        "publishedAt": "2026-10-03T11:20:00.05501Z",
+        "updatedAt": "2026-10-03T11:20:00.05501Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "uk.co.batsurveycost/site",
+      "description": "Bat Survey Cost: the site's own MCP server \u2014 enquiry (enquiry = a human handoff, not a...",
+      "version": "1.0.1",
+      "websiteUrl": "https://batsurveycost.co.uk",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://batsurveycost.co.uk/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-03T11:20:11.558506Z",
+        "publishedAt": "2026-10-03T11:20:11.558506Z",
+        "updatedAt": "2026-10-03T11:20:11.558506Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "uk.co.batterystoragecost/site",
+      "description": "Battery Storage Cost: the site's own MCP server \u2014 enquiry (enquiry = a human handoff, not a...",
+      "version": "1.0.1",
+      "websiteUrl": "https://batterystoragecost.co.uk",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://batterystoragecost.co.uk/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-03T11:20:22.027422Z",
+        "publishedAt": "2026-10-03T11:20:22.027422Z",
+        "updatedAt": "2026-10-03T11:20:22.027422Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "uk.co.binruleschecker/site",
+      "description": "Bin Rules Checker: the site's own MCP server \u2014 checker, enquiry (enquiry = a human handoff, not...",
+      "version": "1.0.1",
+      "websiteUrl": "https://binruleschecker.co.uk",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://binruleschecker.co.uk/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-03T11:20:32.774963Z",
+        "publishedAt": "2026-10-03T11:20:32.774963Z",
+        "updatedAt": "2026-10-03T11:20:32.774963Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "uk.co.bngquotes/site",
+      "description": "BNG Quotes: the site's own MCP server \u2014 enquiry (enquiry = a human handoff, not a purchase);...",
+      "version": "1.0.1",
+      "websiteUrl": "https://bngquotes.co.uk",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://bngquotes.co.uk/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-03T11:20:54.726774Z",
+        "publishedAt": "2026-10-03T11:20:54.726774Z",
+        "updatedAt": "2026-10-03T11:20:54.726774Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "uk.co.boreholedrillingcost/site",
+      "description": "Borehole Drilling Cost: the site's own MCP server \u2014 enquiry (enquiry = a human handoff, not a...",
+      "version": "1.0.1",
+      "websiteUrl": "https://boreholedrillingcost.co.uk",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://boreholedrillingcost.co.uk/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-03T11:21:17.209656Z",
+        "publishedAt": "2026-10-03T11:21:17.209656Z",
+        "updatedAt": "2026-10-03T11:21:17.209656Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "uk.co.buildbatch/buildbatch",
+      "description": "UK DIY shopping lists for one room: paint, wallpaper, tiles, flooring and more, in real packs.",
+      "title": "BuildBatch",
+      "version": "1.6.0",
+      "websiteUrl": "https://buildbatch.co.uk/assistants/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://buildbatch.co.uk/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-02T17:17:16.856924Z",
+        "publishedAt": "2026-11-02T17:17:16.856924Z",
+        "updatedAt": "2026-11-02T17:17:16.856924Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "uk.co.buildmydigital/scanner",
+      "description": "Scans any public website for SEO, AI search, trust, conversion and speed, and lists our prices.",
+      "title": "Build My Digital website scanner",
+      "version": "1.1.0",
+      "websiteUrl": "https://buildmydigital.co.uk/",
+      "icons": [
+        {
+          "src": "https://buildmydigital.co.uk/icon1.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://buildmydigital.co.uk/mcp/"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-21T04:30:22.407755Z",
+        "publishedAt": "2026-09-21T04:30:22.407755Z",
+        "updatedAt": "2026-09-21T04:30:22.407755Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "uk.co.businessgrantsfinder/site",
+      "description": "Business Grants Finder: the site's own MCP server \u2014 checker, enquiry (enquiry = a human handoff,...",
+      "version": "1.0.1",
+      "websiteUrl": "https://businessgrantsfinder.co.uk",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://businessgrantsfinder.co.uk/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-03T11:21:40.262136Z",
+        "publishedAt": "2026-10-03T11:21:40.262136Z",
+        "updatedAt": "2026-10-03T11:21:40.262136Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "uk.co.businessvaluationcost/site",
+      "description": "Business Valuation Cost: the site's own MCP server \u2014 enquiry (enquiry = a human handoff, not a...",
+      "version": "1.0.1",
+      "websiteUrl": "https://businessvaluationcost.co.uk",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://businessvaluationcost.co.uk/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-03T11:21:50.941704Z",
+        "publishedAt": "2026-10-03T11:21:50.941704Z",
+        "updatedAt": "2026-10-03T11:21:50.941704Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "uk.co.camchinabridge/sourcing",
+      "description": "UK import duty, landed cost, anti-dumping and compliance checks for China-sourced goods.",
+      "title": "Cambridge China Bridge \u2014 China sourcing",
+      "version": "1.1.0",
+      "websiteUrl": "https://camchinabridge.co.uk",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://camchinabridge.co.uk/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-22T07:32:32.851477Z",
+        "publishedAt": "2026-09-22T07:32:32.851477Z",
+        "updatedAt": "2026-09-22T07:32:32.851477Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "uk.co.campervanconversioncost/site",
+      "description": "Campervan Conversion Cost: the site's own MCP server \u2014 enquiry (enquiry = a human handoff, not a...",
+      "version": "1.0.1",
+      "websiteUrl": "https://campervanconversioncost.co.uk",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://campervanconversioncost.co.uk/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-03T11:22:32.467864Z",
+        "publishedAt": "2026-10-03T11:22:32.467864Z",
+        "updatedAt": "2026-10-03T11:22:32.467864Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "uk.co.caravanstorageprices/site",
+      "description": "Caravan Storage Prices: the site's own MCP server \u2014 enquiry (enquiry = a human handoff, not a...",
+      "version": "1.0.1",
+      "websiteUrl": "https://caravanstorageprices.co.uk",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://caravanstorageprices.co.uk/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-03T11:22:55.588538Z",
+        "publishedAt": "2026-10-03T11:22:55.588538Z",
+        "updatedAt": "2026-10-03T11:22:55.588538Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "uk.co.cardmachinepricing/site",
+      "description": "Card Machine Pricing: the site's own MCP server \u2014 dataset, enquiry (enquiry = a human handoff,...",
+      "version": "1.0.1",
+      "websiteUrl": "https://cardmachinepricing.co.uk",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://cardmachinepricing.co.uk/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-03T12:42:07.684715Z",
+        "publishedAt": "2026-10-03T12:42:07.684715Z",
+        "updatedAt": "2026-10-03T12:42:07.684715Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "uk.co.cardmachinepricing/uk-card-machine-pricing",
+      "description": "Card Machine Pricing: the printed in-person transaction rate, read from providers (read...",
+      "repository": {
+        "url": "https://github.com/joeetdev/venture-estate",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://cardmachinepricing.co.uk",
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "@ellul-estate/cardmachinepricing-co-uk-uk-card-machine-pricing-mcp",
+          "version": "1.0.0",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-10T19:43:40.925634Z",
+        "publishedAt": "2026-09-10T19:43:40.925634Z",
+        "updatedAt": "2026-09-10T19:43:40.925634Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "uk.co.careinspectorateregistration/site",
+      "description": "Care Inspectorate Registration: the site's own MCP server \u2014 enquiry (enquiry = a human handoff,...",
+      "version": "1.0.1",
+      "websiteUrl": "https://careinspectorateregistration.co.uk",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://careinspectorateregistration.co.uk/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-03T11:23:07.138384Z",
+        "publishedAt": "2026-10-03T11:23:07.138384Z",
+        "updatedAt": "2026-10-03T11:23:07.138384Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "uk.co.carimportcalculator/site",
+      "description": "Car Import Calculator: the site's own MCP server \u2014 calculator, enquiry (enquiry = a human...",
+      "version": "1.0.1",
+      "websiteUrl": "https://carimportcalculator.co.uk",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://carimportcalculator.co.uk/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-03T11:23:17.281645Z",
+        "publishedAt": "2026-10-03T11:23:17.281645Z",
+        "updatedAt": "2026-10-03T11:23:17.281645Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "uk.co.cataractsurgerycost/site",
+      "description": "Cataract Surgery Cost: the site's own MCP server \u2014 enquiry (enquiry = a human handoff, not a...",
+      "version": "1.0.1",
+      "websiteUrl": "https://cataractsurgerycost.co.uk",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://cataractsurgerycost.co.uk/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-03T11:23:39.732241Z",
+        "publishedAt": "2026-10-03T11:23:39.732241Z",
+        "updatedAt": "2026-10-03T11:23:39.732241Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "uk.co.catchmentchecker/site",
+      "description": "Catchment Checker: the site's own MCP server \u2014 checker, enquiry (enquiry = a human handoff, not...",
+      "version": "1.0.1",
+      "websiteUrl": "https://catchmentchecker.co.uk",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://catchmentchecker.co.uk/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-03T11:23:50.534954Z",
+        "publishedAt": "2026-10-03T11:23:50.534954Z",
+        "updatedAt": "2026-10-03T11:23:50.534954Z",
+        "isLatest": true
+      }
+    }
+  }
+]

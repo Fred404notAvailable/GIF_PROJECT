@@ -4,21 +4,21 @@ generated: true
 slug: architecture-patterns
 module: 1
 slot: 2
-source: antigravity-awesome
+source: wshobson-agents
 license: MIT
 status: selected
 skill_path: skills/architecture-patterns/SKILL.md
 ---
 # architecture-patterns
-Master proven backend architecture patterns including Clean Architecture, Hexagonal Architecture, and Domain-Driven Design to build maintainable, testable, and scalable systems.
+Implement proven backend architecture patterns including Clean Architecture, Hexagonal Architecture, and Domain-Driven Design. Use this skill when designing clean architecture for a new microservice, when refactoring a monolith to use bounded contexts, when implementing hexagonal or onion architecture patterns, or when debugging dependency cycles between application layers.
 
 **Module:** [[Module 1 - Modern Backend & API Development]]  
-**Source:** [[src-antigravity-awesome]]  
+**Source:** [[src-wshobson-agents]]  
 **License:** [[lic-MIT]]  
-**Tech:** [[Architecture]], [[UI & Design]]
+**Tech:** [[Architecture]], [[TDD]], [[UI & Design]]
 
 ## Related Skills
-- **Complements:** [[autonomous-agent-patterns]], [[frontend-patterns]], [[postgresql-table-design]], [[tailwind-design-system]]
-- **Alternate of:** [[event-store-design]], [[workflow-orchestration-patterns]]
+- **Complements:** [[autonomous-agent-patterns]], [[docker-compose-patterns]], [[frontend-patterns]], [[langchain-architecture]]
+- **Alternate of:** [[dotnet-backend-patterns]], [[microservices-patterns]]
 
 Real skill file: `skills/architecture-patterns/SKILL.md`

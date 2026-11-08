@@ -19,6 +19,6 @@ Guides Stripe integration decisions across development and test environment plan
 
 ## Related Skills
 - **Complements:** [[api-security]], [[api-security-testing]], [[security-audit]], [[sql-injection-testing]]
-- **Alternate of:** [[api-design-principles]]
+- **Alternate of:** [[dotnet-backend-patterns]]
 
 Real skill file: `skills/stripe-best-practices/SKILL.md`

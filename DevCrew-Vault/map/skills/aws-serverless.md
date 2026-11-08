@@ -18,7 +18,7 @@ Specialized skill for building production-ready serverless applications on AWS. 
 **Tech:** [[AWS]], [[Architecture]], [[Event-Driven]], [[REST & API]]
 
 ## Related Skills
-- **Complements:** [[api-design-principles]], [[event-store-design]], [[fastapi-templates]], [[neon-postgres]]
-- **Alternate of:** [[aws-serverless-eda]]
+- **Complements:** [[dotnet-backend-patterns]], [[event-store-design]], [[fastapi-templates]], [[microservices-patterns]]
+- **Alternate of:** [[aws-cdk-development]], [[aws-serverless-eda]]
 
 Real skill file: `skills/aws-serverless/SKILL.md`

@@ -18,7 +18,7 @@ Cypress E2E testing patterns - test structure, data-cy selectors, cy.intercept()
 **Tech:** [[TDD]], [[Architecture]], [[GitHub Actions]]
 
 ## Related Skills
-- **Complements:** [[api-security-testing]], [[docker-compose-patterns]], [[security-audit]], [[web-security-testing]]
+- **Complements:** [[api-security-testing]], [[architecture-patterns]], [[docker-compose-patterns]], [[dotnet-backend-patterns]]
 - **Alternate of:** [[e2e-testing]], [[web-testing-playwright-e2e]]
 
 Real skill file: `skills/web-testing-cypress-e2e/SKILL.md`

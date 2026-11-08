@@ -519,6 +519,12 @@ def cmd_run(config: dict, config_path: Path | None) -> None:
     observer = Observer()
     observer.schedule(event_handler, str(skills_dir), recursive=True)
 
+    mcp_dir = vault_cfg.get("mcp_dir")
+    mcp_path = Path(mcp_dir) if mcp_dir else skills_dir.parent / "mcp"
+    if mcp_path.exists():
+        observer.schedule(event_handler, str(mcp_path), recursive=True)
+        log.info("Watching MCP notes: %s", mcp_path)
+
     # Optionally watch config file
     if config_path is not None and config_path.exists():
         config_handler = ConfigReloadHandler(config_path, state)
@@ -679,6 +685,107 @@ def cmd_tech(config: dict, tag: str) -> None:
         print(f"  - {s}")
 
 
+def cmd_mcp_list(config: dict) -> None:
+    """List all MCP servers in the DB."""
+    vault_cfg = config.get("vault", {})
+    db_path = Path(vault_cfg.get("db_path", "DevCrew-Vault/registry.db"))
+    conn = get_connection(db_path)
+    from db import list_mcp_servers
+    servers = list_mcp_servers(conn)
+    conn.close()
+
+    if not servers:
+        print("No MCP servers found in DB. Run 'python tools/mcp_sync.py' first.")
+        return
+
+    print(f"\nFound {len(servers)} MCP servers in registry.db:\n")
+    print(f"{'SLUG':<25} {'STATUS':<12} {'MODULE':<8} {'SCORE':<7} {'CAPABILITY':<14} {'NAME'}")
+    print("-" * 90)
+    for s in servers:
+        slug = s.get("slug") or ""
+        status = s.get("status") or ""
+        mid = str(s.get("module_id") or "-")
+        score = f"{s.get('vetting_score', 0)}/100"
+        cap = s.get("capability_class") or "unknown"
+        name = s.get("name") or ""
+        print(f"{slug:<25} {status:<12} {mid:<8} {score:<7} {cap:<14} {name}")
+
+
+def cmd_mcp_show(config: dict, slug: str) -> None:
+    """Show details for a single MCP server."""
+    vault_cfg = config.get("vault", {})
+    db_path = Path(vault_cfg.get("db_path", "DevCrew-Vault/registry.db"))
+    conn = get_connection(db_path)
+    from db import get_mcp_server, list_mcp_links
+    row = get_mcp_server(conn, slug)
+    links = list_mcp_links(conn, mcp_slug=slug) if row else []
+    conn.close()
+
+    if row is None:
+        print(f"MCP server {slug!r} not found in DB")
+        return
+
+    print(f"\n{'=' * 60}")
+    print(f"MCP Server: {row.get('slug')} ({row.get('title')})")
+    print(f"{'=' * 60}")
+    for key, val in row.items():
+        if key in ("snapshot_json",):
+            continue
+        print(f"  {key:<20}: {val}")
+
+    if links:
+        print("\n  Paired Skills (pairs-with):")
+        for l in links:
+            print(f"    - {l['skill_slug']} ({l.get('reason', '')})")
+
+
+def cmd_mcp_search(config: dict, query: str) -> None:
+    """Search MCP servers using FTS5."""
+    vault_cfg = config.get("vault", {})
+    db_path = Path(vault_cfg.get("db_path", "DevCrew-Vault/registry.db"))
+    conn = get_connection(db_path)
+    from db import search_mcp_servers
+    results = search_mcp_servers(conn, query)
+    conn.close()
+
+    if not results:
+        print(f"No MCP servers matched query {query!r}")
+        return
+
+    print(f"\nFound {len(results)} matching MCP server(s) for query {query!r}:\n")
+    for r in results:
+        status = r.get("status", "candidate")
+        slug = r.get("slug", "")
+        title = r.get("title", "")
+        desc = (r.get("description") or "").replace("\n", " ")
+        if len(desc) > 70:
+            desc = desc[:67] + "..."
+        print(f"  [{status:<10}] {slug:<22} {title:<25} {desc}")
+
+
+def cmd_mcp_pairs(config: dict, skill_slug: str) -> None:
+    """List MCP servers that pair with a skill."""
+    vault_cfg = config.get("vault", {})
+    db_path = Path(vault_cfg.get("db_path", "DevCrew-Vault/registry.db"))
+    conn = get_connection(db_path)
+    from db import list_mcp_links, get_mcp_server
+    links = list_mcp_links(conn, skill_slug=skill_slug)
+    servers = [get_mcp_server(conn, l["mcp_slug"]) for l in links]
+    conn.close()
+
+    if not links:
+        print(f"No MCP servers paired with skill {skill_slug!r}")
+        return
+
+    print(f"\nMCP servers pairing with skill '{skill_slug}':\n")
+    for l, s in zip(links, servers):
+        mcp_slug = l["mcp_slug"]
+        reason = l.get("reason", "")
+        status = s.get("status") if s else "unknown"
+        cap = s.get("capability_class") if s else "unknown"
+        print(f"  - {mcp_slug:<22} [{status:<8} | {cap:<10}] ({reason})")
+
+
 # ---------------------------------------------------------------------------
 # CLI entry point
 # ---------------------------------------------------------------------------
@@ -717,6 +824,17 @@ def main(argv: list[str] | None = None) -> None:
     sp_tech = sub.add_parser("tech", help="List selected skills tagged with a technology")
     sp_tech.add_argument("tag", help="Technology tag name")
 
+    sub.add_parser("mcp-list", help="List all MCP servers in DB")
+
+    sp_mcp_show = sub.add_parser("mcp-show", help="Show details for one MCP server")
+    sp_mcp_show.add_argument("slug", help="MCP server slug")
+
+    sp_mcp_search = sub.add_parser("mcp-search", help="FTS5 search over MCP servers")
+    sp_mcp_search.add_argument("query", help="Search query string")
+
+    sp_mcp_pairs = sub.add_parser("mcp-pairs", help="List MCP servers pairing with a skill")
+    sp_mcp_pairs.add_argument("slug", help="Skill slug")
+
     args = parser.parse_args(argv)
 
     config_path = Path(args.config) if args.config else None
@@ -742,8 +860,17 @@ def main(argv: list[str] | None = None) -> None:
         cmd_related(config, args.slug)
     elif args.command == "tech":
         cmd_tech(config, args.tag)
+    elif args.command == "mcp-list":
+        cmd_mcp_list(config)
+    elif args.command == "mcp-show":
+        cmd_mcp_show(config, args.slug)
+    elif args.command == "mcp-search":
+        cmd_mcp_search(config, args.query)
+    elif args.command == "mcp-pairs":
+        cmd_mcp_pairs(config, args.slug)
     else:
         parser.print_help()
+
 
 
 if __name__ == "__main__":

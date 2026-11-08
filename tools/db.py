@@ -17,6 +17,7 @@ concurrency.
 from __future__ import annotations
 
 import json
+import re
 import sqlite3
 from datetime import datetime, timezone
 from pathlib import Path
@@ -99,6 +100,90 @@ CREATE TABLE IF NOT EXISTS skill_links (
 );
 """
 
+_MCP_DDL = """
+CREATE TABLE IF NOT EXISTS mcp_servers(
+  id                  INTEGER PRIMARY KEY,
+  name                TEXT UNIQUE NOT NULL,
+  slug                TEXT UNIQUE NOT NULL,
+  title               TEXT,
+  description         TEXT,
+  version             TEXT,
+  approved_version    TEXT,
+  repo_url            TEXT,
+  license             TEXT,
+  publisher           TEXT,
+  publisher_verified  INTEGER DEFAULT 0,
+  maintainer_class    TEXT DEFAULT 'community',
+  transport           TEXT,
+  package_types       TEXT,
+  requires_secrets    INTEGER DEFAULT 0,
+  capability_class    TEXT DEFAULT 'unknown',
+  module_id           INTEGER,
+  status              TEXT DEFAULT 'candidate',
+  vetting_score       INTEGER DEFAULT 0,
+  vetting_notes       TEXT,
+  last_commit_at      TEXT,
+  repo_archived       INTEGER DEFAULT 0,
+  content_sha256      TEXT,
+  snapshot_json       TEXT,
+  retrieved_at        TEXT,
+  approved_by         TEXT,
+  approved_at         TEXT,
+  license_source      TEXT DEFAULT ''
+);
+
+CREATE TABLE IF NOT EXISTS mcp_sync_runs (
+  id                      INTEGER PRIMARY KEY AUTOINCREMENT,
+  started_at              TEXT NOT NULL,
+  finished_at             TEXT,
+  pages_fetched           INTEGER NOT NULL DEFAULT 0,
+  records_fetched         INTEGER NOT NULL DEFAULT 0,
+  unique_server_names     INTEGER NOT NULL DEFAULT 0,
+  unique_names_latest     INTEGER NOT NULL DEFAULT 0,
+  records_skipped_invalid INTEGER NOT NULL DEFAULT 0,
+  skip_reasons_json       TEXT DEFAULT '{}',
+  final_cursor            TEXT,
+  completed               INTEGER NOT NULL DEFAULT 0
+);
+
+CREATE VIRTUAL TABLE IF NOT EXISTS mcp_fts USING fts5(
+  name, title, description,
+  content='mcp_servers', content_rowid='id'
+);
+
+CREATE TRIGGER IF NOT EXISTS mcp_ai AFTER INSERT ON mcp_servers BEGIN
+  INSERT INTO mcp_fts(rowid, name, title, description)
+  VALUES (new.id, new.name, new.title, new.description);
+END;
+
+CREATE TRIGGER IF NOT EXISTS mcp_ad AFTER DELETE ON mcp_servers BEGIN
+  INSERT INTO mcp_fts(mcp_fts, rowid, name, title, description)
+  VALUES ('delete', old.id, old.name, old.title, old.description);
+END;
+
+CREATE TRIGGER IF NOT EXISTS mcp_au AFTER UPDATE ON mcp_servers BEGIN
+  INSERT INTO mcp_fts(mcp_fts, rowid, name, title, description)
+  VALUES ('delete', old.id, old.name, old.title, old.description);
+  INSERT INTO mcp_fts(rowid, name, title, description)
+  VALUES (new.id, new.name, new.title, new.description);
+END;
+
+CREATE TABLE IF NOT EXISTS mcp_links (
+  mcp_slug   TEXT NOT NULL,
+  skill_slug TEXT NOT NULL,
+  relation   TEXT NOT NULL DEFAULT 'pairs-with',
+  reason     TEXT DEFAULT '',
+  created_by TEXT DEFAULT 'rule',
+  PRIMARY KEY (mcp_slug, skill_slug, relation)
+);
+
+CREATE TABLE IF NOT EXISTS mcp_tech_tags (
+  slug TEXT NOT NULL,
+  tag  TEXT NOT NULL,
+  PRIMARY KEY (slug, tag)
+);
+"""
+
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
@@ -150,12 +235,22 @@ def get_connection(db_path: Path) -> sqlite3.Connection:
     return conn
 
 
+def init_mcp_schema(conn: sqlite3.Connection) -> None:
+    """Ensure MCP tables, virtual tables, triggers, and links exist."""
+    conn.executescript(_MCP_DDL)
+    # Ensure license_source column exists in mcp_servers
+    cols = [col[1] for col in conn.execute("PRAGMA table_info(mcp_servers)").fetchall()]
+    if "license_source" not in cols:
+        conn.execute("ALTER TABLE mcp_servers ADD COLUMN license_source TEXT DEFAULT ''")
+    conn.commit()
+
+
 def init_db(conn: sqlite3.Connection) -> None:
     """Initialise the database schema (idempotent).
 
-    Creates the ``skills`` table, the ``skills_fts`` virtual table, and the
-    three synchronisation triggers if they do not already exist.  Safe to call
-    on every startup.
+    Creates the ``skills`` table, the ``skills_fts`` virtual table, the
+    three synchronisation triggers, and the MCP catalog tables.
+    Safe to call on every startup.
 
     Parameters
     ----------
@@ -165,6 +260,7 @@ def init_db(conn: sqlite3.Connection) -> None:
     """
     conn.executescript(_DDL)
     conn.commit()
+    init_mcp_schema(conn)
 
 
 def upsert_skill(conn: sqlite3.Connection, skill: dict[str, Any]) -> None:
@@ -604,4 +700,204 @@ def clear_skill_links(conn: sqlite3.Connection, created_by: str | None = None) -
             conn.execute("DELETE FROM skill_links WHERE created_by = ?", (created_by,))
         else:
             conn.execute("DELETE FROM skill_links")
+
+
+# ---------------------------------------------------------------------------
+# MCP Database Operations
+# ---------------------------------------------------------------------------
+
+
+def upsert_mcp_server(conn: sqlite3.Connection, server: dict[str, Any]) -> int:
+    """Insert or replace an MCP server record in ``mcp_servers``.
+
+    Returns the integer id of the inserted/updated row.
+    """
+    fields = [
+        "name", "slug", "title", "description", "version", "approved_version",
+        "repo_url", "license", "publisher", "publisher_verified",
+        "maintainer_class", "transport", "package_types", "requires_secrets",
+        "capability_class", "module_id", "status", "vetting_score",
+        "vetting_notes", "last_commit_at", "repo_archived", "content_sha256",
+        "snapshot_json", "retrieved_at", "approved_by", "approved_at",
+        "license_source"
+    ]
+    vals = [server.get(f) for f in fields]
+    placeholders = ", ".join(["?"] * len(fields))
+    columns = ", ".join(fields)
+    updates = ", ".join([f"{f} = excluded.{f}" for f in fields])
+
+    query = f"""
+    INSERT INTO mcp_servers ({columns})
+    VALUES ({placeholders})
+    ON CONFLICT(name) DO UPDATE SET
+      {updates}
+    RETURNING id
+    """
+    with conn:
+        cur = conn.execute(query, vals)
+        row = cur.fetchone()
+        return row[0] if row else 0
+
+
+def get_mcp_server(conn: sqlite3.Connection, slug_or_name: str) -> dict[str, Any] | None:
+    """Fetch a single MCP server by slug or name."""
+    cur = conn.execute(
+        """
+        SELECT * FROM mcp_servers
+        WHERE slug = ? OR name = ?
+        LIMIT 1
+        """,
+        (slug_or_name, slug_or_name),
+    )
+    row = cur.fetchone()
+    return _row_to_dict(row) if row else None
+
+
+def list_mcp_servers(
+    conn: sqlite3.Connection,
+    status: str | None = None,
+    module_id: int | None = None,
+) -> list[dict[str, Any]]:
+    """List MCP servers with optional status and module_id filters."""
+    clauses: list[str] = []
+    params: list[Any] = []
+    if status is not None:
+        clauses.append("status = ?")
+        params.append(status)
+    if module_id is not None:
+        clauses.append("module_id = ?")
+        params.append(module_id)
+
+    where = f"WHERE {' AND '.join(clauses)}" if clauses else ""
+    query = f"SELECT * FROM mcp_servers {where} ORDER BY module_id, vetting_score DESC, name"
+    cur = conn.execute(query, params)
+    return [_row_to_dict(r) for r in cur.fetchall()]
+
+
+def search_mcp_servers(conn: sqlite3.Connection, query: str) -> list[dict[str, Any]]:
+    """Search MCP servers using full-text search (FTS5)."""
+    # Tokenize alphanumeric words for FTS5
+    tokens = re.findall(r'[a-zA-Z0-9]+', query)
+    if not tokens:
+        return []
+    fts_query = " ".join([f'"{t}"*' for t in tokens])
+    cur = conn.execute(
+        """
+        SELECT s.*
+        FROM mcp_fts f
+        JOIN mcp_servers s ON f.rowid = s.id
+        WHERE mcp_fts MATCH ?
+        ORDER BY rank
+        LIMIT 50
+        """,
+        (fts_query,),
+    )
+    return [_row_to_dict(r) for r in cur.fetchall()]
+
+
+def upsert_mcp_link(
+    conn: sqlite3.Connection,
+    mcp_slug: str,
+    skill_slug: str,
+    relation: str = "pairs-with",
+    reason: str = "",
+    created_by: str = "rule",
+) -> None:
+    """Insert or update a link connecting an MCP server to a skill."""
+    with conn:
+        conn.execute(
+            """
+            INSERT OR REPLACE INTO mcp_links (mcp_slug, skill_slug, relation, reason, created_by)
+            VALUES (?, ?, ?, ?, ?)
+            """,
+            (mcp_slug, skill_slug, relation, reason, created_by),
+        )
+
+
+def list_mcp_links(
+    conn: sqlite3.Connection,
+    mcp_slug: str | None = None,
+    skill_slug: str | None = None,
+) -> list[dict[str, Any]]:
+    """Return MCP links filtered by mcp_slug or skill_slug."""
+    if mcp_slug and skill_slug:
+        cur = conn.execute(
+            "SELECT * FROM mcp_links WHERE mcp_slug = ? AND skill_slug = ? ORDER BY relation",
+            (mcp_slug, skill_slug),
+        )
+    elif mcp_slug:
+        cur = conn.execute(
+            "SELECT * FROM mcp_links WHERE mcp_slug = ? ORDER BY relation, skill_slug",
+            (mcp_slug,),
+        )
+    elif skill_slug:
+        cur = conn.execute(
+            "SELECT * FROM mcp_links WHERE skill_slug = ? ORDER BY relation, mcp_slug",
+            (skill_slug,),
+        )
+    else:
+        cur = conn.execute("SELECT * FROM mcp_links ORDER BY mcp_slug, skill_slug")
+    return [_row_to_dict(r) for r in cur.fetchall()]
+
+
+def clear_mcp_links(conn: sqlite3.Connection, created_by: str | None = None) -> None:
+    """Clear MCP links, optionally filtered by created_by."""
+    with conn:
+        if created_by:
+            conn.execute("DELETE FROM mcp_links WHERE created_by = ?", (created_by,))
+        else:
+            conn.execute("DELETE FROM mcp_links")
+
+
+def set_mcp_tech_tags(conn: sqlite3.Connection, slug: str, tags: list[str]) -> None:
+    """Replace all technology tags for an MCP server."""
+    with conn:
+        conn.execute("DELETE FROM mcp_tech_tags WHERE slug = ?", (slug,))
+        conn.executemany(
+            "INSERT OR IGNORE INTO mcp_tech_tags (slug, tag) VALUES (?, ?)",
+            [(slug, tag) for tag in tags],
+        )
+
+
+def insert_sync_run(conn: sqlite3.Connection, run_data: dict[str, Any]) -> int:
+    """Insert an MCP sync run record in ``mcp_sync_runs``.
+
+    Returns the integer id of the inserted row.
+    """
+    query = """
+    INSERT INTO mcp_sync_runs (
+        started_at, finished_at, pages_fetched, records_fetched,
+        unique_server_names, unique_names_latest, records_skipped_invalid,
+        skip_reasons_json, final_cursor, completed
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    """
+    with conn:
+        cur = conn.execute(query, (
+            run_data.get("started_at"),
+            run_data.get("finished_at"),
+            run_data.get("pages_fetched", 0),
+            run_data.get("records_fetched", 0),
+            run_data.get("unique_server_names", 0),
+            run_data.get("unique_names_latest", 0),
+            run_data.get("records_skipped_invalid", 0),
+            json.dumps(run_data.get("skip_reasons", {})),
+            run_data.get("final_cursor"),
+            1 if run_data.get("completed") else 0,
+        ))
+        return cur.lastrowid or 0
+
+
+def get_latest_sync_run(conn: sqlite3.Connection) -> dict[str, Any] | None:
+    """Fetch the latest MCP sync run record."""
+    cur = conn.execute("SELECT * FROM mcp_sync_runs ORDER BY id DESC LIMIT 1")
+    row = cur.fetchone()
+    return _row_to_dict(row) if row else None
+
+
+
+def get_mcp_tech_tags(conn: sqlite3.Connection, slug: str) -> list[str]:
+    """Retrieve technology tags for an MCP server."""
+    cur = conn.execute("SELECT tag FROM mcp_tech_tags WHERE slug = ? ORDER BY tag", (slug,))
+    return [r[0] for r in cur.fetchall()]
+
 

@@ -18,7 +18,7 @@ Set up Azure Pipelines for CI/CD, configure build and release pipelines, manage 
 **Tech:** [[Azure]], [[GitHub Actions]]
 
 ## Related Skills
-- **Complements:** [[api-security-testing]], [[codeql]], [[e2e-testing]], [[rag-implementation]]
+- **Complements:** [[api-security-testing]], [[e2e-testing]], [[security-audit]], [[web-security-testing]]
 - **Alternate of:** [[cloud-devops]]
 
 Real skill file: `skills/azure-devops/SKILL.md`

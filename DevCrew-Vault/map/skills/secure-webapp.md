@@ -18,7 +18,7 @@ Use for OWASP-grounded security guidance when building, editing, or reviewing we
 **Tech:** [[Security Audit]], [[Agents]], [[API Security]], [[MCP]], [[OWASP]]
 
 ## Related Skills
-- **Complements:** [[agent-memory-systems]], [[cloudflare]], [[neon-postgres]], [[next-dev-loop]]
+- **Complements:** [[cloudflare]], [[convex]], [[next-dev-loop]], [[supabase]]
 - **Alternate of:** [[api-security]], [[security-audit]]
 
 Real skill file: `skills/secure-webapp/SKILL.md`

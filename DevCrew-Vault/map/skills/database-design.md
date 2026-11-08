@@ -18,7 +18,7 @@ Database design principles and decision-making. Schema design, indexing strategy
 **Tech:** [[SQL & Database]], [[AWS]], [[UI & Design]]
 
 ## Related Skills
-- **Complements:** [[agent-memory-systems]], [[angular-best-practices]], [[application-performance-performance-optimization]], [[postgresql-table-design]]
-- **Alternate of:** [[convex]]
+- **Complements:** [[agent-memory-systems]], [[neon-postgres]], [[postgresql-table-design]], [[supabase-postgres-best-practices]]
+- **Alternate of:** [[nodejs-backend-patterns]]
 
 Real skill file: `skills/database-design/SKILL.md`

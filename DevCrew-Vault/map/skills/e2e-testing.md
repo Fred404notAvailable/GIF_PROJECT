@@ -18,7 +18,7 @@ End-to-end testing workflow with Playwright for browser automation, visual regre
 **Tech:** [[GitHub Actions]], [[Playwright]], [[TDD]]
 
 ## Related Skills
-- **Complements:** [[api-design-principles]], [[api-security-testing]], [[security-audit]], [[web-security-testing]]
+- **Complements:** [[api-security]], [[api-security-testing]], [[security-audit]], [[web-security-testing]]
 - **Alternate of:** [[web-testing-cypress-e2e]], [[webapp-testing]]
 
 Real skill file: `skills/e2e-testing/SKILL.md`

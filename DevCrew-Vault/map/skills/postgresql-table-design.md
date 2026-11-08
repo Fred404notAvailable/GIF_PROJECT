@@ -18,7 +18,7 @@ Use this skill when designing or reviewing a PostgreSQL-specific schema. Covers 
 **Tech:** [[Architecture]], [[PostgreSQL]], [[SQL & Database]], [[UI & Design]]
 
 ## Related Skills
-- **Complements:** [[architecture-patterns]], [[autonomous-agent-patterns]], [[convex]], [[database-design]]
+- **Complements:** [[architecture-patterns]], [[autonomous-agent-patterns]], [[database-design]], [[nodejs-backend-patterns]]
 - **Alternate of:** [[neon-postgres-branches]], [[supabase-postgres-best-practices]]
 
 Real skill file: `skills/postgresql-table-design/SKILL.md`

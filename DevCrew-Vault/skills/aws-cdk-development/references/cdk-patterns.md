@@ -2,8 +2,6 @@
 
 This reference provides detailed patterns, anti-patterns, and best practices for AWS CDK development.
 
-Examples omit imports/required props in places; typecheck complete constructs against the installed CDK version. Runtime versions are historical examples; check Lambda lifecycle before new deployment. Lifecycle deletion, NAT, scaling and logging require explicit cost/data-retention decisions. Generated APIs are not automatically authenticated or access-logged.
-
 ## Table of Contents
 
 - [Naming Conventions](#naming-conventions)
@@ -107,12 +105,12 @@ Use grant methods instead of broad policies:
 ```typescript
 // ✅ GOOD - Specific grants
 const table = new dynamodb.Table(this, 'Table', { /* ... */ });
-const fn = new lambda.Function(this, 'Function', { /* required code/runtime/handler omitted */ });
+const lambda = new lambda.Function(this, 'Function', { /* ... */ });
 
-table.grantReadWriteData(fn);
+table.grantReadWriteData(lambda);
 
 // ❌ BAD - Overly broad permissions
-fn.addToRolePolicy(new iam.PolicyStatement({
+lambda.addToRolePolicy(new iam.PolicyStatement({
   actions: ['dynamodb:*'],
   resources: ['*'],
 }));
@@ -285,7 +283,7 @@ const devFunction = new NodejsFunction(this, 'DevFunction', {
 const prodFunction = new NodejsFunction(this, 'ProdFunction', {
   memorySize: 1024, // Higher for prod performance
   timeout: Duration.seconds(10),
-  reservedConcurrentExecutions: 10, // Limits concurrency, not total spend
+  reservedConcurrentExecutions: 10, // Prevent runaway costs
 });
 ```
 
@@ -302,10 +300,8 @@ const prodTable = new dynamodb.Table(this, 'ProdTable', {
   billingMode: dynamodb.BillingMode.PROVISIONED,
   readCapacity: 5,
   writeCapacity: 5,
-  partitionKey: { name: 'id', type: dynamodb.AttributeType.STRING },
+  autoScaling: { /* ... */ },
 });
-prodTable.autoScaleReadCapacity({ minCapacity: 5, maxCapacity: 100 }).scaleOnUtilization({ targetUtilizationPercent: 70 });
-prodTable.autoScaleWriteCapacity({ minCapacity: 5, maxCapacity: 100 }).scaleOnUtilization({ targetUtilizationPercent: 70 });
 ```
 
 ### S3 Lifecycle Policies
@@ -358,13 +354,13 @@ new NodejsFunction(this, 'Function', {
 
 ```typescript
 // BAD
-fn.addToRolePolicy(new iam.PolicyStatement({
+function.addToRolePolicy(new iam.PolicyStatement({
   actions: ['*'],
   resources: ['*'],
 }));
 
 // GOOD
-table.grantReadWriteData(fn);
+table.grantReadWriteData(function);
 ```
 
 ### ❌ Manual Dependency Management

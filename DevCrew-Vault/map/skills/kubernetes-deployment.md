@@ -18,7 +18,7 @@ Kubernetes deployment workflow for container orchestration, Helm charts, service
 **Tech:** [[Containers]], [[Kubernetes]], [[Docker]], [[GitHub Actions]]
 
 ## Related Skills
-- **Complements:** [[api-security-testing]], [[codeql]], [[e2e-testing]], [[rag-implementation]]
+- **Complements:** [[api-security-testing]], [[e2e-testing]], [[security-audit]], [[web-security-testing]]
 - **Alternate of:** [[cloud-devops]], [[devops-deploy]]
 
 Real skill file: `skills/kubernetes-deployment/SKILL.md`

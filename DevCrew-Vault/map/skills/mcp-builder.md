@@ -18,6 +18,6 @@ Guide for creating high-quality MCP (Model Context Protocol) servers that enable
 **Tech:** [[MCP]]
 
 ## Related Skills
-- **Complements:** [[neon-postgres]], [[neon-postgres-branches]], [[next-dev-loop]], [[prisma-cli]]
+- **Complements:** [[neon-postgres-branches]], [[next-dev-loop]], [[prisma-cli]], [[secure-webapp]]
 
 Real skill file: `skills/mcp-builder/SKILL.md`

@@ -1,0 +1,3217 @@
+[
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.secretsantaorganizer/secretsanta",
+      "description": "Create a Secret Santa party with names, emails, a date, a place, and a budget.",
+      "title": "Secret Santa Organizer",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.secretsantaorganizer.com/",
+      "icons": [
+        {
+          "src": "https://www.secretsantaorganizer.com/images/secret-santa-logo.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "165x70"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.secretsantaorganizer.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-29T12:12:39.253972Z",
+        "publishedAt": "2026-09-29T12:12:39.253972Z",
+        "updatedAt": "2026-09-29T12:12:39.253972Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.secsift/secsift",
+      "description": "Read, search, and compare SEC EDGAR filings, pull tables, and run AI analysis from any MCP client.",
+      "title": "SECSift",
+      "version": "1.0.0",
+      "websiteUrl": "https://secsift.com/docs/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.secsift.com"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-04T01:34:55.321057Z",
+        "publishedAt": "2026-11-04T01:34:55.321057Z",
+        "updatedAt": "2026-11-04T01:34:55.321057Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.securealy/mcp",
+      "description": "Grade a URL as an attacker and a customer would see it; scan a repo; check Supabase, Stripe, Vercel.",
+      "title": "Securealy",
+      "repository": {
+        "url": "https://github.com/securealy/securealy",
+        "source": "github",
+        "subfolder": "packages/mcp"
+      },
+      "version": "0.1.6",
+      "websiteUrl": "https://securealy.com",
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "securealy-mcp",
+          "version": "0.1.6",
+          "runtimeHint": "npx",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Optional. Your Supabase project URL, read by check_rls. Sent only to that project.",
+              "format": "string",
+              "name": "SUPABASE_URL"
+            },
+            {
+              "description": "Optional. Service role key for check_rls. Sent only to your Supabase project, never printed.",
+              "format": "string",
+              "isSecret": true,
+              "name": "SUPABASE_SERVICE_KEY"
+            },
+            {
+              "description": "Optional. Supabase management token for check_rls and the auth config check. Sent only to the Supabase management API.",
+              "format": "string",
+              "isSecret": true,
+              "name": "SUPABASE_MGMT_TOKEN"
+            },
+            {
+              "description": "Optional. Supabase project ref, used with SUPABASE_MGMT_TOKEN.",
+              "format": "string",
+              "name": "SUPABASE_PROJECT_REF"
+            },
+            {
+              "description": "Optional. Stripe secret key for check_stripe. Sent only to api.stripe.com, never printed.",
+              "format": "string",
+              "isSecret": true,
+              "name": "STRIPE_SECRET_KEY"
+            },
+            {
+              "description": "Optional. Project-scoped Vercel token for check_vercel_env. Sent only to api.vercel.com, never printed.",
+              "format": "string",
+              "isSecret": true,
+              "name": "VERCEL_TOKEN"
+            },
+            {
+              "description": "Optional. Vercel project id for check_vercel_env.",
+              "format": "string",
+              "name": "VERCEL_PROJECT_ID"
+            },
+            {
+              "description": "Optional. Set to 1 to let check_vercel_env fetch decrypted variable values from api.vercel.com for the trailing-newline and live-key checks. Without it only names and targets are read and those checks are reported as skipped.",
+              "format": "string",
+              "name": "SECUREALY_VERCEL_DECRYPT"
+            },
+            {
+              "description": "Optional. Set to 1 to let check_rls send the service key to a self-hosted Supabase URL. Without it the key is sent only to an https URL on a Supabase-hosted domain.",
+              "format": "string",
+              "name": "SECUREALY_SUPABASE_HOST_OVERRIDE"
+            },
+            {
+              "description": "Optional. Folders, separated by the OS path delimiter, that scan_repo may read in addition to the server's working directory. Anything outside is refused.",
+              "format": "string",
+              "name": "SECUREALY_SCAN_ROOTS"
+            },
+            {
+              "description": "Optional. Set to 1 to stop the server appending each run (grade, score, counts, failing check ids; never evidence) to .securealy/history.json in its working directory.",
+              "format": "string",
+              "name": "SECUREALY_NO_HISTORY"
+            },
+            {
+              "description": "Optional, off by default. Set to 1 to send an anonymous aggregate of each run (command, grade, counts, stack kind, failing check ids; no URL, host or evidence) to securealy.com.",
+              "format": "string",
+              "name": "SECUREALY_TELEMETRY"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-14T22:23:05.715368Z",
+        "publishedAt": "2026-10-14T22:23:05.715368Z",
+        "updatedAt": "2026-10-14T22:23:05.715368Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.secureauth/agent-authority",
+      "description": "Identity-first enterprise MCP gateway: per-call authorization, agent identity and audit trail",
+      "title": "SecureAuth Agent Authority",
+      "version": "1.0.0",
+      "websiteUrl": "https://secureauth.com/capabilities/mcp-authority",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://{gateway_host}/gateway/mcp",
+          "variables": {
+            "gateway_host": {
+              "description": "Your Agent Authority gateway host, shown in the admin console",
+              "isRequired": true,
+              "placeholder": "your-gateway-url"
+            }
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-23T17:04:15.018221Z",
+        "publishedAt": "2026-10-23T17:04:15.018221Z",
+        "updatedAt": "2026-10-23T17:04:15.018221Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.securecloudstorage/providers",
+      "description": "Verified cloud storage provider facts: prices, storage, encryption. Dated and source-cited.",
+      "version": "1.0.0",
+      "websiteUrl": "https://securecloudstorage.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://securecloudstorage.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-20T07:53:13.571349Z",
+        "publishedAt": "2026-08-20T07:53:13.571349Z",
+        "updatedAt": "2026-08-20T07:53:13.571349Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.secureputcalls/mcp",
+      "description": "Wheel strategy research: put/call candidates, symbol risk, position analysis and rolls. Read-only.",
+      "title": "SecurePutCalls",
+      "repository": {
+        "url": "https://github.com/rohitguptamrt/secureputcalls-mcp",
+        "source": "github"
+      },
+      "version": "1.4.0",
+      "websiteUrl": "https://secureputcalls.com/claude-connector",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://secureputcalls.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-08T16:27:49.266443Z",
+        "publishedAt": "2026-10-08T16:27:49.266443Z",
+        "updatedAt": "2026-10-08T16:27:49.266443Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-07-09/server.schema.json",
+      "name": "com.securessmtp/securessmtp",
+      "description": "Send email, manage sending domains, and read delivery analytics from your SecureSMTP account.",
+      "repository": {
+        "url": "https://github.com/zainsaeed615/securessmtp-mcp",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://securessmtp.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://securessmtp.com/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-28T05:21:36.165432Z",
+        "publishedAt": "2026-09-28T05:21:36.165432Z",
+        "updatedAt": "2026-09-28T05:21:36.165432Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+      "name": "com.securesvault/catalogue",
+      "description": "Search 10,209 products for sale in euros and return buyable links with live prices.",
+      "version": "1.0.0",
+      "websiteUrl": "https://securesvault.com/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://securesvault.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-19T03:55:49.307337Z",
+        "publishedAt": "2026-09-19T03:55:49.307337Z",
+        "updatedAt": "2026-09-19T03:55:49.307337Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.securitystartups/catalog",
+      "description": "Search a curated directory of young security companies and its CC BY 4.0 stats. Read-only, no key.",
+      "title": "Security Startups",
+      "version": "0.2.0",
+      "websiteUrl": "https://securitystartups.com/for-agents",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://securitystartups.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-04T10:35:53.980975Z",
+        "publishedAt": "2026-11-04T10:35:53.980975Z",
+        "updatedAt": "2026-11-04T10:35:53.980975Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.sednasystem/genesis",
+      "description": "Customer-facing yacht search and charter request MCP server by Sedna System.",
+      "title": "Sedna Genesis",
+      "repository": {
+        "url": "https://github.com/eitsedna/genesis",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://genesis.sednasystem.com/landing",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.sednasystem.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-10T16:04:17.880011Z",
+        "publishedAt": "2026-09-10T16:04:17.880011Z",
+        "updatedAt": "2026-09-10T16:04:17.880011Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+      "name": "com.see-geo/seegeo",
+      "description": "Audit any website for AI visibility: graded report, findings with fixes, AI crawler access check.",
+      "repository": {
+        "url": "https://github.com/Tunisian-Aaron/seegeo",
+        "source": "github",
+        "subfolder": "packages/mcp"
+      },
+      "version": "1.0.5",
+      "websiteUrl": "https://see-geo.com/developers",
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "seegeo-mcp",
+          "version": "1.0.4",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "API key from https://see-geo.com/account",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "SEEGEO_API_KEY"
+            }
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://see-geo.com/mcp/anonymous"
+        },
+        {
+          "type": "streamable-http",
+          "url": "https://see-geo.com/mcp",
+          "headers": [
+            {
+              "description": "Bearer <API key from https://see-geo.com/account>",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-18T23:30:13.626606Z",
+        "publishedAt": "2026-10-18T23:30:13.626606Z",
+        "updatedAt": "2026-10-18T23:30:13.626606Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.seedviral/seedviral",
+      "description": "Make short videos with your SeedViral workspace. Quote first and approve before spending credits.",
+      "title": "SeedViral",
+      "version": "1.0.0",
+      "websiteUrl": "https://seedviral.com/agents",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://seedviral.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-26T16:00:50.786399Z",
+        "publishedAt": "2026-10-26T16:00:50.786399Z",
+        "updatedAt": "2026-10-26T16:00:50.786399Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.seekerscore/seeker",
+      "description": "Match a r\u00e9sum\u00e9 to live job postings: the top 5 open roles with fit labels and links.",
+      "title": "Seeker",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.seekerscore.com",
+      "icons": [
+        {
+          "src": "https://www.seekerscore.com/icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.seekerscore.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-07T07:36:42.075896Z",
+        "publishedAt": "2026-11-07T07:36:42.075896Z",
+        "updatedAt": "2026-11-07T07:36:42.075896Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.seekinweb/ai-visibility",
+      "description": "Does AI recommend a business? Who it names instead, which sources it uses, plus AI readability.",
+      "title": "SeekinWeb \u2014 AI visibility",
+      "version": "1.1.0",
+      "websiteUrl": "https://seekinweb.com/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://seekinweb.com/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-02T20:28:59.039928Z",
+        "publishedAt": "2026-10-02T20:28:59.039928Z",
+        "updatedAt": "2026-10-02T20:28:59.039928Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.seenpaid/seenpaid",
+      "description": "Agentic social media scheduler: 21 platforms, 50 MCP tools, and which posts made money via Stripe.",
+      "repository": {
+        "url": "https://github.com/justinasrolando-cpu/seenpaid",
+        "source": "github",
+        "id": "1325255260"
+      },
+      "version": "2.2.0",
+      "websiteUrl": "https://seenpaid.com/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.seenpaid.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-11T11:00:10.767215Z",
+        "publishedAt": "2026-09-11T11:00:10.767215Z",
+        "updatedAt": "2026-09-11T11:00:10.767215Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.seespectral/oracle",
+      "description": "Cross-check a factual claim against a verified knowledge graph before you assert it. Never guesses.",
+      "title": "Spectral \u2014 verified-knowledge oracle",
+      "version": "1.0.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.seespectral.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-30T03:15:42.592938Z",
+        "publishedAt": "2026-07-30T03:15:42.592938Z",
+        "updatedAt": "2026-07-30T03:15:42.592938Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.seeyourorbit/orbit",
+      "description": "The people behind your Substack writing: who is here, who is drifting, and what your notes did.",
+      "title": "Orbit for Substack",
+      "version": "1.0.0",
+      "websiteUrl": "https://seeyourorbit.com/connector",
+      "icons": [
+        {
+          "src": "https://seeyourorbit.com/orbit-icon.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        },
+        {
+          "src": "https://seeyourorbit.com/orbit-icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://seeyourorbit.com/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-02T23:52:42.308327Z",
+        "publishedAt": "2026-11-02T23:52:42.308327Z",
+        "updatedAt": "2026-11-02T23:52:42.308327Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.seggwat/mcp",
+      "description": "Manage feedback, ratings, surveys, changelogs, and review tasks in your SeggWat projects.",
+      "title": "SeggWat",
+      "version": "1.2.7",
+      "websiteUrl": "https://seggwat.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://seggwat.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-26T07:23:37.651827Z",
+        "publishedAt": "2026-08-26T07:23:37.651827Z",
+        "updatedAt": "2026-08-26T07:23:37.651827Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.seishorei-wakarukun/legal-research",
+      "description": "\u65e5\u672c\u6cd5\u30ea\u30b5\u30fc\u30c1MCP\u3002e-Gov\u5168\u6cd5\u4ee4\u306e\u691c\u7d22\u30fb\u6761\u6587\u53d6\u5f97\u3001\u59d4\u4efb\u5148\u89e3\u6c7a\u3001\u88c1\u5224\u4f8b\u691c\u7d22\u3001\u56fd\u4f1a\u4f1a\u8b70\u9332\u3001\u6539\u6b63\u6cbf\u9769\u3001\u5b98\u516c\u5e81\u4e00\u6b21\u8cc7\u6599\uff08PDF/HTML\uff09\u306e\u672c\u6587\u8aad\u53d6\u30fb\u8aad\u307f\u8d77\u3053\u3057\u5168\u6587\u307e\u3067\u3053\u308c1\u672c\u3067",
+      "title": "Legal Leap MCP\uff08\u65e7 \u653f\u7701\u4ee4\u308f\u304b\u308b\u304f\u3093\uff09",
+      "version": "0.6.1",
+      "websiteUrl": "https://seishorei-wakarukun.com/mcp",
+      "icons": [
+        {
+          "src": "https://seishorei-wakarukun.com/icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://seishorei-wakarukun.com/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-13T12:20:26.791217Z",
+        "publishedAt": "2026-09-13T12:20:26.791217Z",
+        "updatedAt": "2026-09-13T12:20:26.791217Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.sekkeiflow/sekkeiflow",
+      "description": "Read and update your SekkeiFlow life boards, counters and AI coach from any MCP client.",
+      "title": "SekkeiFlow",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.sekkeiflow.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.sekkeiflow.com/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-09T23:44:28.943112Z",
+        "publishedAt": "2026-09-09T23:44:28.943112Z",
+        "updatedAt": "2026-09-09T23:44:28.943112Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.selectbnbs/verify",
+      "description": "Check whether a short-term rental in South Korea is registered, using official government records.",
+      "title": "SelectBNBs Verify",
+      "version": "1.0.0",
+      "websiteUrl": "https://selectbnbs.com/verify/agents/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://selectbnbs.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-27T02:56:30.577069Z",
+        "publishedAt": "2026-09-27T02:56:30.577069Z",
+        "updatedAt": "2026-09-27T02:56:30.577069Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.selenios/mcp",
+      "description": "AI recruiting platform: manage jobs, pipelines, candidate scores and interview transcripts.",
+      "title": "Selenios",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.selenios.com",
+      "icons": [
+        {
+          "src": "https://www.selenios.com/favicon.svg",
+          "mimeType": "image/svg+xml"
+        },
+        {
+          "src": "https://www.selenios.com/apple-touch-icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "180x180"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://back.selenios.com/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-29T18:42:21.362893Z",
+        "publishedAt": "2026-10-29T18:42:21.362893Z",
+        "updatedAt": "2026-10-29T18:42:21.362893Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+      "name": "com.selfbadge/selfbadge",
+      "description": "Look up verified people on SelfBadge and tell them apart from namesakes.",
+      "title": "SelfBadge",
+      "version": "1.0.0",
+      "websiteUrl": "https://selfbadge.com/developers",
+      "icons": [
+        {
+          "src": "https://selfbadge.com/brand/selfbadge-logo.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "400x400"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://selfbadge.com/mcp",
+          "headers": [
+            {
+              "description": "Optional: Bearer and your SelfBadge API key (sbk_...) for the higher limit. Leave empty for anonymous use.",
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-12T14:50:55.694718Z",
+        "publishedAt": "2026-10-12T14:50:55.694718Z",
+        "updatedAt": "2026-10-12T14:50:55.694718Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.selfielabstudio/selfielab",
+      "description": "Generate and edit AI images and videos with SelfieLab's creative tools.",
+      "version": "1.0.0",
+      "websiteUrl": "https://selfielabstudio.com/developers/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://selfielabstudio.com/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-07T03:09:13.345744Z",
+        "publishedAt": "2026-08-07T03:09:13.345744Z",
+        "updatedAt": "2026-08-07T03:09:13.345744Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.selfoperate/tools",
+      "description": "Pay-per-call company dossier, business lookup and website tools for AI agents (x402).",
+      "title": "SelfOperate Tools",
+      "version": "1.1.0",
+      "websiteUrl": "https://selfoperate.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://tools.selfoperate.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-27T23:45:32.941251Z",
+        "publishedAt": "2026-10-27T23:45:32.941251Z",
+        "updatedAt": "2026-10-27T23:45:32.941251Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.selfping/selfping",
+      "description": "Text your own phone when a run finishes or needs you. A key can only message its own number.",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.selfping.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.selfping.com/api/mcp",
+          "headers": [
+            {
+              "description": "A SelfPing API key generated at https://www.selfping.com/dashboard, sent as \"Bearer <key>\". See https://www.selfping.com/auth.md.",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-08T23:05:21.910832Z",
+        "publishedAt": "2026-08-08T23:05:21.910832Z",
+        "updatedAt": "2026-08-08T23:05:21.910832Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.selfpubgo/selfpubgo",
+      "description": "Amazon Ads and book economics for KDP authors: ad results, wasted spend, break-even ACOS, ranks.",
+      "title": "SelfPub Go",
+      "version": "1.0.0",
+      "websiteUrl": "https://selfpubgo.com/modules/claude-chatgpt",
+      "icons": [
+        {
+          "src": "https://selfpubgo.com/brand/app-icon.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        },
+        {
+          "src": "https://selfpubgo.com/brand/app-icon-256.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "256x256"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.selfpubgo.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-05T04:46:56.262968Z",
+        "publishedAt": "2026-11-05T04:46:56.262968Z",
+        "updatedAt": "2026-11-05T04:46:56.262968Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.selfstorming/selfstorming",
+      "description": "Curated marketing libraries and ideation for your AI: 1,800+ award-winning campaigns and frameworks.",
+      "title": "Selfstorming",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.selfstorming.com/tools/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.selfstorming.com/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-28T13:40:00.534214Z",
+        "publishedAt": "2026-09-28T13:40:00.534214Z",
+        "updatedAt": "2026-09-28T13:40:00.534214Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.selisesignature/signature",
+      "description": "Prepare and send documents for electronic signature with SELISE Signature.",
+      "title": "SELISE Signature",
+      "version": "0.4.2",
+      "websiteUrl": "https://selisesignature.com/ai-integrations",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://signaturemcp.selise.biz/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-26T10:58:52.700926Z",
+        "publishedAt": "2026-10-26T10:58:52.700926Z",
+        "updatedAt": "2026-10-26T10:58:52.700926Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.sellablescore/site",
+      "description": "Sellable Score: the site's own MCP server \u2014 checker, enquiry (enquiry = a human handoff, not a...",
+      "version": "1.0.1",
+      "websiteUrl": "https://sellablescore.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://sellablescore.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-03T12:16:14.166436Z",
+        "publishedAt": "2026-10-03T12:16:14.166436Z",
+        "updatedAt": "2026-10-03T12:16:14.166436Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.sellerlabs/amazon-mcp",
+      "description": "Amazon Seller Central + Ads data for AI agents: true SKU profit with COGS, inventory, ads, orders.",
+      "title": "Seller Labs Amazon MCP",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.sellerlabs.com/amazon-mcp/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://ignite-api.sellerlabs.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-04T20:28:29.884785Z",
+        "publishedAt": "2026-11-04T20:28:29.884785Z",
+        "updatedAt": "2026-11-04T20:28:29.884785Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.sellerprofitdoctor/free-tools",
+      "description": "Free profit check-up for Etsy, Shopify and Amazon sellers: fees, sales, ads, shipping, plans, rates.",
+      "title": "Seller Profit Doctor",
+      "repository": {
+        "url": "https://github.com/FelixNovaNexus/sellerprofitdoctor-mcp",
+        "source": "github"
+      },
+      "version": "1.5.0",
+      "websiteUrl": "https://sellerprofitdoctor.com",
+      "icons": [
+        {
+          "src": "https://sellerprofitdoctor.com/favicon.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://sellerprofitdoctor.com/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-27T03:42:36.919886Z",
+        "publishedAt": "2026-10-27T03:42:36.919886Z",
+        "updatedAt": "2026-10-27T03:42:36.919886Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.sellertoolbelt/mcp",
+      "description": "Check and fix Amazon, eBay and Etsy product images, calculate marketplace fees, look up barcodes.",
+      "title": "Seller Toolbelt",
+      "version": "1.0.0",
+      "websiteUrl": "https://sellertoolbelt.com/agents",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://sellertoolbelt.com/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-18T17:12:31.974875Z",
+        "publishedAt": "2026-10-18T17:12:31.974875Z",
+        "updatedAt": "2026-10-18T17:12:31.974875Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.sellfy/mcp",
+      "description": "Run your Sellfy store from your AI assistant: products, discounts, orders, sales and email drafts.",
+      "title": "Sellfy MCP Server",
+      "repository": {
+        "url": "https://github.com/Sellfy/sellfy-mcp",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://sellfy.com/mcp/?utm_source=mcp-registry&utm_medium=mcp-directory",
+      "icons": [
+        {
+          "src": "https://raw.githubusercontent.com/Sellfy/sellfy-mcp/main/assets/sellfy-logo-400.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "400x400"
+          ]
+        },
+        {
+          "src": "https://raw.githubusercontent.com/Sellfy/sellfy-mcp/main/assets/sellfy-logo.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.sellfy.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-03T10:47:36.45996Z",
+        "publishedAt": "2026-11-03T10:47:36.45996Z",
+        "updatedAt": "2026-11-03T10:47:36.45996Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.sellmybusinessquotes/site",
+      "description": "Sell My Business Quotes: the site's own MCP server \u2014 dataset, enquiry (enquiry = a human...",
+      "version": "1.0.1",
+      "websiteUrl": "https://sellmybusinessquotes.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://sellmybusinessquotes.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-03T13:11:18.342904Z",
+        "publishedAt": "2026-10-03T13:11:18.342904Z",
+        "updatedAt": "2026-10-03T13:11:18.342904Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.sellmycompanydata/valuation",
+      "description": "Estimate what your company's operational data is worth to AI labs. Counts only, never content.",
+      "title": "Sell My Company Data",
+      "version": "1.1.0",
+      "websiteUrl": "https://sellmycompanydata.com/connect/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://sellmycompanydata.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-25T10:49:27.562017Z",
+        "publishedAt": "2026-10-25T10:49:27.562017Z",
+        "updatedAt": "2026-10-25T10:49:27.562017Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.selltostate/mcp",
+      "description": "Government tenders, contract awards, buyers and suppliers from official sources in 60+ countries.",
+      "title": "Sell to State",
+      "repository": {
+        "url": "https://github.com/getbeton/selltostate-mcp",
+        "source": "github"
+      },
+      "version": "0.4.1",
+      "websiteUrl": "https://www.selltostate.com/mcp/",
+      "icons": [
+        {
+          "src": "https://raw.githubusercontent.com/getbeton/selltostate-skills/main/assets/icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://app.selltostate.com/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-21T09:34:29.500136Z",
+        "publishedAt": "2026-10-21T09:34:29.500136Z",
+        "updatedAt": "2026-10-21T09:34:29.500136Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.sema-lang/sema",
+      "description": "MCP tools for Sema \u2014 eval, compile, build, format, and docs for a Lisp with LLM primitives.",
+      "title": "Sema",
+      "repository": {
+        "url": "https://github.com/sema-lisp/sema",
+        "source": "github"
+      },
+      "version": "2.0.0",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/sema-lisp/sema/releases/download/v2.0.0/sema.mcpb",
+          "version": "2.0.0",
+          "fileSha256": "274f35902c4adcdb495824986330f31a0f540a3b0d4dbc96a88a77cab2bcf7f7",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-28T12:19:15.344118Z",
+        "publishedAt": "2026-10-28T12:19:15.344118Z",
+        "updatedAt": "2026-10-28T12:19:15.344118Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.sematryx/optimizer",
+      "description": "AI-powered optimization API by Sematryx",
+      "title": "Sematryx Optimizer",
+      "version": "1.0.1",
+      "remotes": [
+        {
+          "type": "sse",
+          "url": "https://mcp.sematryx.com/sse"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-03-07T20:27:55.708493Z",
+        "publishedAt": "2026-03-07T20:27:55.708493Z",
+        "updatedAt": "2026-03-07T20:27:55.708493Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.semscraper/semscraper",
+      "description": "Real Google and Google Maps SERPs for AI assistants: pixel positions, AI Overviews and sources.",
+      "title": "Semscraper",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.semscraper.com/en/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.semscraper.com/mcp",
+          "headers": [
+            {
+              "description": "Bearer followed by your Semscraper API key (API keys menu of app.semscraper.com)",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-10T04:47:00.040866Z",
+        "publishedAt": "2026-10-10T04:47:00.040866Z",
+        "updatedAt": "2026-10-10T04:47:00.040866Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.send-burg/sendburg",
+      "description": "Search 250M+ B2B contacts and 25M+ companies; reveal verified work emails and phone numbers.",
+      "title": "Sendburg",
+      "version": "1.0.0",
+      "websiteUrl": "https://send-burg.com/blog/mcp-connector-setup-guide",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://app.send-burg.com/mcp",
+          "headers": [
+            {
+              "description": "Bearer sb_... API key from app.send-burg.com Settings > API Tokens (not needed when your client signs in with OAuth)",
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-18T12:14:31.436731Z",
+        "publishedAt": "2026-10-18T12:14:31.436731Z",
+        "updatedAt": "2026-10-18T12:14:31.436731Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.send16/send16",
+      "description": "Email, SMS and marketing automation: campaigns, contacts, automations and stats from Claude.",
+      "title": "Send16",
+      "version": "0.5.15",
+      "websiteUrl": "https://send16.com/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.send16.com",
+          "headers": [
+            {
+              "description": "Your Send16 API key as 'Bearer sk_live_...' (Settings > API keys in Send16; the free plan works).",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-28T03:11:37.897522Z",
+        "publishedAt": "2026-10-28T03:11:37.897522Z",
+        "updatedAt": "2026-10-28T03:11:37.897522Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.sendameal/storefront",
+      "description": "Search gift meals and send them as gifts. Live catalog, cart, and guest checkout for SendaMeal.",
+      "title": "SendaMeal Storefront",
+      "version": "1.0.0",
+      "websiteUrl": "https://sendameal.com/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://store-odebi8ye4k-1.mybigcommerce.com/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-15T15:55:20.004688Z",
+        "publishedAt": "2026-08-15T15:55:20.004688Z",
+        "updatedAt": "2026-08-15T15:55:20.004688Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.sendaparcelcompare/site",
+      "description": "Send A Parcel Compare: the site's own MCP server \u2014 dataset, enquiry (enquiry = a human handoff,...",
+      "version": "1.0.1",
+      "websiteUrl": "https://sendaparcelcompare.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://sendaparcelcompare.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-03T13:11:33.75964Z",
+        "publishedAt": "2026-10-03T13:11:33.75964Z",
+        "updatedAt": "2026-10-03T13:11:33.75964Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.senderkit/senderkit",
+      "description": "Build and send email, SMS, and push straight from your AI agent.",
+      "title": "SenderKit",
+      "repository": {
+        "url": "https://github.com/senderkit/senderkit-skills",
+        "source": "github"
+      },
+      "version": "0.1.0",
+      "websiteUrl": "https://www.senderkit.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.senderkit.com"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-06-07T16:58:01.226874Z",
+        "publishedAt": "2026-06-07T16:58:01.226874Z",
+        "updatedAt": "2026-06-07T16:58:01.226874Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.sendfaxfast/fax",
+      "description": "Send real faxes from AI chat. PDF, JPG or PNG. Pay per fax via Stripe link. US, CA, AU, NZ + 39",
+      "title": "SendFaxFast",
+      "version": "1.1.0",
+      "websiteUrl": "https://sendfaxfast.com/claude.html",
+      "icons": [
+        {
+          "src": "https://sendfaxfast.com/icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://sendfaxfast.com/api/mcp.php"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-09T03:36:35.068655Z",
+        "publishedAt": "2026-10-09T03:36:35.068655Z",
+        "updatedAt": "2026-10-09T03:36:35.068655Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.sendfaxfast/fax-credits",
+      "description": "Send faxes from AI chat with prepaid credits (1 credit = 1 fax, up to 100 pages). PDF, JPG, PNG.",
+      "title": "SendFaxFast (AI Fax Credits)",
+      "version": "1.1.0",
+      "websiteUrl": "https://sendfaxfast.com/ai-connect.html",
+      "icons": [
+        {
+          "src": "https://sendfaxfast.com/icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://sendfaxfast.com/api/mcp-credits.php",
+          "headers": [
+            {
+              "description": "Your sfx_ key from the AI fax credits email (buy at sendfaxfast.com/ai-credits.html)",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "X-API-Key"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-09T03:36:36.833671Z",
+        "publishedAt": "2026-10-09T03:36:36.833671Z",
+        "updatedAt": "2026-10-09T03:36:36.833671Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.sendfaxwell/faxwell",
+      "description": "Fax any US or Canada number, as low as 6\u00a2 a page. No subscription, no account needed first.",
+      "title": "Faxwell",
+      "repository": {
+        "url": "https://github.com/kiyokaz/faxwell-mcp",
+        "source": "github",
+        "id": "1446490133"
+      },
+      "version": "1.1.0",
+      "websiteUrl": "https://sendfaxwell.com/guides/send-a-fax-with-ai",
+      "icons": [
+        {
+          "src": "https://sendfaxwell.com/icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        },
+        {
+          "src": "https://sendfaxwell.com/icon-192.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "192x192"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.sendfaxwell.com/mcp"
+        },
+        {
+          "type": "streamable-http",
+          "url": "https://api.sendfaxwell.com/mcp/account"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-05T03:41:42.50256Z",
+        "publishedAt": "2026-11-05T03:41:42.50256Z",
+        "updatedAt": "2026-11-05T03:41:42.50256Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.sendfeather/mcp",
+      "description": "Send transactional email and check delivery: bounces, suppressions, per-provider stats.",
+      "title": "Sendfeather",
+      "version": "1.0.0",
+      "websiteUrl": "https://sendfeather.com/docs/mcp",
+      "icons": [
+        {
+          "src": "https://sendfeather.com/apple-touch-icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "180x180"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://sendfeather.com/api/mcp",
+          "headers": [
+            {
+              "description": "Bearer token: a Sendfeather API key (dashboard \u2192 API keys). Reads need read:activity; sends need send.",
+              "isRequired": true,
+              "value": "Bearer {api_key}",
+              "isSecret": true,
+              "variables": {
+                "api_key": {
+                  "description": "Your Sendfeather API key",
+                  "isRequired": true,
+                  "isSecret": true
+                }
+              },
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-27T17:04:08.525801Z",
+        "publishedAt": "2026-10-27T17:04:08.525801Z",
+        "updatedAt": "2026-10-27T17:04:08.525801Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.sendifai/platform",
+      "description": "335 MCP tools, 75 playbooks. AI-native CRM, email/SMS, events, OAuth.",
+      "title": "sendifai",
+      "repository": {
+        "url": "https://github.com/MSCandCo/sendifai",
+        "source": "github",
+        "subfolder": "email-platform"
+      },
+      "version": "5.0",
+      "websiteUrl": "https://www.sendifai.com",
+      "icons": [
+        {
+          "src": "https://www.sendifai.com/icon.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.sendifai.com/api/mcp"
+        }
+      ],
+      "_meta": {
+        "io.modelcontextprotocol.registry/publisher-provided": {
+          "alternateNames": [
+            "io.github.MSCandCo/sendifai"
+          ],
+          "discovery": {
+            "agentJson": "https://www.sendifai.com/.well-known/agent.json",
+            "agentsLanding": "https://www.sendifai.com/agents",
+            "discoveryHub": "https://www.sendifai.com/api/discovery",
+            "llmsFullTxt": "https://www.sendifai.com/llms-full.txt",
+            "llmsTxt": "https://www.sendifai.com/llms.txt",
+            "mcpManifest": "https://www.sendifai.com/api/mcp/manifest",
+            "oauthIntents": "https://www.sendifai.com/api/oauth/intents"
+          },
+          "ecosystems": [
+            {
+              "id": "official-mcp-registry",
+              "name": "Official MCP Registry",
+              "role": "canonical",
+              "url": "https://registry.modelcontextprotocol.io"
+            },
+            {
+              "id": "smithery",
+              "name": "Smithery",
+              "role": "directory",
+              "url": "https://smithery.ai"
+            },
+            {
+              "id": "glama",
+              "name": "Glama MCP",
+              "role": "directory",
+              "url": "https://glama.ai/mcp"
+            },
+            {
+              "id": "pulsemcp",
+              "name": "PulseMCP",
+              "role": "directory",
+              "url": "https://www.pulsemcp.com"
+            },
+            {
+              "id": "mcp-so",
+              "name": "mcp.so",
+              "role": "directory",
+              "url": "https://mcp.so"
+            },
+            {
+              "id": "awesome-mcp-servers",
+              "name": "awesome-mcp-servers (GitHub)",
+              "role": "directory",
+              "url": "https://github.com/punkpeye/awesome-mcp-servers"
+            },
+            {
+              "id": "anthropic-connectors",
+              "name": "Claude / Anthropic connectors",
+              "role": "vendor",
+              "url": "https://docs.anthropic.com"
+            },
+            {
+              "id": "openai-connectors",
+              "name": "ChatGPT / OpenAI MCP connectors",
+              "role": "vendor",
+              "url": "https://platform.openai.com"
+            },
+            {
+              "id": "google-gemini",
+              "name": "Google Gemini extensions",
+              "role": "vendor",
+              "url": "https://ai.google.dev"
+            }
+          ],
+          "manifestVersion": 5,
+          "oauth": {
+            "authorizationServer": "https://www.sendifai.com/.well-known/oauth-authorization-server",
+            "authorize": "https://www.sendifai.com/oauth/authorize",
+            "protectedResource": "https://www.sendifai.com/.well-known/oauth-protected-resource"
+          },
+          "playbookCount": 75,
+          "totalTools": 335,
+          "universalAgentBridge": {
+            "chat": "https://www.sendifai.com/api/agent/chat",
+            "invoke": "https://www.sendifai.com/api/agent/invoke",
+            "tools": "https://www.sendifai.com/api/agent/tools"
+          },
+          "workflowTools": 285
+        }
+      }
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-31T21:36:50.083776Z",
+        "publishedAt": "2026-07-31T21:36:50.083776Z",
+        "updatedAt": "2026-07-31T21:36:50.083776Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.sendkuy/mcp",
+      "description": "Send WhatsApp, SMS and email, verify OTP codes and run campaigns with SendKuy.",
+      "title": "SendKuy",
+      "repository": {
+        "url": "https://github.com/sendkuy/sendkuy-mcp",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://docs.sendkuy.com/mcp",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@sendkuy/mcp",
+          "version": "1.0.0",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "SendKuy API key from https://app.sendkuy.com/user/api. Needs account:read plus the scopes of the tools you want.",
+              "format": "string",
+              "isSecret": true,
+              "name": "SENDKUY_API_KEY"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-29T06:10:48.498014Z",
+        "publishedAt": "2026-10-29T06:10:48.498014Z",
+        "updatedAt": "2026-10-29T06:10:48.498014Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.sendmycall/public",
+      "description": "Virtual phone number coverage, monthly prices, calling and forwarding rates, help articles.",
+      "title": "SendMyCall public data",
+      "version": "1.0.0",
+      "websiteUrl": "https://sendmycall.com/developers",
+      "icons": [
+        {
+          "src": "https://sendmycall.com/brand/logo-mark.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        },
+        {
+          "src": "https://sendmycall.com/icon1.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "192x192"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://sendmycall.com/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-16T17:13:31.793033Z",
+        "publishedAt": "2026-10-16T17:13:31.793033Z",
+        "updatedAt": "2026-10-16T17:13:31.793033Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.sendocado/sendocado",
+      "description": "Activation and onboarding emails for software products, sent through your own email provider.",
+      "title": "Sendocado",
+      "version": "1.0.0",
+      "websiteUrl": "https://sendocado.com/docs/mcp",
+      "icons": [
+        {
+          "src": "https://sendocado.com/icon.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://sendocado.com/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-01T15:23:51.767225Z",
+        "publishedAt": "2026-11-01T15:23:51.767225Z",
+        "updatedAt": "2026-11-01T15:23:51.767225Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.sendpageapp/sendpage",
+      "description": "Publish an HTML document as a link anyone can open in one tap, plus PDF, image and Word export.",
+      "repository": {
+        "url": "https://github.com/jcaiagent7143-ui/sendpage-mcp",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://sendpageapp.com/docs/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://sendpageapp.com/mcp",
+          "headers": [
+            {
+              "description": "Bearer token. Generate a free key at https://sendpageapp.com/docs/mcp \u2014 no signup required. Format: 'Bearer sp_live_...'",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-02T14:25:51.74328Z",
+        "publishedAt": "2026-08-02T14:25:51.74328Z",
+        "updatedAt": "2026-08-02T14:25:51.74328Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.sendpaybusiness.app/free-business-tools",
+      "description": "Free VAT, card fee, loan, mortgage, margin, ROI and break-even calculators plus IBAN/SWIFT checks",
+      "title": "SendPay free business calculators",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.sendpaybusiness.com/tools",
+      "icons": [
+        {
+          "src": "https://www.sendpaybusiness.com/icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.sendpaybusiness.com/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-27T04:13:03.610933Z",
+        "publishedAt": "2026-10-27T04:13:03.610933Z",
+        "updatedAt": "2026-10-27T04:13:03.610933Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.sendpulse.mcp/mcp-server",
+      "description": "Empower AI agents with SendPulse email, CRM, chatbot, SMTP, and course automation",
+      "title": "SendPulse",
+      "repository": {
+        "url": "https://github.com/sendpulse/mcp-server",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://sendpulse.com/features/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.sendpulse.com/mcp",
+          "headers": [
+            {
+              "description": "Client ID",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "X-SP-ID"
+            },
+            {
+              "description": "Client Secret",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "X-SP-SECRET"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-02T11:46:46.933793Z",
+        "publishedAt": "2026-07-02T11:46:46.933793Z",
+        "updatedAt": "2026-07-02T11:46:46.933793Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.sendquotenow/quote-engine",
+      "description": "Generate branded contractor quotes: hosted approval page, PDF, QR code, and Stripe payment link.",
+      "title": "SendQuoteNow \u2014 AI Quote Engine for Contractors",
+      "version": "1.0.0",
+      "websiteUrl": "https://sendquotenow.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://sendquotenow.com/mcp",
+          "headers": [
+            {
+              "description": "SendQuoteNow API key (sqn_live_...). Register free at https://sendquotenow.com/register.html and mint keys from the dashboard.",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "X-API-Key"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-03T22:04:41.147939Z",
+        "publishedAt": "2026-07-03T22:04:41.147939Z",
+        "updatedAt": "2026-07-03T22:04:41.147939Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.sendsalvo/salvo",
+      "description": "Job applications done for you: check applications and interviews, get prep, apply to a job by URL.",
+      "title": "Salvo",
+      "version": "1.0.0",
+      "websiteUrl": "https://sendsalvo.com/agents.html",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://sendsalvo.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-16T06:03:04.10602Z",
+        "publishedAt": "2026-10-16T06:03:04.10602Z",
+        "updatedAt": "2026-10-16T06:03:04.10602Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.sendseven/messaging",
+      "description": "Unified messaging MCP server: WhatsApp, Instagram, Telegram, SMS, Messenger & email support inbox",
+      "repository": {
+        "url": "https://github.com/SendSeven-GmbH/sendseven-mcp-server",
+        "source": "github"
+      },
+      "version": "1.1.0",
+      "websiteUrl": "https://sendseven.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.sendseven.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-04T10:55:40.741221Z",
+        "publishedAt": "2026-11-04T10:55:40.741221Z",
+        "updatedAt": "2026-11-04T10:55:40.741221Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.sendthisfax/fax",
+      "description": "Send real faxes to EU institutions: pay per fax via checkout link or prepaid API key.",
+      "title": "SendThisFax",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.sendthisfax.com/en/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.sendthisfax.com/mcp",
+          "headers": [
+            {
+              "description": "Optional: Bearer stf_live_... prepaid API key for autonomous sending (buy at https://www.sendthisfax.com/en/credits). Omit for pay-per-fax checkout links.",
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-08T17:33:41.250799Z",
+        "publishedAt": "2026-07-08T17:33:41.250799Z",
+        "updatedAt": "2026-07-08T17:33:41.250799Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.sendwithflare/flaremail",
+      "description": "Read, search, draft, and send email from a FlareMail inbox.",
+      "title": "FlareMail",
+      "version": "1.0.0",
+      "websiteUrl": "https://sendwithflare.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://flaremail-api.tcrxx0.workers.dev/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-28T14:43:28.675445Z",
+        "publishedAt": "2026-10-28T14:43:28.675445Z",
+        "updatedAt": "2026-10-28T14:43:28.675445Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.sendyouragent/readiness",
+      "description": "Scan website AI readiness, understand the result and route customers to the right SYA package.",
+      "title": "Send Your Agent Website Readiness",
+      "version": "1.0.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://sendyouragent.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-15T11:10:24.451891Z",
+        "publishedAt": "2026-07-15T11:10:24.451891Z",
+        "updatedAt": "2026-07-15T11:10:24.451891Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.seniordognotes/pawline-pet-guides",
+      "description": "Search 180+ free PawLine pet care guides and run pet care calculators.",
+      "title": "PawLine Pet Guides",
+      "version": "1.0.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://pawline-mcp.pawline.workers.dev/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-22T00:01:31.73125Z",
+        "publishedAt": "2026-10-22T00:01:31.73125Z",
+        "updatedAt": "2026-10-22T00:01:31.73125Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.senprints.mcp/seller",
+      "description": "Read your SenPrints sales, orders, customers, campaigns and payouts, and publish blog posts.",
+      "title": "SenPrints Seller Connector",
+      "version": "1.0.0",
+      "websiteUrl": "https://mcp.senprints.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.senprints.com/mcp/seller"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-19T06:44:59.070362Z",
+        "publishedAt": "2026-08-19T06:44:59.070362Z",
+        "updatedAt": "2026-08-19T06:44:59.070362Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.sentientmail/email-platform",
+      "description": "AI-first email platform: templates, audiences, journeys. Sends real email when the key allows it.",
+      "title": "SentientMail",
+      "version": "1.0.0",
+      "websiteUrl": "https://sentientmail.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://app.sentientmail.com/api/mcp",
+          "headers": [
+            {
+              "description": "Bearer <agent key> from your SentientMail account. The key's scopes decide what the agent can do; send and journey-activation scopes reach real recipients.",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-13T22:14:18.89591Z",
+        "publishedAt": "2026-09-13T22:14:18.89591Z",
+        "updatedAt": "2026-09-13T22:14:18.89591Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.sentinelbriefing/sentinel",
+      "description": "Strategic monitoring and public affairs intelligence: watches, sourced notes, analysed articles.",
+      "title": "Sentinel Briefing",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.sentinelbriefing.com",
+      "icons": [
+        {
+          "src": "https://app.sentinelbriefing.com/static/icon-192.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "192x192"
+          ]
+        },
+        {
+          "src": "https://app.sentinelbriefing.com/static/icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        },
+        {
+          "src": "https://app.sentinelbriefing.com/static/favicon.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://app.sentinelbriefing.com/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-21T10:49:15.198054Z",
+        "publishedAt": "2026-10-21T10:49:15.198054Z",
+        "updatedAt": "2026-10-21T10:49:15.198054Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.sentrint/sentrint",
+      "description": "Code security scanner for founders and small teams: leaked secrets, missing RLS, injection, CVEs",
+      "title": "Sentrint",
+      "version": "1.0.0",
+      "websiteUrl": "https://sentrint.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://sentrint.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-31T15:31:47.112303Z",
+        "publishedAt": "2026-10-31T15:31:47.112303Z",
+        "updatedAt": "2026-10-31T15:31:47.112303Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.senzii/scheduling",
+      "description": "Open-source staff scheduling: skills matching, shifts, certifications. Self-hostable, MCP-native.",
+      "title": "Senzii Scheduling",
+      "repository": {
+        "url": "https://github.com/Senzii-App/app",
+        "source": "github",
+        "subfolder": "mcp_server"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://senzii.com"
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-28T14:06:57.25635Z",
+        "publishedAt": "2026-09-28T14:06:57.25635Z",
+        "updatedAt": "2026-09-28T14:06:57.25635Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.senzing/mcp",
+      "description": "Entity resolution \u2014 data mapping, SDK code generation, docs search, and error troubleshooting",
+      "title": "Senzing",
+      "repository": {
+        "url": "https://github.com/Senzing/mcp",
+        "source": "github"
+      },
+      "version": "1.45.2",
+      "websiteUrl": "https://senzing.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.senzing.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-07T18:14:20.390517Z",
+        "publishedAt": "2026-11-07T18:14:20.390517Z",
+        "updatedAt": "2026-11-07T18:14:20.390517Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.seoaix/seo-audit",
+      "description": "Free SEO & AI-search (AEO) audits for any site or Shopify store, with emailed weekly score reports.",
+      "title": "SeoAiX SEO Audit",
+      "repository": {
+        "url": "https://github.com/riverliu8/seoaix-mcp",
+        "source": "github"
+      },
+      "version": "1.5.0",
+      "websiteUrl": "https://seoaix.com/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://seoaix.com/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-17T03:33:31.833134Z",
+        "publishedAt": "2026-10-17T03:33:31.833134Z",
+        "updatedAt": "2026-10-17T03:33:31.833134Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.seoapi/amazon",
+      "description": "Validate Amazonbot and Amzn-SearchBot IP addresses. Remote MCP validate_ip tool.",
+      "version": "1.0.0",
+      "websiteUrl": "https://seoapi.com/amazon/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://amazon.seoapi.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-15T21:47:43.033033Z",
+        "publishedAt": "2026-07-15T21:47:43.033033Z",
+        "updatedAt": "2026-07-15T21:47:43.033033Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.seoapi/applebot",
+      "description": "Validate whether an IP address belongs to Applebot. Remote MCP server exposing a validate_ip tool.",
+      "version": "1.0.0",
+      "websiteUrl": "https://seoapi.com/applebot/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://applebot.seoapi.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-15T21:44:30.178152Z",
+        "publishedAt": "2026-07-15T21:44:30.178152Z",
+        "updatedAt": "2026-07-15T21:44:30.178152Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.seoapi/baiduspider",
+      "description": "Validate Baiduspider IP addresses. Remote MCP validate_ip tool.",
+      "version": "1.0.0",
+      "websiteUrl": "https://seoapi.com/baiduspider/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://baiduspider.seoapi.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-15T21:47:18.110179Z",
+        "publishedAt": "2026-07-15T21:47:18.110179Z",
+        "updatedAt": "2026-07-15T21:47:18.110179Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.seoapi/bingbot",
+      "description": "Validate whether an IP address belongs to Bingbot. Remote MCP server exposing a validate_ip tool.",
+      "version": "1.0.0",
+      "websiteUrl": "https://seoapi.com/bingbot/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://bingbot.seoapi.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-15T21:44:36.375401Z",
+        "publishedAt": "2026-07-15T21:44:36.375401Z",
+        "updatedAt": "2026-07-15T21:44:36.375401Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.seoapi/ccbot",
+      "description": "Validate CommonCrawl CCBot IP addresses. Remote MCP validate_ip tool.",
+      "version": "1.0.0",
+      "websiteUrl": "https://seoapi.com/ccbot/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://ccbot.seoapi.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-15T21:47:47.273023Z",
+        "publishedAt": "2026-07-15T21:47:47.273023Z",
+        "updatedAt": "2026-07-15T21:47:47.273023Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.seoapi/claude",
+      "description": "Validate ClaudeBot and Claude-SearchBot IP addresses. Remote MCP validate_ip tool.",
+      "version": "1.0.0",
+      "websiteUrl": "https://seoapi.com/claude/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://claude.seoapi.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-15T21:47:33.532876Z",
+        "publishedAt": "2026-07-15T21:47:33.532876Z",
+        "updatedAt": "2026-07-15T21:47:33.532876Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.seoapi/coccocbot",
+      "description": "Validate C\u1ed1c C\u1ed1c Bot IP addresses. Remote MCP validate_ip tool.",
+      "version": "1.0.0",
+      "websiteUrl": "https://seoapi.com/coccocbot/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://coccocbot.seoapi.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-15T21:47:19.950021Z",
+        "publishedAt": "2026-07-15T21:47:19.950021Z",
+        "updatedAt": "2026-07-15T21:47:19.950021Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.seoapi/duckduckbot",
+      "description": "Validate DuckDuckBot IP addresses. Remote MCP validate_ip tool.",
+      "version": "1.0.0",
+      "websiteUrl": "https://seoapi.com/duckduckbot/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://duckduckbot.seoapi.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-15T21:47:21.790833Z",
+        "publishedAt": "2026-07-15T21:47:21.790833Z",
+        "updatedAt": "2026-07-15T21:47:21.790833Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.seoapi/googlebot",
+      "description": "Validate whether an IP address belongs to Googlebot. Remote MCP server exposing a validate_ip tool.",
+      "version": "1.0.0",
+      "websiteUrl": "https://seoapi.com/googlebot/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://googlebot.seoapi.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-15T21:44:49.326046Z",
+        "publishedAt": "2026-07-15T21:44:49.326046Z",
+        "updatedAt": "2026-07-15T21:44:49.326046Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.seoapi/meta",
+      "description": "Validate Meta-ExternalAgent and Meta-WebIndexer IP addresses. Remote MCP validate_ip tool.",
+      "version": "1.0.0",
+      "websiteUrl": "https://seoapi.com/meta/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://meta.seoapi.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-15T21:47:44.948173Z",
+        "publishedAt": "2026-07-15T21:47:44.948173Z",
+        "updatedAt": "2026-07-15T21:47:44.948173Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.seoapi/naverbot",
+      "description": "Validate Naver Yeti IP addresses. Remote MCP validate_ip tool.",
+      "version": "1.0.0",
+      "websiteUrl": "https://seoapi.com/naverbot/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://naverbot.seoapi.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-15T21:47:23.750047Z",
+        "publishedAt": "2026-07-15T21:47:23.750047Z",
+        "updatedAt": "2026-07-15T21:47:23.750047Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.seoapi/openai",
+      "description": "Validate GPTBot and OAI-SearchBot IP addresses. Remote MCP validate_ip tool.",
+      "version": "1.0.0",
+      "websiteUrl": "https://seoapi.com/openai/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://openai.seoapi.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-15T21:47:31.423108Z",
+        "publishedAt": "2026-07-15T21:47:31.423108Z",
+        "updatedAt": "2026-07-15T21:47:31.423108Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.seoapi/perplexitybot",
+      "description": "Validate PerplexityBot IP addresses. Remote MCP validate_ip tool.",
+      "version": "1.0.0",
+      "websiteUrl": "https://seoapi.com/perplexitybot/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://perplexitybot.seoapi.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-15T21:47:36.36564Z",
+        "publishedAt": "2026-07-15T21:47:36.36564Z",
+        "updatedAt": "2026-07-15T21:47:36.36564Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.seoapi/petalbot",
+      "description": "Validate whether an IP address belongs to PetalBot. Remote MCP server exposing a validate_ip tool.",
+      "version": "1.0.0",
+      "websiteUrl": "https://seoapi.com/petalbot/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://petalbot.seoapi.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-15T21:45:14.998915Z",
+        "publishedAt": "2026-07-15T21:45:14.998915Z",
+        "updatedAt": "2026-07-15T21:45:14.998915Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.seoapi/seznambot",
+      "description": "Validate whether an IP address belongs to SeznamBot. Remote MCP server exposing a validate_ip tool.",
+      "version": "1.0.0",
+      "websiteUrl": "https://seoapi.com/seznambot/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://seznambot.seoapi.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-15T21:45:17.266364Z",
+        "publishedAt": "2026-07-15T21:45:17.266364Z",
+        "updatedAt": "2026-07-15T21:45:17.266364Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.seoapi/sogouwebspider",
+      "description": "Validate Sogou Spider IP addresses. Remote MCP validate_ip tool.",
+      "version": "1.0.0",
+      "websiteUrl": "https://seoapi.com/sogouwebspider/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://sogouwebspider.seoapi.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-15T21:47:26.17176Z",
+        "publishedAt": "2026-07-15T21:47:26.17176Z",
+        "updatedAt": "2026-07-15T21:47:26.17176Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.seoapi/yahooslurp",
+      "description": "Validate Yahoo! Slurp IP addresses. Remote MCP validate_ip tool.",
+      "version": "1.0.0",
+      "websiteUrl": "https://seoapi.com/yahooslurp/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://yahooslurp.seoapi.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-15T21:47:28.426505Z",
+        "publishedAt": "2026-07-15T21:47:28.426505Z",
+        "updatedAt": "2026-07-15T21:47:28.426505Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.seoapi/yandexbot",
+      "description": "Validate whether an IP address belongs to YandexBot. Remote MCP server exposing a validate_ip tool.",
+      "version": "1.0.0",
+      "websiteUrl": "https://seoapi.com/yandexbot/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://yandexbot.seoapi.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-15T21:45:23.606081Z",
+        "publishedAt": "2026-07-15T21:45:23.606081Z",
+        "updatedAt": "2026-07-15T21:45:23.606081Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.seoasist/mcp",
+      "description": "SEO audits, AI fix PRs, rank tracking, blog content and AI-search visibility for your sites.",
+      "title": "SEOAsist",
+      "version": "1.1.1",
+      "websiteUrl": "https://seoasist.com",
+      "icons": [
+        {
+          "src": "https://seoasist.com/logo.png",
+          "mimeType": "image/png"
+        }
+      ],
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@seoasist/mcp",
+          "version": "1.1.1",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "API key from SEOAsist \u2192 Settings \u2192 API keys (sa_live_\u2026; write scope for actions)",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "SEOASIST_API_KEY"
+            }
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://seoasist.com/api/mcp",
+          "headers": [
+            {
+              "description": "Bearer sa_live_\u2026 API key from SEOAsist \u2192 Settings \u2192 API keys (write scope for actions)",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-19T20:22:16.250728Z",
+        "publishedAt": "2026-10-19T20:22:16.250728Z",
+        "updatedAt": "2026-10-19T20:22:16.250728Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.seoclerks/seoclerks",
+      "description": "Find and order SEO services, follow your orders and answer messages on the Seoclerks marketplace.",
+      "title": "Seoclerks",
+      "version": "1.0.0",
+      "websiteUrl": "https://developers.seoclerk.com/connect-ai-agent",
+      "icons": [
+        {
+          "src": "https://www.seoclerks.com/assets/img/icons/icon-192.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "192x192"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.seoclerks.com/mcp",
+          "headers": [
+            {
+              "description": "Optional: Bearer and an API key with the AI assistants (MCP) grant. Leave it out to sign in with Seoclerks (OAuth).",
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-23T14:42:15.532067Z",
+        "publishedAt": "2026-10-23T14:42:15.532067Z",
+        "updatedAt": "2026-10-23T14:42:15.532067Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.seocontentmachine/scm",
+      "description": "Run SEO Content Machine tasks from an MCP client: scraping, crawls, Google Maps, Workspace pages.",
+      "title": "SEO Content Machine",
+      "repository": {
+        "url": "https://github.com/gitTerebi/seo-content-machine-plugin",
+        "source": "github",
+        "subfolder": "mcp"
+      },
+      "version": "1.1.1",
+      "websiteUrl": "https://seocontentmachine.com/?utm_source=npm-mcp&utm_medium=mcp&utm_campaign=mcp-registry&utm_content=website",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "seo-content-machine-mcp",
+          "version": "1.1.1",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "SCM API server address. Default http://localhost:8008",
+              "name": "SCM_API_URL"
+            },
+            {
+              "description": "The key from SCM Settings > App > Api secret key, if you set one",
+              "isSecret": true,
+              "name": "SCM_API_KEY"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-02T04:34:01.686578Z",
+        "publishedAt": "2026-11-02T04:34:01.686578Z",
+        "updatedAt": "2026-11-02T04:34:01.686578Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.seofuxx/seo-audit",
+      "description": "Read SEO analyses and prioritized on-page recommendations from your own SEOFuxx account.",
+      "title": "SEOFuxx SEO Audit",
+      "repository": {
+        "url": "https://github.com/b1tw0rker/seofuxx",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://www.seofuxx.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.seofuxx.com/api/v1/mcp",
+          "headers": [
+            {
+              "description": "Bearer token with your SEOFuxx API key.",
+              "isRequired": true,
+              "value": "Bearer {api_key}",
+              "isSecret": true,
+              "variables": {
+                "api_key": {
+                  "description": "SEOFuxx API key (sfx_live_...). Create one at seofuxx.com/account, tab \"API-Keys\".",
+                  "isRequired": true,
+                  "isSecret": true
+                }
+              },
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-02T13:22:07.824511Z",
+        "publishedAt": "2026-10-02T13:22:07.824511Z",
+        "updatedAt": "2026-10-02T13:22:07.824511Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.seogrep/seogrep",
+      "description": "SEO for AI agents: crawl sites, audit pages, pull Search Console data, generate shareable reports.",
+      "title": "SeoGrep",
+      "version": "1.0.0",
+      "websiteUrl": "https://seogrep.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.seogrep.com/mcp/{key}",
+          "variables": {
+            "key": {
+              "description": "Your personal key from the SeoGrep dashboard (free trial, no card)",
+              "isRequired": true,
+              "isSecret": true
+            }
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-27T14:05:58.022431Z",
+        "publishedAt": "2026-07-27T14:05:58.022431Z",
+        "updatedAt": "2026-07-27T14:05:58.022431Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.seolyticize/seolyticize",
+      "description": "SEO for agencies: rank tracking, site audits, Search Console, GA4, backlinks and AI visibility.",
+      "title": "Seolyticize",
+      "repository": {
+        "url": "https://github.com/Seolyticize/skills",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://seolyticize.com/docs",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://seolyticize.com/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-25T00:25:30.444678Z",
+        "publishedAt": "2026-10-25T00:25:30.444678Z",
+        "updatedAt": "2026-10-25T00:25:30.444678Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.seomely/seomely",
+      "description": "Which pages Google actually indexed, which dropped out and when, and why the rest did not.",
+      "title": "Seomely",
+      "version": "1.0.0",
+      "websiteUrl": "https://seomely.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://seomely.com/api/mcp",
+          "headers": [
+            {
+              "description": "Bearer token using an API key from https://seomely.com/app/api-keys, in the form 'Bearer sk_live_...'. The free plan includes 1,000 calls a month.",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-14T16:01:00.655633Z",
+        "publishedAt": "2026-08-14T16:01:00.655633Z",
+        "updatedAt": "2026-08-14T16:01:00.655633Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.seoperception/mcp",
+      "description": "Search Console, crawl, and SEO to-dos in Cursor and Claude. OAuth or token; close to-dos optionally.",
+      "title": "SEO Perception",
+      "repository": {
+        "url": "https://github.com/lkoudal/seoperception-mcp",
+        "source": "github"
+      },
+      "version": "2.1.0",
+      "websiteUrl": "https://seoperception.com/mcp-integration",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://seoperception.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-26T13:54:31.775595Z",
+        "publishedAt": "2026-10-26T13:54:31.775595Z",
+        "updatedAt": "2026-10-26T13:54:31.775595Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.seoperseo/mcp",
+      "description": "SEO, GEO & AI Visibility intelligence directly inside AI assistants.",
+      "title": "SeoPerseo",
+      "version": "1.0.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://seoperseo.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-13T21:57:25.389568Z",
+        "publishedAt": "2026-10-13T21:57:25.389568Z",
+        "updatedAt": "2026-10-13T21:57:25.389568Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.seorankfixer/seo-rank-fixer",
+      "description": "Google Search Console performance and the SEO fixes worth the most clicks, ranked for your sites.",
+      "title": "SEO Rank Fixer",
+      "repository": {
+        "url": "https://github.com/sharikwani/seo-rank-fixer-plugin",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://seorankfixer.com/connectors",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://seorankfixer.com/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-21T07:03:25.989576Z",
+        "publishedAt": "2026-10-21T07:03:25.989576Z",
+        "updatedAt": "2026-10-21T07:03:25.989576Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.seorecords/geo-seo-records",
+      "description": "Gets a website ready for AI assistants: robots.txt fixed, llms.txt drafted, citable gaps listed.",
+      "title": "GEO SEO Records",
+      "version": "1.0.0",
+      "websiteUrl": "https://seorecords.com/en/assistants",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.seorecords.com/mcp/geo"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-16T16:44:58.232778Z",
+        "publishedAt": "2026-10-16T16:44:58.232778Z",
+        "updatedAt": "2026-10-16T16:44:58.232778Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.seorecords/seo-records",
+      "description": "SEO check of any website and AI crawler access test (access pass), and the full Audit.",
+      "title": "SEO Records",
+      "version": "1.3.0",
+      "websiteUrl": "https://seorecords.com/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.seorecords.com/mcp",
+          "headers": [
+            {
+              "description": "Access key (pass_\u2026) from https://seorecords.com/assistants#pass. It can also be given to each tool as access_key.",
+              "isSecret": true,
+              "name": "x-access-key"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-27T15:20:26.135491Z",
+        "publishedAt": "2026-10-27T15:20:26.135491Z",
+        "updatedAt": "2026-10-27T15:20:26.135491Z",
+        "isLatest": true
+      }
+    }
+  }
+]

@@ -193,8 +193,6 @@ Retry-After: 3600
 
 ### Implementation Pattern
 
-This in-process example is not production enforcement: state is unbounded, lost on restart and unshared across workers. Use a bounded atomic shared limiter, trusted proxy/IP handling and monotonic time; preserve Retry-After headers.
-
 ```python
 from fastapi import HTTPException, Request
 from datetime import datetime, timedelta
@@ -330,8 +328,6 @@ Response:
 ## Idempotency
 
 ### Idempotency Keys
-
-Atomically reserve scoped keys with request-body fingerprints, persist results, reject mismatched reuse and coordinate external side effects. A cache lookup alone does not prevent concurrent duplicates.
 
 ```
 POST /api/orders

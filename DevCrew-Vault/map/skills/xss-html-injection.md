@@ -18,7 +18,7 @@ Execute comprehensive client-side injection vulnerability assessments on web app
 **Tech:** [[XSS]], [[Security Audit]]
 
 ## Related Skills
-- **Complements:** [[cloudflare]], [[nodejs-best-practices]], [[stripe-best-practices]]
+- **Complements:** [[cloudflare]], [[nodejs-best-practices]], [[stripe-best-practices]], [[supabase-postgres-best-practices]]
 - **Alternate of:** [[shared-security-auth-security]], [[web-security-testing]]
 
 Real skill file: `skills/xss-html-injection/SKILL.md`

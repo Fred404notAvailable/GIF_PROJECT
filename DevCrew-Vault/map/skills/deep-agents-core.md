@@ -18,7 +18,7 @@ INVOKE THIS SKILL when building ANY Deep Agents application. Covers create_deep_
 **Tech:** [[Agents]], [[Architecture]]
 
 ## Related Skills
-- **Complements:** [[architecture-patterns]], [[aws-serverless]], [[aws-serverless-eda]], [[cloudflare]]
+- **Complements:** [[architecture-patterns]], [[aws-cdk-development]], [[aws-serverless]], [[cloudflare]]
 - **Alternate of:** [[autonomous-agent-patterns]], [[prompt-engineering-patterns]]
 
 Real skill file: `skills/deep-agents-core/SKILL.md`

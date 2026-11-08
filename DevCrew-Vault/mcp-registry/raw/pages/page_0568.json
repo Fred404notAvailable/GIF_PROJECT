@@ -1,0 +1,2905 @@
+[
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "no.apier/mcp",
+      "description": "Machine-verifiable Norwegian company authority: status, roles and coded signing authority.",
+      "title": "Apier",
+      "repository": {
+        "url": "https://github.com/PowerLaunch/apier-mcp",
+        "source": "github"
+      },
+      "version": "2026.10.0",
+      "websiteUrl": "https://www.apier.no/docs",
+      "icons": [
+        {
+          "src": "https://www.apier.no/logo.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.apier.no/api/mcp",
+          "headers": [
+            {
+              "description": "Apier API key in the form: Bearer <api_key>. REQUIRED for company-data, authority, and action tools; OPTIONAL for the six keyless public tools: the five public reads (get_public_obligations, get_public_deadlines, explain_compliance_error, get_exchange_rate, get_pricing) answer with no credential at all, and redeem_issuance_token needs no API key but requires a one-time owner-issued issuance token in its arguments. All keyless calls are per-IP rate-limited. Discovery needs no key at all: GET /api/mcp and the JSON-RPC handshake methods (initialize, tools/list) are keyless \u2014 only tools/call is keyed. Provision a free key at https://www.apier.no/docs/authentication",
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-10T17:55:24.531631Z",
+        "publishedAt": "2026-10-10T17:55:24.531631Z",
+        "updatedAt": "2026-10-10T17:55:24.531631Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "no.bonussok/award-search",
+      "description": "The ultimate SkyTeam EuroBonus award search. Manage alerts. Needs active Bonuss\u00f8k subscription.",
+      "title": "Bonuss\u00f8k Award Search",
+      "version": "1.0.3",
+      "websiteUrl": "https://www.bonussok.no",
+      "icons": [
+        {
+          "src": "https://www.bonussok.no/icon-192.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "192x192"
+          ]
+        },
+        {
+          "src": "https://www.bonussok.no/icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.bonussok.no/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-01T23:39:31.749683Z",
+        "publishedAt": "2026-08-01T23:39:31.749683Z",
+        "updatedAt": "2026-08-01T23:39:31.749683Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "no.cantara/kcp-agent",
+      "description": "Deterministic, fail-closed planner for KCP knowledge manifests: kcp_plan, kcp_load, kcp_validate.",
+      "title": "kcp-agent \u2014 KCP navigation planner",
+      "repository": {
+        "url": "https://github.com/Cantara/kcp-agent",
+        "source": "github"
+      },
+      "version": "0.12.0",
+      "websiteUrl": "https://cantara.github.io/knowledge-context-protocol",
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "kcp-agent",
+          "version": "0.12.0",
+          "runtimeHint": "npx",
+          "transport": {
+            "type": "stdio"
+          },
+          "packageArguments": [
+            {
+              "description": "Run the MCP stdio server (manifest URL is a per-tool-call parameter)",
+              "isRequired": true,
+              "type": "positional",
+              "value": "mcp",
+              "valueHint": "mcp"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-14T07:03:44.768724Z",
+        "publishedAt": "2026-07-14T07:03:44.768724Z",
+        "updatedAt": "2026-07-14T07:03:44.768724Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "no.cantara/kcp-harness",
+      "description": "MCP compliance proxy between agent and tools: deterministic governance, fail-closed, audit trail.",
+      "title": "kcp-harness \u2014 KCP compliance proxy",
+      "repository": {
+        "url": "https://github.com/Cantara/kcp-harness",
+        "source": "github"
+      },
+      "version": "0.4.1",
+      "websiteUrl": "https://cantara.github.io/kcp-harness/",
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "kcp-harness",
+          "version": "0.4.1",
+          "runtimeHint": "npx",
+          "transport": {
+            "type": "stdio"
+          },
+          "packageArguments": [
+            {
+              "description": "Start the MCP proxy (reads harness.yaml in the working directory; run 'kcp-harness init' first)",
+              "isRequired": true,
+              "type": "positional",
+              "value": "serve",
+              "valueHint": "serve"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-14T07:11:09.846447Z",
+        "publishedAt": "2026-07-14T07:11:09.846447Z",
+        "updatedAt": "2026-07-14T07:11:09.846447Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "no.cantara/wiki",
+      "description": "Norwegian open-source community wiki (2,290 articles, 2008-2022) as a signed KCP knowledge web.",
+      "title": "Cantara wiki \u2014 community knowledge web",
+      "repository": {
+        "url": "https://github.com/Cantara/wiki",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://wiki.cantara.no",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.cantara.no/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-14T07:30:17.949073Z",
+        "publishedAt": "2026-07-14T07:30:17.949073Z",
+        "updatedAt": "2026-07-14T07:30:17.949073Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "no.dobl/regnskap",
+      "description": "Norwegian accounting for small AS and holding companies: vouchers, invoices, VAT, payroll, Altinn.",
+      "title": "Dobl",
+      "version": "1.0.0",
+      "websiteUrl": "https://dobl.no/agenter",
+      "icons": [
+        {
+          "src": "https://dobl.no/brand/dobbel-avatar-aubergine.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        },
+        {
+          "src": "https://dobl.no/brand/png/dobbel-avatar-aubergine-256.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "256x256"
+          ]
+        },
+        {
+          "src": "https://dobl.no/brand/png/dobbel-avatar-aubergine-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://app.dobl.no/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-04T19:37:56.157184Z",
+        "publishedAt": "2026-11-04T19:37:56.157184Z",
+        "updatedAt": "2026-11-04T19:37:56.157184Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "no.domeneschluse/domeneschluse",
+      "description": "Domeneshop-e-post og DNS i AI-assistenten din: s\u00f8k, les, skriv, send. Gratis.",
+      "title": "domeneschluse",
+      "version": "1.1.0",
+      "websiteUrl": "https://domeneschluse.no",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://domeneschluse.no/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-16T09:53:39.928473Z",
+        "publishedAt": "2026-09-16T09:53:39.928473Z",
+        "updatedAt": "2026-09-16T09:53:39.928473Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "no.ferbu/store",
+      "description": "Klinikk Ferbu web shop: cosmetic hair-care products, live shipping quotes, Stripe checkout links.",
+      "title": "Klinikk Ferbu nettbutikk",
+      "version": "1.0.0",
+      "websiteUrl": "https://ferbu.no/nettbutikk",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://ferbu.no/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-14T09:41:30.909766Z",
+        "publishedAt": "2026-09-14T09:41:30.909766Z",
+        "updatedAt": "2026-09-14T09:41:30.909766Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "no.firmaradar/mcp",
+      "description": "Norwegian company intelligence: ownership, roles, financials, risk, KYC/AML/PEP (multi-source)",
+      "title": "Firmaradar",
+      "repository": {
+        "url": "https://github.com/Tiwas/firmaradar-mcp",
+        "source": "github"
+      },
+      "version": "0.3.2",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.firmaradar.no/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-05-29T01:28:59.609345Z",
+        "publishedAt": "2026-05-29T01:28:59.609345Z",
+        "updatedAt": "2026-05-29T01:28:59.609345Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "no.folgpris/folgpris",
+      "description": "Norwegian price tracking: search Elkj\u00f8p, Komplett, Power and 400+ stores, get price-drop alerts.",
+      "repository": {
+        "url": "https://github.com/falense/folgpris-mcp",
+        "source": "github"
+      },
+      "version": "2.0.0",
+      "websiteUrl": "https://folgpris.no/mcp/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.folgpris.no/mcp/"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-04T21:07:24.439913Z",
+        "publishedAt": "2026-09-04T21:07:24.439913Z",
+        "updatedAt": "2026-09-04T21:07:24.439913Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "no.formnord/print",
+      "description": "Quote and order 3D prints (PETG/ABS) from STL/3MF files, printed and shipped in Norway.",
+      "title": "FormNord 3D printing",
+      "version": "1.1.0",
+      "websiteUrl": "https://formnord.no/print/ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://formnord.no/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-16T21:31:21.609118Z",
+        "publishedAt": "2026-10-16T21:31:21.609118Z",
+        "updatedAt": "2026-10-16T21:31:21.609118Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "no.glodi/public-catalog",
+      "description": "Find clinics, treatments, prices and free times on GL\u00d8DI in Norway, with booking links.",
+      "title": "GL\u00d8DI",
+      "version": "2.0.0",
+      "websiteUrl": "https://glodi.no",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://glodi.no/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-22T00:28:07.577179Z",
+        "publishedAt": "2026-10-22T00:28:07.577179Z",
+        "updatedAt": "2026-10-22T00:28:07.577179Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "no.kollegia/jobbsok",
+      "description": "Search active job listings, salaries and employers in Norway (kollegia.no). Read-only, no login.",
+      "title": "Kollegia \u2013 ledige stillinger og l\u00f8nn i Norge",
+      "version": "1.0.0",
+      "websiteUrl": "https://kollegia.no/api",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://kollegia.no/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-18T15:17:26.018097Z",
+        "publishedAt": "2026-10-18T15:17:26.018097Z",
+        "updatedAt": "2026-10-18T15:17:26.018097Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "no.kommuneoversikt/search",
+      "description": "Search key figures for Norway's 357 municipalities: taxes, fees, population, schools, elections.",
+      "title": "Kommuneoversikt search",
+      "version": "0.1.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://kommuneoversikt.no/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-02T20:07:15.606959Z",
+        "publishedAt": "2026-10-02T20:07:15.606959Z",
+        "updatedAt": "2026-10-02T20:07:15.606959Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "no.kulturbase/catalogue",
+      "description": "Search and discover currently playable Nordic cultural recordings.",
+      "title": "Kulturbase",
+      "repository": {
+        "url": "https://github.com/houshuang/kulturbase",
+        "source": "github",
+        "subfolder": "kulturperler/web"
+      },
+      "version": "1.1.0",
+      "websiteUrl": "https://kulturbase.no/about#mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://kulturbase.no/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-15T09:57:28.900826Z",
+        "publishedAt": "2026-09-15T09:57:28.900826Z",
+        "updatedAt": "2026-09-15T09:57:28.900826Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "no.listr/mcp",
+      "description": "Short positions and insider trades in Norwegian listed companies. Read-only, no login.",
+      "title": "Listr.no",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.listr.no/ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.listr.no/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-03T13:28:58.242799Z",
+        "publishedAt": "2026-10-03T13:28:58.242799Z",
+        "updatedAt": "2026-10-03T13:28:58.242799Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "no.lovlyai/lovly",
+      "description": "Answers about Norwegian law with citations to current laws and regulations on Lovdata.",
+      "title": "Lovly",
+      "version": "1.0.1",
+      "websiteUrl": "https://lovlyai.no",
+      "icons": [
+        {
+          "src": "https://lovlyai.no/lovly-icon.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        },
+        {
+          "src": "https://lovlyai.no/icons/icon-512x512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.lovlyai.no/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-27T22:00:44.076959Z",
+        "publishedAt": "2026-10-27T22:00:44.076959Z",
+        "updatedAt": "2026-10-27T22:00:44.076959Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "no.mynto/mynto",
+      "description": "Norsk regnskap i Claude: bokf\u00f8ring, MVA, l\u00f8nn og Altinn \u2014 sp\u00f8r p\u00e5 vanlig norsk.",
+      "title": "Mynto \u2014 AI-regnskapsf\u00f8rer for norske selskaper",
+      "version": "1.1.0",
+      "websiteUrl": "https://www.mynto.no",
+      "icons": [
+        {
+          "src": "https://www.mynto.no/brand/mynto-icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "1024x1024"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.mynto.no/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-28T18:24:03.329468Z",
+        "publishedAt": "2026-07-28T18:24:03.329468Z",
+        "updatedAt": "2026-07-28T18:24:03.329468Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "no.placepoint/dataset",
+      "description": "Create, edit and analyse your own map datasets in Placepoint Fusion. Requires a Placepoint licence.",
+      "title": "Placepoint Datasets",
+      "version": "1.0.0",
+      "websiteUrl": "https://docs.placepoint.no/en/ai/placepoint-ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp-dataset.placepoint.no"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-29T10:51:30.556433Z",
+        "publishedAt": "2026-10-29T10:51:30.556433Z",
+        "updatedAt": "2026-10-29T10:51:30.556433Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "no.placepoint/placepoint",
+      "description": "Norwegian property, company, land register and zoning plan data. Requires a Placepoint licence.",
+      "title": "Placepoint",
+      "version": "2.2.0",
+      "websiteUrl": "https://docs.placepoint.no/en/ai/placepoint-ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.placepoint.no"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-29T10:51:30.118978Z",
+        "publishedAt": "2026-10-29T10:51:30.118978Z",
+        "updatedAt": "2026-10-29T10:51:30.118978Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "no.prisjakten/mcp",
+      "description": "Product search, store prices and price history from Norwegian web shops. Read-only, no login.",
+      "title": "Prisjakten.no",
+      "version": "1.0.0",
+      "websiteUrl": "https://mcp.prisjakten.no/ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.prisjakten.no/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-03T14:10:22.480201Z",
+        "publishedAt": "2026-10-03T14:10:22.480201Z",
+        "updatedAt": "2026-10-03T14:10:22.480201Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "no.pristavla/pristavla",
+      "description": "Norwegian prices and what they consist of, from open data. Norske priser fra \u00e5pne kilder.",
+      "title": "Pristavla \u2013 Norwegian prices / norske priser",
+      "version": "1.0.0",
+      "websiteUrl": "https://pristavla.no/bruk-tallene/#mcp",
+      "icons": [
+        {
+          "src": "https://pristavla.no/static/apple-touch-icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "180x180"
+          ]
+        },
+        {
+          "src": "https://pristavla.no/static/favicon.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://pristavla.no/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-13T20:55:14.166484Z",
+        "publishedAt": "2026-10-13T20:55:14.166484Z",
+        "updatedAt": "2026-10-13T20:55:14.166484Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "no.restplass/travel-search",
+      "description": "Realtime package holiday and charter flight prices from Norway. Inventory not on Google Flights.",
+      "title": "Restplass travel search",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.restplass.no/api",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.restplass.no/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-16T12:55:07.785016Z",
+        "publishedAt": "2026-07-16T12:55:07.785016Z",
+        "updatedAt": "2026-07-16T12:55:07.785016Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "no.rettsarkiv/rettsarkiv",
+      "description": "Norske H\u00f8yesterettsavgj\u00f8relser og lovtekst som lov-bevisst data, s\u00f8kbart p\u00e5 vanlig norsk.",
+      "title": "Rettsarkiv",
+      "version": "1.0.0",
+      "websiteUrl": "https://rettsarkiv.no",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://rettsarkiv-mcp-953525390683.europe-west3.run.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-06-07T19:04:49.551293Z",
+        "publishedAt": "2026-06-07T19:04:49.551293Z",
+        "updatedAt": "2026-06-07T19:04:49.551293Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "no.revly/revly",
+      "description": "Revly kobler assistenter til revisjonsarbeid med firmastyrt tilgang og personlig samtykke.",
+      "title": "Revly",
+      "version": "1.0.1",
+      "websiteUrl": "https://revly.no/developers",
+      "icons": [
+        {
+          "src": "https://revly.no/brand/logo-revly-square-indigo.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://revly.no/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-02T07:52:39.915778Z",
+        "publishedAt": "2026-11-02T07:52:39.915778Z",
+        "updatedAt": "2026-11-02T07:52:39.915778Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "no.sladd/mcp",
+      "description": "Detect and redact Norwegian PII (fodselsnummer, names, health data) in text and PDFs.",
+      "version": "0.1.0",
+      "websiteUrl": "https://sladd.no/api",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@sladd-no/mcp",
+          "version": "0.1.0",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Sladd API key (sk_sladd_...). Issued at https://sladd.no/api",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "SLADD_API_KEY"
+            },
+            {
+              "description": "Override the Sladd API base URL. Default: https://sladd.no",
+              "format": "string",
+              "name": "SLADD_API_BASE"
+            }
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://sladd.no/mcp",
+          "headers": [
+            {
+              "description": "Bearer <Sladd API key>, e.g. 'Bearer sk_sladd_...'. Issued at https://sladd.no/api",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-10T18:49:21.7554Z",
+        "publishedAt": "2026-07-10T18:49:21.7554Z",
+        "updatedAt": "2026-07-10T18:49:21.7554Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "no.sporo/mcp",
+      "description": "Read-only access to your Sporo accounting: balances, invoices, VAT and P&L. OAuth.",
+      "title": "Sporo",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.sporo.no",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.sporo.no/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-03T14:21:39.183566Z",
+        "publishedAt": "2026-10-03T14:21:39.183566Z",
+        "updatedAt": "2026-10-03T14:21:39.183566Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "no.synligdigital/aeo-audit",
+      "description": "AEO audit: score any website 0-100 for AI visibility. Checks schema, meta, content, AI crawlers.",
+      "title": "AEO Audit",
+      "repository": {
+        "url": "https://github.com/piiiico/aeo-mcp-server",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://aeo-mcp-server.amdal-dev.workers.dev/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-03-06T11:03:24.355018Z",
+        "publishedAt": "2026-03-06T11:03:24.355018Z",
+        "updatedAt": "2026-03-06T11:03:24.355018Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "no.zoopit/mcp",
+      "description": "Read-only access to a Zoopit account: orders, routes, fleet and live vehicle positions.",
+      "title": "Zoopit",
+      "version": "1.0.0",
+      "websiteUrl": "https://github.com/zoopit/claude-marketplace/tree/main/zoopit-mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.cloud.zoopit.no/mcp",
+          "headers": [
+            {
+              "description": "Bearer <token> for a Zoopit API client with read scopes. Create a dedicated client: issuing a token revokes the client's previous one.",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-08T11:14:11.941418Z",
+        "publishedAt": "2026-09-08T11:14:11.941418Z",
+        "updatedAt": "2026-09-08T11:14:11.941418Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "now.abis/dongbang-interior",
+      "description": "ABIS photo makeovers, 3D floor-plan proposals, sourced interior guidance and real cases.",
+      "title": "Dongbang Interior \u00b7 \ub3d9\ubc29\uc778\ud14c\ub9ac\uc5b4",
+      "version": "1.4.0",
+      "websiteUrl": "https://abis.now/integrations",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://abis.now/api/mcp/public"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-06T07:06:21.024434Z",
+        "publishedAt": "2026-11-06T07:06:21.024434Z",
+        "updatedAt": "2026-11-06T07:06:21.024434Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "now.aisim/aisim",
+      "description": "Travel eSIM data plans for 160+ countries: find a plan, buy it, install it and check data usage.",
+      "title": "aisim.now",
+      "version": "1.0.0",
+      "websiteUrl": "https://aisim.now/agents",
+      "icons": [
+        {
+          "src": "https://aisim.now/icon.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        },
+        {
+          "src": "https://aisim.now/apple-icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "180x180"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.aisim.now/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-19T11:23:02.665726Z",
+        "publishedAt": "2026-10-19T11:23:02.665726Z",
+        "updatedAt": "2026-10-19T11:23:02.665726Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "now.carejobs/healthcare-jobs",
+      "description": "Search 170,000+ open US healthcare jobs at 258 hospitals and health systems, with posted pay.",
+      "title": "CareJobs.Now",
+      "repository": {
+        "url": "https://github.com/yumaheymans/carejobs-mcp",
+        "source": "github"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://carejobs.now/data",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://carejobs.now/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-15T15:47:07.067513Z",
+        "publishedAt": "2026-10-15T15:47:07.067513Z",
+        "updatedAt": "2026-10-15T15:47:07.067513Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "now.exam/past-papers",
+      "description": "Cambridge, AQA and Edexcel past papers: questions, figures and mark schemes by part, and marking.",
+      "title": "exam.now",
+      "version": "1.0.0",
+      "websiteUrl": "https://exam.now/help/mcp/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://exam.now/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-03T01:00:51.583353Z",
+        "publishedAt": "2026-11-03T01:00:51.583353Z",
+        "updatedAt": "2026-11-03T01:00:51.583353Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "now.presso/presso",
+      "description": "Connect e-commerce and marketing data to AI assistants via MCP.",
+      "title": "Presso",
+      "repository": {
+        "url": "https://github.com/stellagent/presso-setup",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.presso.now/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-02-27T16:31:16.176024Z",
+        "publishedAt": "2026-02-27T16:31:16.176024Z",
+        "updatedAt": "2026-02-27T16:31:16.176024Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "now.roundtable.mcp/roundtable",
+      "description": "Multi-model AI debates: GPT-4o, Claude, Gemini & 200+ models discuss, then synthesize insight.",
+      "title": "Roundtable",
+      "repository": {
+        "url": "https://github.com/deadpixel/roundtable-dashboard",
+        "source": "github"
+      },
+      "version": "1.0.2",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.roundtable.now/mcp",
+          "headers": [
+            {
+              "description": "Your Roundtable API key. Get one at https://roundtable.now/chat/settings/api-keys",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "X-API-Key"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-03-10T22:49:44.948158Z",
+        "publishedAt": "2026-03-10T22:49:44.948158Z",
+        "updatedAt": "2026-03-10T22:49:44.948158Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "now.salesjobs/mcp",
+      "description": "Search open sales jobs (SDR, AE, AM, CSM, SE) with posted base and OTE, read hourly from employers.",
+      "title": "SalesJobs.Now",
+      "version": "1.0.0",
+      "websiteUrl": "https://salesjobs.now",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://salesjobs.now/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-01T17:27:16.493878Z",
+        "publishedAt": "2026-11-01T17:27:16.493878Z",
+        "updatedAt": "2026-11-01T17:27:16.493878Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "now.sendly/sendly",
+      "description": "Send email, manage contacts, campaigns and workflows, and diagnose deliverability in Sendly.",
+      "title": "Sendly",
+      "version": "1.0.1",
+      "websiteUrl": "https://docs.sendly.now/guides/mcp",
+      "icons": [
+        {
+          "src": "https://raw.githubusercontent.com/DevinoSolutions/claude-plugins/main/plugins/sendly/.claude-plugin/icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://app.sendly.now/api/mcp",
+          "headers": [
+            {
+              "description": "Optional. `Bearer sk_\u2026` connects a headless agent with one Sendly secret key, and the key's own scopes become the agent's permissions. Omit it entirely and the server answers 401 with an RFC 9728 challenge, which is how an interactive client discovers the OAuth 2.1 + PKCE flow and registers itself. Sending-only `pk_\u2026` keys are refused.",
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-30T14:51:38.065979Z",
+        "publishedAt": "2026-10-30T14:51:38.065979Z",
+        "updatedAt": "2026-10-30T14:51:38.065979Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "now.settleit/settleit",
+      "description": "Group decisions in one link: polls, who's-in check-ins, find-a-time, and rankings. No sign-up.",
+      "title": "SettleIt",
+      "version": "1.0.0",
+      "websiteUrl": "https://settleit.now",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://settleit.now/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-30T00:12:43.682436Z",
+        "publishedAt": "2026-10-30T00:12:43.682436Z",
+        "updatedAt": "2026-10-30T00:12:43.682436Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "now.shiply/shiply",
+      "description": "Publish any app in one call: SQL database, functions, email, and a custom domain. Flat price.",
+      "version": "1.1.0",
+      "websiteUrl": "https://shiply.now",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://shiply.now/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-22T21:34:47.11063Z",
+        "publishedAt": "2026-07-22T21:34:47.11063Z",
+        "updatedAt": "2026-07-22T21:34:47.11063Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+      "name": "now.spacejobs/spacejobs-now",
+      "description": "Open space-industry jobs (launch, satellites, spacecraft) from 47 employers, with posted pay.",
+      "title": "SpaceJobs.Now",
+      "version": "1.3.0",
+      "websiteUrl": "https://spacejobs.now",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://spacejobs.now/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-29T14:05:58.581372Z",
+        "publishedAt": "2026-10-29T14:05:58.581372Z",
+        "updatedAt": "2026-10-29T14:05:58.581372Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "now.voicelabs/voicelabs",
+      "description": "AI voice generation: text-to-speech and voice cloning from any MCP client.",
+      "title": "VoiceLabs",
+      "version": "1.0.1",
+      "websiteUrl": "https://voicelabs.now/mcp",
+      "icons": [
+        {
+          "src": "https://raw.githubusercontent.com/DevinoSolutions/claude-plugins/main/plugins/voicelabs/.claude-plugin/icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://app.voicelabs.now/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-30T14:52:09.205098Z",
+        "publishedAt": "2026-10-30T14:52:09.205098Z",
+        "updatedAt": "2026-10-30T14:52:09.205098Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "nyc.motley/mcp",
+      "description": "Find, compare, and rank NYC neighborhoods and schools, plus how NYC school admissions works.",
+      "title": "Motley NYC \u2014 Neighborhoods, Schools & Admissions",
+      "version": "0.13.0",
+      "websiteUrl": "https://motley.nyc/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.motley.nyc/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-03T11:39:54.542739Z",
+        "publishedAt": "2026-11-03T11:39:54.542739Z",
+        "updatedAt": "2026-11-03T11:39:54.542739Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "nz.agenticrail/gate",
+      "description": "Deterministic runtime enforcement of step order for AI agents: ALLOW/DENY before a step runs.",
+      "title": "AgenticRail Gate - sequence enforcement and verifiable audit receipts for AI agent compliance",
+      "repository": {
+        "url": "https://github.com/MSMD-RUA/agenticrail-mcp",
+        "source": "github",
+        "id": "1327663357"
+      },
+      "version": "1.3.0",
+      "websiteUrl": "https://agenticrail.nz/docs/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.agenticrail.nz/"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-26T20:19:36.629951Z",
+        "publishedAt": "2026-09-26T20:19:36.629951Z",
+        "updatedAt": "2026-09-26T20:19:36.629951Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "nz.agentline/agentline-nz",
+      "description": "Give your AI assistant its own email inbox: send, read and catch sign-in codes. Texting coming soon.",
+      "title": "Agentline NZ: email inboxes for AI assistants",
+      "version": "1.2.1",
+      "websiteUrl": "https://agentline.nz",
+      "icons": [
+        {
+          "src": "https://agentline.nz/og/logo.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        },
+        {
+          "src": "https://agentline.nz/favicon.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://agentline.nz/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-31T20:02:25.377714Z",
+        "publishedAt": "2026-10-31T20:02:25.377714Z",
+        "updatedAt": "2026-10-31T20:02:25.377714Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "nz.aiready/mcp",
+      "description": "AIready (aiready.nz): AI/agent readiness scans, Agentic Readiness Check quotes, and reports.",
+      "title": "AIready (aiready.nz)",
+      "repository": {
+        "url": "https://github.com/aiready-nz/aiready-mcp",
+        "source": "github",
+        "id": "1434056713"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://aiready.nz/connect",
+      "icons": [
+        {
+          "src": "https://aiready.nz/brand/aiready-mcp-icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        },
+        {
+          "src": "https://aiready.nz/brand/aiready-mcp-icon-128.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "128x128"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://aiready.nz/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-27T20:18:14.183542Z",
+        "publishedAt": "2026-10-27T20:18:14.183542Z",
+        "updatedAt": "2026-10-27T20:18:14.183542Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "nz.co.badbuddy.www/mcp",
+      "description": "Find public badminton activities and venues in New Zealand through a read-only MCP server.",
+      "title": "BadBuddy",
+      "version": "1.0.1",
+      "websiteUrl": "https://www.badbuddy.co.nz/developers/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.badbuddy.co.nz/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-06T17:25:14.770402Z",
+        "publishedAt": "2026-08-06T17:25:14.770402Z",
+        "updatedAt": "2026-08-06T17:25:14.770402Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "nz.co.calculate/calculator",
+      "description": "Search and run New Zealand tax, KiwiSaver, mortgage and property calculators",
+      "title": "Calculate.co.nz NZ Calculators",
+      "version": "1.15.1",
+      "websiteUrl": "https://www.calculate.co.nz/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.calculate.co.nz/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-03T00:21:08.12988Z",
+        "publishedAt": "2026-09-03T00:21:08.12988Z",
+        "updatedAt": "2026-09-03T00:21:08.12988Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "nz.co.conveyancingfees/site",
+      "description": "Conveyancing Fees NZ: the site's own MCP server \u2014 enquiry (enquiry = a human handoff, not a...",
+      "version": "1.0.1",
+      "websiteUrl": "https://conveyancingfees.co.nz",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://conveyancingfees.co.nz/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-03T11:30:30.222713Z",
+        "publishedAt": "2026-10-03T11:30:30.222713Z",
+        "updatedAt": "2026-10-03T11:30:30.222713Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "nz.co.employeecostcalculator/site",
+      "description": "Employee Cost Calculator NZ: the site's own MCP server \u2014 calculator, enquiry (enquiry = a human...",
+      "version": "1.0.1",
+      "websiteUrl": "https://employeecostcalculator.co.nz",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://employeecostcalculator.co.nz/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-03T11:38:17.412119Z",
+        "publishedAt": "2026-10-03T11:38:17.412119Z",
+        "updatedAt": "2026-10-03T11:38:17.412119Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "nz.co.finalpaycalculator/site",
+      "description": "Final Pay Calculator NZ: the site's own MCP server \u2014 calculator, enquiry (enquiry = a human...",
+      "version": "1.0.1",
+      "websiteUrl": "https://finalpaycalculator.co.nz",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://finalpaycalculator.co.nz/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-03T11:41:40.03202Z",
+        "publishedAt": "2026-10-03T11:41:40.03202Z",
+        "updatedAt": "2026-10-03T11:41:40.03202Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "nz.co.holidaypaycalculator/site",
+      "description": "Holiday Pay Calculator NZ: the site's own MCP server \u2014 calculator, enquiry (enquiry = a human...",
+      "version": "1.0.1",
+      "websiteUrl": "https://holidaypaycalculator.co.nz",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://holidaypaycalculator.co.nz/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-03T11:51:13.945585Z",
+        "publishedAt": "2026-10-03T11:51:13.945585Z",
+        "updatedAt": "2026-10-03T11:51:13.945585Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "nz.co.invio/xero",
+      "description": "Every Xero organisation you run, in one AI session. Writes wait for a person to approve them.",
+      "title": "Invio Xero MCP",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.invio.co.nz/xero-mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.invio.co.nz/api/xero-mcp",
+          "headers": [
+            {
+              "description": "Your Invio connector key: the last part of the connector URL Invio shows once in Settings > MCP > Xero. Send the key with no prefix.",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "X-API-Key"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-25T23:44:48.043462Z",
+        "publishedAt": "2026-09-25T23:44:48.043462Z",
+        "updatedAt": "2026-09-25T23:44:48.043462Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "nz.co.noticeperiodcalculator/site",
+      "description": "Notice Period Calculator NZ: the site's own MCP server \u2014 calculator, enquiry (enquiry = a human...",
+      "version": "1.0.1",
+      "websiteUrl": "https://noticeperiodcalculator.co.nz",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://noticeperiodcalculator.co.nz/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-03T12:05:41.081089Z",
+        "publishedAt": "2026-10-03T12:05:41.081089Z",
+        "updatedAt": "2026-10-03T12:05:41.081089Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "nz.co.prelude/instruments",
+      "description": "Search and rent musical instruments in New Zealand. Pricing, teachers, and FAQs.",
+      "title": "Prelude NZ \u2014 Instrument Rental",
+      "version": "1.1.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://prelude.co.nz/mcp/prelude"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-05-06T10:07:30.241156Z",
+        "publishedAt": "2026-05-06T10:07:30.241156Z",
+        "updatedAt": "2026-05-06T10:07:30.241156Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+      "name": "nz.coffeeaddict/coffee-addict",
+      "description": "Every bag of specialty coffee on sale in New Zealand, re-read nightly from each roaster's shop.",
+      "version": "1.0.0",
+      "websiteUrl": "https://coffeeaddict.nz/api/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://coffeeaddict.nz/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-01T10:29:24.272762Z",
+        "publishedAt": "2026-09-01T10:29:24.272762Z",
+        "updatedAt": "2026-09-01T10:29:24.272762Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "nz.gpu/gpu-cloud",
+      "description": "Rent cloud GPUs from AI agents: live prices, VRAM estimates, launch, logs and stop.",
+      "title": "gpu.nz GPU cloud",
+      "repository": {
+        "url": "https://github.com/gpunz/gpunz-mcp",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://gpu.nz/en/docs/mcp",
+      "packages": [
+        {
+          "registryType": "oci",
+          "identifier": "ghcr.io/gpunz/gpunz-mcp:1.0.0",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "API key (gpz_\u2026) from https://gpu.nz/console/keys. Optional: without it only browsing tools work.",
+              "isSecret": true,
+              "name": "GPUNZ_API_KEY"
+            }
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://gpu.nz/mcp",
+          "headers": [
+            {
+              "description": "Bearer gpz_\u2026 API key from https://gpu.nz/console/keys. Optional: without it only GPU search, prices and VRAM estimates work.",
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-19T19:38:47.537696Z",
+        "publishedAt": "2026-10-19T19:38:47.537696Z",
+        "updatedAt": "2026-10-19T19:38:47.537696Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "nz.karthik/karthik-parameshwara",
+      "description": "Read-only profile, resume, projects and open-source work of software engineer Karthik Parameshwara.",
+      "title": "Karthik Parameshwara",
+      "version": "1.0.0",
+      "websiteUrl": "https://karthik.nz",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://karthik.nz/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-01T12:40:01.761849Z",
+        "publishedAt": "2026-11-01T12:40:01.761849Z",
+        "updatedAt": "2026-11-01T12:40:01.761849Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "nz.phos/analytics-engine",
+      "description": "AI analytics \u2014 sales analysis, ML forecasting, customer segmentation.",
+      "repository": {
+        "url": "https://github.com/albermm/analytics-engine",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://analytics.phos.nz/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-02-19T09:31:42.864248Z",
+        "publishedAt": "2026-02-19T09:31:42.864248Z",
+        "updatedAt": "2026-02-19T09:31:42.864248Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "nz.phos/marketing-engine",
+      "description": "AI marketing \u2014 content generation, competitor analysis, social publishing.",
+      "repository": {
+        "url": "https://github.com/albermm/piranha-marketing",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.phos.nz/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-02-19T09:31:42.10402Z",
+        "publishedAt": "2026-02-19T09:31:42.10402Z",
+        "updatedAt": "2026-02-19T09:31:42.10402Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "nz.phos/piranha",
+      "description": "BJJ video analysis \u2014 YOLO pose detection + Claude AI technique analysis.",
+      "repository": {
+        "url": "https://github.com/albermm/piranha",
+        "source": "github"
+      },
+      "version": "1.0.2",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://pi.phos.nz/mcp",
+          "headers": [
+            {
+              "description": "API key for authentication (register at POST /register)",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "X-API-Key"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-02-24T09:38:07.56298Z",
+        "publishedAt": "2026-02-24T09:38:07.56298Z",
+        "updatedAt": "2026-02-24T09:38:07.56298Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "nz.phos/sales-engine",
+      "description": "AI sales \u2014 prospect discovery, ICP scoring, outreach generation.",
+      "repository": {
+        "url": "https://github.com/albermm/sales-engine",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://sales.phos.nz/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-02-19T09:31:43.6283Z",
+        "publishedAt": "2026-02-19T09:31:43.6283Z",
+        "updatedAt": "2026-02-19T09:31:43.6283Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "nz.taxapp/taxapp",
+      "description": "Your taxapp.nz records and NZ tax; adds and edits records only if an owner allows. Sign-in required.",
+      "title": "taxapp.nz",
+      "repository": {
+        "url": "https://github.com/burger-mtbkr/taxapp-mcp",
+        "source": "github"
+      },
+      "version": "1.3.0",
+      "websiteUrl": "https://taxapp.nz/guides/ai-assistants/",
+      "icons": [
+        {
+          "src": "https://taxapp.nz/icons/icon-256.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "256x256"
+          ]
+        },
+        {
+          "src": "https://taxapp.nz/icons/icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        },
+        {
+          "src": "https://taxapp.nz/icons/icon.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.taxapp.nz/mcp"
+        }
+      ],
+      "_meta": {
+        "io.modelcontextprotocol.registry/publisher-provided": {
+          "github": {
+            "readme": "# taxapp.nz\n\nAsk your AI app about your [Tax App](https://taxapp.nz) records in plain words: income, expenses, rental properties and New Zealand tax. Where your organisation allows it, it can add and change records too.\n\n## Sign-in required\n\nEvery request needs you to sign in to Tax App. Your AI app opens the Tax App sign-in page when you connect; there is no key or password to copy into it.\n\n## What you can ask\n\n- \"What is my estimated tax for this year?\"\n- \"Which expenses did I record for the rental in March?\"\n- \"Which bank transactions still need sorting?\"\n- \"Add a $120 plumber bill for 12 Smith Street.\"\n- \"The rent at 12 Smith Street goes up to $680 a week from 1 June.\"\n- \"Change last week's commission payment to $1,250.\"\n\nThe figures come straight from your records. The answer is written by the AI, so check anything that matters in the app.\n\n## Before you connect\n\n1. You need a Tax App account. [Sign up free](https://app.taxapp.nz/signup).\n2. An owner of your organisation turns AI connectors on in **Settings > AI connectors**, or while connecting, and chooses **Read only** or **Read, add and change records**.\n3. Add the server in your AI app and sign in to Tax App when asked. [Steps for each AI app](https://taxapp.nz/guides/ai-assistants/).\n\n## What it can do\n\n| Area | Read | Add and change |\n|------|------|----------------|\n| Tax year | overview, tax summary, profit and loss | |\n| Income | history, list, one record | commission, rent or tenant reimbursement |\n| Expenses | list, one record, expense accounts | expenses, expense accounts |\n| Contacts | list, contact types | contacts, PAYE salary, ACC classifications, contact types |\n| Rental properties | list with tenancies, rental report | properties, tenancies |\n| Savings | savings plan | savings plan |\n| Scheduled reports | list, reports that can be scheduled (owners) | schedules (owners), send one now |\n| Choices | record types and IRD return lines, in your own words | |\n| Bank | bank inbox, reconciliation status | |\n\nAdding and changing is off unless an owner chooses **Read, add and change records**, and never goes beyond your own role. The AI app sends only what you tell it, such as dates, amounts and who paid: Tax App works out GST, KiwiSaver, ACC levy, tax and every total itself, exactly as it does on its own forms. When a detail is unclear, such as which contact, property or expense account you mean, the AI app shows you the closest matches and asks.\n\n## What it cannot do\n\n- Delete anything\n- Reconcile bank statements or change a match\n- Change organisation settings or members\n- See anything your own role cannot, or an organisation you did not tick\n- File a return with Inland Revenue\n\n## Keeping it safe\n\n- It signs in as you and never sees your password.\n- Every change it makes is in the organisation's audit trail, marked as made through the AI connector.\n- Owners see every AI connector under **Settings > AI connectors** and can remove any of them; switching AI connectors off ends them all.\n- Changing your password ends every AI connector you made.\n- What you share goes to the company behind your AI app, under its own terms, and may be kept outside New Zealand. Your records in Tax App stay where they are.\n- Tax, ACC and KiwiSaver figures are indicative workings from IRD rates, not an IRD assessment.\n\n## For app developers\n\n- Authentication: OAuth 2.1 with PKCE (S256). A request without a valid sign-in gets HTTP 401 with a `WWW-Authenticate` challenge.\n- Authorization server: `https://api.taxapp.nz` (dynamic client registration and client ID metadata documents)\n- Protected resource metadata: `https://mcp.taxapp.nz/.well-known/oauth-protected-resource/mcp`\n- Scope: `taxapp`. No API key, header or environment variable to configure.\n\n## More\n\n- [Full guide](https://taxapp.nz/guides/ai-assistants/)\n- [Privacy policy](https://taxapp.nz/privacy/)\n- Help: support@taxapp.nz\n"
+          }
+        }
+      }
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-16T00:46:58.538877Z",
+        "publishedAt": "2026-10-16T00:46:58.538877Z",
+        "updatedAt": "2026-10-16T00:46:58.538877Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "nz.tier1.mcp/it-assessment",
+      "description": "Read-only IT Health Check, domain security, recommendations, pricing, and draft enquiries.",
+      "title": "Tier1 IT Assessment",
+      "version": "1.1.0",
+      "websiteUrl": "https://tier1.nz/resources/it-health-check/#mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.tier1.nz/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-09T18:24:57.742664Z",
+        "publishedAt": "2026-08-09T18:24:57.742664Z",
+        "updatedAt": "2026-08-09T18:24:57.742664Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-10-17/server.schema.json",
+      "name": "nz.wanakahaus/booking",
+      "description": "Book Wanaka Haus, an Architectural Passive home in W\u0101naka NZ. Availability, quotes, Stripe checkout.",
+      "version": "1.0.1",
+      "websiteUrl": "https://wanakahaus.nz",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://wanakahaus.nz/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-28T08:26:31.432071Z",
+        "publishedAt": "2026-07-28T08:26:31.432071Z",
+        "updatedAt": "2026-07-28T08:26:31.432071Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "nz.yardstock/nz-car-listings",
+      "description": "Live used-car stock on named NZ dealer yards. Search make, model, price, city. Not Trade Me.",
+      "title": "YardStock NZ Vehicle Listings",
+      "version": "1.0.0",
+      "websiteUrl": "https://yardstock.nz",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://stock.yardstock.nz/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-25T09:32:44.688739Z",
+        "publishedAt": "2026-08-25T09:32:44.688739Z",
+        "updatedAt": "2026-08-25T09:32:44.688739Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+      "name": "observer.blacklight/signals",
+      "description": "Realizability-gated Hyperliquid & Polymarket wallet copyability, risk & smart-money signals.",
+      "repository": {},
+      "version": "0.1.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://blacklight.observer/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-06-21T14:16:58.864966Z",
+        "publishedAt": "2026-06-21T14:16:58.864966Z",
+        "updatedAt": "2026-06-21T14:16:58.864966Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "observer.remote/remote-observer",
+      "description": "Free MCP window into a live autonomous machine-economy experiment: telemetry, hypothesis scoreboard.",
+      "title": "remote.observer \u2014 machine-economy observatory",
+      "repository": {
+        "url": "https://github.com/oblique-markets/oblique-core",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://remote.observer",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://remote.observer/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-12T03:03:07.898763Z",
+        "publishedAt": "2026-08-12T03:03:07.898763Z",
+        "updatedAt": "2026-08-12T03:03:07.898763Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "om.amjtech/tools",
+      "description": "Pay-per-call tools for AI agents: product photos, documents, web pages, data. USDC via x402.",
+      "title": "AMJ Tools",
+      "version": "1.0.0",
+      "websiteUrl": "https://factory.amjtech.om:9443",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://factory.amjtech.om:9443/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-30T03:07:22.670942Z",
+        "publishedAt": "2026-10-30T03:07:22.670942Z",
+        "updatedAt": "2026-10-30T03:07:22.670942Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "om.async/asyncflow",
+      "description": "Manage AsyncFlow tickets: find, read, create, update, assign, move, link, archive and attach files.",
+      "title": "AsyncFlow",
+      "repository": {
+        "url": "https://github.com/iamsj7/asyncflow-mcp",
+        "source": "github"
+      },
+      "version": "4.5.0",
+      "websiteUrl": "https://flow.async.om",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://flow.async.om/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-28T20:49:11.69942Z",
+        "publishedAt": "2026-10-28T20:49:11.69942Z",
+        "updatedAt": "2026-10-28T20:49:11.69942Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "om.decree/legislation",
+      "description": "Search, read and cite Omani legislation in English and Arabic, with version and currency guidance.",
+      "title": "Decree \u2014 Omani Legislation (EN + AR)",
+      "version": "2.0.0",
+      "websiteUrl": "https://decree.om",
+      "icons": [
+        {
+          "src": "https://mcp.decree.om/icons/decree-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        },
+        {
+          "src": "https://mcp.decree.om/icons/decree-128.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "128x128"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.decree.om/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-14T07:53:43.067875Z",
+        "publishedAt": "2026-10-14T07:53:43.067875Z",
+        "updatedAt": "2026-10-14T07:53:43.067875Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "one.aisa/agent-mail",
+      "description": "Inboxes, threads, drafts and sending, built for agents.",
+      "title": "AIsa Agent Mail",
+      "version": "1.0.1",
+      "websiteUrl": "https://aisa.one",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.aisa.one/mail/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-15T08:24:07.123988Z",
+        "publishedAt": "2026-09-15T08:24:07.123988Z",
+        "updatedAt": "2026-09-15T08:24:07.123988Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "one.aisa/apollo",
+      "description": "B2B people and company search, enrichment, and the CRM objects behind a pipeline.",
+      "title": "AIsa Apollo",
+      "version": "1.0.1",
+      "websiteUrl": "https://aisa.one",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.aisa.one/apollo/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-15T08:24:10.18547Z",
+        "publishedAt": "2026-09-15T08:24:10.18547Z",
+        "updatedAt": "2026-09-15T08:24:10.18547Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "one.aisa/creator-discovery",
+      "description": "Find creators from a seed profile or a brief, and look up their contact email.",
+      "title": "AIsa Creator Discovery",
+      "version": "1.0.1",
+      "websiteUrl": "https://aisa.one",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.aisa.one/creator-discovery/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-15T08:24:19.062848Z",
+        "publishedAt": "2026-09-15T08:24:19.062848Z",
+        "updatedAt": "2026-09-15T08:24:19.062848Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "one.aisa/crypto-market-data",
+      "description": "Spot prices, ranked market tables, history, OHLC, per-venue tickers and trending.",
+      "title": "AIsa Crypto Market Data",
+      "version": "1.0.1",
+      "websiteUrl": "https://aisa.one",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.aisa.one/crypto-market-data/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-15T08:24:25.996116Z",
+        "publishedAt": "2026-09-15T08:24:25.996116Z",
+        "updatedAt": "2026-09-15T08:24:25.996116Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "one.aisa/equities",
+      "description": "US equities: prices, statements, ratios, earnings, estimates, filings and a screener.",
+      "title": "AIsa Equities",
+      "version": "1.0.1",
+      "websiteUrl": "https://aisa.one",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.aisa.one/marketpulse/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-15T08:24:32.850664Z",
+        "publishedAt": "2026-09-15T08:24:32.850664Z",
+        "updatedAt": "2026-09-15T08:24:32.850664Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "one.aisa/finance",
+      "description": "Prices, fundamentals, filings, crypto and prediction markets, for agents.",
+      "title": "AIsa Finance",
+      "version": "1.0.1",
+      "websiteUrl": "https://aisa.one",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.aisa.one/finance/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-15T08:24:45.54999Z",
+        "publishedAt": "2026-09-15T08:24:45.54999Z",
+        "updatedAt": "2026-09-15T08:24:45.54999Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "one.aisa/gtm",
+      "description": "One go-to-market set: companies, the people who decide, market size and social signal.",
+      "title": "AIsa Go-To-Market",
+      "version": "1.0.1",
+      "websiteUrl": "https://aisa.one",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.aisa.one/gtm/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-15T08:24:47.723687Z",
+        "publishedAt": "2026-09-15T08:24:47.723687Z",
+        "updatedAt": "2026-09-15T08:24:47.723687Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "one.aisa/instagram",
+      "description": "Public profiles, timelines, reels, highlights, comments and video transcripts.",
+      "title": "AIsa Instagram",
+      "version": "1.0.1",
+      "websiteUrl": "https://aisa.one",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.aisa.one/instagram/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-15T08:24:53.190548Z",
+        "publishedAt": "2026-09-15T08:24:53.190548Z",
+        "updatedAt": "2026-09-15T08:24:53.190548Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "one.aisa/mcp",
+      "description": "Go-to-market data, one key: 950+ APIs across SEO, finance, social, search, sales, agent mail.",
+      "title": "AIsa",
+      "version": "1.0.1",
+      "websiteUrl": "https://aisa.one",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.aisa.one/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-15T08:24:56.998699Z",
+        "publishedAt": "2026-09-15T08:24:56.998699Z",
+        "updatedAt": "2026-09-15T08:24:56.998699Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "one.aisa/pinterest",
+      "description": "Search pins, read a pin's engagement, page through a board, list a user's boards.",
+      "title": "AIsa Pinterest",
+      "version": "1.0.1",
+      "websiteUrl": "https://aisa.one",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.aisa.one/pinterest/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-15T08:25:07.019046Z",
+        "publishedAt": "2026-09-15T08:25:07.019046Z",
+        "updatedAt": "2026-09-15T08:25:07.019046Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "one.aisa/prediction-markets",
+      "description": "Live odds and markets from the major prediction markets.",
+      "title": "AIsa Prediction Markets",
+      "version": "1.0.1",
+      "websiteUrl": "https://aisa.one",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.aisa.one/prediction-market-data/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-15T08:25:13.478873Z",
+        "publishedAt": "2026-09-15T08:25:13.478873Z",
+        "updatedAt": "2026-09-15T08:25:13.478873Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "one.aisa/reddit",
+      "description": "Search every community or one of them, browse post streams, read comment trees.",
+      "title": "AIsa Reddit",
+      "version": "1.0.1",
+      "websiteUrl": "https://aisa.one",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.aisa.one/reddit/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-15T08:25:21.018966Z",
+        "publishedAt": "2026-09-15T08:25:21.018966Z",
+        "updatedAt": "2026-09-15T08:25:21.018966Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "one.aisa/sales",
+      "description": "Find companies and the people who decide, enrich them, and size their market.",
+      "title": "AIsa Sales",
+      "version": "1.0.1",
+      "websiteUrl": "https://aisa.one",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.aisa.one/sales/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-15T08:25:30.245486Z",
+        "publishedAt": "2026-09-15T08:25:30.245486Z",
+        "updatedAt": "2026-09-15T08:25:30.245486Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "one.aisa/seo",
+      "description": "Rankings, keywords, backlinks, site health and AI-answer visibility, several indexes.",
+      "title": "AIsa SEO & AI Visibility",
+      "version": "1.0.1",
+      "websiteUrl": "https://aisa.one",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.aisa.one/seo/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-15T08:26:47.002711Z",
+        "publishedAt": "2026-09-15T08:26:47.002711Z",
+        "updatedAt": "2026-09-15T08:26:47.002711Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "one.aisa/seo-ai-visibility",
+      "description": "How a brand shows up in ChatGPT, Claude, Gemini and Perplexity answers.",
+      "title": "AIsa AI Visibility",
+      "version": "1.0.1",
+      "websiteUrl": "https://aisa.one",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.aisa.one/seo-ai-visibility/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-15T08:25:42.391952Z",
+        "publishedAt": "2026-09-15T08:25:42.391952Z",
+        "updatedAt": "2026-09-15T08:25:42.391952Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "one.aisa/seo-apps",
+      "description": "App store listings, details, searches, reviews and app-store search results.",
+      "title": "AIsa App Store Data",
+      "version": "1.0.1",
+      "websiteUrl": "https://aisa.one",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.aisa.one/seo-apps/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-15T08:25:46.589173Z",
+        "publishedAt": "2026-09-15T08:25:46.589173Z",
+        "updatedAt": "2026-09-15T08:25:46.589173Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "one.aisa/seo-backlinks",
+      "description": "Referring domains, anchors, links won and lost, and competitor link intersections.",
+      "title": "AIsa Backlinks",
+      "version": "1.0.1",
+      "websiteUrl": "https://aisa.one",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.aisa.one/seo-backlinks/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-15T08:25:49.691992Z",
+        "publishedAt": "2026-09-15T08:25:49.691992Z",
+        "updatedAt": "2026-09-15T08:25:49.691992Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "one.aisa/seo-business",
+      "description": "Business profiles, reviews and Q&A, hotels, and listing search across review sites.",
+      "title": "AIsa Business Listings & Reviews",
+      "version": "1.0.1",
+      "websiteUrl": "https://aisa.one",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.aisa.one/seo-business/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-15T08:25:51.681614Z",
+        "publishedAt": "2026-09-15T08:25:51.681614Z",
+        "updatedAt": "2026-09-15T08:25:51.681614Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "one.aisa/seo-content",
+      "description": "Where a brand or phrase is cited across the web, with trends, sentiment and ratings.",
+      "title": "AIsa Content & Sentiment",
+      "version": "1.0.1",
+      "websiteUrl": "https://aisa.one",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.aisa.one/seo-content/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-15T08:26:00.04048Z",
+        "publishedAt": "2026-09-15T08:26:00.04048Z",
+        "updatedAt": "2026-09-15T08:26:00.04048Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "one.aisa/seo-domains",
+      "description": "What a domain is built on and who owns it: technology detection and whois records.",
+      "title": "AIsa Technologies & Whois",
+      "version": "1.0.1",
+      "websiteUrl": "https://aisa.one",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.aisa.one/seo-domains/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-15T08:26:15.074056Z",
+        "publishedAt": "2026-09-15T08:26:15.074056Z",
+        "updatedAt": "2026-09-15T08:26:15.074056Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "one.aisa/seo-keywords",
+      "description": "Search volume, keyword ideas, difficulty, clickstream volumes and search trends.",
+      "title": "AIsa Keyword Volume & Ads",
+      "version": "1.0.1",
+      "websiteUrl": "https://aisa.one",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.aisa.one/seo-keywords/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-15T08:26:24.716667Z",
+        "publishedAt": "2026-09-15T08:26:24.716667Z",
+        "updatedAt": "2026-09-15T08:26:24.716667Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "one.aisa/seo-labs",
+      "description": "Domain authority, ranked and related keywords, difficulty, intent and competitors.",
+      "title": "AIsa Domain & Keyword Research",
+      "version": "1.0.1",
+      "websiteUrl": "https://aisa.one",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.aisa.one/seo-labs/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-15T08:26:30.513314Z",
+        "publishedAt": "2026-09-15T08:26:30.513314Z",
+        "updatedAt": "2026-09-15T08:26:30.513314Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "one.aisa/seo-merchant",
+      "description": "Marketplace and shopping data: product listings, sellers, reviews and search results.",
+      "title": "AIsa Shopping & Marketplace",
+      "version": "1.0.1",
+      "websiteUrl": "https://aisa.one",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.aisa.one/seo-merchant/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-15T08:26:33.330417Z",
+        "publishedAt": "2026-09-15T08:26:33.330417Z",
+        "updatedAt": "2026-09-15T08:26:33.330417Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "one.aisa/seo-onpage",
+      "description": "Crawl a site: pages, resources, links, duplicates, tags, Lighthouse and raw HTML.",
+      "title": "AIsa On-Page Audit",
+      "version": "1.0.1",
+      "websiteUrl": "https://aisa.one",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.aisa.one/seo-onpage/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-15T08:26:36.360241Z",
+        "publishedAt": "2026-09-15T08:26:36.360241Z",
+        "updatedAt": "2026-09-15T08:26:36.360241Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "one.aisa/seo-serp",
+      "description": "Google results: organic, paid, local, images, news, maps, jobs and the AI overview.",
+      "title": "AIsa SERP \u2014 Google",
+      "version": "1.0.1",
+      "websiteUrl": "https://aisa.one",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.aisa.one/seo-serp/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-15T08:26:43.454456Z",
+        "publishedAt": "2026-09-15T08:26:43.454456Z",
+        "updatedAt": "2026-09-15T08:26:43.454456Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "one.aisa/seo-serp-other-engines",
+      "description": "Search results outside Google: Bing, Yahoo, Baidu, Naver, Seznam and YouTube.",
+      "title": "AIsa SERP \u2014 Other Engines",
+      "version": "1.0.1",
+      "websiteUrl": "https://aisa.one",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.aisa.one/seo-serp-other-engines/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-15T08:26:39.072198Z",
+        "publishedAt": "2026-09-15T08:26:39.072198Z",
+        "updatedAt": "2026-09-15T08:26:39.072198Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "one.aisa/similarweb",
+      "description": "Traffic and engagement for any domain: rank, channels, referrers, audience, rivals.",
+      "title": "AIsa Similarweb",
+      "version": "1.0.1",
+      "websiteUrl": "https://aisa.one",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.aisa.one/similarweb/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-15T08:26:49.231814Z",
+        "publishedAt": "2026-09-15T08:26:49.231814Z",
+        "updatedAt": "2026-09-15T08:26:49.231814Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "one.aisa/social",
+      "description": "What people post and say across the major social platforms, in one place.",
+      "title": "AIsa Social",
+      "version": "1.0.1",
+      "websiteUrl": "https://aisa.one",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.aisa.one/social/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-15T08:26:51.593513Z",
+        "publishedAt": "2026-09-15T08:26:51.593513Z",
+        "updatedAt": "2026-09-15T08:26:51.593513Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "one.aisa/stock-pulse",
+      "description": "What social is saying about a ticker now, joined with the market data behind it.",
+      "title": "AIsa Stock Pulse",
+      "version": "1.0.1",
+      "websiteUrl": "https://aisa.one",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.aisa.one/stock-pulse/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-15T08:26:53.675882Z",
+        "publishedAt": "2026-09-15T08:26:53.675882Z",
+        "updatedAt": "2026-09-15T08:26:53.675882Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "one.aisa/twitter-api",
+      "description": "Profiles, timelines, followers, replies, quotes, communities, lists and trends.",
+      "title": "AIsa X / Twitter",
+      "version": "1.0.1",
+      "websiteUrl": "https://aisa.one",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.aisa.one/twitter-api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-15T08:26:55.478656Z",
+        "publishedAt": "2026-09-15T08:26:55.478656Z",
+        "updatedAt": "2026-09-15T08:26:55.478656Z",
+        "isLatest": true
+      }
+    }
+  }
+]

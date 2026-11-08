@@ -4,22 +4,24 @@ Advanced patterns for high-performance data access with Dapper in .NET.
 
 ## Why Dapper?
 
-| Aspect | Dapper | EF Core |
-|--------|--------|---------|
-| Performance | Workload-dependent; benchmark equivalent queries | Good with optimization |
-| Control | Full SQL control | Abstracted |
-| Learning curve | Low (just SQL) | Higher |
-| Complex mappings | Manual | Automatic |
-| Change tracking | None | Built-in |
-| Migrations | External tools | Built-in |
+| Aspect           | Dapper                         | EF Core                |
+| ---------------- | ------------------------------ | ---------------------- |
+| Performance      | ~10x faster for simple queries | Good with optimization |
+| Control          | Full SQL control               | Abstracted             |
+| Learning curve   | Low (just SQL)                 | Higher                 |
+| Complex mappings | Manual                         | Automatic              |
+| Change tracking  | None                           | Built-in               |
+| Migrations       | External tools                 | Built-in               |
 
 **Use Dapper when:**
+
 - Performance is critical (hot paths)
 - You need complex SQL (CTEs, window functions)
 - Read-heavy workloads
 - Legacy database schemas
 
 **Use EF Core when:**
+
 - Rich domain models with relationships
 - Need change tracking
 - Want LINQ-to-SQL translation
@@ -41,7 +43,7 @@ services.AddScoped<IDbConnection>(sp =>
 // Or use a factory for more control
 public interface IDbConnectionFactory
 {
-    System.Data.Common.DbConnection CreateConnection();
+    IDbConnection CreateConnection();
 }
 
 public class SqlConnectionFactory : IDbConnectionFactory
@@ -54,7 +56,7 @@ public class SqlConnectionFactory : IDbConnectionFactory
             ?? throw new InvalidOperationException("Connection string not found");
     }
 
-    public System.Data.Common.DbConnection CreateConnection() => new SqlConnection(_connectionString);
+    public IDbConnection CreateConnection() => new SqlConnection(_connectionString);
 }
 ```
 
@@ -74,7 +76,7 @@ public class ProductRepository
     {
         // Connection opens automatically, closes on dispose
         using var connection = _factory.CreateConnection();
-        
+
         return await connection.QueryFirstOrDefaultAsync<Product>(
             new CommandDefinition(
                 "SELECT * FROM Products WHERE Id = @Id",
@@ -120,7 +122,7 @@ var inserted = await connection.QuerySingleAsync<Product>(
 // UPDATE
 var rowsAffected = await connection.ExecuteAsync(
     """
-    UPDATE Products 
+    UPDATE Products
     SET Name = @Name, Price = @Price, UpdatedAt = @UpdatedAt
     WHERE Id = @Id
     """,
@@ -138,8 +140,6 @@ await connection.ExecuteAsync(
 public async Task<IReadOnlyList<Product>> SearchAsync(ProductSearchCriteria criteria)
 {
     var sql = new StringBuilder("SELECT * FROM Products WHERE 1=1");
-    if (criteria.Page < 1 || criteria.PageSize < 1 || criteria.PageSize > 200)
-        throw new ArgumentOutOfRangeException(nameof(criteria));
     var parameters = new DynamicParameters();
 
     if (!string.IsNullOrWhiteSpace(criteria.SearchTerm))
@@ -167,9 +167,9 @@ public async Task<IReadOnlyList<Product>> SearchAsync(ProductSearchCriteria crit
     }
 
     // Pagination
-    sql.Append(" ORDER BY Name, Id");
+    sql.Append(" ORDER BY Name");
     sql.Append(" OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY");
-    parameters.Add("Offset", checked((criteria.Page - 1) * criteria.PageSize));
+    parameters.Add("Offset", (criteria.Page - 1) * criteria.PageSize);
     parameters.Add("PageSize", criteria.PageSize);
 
     using var connection = _factory.CreateConnection();
@@ -192,7 +192,7 @@ public async Task<Product?> GetProductWithCategoryAsync(string id)
         """;
 
     using var connection = _factory.CreateConnection();
-    
+
     var result = await connection.QueryAsync<Product, Category, Product>(
         sql,
         (product, category) =>
@@ -220,7 +220,7 @@ public async Task<Order?> GetOrderWithItemsAsync(int orderId)
     var orderDictionary = new Dictionary<int, Order>();
 
     using var connection = _factory.CreateConnection();
-    
+
     await connection.QueryAsync<Order, OrderItem, Product, Order>(
         sql,
         (order, item, product) =>
@@ -256,11 +256,11 @@ public async Task<(IReadOnlyList<Product> Products, int TotalCount)> SearchWithC
     const string sql = """
         -- First result set: count
         SELECT COUNT(*) FROM Products WHERE CategoryId = @CategoryId;
-        
+
         -- Second result set: data
-        SELECT * FROM Products 
+        SELECT * FROM Products
         WHERE CategoryId = @CategoryId
-        ORDER BY Name, Id
+        ORDER BY Name
         OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY;
         """;
 
@@ -268,7 +268,7 @@ public async Task<(IReadOnlyList<Product> Products, int TotalCount)> SearchWithC
     using var multi = await connection.QueryMultipleAsync(sql, new
     {
         CategoryId = criteria.CategoryId,
-        Offset = checked((criteria.Page - 1) * criteria.PageSize),
+        Offset = (criteria.Page - 1) * criteria.PageSize,
         PageSize = criteria.PageSize
     });
 
@@ -290,14 +290,14 @@ public async Task<IReadOnlyList<Product>> GetByIdsAsync(IEnumerable<string> ids)
     // Create DataTable matching TVP structure
     var table = new DataTable();
     table.Columns.Add("Id", typeof(string));
-    
+
     foreach (var id in ids)
     {
         table.Rows.Add(id);
     }
 
     using var connection = _factory.CreateConnection();
-    
+
     var results = await connection.QueryAsync<Product>(
         "SELECT p.* FROM Products p INNER JOIN @Ids i ON p.Id = i.Id",
         new { Ids = table.AsTableValuedParameter("dbo.StringIdList") });
@@ -315,7 +315,7 @@ public async Task<IReadOnlyList<Product>> GetByIdsAsync(IEnumerable<string> ids)
 public async Task<IReadOnlyList<Product>> GetTopProductsAsync(int categoryId, int count)
 {
     using var connection = _factory.CreateConnection();
-    
+
     var results = await connection.QueryAsync<Product>(
         "dbo.GetTopProductsByCategory",
         new { CategoryId = categoryId, TopN = count },
@@ -336,7 +336,7 @@ public async Task<(Order Order, string ConfirmationCode)> CreateOrderAsync(Order
     parameters.Add("ConfirmationCode", dbType: DbType.String, size: 20, direction: ParameterDirection.Output);
 
     using var connection = _factory.CreateConnection();
-    
+
     await connection.ExecuteAsync(
         "dbo.CreateOrder",
         parameters,
@@ -356,9 +356,9 @@ public async Task<Order> CreateOrderWithItemsAsync(Order order, List<OrderItem> 
 {
     using var connection = _factory.CreateConnection();
     await connection.OpenAsync();
-    
+
     using var transaction = await connection.BeginTransactionAsync();
-    
+
     try
     {
         // Insert order
@@ -386,7 +386,7 @@ public async Task<Order> CreateOrderWithItemsAsync(Order order, List<OrderItem> 
             transaction);
 
         await transaction.CommitAsync();
-        
+
         order.Items = items;
         return order;
     }
@@ -464,7 +464,7 @@ await foreach (var product in products)
 ```json
 {
   "ConnectionStrings": {
-    "Default": "Server=localhost;Database=MyDb;Integrated Security=True;Encrypt=True;TrustServerCertificate=False;Min Pool Size=5;Max Pool Size=100;Connection Timeout=30;"
+    "Default": "Server=localhost;Database=MyDb;User Id=sa;Password=xxx;TrustServerCertificate=True;Min Pool Size=5;Max Pool Size=100;Connection Timeout=30;"
   }
 }
 ```
@@ -478,7 +478,7 @@ public abstract class DapperRepositoryBase<T> where T : class
 {
     protected readonly IDbConnectionFactory ConnectionFactory;
     protected readonly ILogger Logger;
-    protected abstract string TableName { get; } // Trusted, fixed identifier; never request input
+    protected abstract string TableName { get; }
 
     protected DapperRepositoryBase(IDbConnectionFactory factory, ILogger logger)
     {
@@ -489,7 +489,7 @@ public abstract class DapperRepositoryBase<T> where T : class
     protected async Task<T?> GetByIdAsync<TId>(TId id, CancellationToken ct = default)
     {
         var sql = $"SELECT * FROM {TableName} WHERE Id = @Id";
-        
+
         using var connection = ConnectionFactory.CreateConnection();
         return await connection.QueryFirstOrDefaultAsync<T>(
             new CommandDefinition(sql, new { Id = id }, cancellationToken: ct));
@@ -498,17 +498,17 @@ public abstract class DapperRepositoryBase<T> where T : class
     protected async Task<IReadOnlyList<T>> GetAllAsync(CancellationToken ct = default)
     {
         var sql = $"SELECT * FROM {TableName}";
-        
+
         using var connection = ConnectionFactory.CreateConnection();
         var results = await connection.QueryAsync<T>(
             new CommandDefinition(sql, cancellationToken: ct));
-        
+
         return results.ToList();
     }
 
     protected async Task<int> ExecuteAsync(
-        string sql, 
-        object? parameters = null, 
+        string sql,
+        object? parameters = null,
         CancellationToken ct = default)
     {
         using var connection = ConnectionFactory.CreateConnection();
@@ -538,7 +538,7 @@ using var connection = new SqlConnection(connectionString);
 var result = await connection.QueryAsync<Product>(sql);
 
 // ❌ Bad - Opening connection manually when not needed
-await connection.OpenAsync();  // Optional for one query; necessary for explicit transactions
+await connection.OpenAsync();  // Dapper does this automatically
 var result = await connection.QueryAsync<Product>(sql);
 
 // ✅ Good - Let Dapper manage connection

@@ -1,20 +1,16 @@
 ---
 name: supabase-postgres-best-practices
-description: Postgres performance optimization and best practices from Supabase. Use this skill when writing, reviewing, or optimizing Postgres queries, schema designs, or database configurations.
-risk: critical
-source: https://github.com/supabase/agent-skills/tree/main/skills/supabase-postgres-best-practices
-source_repo: supabase/agent-skills
-source_type: official
-date_added: 2026-07-01
+description: "Postgres best practices maintained by Supabase, for Postgres running anywhere. Load this skill BEFORE writing or changing anything that lives in a Postgres database: creating or altering tables and columns (including choosing column types), schema design, migrations and declarative schema files, RLS policies and the tests that verify them, indexes, triggers, database functions, queues and scheduled jobs (pg_cron, pgmq), vector/semantic search (pgvector), and restoring dumps (pg_restore) or importing data. Also load it when diagnosing slow queries, high CPU, timeouts, EXPLAIN plans, connection exhaustion, locking, bloat, or rows visible to the wrong user or tenant. This is not just a performance guide — schema, migration, security, and SQL authoring tasks need these rules too, even for a one-column change or a single query."
 license: MIT
-license_source: https://github.com/supabase/agent-skills/blob/main/LICENSE
+metadata:
+  author: supabase
+  version: "1.1.1"
+  organization: Supabase
+  date: January 2026
+  abstract: Comprehensive Postgres performance optimization guide for developers using Supabase and Postgres. Contains performance rules across 8 categories, prioritized by impact from critical (query performance, connection management) to incremental (advanced features). Each rule includes detailed explanations, incorrect vs. correct SQL examples, query plan analysis, and specific performance metrics to guide automated optimization and code generation.
 ---
 
 # Supabase Postgres Best Practices
-## When to Use
-
-Use this skill when you need postgres performance optimization and best practices from Supabase. Use this skill when writing, reviewing, or optimizing Postgres queries, schema designs, or database configurations.
-
 
 Comprehensive performance optimization guide for Postgres, maintained by Supabase. Contains rules across 8 categories, prioritized by impact to guide automated query optimization and schema design.
 
@@ -27,10 +23,6 @@ Reference these guidelines when:
 - Configuring connection pooling or scaling
 - Optimizing for Postgres-specific features
 - Working with Row-Level Security (RLS)
-
-## Execution and evidence boundaries
-
-SQL is illustrative, not an instruction to mutate a live database. Confirm target, permissions, locks, backups and rollback before DDL/DML, global settings, resets or extension changes. EXPLAIN ANALYZE executes its statement and can invoke side effects even for SELECT; inspect first and use a disposable environment when needed. All speedups, row counts, memory estimates and plan outputs here are examples, not measured guarantees. Benchmark equivalent workloads and preserve RLS semantics while optimizing.
 
 ## Rule Categories by Priority
 
@@ -70,9 +62,3 @@ Each rule file contains:
 - https://wiki.postgresql.org/wiki/Performance_Optimization
 - https://supabase.com/docs/guides/database/overview
 - https://supabase.com/docs/guides/auth/row-level-security
-
-## Limitations
-
-- Use this skill only when the task clearly matches its upstream product or API scope.
-- Verify commands, API behavior, pricing, quotas, credentials, and deployment effects against current official documentation before making changes.
-- Do not treat generated examples as a substitute for environment-specific tests, security review, or user approval for destructive or costly actions.

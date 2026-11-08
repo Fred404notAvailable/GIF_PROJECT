@@ -18,7 +18,7 @@ INVOKE THIS SKILL when you need human-in-the-loop approval, custom middleware, o
 **Tech:** [[Architecture]], [[FastAPI]], [[LangChain]]
 
 ## Related Skills
-- **Complements:** [[architecture-patterns]], [[aws-serverless]], [[aws-serverless-eda]], [[fastapi-templates]]
+- **Complements:** [[architecture-patterns]], [[aws-cdk-development]], [[aws-serverless]], [[fastapi-templates]]
 - **Alternate of:** [[langchain-architecture]]
 
 Real skill file: `skills/langchain-middleware/SKILL.md`

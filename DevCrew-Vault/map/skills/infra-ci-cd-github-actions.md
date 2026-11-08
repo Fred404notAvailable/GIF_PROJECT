@@ -15,9 +15,10 @@ GitHub Actions, pipelines, deployment
 **Module:** [[Module 7 - DevOps, Containers & Cloud Automation]]  
 **Source:** [[src-agents-inc]]  
 **License:** [[lic-MIT]]  
-**Tech:** [[GitHub Actions]]
+**Tech:** [[Git]], [[GitHub Actions]]
 
 ## Related Skills
-- **Complements:** [[api-security-testing]], [[codeql]], [[e2e-testing]], [[rag-implementation]]
+- **Complements:** [[api-security-testing]], [[autonomous-agent-patterns]], [[e2e-testing]], [[security-audit]]
+- **Alternate of:** [[devops-deploy]]
 
 Real skill file: `skills/infra-ci-cd-github-actions/SKILL.md`

@@ -129,6 +129,26 @@ def verify_vault(
             if errors:
                 report.failures.append(VerificationFailure(module_id=mod_id, slug=slug, errors=errors))
 
+        # Check 5: MCP server license gate per Round 3 Item 2
+        c.execute("""
+            SELECT slug, name, license, status, module_id
+            FROM mcp_servers
+            WHERE status = 'selected'
+        """)
+        mcp_rows = c.fetchall()
+        for m_row in mcp_rows:
+            m_slug = m_row["slug"]
+            m_lic = m_row["license"]
+            m_mod = m_row["module_id"] or 0
+            if not m_lic or m_lic not in allowed_licenses:
+                report.failures.append(
+                    VerificationFailure(
+                        module_id=m_mod,
+                        slug=f"mcp:{m_slug}",
+                        errors=[f"MCP server '{m_slug}' has invalid/disallowed license '{m_lic}' (allowed: {allowed_licenses})"],
+                    )
+                )
+
     finally:
         conn.close()
 

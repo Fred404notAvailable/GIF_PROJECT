@@ -18,7 +18,7 @@ Choose and create the right Neon branch type for testing and development. Use wh
 **Tech:** [[PostgreSQL]], [[SQL & Database]], [[TDD]], [[MCP]]
 
 ## Related Skills
-- **Complements:** [[api-design-principles]], [[api-security]], [[docker-compose-patterns]], [[sql-injection-testing]]
-- **Alternate of:** [[neon-postgres]], [[supabase-postgres-best-practices]]
+- **Complements:** [[api-security]], [[docker-compose-patterns]], [[dotnet-backend-patterns]], [[sql-injection-testing]]
+- **Alternate of:** [[neon-postgres]], [[supabase]]
 
 Real skill file: `skills/neon-postgres-branches/SKILL.md`

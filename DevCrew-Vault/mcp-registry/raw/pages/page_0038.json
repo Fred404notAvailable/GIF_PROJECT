@@ -1,0 +1,3022 @@
+[
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.usehourly/usehourly",
+      "description": "Freelancer time tracking for AI assistants: log time, timers, timesheets, sign-off links, invoices.",
+      "title": "UseHourly",
+      "repository": {
+        "url": "https://github.com/Zontak-LLC/usehourly",
+        "source": "github"
+      },
+      "version": "1.1.0",
+      "websiteUrl": "https://usehourly.app",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "usehourly-mcp",
+          "version": "1.1.0",
+          "runtimeHint": "npx",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "A token from UseHourly > Account > AI assistants (read-only or read and change, with an expiry). The bridge sends it to https://usehourly.app/api/mcp as a Bearer token.",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "USEHOURLY_API_TOKEN"
+            }
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://usehourly.app/api/mcp",
+          "headers": [
+            {
+              "description": "Optional. MCP clients that support OAuth (Claude, Cursor, Smithery) connect with log in and approve and need no header. For a client that cannot, use Bearer <personal access token> from Account > AI assistants at usehourly.app.",
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-20T18:34:36.23989Z",
+        "publishedAt": "2026-10-20T18:34:36.23989Z",
+        "updatedAt": "2026-10-20T18:34:36.23989Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.usemailroom/mailroom",
+      "description": "Your own IMAP mailbox in any MCP client: search, read, flag, move; send and delete need confirm.",
+      "title": "Mailroom",
+      "version": "0.1.0",
+      "websiteUrl": "https://usemailroom.app/?utm_source=mcp-registry",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://usemailroom.app/mcp",
+          "headers": [
+            {
+              "description": "'Bearer YOUR_API_KEY' (key from your usemailroom.app dashboard, shown once). A bare key or X-API-Key header also works.",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-10T19:09:44.81589Z",
+        "publishedAt": "2026-10-10T19:09:44.81589Z",
+        "updatedAt": "2026-10-10T19:09:44.81589Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.usewrit/writ-cloud",
+      "description": "Read, crawl and act on websites, signed in as the user, and turn any site into an API.",
+      "title": "Writ Cloud",
+      "repository": {
+        "url": "https://github.com/usewrit/writ-mcp",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://usewrit.app",
+      "icons": [
+        {
+          "src": "https://usewrit.app/icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "writ-mcp",
+          "version": "1.2.0",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "A Writ API key with the mcp scope (Settings -> Developers).",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "WRIT_API_KEY"
+            }
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.usewrit.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-10T13:19:03.186616Z",
+        "publishedAt": "2026-10-10T13:19:03.186616Z",
+        "updatedAt": "2026-10-10T13:19:03.186616Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.vaultbags/vaultbags",
+      "description": "Autonomous RWA treasury on Solana: daily allocation, on-chain receipts, proofs, your own vault.",
+      "title": "VaultBags",
+      "version": "1.0.0",
+      "websiteUrl": "https://vaultbags.app",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://vaultbags.app/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-10T00:37:34.805748Z",
+        "publishedAt": "2026-10-10T00:37:34.805748Z",
+        "updatedAt": "2026-10-10T00:37:34.805748Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.vayapin/mcp",
+      "description": "VayaPin MCP: pin resolution + Google Maps geocoding/places + AfterShip tracking, with BYOK.",
+      "repository": {
+        "url": "https://github.com/martinshein/vayacore",
+        "source": "github",
+        "subfolder": "apps/mcp"
+      },
+      "version": "0.1.2",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@vayacore/mcp",
+          "version": "0.1.2",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "VayaPin Personal Access Token, sent as 'Authorization: Bearer'. Generate one on the VayaPin developer portal (POST /api/v1/auth/pat/request).",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "VAYAPIN_PAT"
+            },
+            {
+              "description": "Optional tool-slice name to expose a subset of tools (128-tool client ceiling lift). Unset exposes all tools.",
+              "format": "string",
+              "name": "VAYAPIN_MCP_SLICE"
+            },
+            {
+              "description": "Override the VayaPin API base URL for staging or self-host.",
+              "format": "string",
+              "default": "https://api.vayapin.app/api/v1",
+              "name": "VAYAPIN_MCP_API_URL"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-06-20T01:24:48.256119Z",
+        "publishedAt": "2026-06-20T01:24:48.256119Z",
+        "updatedAt": "2026-06-20T01:24:48.256119Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.vazante/vazante",
+      "description": "Ask Claude or ChatGPT about your Meta, Google and TikTok Ads, and let AI edit campaigns on your OK.",
+      "title": "Vazante",
+      "version": "1.0.0",
+      "websiteUrl": "https://vazante.app",
+      "icons": [
+        {
+          "src": "https://vazante.app/icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://vazante.app/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-16T10:20:12.278309Z",
+        "publishedAt": "2026-10-16T10:20:12.278309Z",
+        "updatedAt": "2026-10-16T10:20:12.278309Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.vellm/vellm",
+      "description": "Create AI videos from photos with templates, track jobs, and download results using Vellm points.",
+      "title": "Vellm",
+      "version": "1.0.0",
+      "websiteUrl": "https://vellm.app",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.vellm.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-15T12:53:55.056869Z",
+        "publishedAt": "2026-10-15T12:53:55.056869Z",
+        "updatedAt": "2026-10-15T12:53:55.056869Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.vendojo/vendojo",
+      "description": "Tu asistente de IA configura tu negocio y crea escenarios de pr\u00e1ctica de ventas en Vendojo.",
+      "title": "Vendojo",
+      "version": "1.0.0",
+      "websiteUrl": "https://vendojo.app/conecta-tu-asistente",
+      "icons": [
+        {
+          "src": "https://vendojo.app/apple-icon.png",
+          "mimeType": "image/png"
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://vendojo.app/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-11T17:58:28.356083Z",
+        "publishedAt": "2026-10-11T17:58:28.356083Z",
+        "updatedAt": "2026-10-11T17:58:28.356083Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.vercel.agent-permissions-index/agent-permissions-index",
+      "description": "Grade Claude Code, Gemini CLI and Cursor configs for risky permissions; get public config stats.",
+      "title": "Agent Permissions Index",
+      "version": "1.0.0",
+      "websiteUrl": "https://agent-permissions-index.vercel.app/mcp-docs",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://agent-permissions-index.vercel.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-20T22:43:25.791593Z",
+        "publishedAt": "2026-10-20T22:43:25.791593Z",
+        "updatedAt": "2026-10-20T22:43:25.791593Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.vercel.agent-svg-registry/mcp",
+      "description": "Search SVG metadata and buy licensed commercial SVG exports for coding agents.",
+      "title": "Agent SVG Registry",
+      "version": "1.0.0",
+      "websiteUrl": "https://agent-svg-registry.vercel.app/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://agent-svg-registry.vercel.app/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-05-28T13:19:53.38587Z",
+        "publishedAt": "2026-05-28T13:19:53.38587Z",
+        "updatedAt": "2026-05-28T13:19:53.38587Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.vercel.agentready-rho/agentready",
+      "description": "Scan any website or MCP server for agent readiness: 0-100 score, a fix per failing check. Free.",
+      "version": "1.0.0",
+      "websiteUrl": "https://agentready-rho.vercel.app",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://agentready-rho.vercel.app/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-17T23:41:33.191908Z",
+        "publishedAt": "2026-08-17T23:41:33.191908Z",
+        "updatedAt": "2026-08-17T23:41:33.191908Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+      "name": "app.vercel.auditflag-lac/auditflag",
+      "description": "Search SEC EDGAR for going-concern auditor opinions in real 10-K/10-Q filings.",
+      "version": "1.0.0",
+      "websiteUrl": "https://auditflag-lac.vercel.app",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://auditflag-lac.vercel.app/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-13T06:30:46.421887Z",
+        "publishedAt": "2026-09-13T06:30:46.421887Z",
+        "updatedAt": "2026-09-13T06:30:46.421887Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.vercel.automaton-tx-explainer/base-tools",
+      "description": "Paid x402 crypto safety tools (Base/ETH/BSC): tx, approvals, contract risk, token deep scan.",
+      "title": "Automaton Onchain Tools",
+      "version": "1.5.0",
+      "websiteUrl": "https://github.com/povrouyre-wq/automaton-onchain-tools",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://automaton-tx-explainer.vercel.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-24T18:32:14.017432Z",
+        "publishedAt": "2026-10-24T18:32:14.017432Z",
+        "updatedAt": "2026-10-24T18:32:14.017432Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.vercel.axiom-risk-mcp/solana-token-risk",
+      "description": "Solana SPL token risk checks: free preview tool plus links to paid x402 (USDC) full reports.",
+      "title": "Axiom Solana Token Risk",
+      "version": "1.0.0",
+      "websiteUrl": "https://axiom-token-risk.vercel.app",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://axiom-risk-mcp.vercel.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-17T01:46:44.578262Z",
+        "publishedAt": "2026-10-17T01:46:44.578262Z",
+        "updatedAt": "2026-10-17T01:46:44.578262Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.vercel.baselens-api/baselens",
+      "description": "Base on-chain data for agents: balances, prices, transfers, Basenames, contracts. x402 pay-per-call.",
+      "title": "BaseLens",
+      "version": "1.1.0",
+      "websiteUrl": "https://baselens-api.vercel.app",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://baselens-api.vercel.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-30T14:16:58.920721Z",
+        "publishedAt": "2026-10-30T14:16:58.920721Z",
+        "updatedAt": "2026-10-30T14:16:58.920721Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.vercel.clearpage-x402/clearpage",
+      "description": "Web page to clean Markdown and metadata for agents. Free daily trial, then x402 USDC.",
+      "title": "ClearPage",
+      "version": "1.0.0",
+      "websiteUrl": "https://clearpage-x402.vercel.app",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://clearpage-x402.vercel.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-03T23:17:13.855828Z",
+        "publishedAt": "2026-11-03T23:17:13.855828Z",
+        "updatedAt": "2026-11-03T23:17:13.855828Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+      "name": "app.vercel.cloakcheck-wheat/cloakcheck",
+      "description": "Scan a page for hidden prompt-injection payloads targeting AI agents.",
+      "version": "1.0.0",
+      "websiteUrl": "https://cloakcheck-wheat.vercel.app",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://cloakcheck-wheat.vercel.app/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-13T05:40:50.474611Z",
+        "publishedAt": "2026-09-13T05:40:50.474611Z",
+        "updatedAt": "2026-09-13T05:40:50.474611Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.vercel.codigo07/human-verification-peru",
+      "description": "Marketplace of vetted human verifiers in Peru, hired and paid by AI agents in USDC via x402.",
+      "title": "C\u00f3digo 07 \u00b7 Human verification in Peru",
+      "version": "1.2.0",
+      "websiteUrl": "https://codigo07.vercel.app/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://codigo07.vercel.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-03T18:57:58.302544Z",
+        "publishedAt": "2026-10-03T18:57:58.302544Z",
+        "updatedAt": "2026-10-03T18:57:58.302544Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.vercel.control-your-tesla/control-your-tesla",
+      "description": "AI for your car: check charge, start climate, lock/unlock, open trunk via Tesla Fleet API. OAuth.",
+      "title": "Control Your Tesla",
+      "version": "1.0.0",
+      "websiteUrl": "https://control-your-tesla.vercel.app",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://control-your-tesla.vercel.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-05T06:53:29.421022Z",
+        "publishedAt": "2026-11-05T06:53:29.421022Z",
+        "updatedAt": "2026-11-05T06:53:29.421022Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+      "name": "app.vercel.exploitwatch-kappa/exploitwatch",
+      "description": "Check dependencies against CISA's real Known Exploited Vulnerabilities feed.",
+      "version": "1.0.0",
+      "websiteUrl": "https://exploitwatch-kappa.vercel.app",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://exploitwatch-kappa.vercel.app/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-13T03:38:47.939578Z",
+        "publishedAt": "2026-09-13T03:38:47.939578Z",
+        "updatedAt": "2026-09-13T03:38:47.939578Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+      "name": "app.vercel.filingcheck-bot/filingcheck",
+      "description": "Real SEC EDGAR filing metrics: margin-of-safety, EPS growth, going-concern flags.",
+      "version": "1.0.0",
+      "websiteUrl": "https://filingcheck-bot.vercel.app",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://filingcheck-bot.vercel.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-13T02:06:18.714341Z",
+        "publishedAt": "2026-09-13T02:06:18.714341Z",
+        "updatedAt": "2026-09-13T02:06:18.714341Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.vercel.flightsweeper-webmcp/public",
+      "description": "Anonymous public tools for FlightSweeper. See the published agent boundary before use.",
+      "title": "FlightSweeper",
+      "repository": {
+        "url": "https://github.com/raintree-technology/flightsweeper-webmcp",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://flightsweeper-webmcp.vercel.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-28T19:20:13.024594Z",
+        "publishedAt": "2026-08-28T19:20:13.024594Z",
+        "updatedAt": "2026-08-28T19:20:13.024594Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.vercel.fork-for-agents/fork",
+      "description": "Harness improvements agents post and test for each other. Read without a key; join in one call.",
+      "title": "Fork",
+      "version": "0.2.0",
+      "websiteUrl": "https://fork.zone",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://fork.zone/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-24T09:35:39.283363Z",
+        "publishedAt": "2026-10-24T09:35:39.283363Z",
+        "updatedAt": "2026-10-24T09:35:39.283363Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.vercel.gouda-studios-agent-tools/gouda-studios-agent-tools",
+      "description": "Pay-per-result SAM.gov contracts, SEC EDGAR filings, USAspending awards and GLEIF LEI lookups.",
+      "title": "Gouda Studios Agent Tools",
+      "repository": {
+        "url": "https://github.com/goudastudios/gouda-studios-agent-tools",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://gouda-studios-agent-tools.vercel.app",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://gouda-studios-agent-tools.vercel.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-18T22:52:07.353304Z",
+        "publishedAt": "2026-10-18T22:52:07.353304Z",
+        "updatedAt": "2026-10-18T22:52:07.353304Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.vercel.groundtruth-ruby/groundtruth",
+      "description": "Human-in-the-loop user research: ask real people what the web can't answer, get verbatim replies",
+      "title": "Groundtruth \u2014 Ask Real Humans",
+      "repository": {
+        "url": "https://github.com/aniketshaw748-hub/groundtruth",
+        "source": "github"
+      },
+      "version": "0.1.1",
+      "websiteUrl": "https://groundtruth-ruby.vercel.app",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://groundtruth-ruby.vercel.app/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-11T15:23:23.59059Z",
+        "publishedAt": "2026-09-11T15:23:23.59059Z",
+        "updatedAt": "2026-09-11T15:23:23.59059Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.vercel.humancard-registry/human-registry",
+      "description": "Search, hire and pay a verified human per job from any AI. Humans are handles; AIs call them.",
+      "title": "Human Capability Registry",
+      "version": "0.9.0",
+      "websiteUrl": "https://humancard-registry.vercel.app",
+      "icons": [
+        {
+          "src": "https://humancard-registry.vercel.app/icon.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://humancard-registry.vercel.app/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-20T07:06:29.507499Z",
+        "publishedAt": "2026-10-20T07:06:29.507499Z",
+        "updatedAt": "2026-10-20T07:06:29.507499Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.vercel.indo-news-api/indonesia-news",
+      "description": "Indonesian news + FX history to 10 yrs, crypto/IDR, quakes, holidays. $0.05/call, licences $19-700",
+      "title": "Indo News API",
+      "version": "1.0.6",
+      "websiteUrl": "https://indo-news-api.vercel.app/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://indo-news-api.vercel.app/mcp/indonesia-news"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-05T16:25:16.413298Z",
+        "publishedAt": "2026-11-05T16:25:16.413298Z",
+        "updatedAt": "2026-11-05T16:25:16.413298Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-10-17/server.schema.json",
+      "name": "app.vercel.indo-news-api/news",
+      "description": "Indonesian news for AI agents: headlines, keyword search, coverage summaries. Free MCP tools.",
+      "version": "1.0.0",
+      "websiteUrl": "https://indo-news-api.vercel.app/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://indo-news-api.vercel.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "deprecated",
+        "statusChangedAt": "2026-10-27T21:48:31.766727Z",
+        "statusMessage": "Renamed to app.vercel.indo-news-api/indonesia-news",
+        "publishedAt": "2026-10-27T21:37:12.311125Z",
+        "updatedAt": "2026-10-27T21:48:31.766727Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.vercel.interesting-concepts-ventures/threadkeep",
+      "description": "Agent checkpoints. Resume after context resets and handoffs with retry-safe, versioned saves.",
+      "title": "Threadkeep \u2014 Agent Checkpoints",
+      "version": "1.0.0",
+      "websiteUrl": "https://interesting-concepts-ventures.vercel.app/threadkeep/agents",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://interesting-concepts-ventures.vercel.app/api/threadkeep-mcp",
+          "headers": [
+            {
+              "description": "Agent key from free HTTP registration. See website for setup. Public tool discovery needs no key.",
+              "isSecret": true,
+              "name": "X-Threadkeep-Agent-Key"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-20T08:20:16.162361Z",
+        "publishedAt": "2026-09-20T08:20:16.162361Z",
+        "updatedAt": "2026-09-20T08:20:16.162361Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.vercel.jestsprout/jestsprout",
+      "description": "Solana rug checks, memecoin tools, swaps, and JestSprout Pay pages (Apple Pay, Solana Pay) + shop.",
+      "title": "JestSprout Meme Coin & Solana Rug-Check Tools",
+      "version": "1.2.0",
+      "websiteUrl": "https://jestsprout.vercel.app/agents",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://jestsprout.vercel.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-22T22:56:04.659033Z",
+        "publishedAt": "2026-10-22T22:56:04.659033Z",
+        "updatedAt": "2026-10-22T22:56:04.659033Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.vercel.krankenkasse-copilot/krankenkasse-copilot",
+      "description": "Swiss health insurance 2027: rank every insurer, model and deductible with official BAG data.",
+      "title": "Krankenkasse Copilot",
+      "version": "1.0.0",
+      "websiteUrl": "https://krankenkasse-copilot.vercel.app/agents",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://krankenkasse-copilot.vercel.app/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-10T10:19:13.212311Z",
+        "publishedAt": "2026-10-10T10:19:13.212311Z",
+        "updatedAt": "2026-10-10T10:19:13.212311Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.vercel.olothea-research/olothea",
+      "description": "Emerging human\u2013AI knowledge network: shared research, collective intelligence and peer review.",
+      "title": "Olothea \u2014 Collective Mind & Human\u2013AI Research",
+      "version": "0.9.0",
+      "websiteUrl": "https://olothea-research.vercel.app",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://olothea-research.vercel.app/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-29T01:52:12.531064Z",
+        "publishedAt": "2026-10-29T01:52:12.531064Z",
+        "updatedAt": "2026-10-29T01:52:12.531064Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.vercel.ora-x402-gateway/sensations-mergulho",
+      "description": "MCP server for 0001SENSATIONS: 107-level textual descent, append-only trace logging",
+      "repository": {
+        "url": "https://github.com/fomosdeimos-gif/orum-ora-x402",
+        "source": "github"
+      },
+      "version": "0.3.0",
+      "websiteUrl": "https://ora-x402-gateway.vercel.app",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://ywabnlhkmhbyewqhbsjm.supabase.co/functions/v1/sensations-mergulho"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-04T14:14:12.363014Z",
+        "publishedAt": "2026-09-04T14:14:12.363014Z",
+        "updatedAt": "2026-09-04T14:14:12.363014Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.vercel.pass-through-tax-rules/pass-through-tax-rules",
+      "description": "Cited, tax-year-dated rules for state PTET, the federal SALT cap, and bonus-depreciation conformity.",
+      "title": "Pass-through tax rules",
+      "version": "0.1.0",
+      "websiteUrl": "https://pass-through-tax-rules.vercel.app",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://pass-through-tax-rules.vercel.app/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-24T02:25:32.542887Z",
+        "publishedAt": "2026-10-24T02:25:32.542887Z",
+        "updatedAt": "2026-10-24T02:25:32.542887Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.vercel.personalos-kappa/personalos",
+      "description": "Build and keep small personal apps (worlds) on a person's PersonalOS wall: logs, trackers, rituals.",
+      "title": "PersonalOS",
+      "version": "1.0.0",
+      "websiteUrl": "https://personalos-kappa.vercel.app/mcp-docs.html",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://personalos-kappa.vercel.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-11T00:57:12.175568Z",
+        "publishedAt": "2026-10-11T00:57:12.175568Z",
+        "updatedAt": "2026-10-11T00:57:12.175568Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.vercel.planlimits-rpatel021/planlimits",
+      "description": "AI coding plan limits (Claude Code, Codex, Cursor, Copilot): router, picker, status, budget check",
+      "title": "PlanLimits",
+      "version": "1.3.0",
+      "websiteUrl": "https://planlimits.app/mcp-docs/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://planlimits.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-21T16:53:48.383203Z",
+        "publishedAt": "2026-10-21T16:53:48.383203Z",
+        "updatedAt": "2026-10-21T16:53:48.383203Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.vercel.polyglot-ai-board/board",
+      "description": "Read-only: which LLM is best in 7 languages (zh, ko, nb, de, nl, es, pt), from public benchmarks.",
+      "title": "Polyglot AI Board",
+      "version": "1.0.0",
+      "websiteUrl": "https://polyglot-ai-board.vercel.app/agents.html",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://polyglot-ai-board.vercel.app/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-20T20:44:48.361685Z",
+        "publishedAt": "2026-10-20T20:44:48.361685Z",
+        "updatedAt": "2026-10-20T20:44:48.361685Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-07-09/server.schema.json",
+      "name": "app.vercel.proof-stack-lake/proofstack",
+      "description": "Audited indie product business cases with source-backed pricing, revenue and pricing benchmarks.",
+      "repository": {
+        "url": "https://github.com/lttxzmj/proofstack-mcp",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://proof-stack-lake.vercel.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-03T17:31:21.575748Z",
+        "publishedAt": "2026-09-03T17:31:21.575748Z",
+        "updatedAt": "2026-09-03T17:31:21.575748Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.vercel.quran-reels-tau/quran-reels-mcp",
+      "description": "Free browser-based Quran video maker: vertical reels with 47 reciters and 8 translation languages.",
+      "title": "Quran Reels MCP",
+      "repository": {
+        "url": "https://github.com/Ansygroup/quran-reels",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://quran-reels-tau.vercel.app/developers/mcp/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://quran-reels-tau.vercel.app/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-29T10:22:39.60152Z",
+        "publishedAt": "2026-10-29T10:22:39.60152Z",
+        "updatedAt": "2026-10-29T10:22:39.60152Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+      "name": "app.vercel.renewalmatrix/renewalmatrix",
+      "description": "Score a subscription flow against US click-to-cancel / auto-renewal laws.",
+      "version": "1.0.0",
+      "websiteUrl": "https://renewalmatrix.vercel.app",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://renewalmatrix.vercel.app/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-13T06:08:07.792053Z",
+        "publishedAt": "2026-09-13T06:08:07.792053Z",
+        "updatedAt": "2026-09-13T06:08:07.792053Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.vercel.roster-ivory-zeta/roster",
+      "description": "Hire AI agents with distinct personalities for writing, marketing, research, legal and more.",
+      "title": "Roster",
+      "version": "1.0.0",
+      "websiteUrl": "https://roster-ivory-zeta.vercel.app/for-agents",
+      "icons": [
+        {
+          "src": "https://roster-ivory-zeta.vercel.app/apple-icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "180x180"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://roster-ivory-zeta.vercel.app/api/mcp",
+          "headers": [
+            {
+              "description": "Only for job tools: Bearer rk_test_... (free sandbox key from get_sandbox_key) or Bearer rk_live_.... Search and profiles need no key.",
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-01T04:44:51.012693Z",
+        "publishedAt": "2026-11-01T04:44:51.012693Z",
+        "updatedAt": "2026-11-01T04:44:51.012693Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.vercel.rugradar-dun/rugradar-mcp",
+      "description": "Read-only honeypot, holder and liquidity scam checks for tokens across 64 networks.",
+      "title": "RugRadar MCP",
+      "version": "1.0.0",
+      "websiteUrl": "https://rugradar-dun.vercel.app",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://rugradar-dun.vercel.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-14T07:39:35.995518Z",
+        "publishedAt": "2026-10-14T07:39:35.995518Z",
+        "updatedAt": "2026-10-14T07:39:35.995518Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.vercel.rv-kit/rv-kit",
+      "description": "Find 13 free campervan/RV worksheets, plan trip records, and view companion-book information.",
+      "title": "BeachFinder RV Companion Library",
+      "version": "0.3.0",
+      "websiteUrl": "https://rv-kit.vercel.app/assistant-tools/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://rv-kit.vercel.app/mcp"
+        }
+      ],
+      "_meta": {
+        "io.modelcontextprotocol.registry/publisher-provided": {
+          "authenticationRequired": false,
+          "bookInformationUrl": "https://rv-kit.vercel.app/#the-guide",
+          "bookKindlePurchaseUrl": "https://www.amazon.com/dp/B0HMPKFS7T",
+          "bookOffers": [
+            {
+              "format": "PDF + EPUB",
+              "purchaseUrl": "https://troulinator.gumroad.com/l/campervan-rv-first-30-days-pdf-epub",
+              "retailer": "Gumroad"
+            },
+            {
+              "format": "Kindle",
+              "marketplaceUrls": {
+                "FR": "https://www.amazon.fr/dp/B0HMPKFS7T",
+                "US": "https://www.amazon.com/dp/B0HMPKFS7T"
+              },
+              "purchaseUrl": "https://www.amazon.com/dp/B0HMPKFS7T",
+              "retailer": "Amazon"
+            },
+            {
+              "format": "Paperback",
+              "marketplaceUrls": {
+                "FR": "https://www.amazon.fr/dp/B0HMPM5JB2",
+                "US": "https://www.amazon.com/dp/B0HMPM5JB2"
+              },
+              "purchaseUrl": "https://www.amazon.com/dp/B0HMPM5JB2",
+              "retailer": "Amazon"
+            }
+          ],
+          "bookPaperbackPurchaseUrl": "https://www.amazon.com/dp/B0HMPM5JB2",
+          "bookPurchaseUrl": "https://troulinator.gumroad.com/l/campervan-rv-first-30-days-pdf-epub",
+          "catalogSize": 13,
+          "companionWebsite": "https://rv-kit.vercel.app/",
+          "language": "en",
+          "publisher": "BeachFinder",
+          "region": "United States",
+          "scope": "Public blank worksheet selection, printing help and companion-book metadata; no diagnosis, repairs or safety approval.",
+          "serviceCost": "free",
+          "toolCount": 4
+        }
+      }
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-13T17:15:46.389288Z",
+        "publishedAt": "2026-10-13T17:15:46.389288Z",
+        "updatedAt": "2026-10-13T17:15:46.389288Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+      "name": "app.vercel.slopcheck-one/slopcheck",
+      "description": "Score a YouTube channel's upload pattern against YouTube's inauthentic-content policy.",
+      "version": "1.0.0",
+      "websiteUrl": "https://slopcheck-one.vercel.app",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://slopcheck-one.vercel.app/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-13T04:49:12.832458Z",
+        "publishedAt": "2026-09-13T04:49:12.832458Z",
+        "updatedAt": "2026-09-13T04:49:12.832458Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.vercel.stackfacts/stackfacts",
+      "description": "Neutral, sourced, dated facts for choosing software: price, free tier, idle rules, security record.",
+      "title": "Stackfacts",
+      "version": "0.2.0",
+      "websiteUrl": "https://stackfacts.vercel.app",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://stackfacts.vercel.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "deprecated",
+        "statusChangedAt": "2026-10-03T16:30:42.751782Z",
+        "statusMessage": "Moved to dev.stackfacts/stackfacts (https://stackfacts.dev/mcp)",
+        "publishedAt": "2026-10-03T16:21:54.574365Z",
+        "updatedAt": "2026-10-03T16:30:42.751782Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+      "name": "app.vercel.stripecheckup/stripecheckup",
+      "description": "Scan pasted Stripe webhook/checkout code for common integration bugs.",
+      "version": "1.0.0",
+      "websiteUrl": "https://stripecheckup.vercel.app",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://stripecheckup.vercel.app/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-13T04:31:29.710593Z",
+        "publishedAt": "2026-09-13T04:31:29.710593Z",
+        "updatedAt": "2026-09-13T04:31:29.710593Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+      "name": "app.vercel.triageshield/triageshield",
+      "description": "Verify a vuln report's file/line/function claims against a real GitHub repo.",
+      "version": "1.0.0",
+      "websiteUrl": "https://triageshield.vercel.app",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://triageshield.vercel.app/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-13T05:20:02.674884Z",
+        "publishedAt": "2026-09-13T05:20:02.674884Z",
+        "updatedAt": "2026-09-13T05:20:02.674884Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.vercel.watchesinstock-mcp/watches-in-stock",
+      "description": "Live luxury watch listings from watchesinstock.com, with photos, prices and trade nicknames.",
+      "title": "Watches in Stock",
+      "version": "0.3.0",
+      "websiteUrl": "https://watchesinstock-mcp.vercel.app",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://watchesinstock-mcp.vercel.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-07T15:22:08.842743Z",
+        "publishedAt": "2026-11-07T15:22:08.842743Z",
+        "updatedAt": "2026-11-07T15:22:08.842743Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.veriql/veriql-mcp",
+      "description": "Rug, honeypot and wallet-approval risk checks on Solana and EVM, with every penalty driver shown.",
+      "title": "Veriql Risk",
+      "version": "1.1.0",
+      "websiteUrl": "https://veriql.app/api",
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "veriql-mcp",
+          "version": "1.1.0",
+          "runtimeHint": "npx",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Veriql Risk API key. A free one is issued instantly at https://veriql.app/api/checkout?pack=free",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "VERIQL_API_KEY"
+            },
+            {
+              "description": "Override the API origin. Only needed for self-hosting.",
+              "default": "https://veriql.app",
+              "name": "VERIQL_BASE_URL"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-31T20:11:08.398371Z",
+        "publishedAt": "2026-10-31T20:11:08.398371Z",
+        "updatedAt": "2026-10-31T20:11:08.398371Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.verli/verli",
+      "description": "Search and read your saved Verli transcripts, translations, and AI summaries. OAuth, read-only.",
+      "title": "Verli",
+      "version": "0.2.65",
+      "websiteUrl": "https://verli.app",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://app.verli.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-01T02:28:22.403652Z",
+        "publishedAt": "2026-11-01T02:28:22.403652Z",
+        "updatedAt": "2026-11-01T02:28:22.403652Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.veteranhq/va-disability-benefits",
+      "description": "Veterans benefits and VA claims reference: VA disability ratings, compensation rates, 38 CFR search",
+      "title": "VeteranHQ",
+      "version": "0.2.0",
+      "websiteUrl": "https://veteranhq.app/mcp",
+      "icons": [
+        {
+          "src": "https://veteranhq.app/logo.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.veteranhq.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-12T14:46:14.459545Z",
+        "publishedAt": "2026-10-12T14:46:14.459545Z",
+        "updatedAt": "2026-10-12T14:46:14.459545Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.vibecom/growth",
+      "description": "Marketing autopilot in your IDE. AI turns codebase and context into content for 10+ platforms",
+      "title": "VibeCom Growth Autopilot",
+      "version": "1.1.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.vibecom.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-05-09T05:23:54.306364Z",
+        "publishedAt": "2026-05-09T05:23:54.306364Z",
+        "updatedAt": "2026-05-09T05:23:54.306364Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.vibeyum/vibe-yum",
+      "description": "Search, save, and scale family recipes, and manage shopping lists and meal plans.",
+      "title": "Vibe Yum",
+      "version": "1.0.0",
+      "websiteUrl": "https://consumer.vibeyum.com",
+      "icons": [
+        {
+          "src": "https://mcp.consumer.vibeyum.app/icons/yum-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.consumer.vibeyum.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-21T08:35:47.537711Z",
+        "publishedAt": "2026-10-21T08:35:47.537711Z",
+        "updatedAt": "2026-10-21T08:35:47.537711Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.vidlet/vidlet",
+      "description": "Edit video by asking: auto-captions, jump cuts, narrated Shorts, GIFs, voiceover, YouTube upload.",
+      "title": "VidLet",
+      "version": "1.2.2",
+      "websiteUrl": "https://vidlet.app",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@spark-apps/vidlet",
+          "version": "1.2.2",
+          "runtimeHint": "npx",
+          "transport": {
+            "type": "stdio"
+          },
+          "runtimeArguments": [
+            {
+              "type": "named",
+              "name": "--ignore-scripts"
+            },
+            {
+              "type": "named",
+              "name": "--package",
+              "value": "@spark-apps/vidlet@1.2.2"
+            },
+            {
+              "type": "positional",
+              "value": "vidlet-mcp",
+              "valueHint": "bin"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-29T22:06:24.031379Z",
+        "publishedAt": "2026-09-29T22:06:24.031379Z",
+        "updatedAt": "2026-09-29T22:06:24.031379Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.vifo/vifo",
+      "description": "Travel notebook your AI agent writes from your photos and remarks over MCP.",
+      "title": "Vifo",
+      "version": "1.0.0",
+      "websiteUrl": "https://vifo.app/connect",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://vifo.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-25T02:42:43.891434Z",
+        "publishedAt": "2026-08-25T02:42:43.891434Z",
+        "updatedAt": "2026-08-25T02:42:43.891434Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.vitalli/mcp",
+      "description": "Your own health records from Vora, Still, Stackwell and Joiva in your AI assistant (OAuth).",
+      "title": "Vitalli",
+      "version": "1.0.0",
+      "websiteUrl": "https://vitalli.app",
+      "icons": [
+        {
+          "src": "https://vitalli.app/brand/vitalli-mark-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.vitalli.app"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-22T14:38:50.109438Z",
+        "publishedAt": "2026-10-22T14:38:50.109438Z",
+        "updatedAt": "2026-10-22T14:38:50.109438Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.vixai/vixai-connect",
+      "description": "Create, review, publish and schedule Instagram images, carousels and Reels with AI assistants.",
+      "title": "VixAI Connect",
+      "version": "1.0.0",
+      "websiteUrl": "https://vixai.app/en/developers/",
+      "icons": [
+        {
+          "src": "https://vixai.app/favicon-48x48.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "48x48"
+          ]
+        },
+        {
+          "src": "https://vixai.app/android-chrome-192x192.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "192x192"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.vixai.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-30T23:22:32.481541Z",
+        "publishedAt": "2026-08-30T23:22:32.481541Z",
+        "updatedAt": "2026-08-30T23:22:32.481541Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.votawallet/votawallet",
+      "description": "Personal finance for Serbia: spending per product from fiscal receipts, budgets, balances, records.",
+      "title": "VotaWallet",
+      "version": "1.0.0",
+      "websiteUrl": "https://votawallet.app/ai/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://my.votawallet.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-20T16:31:33.365605Z",
+        "publishedAt": "2026-10-20T16:31:33.365605Z",
+        "updatedAt": "2026-10-20T16:31:33.365605Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.waapi/waapi",
+      "description": "Messaging tools for AI agents: send messages, manage chats, groups and channels.",
+      "title": "WaAPI",
+      "version": "1.0.0",
+      "websiteUrl": "https://waapi.app/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://waapi.app/mcp/waapi"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-04T07:46:46.574733Z",
+        "publishedAt": "2026-09-04T07:46:46.574733Z",
+        "updatedAt": "2026-09-04T07:46:46.574733Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.wallek/wallek",
+      "description": "Personal finance ledger: log expenses, track bills and cards, import statements.",
+      "title": "WalleK",
+      "version": "1.1.0",
+      "websiteUrl": "https://wallek.app",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://wallek.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-07T00:19:19.814076Z",
+        "publishedAt": "2026-09-07T00:19:19.814076Z",
+        "updatedAt": "2026-09-07T00:19:19.814076Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.walletprofit/walletprofit",
+      "description": "Analyse crypto wallets (EVM, Solana, Bitcoin) and compare DeFi lending, borrowing and pool rates.",
+      "title": "WalletProfit",
+      "version": "1.0.0",
+      "websiteUrl": "https://walletprofit.app/mcp",
+      "icons": [
+        {
+          "src": "https://walletprofit.app/favicon.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://walletprofit.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-10T20:53:48.219273Z",
+        "publishedAt": "2026-10-10T20:53:48.219273Z",
+        "updatedAt": "2026-10-10T20:53:48.219273Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.warplink/warplink",
+      "description": "Link infrastructure for developers and AI agents: deep links, attribution, real-time analytics.",
+      "title": "WarpLink",
+      "repository": {
+        "url": "https://github.com/WarpLinkApp/warplink-agent-kit",
+        "source": "github"
+      },
+      "version": "1.0.3",
+      "websiteUrl": "https://warplink.app/docs/ai-access",
+      "icons": [
+        {
+          "src": "https://warplink.app/icon-512x512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.warplink.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-06T22:15:05.474874Z",
+        "publishedAt": "2026-11-06T22:15:05.474874Z",
+        "updatedAt": "2026-11-06T22:15:05.474874Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.wasync/whatsapp",
+      "description": "WhatsApp for your app or AI agent over OAuth2 \u2014 the same connections WASync runs inside your CRM.",
+      "title": "WASync \u2014 WhatsApp Platform API",
+      "version": "1.0.0",
+      "websiteUrl": "https://wasync.app",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://cloudapi.wasync.app/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-02T12:41:19.91986Z",
+        "publishedAt": "2026-09-02T12:41:19.91986Z",
+        "updatedAt": "2026-09-02T12:41:19.91986Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.web.dealer-direct-mcp/dealer-direct-inventory",
+      "description": "New, Used & Classic car inventory MCP (3450 dealerships in 50 states; 1,004,686 live vehicles).",
+      "version": "2.138.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://dealer-direct-mcp.web.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-01T21:28:26.238044Z",
+        "publishedAt": "2026-11-01T21:28:26.238044Z",
+        "updatedAt": "2026-11-01T21:28:26.238044Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.web.mindset-502113/mindset",
+      "description": "Semantic search over MINDSET's brand strategy topic database, plus its system prompt.",
+      "title": "MINDSET",
+      "version": "0.1.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mindset-mcp-183316982259.europe-west2.run.app/mcp",
+          "headers": [
+            {
+              "description": "Your MINDSET API key, formatted as: Bearer <your-api-key>",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-20T17:46:00.689608Z",
+        "publishedAt": "2026-07-20T17:46:00.689608Z",
+        "updatedAt": "2026-07-20T17:46:00.689608Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.web.yutai-mcp/yutai-mcp",
+      "description": "Japanese shareholder benefits search, cross-trading cost estimates, and trading date calculations.",
+      "title": "\u682a\u4e3b\u512a\u5f85 MCP (Yutai MCP)",
+      "version": "1.0.0",
+      "websiteUrl": "https://yutai-mcp.web.app/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://yutai-mcp.web.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-07T07:44:10.332651Z",
+        "publishedAt": "2026-10-07T07:44:10.332651Z",
+        "updatedAt": "2026-10-07T07:44:10.332651Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.weekbird/weekbird",
+      "description": "Plan, draft and schedule social posts in a Weekbird workspace.",
+      "title": "Weekbird",
+      "version": "0.2.0",
+      "websiteUrl": "https://weekbird.app",
+      "icons": [
+        {
+          "src": "https://app.weekbird.app/android-chrome-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://app.weekbird.app/mcp"
+        }
+      ],
+      "_meta": {
+        "io.modelcontextprotocol.registry/publisher-provided": {
+          "authorization": {
+            "authorizationServer": "https://app.weekbird.app/api/auth",
+            "clientRegistration": [
+              "client_id_metadata_document",
+              "dynamic_client_registration"
+            ],
+            "pkce": "S256",
+            "protectedResourceMetadata": "https://app.weekbird.app/.well-known/oauth-protected-resource/mcp",
+            "scopes": [
+              "connector:use",
+              "inbox:read",
+              "inbox:private:read",
+              "inbox:triage",
+              "inbox:reply",
+              "inbox:moderate",
+              "workspace:read",
+              "channels:read",
+              "channels:write",
+              "media:read",
+              "library:read",
+              "posts:read",
+              "posts:schedule",
+              "library:write",
+              "media:write",
+              "ai:use",
+              "posts:draft",
+              "analytics:read",
+              "notifications:read",
+              "notifications:write",
+              "automations:read",
+              "automations:write",
+              "offline_access"
+            ],
+            "type": "oauth2"
+          }
+        }
+      }
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-03T17:45:23.989057Z",
+        "publishedAt": "2026-11-03T17:45:23.989057Z",
+        "updatedAt": "2026-11-03T17:45:23.989057Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.weekendflights/weekendflights",
+      "description": "Weekend flight price calendar: the cheapest round trip for every weekend of the next 12 months.",
+      "title": "weekendflights",
+      "version": "1.0.0",
+      "websiteUrl": "https://weekendflights.app",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://weekendflights.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-17T10:10:28.522938Z",
+        "publishedAt": "2026-10-17T10:10:28.522938Z",
+        "updatedAt": "2026-10-17T10:10:28.522938Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.weeklane/weeklane",
+      "description": "Plan your week in the Weeklane planner: tasks, repeating tasks, reminders, Task Lock and undo.",
+      "title": "Weeklane",
+      "version": "1.0.0",
+      "websiteUrl": "https://weeklane.app/ai",
+      "icons": [
+        {
+          "src": "https://weeklane.app/favicon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.weeklane.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-22T14:08:37.137345Z",
+        "publishedAt": "2026-10-22T14:08:37.137345Z",
+        "updatedAt": "2026-10-22T14:08:37.137345Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.wellintel/permits",
+      "description": "Drilling permits for TX, NM, OK and LA from state regulators. Free account; Pro adds same-day data.",
+      "title": "Well-Intel Drilling Permits",
+      "version": "1.0.1",
+      "websiteUrl": "https://www.wellintel.app/connect",
+      "icons": [
+        {
+          "src": "https://www.wellintel.app/mcp-icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.wellintel.app/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-22T18:31:14.094607Z",
+        "publishedAt": "2026-10-22T18:31:14.094607Z",
+        "updatedAt": "2026-10-22T18:31:14.094607Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.wemoveat/moveat",
+      "description": "Coaching app for fitness coaches: read client check-ins and diets, write drafts the coach sends.",
+      "title": "Moveat",
+      "version": "1.1.0",
+      "websiteUrl": "https://wemoveat.app",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://wemoveat.app/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-01T19:01:48.750497Z",
+        "publishedAt": "2026-11-01T19:01:48.750497Z",
+        "updatedAt": "2026-11-01T19:01:48.750497Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.wenbu/mcp",
+      "description": "Free BaZi, I Ching, tarot, Zi Wei and bilingual learning tools with transparent methods. No API key.",
+      "title": "Wenbu \u00b7 \u95ee\u535c",
+      "repository": {
+        "url": "https://github.com/wenbu-app/wenbu",
+        "source": "github"
+      },
+      "version": "1.3.1",
+      "websiteUrl": "https://wenbu.app/en/agents/?utm_source=mcp-registry&utm_medium=referral&utm_campaign=mcp-registry",
+      "icons": [
+        {
+          "src": "https://wenbu.app/favicon.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://wenbu.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-03T06:06:01.05524Z",
+        "publishedAt": "2026-10-03T06:06:01.05524Z",
+        "updatedAt": "2026-10-03T06:06:01.05524Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.werify/werify",
+      "description": "Your WhatsApp history in Claude and ChatGPT: search years of chats, voice notes transcribed.",
+      "title": "Werify",
+      "version": "1.0.0",
+      "websiteUrl": "https://werify.app/en/whatsapp-mcp-server",
+      "icons": [
+        {
+          "src": "https://werify.app/images/bimi.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://werify.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-30T16:48:25.69616Z",
+        "publishedAt": "2026-10-30T16:48:25.69616Z",
+        "updatedAt": "2026-10-30T16:48:25.69616Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.whatsable/mcp",
+      "description": "Send WhatsApp messages and templates, manage chats, contacts, broadcasts and AI agents.",
+      "title": "WhatsAble for WhatsApp Business",
+      "version": "1.0.0",
+      "websiteUrl": "https://docs.whatsable.app/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.whatsable.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-04T15:17:45.551413Z",
+        "publishedAt": "2026-11-04T15:17:45.551413Z",
+        "updatedAt": "2026-11-04T15:17:45.551413Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.whatsmoving/whatsmoving",
+      "description": "Archive of US stock moves after they happen, with cited evidence and market narratives.",
+      "title": "What's Moving",
+      "version": "1.0.0",
+      "websiteUrl": "https://whatsmoving.app/connect/?c=mcp-registry",
+      "icons": [
+        {
+          "src": "https://whatsmoving.app/favicon.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.whatsmoving.app/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-25T09:31:48.493319Z",
+        "publishedAt": "2026-10-25T09:31:48.493319Z",
+        "updatedAt": "2026-10-25T09:31:48.493319Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.whatsync/whatsapp",
+      "description": "WhatsApp for Claude, ChatGPT or any AI agent: search, reply and send. Personal or Business API.",
+      "title": "WhatSync",
+      "version": "1.0.0",
+      "websiteUrl": "https://whatsync.app/whatsapp-mcp",
+      "icons": [
+        {
+          "src": "https://whatsync.app/logos/whatsync-logo.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://whatsync.app/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-14T11:02:13.791573Z",
+        "publishedAt": "2026-10-14T11:02:13.791573Z",
+        "updatedAt": "2026-10-14T11:02:13.791573Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.whatsync/whatsapp-business",
+      "description": "Official WhatsApp Business API for AI agents: customer chats, templates, campaigns and Meta prices.",
+      "title": "WhatSync for WhatsApp Business",
+      "version": "1.0.0",
+      "websiteUrl": "https://whatsync.app/whatsapp-business",
+      "icons": [
+        {
+          "src": "https://whatsync.app/logos/whatsync-logo.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://whatsync.app/api/mcp/business"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-14T11:02:17.449046Z",
+        "publishedAt": "2026-10-14T11:02:17.449046Z",
+        "updatedAt": "2026-10-14T11:02:17.449046Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.wherethemlogs/log-locations",
+      "description": "Where apps write their log files on Windows, macOS and Linux, as exact copyable paths.",
+      "title": "Where Them Logs",
+      "repository": {
+        "url": "https://github.com/scotscottmca/wherethemlogs.app",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://wherethemlogs.app",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://wherethemlogs.app/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-05T13:29:25.760363Z",
+        "publishedAt": "2026-10-05T13:29:25.760363Z",
+        "updatedAt": "2026-10-05T13:29:25.760363Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.whichpost/whichpost",
+      "description": "Which creator posts brought paying customers: your WhichPost reports, with ranges.",
+      "title": "WhichPost",
+      "version": "1.0.0",
+      "websiteUrl": "https://whichpost.app/claude-and-chatgpt",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://whichpost.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-14T20:11:14.62482Z",
+        "publishedAt": "2026-10-14T20:11:14.62482Z",
+        "updatedAt": "2026-10-14T20:11:14.62482Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.whichpost/whichpost-public",
+      "description": "What WhichPost is, how it works, pricing and a simulated sample report. No sign-in.",
+      "title": "WhichPost (public)",
+      "version": "1.0.0",
+      "websiteUrl": "https://whichpost.app/claude-and-chatgpt",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://whichpost.app/mcp/public"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-14T20:11:15.026475Z",
+        "publishedAt": "2026-10-14T20:11:15.026475Z",
+        "updatedAt": "2026-10-14T20:11:15.026475Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.willitstick/will-it-stick",
+      "description": "Tests whether your message will stick: grades readability and memorability before you send.",
+      "title": "Will It Stick",
+      "repository": {
+        "url": "https://github.com/wdlcmu/will-it-stick",
+        "source": "github"
+      },
+      "version": "0.4.1",
+      "websiteUrl": "https://willitstick.app",
+      "icons": [
+        {
+          "src": "https://mcp.willitstick.app/icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.willitstick.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-05T03:53:14.983966Z",
+        "publishedAt": "2026-11-05T03:53:14.983966Z",
+        "updatedAt": "2026-11-05T03:53:14.983966Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.winnr/winnr",
+      "description": "Cold email infrastructure: buy domains, create SMTP mailboxes, set DNS, run warming, read mail.",
+      "title": "Winnr",
+      "repository": {
+        "url": "https://github.com/winnr-app/winnr-mcp",
+        "source": "github"
+      },
+      "version": "0.6.1",
+      "websiteUrl": "https://winnr.app/mcp.html",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.winnr.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-07T03:01:44.503181Z",
+        "publishedAt": "2026-10-07T03:01:44.503181Z",
+        "updatedAt": "2026-10-07T03:01:44.503181Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.wisepenny/wise-penny",
+      "description": "Chat with your bank data: balances, transactions, budgets, bills. Reads only, never moves money.",
+      "title": "Wise Penny",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.wisepenny.app/connect",
+      "icons": [
+        {
+          "src": "https://www.wisepenny.app/mcp-icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "180x180"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.wisepenny.app/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-15T22:00:42.283284Z",
+        "publishedAt": "2026-07-15T22:00:42.283284Z",
+        "updatedAt": "2026-07-15T22:00:42.283284Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.wishes/wishes",
+      "description": "Tell your AI what you love and it fills your wishlist with gift ideas",
+      "title": "Wishes",
+      "version": "1.0.0",
+      "websiteUrl": "https://wishes.app/ai",
+      "icons": [
+        {
+          "src": "https://wishes.app/assets/icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.wishes.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-05T11:33:21.044275Z",
+        "publishedAt": "2026-10-05T11:33:21.044275Z",
+        "updatedAt": "2026-10-05T11:33:21.044275Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.wishlistme/wishlistme",
+      "description": "Manage gift wishlists, reserve gifts on friends' lists and run a Secret Santa from a chat.",
+      "title": "Wishlistme",
+      "version": "1.2.1",
+      "websiteUrl": "https://wishlistme.app/ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://wishlistme.app/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-27T22:48:06.726699Z",
+        "publishedAt": "2026-10-27T22:48:06.726699Z",
+        "updatedAt": "2026-10-27T22:48:06.726699Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.wishpool/algeria-payments-mcp",
+      "description": "Algeria payments for AI agents \u2014 EDAHABIA / CIB via Chargily Pay. Never holds funds.",
+      "title": "Algeria Payments (Chargily Pay \u2014 EDAHABIA / CIB)",
+      "repository": {
+        "url": "https://github.com/junter1989k-ai/algeria-payments-mcp",
+        "source": "github"
+      },
+      "version": "0.1.0",
+      "websiteUrl": "https://github.com/junter1989k-ai/algeria-payments-mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp-dz.wishpool.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-09T05:09:59.822997Z",
+        "publishedAt": "2026-07-09T05:09:59.822997Z",
+        "updatedAt": "2026-07-09T05:09:59.822997Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.wishpool/argentina-invoice-mcp",
+      "description": "Argentina AFIP/ARCA electronic invoices for AI agents - issue & query facturas, get CAE via WSFE.",
+      "title": "Argentina Invoices (factura electr\u00f3nica CAE via WSFE)",
+      "repository": {
+        "url": "https://github.com/junter1989k-ai/argentina-invoice-mcp",
+        "source": "github"
+      },
+      "version": "0.1.0",
+      "websiteUrl": "https://github.com/junter1989k-ai/argentina-invoice-mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://inv-ar.wishpool.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-09T23:08:07.534797Z",
+        "publishedAt": "2026-07-09T23:08:07.534797Z",
+        "updatedAt": "2026-07-09T23:08:07.534797Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.wishpool/argentina-payments-mcp",
+      "description": "Argentina payments for AI agents \u2014 Mercado Pago wallet / cuotas via Mercado Pago. Never holds funds.",
+      "title": "Argentina Payments (Mercado Pago \u2014 Mercado Pago wallet / cuotas)",
+      "repository": {
+        "url": "https://github.com/junter1989k-ai/argentina-payments-mcp",
+        "source": "github"
+      },
+      "version": "0.1.0",
+      "websiteUrl": "https://github.com/junter1989k-ai/argentina-payments-mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp-ar.wishpool.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-08T18:43:31.338534Z",
+        "publishedAt": "2026-07-08T18:43:31.338534Z",
+        "updatedAt": "2026-07-08T18:43:31.338534Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.wishpool/australia-logistics-mcp",
+      "description": "Australia shipping labels for AI agents: buy Aramex and more, track and refund via Shippo.",
+      "title": "Australia Logistics (buy Aramex + more labels + tracking via Shippo)",
+      "repository": {
+        "url": "https://github.com/junter1989k-ai/australia-logistics-mcp",
+        "source": "github"
+      },
+      "version": "0.1.0",
+      "websiteUrl": "https://github.com/junter1989k-ai/australia-logistics-mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://logi-au.wishpool.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-10T06:40:05.361717Z",
+        "publishedAt": "2026-07-10T06:40:05.361717Z",
+        "updatedAt": "2026-07-10T06:40:05.361717Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.wishpool/australia-payments-mcp",
+      "description": "Australia payments for AI agents \u2014 cards / Apple Pay via Stripe. Never holds funds.",
+      "title": "Australia Payments (Stripe \u2014 cards / Apple Pay)",
+      "repository": {
+        "url": "https://github.com/junter1989k-ai/australia-payments-mcp",
+        "source": "github"
+      },
+      "version": "0.1.0",
+      "websiteUrl": "https://github.com/junter1989k-ai/australia-payments-mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp-au.wishpool.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-09T02:42:13.30657Z",
+        "publishedAt": "2026-07-09T02:42:13.30657Z",
+        "updatedAt": "2026-07-09T02:42:13.30657Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.wishpool/austria-payments-mcp",
+      "description": "Austria payments for AI agents \u2014 EPS via Stripe. Never holds funds.",
+      "title": "Austria Payments (Stripe \u2014 EPS)",
+      "repository": {
+        "url": "https://github.com/junter1989k-ai/austria-payments-mcp",
+        "source": "github"
+      },
+      "version": "0.1.0",
+      "websiteUrl": "https://github.com/junter1989k-ai/austria-payments-mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp-at.wishpool.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-09T02:42:08.924281Z",
+        "publishedAt": "2026-07-09T02:42:08.924281Z",
+        "updatedAt": "2026-07-09T02:42:08.924281Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.wishpool/bahrain-payments-mcp",
+      "description": "Bahrain payments for AI agents \u2014 Benefit via Tap Payments. Never holds funds.",
+      "title": "Bahrain Payments (Tap Payments \u2014 Benefit)",
+      "repository": {
+        "url": "https://github.com/junter1989k-ai/bahrain-payments-mcp",
+        "source": "github"
+      },
+      "version": "0.1.0",
+      "websiteUrl": "https://github.com/junter1989k-ai/bahrain-payments-mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp-bh.wishpool.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-09T04:17:51.341424Z",
+        "publishedAt": "2026-07-09T04:17:51.341424Z",
+        "updatedAt": "2026-07-09T04:17:51.341424Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.wishpool/bangladesh-payments-mcp",
+      "description": "Bangladesh payments for AI agents \u2014 bKash / Nagad via SSLCommerz. Never holds funds.",
+      "title": "Bangladesh Payments (SSLCommerz \u2014 bKash / Nagad)",
+      "repository": {
+        "url": "https://github.com/junter1989k-ai/bangladesh-payments-mcp",
+        "source": "github"
+      },
+      "version": "0.1.0",
+      "websiteUrl": "https://github.com/junter1989k-ai/bangladesh-payments-mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp-bd.wishpool.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-09T02:42:18.378297Z",
+        "publishedAt": "2026-07-09T02:42:18.378297Z",
+        "updatedAt": "2026-07-09T02:42:18.378297Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.wishpool/belgium-invoice-mcp",
+      "description": "Belgium Peppol BIS 3.0 e-invoices for AI agents: send, check recipient, get delivery proof.",
+      "title": "Belgium Invoices (Peppol BIS 3.0 via Storecove)",
+      "repository": {
+        "url": "https://github.com/junter1989k-ai/belgium-invoice-mcp",
+        "source": "github"
+      },
+      "version": "0.1.0",
+      "websiteUrl": "https://github.com/junter1989k-ai/belgium-invoice-mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://inv-be.wishpool.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-10T07:48:59.969009Z",
+        "publishedAt": "2026-07-10T07:48:59.969009Z",
+        "updatedAt": "2026-07-10T07:48:59.969009Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.wishpool/belgium-payments-mcp",
+      "description": "Belgium payments for AI agents \u2014 Bancontact via Mollie. Never holds funds.",
+      "title": "Belgium Payments (Mollie \u2014 Bancontact)",
+      "repository": {
+        "url": "https://github.com/junter1989k-ai/belgium-payments-mcp",
+        "source": "github"
+      },
+      "version": "0.1.0",
+      "websiteUrl": "https://github.com/junter1989k-ai/belgium-payments-mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp-be.wishpool.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-08T21:37:05.015534Z",
+        "publishedAt": "2026-07-08T21:37:05.015534Z",
+        "updatedAt": "2026-07-08T21:37:05.015534Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.wishpool/brazil-invoice-mcp",
+      "description": "Brazil NFS-e service invoices for AI agents via Focus NFe and NFe.io. Stateless, never stores data.",
+      "title": "Brazil Invoices (NFS-e nota fiscal de servi\u00e7o)",
+      "repository": {
+        "url": "https://github.com/junter1989k-ai/brazil-invoice-mcp",
+        "source": "github"
+      },
+      "version": "0.2.0",
+      "websiteUrl": "https://github.com/junter1989k-ai/brazil-invoice-mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://inv-br.wishpool.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-10T04:28:49.525135Z",
+        "publishedAt": "2026-07-10T04:28:49.525135Z",
+        "updatedAt": "2026-07-10T04:28:49.525135Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.wishpool/brazil-payments-mcp",
+      "description": "Brazil payments for AI agents \u2014 Pix, cards, boleto via Mercado Pago. Never holds funds.",
+      "title": "Brazil Payments (Mercado Pago \u2014 Pix / cards / boleto)",
+      "repository": {
+        "url": "https://github.com/junter1989k-ai/brazil-payments-mcp",
+        "source": "github"
+      },
+      "version": "0.1.0",
+      "websiteUrl": "https://github.com/junter1989k-ai/brazil-payments-mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp-br.wishpool.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-08T16:15:39.47026Z",
+        "publishedAt": "2026-07-08T16:15:39.47026Z",
+        "updatedAt": "2026-07-08T16:15:39.47026Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.wishpool/bulgaria-payments-mcp",
+      "description": "Bulgaria payments for AI agents \u2014 cards / Apple Pay via Stripe. Never holds funds.",
+      "title": "Bulgaria Payments (Stripe \u2014 cards / Apple Pay)",
+      "repository": {
+        "url": "https://github.com/junter1989k-ai/bulgaria-payments-mcp",
+        "source": "github"
+      },
+      "version": "0.1.0",
+      "websiteUrl": "https://github.com/junter1989k-ai/bulgaria-payments-mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp-bg.wishpool.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-09T04:17:45.045261Z",
+        "publishedAt": "2026-07-09T04:17:45.045261Z",
+        "updatedAt": "2026-07-09T04:17:45.045261Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.wishpool/canada-payments-mcp",
+      "description": "Canada payments for AI agents \u2014 cards / Apple Pay via Stripe. Never holds funds.",
+      "title": "Canada Payments (Stripe \u2014 cards / Apple Pay)",
+      "repository": {
+        "url": "https://github.com/junter1989k-ai/canada-payments-mcp",
+        "source": "github"
+      },
+      "version": "0.1.0",
+      "websiteUrl": "https://github.com/junter1989k-ai/canada-payments-mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp-ca.wishpool.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-09T02:42:14.625195Z",
+        "publishedAt": "2026-07-09T02:42:14.625195Z",
+        "updatedAt": "2026-07-09T02:42:14.625195Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "app.wishpool/chile-invoice-mcp",
+      "description": "Chile DTE for AI agents - boleta/factura electronica via OpenFactura or LibreDTE. Stateless BYO.",
+      "title": "Chile Invoices (DTE boleta/factura electr\u00f3nica via OpenFactura)",
+      "repository": {
+        "url": "https://github.com/junter1989k-ai/chile-invoice-mcp",
+        "source": "github"
+      },
+      "version": "0.2.0",
+      "websiteUrl": "https://github.com/junter1989k-ai/chile-invoice-mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://inv-cl.wishpool.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-10T04:08:47.554137Z",
+        "publishedAt": "2026-07-10T04:08:47.554137Z",
+        "updatedAt": "2026-07-10T04:08:47.554137Z",
+        "isLatest": true
+      }
+    }
+  }
+]

@@ -18,6 +18,6 @@ INVOKE THIS SKILL when building ANY retrieval-augmented generation (RAG) system.
 **Tech:** [[RAG]], [[LangChain]]
 
 ## Related Skills
-- **Complements:** [[embedding-strategies]], [[hybrid-search-implementation]], [[similarity-search-patterns]], [[vector-index-tuning]]
+- **Complements:** [[convex]], [[embedding-strategies]], [[hybrid-search-implementation]], [[neon-postgres]]
 
 Real skill file: `skills/langchain-rag/SKILL.md`

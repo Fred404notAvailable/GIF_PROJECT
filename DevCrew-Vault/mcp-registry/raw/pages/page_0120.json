@@ -1,0 +1,3164 @@
+[
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.number7even/website-check",
+      "description": "Free website check: rebuild preview in every design, AI-readiness test, fixed price.",
+      "title": "number7even website check",
+      "version": "1.0.0",
+      "websiteUrl": "https://number7even.com/check/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://number7even.com/api/mcp/"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-07T03:48:05.384332Z",
+        "publishedAt": "2026-11-07T03:48:05.384332Z",
+        "updatedAt": "2026-11-07T03:48:05.384332Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.numbru/client-compass",
+      "description": "Behavioral intelligence for client-facing professionals. Know who you're walking into.",
+      "repository": {
+        "url": "https://github.com/marcus160365/numbru-mcp-server",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://numbru-mcp-server.numbru.workers.dev"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-22T14:39:35.508066Z",
+        "publishedAt": "2026-07-22T14:39:35.508066Z",
+        "updatedAt": "2026-07-22T14:39:35.508066Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.numeratica/mcp",
+      "description": "Deterministic US financial planning: retirement Monte Carlo, Roth conversion, RMD, tax, IRMAA, SS",
+      "title": "Numeratica \u2014 financial planning calculations",
+      "repository": {
+        "url": "https://github.com/numeratica/mcp",
+        "source": "github"
+      },
+      "version": "0.1.5",
+      "websiteUrl": "https://docs.numeratica.com",
+      "icons": [
+        {
+          "src": "https://docs.numeratica.com/assets/favicon.svg",
+          "mimeType": "image/svg+xml"
+        },
+        {
+          "src": "https://docs.numeratica.com/assets/favicon-32.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "32x32"
+          ]
+        }
+      ],
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@numeratica/mcp",
+          "version": "0.1.5",
+          "runtimeHint": "npx",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Numeratica API key (nmr_sk_...). Free self-serve key at https://docs.numeratica.com/get-key",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "NUMERATICA_API_KEY"
+            },
+            {
+              "description": "Override the API base URL. Defaults to https://api.numeratica.com; only needed for a staging or self-hosted deployment.",
+              "format": "string",
+              "name": "NUMERATICA_BASE_URL"
+            },
+            {
+              "description": "Per-request timeout in milliseconds (default 120000, minimum 1000). Raise it for long-horizon Monte Carlo runs.",
+              "format": "string",
+              "name": "NUMERATICA_TIMEOUT_MS"
+            }
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.numeratica.com/mcp",
+          "headers": [
+            {
+              "description": "Bearer <your Numeratica API key>, from https://docs.numeratica.com/get-key. Required for every tools/call. Discovery (initialize, tools/list, ping) answers without it, so a registry can enumerate the catalogue, but a client should still collect the key at setup or the first tool call fails.",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-28T01:48:37.68386Z",
+        "publishedAt": "2026-07-28T01:48:37.68386Z",
+        "updatedAt": "2026-07-28T01:48:37.68386Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.numeroclaw/readings",
+      "description": "Order a personalized numerology reading, paid by the person and delivered by email.",
+      "title": "NumeroClaw",
+      "version": "1.0.0",
+      "websiteUrl": "https://numeroclaw.com/assistants/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.numeroclaw.com/mcp/connect"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-06T15:55:43.742212Z",
+        "publishedAt": "2026-11-06T15:55:43.742212Z",
+        "updatedAt": "2026-11-06T15:55:43.742212Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.numezis/numezis",
+      "description": "Swiss SME back office: accounting, VAT, QR-bill invoicing, supplier bills, CRM, HR and payroll.",
+      "title": "Numezis",
+      "version": "1.0.0",
+      "websiteUrl": "https://docs.numezis.com/en/docs/product/mcp/overview",
+      "icons": [
+        {
+          "src": "https://www.numezis.com/favicon/icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.numezis.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-16T09:42:59.283804Z",
+        "publishedAt": "2026-09-16T09:42:59.283804Z",
+        "updatedAt": "2026-09-16T09:42:59.283804Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.nunify/nunify",
+      "description": "Enables AI assistants to retrieve event data and execute event management operations in Nunify.",
+      "title": "Nunify",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.nunify.com",
+      "icons": [
+        {
+          "src": "https://www.nunify.com/favicon.png",
+          "mimeType": "image/png"
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://app.nunify.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-03T09:16:30.625431Z",
+        "publishedAt": "2026-11-03T09:16:30.625431Z",
+        "updatedAt": "2026-11-03T09:16:30.625431Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.nuntior/mcp",
+      "description": "Social media, DMs, blog syndication & E.164 telecom for AI agents across 18+ networks.",
+      "title": "Nuntior \u2014 Social, Messaging, Blog & Telecom MCP",
+      "version": "1.0.0",
+      "websiteUrl": "https://nuntior.com",
+      "icons": [
+        {
+          "src": "https://nuntior.com/icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "256x256"
+          ],
+          "theme": "light"
+        },
+        {
+          "src": "https://nuntior.com/logo.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ],
+          "theme": "light"
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.nuntior.com/mcp",
+          "headers": [
+            {
+              "description": "Optional Nuntior Bearer API key (Bearer nnt_live_...). Call account_register first for zero-browser provisioning.",
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-26T19:27:06.873331Z",
+        "publishedAt": "2026-10-26T19:27:06.873331Z",
+        "updatedAt": "2026-10-26T19:27:06.873331Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.nursinghomedatabase/mcp",
+      "description": "MCP server for US nursing facility search and ownership lookup (NursingHomeDatabase).",
+      "title": "Nursing Home Database",
+      "repository": {
+        "url": "https://github.com/jmtroller/nhd-mcp-public-documentation",
+        "source": "github"
+      },
+      "version": "1.0.1",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.nursinghomedatabase.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-03-24T20:26:25.442749Z",
+        "publishedAt": "2026-03-24T20:26:25.442749Z",
+        "updatedAt": "2026-03-24T20:26:25.442749Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.nusii/mcp",
+      "description": "Nusii MCP server for drafting, pricing, and tracking business proposals.",
+      "title": "Nusii MCP Server",
+      "version": "1.0.0",
+      "websiteUrl": "https://nusii.com/docs/integrations/ai-assistants/",
+      "icons": [
+        {
+          "src": "https://nusii.com/images/logo.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "800x800"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://app.nusii.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-30T10:47:51.680168Z",
+        "publishedAt": "2026-07-30T10:47:51.680168Z",
+        "updatedAt": "2026-07-30T10:47:51.680168Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.nutsgrowth/directory",
+      "description": "Startup and SaaS tools and their alternatives, with prices and when a person last checked them.",
+      "title": "NutsGrowth",
+      "version": "1.0.0",
+      "websiteUrl": "https://nutsgrowth.com/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://nutsgrowth.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-13T20:52:14.857413Z",
+        "publishedAt": "2026-10-13T20:52:14.857413Z",
+        "updatedAt": "2026-10-13T20:52:14.857413Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.nuverlabs/image-gen",
+      "description": "Generate and edit images from your coding agent with Gemini and OpenAI, using your own API keys.",
+      "title": "Image Gen",
+      "repository": {
+        "url": "https://github.com/nuver-labs/image-gen-mcp",
+        "source": "github"
+      },
+      "version": "0.2.1",
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "@nuver-labs/image-gen-mcp",
+          "version": "0.2.1",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Google Gemini API key. Enables the Gemini provider. At least one provider key is required.",
+              "isSecret": true,
+              "name": "GEMINI_API_KEY"
+            },
+            {
+              "description": "OpenAI API key. Enables the OpenAI provider. At least one provider key is required.",
+              "isSecret": true,
+              "name": "OPENAI_API_KEY"
+            },
+            {
+              "description": "Provider used when a tool call does not name one: gemini or openai. Defaults to whichever key is set, preferring gemini.",
+              "name": "IMAGE_GEN_MCP_DEFAULT_PROVIDER"
+            },
+            {
+              "description": "Default Gemini model. Defaults to gemini-3.1-flash-image.",
+              "name": "IMAGE_GEN_MCP_GEMINI_MODEL"
+            },
+            {
+              "description": "Default OpenAI model. Defaults to gpt-image-2.",
+              "name": "IMAGE_GEN_MCP_OPENAI_MODEL"
+            },
+            {
+              "description": "Directory used when a tool call passes no output_path.",
+              "name": "IMAGE_GEN_MCP_OUTPUT_DIR"
+            },
+            {
+              "description": "Comma separated directories that file reads and writes are confined to. Unset means unrestricted.",
+              "name": "IMAGE_GEN_MCP_ALLOWED_DIRS"
+            },
+            {
+              "description": "Per-request timeout to the provider API in milliseconds. Defaults to 180000.",
+              "name": "IMAGE_GEN_MCP_TIMEOUT_MS"
+            },
+            {
+              "description": "Path of the JSONL image ledger. Defaults to ~/.image-gen-mcp/images.jsonl. Set to none to disable the file.",
+              "name": "IMAGE_GEN_MCP_LOG_FILE"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-13T11:04:46.12209Z",
+        "publishedAt": "2026-08-13T11:04:46.12209Z",
+        "updatedAt": "2026-08-13T11:04:46.12209Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.nuxtseo/nuxt-seo",
+      "description": "Free SEO checks for any URL, plus the Nuxt SEO module docs.",
+      "title": "Nuxt SEO",
+      "version": "2.0.1",
+      "websiteUrl": "https://nuxtseo.com/docs/nuxt-seo/guides/mcp",
+      "icons": [
+        {
+          "src": "https://nuxtseo.com/icon.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ],
+          "theme": "light"
+        },
+        {
+          "src": "https://nuxtseo.com/icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ],
+          "theme": "light"
+        },
+        {
+          "src": "https://nuxtseo.com/icon-dark.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ],
+          "theme": "dark"
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://nuxtseo.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-12T16:16:32.74103Z",
+        "publishedAt": "2026-10-12T16:16:32.74103Z",
+        "updatedAt": "2026-10-12T16:16:32.74103Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.nuzzodevstudio/quasar-guide",
+      "description": "Read-only guide to Quasar, the AI-agent-first project management tool. No sign-in needed.",
+      "title": "Quasar product guide",
+      "version": "1.0.0",
+      "websiteUrl": "https://guide.quasar.nuzzodevstudio.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://guide.quasar.nuzzodevstudio.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-23T11:00:57.149118Z",
+        "publishedAt": "2026-10-23T11:00:57.149118Z",
+        "updatedAt": "2026-10-23T11:00:57.149118Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.nvidia.ngc.nsight.copilot.api/cuda-docs",
+      "description": "Search NVIDIA CUDA documentation and code samples from AI coding agents.",
+      "title": "NVIDIA CUDA Docs",
+      "version": "2026.2.1",
+      "websiteUrl": "https://developer.nvidia.com/nsight-ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.copilot.nsight.ngc.nvidia.com/mcp/cuda-docs"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-23T05:25:36.314282Z",
+        "publishedAt": "2026-07-23T05:25:36.314282Z",
+        "updatedAt": "2026-07-23T05:25:36.314282Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.nymwell/lookup",
+      "description": "Check domain availability and prices, and look up any domain's public records. Read-only.",
+      "title": "Nymwell Lookup",
+      "version": "1.0.0",
+      "websiteUrl": "https://nymwell.com/en/docs/mcp/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://nymwell.com/mcp/lookup"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-31T15:27:33.647042Z",
+        "publishedAt": "2026-10-31T15:27:33.647042Z",
+        "updatedAt": "2026-10-31T15:27:33.647042Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.nymwell/mcp",
+      "description": "Look up and buy domain names: live prices, any domain's public records, renewals, transfers and DNS.",
+      "title": "Nymwell",
+      "version": "1.0.1",
+      "websiteUrl": "https://nymwell.com/en/developers/mcp/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://nymwell.com/mcp"
+        },
+        {
+          "type": "streamable-http",
+          "url": "https://nymwell.com/mcp/account"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-27T15:50:49.928335Z",
+        "publishedAt": "2026-10-27T15:50:49.928335Z",
+        "updatedAt": "2026-10-27T15:50:49.928335Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.nythosx.market/market-data",
+      "description": "Crypto/stock trade setups, signal bias, levels, regime, odds. Free track record. Pay per call, x402.",
+      "title": "NythosX Market Data",
+      "version": "1.1.0",
+      "websiteUrl": "https://market.nythosx.com/docs/api#mcp",
+      "icons": [
+        {
+          "src": "https://market.nythosx.com/icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://market.nythosx.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-20T15:13:17.466756Z",
+        "publishedAt": "2026-10-20T15:13:17.466756Z",
+        "updatedAt": "2026-10-20T15:13:17.466756Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.nythosx.tools/agent-tools",
+      "description": "Gas fees and USD tx costs on 6 chains, cheapest-chain ranking, URL to Markdown. Pay per call, x402.",
+      "title": "NythosX Agent Tools",
+      "version": "1.0.0",
+      "websiteUrl": "https://tools.nythosx.com/",
+      "icons": [
+        {
+          "src": "https://tools.nythosx.com/favicon.svg",
+          "mimeType": "image/svg+xml"
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://tools.nythosx.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-21T04:04:08.87584Z",
+        "publishedAt": "2026-10-21T04:04:08.87584Z",
+        "updatedAt": "2026-10-21T04:04:08.87584Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.nyx-intelligence/val",
+      "description": "QA agent for vibecoded apps. Real browser checks, your AI fixes them. Ship to green.",
+      "repository": {
+        "url": "https://github.com/Wakizara/val-action",
+        "source": "github"
+      },
+      "version": "0.10.1",
+      "websiteUrl": "https://val.nyx-intelligence.com",
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "@nyx-intelligence/val-mcp",
+          "version": "0.10.1",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Your Val license key (vk_...). Subscribe at val.nyx-intelligence.com (4.99 USD per month) if you do not have one.",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "VAL_LICENSE_KEY"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-05-29T05:39:50.227601Z",
+        "publishedAt": "2026-05-29T05:39:50.227601Z",
+        "updatedAt": "2026-05-29T05:39:50.227601Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.nyxory/nyxory",
+      "description": "Agent-to-agent cloud service: deploys and runs your apps and services \u2014 domains, logs, real status.",
+      "title": "nyxory",
+      "version": "0.12.4",
+      "websiteUrl": "https://nyxory.com",
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "@nyxory/mcp",
+          "version": "0.12.4",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.nyxory.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-06-11T19:09:13.923543Z",
+        "publishedAt": "2026-06-11T19:09:13.923543Z",
+        "updatedAt": "2026-06-11T19:09:13.923543Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+      "name": "com.o11r/daleel",
+      "description": "Halal stock screening with receipts: every Sharia verdict cites its SEC filing. 5 methodologies.",
+      "repository": {
+        "url": "https://github.com/obedier/daleel",
+        "source": "github"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://daleel.o11r.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://daleel.o11r.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-04T21:11:36.114655Z",
+        "publishedAt": "2026-08-04T21:11:36.114655Z",
+        "updatedAt": "2026-08-04T21:11:36.114655Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+      "name": "com.oakferry/agents",
+      "description": "Search and compare Oakferry's apps with dated, sourced facts: platforms, prices, ratings, limits.",
+      "title": "Oakferry Agents",
+      "version": "0.1.0",
+      "websiteUrl": "https://agents.oakferry.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://agents.oakferry.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-08T01:47:48.928974Z",
+        "publishedAt": "2026-10-08T01:47:48.928974Z",
+        "updatedAt": "2026-10-08T01:47:48.928974Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-07-09/server.schema.json",
+      "name": "com.obeliskgate/trust-tools",
+      "description": "Website security ratings, token verification, and tamper-evident ledger heads from Obelisk Gate.",
+      "version": "1.0.0",
+      "websiteUrl": "https://obeliskgate.com/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://obeliskgate.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-18T01:08:22.970646Z",
+        "publishedAt": "2026-08-18T01:08:22.970646Z",
+        "updatedAt": "2026-08-18T01:08:22.970646Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.obentoapp/obento",
+      "description": "Live USDC rates on Base, any address's Obento position, and deposits and withdrawals to sign.",
+      "title": "Obento",
+      "version": "1.0.0",
+      "websiteUrl": "https://obentoapp.com/docs/agents",
+      "icons": [
+        {
+          "src": "https://obentoapp.com/icon-192.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "192x192"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://obentoapp.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-06T13:24:10.865619Z",
+        "publishedAt": "2026-10-06T13:24:10.865619Z",
+        "updatedAt": "2026-10-06T13:24:10.865619Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.obligationsign.mcp/agts-mcp",
+      "description": "Sovereign MCP Gateway \u2014 64 governed tools with Merkle transparency log. EU AI Act ready.",
+      "title": "AGTS MCP Server",
+      "repository": {
+        "url": "https://github.com/ObligationSign/agts-mcp",
+        "source": "github"
+      },
+      "version": "1.0.2",
+      "websiteUrl": "https://obligationsign.com/mcp/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.obligationsign.com/mcp"
+        },
+        {
+          "type": "sse",
+          "url": "https://mcp.obligationsign.com/mcp/sse"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-04-23T22:29:37.920377Z",
+        "publishedAt": "2026-04-23T22:29:37.920377Z",
+        "updatedAt": "2026-04-23T22:29:37.920377Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.oboelib/mcp",
+      "description": "Look up Conservatory oboe fingerings, half-hole, left/forked F rules, octave keys & trill combi",
+      "title": "OboeLib \u2014 Conservatory Oboe Fingering, Half-Hole, Forked F & Trill Chart Engine",
+      "version": "1.0.0",
+      "websiteUrl": "https://oboelib.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://oboelib.com/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-08T01:27:54.55656Z",
+        "publishedAt": "2026-11-08T01:27:54.55656Z",
+        "updatedAt": "2026-11-08T01:27:54.55656Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.obriym-crm/mcp",
+      "description": "Operate Obriym CRM from your AI assistant: leads, deals, orders, catalog, stock, marketplaces.",
+      "title": "Obriym CRM",
+      "version": "1.26.1",
+      "websiteUrl": "https://obriym-crm.com/integrations/mcp",
+      "icons": [
+        {
+          "src": "https://obriym-crm.com/icons/icon-512",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        },
+        {
+          "src": "https://obriym-crm.com/logo-bimi.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://obriym-crm.com/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-08T10:54:01.39262Z",
+        "publishedAt": "2026-11-08T10:54:01.39262Z",
+        "updatedAt": "2026-11-08T10:54:01.39262Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.obsmetrics.paygent/agents",
+      "description": "Pay-per-call safety guards for AI agents: injection, tool-call, signing, secret, x402-trust.",
+      "version": "0.0.8",
+      "websiteUrl": "https://paygent.obsmetrics.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://paygent.obsmetrics.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-06-16T20:45:13.080183Z",
+        "publishedAt": "2026-06-16T20:45:13.080183Z",
+        "updatedAt": "2026-06-16T20:45:13.080183Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.oceanalt/aml",
+      "description": "Pre-payment checks for AI agents: sanctions and AML screening of payees, payment pages and requests.",
+      "repository": {
+        "url": "https://github.com/OceanAlt666/oceanalt-aml-mcp",
+        "source": "github"
+      },
+      "version": "0.7.6",
+      "websiteUrl": "https://oceanalt.com/en/api-docs",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "oceanalt-aml-mcp",
+          "version": "0.7.6",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://oceanalt.com/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-20T23:40:00.516045Z",
+        "publishedAt": "2026-10-20T23:40:00.516045Z",
+        "updatedAt": "2026-10-20T23:40:00.516045Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.oceanbuilders/inventory",
+      "description": "Search Ocean Builders' floating-home inventory, get unit specs and pricing, register buyer interest.",
+      "version": "1.0.0",
+      "websiteUrl": "https://oceanbuilders.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://app.oceanbuilders.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-02T13:42:06.004133Z",
+        "publishedAt": "2026-09-02T13:42:06.004133Z",
+        "updatedAt": "2026-09-02T13:42:06.004133Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.ocklu/hypermarket",
+      "description": "Agentic broker for any industry + agent shop: list, find, get introduced. 7% fee only on deals.",
+      "title": "OCKLU Hyper Market",
+      "version": "1.8.0",
+      "websiteUrl": "https://ocklu.com/hypermarket/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://njghzieuuopukuagrswu.supabase.co/functions/v1/hypermarket"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-16T08:01:47.092973Z",
+        "publishedAt": "2026-10-16T08:01:47.092973Z",
+        "updatedAt": "2026-10-16T08:01:47.092973Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.ocr-ai/ocr-ai",
+      "description": "Hebrew and English OCR for PDFs and images: text, key fields and tables, page by page.",
+      "title": "OCR-AI",
+      "version": "1.0.0",
+      "websiteUrl": "https://ocr-ai.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://ocr-ai.com/mcp",
+          "headers": [
+            {
+              "description": "OCR-AI API key as a Bearer token: Bearer ocrai_sk_...",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-04T17:27:18.020534Z",
+        "publishedAt": "2026-11-04T17:27:18.020534Z",
+        "updatedAt": "2026-11-04T17:27:18.020534Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.octo-dock/octodock",
+      "description": "One MCP URL for all your apps. 600+ actions for AI.",
+      "repository": {
+        "url": "https://github.com/chaosmibu-blip/OctoDock",
+        "source": "github"
+      },
+      "version": "0.1.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://octo-dock.com/mcp/{apiKey}",
+          "variables": {
+            "apiKey": {
+              "description": "Your OctoDock API key. Get it from https://octo-dock.com after signing in.",
+              "isRequired": true,
+              "isSecret": true
+            }
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-04-03T12:29:33.200851Z",
+        "publishedAt": "2026-04-03T12:29:33.200851Z",
+        "updatedAt": "2026-04-03T12:29:33.200851Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.octolens/octolens",
+      "description": "Social listening for AI: query brand mentions across 15+ platforms, run analytics, manage keywords.",
+      "version": "2.0.0",
+      "websiteUrl": "https://octolens.com/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://app.octolens.com/api/mcp/v2"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-31T16:42:46.913215Z",
+        "publishedAt": "2026-07-31T16:42:46.913215Z",
+        "updatedAt": "2026-07-31T16:42:46.913215Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.octoparse/octoparse-mcp",
+      "description": "Official Octoparse MCP server for template discovery, cloud tasks, and structured data export.",
+      "title": "Octoparse MCP Server",
+      "repository": {
+        "url": "https://github.com/octoparse/octoparse-mcp",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://www.octoparse.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.octoparse.com"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-07T09:49:12.958668Z",
+        "publishedAt": "2026-07-07T09:49:12.958668Z",
+        "updatedAt": "2026-07-07T09:49:12.958668Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.octothinks/presets",
+      "description": "Reviewed decision matrices and buying guides: ranked options and weighted criteria in 6 languages",
+      "title": "Octo Thinks Decision Presets",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.octothinks.com/",
+      "icons": [
+        {
+          "src": "https://www.octothinks.com/_next/static/media/octo-icon-v2-192.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "192x192"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.octothinks.com/"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-21T21:35:07.485121Z",
+        "publishedAt": "2026-10-21T21:35:07.485121Z",
+        "updatedAt": "2026-10-21T21:35:07.485121Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.octurasolutions/site-tools",
+      "description": "Deterministic Odoo ERP calculators: implementation cost, ROI, TCO, tax, payroll, inventory.",
+      "title": "Octura Solutions Site Tools",
+      "version": "1.0.0",
+      "websiteUrl": "https://octurasolutions.com/tools/mcp-server",
+      "icons": [
+        {
+          "src": "https://octurasolutions.com/android-chrome-512x512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://octurasolutions.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-10T08:07:59.361083Z",
+        "publishedAt": "2026-08-10T08:07:59.361083Z",
+        "updatedAt": "2026-08-10T08:07:59.361083Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.oddiforge/oddiforge",
+      "description": "Read-only facts about Oddi Forge ($ODDI) on Solana: launch status, official contract, FAQ.",
+      "title": "Oddi Forge",
+      "version": "1.0.0",
+      "websiteUrl": "https://oddiforge.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://oddiforge.com/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-25T17:29:09.257913Z",
+        "publishedAt": "2026-10-25T17:29:09.257913Z",
+        "updatedAt": "2026-10-25T17:29:09.257913Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.oddiwire/esports-odds",
+      "description": "Live and prematch esports odds (ODDIN.GG feed) with no-vig fair prices. Free demo access, no key.",
+      "title": "OddiWire \u2014 Esports Odds with No-Vig Probabilities",
+      "version": "1.0.0",
+      "websiteUrl": "https://oddiwire.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://oddiwire.com/mcp",
+          "headers": [
+            {
+              "description": "OddiWire API key. Optional \u2014 omit to use the public demo key at a shared 10 requests per 5 minutes. Get a free key at https://oddiwire.com",
+              "isSecret": true,
+              "name": "X-API-Key"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-15T07:04:56.516426Z",
+        "publishedAt": "2026-09-15T07:04:56.516426Z",
+        "updatedAt": "2026-09-15T07:04:56.516426Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.oddsradarwire/betradar-odds",
+      "description": "Live and prematch Betradar odds with no-vig fair prices. Free demo access, no key.",
+      "title": "Oddsradarwire \u2014 Live & Prematch Betradar Odds with No-Vig Probabilities",
+      "version": "1.0.0",
+      "websiteUrl": "https://oddsradarwire.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://oddsradarwire.com/mcp",
+          "headers": [
+            {
+              "description": "Oddsradarwire API key (or_...). Optional \u2014 omit to use the public demo key at a shared 10 requests per 5 minutes. Get a free key at https://oddsradarwire.com/#getkey",
+              "isSecret": true,
+              "name": "X-API-Key"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-15T07:05:25.507522Z",
+        "publishedAt": "2026-09-15T07:05:25.507522Z",
+        "updatedAt": "2026-09-15T07:05:25.507522Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.odilelabs/answering-lines",
+      "description": "A phone line for your app or business that answers calls, takes messages and bookings.",
+      "title": "Odile answering lines",
+      "repository": {
+        "url": "https://github.com/tolga-boop/odile-mcp",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://odilelabs.com/developers",
+      "icons": [
+        {
+          "src": "https://odilelabs.com/media/odile-icon-192.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "192x192"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://odilelabs.com/mcp/lines"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-31T16:33:29.639858Z",
+        "publishedAt": "2026-10-31T16:33:29.639858Z",
+        "updatedAt": "2026-10-31T16:33:29.639858Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+      "name": "com.odilelabs/gate",
+      "description": "Free, no signup: per-app keys, allowed calls, approvals and an audit log for your API or model key.",
+      "title": "Odile Gate",
+      "version": "1.7.0",
+      "websiteUrl": "https://gate.odilelabs.com/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://gate.odilelabs.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-27T22:56:56.970705Z",
+        "publishedAt": "2026-10-27T22:56:56.970705Z",
+        "updatedAt": "2026-10-27T22:56:56.970705Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.odilelabs/odile",
+      "description": "Odile Labs: AI agents reach businesses by phone number (Direct); Gate keys, audit. Agentforce-ready.",
+      "title": "Odile Labs",
+      "repository": {
+        "url": "https://github.com/tolga-boop/odile-mcp",
+        "source": "github"
+      },
+      "version": "1.9.0",
+      "websiteUrl": "https://odilelabs.com/developers",
+      "icons": [
+        {
+          "src": "https://odilelabs.com/media/odile-icon-192.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "192x192"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://odilelabs.com/mcp/direct"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-31T16:33:29.301443Z",
+        "publishedAt": "2026-10-31T16:33:29.301443Z",
+        "updatedAt": "2026-10-31T16:33:29.301443Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.odingard/bifrost",
+      "description": "Query a company's Bifrost trust gateway: cited answers and approved actions with signed receipts.",
+      "title": "Bifrost",
+      "repository": {
+        "url": "https://github.com/Odingard/Bifrost",
+        "source": "github"
+      },
+      "version": "0.1.48",
+      "websiteUrl": "https://odingard.com/bifrost",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://bifrost-mcp-842108046620.us-central1.run.app/t/{tenant}/mcp",
+          "variables": {
+            "tenant": {
+              "description": "Vendor's Bifrost workspace name (slug), e.g. from their trust page",
+              "isRequired": true
+            }
+          }
+        },
+        {
+          "type": "streamable-http",
+          "url": "https://bifrost-mcp-842108046620.us-central1.run.app/public/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-31T15:33:37.303424Z",
+        "publishedAt": "2026-10-31T15:33:37.303424Z",
+        "updatedAt": "2026-10-31T15:33:37.303424Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+      "name": "com.odooconsole/odoo",
+      "description": "Odoo ERP for AI agents: hosted OAuth endpoint, gated writes, one endpoint for every instance.",
+      "repository": {
+        "url": "https://github.com/oconsole/odoo-mcp-server",
+        "source": "github"
+      },
+      "version": "1.1.0",
+      "websiteUrl": "https://www.odooconsole.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.odooconsole.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-13T13:35:03.998552Z",
+        "publishedAt": "2026-08-13T13:35:03.998552Z",
+        "updatedAt": "2026-08-13T13:35:03.998552Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.ofacscreen/screening",
+      "description": "Screen names and addresses on US, UN, EU, UK and other sanctions and export-control lists. Free.",
+      "title": "OFACScreen Sanctions Screening",
+      "version": "1.3.0",
+      "websiteUrl": "https://www.ofacscreen.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.ofacscreen.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-20T07:16:27.777745Z",
+        "publishedAt": "2026-10-20T07:16:27.777745Z",
+        "updatedAt": "2026-10-20T07:16:27.777745Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.offdayly/site",
+      "description": "Offdayly: the site's own MCP server \u2014 dataset; every answer cites the site.",
+      "version": "1.0.1",
+      "websiteUrl": "https://offdayly.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://offdayly.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-03T13:01:54.950218Z",
+        "publishedAt": "2026-10-03T13:01:54.950218Z",
+        "updatedAt": "2026-10-03T13:01:54.950218Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-07-09/server.schema.json",
+      "name": "com.offensive360/o360-mcp",
+      "description": "Run Offensive360 SAST scans (60+ languages) on local code; findings with file/line and fixes",
+      "repository": {
+        "url": "https://github.com/offensive360/mcp-server",
+        "source": "github"
+      },
+      "version": "1.0.2",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "o360-mcp",
+          "version": "1.0.2",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Offensive360 instance base URL",
+              "default": "https://sast.offensive360.com",
+              "name": "O360_URL"
+            },
+            {
+              "description": "External scan token (free for public repos: https://offensive360.com/free-for-open-source/)",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "O360_TOKEN"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-02T13:25:59.875351Z",
+        "publishedAt": "2026-08-02T13:25:59.875351Z",
+        "updatedAt": "2026-08-02T13:25:59.875351Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.offerlaneauto/motor-row",
+      "description": "Search used cars for sale from Indianapolis dealers: search_cars, get_car, site_info. No auth.",
+      "title": "Motor Row \u2014 used cars for sale in Indianapolis",
+      "version": "1.0.0",
+      "websiteUrl": "https://offerlaneauto.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://offerlaneauto.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-29T10:00:14.156417Z",
+        "publishedAt": "2026-10-29T10:00:14.156417Z",
+        "updatedAt": "2026-10-29T10:00:14.156417Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.offhandapp/offhand",
+      "description": "Use Claude, ChatGPT, Grok Bot or Muse from the agent you are in: hand it a task, get the work back.",
+      "title": "Offhand",
+      "repository": {
+        "url": "https://github.com/offhandapp/offhand-plugin",
+        "source": "github",
+        "id": "1411383907"
+      },
+      "version": "0.7.0",
+      "websiteUrl": "https://offhandapp.com/docs",
+      "icons": [
+        {
+          "src": "https://offhandapp.com/assets/app-icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://offhandapp.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-04T04:01:46.514425Z",
+        "publishedAt": "2026-11-04T04:01:46.514425Z",
+        "updatedAt": "2026-11-04T04:01:46.514425Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.offlinecreatorstudio/mcp",
+      "description": "Create images and videos with OfflineCreator Studio through OAuth or the npm stdio server.",
+      "title": "OfflineCreator Studio",
+      "repository": {
+        "url": "https://github.com/OfflineCreatorStudio/offlinecreator-mcp",
+        "source": "github"
+      },
+      "version": "0.1.2",
+      "websiteUrl": "https://offlinecreatorstudio.com/mcp-cli",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@offlinecreator/mcp",
+          "version": "0.1.2",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Personal API key created in OfflineCreator Studio Settings. Required only for local stdio.",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "OFFLINECREATOR_API_KEY"
+            }
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.offlinecreatorstudio.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-08T19:15:57.556215Z",
+        "publishedAt": "2026-08-08T19:15:57.556215Z",
+        "updatedAt": "2026-08-08T19:15:57.556215Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.offlineprotocol/cli",
+      "description": "Find Offline Protocol SDK packages, read integration guides, plan and scaffold local apps.",
+      "title": "Offline Protocol",
+      "repository": {
+        "url": "https://github.com/Offline-Protocol/offline-protocol-agent-plugins",
+        "source": "github"
+      },
+      "version": "0.3.2",
+      "websiteUrl": "https://www.offlineprotocol.com/docs/tools/overview",
+      "icons": [
+        {
+          "src": "https://www.offlineprotocol.com/assets/icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "@offline-protocol/cli",
+          "version": "0.3.2",
+          "runtimeHint": "npx",
+          "transport": {
+            "type": "stdio"
+          },
+          "packageArguments": [
+            {
+              "type": "positional",
+              "value": "mcp"
+            },
+            {
+              "type": "positional",
+              "value": "serve"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-05T20:49:19.754547Z",
+        "publishedAt": "2026-11-05T20:49:19.754547Z",
+        "updatedAt": "2026-11-05T20:49:19.754547Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.offlineprotocol/hosted",
+      "description": "Offline Protocol packages, workflows and integration guides over HTTPS. Read-only.",
+      "title": "Offline Protocol (hosted)",
+      "repository": {
+        "url": "https://github.com/Offline-Protocol/offline-protocol-agent-plugins",
+        "source": "github"
+      },
+      "version": "0.3.2",
+      "websiteUrl": "https://www.offlineprotocol.com/docs/tools/overview",
+      "icons": [
+        {
+          "src": "https://www.offlineprotocol.com/assets/icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.offlineprotocol.com/mcp",
+          "headers": [
+            {
+              "description": "Offline Protocol application API key as a bearer token. Organization keys are not accepted.",
+              "isRequired": true,
+              "value": "Bearer {api_key}",
+              "isSecret": true,
+              "variables": {
+                "api_key": {
+                  "description": "Application API key from the Offline Protocol developer portal",
+                  "isRequired": true,
+                  "isSecret": true
+                }
+              },
+              "name": "Authorization"
+            },
+            {
+              "description": "Application id that owns the API key. It must match the key's application.",
+              "isRequired": true,
+              "name": "x-app-id"
+            }
+          ]
+        },
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.offlineprotocol.com/public/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-05T20:49:19.903801Z",
+        "publishedAt": "2026-11-05T20:49:19.903801Z",
+        "updatedAt": "2026-11-05T20:49:19.903801Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.offnadir-delta/mcp",
+      "description": "From first signal to satellite evidence: live world-event intelligence and collection planning.",
+      "title": "Off-Nadir Delta",
+      "repository": {
+        "url": "https://github.com/Off-Nadir-Lab/offnadir-delta-mcp",
+        "source": "github"
+      },
+      "version": "5.11.0",
+      "websiteUrl": "https://offnadir-delta.com/docs/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://offnadir-delta.com/api/v1/mcp",
+          "headers": [
+            {
+              "description": "Bearer credential: an Off-Nadir Delta API key (\"Bearer ond_...\", issued self-serve at /account/api) or an OAuth 2.1 access token. The endpoint also advertises OAuth 2.1 (with Dynamic Client Registration) for interactive clients.",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-27T00:52:52.28634Z",
+        "publishedAt": "2026-10-27T00:52:52.28634Z",
+        "updatedAt": "2026-10-27T00:52:52.28634Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.ogenalabs/gate402-x402",
+      "description": "Drop-in x402 checkout for merchants: issue terms, verify payment. $0.01 each.",
+      "title": "gate402 merchant checkout",
+      "repository": {
+        "url": "https://github.com/OgenaLabs/gate402-mcp",
+        "source": "github"
+      },
+      "version": "0.1.0",
+      "websiteUrl": "https://ogenalabs.com/products",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.ogenalabs.com/api/gate402/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-09T08:17:36.983055Z",
+        "publishedAt": "2026-09-09T08:17:36.983055Z",
+        "updatedAt": "2026-09-09T08:17:36.983055Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.ogenalabs/signals-edge-x402",
+      "description": "pump.fun graduation radar for trading bots and AI agents. x402 USDC per scan, no key.",
+      "title": "signals.edge graduation radar",
+      "repository": {
+        "url": "https://github.com/OgenaLabs/signals-edge-mcp",
+        "source": "github"
+      },
+      "version": "0.1.0",
+      "websiteUrl": "https://ogenalabs.com/products",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.ogenalabs.com/api/signals/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-09T07:21:29.912314Z",
+        "publishedAt": "2026-09-09T07:21:29.912314Z",
+        "updatedAt": "2026-09-09T07:21:29.912314Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.ogenalabs/token-risk-x402",
+      "description": "Pre-trade token safety checks for AI agents on Solana and Base. x402 USDC per call, no key.",
+      "title": "Token risk x402",
+      "repository": {
+        "url": "https://github.com/OgenaLabs/token-risk-mcp",
+        "source": "github"
+      },
+      "version": "0.1.0",
+      "websiteUrl": "https://ogenalabs.com/products",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.ogenalabs.com/api/token-risk/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-08T12:40:11.745302Z",
+        "publishedAt": "2026-09-08T12:40:11.745302Z",
+        "updatedAt": "2026-09-08T12:40:11.745302Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.ogenhq/ogen",
+      "description": "Eight tools an agent uses; ten more for operating your tenant. Patent pending.",
+      "title": "Ogen",
+      "version": "1.0.1",
+      "websiteUrl": "https://ogenhq.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://us.ogenhq.com/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-26T07:03:18.768962Z",
+        "publishedAt": "2026-09-26T07:03:18.768962Z",
+        "updatedAt": "2026-09-26T07:03:18.768962Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.ogmake/mcp",
+      "description": "Generate og:image social cards and signed ogmake.com image URLs from your AI assistant.",
+      "repository": {
+        "url": "https://github.com/ogmake/ogmake-mcp",
+        "source": "github"
+      },
+      "version": "0.1.2",
+      "websiteUrl": "https://ogmake.com",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "ogmake-mcp",
+          "version": "0.1.2",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "ogmake.com API key. Optional: without it render_image uses the free watermarked endpoint.",
+              "isSecret": true,
+              "name": "OGMAKE_API_KEY"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-09T23:09:58.640143Z",
+        "publishedAt": "2026-10-09T23:09:58.640143Z",
+        "updatedAt": "2026-10-09T23:09:58.640143Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.ogstamp/og",
+      "description": "Pay-as-you-go Open Graph image API. Renders 1200x630 PNGs for agents. Credits never expire.",
+      "title": "OG Stamp",
+      "repository": {
+        "url": "https://github.com/BenceBakos/ogstamp",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://ogstamp.com/for-ai-agents/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://ogstamp.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-20T18:21:51.035179Z",
+        "publishedAt": "2026-09-20T18:21:51.035179Z",
+        "updatedAt": "2026-09-20T18:21:51.035179Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.oheyinc/ringmaster",
+      "description": "Evening research on a thousand US stocks and their options: signals, IV rank, priced moves, gamma.",
+      "title": "RingMaster, the evening desk",
+      "version": "4.0",
+      "websiteUrl": "https://ringmaster.oheyinc.com",
+      "icons": [
+        {
+          "src": "https://oheyinc.com/ringmaster-icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ],
+          "theme": "light"
+        },
+        {
+          "src": "https://oheyinc.com/ringmaster-icon-512-dark.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ],
+          "theme": "dark"
+        },
+        {
+          "src": "https://oheyinc.com/ringmaster-mark.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://ringmaster.oheyinc.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-29T17:11:35.160085Z",
+        "publishedAt": "2026-09-29T17:11:35.160085Z",
+        "updatedAt": "2026-09-29T17:11:35.160085Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.ohfax/ohfax",
+      "description": "Outbound US/CA fax for agents: quote PDF, pay via MPP, get delivery receipt.",
+      "title": "Oh Fax",
+      "version": "0.1.0",
+      "websiteUrl": "https://ohfax.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://app.ohfax.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-20T20:26:44.217584Z",
+        "publishedAt": "2026-09-20T20:26:44.217584Z",
+        "updatedAt": "2026-09-20T20:26:44.217584Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.ohgiftplease/gift-discovery",
+      "description": "Person-first gift discovery with curated ideas, guides, categories, and brands.",
+      "title": "OhGiftPlease Gift Discovery",
+      "repository": {
+        "url": "https://github.com/racharmi/-ohgiftplease-mcp",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.ohgiftplease.com/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-07T02:15:17.520968Z",
+        "publishedAt": "2026-10-07T02:15:17.520968Z",
+        "updatedAt": "2026-10-07T02:15:17.520968Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.ohioroofreplacementcost/site",
+      "description": "Ohio Roof Replacement Cost: the site's own MCP server \u2014 enquiry (enquiry = a human handoff, not...",
+      "version": "1.0.1",
+      "websiteUrl": "https://ohioroofreplacementcost.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://ohioroofreplacementcost.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-03T12:06:25.694103Z",
+        "publishedAt": "2026-10-03T12:06:25.694103Z",
+        "updatedAt": "2026-10-03T12:06:25.694103Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.ohmbo/ohmbo",
+      "description": "Design and revise PCBs from plain language, track jobs, and retrieve design artifacts.",
+      "title": "Ohmbo",
+      "version": "0.8.18",
+      "websiteUrl": "https://ohmbo.com/docs/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.ohmbo.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-25T14:34:14.496997Z",
+        "publishedAt": "2026-10-25T14:34:14.496997Z",
+        "updatedAt": "2026-10-25T14:34:14.496997Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.ohmydots/mcp",
+      "description": "Crossword, audio crossword, word search, cryptogram and cross-math puzzle links for ohmydots.com.",
+      "title": "Oh, my Dots!",
+      "version": "1.0.15",
+      "websiteUrl": "https://mcp.ohmydots.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.ohmydots.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-04T19:55:57.800563Z",
+        "publishedAt": "2026-10-04T19:55:57.800563Z",
+        "updatedAt": "2026-10-04T19:55:57.800563Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.oilpicker/oilpicker",
+      "description": "Korean local-currency (\uc9c0\uc5ed\ud654\ud3d0) discounts: fuel rates, effective prices, merchant search, deep links.",
+      "title": "OilPicker",
+      "version": "1.1.0",
+      "websiteUrl": "https://oilpicker.com/ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://oilpicker.com/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-29T14:12:38.636225Z",
+        "publishedAt": "2026-10-29T14:12:38.636225Z",
+        "updatedAt": "2026-10-29T14:12:38.636225Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.okareo/okareo",
+      "description": "Simulation, evaluation and monitoring for voice agents.",
+      "title": "Okareo",
+      "repository": {
+        "url": "https://github.com/okareo-ai/okareo-mcp",
+        "source": "github"
+      },
+      "version": "0.0.57",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://tools.okareo.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-15T02:33:56.862434Z",
+        "publishedAt": "2026-10-15T02:33:56.862434Z",
+        "updatedAt": "2026-10-15T02:33:56.862434Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.okcwindshield/booking",
+      "description": "Book windshield replacement in Oklahoma City, OK: prices, ZIP coverage, free callback.",
+      "title": "OKC Windshield \u2014 book windshield replacement in Oklahoma City",
+      "version": "1.0.0",
+      "websiteUrl": "https://okcwindshield.com/for-ai-assistants",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://okcwindshield.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-21T02:35:37.525568Z",
+        "publishedAt": "2026-10-21T02:35:37.525568Z",
+        "updatedAt": "2026-10-21T02:35:37.525568Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+      "name": "com.okdocai/okdoc",
+      "description": "E-signature & document automation: create, send, track and sign documents with payments. 38 tools.",
+      "version": "1.0.0",
+      "websiteUrl": "https://okdocai.com/ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://okdocai.com/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-01T22:56:42.168001Z",
+        "publishedAt": "2026-07-01T22:56:42.168001Z",
+        "updatedAt": "2026-07-01T22:56:42.168001Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.okeystay/okeystay",
+      "description": "Search holiday rentals by town and dates, with total prices, and get a ready-made booking link.",
+      "title": "OkeyStay",
+      "version": "1.0.0",
+      "websiteUrl": "https://okeystay.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://okeystay.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-19T19:23:56.995244Z",
+        "publishedAt": "2026-10-19T19:23:56.995244Z",
+        "updatedAt": "2026-10-19T19:23:56.995244Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+      "name": "com.okfindex/okfindex",
+      "description": "Search Open Knowledge Format (OKF) bundles, read a bundle card and submit your own with IndexNow.",
+      "repository": {
+        "url": "https://github.com/wrpbr/okfindex",
+        "source": "github"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://okfindex.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://okfindex.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-15T01:19:10.471997Z",
+        "publishedAt": "2026-10-15T01:19:10.471997Z",
+        "updatedAt": "2026-10-15T01:19:10.471997Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.okkmax/okkmax",
+      "description": "Read-only data on AI API relay stations: rank, purity, uptime, price per model.",
+      "title": "OkkMax",
+      "version": "0.2.0",
+      "websiteUrl": "https://www.okkmax.com/developers",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.okkmax.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-04T04:22:23.638573Z",
+        "publishedAt": "2026-11-04T04:22:23.638573Z",
+        "updatedAt": "2026-11-04T04:22:23.638573Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.oklahomaautoquotes/insurance",
+      "description": "Oklahoma's published auto insurance averages. Not a quote; we are not licensed here yet.",
+      "title": "Oklahoma Insurance",
+      "version": "1.0.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://oklahomaautoquotes.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-04T21:41:02.966334Z",
+        "publishedAt": "2026-09-04T21:41:02.966334Z",
+        "updatedAt": "2026-09-04T21:41:02.966334Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.oklahomaautoquotes/quote-exchange",
+      "description": "Indicative US auto insurance prices for agents: rating facts only, no PII, consented path to agents.",
+      "title": "Oklahomaautoquotes",
+      "version": "0.5.0",
+      "websiteUrl": "https://oklahomaautoquotes.com/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://oklahomaautoquotes.com/"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-02T23:27:27.591666Z",
+        "publishedAt": "2026-09-02T23:27:27.591666Z",
+        "updatedAt": "2026-09-02T23:27:27.591666Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.oklahomafoundationrepaircost/site",
+      "description": "Oklahoma Foundation Repair Cost: the site's own MCP server \u2014 enquiry (enquiry = a human handoff,...",
+      "version": "1.0.1",
+      "websiteUrl": "https://oklahomafoundationrepaircost.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://oklahomafoundationrepaircost.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-03T12:06:49.76445Z",
+        "publishedAt": "2026-10-03T12:06:49.76445Z",
+        "updatedAt": "2026-10-03T12:06:49.76445Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.okokumo/okokumo",
+      "description": "Uptime, cron/heartbeat, TLS and domain expiry monitoring, EU-hosted. Same access as the REST API.",
+      "title": "Okokumo",
+      "version": "0.1.85",
+      "websiteUrl": "https://okokumo.com/mcp?mtm_campaign=mcp-registry",
+      "icons": [
+        {
+          "src": "https://okokumo.com/favicon-192.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "192x192"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://app.okokumo.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-19T12:41:55.039348Z",
+        "publishedAt": "2026-10-19T12:41:55.039348Z",
+        "updatedAt": "2026-10-19T12:41:55.039348Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.oksigenia/checker-mcp",
+      "description": "Domain security & privacy checker as an MCP server. 17 live checks, 0-100 score, local-first.",
+      "repository": {
+        "url": "https://github.com/OksigeniaSL/checker-mcp",
+        "source": "github"
+      },
+      "version": "0.1.1",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@oksigenia/checker-mcp",
+          "version": "0.1.1",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-21T23:22:31.599136Z",
+        "publishedAt": "2026-07-21T23:22:31.599136Z",
+        "updatedAt": "2026-07-21T23:22:31.599136Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.okstays/okstays",
+      "description": "Hotels ranked by real comfort, not commission: efficient AC, comfy beds, soundproof rooms and more",
+      "title": "OKstays",
+      "repository": {
+        "url": "https://github.com/okstays/okstays-mcp",
+        "source": "github"
+      },
+      "version": "4.3.0",
+      "websiteUrl": "https://okstays.com/mcp",
+      "icons": [
+        {
+          "src": "https://okstays.com/favicon-192x192.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "192x192"
+          ]
+        },
+        {
+          "src": "https://okstays.com/favicon.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://okstays.com/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-04T17:07:01.920882Z",
+        "publishedAt": "2026-11-04T17:07:01.920882Z",
+        "updatedAt": "2026-11-04T17:07:01.920882Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.olachill/olachill-travel",
+      "description": "Search and price Japan tours, tickets, ryokan, transfers, charter buses, helicopters, golf and eSIM.",
+      "title": "OlaChill Japan Travel",
+      "version": "1.0.0",
+      "websiteUrl": "https://olachill.com",
+      "icons": [
+        {
+          "src": "https://raw.githubusercontent.com/dang13021993/olachill-dsh-plugin/main/logo.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "800x800"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://olachill.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-07T16:59:21.589561Z",
+        "publishedAt": "2026-10-07T16:59:21.589561Z",
+        "updatedAt": "2026-10-07T16:59:21.589561Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.olane/copass-local",
+      "description": "Local encryption and project setup plugin for Copass. Keys never leave your machine.",
+      "repository": {
+        "url": "https://github.com/olane-labs/cosync-local",
+        "source": "github"
+      },
+      "version": "0.3.2",
+      "packages": [
+        {
+          "registryType": "pypi",
+          "identifier": "olane-copass-local",
+          "version": "0.3.2",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-03-05T18:17:00.22148Z",
+        "publishedAt": "2026-03-05T18:17:00.22148Z",
+        "updatedAt": "2026-03-05T18:17:00.22148Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.olane/copass-remote",
+      "description": "Knowledge graph ingestion, entity search, ontology analysis, and CoPass scoring.",
+      "repository": {
+        "url": "https://github.com/olane-labs/o-twin-data-pipeline",
+        "source": "github"
+      },
+      "version": "0.1.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.copass.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-03-05T07:45:24.684034Z",
+        "publishedAt": "2026-03-05T07:45:24.684034Z",
+        "updatedAt": "2026-03-05T07:45:24.684034Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+      "name": "com.olane/cosync-local",
+      "description": "Local encryption and project setup plugin for CoSync. Keys never leave your machine.",
+      "repository": {
+        "url": "https://github.com/olane-labs/cosync-local",
+        "source": "github"
+      },
+      "version": "0.2.0",
+      "packages": [
+        {
+          "registryType": "pypi",
+          "identifier": "olane-cosync-local",
+          "version": "0.2.0",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-03-04T22:23:03.883672Z",
+        "publishedAt": "2026-03-04T22:23:03.883672Z",
+        "updatedAt": "2026-03-04T22:23:03.883672Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.olane/cosync-remote",
+      "description": "Knowledge graph ingestion, entity search, ontology analysis, and CoSync scoring.",
+      "repository": {
+        "url": "https://github.com/olane-labs/o-twin-data-pipeline",
+        "source": "github"
+      },
+      "version": "0.1.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.copass.id/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-03-04T22:24:48.626984Z",
+        "publishedAt": "2026-03-04T22:24:48.626984Z",
+        "updatedAt": "2026-03-04T22:24:48.626984Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.olatti/olatti",
+      "description": "UK business phone for Claude and ChatGPT: calls, transcripts, AI summaries, contacts, messages.",
+      "title": "Olatti",
+      "version": "0.0.4",
+      "websiteUrl": "https://olatti.com/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.olatti.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-29T06:36:15.940097Z",
+        "publishedAt": "2026-10-29T06:36:15.940097Z",
+        "updatedAt": "2026-10-29T06:36:15.940097Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.olbrain/alchemist",
+      "description": "Build, test and publish Olbrain AI agents from Claude Code, Codex, Antigravity, Cursor or Claude.ai.",
+      "title": "Olbrain Alchemist",
+      "repository": {
+        "url": "https://github.com/Olbrain/alchemist-plugin",
+        "source": "github"
+      },
+      "version": "0.9.11",
+      "websiteUrl": "https://olbrain.com/developers/",
+      "icons": [
+        {
+          "src": "https://alchemist.olbrain.com/alchemist-icon-192.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "192x192"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://alchemist.olbrain.com/mcp/"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-04T18:49:26.839454Z",
+        "publishedAt": "2026-11-04T18:49:26.839454Z",
+        "updatedAt": "2026-11-04T18:49:26.839454Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.oldcarsdata/mcp",
+      "description": "Collector-car auction history, live listings, bid trails, and market statistics for AI agents.",
+      "title": "Old Cars Data",
+      "repository": {
+        "url": "https://github.com/pinecreeklabs/oldcarsdata-mcp",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.oldcarsdata.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-05-17T20:58:38.789696Z",
+        "publishedAt": "2026-05-17T20:58:38.789696Z",
+        "updatedAt": "2026-05-17T20:58:38.789696Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.oleadesk/mail",
+      "description": "Your own AI reads, searches and drafts in your mailbox, on your Windows computer.",
+      "title": "OleaDesk Mail",
+      "version": "0.1.124",
+      "websiteUrl": "https://oleadesk.com/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://app.oleadesk.com/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-30T15:15:22.216991Z",
+        "publishedAt": "2026-09-30T15:15:22.216991Z",
+        "updatedAt": "2026-09-30T15:15:22.216991Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.oliveturn/research-connect",
+      "description": "Legitimate full-text access to scholarly articles for your AI, by DOI, with provenance.",
+      "title": "Research Connect",
+      "version": "0.19.6",
+      "websiteUrl": "https://research-connect.oliveturn.com/about",
+      "icons": [
+        {
+          "src": "https://oliveturn.com/oliveturn-logo.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ],
+          "theme": "light"
+        },
+        {
+          "src": "https://oliveturn.com/oliveturn-icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "180x180"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://research-connect.oliveturn.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-01T19:42:06.409648Z",
+        "publishedAt": "2026-11-01T19:42:06.409648Z",
+        "updatedAt": "2026-11-01T19:42:06.409648Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.olympus-bets/olympus-bets-analytics",
+      "description": "Quant sports analytics: 19 read-only tools across 12 leagues, projections, methods, track record.",
+      "repository": {
+        "url": "https://github.com/drduda9/olympus-bets-mcp",
+        "source": "github"
+      },
+      "version": "1.3.0",
+      "websiteUrl": "https://app.olympus-bets.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://app.olympus-bets.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-24T22:22:43.067039Z",
+        "publishedAt": "2026-07-24T22:22:43.067039Z",
+        "updatedAt": "2026-07-24T22:22:43.067039Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.olyport/bea",
+      "description": "County GDP, personal income, and employment from the Bureau of Economic Analysis",
+      "title": "BEA Economic Accounts",
+      "version": "1.0.0",
+      "websiteUrl": "https://olyport.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.olyport.com/bea/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-04-03T21:35:14.913535Z",
+        "publishedAt": "2026-04-03T21:35:14.913535Z",
+        "updatedAt": "2026-04-03T21:35:14.913535Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.olyport/bls",
+      "description": "Unemployment rates, labor force, and Consumer Price Index from the Bureau of Labor Statistics",
+      "title": "BLS Employment & Wages",
+      "version": "1.1.0",
+      "websiteUrl": "https://olyport.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.olyport.com/bls/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-04-02T02:26:39.104509Z",
+        "publishedAt": "2026-04-02T02:26:39.104509Z",
+        "updatedAt": "2026-04-02T02:26:39.104509Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.olyport/cdc-mmwr",
+      "description": "Morbidity and Mortality Weekly Reports and disease surveillance",
+      "title": "CDC MMWR Reports",
+      "version": "1.1.0",
+      "websiteUrl": "https://olyport.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.olyport.com/cdc-mmwr/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-04-02T02:26:40.452294Z",
+        "publishedAt": "2026-04-02T02:26:40.452294Z",
+        "updatedAt": "2026-04-02T02:26:40.452294Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.olyport/cdc-places",
+      "description": "County and tract-level health outcomes, behaviors, and preventive services from CDC PLACES",
+      "title": "CDC PLACES Health Data",
+      "version": "1.0.0",
+      "websiteUrl": "https://olyport.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.olyport.com/cdc-places/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-04-03T21:35:14.658395Z",
+        "publishedAt": "2026-04-03T21:35:14.658395Z",
+        "updatedAt": "2026-04-03T21:35:14.658395Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.olyport/cdc-svi",
+      "description": "SVI scores and theme breakdowns by county and tract",
+      "title": "CDC Social Vulnerability Index",
+      "version": "1.1.0",
+      "websiteUrl": "https://olyport.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.olyport.com/cdc-svi/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-04-02T02:26:43.102172Z",
+        "publishedAt": "2026-04-02T02:26:43.102172Z",
+        "updatedAt": "2026-04-02T02:26:43.102172Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.olyport/cdc-wonder",
+      "description": "Leading causes of death, mortality rates, infant mortality, and drug overdose data",
+      "title": "CDC Mortality (WONDER)",
+      "version": "1.1.0",
+      "websiteUrl": "https://olyport.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.olyport.com/cdc-wonder/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-04-02T02:26:39.333882Z",
+        "publishedAt": "2026-04-02T02:26:39.333882Z",
+        "updatedAt": "2026-04-02T02:26:39.333882Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.olyport/census",
+      "description": "Population, income, poverty, education, housing, and commuting from the US Census ACS",
+      "title": "Census ACS Demographics",
+      "version": "1.1.0",
+      "websiteUrl": "https://olyport.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.olyport.com/census/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-04-02T02:26:38.861335Z",
+        "publishedAt": "2026-04-02T02:26:38.861335Z",
+        "updatedAt": "2026-04-02T02:26:38.861335Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.olyport/census-cbp",
+      "description": "Establishment counts, employment, and payroll by geography and NAICS code from Census CBP",
+      "title": "Census County Business Patterns",
+      "version": "1.1.0",
+      "websiteUrl": "https://olyport.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.olyport.com/census-cbp/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-04-04T06:07:09.262202Z",
+        "publishedAt": "2026-04-04T06:07:09.262202Z",
+        "updatedAt": "2026-04-04T06:07:09.262202Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.olyport/cms-medicare",
+      "description": "Medicare spending, chronic conditions, hospital quality, readmissions, and enrollment",
+      "title": "CMS Medicare Data",
+      "version": "1.1.0",
+      "websiteUrl": "https://olyport.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.olyport.com/cms-medicare/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-04-02T02:26:42.241502Z",
+        "publishedAt": "2026-04-02T02:26:42.241502Z",
+        "updatedAt": "2026-04-02T02:26:42.241502Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.olyport/cochrane",
+      "description": "Systematic medical reviews and evidence-based healthcare research",
+      "title": "Cochrane Medical Reviews",
+      "version": "1.1.0",
+      "websiteUrl": "https://olyport.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.olyport.com/cochrane/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-04-02T02:26:40.237024Z",
+        "publishedAt": "2026-04-02T02:26:40.237024Z",
+        "updatedAt": "2026-04-02T02:26:40.237024Z",
+        "isLatest": true
+      }
+    }
+  }
+]

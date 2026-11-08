@@ -1,16 +1,13 @@
 ---
 name: api-design-principles
-description: "Master REST and GraphQL API design principles to build intuitive, scalable, and maintainable APIs that delight developers and stand the test of time."
-risk: safe
-source: community
-date_added: "2026-02-27"
+description: Master REST and GraphQL API design principles to build intuitive, scalable, and maintainable APIs that delight developers. Use when designing new APIs, reviewing API specifications, or establishing API design standards.
 ---
 
 # API Design Principles
 
 Master REST and GraphQL API design principles to build intuitive, scalable, and maintainable APIs that delight developers and stand the test of time.
 
-## Use this skill when
+## When to Use This Skill
 
 - Designing new REST or GraphQL APIs
 - Refactoring existing APIs for better usability
@@ -20,26 +17,94 @@ Master REST and GraphQL API design principles to build intuitive, scalable, and 
 - Creating developer-friendly API documentation
 - Optimizing APIs for specific use cases (mobile, third-party integrations)
 
-## Do not use this skill when
+## Core Concepts
 
-- You only need implementation guidance for a specific framework
-- You are doing infrastructure-only work without API contracts
-- You cannot change or version public interfaces
+### 1. RESTful Design Principles
 
-## Instructions
+**Resource-Oriented Architecture**
 
-1. Define consumers, use cases, and constraints.
-2. Choose API style and model resources or types.
-3. Specify errors, versioning, pagination, and auth strategy.
-4. Validate with examples and review for consistency.
+- Resources are nouns (users, orders, products), not verbs
+- Use HTTP methods for actions (GET, POST, PUT, PATCH, DELETE)
+- URLs represent resource hierarchies
+- Consistent naming conventions
 
-Refer to `resources/implementation-playbook.md` for detailed patterns, checklists, and templates.
+**HTTP Methods Semantics:**
 
-## Resources
+- `GET`: Retrieve resources (idempotent, safe)
+- `POST`: Create new resources
+- `PUT`: Replace entire resource (idempotent)
+- `PATCH`: Partial resource updates
+- `DELETE`: Remove resources (idempotent)
 
-- `resources/implementation-playbook.md` for detailed patterns, checklists, and templates.
+### 2. GraphQL Design Principles
 
-## Limitations
-- Use this skill only when the task clearly matches the scope described above.
-- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
-- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
+**Schema-First Development**
+
+- Types define your domain model
+- Queries for reading data
+- Mutations for modifying data
+- Subscriptions for real-time updates
+
+**Query Structure:**
+
+- Clients request exactly what they need
+- Single endpoint, multiple operations
+- Strongly typed schema
+- Introspection built-in
+
+### 3. API Versioning Strategies
+
+**URL Versioning:**
+
+```
+/api/v1/users
+/api/v2/users
+```
+
+**Header Versioning:**
+
+```
+Accept: application/vnd.api+json; version=1
+```
+
+**Query Parameter Versioning:**
+
+```
+/api/users?version=1
+```
+
+## Detailed patterns and worked examples
+
+Detailed pattern documentation lives in `references/details.md`. Read that file when the navigation tier above is insufficient.
+
+## Best Practices
+
+### REST APIs
+
+1. **Consistent Naming**: Use plural nouns for collections (`/users`, not `/user`)
+2. **Stateless**: Each request contains all necessary information
+3. **Use HTTP Status Codes Correctly**: 2xx success, 4xx client errors, 5xx server errors
+4. **Version Your API**: Plan for breaking changes from day one
+5. **Pagination**: Always paginate large collections
+6. **Rate Limiting**: Protect your API with rate limits
+7. **Documentation**: Use OpenAPI/Swagger for interactive docs
+
+### GraphQL APIs
+
+1. **Schema First**: Design schema before writing resolvers
+2. **Avoid N+1**: Use DataLoaders for efficient data fetching
+3. **Input Validation**: Validate at schema and resolver levels
+4. **Error Handling**: Return structured errors in mutation payloads
+5. **Pagination**: Use cursor-based pagination (Relay spec)
+6. **Deprecation**: Use `@deprecated` directive for gradual migration
+7. **Monitoring**: Track query complexity and execution time
+
+## Common Pitfalls
+
+- **Over-fetching/Under-fetching (REST)**: Fixed in GraphQL but requires DataLoaders
+- **Breaking Changes**: Version APIs or use deprecation strategies
+- **Inconsistent Error Formats**: Standardize error responses
+- **Missing Rate Limits**: APIs without limits are vulnerable to abuse
+- **Poor Documentation**: Undocumented APIs frustrate developers
+- **Ignoring HTTP Semantics**: POST for idempotent operations breaks expectations
+- **Tight Coupling**: API structure shouldn't mirror database schema

@@ -1,0 +1,3402 @@
+[
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.deskcrew/support",
+      "description": "Agent-native helpdesk where AI agents run support tickets and pay per action in USDC via x402.",
+      "title": "DeskCrew",
+      "repository": {
+        "url": "https://github.com/webmilmind1/deskcrew-mcp",
+        "source": "github"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://deskcrew.io",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://deskcrew.io/api/mcp/{tenant_slug}",
+          "variables": {
+            "tenant_slug": {
+              "description": "Your DeskCrew tenant slug (the workspace the agent operates in)",
+              "isRequired": true
+            }
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-03T01:41:56.624963Z",
+        "publishedAt": "2026-08-03T01:41:56.624963Z",
+        "updatedAt": "2026-08-03T01:41:56.624963Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.developerhub/docs",
+      "description": "Search DeveloperHub's own documentation. Every docs site hosted on DeveloperHub serves one at /mcp",
+      "title": "DeveloperHub Docs",
+      "version": "0.1.0",
+      "websiteUrl": "https://docs.developerhub.io/support-center/reader-mcp-server",
+      "icons": [
+        {
+          "src": "https://developerhub.io/images/dh-favicon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "160x160"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://docs.developerhub.io/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-29T14:10:02.455656Z",
+        "publishedAt": "2026-10-29T14:10:02.455656Z",
+        "updatedAt": "2026-10-29T14:10:02.455656Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.developerhub/editor",
+      "description": "Find, write, publish and check pages and API references in your DeveloperHub docs from an AI client",
+      "title": "DeveloperHub Editor",
+      "version": "0.1.0",
+      "websiteUrl": "https://docs.developerhub.io/support-center/editor-mcp-server",
+      "icons": [
+        {
+          "src": "https://developerhub.io/images/dh-favicon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "160x160"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://ai.developerhub.io/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-29T14:10:02.25573Z",
+        "publishedAt": "2026-10-29T14:10:02.25573Z",
+        "updatedAt": "2026-10-29T14:10:02.25573Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.devicechain/mcp",
+      "description": "Read-only MCP tools for a self-hosted DeviceChain IoT instance: devices, telemetry, alarms.",
+      "title": "DeviceChain",
+      "repository": {
+        "url": "https://github.com/devicechain-io/devicechain",
+        "source": "github",
+        "subfolder": "backend/services/mcp"
+      },
+      "version": "1.1.0",
+      "websiteUrl": "https://docs.devicechain.io/concepts/mcp/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://{host}/api/mcp",
+          "variables": {
+            "host": {
+              "description": "Public host name of your own DeviceChain instance (the ingress host, for example iot.example.com). The MCP endpoint is always https://<host>/api/mcp.",
+              "isRequired": true
+            }
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-06T20:38:27.208888Z",
+        "publishedAt": "2026-11-06T20:38:27.208888Z",
+        "updatedAt": "2026-11-06T20:38:27.208888Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.devinbox/devinbox",
+      "description": "Real email inboxes for AI agents: create inboxes, catch verification codes, extract OTPs, reply.",
+      "title": "DevInbox",
+      "repository": {
+        "url": "https://github.com/adospace/dev-inbox",
+        "source": "github",
+        "subfolder": "src/DevInbox.McpServer"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://devinbox.io",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.devinbox.io",
+          "headers": [
+            {
+              "description": "Bearer <your DevInbox API key>, from https://app.devinbox.io/api-keys",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-10T19:38:59.845467Z",
+        "publishedAt": "2026-08-10T19:38:59.845467Z",
+        "updatedAt": "2026-08-10T19:38:59.845467Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.diagrid/catalyst",
+      "description": "Build and operate Dapr Workflows and Durable Agents on Diagrid Catalyst. Sign-in required.",
+      "title": "Diagrid Catalyst",
+      "repository": {
+        "url": "https://github.com/diagridio/catalyst-ai",
+        "source": "github",
+        "id": "1342598007"
+      },
+      "version": "0.0.1",
+      "websiteUrl": "https://www.diagrid.io/catalyst",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.cloud.r1.diagrid.io/mcp"
+        }
+      ],
+      "_meta": {
+        "io.modelcontextprotocol.registry/publisher-provided": {
+          "commit": "df77c6cc16699159acd4a19e84882d7dc56fc23e",
+          "runId": "39590796222"
+        }
+      }
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-21T15:49:30.35166Z",
+        "publishedAt": "2026-10-21T15:49:30.35166Z",
+        "updatedAt": "2026-10-21T15:49:30.35166Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.disban/disban",
+      "description": "Check if a signup email is disposable, free, an alias, testing, parked or unknown, with evidence.",
+      "title": "Disban",
+      "version": "1.0.0",
+      "websiteUrl": "https://disban.io/docs#mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://disban.io/mcp",
+          "headers": [
+            {
+              "description": "Bearer followed by your Disban API key (dbn_...). Free key with 2,000 checks a month: npx disban signup",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-15T08:56:25.093705Z",
+        "publishedAt": "2026-10-15T08:56:25.093705Z",
+        "updatedAt": "2026-10-15T08:56:25.093705Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.disdex/discord-servers",
+      "description": "Find public Discord servers by topic, language and size, check invite links, see member growth.",
+      "title": "disdex: Discord server search",
+      "version": "1.0.1",
+      "websiteUrl": "https://disdex.io/mcp",
+      "icons": [
+        {
+          "src": "https://disdex.io/icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        },
+        {
+          "src": "https://disdex.io/favicon.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://disdex.io/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-31T07:58:47.418147Z",
+        "publishedAt": "2026-10-31T07:58:47.418147Z",
+        "updatedAt": "2026-10-31T07:58:47.418147Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.dnsspy/dnsspy",
+      "description": "DNS monitoring and domain security: live DNS, propagation, WHOIS/RDAP, SSL and look-alike domains.",
+      "title": "DNS Spy",
+      "version": "1.0.0",
+      "websiteUrl": "https://dnsspy.io/features/mcp-server",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://dnsspy.io/mcp",
+          "headers": [
+            {
+              "description": "Bearer <DNS Spy API key>. Not needed if your client signs in with OAuth 2.1.",
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-16T14:05:23.361485Z",
+        "publishedAt": "2026-10-16T14:05:23.361485Z",
+        "updatedAt": "2026-10-16T14:05:23.361485Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.docdeploy.www/mcp-server",
+      "description": "Document hosting and encrypted agent memory with multi-tenant persistence.",
+      "title": "DocDeploy",
+      "repository": {
+        "url": "https://github.com/mrdulasolutions/docdeploy",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://docdeploy.io",
+      "icons": [
+        {
+          "src": "https://app.docdeploy.io/logo.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.docdeploy.io/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-04-12T01:01:11.226834Z",
+        "publishedAt": "2026-04-12T01:01:11.226834Z",
+        "updatedAt": "2026-04-12T01:01:11.226834Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.docks/agent",
+      "description": "Maschinendokumentation per QR-Code (EU-MVO 2023/1230): belegte Fakten pr\u00fcfen, Pilotanfrage stellen.",
+      "title": "docks Produktberatung",
+      "repository": {
+        "url": "https://github.com/maikatreetro/agentic-sales-b2b",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://docks.io/produktberatung/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://agent.docks.io/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-17T21:02:40.351531Z",
+        "publishedAt": "2026-10-17T21:02:40.351531Z",
+        "updatedAt": "2026-10-17T21:02:40.351531Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.docmake/mcp",
+      "description": "Generate DOCX and PDF documents from your DocMake templates",
+      "title": "DocMake",
+      "repository": {
+        "url": "https://github.com/docmake-io/mcp",
+        "source": "github"
+      },
+      "version": "0.1.1",
+      "websiteUrl": "https://docmake.io/mcp",
+      "icons": [
+        {
+          "src": "https://docmake.io/favicon.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        }
+      ],
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "@docmake/mcp",
+          "version": "0.1.1",
+          "runtimeHint": "npx",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "DocMake API key, created at app.docmake.io under Settings > API Keys",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "placeholder": "dm_your_key_here",
+              "name": "DOCMAKE_API_KEY"
+            },
+            {
+              "description": "Directory rendered documents are saved to. Defaults to ~/Downloads/DocMake",
+              "format": "filepath",
+              "name": "DOCMAKE_OUTPUT_DIR"
+            },
+            {
+              "description": "API base URL, for self-hosted setups. Defaults to https://app.docmake.io/api/v1",
+              "format": "string",
+              "default": "https://app.docmake.io/api/v1",
+              "name": "DOCMAKE_API_BASE"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-31T12:04:54.586743Z",
+        "publishedAt": "2026-08-31T12:04:54.586743Z",
+        "updatedAt": "2026-08-31T12:04:54.586743Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.docmill/mcp-server",
+      "description": "Generate PDF, DOCX, and XLSX documents from JSON data and create reusable templates via Docmill",
+      "version": "0.1.2",
+      "websiteUrl": "https://docmill.io",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@docmill/mcp-server",
+          "version": "0.1.2",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Docmill API key (create one at https://docmill.io)",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "DOCMILL_API_KEY"
+            },
+            {
+              "description": "Override the Docmill API base URL (defaults to https://api.docmill.io)",
+              "format": "string",
+              "name": "DOCMILL_BASE_URL"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-31T11:28:43.3209Z",
+        "publishedAt": "2026-08-31T11:28:43.3209Z",
+        "updatedAt": "2026-08-31T11:28:43.3209Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.dodomain/mcp",
+      "description": "Connect custom domains via AI agents: DNS pre-flight checks, hand-off connect sessions and checks.",
+      "title": "DoDomain",
+      "version": "1.0.1",
+      "websiteUrl": "https://dodomain.io/docs/mcp",
+      "icons": [
+        {
+          "src": "https://raw.githubusercontent.com/DevinoSolutions/claude-plugins/main/plugins/dodomain/.claude-plugin/icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://app.dodomain.io/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-30T14:51:15.737081Z",
+        "publishedAt": "2026-10-30T14:51:15.737081Z",
+        "updatedAt": "2026-10-30T14:51:15.737081Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.domaindrift/domaindrift",
+      "description": "Signed internet telemetry, read-only: DNS, TLS, WHOIS, reachability. Every record Ed25519-signed.",
+      "version": "1.200.0",
+      "websiteUrl": "https://domaindrift.io/agents",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://domaindrift.io/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-07T22:31:31.532107Z",
+        "publishedAt": "2026-09-07T22:31:31.532107Z",
+        "updatedAt": "2026-09-07T22:31:31.532107Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.domainium.search/domainium-search",
+      "description": "AI-powered domain & business name generation with real-time availability checks.",
+      "repository": {
+        "url": "https://gitlab.com/digitalwebworks/name-finder",
+        "source": "gitlab"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://search.domainium.io/developers",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://search.domainium.io/api/mcp",
+          "headers": [
+            {
+              "description": "Bearer <your Domainium API key> \u2014 create one at https://search.domainium.io/developers",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "deprecated",
+        "statusChangedAt": "2026-06-27T21:54:22.461917Z",
+        "statusMessage": "Migrated to io.domainium/domainium-search \u2014 endpoint https://domainium.io/api/mcp",
+        "publishedAt": "2026-06-11T23:36:41.337183Z",
+        "updatedAt": "2026-06-27T21:54:22.461917Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.domainium/domainium-search",
+      "description": "AI-powered domain & business name generation with real-time availability checks.",
+      "repository": {
+        "url": "https://gitlab.com/digitalwebworks/name-finder",
+        "source": "gitlab"
+      },
+      "version": "1.1.0",
+      "websiteUrl": "https://domainium.io/developers",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://domainium.io/api/mcp",
+          "headers": [
+            {
+              "description": "Bearer <your Domainium API key> \u2014 create one at https://domainium.io/developers",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-06-27T12:54:58.799027Z",
+        "publishedAt": "2026-06-27T12:54:58.799027Z",
+        "updatedAt": "2026-06-27T12:54:58.799027Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.doply/doply",
+      "description": "Check your Google Play closed test on Doply: progress, devices, crashes, screenshots.",
+      "title": "Doply",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.doply.io/en/dashboard/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.doply.io/mcp",
+          "headers": [
+            {
+              "description": "Optional. 'Bearer <Doply MCP key>' from https://www.doply.io/en/dashboard/mcp. Without it only FAQ, requirements, service info and contact tools are available.",
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-26T12:56:50.909241Z",
+        "publishedAt": "2026-10-26T12:56:50.909241Z",
+        "updatedAt": "2026-10-26T12:56:50.909241Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+      "name": "io.dorabot/dia-chi",
+      "description": "Convert old Vietnamese addresses to the 2025 format and check new ones, per official resolutions.",
+      "title": "Dorabot \u2013 Vietnam address after 2025 merger",
+      "repository": {
+        "url": "https://github.com/Dorabot-io/dia-chi",
+        "source": "github"
+      },
+      "version": "1.1.0",
+      "websiteUrl": "https://dorabot.io/dia-chi/nha-phat-trien/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://dorabot.io/dia-chi/mcp",
+          "headers": [
+            {
+              "description": "Optional: Bearer dk_... API key (free at https://dorabot.io/dia-chi/nha-phat-trien/) for higher daily quota",
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-08T14:14:39.956521Z",
+        "publishedAt": "2026-11-08T14:14:39.956521Z",
+        "updatedAt": "2026-11-08T14:14:39.956521Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+      "name": "io.dorabot/ngay-le",
+      "description": "Vietnam public holidays 2026\u20132040 with compensatory and swapped days; count/add business days.",
+      "title": "Dorabot \u2013 Vietnam public holidays & business days",
+      "repository": {
+        "url": "https://github.com/Dorabot-io/ngay-le",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://dorabot.io/lich-am/nha-phat-trien/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://dorabot.io/lich-am/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-08T14:14:40.702726Z",
+        "publishedAt": "2026-11-08T14:14:40.702726Z",
+        "updatedAt": "2026-11-08T14:14:40.702726Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.doriku/task-manager",
+      "description": "Shared control plane for AI coding agents \u2014 tasks, memory, decisions, file locks. 12 tools.",
+      "title": "Doriku",
+      "repository": {
+        "url": "https://github.com/doriku-io/doriku.cli",
+        "source": "github"
+      },
+      "version": "1.2.0",
+      "websiteUrl": "https://doriku.io",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.doriku.io/mcp",
+          "headers": [
+            {
+              "description": "Bearer token for API authentication (format: Bearer drk_*)",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-06T07:18:19.662663Z",
+        "publishedAt": "2026-07-06T07:18:19.662663Z",
+        "updatedAt": "2026-07-06T07:18:19.662663Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.dotrequirements/dotrequirements",
+      "description": "Write product documentation to share with your whole team, including testable specifications.",
+      "title": "dot\u2022requirements",
+      "version": "1.0.0",
+      "websiteUrl": "https://dotrequirements.io",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://app.dotrequirements.io/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-13T16:46:08.586589Z",
+        "publishedAt": "2026-08-13T16:46:08.586589Z",
+        "updatedAt": "2026-08-13T16:46:08.586589Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.dovri/handoff",
+      "description": "Search published help and hand customer chat to a person. Requires your app's backend integration.",
+      "title": "Dovri customer support handoff",
+      "version": "1.0.0",
+      "websiteUrl": "https://dovri.io/guides/agent-mcp/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.dovri.io/mcp",
+          "headers": [
+            {
+              "description": "Backend only. Use the thread-bound agent token from POST /v1/integrations/chat-session; expires within 15 minutes. Never use an app server key here or expose this token to a browser. See the setup guide; no OAuth enrollment.",
+              "value": "Bearer {agent_token}",
+              "variables": {
+                "agent_token": {
+                  "description": "Private, short-lived token for one authorized app/customer/thread, minted by your backend for each agent run.",
+                  "isRequired": true,
+                  "isSecret": true
+                }
+              },
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-23T06:24:31.316022Z",
+        "publishedAt": "2026-09-23T06:24:31.316022Z",
+        "updatedAt": "2026-09-23T06:24:31.316022Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.dozier/exposure-audit",
+      "description": "Free AI-visibility and competitive Exposure Audit for any domain. No account, no API key.",
+      "version": "1.0.0",
+      "websiteUrl": "https://dozier.io/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://dozier.io/backend/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-16T22:33:30.718296Z",
+        "publishedAt": "2026-08-16T22:33:30.718296Z",
+        "updatedAt": "2026-08-16T22:33:30.718296Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.draftcall/fantasy-football",
+      "description": "Should I start X or Y? NFL fantasy compares, rankings, byes, matchups, schedule strength, checks",
+      "title": "DraftCall",
+      "repository": {
+        "url": "https://github.com/evanatpizzarobot/draftcall-mcp",
+        "source": "github"
+      },
+      "version": "1.1.0",
+      "websiteUrl": "https://draftcall.io/mcp-server/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://draftcall.io/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-25T02:19:35.61673Z",
+        "publishedAt": "2026-08-25T02:19:35.61673Z",
+        "updatedAt": "2026-08-25T02:19:35.61673Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.draw/mcp",
+      "description": "Create draw.io diagrams in chat from Mermaid or XML, shown live and interactive. 10,000+ shapes.",
+      "title": "draw.io",
+      "repository": {
+        "url": "https://github.com/jgraph/drawio-mcp",
+        "source": "github"
+      },
+      "version": "1.7.0",
+      "websiteUrl": "https://www.drawio.com",
+      "icons": [
+        {
+          "src": "https://www.drawio.com/img/logo.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.draw.io/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-07T15:29:37.36556Z",
+        "publishedAt": "2026-11-07T15:29:37.36556Z",
+        "updatedAt": "2026-11-07T15:29:37.36556Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.drawdy/mcp",
+      "description": "Free whiteboard where people and AI draw together: read cloud boards, draw diagrams, build slides.",
+      "title": "Drawdy",
+      "version": "1.0.0",
+      "websiteUrl": "https://drawdy.io/mcp",
+      "icons": [
+        {
+          "src": "https://drawdy.io/landing/drawdy-logo.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.drawdy.io/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-24T10:11:57.627232Z",
+        "publishedAt": "2026-10-24T10:11:57.627232Z",
+        "updatedAt": "2026-10-24T10:11:57.627232Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.drint/drint",
+      "description": "Packaging dielines (FEFCO/ECMA), 3D box and bag mockups, and your Drint projects in the chat.",
+      "title": "Drint",
+      "version": "1.0.1",
+      "websiteUrl": "https://drint.io/help/mcp",
+      "icons": [
+        {
+          "src": "https://drint.io/brand/drint-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://drint.io/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-03T01:32:12.581238Z",
+        "publishedAt": "2026-11-03T01:32:12.581238Z",
+        "updatedAt": "2026-11-03T01:32:12.581238Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.dropl/mcp",
+      "description": "Create client-editable photo and video galleries from Cursor or Claude Code, then embed them.",
+      "title": "Dropl MCP",
+      "repository": {
+        "url": "https://github.com/develanet/dropl-mcp",
+        "source": "github"
+      },
+      "version": "0.6.0",
+      "websiteUrl": "https://www.dropl.io/mcp",
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "@dropl/mcp",
+          "version": "0.6.0",
+          "runtimeHint": "npx",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Optional. Dropl API key; overrides the saved browser sign-in.",
+              "isSecret": true,
+              "name": "DROPL_API_KEY"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-04T04:12:28.587907Z",
+        "publishedAt": "2026-10-04T04:12:28.587907Z",
+        "updatedAt": "2026-10-04T04:12:28.587907Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.dropyour/dropyour",
+      "description": "Publish micro-apps from your AI with no account; operate them as real apps. Data stored in the EU.",
+      "title": "Dropyour",
+      "repository": {
+        "url": "https://github.com/dropyour/dropyour-plugin",
+        "source": "github"
+      },
+      "version": "1.5.0",
+      "websiteUrl": "https://dropyour.io",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.dropyour.io/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-13T08:47:55.202294Z",
+        "publishedAt": "2026-10-13T08:47:55.202294Z",
+        "updatedAt": "2026-10-13T08:47:55.202294Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.duechat/duechat",
+      "description": "Find overdue invoices, draft invoices, and chase payment. Sends need your confirmation.",
+      "title": "DueChat",
+      "version": "1.0.0",
+      "websiteUrl": "https://duechat.io",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://duechat.io/mcp",
+          "headers": [
+            {
+              "description": "Bearer token. DueChat scoped API key (prefix dc_mcp_), created in Settings \u2192 AI agents.",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-22T18:46:34.878994Z",
+        "publishedAt": "2026-10-22T18:46:34.878994Z",
+        "updatedAt": "2026-10-22T18:46:34.878994Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.dumpstercontrols/dumpster-controls",
+      "description": "Dumpster rental operations from AI: orders, dispatch, invoices and customers. You confirm changes.",
+      "title": "Dumpster Controls",
+      "version": "1.0.0",
+      "websiteUrl": "https://dumpstercontrols.io/developers/mcp",
+      "icons": [
+        {
+          "src": "https://dumpstercontrols.io/icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.dumpstercontrols.io/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-29T19:58:30.619901Z",
+        "publishedAt": "2026-09-29T19:58:30.619901Z",
+        "updatedAt": "2026-09-29T19:58:30.619901Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.dunjn/dunjn",
+      "description": "Tabletop RPG campaign wiki for game masters: NPCs, places, sessions, encounters, notes, roll tables",
+      "title": "Dunjn",
+      "version": "0.1.1",
+      "websiteUrl": "https://dunjn.io/en/docs/connect-an-ai/",
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "dunjn-mcp",
+          "version": "0.1.1",
+          "runtimeHint": "npx",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Dunjn personal API key (starts with dunjn_pak_), from Profile > API keys in app.dunjn.io",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "DUNJN_API_TOKEN"
+            },
+            {
+              "description": "Dunjn instance URL",
+              "format": "string",
+              "default": "https://app.dunjn.io",
+              "name": "DUNJN_API_URL"
+            }
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://app.dunjn.io/api/mcp/v1"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-20T21:52:49.630442Z",
+        "publishedAt": "2026-10-20T21:52:49.630442Z",
+        "updatedAt": "2026-10-20T21:52:49.630442Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+      "name": "io.dwelldata/real-estate-data",
+      "description": "DwellData: typed US real-estate feeds \u2014 deals, distress, auctions, leads, address lookup.",
+      "version": "1.1.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://dwelldata.io/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-28T16:47:55.112684Z",
+        "publishedAt": "2026-07-28T16:47:55.112684Z",
+        "updatedAt": "2026-07-28T16:47:55.112684Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.dxbdata/dxb-data",
+      "description": "Official Dubai real estate data: live prices and rental yields by area, from the DLD.",
+      "repository": {},
+      "version": "1.1.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://dxbdata.io/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-04T11:10:49.612143Z",
+        "publishedAt": "2026-07-04T11:10:49.612143Z",
+        "updatedAt": "2026-07-04T11:10:49.612143Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.dyscalculia/dyscalculia",
+      "description": "Open number-sense practice data and game catalogue for dyscalculia. Read-only.",
+      "title": "Dyscalculia.io",
+      "repository": {
+        "url": "https://github.com/Dyscalculia-io/dyscalculia-mcp",
+        "source": "github"
+      },
+      "version": "0.1.0",
+      "websiteUrl": "https://dyscalculia.io/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.dyscalculia.io/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-26T13:32:34.373159Z",
+        "publishedAt": "2026-10-26T13:32:34.373159Z",
+        "updatedAt": "2026-10-26T13:32:34.373159Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.easyweek/booking",
+      "description": "Find a salon, barber or studio, see free time, get the booking link. Serves claude.ai and ChatGPT.",
+      "title": "EasyWeek Booking",
+      "version": "1.0.0",
+      "websiteUrl": "https://booking-mcp.easyweek.io/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://booking-mcp.easyweek.io/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-12T09:15:33.860078Z",
+        "publishedAt": "2026-10-12T09:15:33.860078Z",
+        "updatedAt": "2026-10-12T09:15:33.860078Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.easyweek/business",
+      "description": "Manage an EasyWeek business from AI: bookings, availability, customers, services, orders, messaging.",
+      "title": "EasyWeek Business",
+      "version": "1.4.3",
+      "websiteUrl": "https://easyweek.io/business/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.easyweek.io/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-15T08:04:01.141682Z",
+        "publishedAt": "2026-09-15T08:04:01.141682Z",
+        "updatedAt": "2026-09-15T08:04:01.141682Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.ecfr/ecfr",
+      "description": "Search and read US federal regulations with legal and inline citations linking to ecfr.io.",
+      "title": "eCFR.io Federal Regulations",
+      "repository": {
+        "url": "https://github.com/lrehmann/ecfr-mcp",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://ecfr.io/developers",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://ecfr.io/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-30T00:34:08.15725Z",
+        "publishedAt": "2026-09-30T00:34:08.15725Z",
+        "updatedAt": "2026-09-30T00:34:08.15725Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.ecfr/uscode",
+      "description": "Search and read U.S. Code statutes with legal and inline citations linking to uscode.ecfr.io.",
+      "title": "US Code Federal Statutes",
+      "repository": {
+        "url": "https://github.com/lrehmann/uscode-mcp",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://uscode.ecfr.io/developers",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://uscode.ecfr.io/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-30T23:42:20.757432Z",
+        "publishedAt": "2026-09-30T23:42:20.757432Z",
+        "updatedAt": "2026-09-30T23:42:20.757432Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.echelongraph/echelongraph-mcp",
+      "description": "CVE, KEV, EPSS, SBOM and advisory lookups; per-CVE exposure from Shodan data (\u00a9 Shodan). Keyless.",
+      "title": "EchelonGraph CVE & Exposure",
+      "repository": {
+        "url": "https://github.com/echelongraph/echelongraph-mcp",
+        "source": "github"
+      },
+      "version": "3.2.0",
+      "websiteUrl": "https://echelongraph.io/pulse/mcp",
+      "icons": [
+        {
+          "src": "https://echelongraph.io/logo-mark.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "echelongraph-mcp",
+          "version": "3.2.0",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Override the API base URL (self-host or proxy).",
+              "format": "string",
+              "default": "https://app.echelongraph.io",
+              "name": "ECHELONGRAPH_API_BASE"
+            },
+            {
+              "description": "Per-request timeout in milliseconds. A slower answer is reported as a failed lookup, not as empty data.",
+              "format": "number",
+              "default": "15000",
+              "name": "ECHELONGRAPH_API_TIMEOUT_MS"
+            }
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.echelongraph.io/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-08T03:22:12.672605Z",
+        "publishedAt": "2026-11-08T03:22:12.672605Z",
+        "updatedAt": "2026-11-08T03:22:12.672605Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.echothread/mcp",
+      "description": "Read and moderate your EchoThread site comments: pending queue, approve, reject, spam, reply.",
+      "title": "EchoThread",
+      "repository": {
+        "url": "https://github.com/ryabinski-labs/echothread-integrations",
+        "source": "github",
+        "subfolder": "packages/mcp"
+      },
+      "version": "0.1.0",
+      "websiteUrl": "https://echothread.io/docs/mcp",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@echothread/mcp",
+          "version": "0.1.0",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "An EchoThread API token from https://echothread.io/api-tokens",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "ECHOTHREAD_API_TOKEN"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-30T23:29:37.387156Z",
+        "publishedAt": "2026-09-30T23:29:37.387156Z",
+        "updatedAt": "2026-09-30T23:29:37.387156Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.ecliptical/voipms-mcp",
+      "description": "Manage phone numbers, SMS/MMS, voicemail, faxing, and call routing for your VoIP.ms account.",
+      "title": "VoIP.ms",
+      "version": "0.17.3",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://voipms-mcp.ecliptical.io/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-06T21:41:25.022896Z",
+        "publishedAt": "2026-11-06T21:41:25.022896Z",
+        "updatedAt": "2026-11-06T21:41:25.022896Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.edgebook/mcp",
+      "description": "Chart-first trading journal: log trades from notes or chart screenshots, review setups and stats.",
+      "title": "EdgeBook",
+      "repository": {
+        "url": "https://github.com/highlydubious/edgebook-mcp",
+        "source": "github"
+      },
+      "version": "0.7.1",
+      "websiteUrl": "https://www.edgebook.io",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://edgebook-mcp.alexdubelko.workers.dev/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-06T14:46:22.761094Z",
+        "publishedAt": "2026-10-06T14:46:22.761094Z",
+        "updatedAt": "2026-10-06T14:46:22.761094Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.elaan/mcp",
+      "description": "Create Elaan notification types, templates and brands, trigger sends, and debug delivery.",
+      "repository": {
+        "url": "https://github.com/ThingsIDoForLove/elaan-js",
+        "source": "github",
+        "subfolder": "mcp"
+      },
+      "version": "0.1.3",
+      "websiteUrl": "https://elaan.io/docs.html",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@elaanio/mcp",
+          "version": "0.1.3",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Elaan service key (sk_...) from console.elaan.io. Read from the environment only, never passed as a tool argument.",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "ELAAN_API_KEY"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-03T08:53:06.727628Z",
+        "publishedAt": "2026-08-03T08:53:06.727628Z",
+        "updatedAt": "2026-08-03T08:53:06.727628Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.elevaredigital/recibopro",
+      "description": "Create invoices from your AI assistant in 6 languages and 10 currencies, ready for WhatsApp.",
+      "title": "ReciboPro Invoices",
+      "version": "1.0.0",
+      "websiteUrl": "https://recibopro.elevaredigital.io/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://recibopro.elevaredigital.io/api/public/mcp",
+          "headers": [
+            {
+              "description": "Bearer token with your free ReciboPro API key (get one at https://recibopro.elevaredigital.io/mcp). Format: Bearer YOUR_KEY",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-04T03:27:56.482886Z",
+        "publishedAt": "2026-10-04T03:27:56.482886Z",
+        "updatedAt": "2026-10-04T03:27:56.482886Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.elevenlabs/mcp",
+      "description": "Manage ElevenLabs voice agents and generate speech, music, sound effects, images, and video.",
+      "title": "ElevenLabs",
+      "repository": {
+        "url": "https://github.com/elevenlabs/plugin",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://elevenlabs.io/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.us.elevenlabs.io/v1/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-08T16:30:04.616993Z",
+        "publishedAt": "2026-09-08T16:30:04.616993Z",
+        "updatedAt": "2026-09-08T16:30:04.616993Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.elmah/mcp",
+      "description": "Search logs, investigate errors, check deployments, and monitor uptime for your elmah.io org.",
+      "title": "elmah.io",
+      "version": "1.0.0",
+      "websiteUrl": "https://mcp.elmah.io/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.elmah.io/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-29T13:30:28.659901Z",
+        "publishedAt": "2026-09-29T13:30:28.659901Z",
+        "updatedAt": "2026-09-29T13:30:28.659901Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.elytrack/elytrack",
+      "description": "Smart wallets, insiders, launches and news on Elysium (Hyperliquid L2), plus Montra trades.",
+      "title": "Elytrack",
+      "version": "1.0.0",
+      "websiteUrl": "https://elytrack.io/agents",
+      "icons": [
+        {
+          "src": "https://elytrack.io/static/favicon.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        },
+        {
+          "src": "https://elytrack.io/static/apple-touch-icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "180x180"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://elytrack.io/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-07T06:25:52.772786Z",
+        "publishedAt": "2026-11-07T06:25:52.772786Z",
+        "updatedAt": "2026-11-07T06:25:52.772786Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.emaillistchecker/email-verification",
+      "description": "Verify emails (valid/invalid/risky/unknown): MX, SMTP, catch-all, disposable. Free agent key.",
+      "title": "Emaillistchecker.io Email Verification",
+      "repository": {
+        "url": "https://github.com/Emaillistchecker-io/emaillistchecker-mcp",
+        "source": "github"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://platform.emaillistchecker.io/agent-gateway",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://platform.emaillistchecker.io/mcp",
+          "headers": [
+            {
+              "description": "Bearer <api_key>. Get a free key (25 verifications/day) with the get_api_key tool or POST https://platform.emaillistchecker.io/agent-gateway/register",
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-08T22:03:34.668164Z",
+        "publishedAt": "2026-10-08T22:03:34.668164Z",
+        "updatedAt": "2026-10-08T22:03:34.668164Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.emc2ai/einstein",
+      "description": "AI price forecasts, whale flows, market sentiment and prediction signals. 18 tools free, no account.",
+      "title": "Agent Einstein \u2014 Crypto & Market Intelligence",
+      "repository": {
+        "url": "https://github.com/ChuXo/einstein-claude-plugin",
+        "source": "github"
+      },
+      "version": "3.1.0",
+      "websiteUrl": "https://emc2ai.io/mcp",
+      "icons": [
+        {
+          "src": "https://emc2ai.io/einstein-icon-64.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "64x64"
+          ]
+        },
+        {
+          "src": "https://emc2ai.io/android-chrome-512x512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://emc2ai.io/api/mcp",
+          "headers": [
+            {
+              "description": "Bearer token from Einstein's OAuth 2.1 flow. Discovered automatically via /.well-known/oauth-protected-resource \u2014 clients register themselves. Required only for paid tools; the free tools accept anonymous calls.",
+              "isSecret": true,
+              "name": "Authorization"
+            },
+            {
+              "description": "x402 payment token (Base USDC), for autonomous agents paying per call on the legacy per-skill tool names. Not needed by ordinary MCP clients, which use OAuth and a credit balance instead.",
+              "isSecret": true,
+              "name": "X-PAYMENT"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-27T22:03:30.683797Z",
+        "publishedAt": "2026-08-27T22:03:30.683797Z",
+        "updatedAt": "2026-08-27T22:03:30.683797Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.emelia/mcp",
+      "description": "Run Emelia cold email and LinkedIn campaigns, lists, enrichment and your Emelia inbox from AI.",
+      "title": "Emelia",
+      "version": "0.1.0",
+      "websiteUrl": "https://docs.emelia.io/docs/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.emelia.io/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-22T09:25:11.010066Z",
+        "publishedAt": "2026-10-22T09:25:11.010066Z",
+        "updatedAt": "2026-10-22T09:25:11.010066Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.endlss/endlss-mcp-server",
+      "description": "Manage Endlss ambassador programs: sellers, offers, invites, messaging, and analytics.",
+      "title": "Endlss",
+      "version": "0.1.0",
+      "websiteUrl": "https://endlss.io",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.endlss.io/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-06-29T18:19:10.043635Z",
+        "publishedAt": "2026-06-29T18:19:10.043635Z",
+        "updatedAt": "2026-06-29T18:19:10.043635Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.energypod/energypod",
+      "description": "Read energypod.io's weekly energy digests, episode summaries, and transcripts. Read-only.",
+      "title": "Energy Podcast Digest",
+      "repository": {
+        "url": "https://github.com/m4rz910/podcast-toolkit",
+        "source": "github"
+      },
+      "version": "1.1.0",
+      "websiteUrl": "https://energypod.io/connect",
+      "icons": [
+        {
+          "src": "https://energypod.io/static/og.png",
+          "mimeType": "image/png"
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://energypod.io/mcp",
+          "headers": [
+            {
+              "description": "Optional Bearer credential for a higher quota \u2014 an API key: epk_\u2026 (mint one via POST https://energypod.io/signup with JSON, or on your Account page at https://energypod.io/account), or an OAuth 2.1 access token (https://energypod.io/.well-known/oauth-protected-resource). Anonymous access is rate-limited but works.",
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-16T00:43:18.858908Z",
+        "publishedAt": "2026-09-16T00:43:18.858908Z",
+        "updatedAt": "2026-09-16T00:43:18.858908Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.engineeringleaders/elc-partnership-builder",
+      "description": "Build and price an ELC community partnership: match, customize, 12-month plan, 16% AI discount.",
+      "repository": {
+        "url": "https://github.com/marian-kamenistak/elc-partnership-builder",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://www.engineeringleaders.io/partner/ai/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.engineeringleaders.io/mcp/partnership"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-08T21:13:59.076259Z",
+        "publishedAt": "2026-08-08T21:13:59.076259Z",
+        "updatedAt": "2026-08-08T21:13:59.076259Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.engineeringleaders/elc-toolkit",
+      "description": "Leadership-ratio benchmark, partnership ROI builder, community-launch readiness test. ELC data.",
+      "repository": {
+        "url": "https://github.com/marian-kamenistak/elc-toolkit",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://www.engineeringleaders.io/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.engineeringleaders.io/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-04T11:50:11.553847Z",
+        "publishedAt": "2026-08-04T11:50:11.553847Z",
+        "updatedAt": "2026-08-04T11:50:11.553847Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.engineeringleaders/elc-trade",
+      "description": "Score a meetup topic, place a speaker on the right stage, price community reach. ELC data.",
+      "repository": {
+        "url": "https://github.com/marian-kamenistak/elc-trade",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://www.engineeringleaders.io/agents/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.engineeringleaders.io/mcp/trade"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-05T08:05:32.046594Z",
+        "publishedAt": "2026-09-05T08:05:32.046594Z",
+        "updatedAt": "2026-09-05T08:05:32.046594Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.enrow/enrow-mcp",
+      "description": "Find and verify professional emails and phone numbers via the Enrow API.",
+      "version": "1.2.0",
+      "websiteUrl": "https://enrow.io",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.enrow.io/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-23T18:16:37.149634Z",
+        "publishedAt": "2026-09-23T18:16:37.149634Z",
+        "updatedAt": "2026-09-23T18:16:37.149634Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.enterno/site-diagnostics",
+      "description": "HTTP, DNS, SSL, WHOIS, ping, security-header, SEO and AI-readiness checks for any website.",
+      "title": "Enterno.io Site Diagnostics",
+      "repository": {
+        "url": "https://github.com/enterno-io/enterno-mcp",
+        "source": "github"
+      },
+      "version": "1.1.0",
+      "websiteUrl": "https://enterno.io/en/mcp-server",
+      "icons": [
+        {
+          "src": "https://enterno.io/favicon.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://enterno.io/mcp",
+          "headers": [
+            {
+              "description": "Your Enterno.io API key as a Bearer token. Create a free key at https://enterno.io/en/register.",
+              "isRequired": true,
+              "value": "Bearer {api_key}",
+              "isSecret": true,
+              "variables": {
+                "api_key": {
+                  "description": "Enterno.io API key, starts with ent_",
+                  "isRequired": true,
+                  "isSecret": true
+                }
+              },
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-20T06:46:25.267414Z",
+        "publishedAt": "2026-10-20T06:46:25.267414Z",
+        "updatedAt": "2026-10-20T06:46:25.267414Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.equation/equation",
+      "description": "Create interactive 2D and 3D graphs with validated equations, shareable links, and PNG previews.",
+      "title": "Equation.io",
+      "repository": {
+        "url": "https://github.com/aantthony/equation.io",
+        "source": "github"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://equation.io",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://equation.io/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-02T10:56:21.282399Z",
+        "publishedAt": "2026-10-02T10:56:21.282399Z",
+        "updatedAt": "2026-10-02T10:56:21.282399Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-10-17/server.schema.json",
+      "name": "io.eraser/eraser",
+      "description": "Generate, edit, and manage Eraser diagrams and docs with AI.",
+      "version": "0.2.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://app.eraser.io/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-05-22T22:28:20.703569Z",
+        "publishedAt": "2026-05-22T22:28:20.703569Z",
+        "updatedAt": "2026-05-22T22:28:20.703569Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.escrova/escrova",
+      "description": "Search Amazon, eBay, Walmart and more and compare prices. Agents can search, not buy.",
+      "title": "Escrova",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.escrova.io/agents",
+      "icons": [
+        {
+          "src": "https://www.escrova.io/brand/pfp.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "1000x1000"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.escrova.io/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-04T02:08:28.655935Z",
+        "publishedAt": "2026-11-04T02:08:28.655935Z",
+        "updatedAt": "2026-11-04T02:08:28.655935Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.esimfinder/connector",
+      "description": "Find, compare & buy travel eSIMs for 190+ countries + a 12-month Travel Pass. 40 currencies.",
+      "title": "eSIM Finder",
+      "version": "1.0.1",
+      "websiteUrl": "https://esimfinder.io/connector",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.esimfinder.io/api/v1/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-14T20:05:55.53813Z",
+        "publishedAt": "2026-08-14T20:05:55.53813Z",
+        "updatedAt": "2026-08-14T20:05:55.53813Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.estimay/estimay",
+      "description": "Planning poker rooms: import stories from Jira or GitHub, run rounds, write the estimates back.",
+      "title": "Estimay",
+      "version": "1.4.0",
+      "websiteUrl": "https://estimay.io/mcp-scrum-poker",
+      "icons": [
+        {
+          "src": "https://estimay.io/icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ],
+          "theme": "light"
+        },
+        {
+          "src": "https://estimay.io/icon-512-dark.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ],
+          "theme": "dark"
+        },
+        {
+          "src": "https://estimay.io/favicon.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://estimay.io/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-06T11:55:56.114526Z",
+        "publishedAt": "2026-11-06T11:55:56.114526Z",
+        "updatedAt": "2026-11-06T11:55:56.114526Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.etherscan/etherscan-mcp",
+      "description": "Read-only Etherscan V2 blockchain data: balances, transactions, transfers, tokens, contracts, logs.",
+      "title": "Etherscan",
+      "version": "2.3.0",
+      "websiteUrl": "https://docs.etherscan.io/build-with-ai/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp-keyless.etherscan.io/mcp"
+        },
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.etherscan.io/mcp",
+          "headers": [
+            {
+              "description": "Bearer <ETHERSCAN_API_KEY>. Create a free key at https://etherscan.io/apis.",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-04T06:33:47.776955Z",
+        "publishedAt": "2026-09-04T06:33:47.776955Z",
+        "updatedAt": "2026-09-04T06:33:47.776955Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.eventify/mcp-server",
+      "description": "Eventify MCP server \u2014 manage events, attendees, sessions, speakers, sponsors, and analytics.",
+      "version": "1.0.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://amcp.eventify.io/api/v2/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-04-25T07:35:41.217579Z",
+        "publishedAt": "2026-04-25T07:35:41.217579Z",
+        "updatedAt": "2026-04-25T07:35:41.217579Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.eventsend/eventsend",
+      "description": "Ask your AI about your product's events, delivery health and usage",
+      "title": "EventSend",
+      "repository": {
+        "url": "https://github.com/mytinyrocket/eventsend-claude-plugin",
+        "source": "github"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://eventsend.io",
+      "icons": [
+        {
+          "src": "https://eventsend.io/images/pwa/icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://eventsend.io/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-28T03:31:30.672949Z",
+        "publishedAt": "2026-10-28T03:31:30.672949Z",
+        "updatedAt": "2026-10-28T03:31:30.672949Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.exactmatch.mcp/exact-match",
+      "description": "US consumer and business audience data: build audiences, match and enrich records, export lists.",
+      "title": "Exact Match",
+      "version": "2.0.0",
+      "websiteUrl": "https://mcp.exactmatch.io/docs/v2",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.exactmatch.io/mcp/v2"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-04T05:20:39.871296Z",
+        "publishedAt": "2026-11-04T05:20:39.871296Z",
+        "updatedAt": "2026-11-04T05:20:39.871296Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.extcord/extcord",
+      "description": "Agent utilities: read big pages without filling context, exact math, dates, parsing. Free.",
+      "title": "Extcord",
+      "version": "0.7.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://extcord.io/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-11T00:32:53.575467Z",
+        "publishedAt": "2026-10-11T00:32:53.575467Z",
+        "updatedAt": "2026-10-11T00:32:53.575467Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.ezstats/ezstats-mcp",
+      "description": "Privacy-first website analytics MCP server for ezStats with analytics, SEO, goals, and MCP tools.",
+      "title": "ezStats MCP",
+      "version": "0.2.1",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@ezstats/ezstats-mcp",
+          "version": "0.2.1",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Base ezStats Agent API URL",
+              "format": "string",
+              "name": "EZSTATS_API_URL"
+            },
+            {
+              "description": "Your ezStats API key",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "EZSTATS_API_KEY"
+            }
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "sse",
+          "url": "https://go.ezstats.io/mcp/sse"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-04-06T01:48:14.171879Z",
+        "publishedAt": "2026-04-06T01:48:14.171879Z",
+        "updatedAt": "2026-04-06T01:48:14.171879Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.factorguide/factorguide",
+      "description": "Send a coupling matrix, get zone classifications and optimal factorization strategy.",
+      "repository": {
+        "url": "https://github.com/Bwana7/factorguide",
+        "source": "github"
+      },
+      "version": "1.2.1",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://factorguide.io/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-04-03T15:00:33.61901Z",
+        "publishedAt": "2026-04-03T15:00:33.61901Z",
+        "updatedAt": "2026-04-03T15:00:33.61901Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.fairline/fairline",
+      "description": "Shops MLB, NHL, EPL and NFL lines across sportsbooks with a no-vig fair probability, for members.",
+      "title": "FairLine",
+      "version": "1.0.0",
+      "websiteUrl": "https://fairline.io",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.fairline.io/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-12T16:52:09.971656Z",
+        "publishedAt": "2026-09-12T16:52:09.971656Z",
+        "updatedAt": "2026-09-12T16:52:09.971656Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.fairseal/mcp-server",
+      "description": "Verifiable entropy, provably-fair games, and receipt verification for AI agents (FairSeal API).",
+      "repository": {
+        "url": "https://github.com/ned-del/fairseal",
+        "source": "github"
+      },
+      "version": "0.2.4",
+      "websiteUrl": "https://fairseal.io",
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "@fairseal/mcp-server",
+          "version": "0.2.4",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "API key for gated tools (fairseal_entropy, fairseal_stats, fairseal_rng_generate, fairseal_notarize_decision, fairseal_anchor_submit). Key prefix: fsn_. Without a key these tools return 401; free tools (game reads, notarize_status, anchor_status) work without any key. x402 micropayment ($0.02 USDC on Base) is an alternative to the key for notarize/anchor.",
+              "isSecret": true,
+              "name": "FAIRSEAL_API_KEY"
+            },
+            {
+              "description": "Upstream API base URL (default https://api.fairseal.io).",
+              "name": "FAIRSEAL_API_URL"
+            },
+            {
+              "description": "Key override for the notary service only (POST /v1/notarize). Falls back to FAIRSEAL_API_KEY if not set. Key prefix: fsn_.",
+              "isSecret": true,
+              "name": "FAIRSEAL_NOTARY_API_KEY"
+            },
+            {
+              "description": "Key override for Anchor API v2 only (POST /v2/anchor). Falls back to FAIRSEAL_API_KEY if not set. Key prefix: anck_.",
+              "isSecret": true,
+              "name": "FAIRSEAL_ANCHOR_API_KEY"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-30T02:32:07.656741Z",
+        "publishedAt": "2026-09-30T02:32:07.656741Z",
+        "updatedAt": "2026-09-30T02:32:07.656741Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.fallax/fallax",
+      "description": "Fallax is a phishing simulation and security awareness training platform. Read your results.",
+      "title": "Fallax",
+      "version": "1.0.0",
+      "websiteUrl": "https://fallax.io/docs/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://app.fallax.io/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-02T12:00:00.284741Z",
+        "publishedAt": "2026-09-02T12:00:00.284741Z",
+        "updatedAt": "2026-09-02T12:00:00.284741Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.famelab/linkedin",
+      "description": "LinkedIn AI agents for B2B: leads, inbox, draft replies, campaigns and posts. You approve each send.",
+      "title": "Famelab: LinkedIn AI agents",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.famelab.io/claude-sales-agent",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://portal.famelab.io/v2/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-16T12:52:28.286815Z",
+        "publishedAt": "2026-10-16T12:52:28.286815Z",
+        "updatedAt": "2026-10-16T12:52:28.286815Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.famulor/famulor-mcp",
+      "description": "Manage AI assistants, history, calls, campaigns, contacts, knowledge, messaging, and automations.",
+      "title": "Famulor",
+      "repository": {
+        "url": "https://github.com/bekservice/Famulor-MCP",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://www.famulor.io",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://app.famulor.io/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-23T08:10:36.805822Z",
+        "publishedAt": "2026-08-23T08:10:36.805822Z",
+        "updatedAt": "2026-08-23T08:10:36.805822Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.fast/fast-io",
+      "description": "Give every project one workspace for its files, its team, and its AI agents.",
+      "title": "Fastio",
+      "version": "2026.10.17",
+      "websiteUrl": "https://fast.io",
+      "icons": [
+        {
+          "src": "https://fast.io/logo.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.fast.io/mcp/tools"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-05T22:26:44.799156Z",
+        "publishedAt": "2026-10-05T22:26:44.799156Z",
+        "updatedAt": "2026-10-05T22:26:44.799156Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.favcrm/favcrm",
+      "description": "Agentic CRM for service businesses \u2014 bookings, customers, WhatsApp, loyalty, invoicing.",
+      "title": "FavCRM",
+      "repository": {
+        "url": "https://github.com/favcrm/mcp",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://favcrm.io",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.favcrm.io/mcp",
+          "headers": [
+            {
+              "description": "Optional. A FavCRM MCP key as a Bearer token, or connect via OAuth (the server exposes /.well-known/oauth-authorization-server for automatic auth).",
+              "isSecret": true,
+              "placeholder": "Bearer fav_mcp_...",
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-06-08T02:14:20.464132Z",
+        "publishedAt": "2026-06-08T02:14:20.464132Z",
+        "updatedAt": "2026-06-08T02:14:20.464132Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.fdb4/football-database-and-results",
+      "description": "Historical football results, draws and no-draw streaks. 11 read-only tools, 6 need no API key.",
+      "title": "Football Database and Results",
+      "version": "1.1.0",
+      "websiteUrl": "https://fdb4.io/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://fdb4.io/mcp",
+          "headers": [
+            {
+              "description": "OPTIONAL. Six tools answer without it: get_team_streaks, list_teams, get_team, list_tournaments, list_countries and search_results over the last 7 days. A key opens the draw models, the all-time leaderboard, full head-to-head records and the whole results archive; it is free to create at https://fdb4.io/mcp and starts with 10 points, then 1 call = 1 point = 1 cent.",
+              "value": "Bearer {api_key}",
+              "isSecret": true,
+              "variables": {
+                "api_key": {
+                  "description": "FDB4 API key \u2014 optional, create one at https://fdb4.io/mcp",
+                  "isSecret": true
+                }
+              },
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-22T14:54:10.135989Z",
+        "publishedAt": "2026-09-22T14:54:10.135989Z",
+        "updatedAt": "2026-09-22T14:54:10.135989Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.feedico/feedico-mcp",
+      "description": "Free coupons, deals and products with tracked links; no key needed. Add a partner token to earn 65%.",
+      "title": "Feedico: coupons, deals & products",
+      "version": "2.1.2",
+      "websiteUrl": "https://feedico.io/ai-coupon-agent",
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "feedico-mcp",
+          "version": "2.1.2",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Optional. Your Feedico partner token (fdcp_\u2026) from https://partner.feedico.io/settings; without it the server runs in free public mode.",
+              "isSecret": true,
+              "name": "FEEDICO_PARTNER_TOKEN"
+            }
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.feedico.io/mcp",
+          "headers": [
+            {
+              "description": "Optional. Bearer fdcp_\u2026 (your Feedico partner token from https://partner.feedico.io/settings); without it the server answers in free public mode.",
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-22T17:20:18.723904Z",
+        "publishedAt": "2026-10-22T17:20:18.723904Z",
+        "updatedAt": "2026-10-22T17:20:18.723904Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.feedlio/feedlio",
+      "description": "Schedule and publish social media posts to Facebook, Instagram, LinkedIn, TikTok and YouTube.",
+      "title": "Feedlio",
+      "version": "1.0.0",
+      "websiteUrl": "https://feedlio.io/en/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.feedlio.io/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-16T02:10:47.208477Z",
+        "publishedAt": "2026-10-16T02:10:47.208477Z",
+        "updatedAt": "2026-10-16T02:10:47.208477Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.feedoracle/compliance",
+      "description": "MiCA compliance evidence, stablecoin risk, macro regime, agent governance. 79 tools.",
+      "title": "FeedOracle Compliance Agent",
+      "repository": {
+        "url": "https://github.com/feedoracle/feedoracle-managed-agents",
+        "source": "github"
+      },
+      "version": "3.0.0",
+      "websiteUrl": "https://feedoracle.io",
+      "remotes": [
+        {
+          "type": "sse",
+          "url": "https://feedoracle.io/mcp/sse"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-04-12T06:05:36.700119Z",
+        "publishedAt": "2026-04-12T06:05:36.700119Z",
+        "updatedAt": "2026-04-12T06:05:36.700119Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.fhirfly/mcp-server",
+      "description": "Healthcare reference data for AI agents: providers, drugs, diagnoses, labs, codes, claims.",
+      "repository": {
+        "url": "https://github.com/FHIRfly-io/fhirfly-mcp-server",
+        "source": "github"
+      },
+      "version": "0.9.0",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@fhirfly-io/mcp-server",
+          "version": "0.9.0",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "FHIRfly API key (get one at https://fhirfly.io)",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "FHIRFLY_API_KEY"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-03T16:03:27.364831Z",
+        "publishedAt": "2026-07-03T16:03:27.364831Z",
+        "updatedAt": "2026-07-03T16:03:27.364831Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.ficiel/ficiel",
+      "description": "Read and search your Instagram, WhatsApp and LinkedIn DMs and prepare follow-ups you approve.",
+      "title": "Ficiel MCP",
+      "repository": {
+        "url": "https://github.com/abraham-rajoelina/ficiel-mcp",
+        "source": "github"
+      },
+      "version": "1.6.3",
+      "websiteUrl": "https://ficiel.io/mcp",
+      "icons": [
+        {
+          "src": "https://ficiel.io/assets/images/ficiel-logo.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        },
+        {
+          "src": "https://ficiel.io/assets/images/ficiel-logo-192.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "192x192"
+          ]
+        },
+        {
+          "src": "https://ficiel.io/assets/images/ficiel-logo-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://bridge.ficiel.io/mcp",
+          "headers": [
+            {
+              "description": "Optional if your client supports OAuth (discovered automatically). Otherwise: Bearer + your Ficiel organization API key (fk_live_...), created in Ficiel settings.",
+              "value": "Bearer {ficiel_api_key}",
+              "isSecret": true,
+              "variables": {
+                "ficiel_api_key": {
+                  "description": "Ficiel organization API key, starts with fk_live_",
+                  "isRequired": true,
+                  "isSecret": true,
+                  "placeholder": "fk_live_..."
+                }
+              },
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-07T15:03:14.116023Z",
+        "publishedAt": "2026-11-07T15:03:14.116023Z",
+        "updatedAt": "2026-11-07T15:03:14.116023Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.fidro/fidro",
+      "description": "Signup fraud checks: score emails and IPs, look up IPs and manage your blocklist.",
+      "title": "Fidro",
+      "version": "1.0.1",
+      "websiteUrl": "https://fidro.io/mcp?utm_source=mcp-registry&utm_medium=directory&utm_campaign=mcp",
+      "icons": [
+        {
+          "src": "https://fidro.io/images/app-icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://fidro.io/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-07T11:32:45.198308Z",
+        "publishedAt": "2026-09-07T11:32:45.198308Z",
+        "updatedAt": "2026-09-07T11:32:45.198308Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.filechanger/filechanger",
+      "description": "Convert documents between text formats (markdown, html, and more) via the FileChanger API.",
+      "repository": {
+        "url": "https://github.com/seanparsons/monorepo",
+        "source": "github"
+      },
+      "version": "0.1.3",
+      "websiteUrl": "https://filechanger.io",
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "filechanger-mcp",
+          "version": "0.1.3",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "FileChanger API key (fc_...). Get one at https://filechanger.io.",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "FILECHANGER_API_KEY"
+            },
+            {
+              "description": "Override the MCP endpoint. Defaults to https://filechanger.io/mcp.",
+              "name": "FILECHANGER_URL"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-26T15:12:18.694564Z",
+        "publishedAt": "2026-08-26T15:12:18.694564Z",
+        "updatedAt": "2026-08-26T15:12:18.694564Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.filingpulse/filingpulse",
+      "description": "Hosted SEC EDGAR filings: Form 4 insider trades, 8-K events, S-1/IPO registrations. Read-only.",
+      "version": "0.1.0",
+      "websiteUrl": "https://filingpulse.io/mcp.html",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.filingpulse.io/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-24T01:05:54.740769Z",
+        "publishedAt": "2026-08-24T01:05:54.740769Z",
+        "updatedAt": "2026-08-24T01:05:54.740769Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.finwiseapp/finwise",
+      "description": "Your budgets, net worth, accounts and transactions from FinWise, the personal finance app.",
+      "title": "FinWise",
+      "version": "1.0.0",
+      "websiteUrl": "https://finwiseapp.io/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.finwiseapp.io/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-02T19:07:22.781331Z",
+        "publishedAt": "2026-11-02T19:07:22.781331Z",
+        "updatedAt": "2026-11-02T19:07:22.781331Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.firmops/firmops",
+      "description": "Managed firm-brain MCP for law firms: Clio matters, intake, calendar, and calls over OAuth.",
+      "title": "FirmOps",
+      "version": "1.0.0",
+      "websiteUrl": "https://firmops.io",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.firmops.io/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-05T07:57:56.187342Z",
+        "publishedAt": "2026-11-05T07:57:56.187342Z",
+        "updatedAt": "2026-11-05T07:57:56.187342Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.firsay/firsay",
+      "description": "Find Web3 people with proof: founders, BD and listing managers, KOLs, market makers, VCs.",
+      "title": "Firsay",
+      "version": "1.1.0",
+      "websiteUrl": "https://firsay.io/docs#mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://firsay.io/api/mcp",
+          "headers": [
+            {
+              "description": "Bearer fsy_... personal API key from firsay.io (Account, API keys & MCP)",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-27T20:34:25.26674Z",
+        "publishedAt": "2026-10-27T20:34:25.26674Z",
+        "updatedAt": "2026-10-27T20:34:25.26674Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.fitsociety/mcp",
+      "description": "Access approved FITsociety clients, schedules, bookings and coaching data with AI assistants.",
+      "title": "FITsociety",
+      "version": "1.0.0",
+      "websiteUrl": "https://docs.fitsociety.io/mcp/overview",
+      "icons": [
+        {
+          "src": "https://docs.fitsociety.io/images/fitsociety-logo.svg",
+          "mimeType": "image/svg+xml"
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.fitsociety.io/mcp/v1"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-09T14:57:29.772468Z",
+        "publishedAt": "2026-09-09T14:57:29.772468Z",
+        "updatedAt": "2026-09-09T14:57:29.772468Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.fixyourdocs/mcp-server",
+      "description": "File structured docs-feedback reports to the FixYourDocs hub via a file_doc_feedback tool.",
+      "title": "FixYourDocs",
+      "repository": {
+        "url": "https://github.com/fixyourdocs/fixyourdocs",
+        "source": "github",
+        "subfolder": "mcp-server"
+      },
+      "version": "0.2.0",
+      "websiteUrl": "https://fixyourdocs.io",
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "@fixyourdocs/mcp-server",
+          "version": "0.2.0",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Override the hub base URL. Defaults to https://hub.fixyourdocs.io.",
+              "default": "https://hub.fixyourdocs.io",
+              "name": "FIXYOURDOCS_HUB_URL"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-06-10T10:01:28.421584Z",
+        "publishedAt": "2026-06-10T10:01:28.421584Z",
+        "updatedAt": "2026-06-10T10:01:28.421584Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.flareapp/flare",
+      "description": "Error tracking for Laravel and PHP apps. Let your agent fetch errors, stack traces and context.",
+      "title": "Flare",
+      "version": "1.0.0",
+      "websiteUrl": "https://flareapp.io/platform/ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://flareapp.io/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-09T14:45:48.730155Z",
+        "publishedAt": "2026-10-09T14:45:48.730155Z",
+        "updatedAt": "2026-10-09T14:45:48.730155Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.flaresignal/intelligence",
+      "description": "Flare and Songbird intelligence with provenance, source health, MCP access and x402 readiness.",
+      "title": "FlareSignal Intelligence",
+      "version": "0.39.40",
+      "websiteUrl": "https://flaresignal.io/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://flaresignal.io/wp-json/flaresignal/v1/mcp"
+        }
+      ],
+      "_meta": {}
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-12T04:49:59.530226Z",
+        "publishedAt": "2026-09-12T04:49:59.530226Z",
+        "updatedAt": "2026-09-12T04:49:59.530226Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.flarewatch/flarewatch",
+      "description": "Verifiable Flare & Songbird data: validator scores, FTSO accuracy, prices, wallet intelligence.",
+      "repository": {
+        "url": "https://github.com/nbridges333/flarewatch",
+        "source": "github"
+      },
+      "version": "0.1.5",
+      "websiteUrl": "https://www.flarewatch.io/services/mcp",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@flarewatch/mcp",
+          "version": "0.1.5",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.flarewatch.io/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-30T18:33:19.398847Z",
+        "publishedAt": "2026-08-30T18:33:19.398847Z",
+        "updatedAt": "2026-08-30T18:33:19.398847Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.flashshot/flashshot-mcp",
+      "description": "Generate studio-grade AI commercial product photography, scene templates, and pricing plans.",
+      "title": "FlashShot \u2014 AI Commercial Product Studio Photography",
+      "version": "2.0.1",
+      "websiteUrl": "https://flashshot.io",
+      "icons": [
+        {
+          "src": "https://blobs.codeways.co/cdn-cgi/image/width=600,fit=scale-down,format=auto,metadata=keep,sharpen=0.5/flashshot-io-logo-only-favicon.png",
+          "mimeType": "image/png"
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.flashshot.io/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-29T16:36:30.321725Z",
+        "publishedAt": "2026-10-29T16:36:30.321725Z",
+        "updatedAt": "2026-10-29T16:36:30.321725Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.fless/mcp",
+      "description": "Apartment hunting across 13 US states: rents, briefs, hunt links.",
+      "title": "Fless Apartment Hunt",
+      "repository": {
+        "url": "https://github.com/fless-io/skills",
+        "source": "github"
+      },
+      "version": "1.7.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.fless.io/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-27T15:38:54.161747Z",
+        "publishedAt": "2026-10-27T15:38:54.161747Z",
+        "updatedAt": "2026-10-27T15:38:54.161747Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.flexim/mcp",
+      "description": "Manage Flexim CMS content and Suggested Topics from compatible AI clients.",
+      "title": "Flexim",
+      "version": "1.0.0",
+      "websiteUrl": "https://flexim.io/docs/user-guide/mcp",
+      "icons": [
+        {
+          "src": "https://flexim.io/mcp-icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://flexim.io/api/v1/{workspace}/mcp",
+          "variables": {
+            "workspace": {
+              "description": "The workspace slug shown in your Flexim workspace URL.",
+              "isRequired": true,
+              "format": "string",
+              "placeholder": "my-workspace"
+            }
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-14T04:24:43.747491Z",
+        "publishedAt": "2026-08-14T04:24:43.747491Z",
+        "updatedAt": "2026-08-14T04:24:43.747491Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.flexyield/gateway",
+      "description": "RPC gateway for agents: six mainnets, measured failover, a key without signup, pay per call in USDC.",
+      "title": "FlexYield \u2014 blockchain RPC gateway",
+      "version": "1.4.0",
+      "websiteUrl": "https://flexyield.io/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://flexyield.io/mcp",
+          "headers": [
+            {
+              "description": "Bearer <FlexYield API key> \u2014 get one without signup: POST https://flexyield.io/keys (or the get_key tool); free tier at https://flexyield.io/registration/new",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-26T12:41:26.924933Z",
+        "publishedAt": "2026-09-26T12:41:26.924933Z",
+        "updatedAt": "2026-09-26T12:41:26.924933Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.flightcat/flightcat",
+      "description": "Search flights by flexible dates and broad destinations, with live prices and booking links.",
+      "title": "Flightcat",
+      "version": "1.0.0",
+      "websiteUrl": "https://flightcat.io",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.flightcat.io/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-10T16:56:08.665084Z",
+        "publishedAt": "2026-09-10T16:56:08.665084Z",
+        "updatedAt": "2026-09-10T16:56:08.665084Z",
+        "isLatest": true
+      }
+    }
+  }
+]

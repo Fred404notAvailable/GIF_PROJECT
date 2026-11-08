@@ -88,6 +88,10 @@ DEFAULT_TECH_KEYWORDS: dict[str, list[str]] = {
         "penetration", "pentest",
     ],
     "MCP": ["mcp", "model context protocol"],
+    "Stripe": ["stripe", "stripe api"],
+    "Figma": ["figma"],
+    "ClickHouse": ["clickhouse"],
+    "Git": ["git", "github", "git-scm"],
 }
 
 
@@ -135,6 +139,45 @@ class MapBuilder:
         )
         cols = [c[0] for c in cur.description]
         return [dict(zip(cols, row)) for row in cur.fetchall()]
+
+    def fetch_selected_mcp_servers(self, conn: sqlite3.Connection) -> list[dict[str, Any]]:
+        """Fetch all selected or approved MCP servers with metadata and tags."""
+        try:
+            cur = conn.cursor()
+            cur.execute(
+                """
+                SELECT id, name, slug, title, description, version, approved_version,
+                       repo_url, license, publisher, publisher_verified, maintainer_class,
+                       transport, package_types, requires_secrets, capability_class,
+                       module_id, status, vetting_score, vetting_notes
+                FROM mcp_servers
+                WHERE status IN ('selected', 'approved')
+                ORDER BY module_id, vetting_score DESC, slug
+                """
+            )
+            cols = [c[0] for c in cur.description]
+            servers = [dict(zip(cols, row)) for row in cur.fetchall()]
+        except sqlite3.OperationalError:
+            return []
+
+        for s in servers:
+            try:
+                cur.execute("SELECT tag FROM mcp_tech_tags WHERE slug = ? ORDER BY tag", (s["slug"],))
+                s["tags"] = [r[0] for r in cur.fetchall()]
+            except sqlite3.OperationalError:
+                s["tags"] = []
+
+        return servers
+
+    def fetch_mcp_links(self, conn: sqlite3.Connection) -> list[dict[str, Any]]:
+        """Fetch links between MCP servers and skills."""
+        try:
+            cur = conn.execute("SELECT mcp_slug, skill_slug, relation, reason FROM mcp_links ORDER BY mcp_slug")
+            cols = [c[0] for c in cur.description]
+            return [dict(zip(cols, row)) for row in cur.fetchall()]
+        except sqlite3.OperationalError:
+            return []
+
 
     def compute_tech_tags(self, skills: list[dict[str, Any]]) -> tuple[dict[str, list[str]], dict[str, list[str]]]:
         """
@@ -289,15 +332,30 @@ class MapBuilder:
             source_to_skills[src].append(sk)
             license_to_skills[lic].append(sk)
 
+        # Collect MCP servers & mappings
+        mcp_servers = self.fetch_selected_mcp_servers(conn)
+        mcp_links = self.fetch_mcp_links(conn)
+        mcp_to_skills = defaultdict(list)
+        for link in mcp_links:
+            mcp_to_skills[link["mcp_slug"]].append(link["skill_slug"])
+
+        # Also add MCP licenses to license_to_skills so lic-<license>.md notes exist
+        for srv in mcp_servers:
+            lic = srv.get("license") or "MIT"
+            license_to_skills[lic].append({
+                "slug": srv["slug"],
+                "description": srv.get("description", ""),
+            })
+
         # Plan files to generate: path -> content string
         files_to_write: dict[Path, str] = {}
 
         # 1. 00-Home.md
-        files_to_write[self.home_file] = self._render_home(mod_defs, skills)
+        files_to_write[self.home_file] = self._render_home(mod_defs, skills, mcp_servers)
 
         # 2. map/dashboard.md
         files_to_write[self.map_dir / "dashboard.md"] = self._render_dashboard(
-            skills, mod_defs, license_to_skills, active_tech_tags
+            skills, mod_defs, license_to_skills, active_tech_tags, mcp_servers
         )
 
         # 3. map/modules/Module N - <name>.md
@@ -335,10 +393,36 @@ class MapBuilder:
                 src, sk_list
             )
 
+        # MCP Sources
+        mcp_reg_srvs = [s for s in mcp_servers if s.get("maintainer_class") != "reference"]
+        if mcp_reg_srvs:
+            files_to_write[self.map_dir / "sources" / "src-mcp-registry.md"] = self._render_source_note(
+                "mcp-registry",
+                [{"source_name": "https://registry.modelcontextprotocol.io", "commit_sha": "registry-v0.1", "license": "MIT", "slug": s["slug"], "description": s.get("description", "")} for s in mcp_reg_srvs]
+            )
+        mcp_ref_srvs = [s for s in mcp_servers if s.get("maintainer_class") == "reference"]
+        if mcp_ref_srvs:
+            files_to_write[self.map_dir / "sources" / "src-reference.md"] = self._render_source_note(
+                "reference",
+                [{"source_name": "https://github.com/modelcontextprotocol/servers", "commit_sha": "main", "license": "MIT", "slug": s["slug"], "description": s.get("description", "")} for s in mcp_ref_srvs]
+            )
+
         # 7. map/licenses/lic-<license>.md
         for lic, sk_list in sorted(license_to_skills.items()):
             files_to_write[self.map_dir / "licenses" / f"lic-{lic}.md"] = self._render_license_note(
                 lic, sk_list
+            )
+
+        # 8. map/mcp/<slug>.md
+        for srv in mcp_servers:
+            slug = srv["slug"]
+            mid = srv.get("module_id") or 1
+            mname = mod_defs.get(mid, {}).get("name", f"Module {mid}")
+            mod_title = f"Module {mid} - {self._sanitize_title(mname)}"
+            paired = mcp_to_skills.get(slug, [])
+            mcp_tags = [t for t in srv.get("tags", []) if t in active_tech_tags]
+            files_to_write[self.map_dir / "mcp" / f"{slug}.md"] = self._render_mcp_proxy(
+                srv, mod_title, mcp_tags, paired
             )
 
         # Prune obsolete skill proxies (skills no longer selected)
@@ -349,6 +433,44 @@ class MapBuilder:
             for p in skills_map_dir.glob("*.md"):
                 if p.stem not in selected_slugs:
                     files_to_delete.append(p)
+
+        # Prune obsolete mcp proxies
+        mcp_map_dir = self.map_dir / "mcp"
+        if mcp_map_dir.is_dir():
+            selected_mcp_slugs = {s["slug"] for s in mcp_servers}
+            for p in mcp_map_dir.glob("*.md"):
+                if p.stem not in selected_mcp_slugs:
+                    files_to_delete.append(p)
+
+        # Prune obsolete license notes
+        license_map_dir = self.map_dir / "licenses"
+        if license_map_dir.is_dir():
+            active_licenses = {f"lic-{lic}" for lic in license_to_skills if license_to_skills[lic]}
+            for p in license_map_dir.glob("*.md"):
+                if p.stem not in active_licenses:
+                    files_to_delete.append(p)
+
+        # Prune obsolete source notes
+        sources_map_dir = self.map_dir / "sources"
+        if sources_map_dir.is_dir():
+            active_sources = {f"src-{src}" for src in source_to_skills if source_to_skills[src]}
+            if mcp_reg_srvs:
+                active_sources.add("src-mcp-registry")
+            if mcp_ref_srvs:
+                active_sources.add("src-reference")
+            for p in sources_map_dir.glob("*.md"):
+                if p.stem not in active_sources:
+                    files_to_delete.append(p)
+
+        # Prune obsolete tech notes
+        tech_map_dir = self.map_dir / "tech"
+        if tech_map_dir.is_dir():
+            active_tech = set(active_tech_tags.keys())
+            for p in tech_map_dir.glob("*.md"):
+                if p.stem not in active_tech:
+                    files_to_delete.append(p)
+
+
 
         summary = {
             "total_selected": len(skills),
@@ -446,6 +568,7 @@ class MapBuilder:
         # Check proxy notes vs selected skills
         conn = get_connection(self.db_path)
         skills = self.fetch_selected_skills(conn)
+        mcp_servers = self.fetch_selected_mcp_servers(conn)
         conn.close()
 
         selected_slugs = {s["slug"] for s in skills}
@@ -458,6 +581,18 @@ class MapBuilder:
         extra_proxies = proxy_slugs - selected_slugs
         if extra_proxies:
             errors.append(f"Extra proxy notes for unselected skills: {sorted(list(extra_proxies))[:5]}")
+
+        selected_mcp_slugs = {s["slug"] for s in mcp_servers}
+        mcp_proxy_slugs = {p.stem for p in (self.map_dir / "mcp").glob("*.md")} if (self.map_dir / "mcp").is_dir() else set()
+
+        missing_mcp = selected_mcp_slugs - mcp_proxy_slugs
+        if missing_mcp:
+            errors.append(f"Missing proxy notes for selected MCP servers: {sorted(list(missing_mcp))[:5]}")
+
+        extra_mcp = mcp_proxy_slugs - selected_mcp_slugs
+        if extra_mcp:
+            errors.append(f"Extra proxy notes for unselected MCP servers: {sorted(list(extra_mcp))[:5]}")
+
 
         # Link integrity check across map/
         wikilink_pattern = re.compile(r"\[\[([^\]|#]+)(?:[|#][^\]]*)?\]\]")
@@ -485,7 +620,12 @@ class MapBuilder:
     def _sanitize_title(self, name: str) -> str:
         return name.replace("/", "-").replace("\\", "-").replace(":", " -")
 
-    def _render_home(self, mod_defs: dict[int, dict[str, Any]], skills: list[dict[str, Any]]) -> str:
+    def _render_home(
+        self,
+        mod_defs: dict[int, dict[str, Any]],
+        skills: list[dict[str, Any]],
+        mcp_servers: list[dict[str, Any]] | None = None,
+    ) -> str:
         lines = [
             "---",
             "type: home-dashboard",
@@ -494,7 +634,7 @@ class MapBuilder:
             "---",
             "# DevCrew AI Skill Vault",
             "",
-            "Welcome to the **DevCrew AI Skill Vault** map layer. This knowledge graph connects the 100 selected enterprise agent skills across 7 core architecture modules, technologies, upstream sources, and licenses.",
+            "Welcome to the **DevCrew AI Skill Vault** map layer. This knowledge graph connects the 100 selected enterprise agent skills and curated live MCP servers across 7 core architecture modules, technologies, upstream sources, and licenses.",
             "",
             "## Architecture Modules & Hubs",
         ]
@@ -510,6 +650,11 @@ class MapBuilder:
             "## Vault Observability & Dashboards",
             "- [[dashboard|Vault Operational Dashboard & Metrics]]",
             "",
+            "## MCP Server Catalog & Client Configs",
+            "- **MCP Proxy Nodes:** Generated in `map/mcp/`",
+            "- **Vetted MCP Notes:** See `mcp/` in vault",
+            "- **Client Config Examples:** Generated in `mcp/configs/`",
+            "",
             "## Human Collaboration & Workflows",
             "- **Crews:** See `crews/README.md` for agent team configurations",
             "- **Playbooks:** See `playbooks/README.md` for operational SOPs",
@@ -524,6 +669,7 @@ class MapBuilder:
         mod_defs: dict[int, dict[str, Any]],
         license_to_skills: dict[str, list[dict[str, Any]]],
         active_tech_tags: dict[str, list[str]],
+        mcp_servers: list[dict[str, Any]] | None = None,
     ) -> str:
         lines = [
             "---",
@@ -550,6 +696,29 @@ class MapBuilder:
 
         lines.append(f"| **Total** | **All 7 Modules** | **{total_target}** | **{total_selected}** | **100% Target Met** |")
 
+        if mcp_servers:
+            approved_cnt = len([s for s in mcp_servers if s.get("status") == "approved"])
+            selected_cnt = len([s for s in mcp_servers if s.get("status") == "selected"])
+            ro_cnt = len([s for s in mcp_servers if s.get("capability_class") == "read-only"])
+            rw_cnt = len([s for s in mcp_servers if s.get("capability_class") == "read-write"])
+            dest_cnt = len([s for s in mcp_servers if s.get("capability_class") == "destructive"])
+            vendor_cnt = len([s for s in mcp_servers if s.get("maintainer_class") in ("official-vendor", "reference")])
+
+            lines.extend([
+                "",
+                "## MCP Server Catalog Statistics",
+                "",
+                "| Metric | Count |",
+                "|---|:---:|",
+                f"| **Total Selected MCP Servers** | {len(mcp_servers)} |",
+                f"| **Approved by Human (catalog.yaml)** | {approved_cnt} |",
+                f"| **Awaiting Human Approval** | {selected_cnt} |",
+                f"| **Read-Only Capability Class** | {ro_cnt} |",
+                f"| **Read-Write Capability Class** | {rw_cnt} |",
+                f"| **Destructive Capability Class** | {dest_cnt} |",
+                f"| **Official Vendor / Reference Class** | {vendor_cnt} |",
+            ])
+
         lines.extend([
             "",
             "## License Distribution",
@@ -557,6 +726,7 @@ class MapBuilder:
             "| License | Selected Skills | Policy Status | Reference Note |",
             "|---|:---:|:---:|---|",
         ])
+
         for lic, sk_list in sorted(license_to_skills.items()):
             lines.append(f"| `{lic}` | {len(sk_list)} | Allowed | [[lic-{lic}]] |")
 
@@ -789,6 +959,78 @@ class MapBuilder:
         lines.append("")
         return "\n".join(lines)
 
+    def _render_mcp_proxy(
+        self,
+        srv: dict[str, Any],
+        mod_title: str,
+        tags: list[str],
+        paired_skills: list[str],
+    ) -> str:
+        slug = srv["slug"]
+        mid = srv.get("module_id") or 1
+        name = srv.get("name") or slug
+        title = srv.get("title") or slug
+        mclass = srv.get("maintainer_class") or "community"
+        status = srv.get("status") or "selected"
+        cap = srv.get("capability_class") or "unknown"
+        lic = srv.get("license") or "MIT"
+        ver = srv.get("version") or ""
+        score = srv.get("vetting_score") or 0
+        desc = (srv.get("description") or "").replace("\n", " ").strip()
+
+        source_note = "src-reference" if mclass == "reference" else "src-mcp-registry"
+
+        lines = [
+            "---",
+            "type: mcp-proxy",
+            "generated: true",
+            f'title: "{title}"',
+            f'name: "{name}"',
+            f"slug: {slug}",
+            f"maintainer_class: {mclass}",
+            f"capability_class: {cap}",
+            f"status: {status}",
+            f"module_id: {mid}",
+            f"vetting_score: {score}",
+            f"source: {source_note}",
+            f"license: {lic}",
+            f"mcp_note_path: mcp/{slug}.md",
+            "---",
+            f"# {title} ({slug})",
+            desc if desc else f"MCP Server proxy for {slug}",
+            "",
+            f"**Module:** [[{mod_title}]]  ",
+            f"**Source / Publisher:** [[{source_note}]]  ",
+            f"**License:** [[lic-{lic}]]  ",
+            f"**Capability Class:** `{cap}`  ",
+            f"**Status:** **{status}** | **Version:** `{ver}` | **Vetting Score:** {score}/100",
+            "",
+            "## Paired Agent Skills (pairs-with)",
+        ]
+        if paired_skills:
+            for psk in sorted(paired_skills):
+                lines.append(f"- [[{psk}]]")
+        else:
+            lines.append("_No direct skill pairings registered._")
+
+        lines.extend([
+            "",
+            "## Technologies",
+        ])
+        if tags:
+            for t in sorted(tags):
+                lines.append(f"- [[{t}]]")
+        else:
+            lines.append("_No specific technology tag assigned._")
+
+        lines.extend([
+            "",
+            "## Details & Vault Note",
+            f"See full vault note at `mcp/{slug}.md`.",
+            "",
+        ])
+        return "\n".join(lines)
+
     # -----------------------------------------------------------------------
     # Obsidian Config Merging
     # -----------------------------------------------------------------------
@@ -813,7 +1055,7 @@ class MapBuilder:
                 app_data = {}
 
         filters: list[str] = app_data.get("userIgnoreFilters", [])
-        for f in ["skills/", "_quarantine/", ".staging/"]:
+        for f in ["skills/", "_quarantine/", ".staging/", "mcp-registry/"]:
             if f not in filters:
                 filters.append(f)
         app_data["userIgnoreFilters"] = filters
@@ -838,11 +1080,13 @@ class MapBuilder:
             {"query": "path:map/tech", "color": {"a": 1, "rgb": 1096065}},      # Emerald (#10b981)
             {"query": "path:map/sources", "color": {"a": 1, "rgb": 16113163}},  # Amber (#f59e0b)
             {"query": "path:map/licenses", "color": {"a": 1, "rgb": 15680580}}, # Red (#ef4444)
+            {"query": "path:map/mcp", "color": {"a": 1, "rgb": 15158332}},      # Indigo/Magenta (#e74c3c)
             {"query": "path:crews", "color": {"a": 1, "rgb": 439892}},          # Cyan (#06b6d4)
             {"query": "path:playbooks", "color": {"a": 1, "rgb": 15513241}},    # Pink (#ec4899)
         ]
         graph_data["colorGroups"] = target_colors
         graph_json.write_text(json.dumps(graph_data, indent=2), encoding="utf-8")
+
 
 
 # ---------------------------------------------------------------------------

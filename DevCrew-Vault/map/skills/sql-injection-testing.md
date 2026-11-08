@@ -18,7 +18,7 @@ Execute comprehensive SQL injection vulnerability assessments on web application
 **Tech:** [[SQL & Database]], [[Security Audit]], [[SQL Injection]], [[TDD]]
 
 ## Related Skills
-- **Complements:** [[api-design-principles]], [[docker-compose-patterns]], [[neon-postgres-branches]], [[stripe-best-practices]]
-- **Alternate of:** [[api-security-testing]], [[security-review]], [[web-security-testing]]
+- **Complements:** [[docker-compose-patterns]], [[neon-postgres-branches]], [[sql-optimization-patterns]], [[stripe-best-practices]]
+- **Alternate of:** [[api-security-testing]], [[owasp-audit]], [[security-review]]
 
 Real skill file: `skills/sql-injection-testing/SKILL.md`

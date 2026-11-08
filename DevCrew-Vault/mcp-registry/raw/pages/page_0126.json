@@ -1,0 +1,3544 @@
+[
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.pingodds/odds",
+      "description": "Live sportsbook odds, line movement and +EV and arbitrage signals from 14 US and Ontario books.",
+      "title": "PingOdds",
+      "version": "1.0.0",
+      "websiteUrl": "https://pingodds.com/docs/mcp",
+      "icons": [
+        {
+          "src": "https://pingodds.com/apple-touch-icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "180x180"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.pingodds.com/mcp",
+          "headers": [
+            {
+              "description": "Your PingOdds AI agent key (po_mcp_...), from pingodds.com/app/agents. Starter and Pro plans.",
+              "isRequired": true,
+              "value": "Bearer {agent_key}",
+              "isSecret": true,
+              "variables": {
+                "agent_key": {
+                  "description": "PingOdds AI agent key (po_mcp_...), from pingodds.com/app/agents",
+                  "isRequired": true,
+                  "isSecret": true
+                }
+              },
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-23T13:24:59.031791Z",
+        "publishedAt": "2026-10-23T13:24:59.031791Z",
+        "updatedAt": "2026-10-23T13:24:59.031791Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.pingvalid/mcp-server",
+      "description": "Email validation for AI assistants: verdict, risk score, evidence. Free: 100 checks a month.",
+      "title": "PingValid Email Validation",
+      "version": "0.4.3",
+      "websiteUrl": "https://pingvalid.com/docs/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://pingvalid.com/mcp",
+          "headers": [
+            {
+              "description": "Optional. Clients sign in with OAuth by default; or Bearer pv_live_\u2026 \u2014 a PingValid API key from https://pingvalid.com/dashboard/api-keys",
+              "format": "string",
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-18T10:22:52.062321Z",
+        "publishedAt": "2026-10-18T10:22:52.062321Z",
+        "updatedAt": "2026-10-18T10:22:52.062321Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+      "name": "com.pingvera/monitoring",
+      "description": "Client-website monitoring for agencies: uptime, incidents, SSL/domain expiry, server metrics.",
+      "version": "1.0.0",
+      "websiteUrl": "https://pingvera.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://app.pingvera.com/mcp",
+          "headers": [
+            {
+              "description": "Bearer <API token from the Pingvera dashboard>",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-23T15:40:13.096713Z",
+        "publishedAt": "2026-07-23T15:40:13.096713Z",
+        "updatedAt": "2026-07-23T15:40:13.096713Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.pinkwallet/agentic-payments-sandbox",
+      "description": "Pink Agentic AI Payments: AI agents pay within spending rules (budgets, caps, approval). Sandbox.",
+      "title": "Pink Agentic AI Payments",
+      "repository": {
+        "url": "https://github.com/Pink-Agentic-Payments/pink-agentic-payments-mcp",
+        "source": "github"
+      },
+      "version": "0.1.3",
+      "websiteUrl": "https://pinkwallet.com/agentic/developers/",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "pink-agentic-payments-mcp",
+          "version": "0.1.1",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Agent API key from a Pink sandbox workspace (create one free, no signup, at https://agentic-sandbox.pinkwallet.com or via `npx pink-agentic-payments-mcp --create-sandbox`).",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "PINK_AGENT_API_KEY"
+            },
+            {
+              "description": "Remote Pink MCP endpoint to bridge to. Defaults to the public sandbox: https://agentic-sandbox.pinkwallet.com/mcp",
+              "name": "PINK_MCP_URL"
+            }
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://agentic-sandbox.pinkwallet.com/mcp",
+          "headers": [
+            {
+              "description": "Optional. OAuth 2.1 is available (discovery at /.well-known/oauth-authorization-server, dynamic client registration, PKCE S256, consent page); or a Bearer sandbox agent key (pk_sandbox_agent_*) issued by POST /v1/sandbox/workspaces or the create-workspace form at https://agentic-sandbox.pinkwallet.com/.",
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-15T05:30:51.89714Z",
+        "publishedAt": "2026-10-15T05:30:51.89714Z",
+        "updatedAt": "2026-10-15T05:30:51.89714Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.pinnodds/odds",
+      "description": "Pinnacle live and prematch odds, odds drops and account usage. Auth: pinnodds API key as Bearer.",
+      "title": "pinnodds \u2014 Pinnacle odds",
+      "version": "0.1.0",
+      "websiteUrl": "https://pinnodds.com/docs#mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.pinnodds.com/mcp",
+          "headers": [
+            {
+              "description": "Bearer <your pinnodds API key> \u2014 get one free at https://pinnodds.com/",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-07T07:42:45.117326Z",
+        "publishedAt": "2026-09-07T07:42:45.117326Z",
+        "updatedAt": "2026-09-07T07:42:45.117326Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.pinnwire/pinnacle-odds",
+      "description": "Live and prematch Pinnacle odds, price drops and no-vig fair prices. Free demo access, no key.",
+      "title": "PinnWire \u2014 Pinnacle Odds, Price Drops & No-Vig Fair Prices",
+      "version": "1.1.0",
+      "websiteUrl": "https://pinnwire.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://pinnwire.com/mcp",
+          "headers": [
+            {
+              "description": "PinnWire API key (pk_...). Optional \u2014 omit to use the public demo key at reduced rate limits. Get a free key at https://pinnwire.com",
+              "isSecret": true,
+              "name": "X-API-Key"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-25T19:24:50.561211Z",
+        "publishedAt": "2026-08-25T19:24:50.561211Z",
+        "updatedAt": "2026-08-25T19:24:50.561211Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.pinoyshki/bakery",
+      "description": "Browse Pinoyshki Bakery's menu, check an order against its rules, and get the checkout link.",
+      "title": "Pinoyshki Bakery",
+      "version": "1.0.0",
+      "websiteUrl": "https://pinoyshki.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://bot.pinoyshki.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-25T01:37:25.694558Z",
+        "publishedAt": "2026-09-25T01:37:25.694558Z",
+        "updatedAt": "2026-09-25T01:37:25.694558Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.pinpinterest/keywords",
+      "description": "Pinterest keyword research from our own crawl: saves, competition, related terms, trends, top pins.",
+      "title": "PinPinterest \u2014 Pinterest Keyword Research",
+      "version": "1.0.0",
+      "websiteUrl": "https://pinpinterest.com/developers/mcp?utm_source=mcp-registry",
+      "icons": [
+        {
+          "src": "https://pinpinterest.com/icon.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.pinpinterest.com/mcp",
+          "headers": [
+            {
+              "description": "Bearer <your PinPinterest API key>. 15 lookups a month free: make a key at https://pinpinterest.com/developers",
+              "isRequired": true,
+              "value": "Bearer {api_key}",
+              "isSecret": true,
+              "variables": {
+                "api_key": {
+                  "description": "Your PinPinterest API key (pp_live_\u2026), from Settings \u203a API",
+                  "isRequired": true,
+                  "isSecret": true
+                }
+              },
+              "name": "Authorization"
+            }
+          ]
+        }
+      ],
+      "_meta": {
+        "io.modelcontextprotocol.registry/publisher-provided": {
+          "tools": [
+            "keyword_lookup",
+            "request_keywords",
+            "related_keywords",
+            "keyword_top_pins",
+            "niche_top_pins",
+            "trending",
+            "list_niches",
+            "my_quota"
+          ]
+        }
+      }
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-24T10:14:17.72407Z",
+        "publishedAt": "2026-10-24T10:14:17.72407Z",
+        "updatedAt": "2026-10-24T10:14:17.72407Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.pinsharing/maps",
+      "description": "Geocoding, static maps and privacy-safe area maps from OpenStreetMap data. Hard caps, no overage.",
+      "title": "PinSharing Maps",
+      "repository": {
+        "url": "https://github.com/Software-Consulting/pinsharing-mcp",
+        "source": "github"
+      },
+      "version": "1.0.2",
+      "websiteUrl": "https://pinsharing.com/docs/mcp",
+      "icons": [
+        {
+          "src": "https://pinsharing.com/icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        },
+        {
+          "src": "https://pinsharing.com/icon-192.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "192x192"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.pinsharing.com/v1/mcp",
+          "headers": [
+            {
+              "description": "Bearer followed by your PinSharing API key (ps_\u2026). Free keys: https://pinsharing.com/dashboard",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-05T06:53:13.359741Z",
+        "publishedAt": "2026-11-05T06:53:13.359741Z",
+        "updatedAt": "2026-11-05T06:53:13.359741Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.pinsvit/api",
+      "description": "Discover and book local places, or run yours with Pinsvit Business: bookings, front desk, bills.",
+      "title": "Pinsvit",
+      "version": "1.16.0",
+      "websiteUrl": "https://pinsvit.com/developers",
+      "icons": [
+        {
+          "src": "https://cdn.pinsvit.com/pinsvit1024.jpg",
+          "mimeType": "image/jpeg",
+          "sizes": [
+            "1024x1024"
+          ]
+        },
+        {
+          "src": "https://pinsvit.com/site/mcp/icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        },
+        {
+          "src": "https://pinsvit.com/site/mcp/icon-192.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "192x192"
+          ]
+        },
+        {
+          "src": "https://pinsvit.com/site/mcp/icon-48.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "48x48"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://pinsvit.com/api/v1/mcp"
+        },
+        {
+          "type": "sse",
+          "url": "https://pinsvit.com/api/v1/mcp/sse"
+        }
+      ],
+      "_meta": {
+        "io.modelcontextprotocol.registry/publisher-provided": {
+          "auth": {
+            "documentation": "https://pinsvit.com/auth.md",
+            "oauth": {
+              "clientRegistration": "client-id-metadata-document",
+              "issuer": "https://pinsvit.com",
+              "metadata": "https://pinsvit.com/.well-known/oauth-authorization-server",
+              "resource": "https://pinsvit.com/api/v1/mcp",
+              "scopes": [
+                "account"
+              ]
+            },
+            "scheme": "OAuth 2.1 (MCP authorization): a protected call without a token answers HTTP 401 with WWW-Authenticate resource_metadata; clients identify with a Client ID Metadata Document, PKCE S256, scope account. A Firebase ID token for a Pinsvit account is still accepted as a legacy bearer."
+          },
+          "brand": {
+            "canonicalName": "Pinsvit",
+            "disambiguation": "Pinsvit is a single-word brand, spelled P-I-N-S-V-I-T, for a local discovery and social platform where people find and book places, and places run their back office with Pinsvit Business. It is a distinct brand and is not affiliated with other, similarly spelled names.",
+            "officialDomain": "pinsvit.com"
+          },
+          "capabilities": {
+            "completions": true,
+            "prompts": true,
+            "resources": true,
+            "tools": true
+          },
+          "documentation": {
+            "apiCatalog": "https://pinsvit.com/.well-known/api-catalog",
+            "auth": "https://pinsvit.com/auth.md",
+            "authorizationServerMetadata": "https://pinsvit.com/.well-known/oauth-authorization-server",
+            "graphqlSchema": "https://pinsvit.com/api/v1/graphql/schema.graphql",
+            "llms": "https://pinsvit.com/llms.txt",
+            "llmsFull": "https://pinsvit.com/llms-full.txt",
+            "protectedResourceMetadata": "https://pinsvit.com/.well-known/oauth-protected-resource/api/v1/mcp",
+            "skill": "https://pinsvit.com/.well-known/agent-skills/pinsvit/SKILL.md"
+          },
+          "keywords": [
+            "pinsvit",
+            "booking",
+            "online booking",
+            "booking software",
+            "appointment scheduling",
+            "appointments",
+            "reservations",
+            "pinsvit business",
+            "business management",
+            "front desk",
+            "customer management",
+            "service catalog",
+            "local business",
+            "salon booking",
+            "barber booking",
+            "clinic booking",
+            "AI booking assistant",
+            "AI agents",
+            "MCP",
+            "local discovery",
+            "places near me",
+            "things to do",
+            "local events",
+            "community",
+            "events"
+          ],
+          "manifest": "https://pinsvit.com/.well-known/mcp.json",
+          "prompts": [
+            "find_events_nearby",
+            "post_about_place",
+            "book_appointment",
+            "reschedule_booking",
+            "book_walk_in"
+          ],
+          "protocolVersions": [
+            "2026-07-28",
+            "2025-11-25",
+            "2025-06-18",
+            "2025-03-26",
+            "2024-11-05"
+          ],
+          "resourceTemplates": [
+            "pinsvit://post/{geoHash}/{id}",
+            "pinsvit://place/{geoHash}/{id}"
+          ],
+          "summary": "Pinsvit is a map of local places and what's happening around them: find places near you, see their services, prices and free times, book the ones that take bookings, and share posts and events with people nearby, in the app or through AI agents. Pinsvit Business is the back office those places run on: bookings, a front desk, customers and bills, with a free tier available. It gives a business a public page, a service catalog, online booking, a front desk, a customer directory and per-booking billing, ready for AI agents. MCP covers the customer side (place lookup, services, bookable times, booking, cancelling and notes) and the front desk of a business (its bookings, booking requests, accepting and declining, no-shows, booking for a walk-in customer, reading a bill and recording a payment), plus public local discovery and content creation; setting a business up (its services, hours, settings, bill charges and discounts) is in the GraphQL API and the app.",
+          "tools": {
+            "authenticated": [
+              "search_places",
+              "get_current_user_details",
+              "get_publishing_media_keys",
+              "create_post",
+              "create_event",
+              "create_comment",
+              "delete_post",
+              "delete_comment",
+              "get_place_services",
+              "find_booking_times",
+              "get_month_availability",
+              "create_booking",
+              "list_my_bookings",
+              "get_booking",
+              "cancel_booking",
+              "add_booking_note",
+              "list_my_places",
+              "list_place_bookings",
+              "list_place_booking_requests",
+              "accept_booking",
+              "decline_booking",
+              "mark_no_show",
+              "find_place_customers",
+              "get_booking_bill",
+              "record_bill_payment"
+            ],
+            "public": [
+              "ping",
+              "get_current_country_code",
+              "search_posts_near",
+              "search_events_near",
+              "get_post",
+              "get_comments",
+              "get_place"
+            ],
+            "staff": [
+              "list_my_places",
+              "list_place_bookings",
+              "list_place_booking_requests",
+              "accept_booking",
+              "decline_booking",
+              "mark_no_show",
+              "find_place_customers",
+              "record_bill_payment"
+            ]
+          }
+        }
+      }
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-03T17:50:26.04992Z",
+        "publishedAt": "2026-11-03T17:50:26.04992Z",
+        "updatedAt": "2026-11-03T17:50:26.04992Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.pintonotes/pinto-notes",
+      "description": "Search, read and edit your notes in Pinto Notes: folders, checklists, tables and trackers.",
+      "title": "Pinto Notes",
+      "repository": {
+        "url": "https://github.com/amber-notes/amber-notes",
+        "source": "github",
+        "id": "1394754812",
+        "subfolder": "supabase/functions/mcp"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://pintonotes.com/blog/mcp-server",
+      "icons": [
+        {
+          "src": "https://pintonotes.com/mark-256.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "256x256"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.pintonotes.com"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-09T11:04:19.634097Z",
+        "publishedAt": "2026-10-09T11:04:19.634097Z",
+        "updatedAt": "2026-10-09T11:04:19.634097Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.pipe0/pipe0",
+      "description": "GTM data for agents. Build and enrich lead lists, and watch for signals like job changes and hiring.",
+      "title": "pipe0",
+      "version": "2.3.0",
+      "websiteUrl": "https://www.pipe0.com/docs/sdks/mcp",
+      "icons": [
+        {
+          "src": "https://www.pipe0.com/apple-touch-icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "180x180"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.pipe0.com/v1/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-02T17:11:06.585251Z",
+        "publishedAt": "2026-10-02T17:11:06.585251Z",
+        "updatedAt": "2026-10-02T17:11:06.585251Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.pipecorn/mcp",
+      "description": "Search B2B companies and people, then find verified work emails and mobiles across 100+ providers.",
+      "title": "Pipecorn",
+      "repository": {
+        "url": "https://github.com/Pipecorn/mcp-pipecorn",
+        "source": "github"
+      },
+      "version": "0.1.0",
+      "websiteUrl": "https://pipecorn.com",
+      "icons": [
+        {
+          "src": "https://pipecorn.com/assets/brand/icon-96.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "96x96"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.pipecorn.com/mcp",
+          "headers": [
+            {
+              "description": "Pipecorn API key, for clients that do not use OAuth. Create one at https://app.pipecorn.com/settings/apis/keys",
+              "isSecret": true,
+              "name": "X-API-Key"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-17T00:29:17.785574Z",
+        "publishedAt": "2026-10-17T00:29:17.785574Z",
+        "updatedAt": "2026-10-17T00:29:17.785574Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.pipefork/management",
+      "description": "Manage Pipefork API projects, drafts, connections, secrets, and deployments through MCP.",
+      "title": "Pipefork Management MCP",
+      "version": "0.1.0",
+      "websiteUrl": "https://www.pipefork.com/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.pipefork.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-17T05:34:09.174733Z",
+        "publishedAt": "2026-10-17T05:34:09.174733Z",
+        "updatedAt": "2026-10-17T05:34:09.174733Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.pipiwaitrailmaui/trail-status",
+      "description": "Live P\u012bp\u012bwai Trail park and road status, compiled from NPS and Hawaii DOT.",
+      "title": "P\u012bp\u012bwai Trail status",
+      "version": "1.0.0",
+      "websiteUrl": "https://pipiwaitrailmaui.com/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://pipiwaitrailmaui.com/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-26T04:57:57.367621Z",
+        "publishedAt": "2026-08-26T04:57:57.367621Z",
+        "updatedAt": "2026-08-26T04:57:57.367621Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.piratefly/flight-deals",
+      "description": "Is this flight price good right now? Verdicts from 90 days of observed fares on 500+ routes.",
+      "title": "Piratefly Flight Price Judge",
+      "version": "1.0.0",
+      "websiteUrl": "https://piratefly.com/mcp-server",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://piratefly.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-20T13:52:14.424524Z",
+        "publishedAt": "2026-09-20T13:52:14.424524Z",
+        "updatedAt": "2026-09-20T13:52:14.424524Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.pirateskills/pirateskills",
+      "description": "Growth marketing and vibe coding: search the codices, find and join events, see the passes.",
+      "title": "Pirate Skills",
+      "version": "1.0.0",
+      "websiteUrl": "https://pirateskills.com/agents",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://pirateskills.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-18T11:12:06.883743Z",
+        "publishedAt": "2026-10-18T11:12:06.883743Z",
+        "updatedAt": "2026-10-18T11:12:06.883743Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.pirchjobs/pirch",
+      "description": "Verified job search: every listing confirmed live and accepting applicants within the last 72h.",
+      "version": "1.0.0",
+      "websiteUrl": "https://pirchjobs.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://pirchjobs.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-27T22:28:29.939006Z",
+        "publishedAt": "2026-07-27T22:28:29.939006Z",
+        "updatedAt": "2026-07-27T22:28:29.939006Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.pitbridge/pitbridge",
+      "description": "Local-first MCP bridge for NinjaTrader 8 behind a deterministic guardrail engine.",
+      "repository": {
+        "url": "https://github.com/ToolstackVault/pitbridge",
+        "source": "github"
+      },
+      "version": "0.2.2",
+      "websiteUrl": "https://pitbridge.com/",
+      "packages": [
+        {
+          "registryType": "pypi",
+          "registryBaseUrl": "https://pypi.org",
+          "identifier": "pitbridge",
+          "version": "0.2.2",
+          "runtimeHint": "uvx",
+          "transport": {
+            "type": "stdio"
+          },
+          "packageArguments": [
+            {
+              "description": "Run the PitBridge daemon exposing its agent surface over MCP stdio. Paper mode by default; there is no MCP tool to arm live trading or release the kill switch.",
+              "type": "positional",
+              "value": "mcp"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-10T11:30:06.033941Z",
+        "publishedAt": "2026-07-10T11:30:06.033941Z",
+        "updatedAt": "2026-07-10T11:30:06.033941Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.pitchcentric/mcp-server",
+      "description": "Podcast booking-intelligence MCP server: search shows, match profiles, draft pitches, read replies.",
+      "repository": {
+        "url": "https://github.com/usmancentric/Pitch-Centric",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://pitchcentric.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-13T12:55:25.667392Z",
+        "publishedAt": "2026-07-13T12:55:25.667392Z",
+        "updatedAt": "2026-07-13T12:55:25.667392Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.pitchwhip/pitchwhip",
+      "description": "B2B cold-calling: your calls, follow-ups, account maps and contacts, plus call scripts.",
+      "title": "PitchWhip",
+      "version": "1.0.0",
+      "websiteUrl": "https://pitchwhip.com/ai-assistants",
+      "icons": [
+        {
+          "src": "https://pitchwhip.com/icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.pitchwhip.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-14T21:00:45.00335Z",
+        "publishedAt": "2026-10-14T21:00:45.00335Z",
+        "updatedAt": "2026-10-14T21:00:45.00335Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.pithflow/pithflow",
+      "description": "Read-only access to your own Pithflow meeting notes, transcripts, dictionary and usage.",
+      "title": "Pithflow",
+      "version": "1.36.0",
+      "websiteUrl": "https://pithflow.com/docs/mcp/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.pithflow.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-06T05:41:58.819159Z",
+        "publishedAt": "2026-09-06T05:41:58.819159Z",
+        "updatedAt": "2026-09-06T05:41:58.819159Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.pixelesq/pixelesq",
+      "description": "Build and manage Pixelesq websites from a conversation: pages, sections, content, SEO, analytics.",
+      "title": "Pixelesq",
+      "repository": {
+        "url": "https://github.com/pixelesq/pixelesq-skills",
+        "source": "github",
+        "id": "1175425490"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://www.pixelesq.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.pixelesq.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-17T14:35:47.085679Z",
+        "publishedAt": "2026-10-17T14:35:47.085679Z",
+        "updatedAt": "2026-10-17T14:35:47.085679Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.pixelgust/mcp",
+      "description": "Weather, climate, soil, terrain, fire and flood risk data for any point or polygon. Free tier.",
+      "title": "PixelGust Environmental Data",
+      "version": "1.2.0",
+      "websiteUrl": "https://pixelgust.com/docs#mcp",
+      "icons": [
+        {
+          "src": "https://pixelgust.com/logo.png",
+          "mimeType": "image/png"
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://pixelgust.com/mcp",
+          "headers": [
+            {
+              "description": "Optional PixelGust API key. Without it, keyless free-tier limits apply. Clients that cannot set headers can append ?key=YOUR_KEY to the URL.",
+              "isSecret": true,
+              "name": "X-API-Key"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-01T11:30:26.393552Z",
+        "publishedAt": "2026-11-01T11:30:26.393552Z",
+        "updatedAt": "2026-11-01T11:30:26.393552Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.pixelixe/pixelixe-mcp",
+      "description": "Brand-safe MCP for AI agents to create editable, on-brand graphics and automate variants.",
+      "title": "Pixelixe",
+      "repository": {
+        "url": "https://github.com/pixelixe/pixelixe-mcp",
+        "source": "github"
+      },
+      "version": "1.0.2",
+      "websiteUrl": "https://pixelixe.com/mcp-server/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://studio.pixelixe.com/api/mcp/v1"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-03-26T17:25:56.760645Z",
+        "publishedAt": "2026-03-26T17:25:56.760645Z",
+        "updatedAt": "2026-03-26T17:25:56.760645Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.pixelplusapp/pixelplus",
+      "description": "Make AI videos, images, dubbing, character swaps and upscales with your Pixel+ account.",
+      "title": "Pixel+",
+      "version": "1.2.0",
+      "websiteUrl": "https://app.pixelplusapp.com/mcp",
+      "icons": [
+        {
+          "src": "https://pixelplusapp.com/android-chrome-512x512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.pixelplusapp.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-14T15:03:08.246019Z",
+        "publishedAt": "2026-10-14T15:03:08.246019Z",
+        "updatedAt": "2026-10-14T15:03:08.246019Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.pixfaro/mcp",
+      "description": "Generate images with any major model \u2014 one API key, one prepaid balance, one MCP.",
+      "repository": {
+        "url": "https://github.com/pixfaro/mcp",
+        "source": "github"
+      },
+      "version": "0.1.2",
+      "websiteUrl": "https://pixfaro.com",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@pixfaro/mcp",
+          "version": "0.1.2",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Pixfaro API key (pf_live_\u2026) from https://pixfaro.com \u2014 top up, no subscription.",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "PIXFARO_KEY"
+            }
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.pixfaro.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-19T00:34:19.026626Z",
+        "publishedAt": "2026-08-19T00:34:19.026626Z",
+        "updatedAt": "2026-08-19T00:34:19.026626Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.pixharvest/esp32-control",
+      "description": "Control ESP32 IoT devices from AI agents: status, GPIO, ADC, reboot.",
+      "title": "ESP32 Control",
+      "repository": {
+        "url": "https://github.com/contentforge-press/esp32-mcp",
+        "source": "github",
+        "id": "1409687604"
+      },
+      "version": "0.1.0",
+      "websiteUrl": "https://github.com/contentforge-press/esp32-mcp"
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-08T03:49:35.733743Z",
+        "publishedAt": "2026-10-08T03:49:35.733743Z",
+        "updatedAt": "2026-10-08T03:49:35.733743Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.pixharvest/gov-contract-radar",
+      "description": "US federal contracts: solicitations, set-asides, deadlines, awards, contractor profiles. Free.",
+      "title": "GovContract Radar",
+      "repository": {
+        "url": "https://github.com/contentforge-press/us-tariff-data",
+        "source": "github",
+        "id": "1395059656"
+      },
+      "version": "2.0.0",
+      "websiteUrl": "https://pixharvest.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://gov.pixharvest.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-07T22:18:13.11849Z",
+        "publishedAt": "2026-10-07T22:18:13.11849Z",
+        "updatedAt": "2026-10-07T22:18:13.11849Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.pixharvest/tariff-data",
+      "description": "US stacked tariffs (MFN+301+232), daily-updated, Chinese labels, keyless, $49 x402 unlock",
+      "title": "Tariff Data",
+      "repository": {
+        "url": "https://github.com/contentforge-press/us-tariff-data",
+        "source": "github",
+        "id": "1395059656"
+      },
+      "version": "1.2.0",
+      "websiteUrl": "https://pixharvest.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://pixharvest.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-08T02:03:30.366514Z",
+        "publishedAt": "2026-10-08T02:03:30.366514Z",
+        "updatedAt": "2026-10-08T02:03:30.366514Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.pixilui/pixilui",
+      "description": "Search and install PixilUI React components for AI product UI into your app.",
+      "title": "PixilUI components",
+      "version": "0.1.0",
+      "websiteUrl": "https://pixilui.com/docs/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.pixilui.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-04T11:03:39.290829Z",
+        "publishedAt": "2026-11-04T11:03:39.290829Z",
+        "updatedAt": "2026-11-04T11:03:39.290829Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.pixserp/search",
+      "description": "Live AI-native web search with citations. One tool for every MCP client. Flat per-request pricing.",
+      "title": "pixserp",
+      "repository": {
+        "url": "https://github.com/TetiAI/pixserp-mcp",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://pixserp.com/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://pixserp.com/api/v1/mcp",
+          "headers": [
+            {
+              "description": "Bearer pxs_YOUR_KEY \u2014 get a key at https://pixserp.com (no card, $2.50 free credit).",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-05-22T14:57:19.37733Z",
+        "publishedAt": "2026-05-22T14:57:19.37733Z",
+        "updatedAt": "2026-05-22T14:57:19.37733Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.pizzadeveloper/pizzadeveloper",
+      "description": "Work management for AI agents: plan Ideas, Batches and Works, keep context, ship Deliveries.",
+      "title": "Pizza Developer",
+      "version": "2.7.3",
+      "websiteUrl": "https://pizzadeveloper.com",
+      "icons": [
+        {
+          "src": "https://pizzadeveloper.com/logo.png",
+          "mimeType": "image/png"
+        },
+        {
+          "src": "https://pizzadeveloper.com/logo.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://pizzadeveloper.com/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-30T20:09:18.648845Z",
+        "publishedAt": "2026-10-30T20:09:18.648845Z",
+        "updatedAt": "2026-10-30T20:09:18.648845Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.place-check/place-check",
+      "description": "Sourced location reports for Austrian addresses: hazards, noise, transport, zoning, demographics.",
+      "title": "Place Check",
+      "version": "0.2.0",
+      "websiteUrl": "https://www.place-check.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.place-check.com/api/mcp",
+          "headers": [
+            {
+              "description": "Optional. Without it, MCP clients sign in with OAuth 2.1 (Connect, sign in on place-check.com, approve). Alternatively send Bearer <API key from https://www.place-check.com/dashboard> (lb_live_...).",
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-22T13:04:07.591166Z",
+        "publishedAt": "2026-10-22T13:04:07.591166Z",
+        "updatedAt": "2026-10-22T13:04:07.591166Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.placesdataapi/mcp-server",
+      "description": "Real-time local business places, reviews, geocoding & contact emails MCP. OAuth or API key.",
+      "title": "PlacesDataAPI \u2014 Local Business Places, Reviews & Contact Enrichment MCP Server",
+      "version": "1.0.0",
+      "websiteUrl": "https://placesdataapi.com/mcp",
+      "icons": [
+        {
+          "src": "https://placesdataapi.com/icon.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.placesdataapi.com/mcp"
+        },
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.placesdataapi.com/v1/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-07T17:32:01.655967Z",
+        "publishedAt": "2026-11-07T17:32:01.655967Z",
+        "updatedAt": "2026-11-07T17:32:01.655967Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.placestack/mcp",
+      "description": "US parcels, owners, sales, zoning rules, building permits and zoning cases.",
+      "title": "Placestack",
+      "version": "1.0.0",
+      "websiteUrl": "https://placestack.com/docs/agent",
+      "icons": [
+        {
+          "src": "https://placestack.com/icon.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.placestack.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-12T03:40:46.616109Z",
+        "publishedAt": "2026-10-12T03:40:46.616109Z",
+        "updatedAt": "2026-10-12T03:40:46.616109Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.plagiarismcheckerplus/checker",
+      "description": "Plagiarism checker and AI detector for essays, papers and articles, with source links.",
+      "title": "Plagiarism Checker Plus",
+      "version": "1.0.1",
+      "websiteUrl": "https://plagiarismcheckerplus.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://app.plagiarismcheckerplus.com/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-02T06:56:42.3635Z",
+        "publishedAt": "2026-11-02T06:56:42.3635Z",
+        "updatedAt": "2026-11-02T06:56:42.3635Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.plainfreight/quotes",
+      "description": "All-in DDP quotes for China to USA shipments, 100 g to 2,000 kg, from a live rate card",
+      "title": "Plain Freight",
+      "repository": {
+        "url": "https://github.com/plainfreight-com/plainfreight-mcp",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://plainfreight.com/for-agents",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://plainfreight.com/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-15T14:21:17.422591Z",
+        "publishedAt": "2026-09-15T14:21:17.422591Z",
+        "updatedAt": "2026-09-15T14:21:17.422591Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.plainquant/plainquant",
+      "description": "What US stocks did after past market events, and trend/business scores for US and HK stocks.",
+      "title": "PlainQuant",
+      "version": "1.0.0",
+      "websiteUrl": "https://plainquant.com/developers",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://plainquant.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-08T07:47:18.938465Z",
+        "publishedAt": "2026-11-08T07:47:18.938465Z",
+        "updatedAt": "2026-11-08T07:47:18.938465Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.plainradar/news",
+      "description": "Live news search: recent stories in 45 languages, grouped by coverage and checked for relevance.",
+      "title": "Plainradar news search",
+      "version": "0.6.0",
+      "websiteUrl": "https://plainradar.com",
+      "icons": [
+        {
+          "src": "https://plainradar.com/static/favicon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "64x64"
+          ]
+        },
+        {
+          "src": "https://plainradar.com/static/apple-touch-icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "180x180"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://plainradar.com/mcp",
+          "headers": [
+            {
+              "description": "Only for clients without OAuth sign-in: \"Bearer \" followed by an agent token from https://plainradar.com (Account > Agent tokens)",
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-10T13:47:47.135783Z",
+        "publishedAt": "2026-10-10T13:47:47.135783Z",
+        "updatedAt": "2026-10-10T13:47:47.135783Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.plainrecords/us-recalls-food-products-vehicles",
+      "description": "U.S. FDA, CPSC and NHTSA recalls by product, brand, lot code or car, plus owner complaints. Daily.",
+      "title": "PlainRecords: U.S. recalls in plain English",
+      "version": "1.0.0",
+      "websiteUrl": "https://plainrecords.com/ai/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://plainrecords.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-09T09:39:37.582877Z",
+        "publishedAt": "2026-10-09T09:39:37.582877Z",
+        "updatedAt": "2026-10-09T09:39:37.582877Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.plainrouter/mcp",
+      "description": "Meta Ads MCP: read ad accounts and signal health; propose governed changes under Ask or Full.",
+      "title": "Plainrouter",
+      "version": "0.4.2",
+      "websiteUrl": "https://plainrouter.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://plainrouter.com/mcp"
+        }
+      ],
+      "_meta": {
+        "io.modelcontextprotocol.registry/publisher-provided": {
+          "capabilities": {
+            "io.modelcontextprotocol/ui": {}
+          },
+          "serverCardUrl": "https://plainrouter.com/.well-known/mcp.json"
+        }
+      }
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-29T03:33:03.153977Z",
+        "publishedAt": "2026-10-29T03:33:03.153977Z",
+        "updatedAt": "2026-10-29T03:33:03.153977Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.planifyapps/planify",
+      "description": "Schedule and publish social posts to Twitter, Instagram, LinkedIn, Pinterest, Bluesky and more.",
+      "title": "Planify",
+      "repository": {
+        "url": "https://github.com/gsrathoreniks/planifyWeb",
+        "source": "github",
+        "subfolder": "packages/mcp"
+      },
+      "version": "0.4.0",
+      "websiteUrl": "https://planifyapps.com",
+      "icons": [
+        {
+          "src": "https://planifyapps.com/logo.svg",
+          "mimeType": "image/svg+xml"
+        },
+        {
+          "src": "https://planifyapps.com/logo.png",
+          "mimeType": "image/png"
+        }
+      ],
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@planifyapps/mcp",
+          "version": "0.4.0",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Planify API key, created under Settings \u2192 API in the dashboard. Shown once.",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "PLANIFY_API_KEY"
+            },
+            {
+              "description": "Override the API base URL. Only needed for staging or self-hosted.",
+              "format": "string",
+              "default": "https://planifyapps.com/api/v1",
+              "name": "PLANIFY_API_URL"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-25T06:46:41.796089Z",
+        "publishedAt": "2026-08-25T06:46:41.796089Z",
+        "updatedAt": "2026-08-25T06:46:41.796089Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.planningcenter/mcp",
+      "description": "The official Planning Center MCP server for interacting with your ministry's data.",
+      "title": "Planning Center MCP Server",
+      "version": "1.0.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.planningcenteronline.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-04-14T15:08:42.338575Z",
+        "publishedAt": "2026-04-14T15:08:42.338575Z",
+        "updatedAt": "2026-04-14T15:08:42.338575Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.planningledger/planningledger",
+      "description": "Search UK planning applications and documents, appeals, decision counts and Local Plan policies.",
+      "title": "PlanningLedger",
+      "version": "1.0.1",
+      "websiteUrl": "https://mcp.planningledger.com/",
+      "icons": [
+        {
+          "src": "https://planningledger.com/static/brand/planningledger-icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.planningledger.com/mcp"
+        }
+      ],
+      "_meta": {
+        "io.modelcontextprotocol.registry/publisher-provided": {
+          "com.planningledger": {
+            "privacyPolicyUrl": "https://mcp.planningledger.com/privacy",
+            "publisher": "Alpha Maven Ltd",
+            "supportEmail": "support@planningledger.com",
+            "supportUrl": "https://mcp.planningledger.com/#support",
+            "termsOfServiceUrl": "https://mcp.planningledger.com/terms"
+          }
+        }
+      }
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-02T18:06:11.269573Z",
+        "publishedAt": "2026-11-02T18:06:11.269573Z",
+        "updatedAt": "2026-11-02T18:06:11.269573Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.plateartists/plate-artists",
+      "description": "Recipes, plating guides and kitchen calculators (turkey, Thanksgiving timeline). Free, read-only.",
+      "title": "Plate Artists",
+      "version": "1.1.0",
+      "websiteUrl": "https://plateartists.com/mcp",
+      "icons": [
+        {
+          "src": "https://plateartists.com/brand/logo-mark-light-128.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "128x128"
+          ],
+          "theme": "light"
+        },
+        {
+          "src": "https://plateartists.com/brand/logo-mark-dark-128.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "128x128"
+          ],
+          "theme": "dark"
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://plateartists.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-06T08:49:28.721236Z",
+        "publishedAt": "2026-11-06T08:49:28.721236Z",
+        "updatedAt": "2026-11-06T08:49:28.721236Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.plateop/agent-commons",
+      "description": "Free public notebook and mailboxes for AI agents: shared notes, votes, no accounts.",
+      "title": "Agent Commons",
+      "repository": {
+        "url": "https://github.com/gvb9/agent-commons",
+        "source": "github"
+      },
+      "version": "0.1.1",
+      "websiteUrl": "https://commons.plateop.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://commons.plateop.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-19T15:56:36.370791Z",
+        "publishedAt": "2026-10-19T15:56:36.370791Z",
+        "updatedAt": "2026-10-19T15:56:36.370791Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.plateop/plateop-check",
+      "description": "Free used-car facts from the official register (NL, GB, IL, IS, DK) with source and date.",
+      "title": "Plateop vehicle check",
+      "repository": {
+        "url": "https://github.com/gvb9/plateop-check-mcp",
+        "source": "github"
+      },
+      "version": "0.1.1",
+      "websiteUrl": "https://check.plateop.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://check.plateop.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-19T15:50:32.892668Z",
+        "publishedAt": "2026-10-19T15:50:32.892668Z",
+        "updatedAt": "2026-10-19T15:50:32.892668Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.platequery/plate-api",
+      "description": "License plate lookup for AI agents: plate messages and ALPR history via PlateQuery. OAuth 2.1.",
+      "title": "PlateQuery MCP \u2014 US License Plate & Vehicle Information",
+      "repository": {
+        "url": "https://github.com/Veilkrand/platequery-mcp",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://api.platequery.com/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.platequery.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-15T18:57:14.279637Z",
+        "publishedAt": "2026-09-15T18:57:14.279637Z",
+        "updatedAt": "2026-09-15T18:57:14.279637Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.platformdtc/store",
+      "description": "Run your online store with your own AI: products, orders, customers, ads, emails and reports.",
+      "title": "PlatformDTC",
+      "version": "1.0.0",
+      "websiteUrl": "https://docs.platformdtc.com/agents/connect-your-own-agent/",
+      "icons": [
+        {
+          "src": "https://platformdtc.com/icon-256.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "256x256"
+          ]
+        },
+        {
+          "src": "https://platformdtc.com/icon.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.platformdtc.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-17T09:45:30.542163Z",
+        "publishedAt": "2026-10-17T09:45:30.542163Z",
+        "updatedAt": "2026-10-17T09:45:30.542163Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.platinumride/transfers",
+      "description": "Gulf cross-border private transfers: routes, per-vehicle prices, border steps, booking inquiries",
+      "title": "Platinumride",
+      "version": "0.2.3",
+      "websiteUrl": "https://platinumride.com/ai-assistants",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://platinumride.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-23T12:52:39.681824Z",
+        "publishedAt": "2026-10-23T12:52:39.681824Z",
+        "updatedAt": "2026-10-23T12:52:39.681824Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.playablegift/playable-gift",
+      "description": "Turn a few lines about someone into a small video game made just for them. Free, about a minute.",
+      "title": "Playable Gift",
+      "version": "1.0.0",
+      "websiteUrl": "https://playablegift.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://playablegift.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-13T01:05:30.030748Z",
+        "publishedAt": "2026-10-13T01:05:30.030748Z",
+        "updatedAt": "2026-10-13T01:05:30.030748Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-10-17/server.schema.json",
+      "name": "com.playbalancegrid/puzzle-tools",
+      "description": "Takuzu/Binairo puzzle generator and solver. Generate puzzles, validate solutions.",
+      "title": "PlayBalanceGrid Puzzle Tools",
+      "repository": {
+        "url": "https://github.com/AmigaMeow/playbalancegrid-mcp",
+        "source": "github"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://playbalancegrid.com",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "playbalancegrid-mcp-server",
+          "version": "1.0.1",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-14T07:07:20.87831Z",
+        "publishedAt": "2026-10-14T07:07:20.87831Z",
+        "updatedAt": "2026-10-14T07:07:20.87831Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.playbettergame/agents",
+      "description": "A hockey prediction game for AI agents: pick who has the better game before each Oilers game.",
+      "title": "Better Game: Agents",
+      "version": "0.2.0",
+      "websiteUrl": "https://playbettergame.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://agents.playbettergame.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-29T18:09:08.208216Z",
+        "publishedAt": "2026-10-29T18:09:08.208216Z",
+        "updatedAt": "2026-10-29T18:09:08.208216Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.playbluffo/bluffo",
+      "description": "A live game of Who's the Undercover for AI agents: get a secret word, bluff, vote out the odd one.",
+      "title": "Bluffo \u2014 the bluffing game for AI agents",
+      "version": "1.16.0",
+      "websiteUrl": "https://playbluffo.com/agents",
+      "icons": [
+        {
+          "src": "https://playbluffo.com/design/bluffo-logo.png",
+          "mimeType": "image/png"
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://playbluffo.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-24T05:08:31.459152Z",
+        "publishedAt": "2026-09-24T05:08:31.459152Z",
+        "updatedAt": "2026-09-24T05:08:31.459152Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.playbook/playbook",
+      "description": "Media backend: search, organize, upload, and share creative files and folders",
+      "title": "Playbook",
+      "version": "1.0.0",
+      "websiteUrl": "https://dev.playbook.com/docs/guides/mcp/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.playbook.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-01T18:13:23.704162Z",
+        "publishedAt": "2026-10-01T18:13:23.704162Z",
+        "updatedAt": "2026-10-01T18:13:23.704162Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.playbykey/theory-mcp",
+      "description": "Chords, scales, progressions, transposition, and MIDI tools for music theory AI agents.",
+      "title": "PlayByKey Music Theory",
+      "repository": {
+        "url": "https://github.com/DigitalBrewLLC/playbykey-dev-tools",
+        "source": "github",
+        "subfolder": "packages/theory-mcp"
+      },
+      "version": "1.6.0",
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "@playbykey/theory-mcp",
+          "version": "1.6.0",
+          "runtimeHint": "npx",
+          "transport": {
+            "type": "stdio"
+          },
+          "runtimeArguments": [
+            {
+              "type": "positional",
+              "value": "-y"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-28T00:09:55.288921Z",
+        "publishedAt": "2026-07-28T00:09:55.288921Z",
+        "updatedAt": "2026-07-28T00:09:55.288921Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.playcallerapp/mcp",
+      "description": "Live NFL, MLB, and NBA sports intelligence: injury signals, identity resolution, projections.",
+      "repository": {
+        "url": "https://github.com/CptBeerfest/PlayCaller.git",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "icons": [
+        {
+          "src": "https://playcallerapp.com/icons/favicon-32x32.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "32x32"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://playcallerapp.com/mcp",
+          "headers": [
+            {
+              "value": "{x_playcaller_key}",
+              "name": "X-PlayCaller-Key"
+            }
+          ],
+          "variables": {
+            "x_playcaller_key": {
+              "description": "PlayCaller DaaS API key. Free 14-day trial at https://playcallerapp.com/developer",
+              "isRequired": true,
+              "isSecret": true
+            }
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-06-21T00:31:20.140162Z",
+        "publishedAt": "2026-06-21T00:31:20.140162Z",
+        "updatedAt": "2026-06-21T00:31:20.140162Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.playfacetoface/play-face-to-face",
+      "description": "Create instant multiplayer browser-game rooms friends join from a link. No account or app needed.",
+      "title": "Play Face to Face",
+      "version": "0.1.0",
+      "websiteUrl": "https://www.playfacetoface.com",
+      "icons": [
+        {
+          "src": "https://content.playfacetoface.com/cms/brand/pf2f-app-icon-1024.4e068bf0.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "1024x1024"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.playfacetoface.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-29T04:20:40.563084Z",
+        "publishedAt": "2026-10-29T04:20:40.563084Z",
+        "updatedAt": "2026-10-29T04:20:40.563084Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.playgama/developer-cabinet",
+      "description": "Publish HTML5 games in seconds from an AI agent: audience, monetization, analytics.",
+      "title": "Playgama MCP - Publish & Manage HTML5 Games",
+      "repository": {
+        "url": "https://github.com/Playgama/developer-cabinet-mcp",
+        "source": "github"
+      },
+      "version": "1.1.0",
+      "websiteUrl": "https://playgama.com/mcp/",
+      "icons": [
+        {
+          "src": "https://static.playgama.com/p-static/static/image/favicon-512.forced.0e230cda.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://developer.playgama.com/api/mcp"
+        }
+      ],
+      "_meta": {
+        "io.modelcontextprotocol.registry/publisher-provided": {
+          "com.playgama": {
+            "authentication": "OAuth 2.1 (DCR + PKCE S256, scope mcp)",
+            "categories": [
+              "gaming",
+              "developer-tools"
+            ],
+            "docsUrl": "https://wiki.playgama.com/playgama/mcp",
+            "readOnlyToolCount": 11,
+            "supportEmail": "developer.success@playgama.com",
+            "tags": [
+              "game-development",
+              "html5-games",
+              "game-publishing",
+              "web-games",
+              "playgama"
+            ],
+            "toolCount": 22,
+            "toolsReferenceUrl": "https://wiki.playgama.com/playgama/mcp/tools"
+          }
+        }
+      }
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-17T12:52:45.65171Z",
+        "publishedAt": "2026-09-17T12:52:45.65171Z",
+        "updatedAt": "2026-09-17T12:52:45.65171Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.playlistmap/playlistmap",
+      "description": "Find active Spotify playlists for a song and check a playlist's integrity. No curator contacts.",
+      "title": "PlaylistMap",
+      "version": "1.1.0",
+      "websiteUrl": "https://playlistmap.com/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://playlistmap.com/mcp/server"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-24T09:24:34.121862Z",
+        "publishedAt": "2026-10-24T09:24:34.121862Z",
+        "updatedAt": "2026-10-24T09:24:34.121862Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.playshowandtell/show-and-tell",
+      "description": "Daily photo game: you see a secret word, show it in photos, and your AI guesses it.",
+      "title": "Show & Tell",
+      "version": "1.0.0",
+      "websiteUrl": "https://playshowandtell.com",
+      "icons": [
+        {
+          "src": "https://playshowandtell.com/brand/logo/png/app-icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://playshowandtell.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-07T03:55:33.673925Z",
+        "publishedAt": "2026-10-07T03:55:33.673925Z",
+        "updatedAt": "2026-10-07T03:55:33.673925Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.playtesterhub/playtesterhub",
+      "description": "Google Play closed testing: order 12 real Android testers for 14 days and follow the test.",
+      "title": "PlayTesterHub",
+      "version": "1.0.0",
+      "websiteUrl": "https://playtesterhub.com/en/api-mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://playtesterhub.com/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-08T08:51:57.879317Z",
+        "publishedAt": "2026-11-08T08:51:57.879317Z",
+        "updatedAt": "2026-11-08T08:51:57.879317Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.playthislife/play-this-life",
+      "description": "Plan goals, habits, routines, workouts and chores in your Play This Life account.",
+      "title": "Play This Life",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.playthislife.com/facts",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.playthislife.com/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-05T07:52:58.442815Z",
+        "publishedAt": "2026-11-05T07:52:58.442815Z",
+        "updatedAt": "2026-11-05T07:52:58.442815Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.playwrightgen/playwrightgen",
+      "description": "Approved test intent, reviewed Playwright automation and run evidence, inside your editor.",
+      "title": "PlaywrightGen",
+      "repository": {
+        "url": "https://github.com/hmamut39/playwrightgen",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://playwrightgen.com/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://playwrightgen.com/api/mcp",
+          "headers": [
+            {
+              "description": "Bearer <token>, where the token is the personal editor token from your project's Automation page in PlaywrightGen. It speaks for you, proposes but never approves, and stops working when your access ends.",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-20T13:48:34.38579Z",
+        "publishedAt": "2026-09-20T13:48:34.38579Z",
+        "updatedAt": "2026-09-20T13:48:34.38579Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.plcgateway/plcgateway",
+      "description": "Ask your plant: live PLC data, alarms, history, OEE and reports from your on-premises PLCGateway.",
+      "title": "PLCGateway",
+      "repository": {
+        "url": "https://github.com/CybriantOps/plcgateway-mcp",
+        "source": "github"
+      },
+      "version": "0.1.0",
+      "websiteUrl": "https://plcgateway.com/ai-mcp",
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "@plcgateway/mcp",
+          "version": "0.1.0",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Address of your PLCGateway SCADA or Connect, e.g. http://192.168.1.50:8080",
+              "isRequired": true,
+              "format": "string",
+              "name": "PLCGATEWAY_URL"
+            },
+            {
+              "description": "API token (PLCGateway \u2192 Settings \u2192 API token), or the MCP configuration token for device/tag setup",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "PLCGATEWAY_TOKEN"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-03T10:57:05.23545Z",
+        "publishedAt": "2026-11-03T10:57:05.23545Z",
+        "updatedAt": "2026-11-03T10:57:05.23545Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.plcgateway/support",
+      "description": "PLCGateway products, modules, PLC/CNC driver support, prices and demo requests, in 11 languages.",
+      "title": "PLCGateway support",
+      "version": "1.0.0",
+      "websiteUrl": "https://plcgateway.com/ai-mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://plcgateway.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-04T09:17:18.873146Z",
+        "publishedAt": "2026-11-04T09:17:18.873146Z",
+        "updatedAt": "2026-11-04T09:17:18.873146Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.plcsense/mcp",
+      "description": "Read-only TwinCAT ST intelligence: resolve symbols, library APIs, docs, validate PLC code.",
+      "title": "plcsense",
+      "version": "1.1.22",
+      "websiteUrl": "https://plcsense.com",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@zeugwerk/plcsense",
+          "version": "1.1.22",
+          "runtimeHint": "npx",
+          "transport": {
+            "type": "stdio"
+          },
+          "packageArguments": [
+            {
+              "type": "positional",
+              "value": "mcp"
+            }
+          ],
+          "environmentVariables": [
+            {
+              "description": "Optional one-shot licence key (same as plcsense license activate). Skip if this machine is already licensed.",
+              "format": "string",
+              "isSecret": true,
+              "name": "PLCSENSE_LICENSE_KEY"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-07T15:19:47.520638Z",
+        "publishedAt": "2026-09-07T15:19:47.520638Z",
+        "updatedAt": "2026-09-07T15:19:47.520638Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.plendio/plendio",
+      "description": "Compare 22M+ prices in DK, SE, NO, DE: search, price history, deals, gift ideas, wishlists. No login",
+      "title": "Plendio price comparison",
+      "version": "1.3.0",
+      "websiteUrl": "https://plendio.dk/ai",
+      "icons": [
+        {
+          "src": "https://plendio.com/assets/img/mcp/plendio-icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        },
+        {
+          "src": "https://plendio.com/assets/img/mcp/plendio-icon.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://plendio.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-07T20:48:55.72426Z",
+        "publishedAt": "2026-11-07T20:48:55.72426Z",
+        "updatedAt": "2026-11-07T20:48:55.72426Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.plentopasto/mcp-server",
+      "description": "Plan a week of budget family dinners from your pantry, then send the list to the Instacart\u00ae app.",
+      "version": "0.2.0",
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "@plentopasto/mcp-server",
+          "version": "0.2.0",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Your Plento Pasto API key, used to authenticate the MCP server to your account.",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "PLENTOPASTO_API_KEY"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-25T15:40:31.231662Z",
+        "publishedAt": "2026-09-25T15:40:31.231662Z",
+        "updatedAt": "2026-09-25T15:40:31.231662Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.plexarm/plexarm",
+      "description": "The operating system for self-organised AI agent teams.",
+      "title": "Plexarm",
+      "repository": {
+        "url": "https://github.com/natalabs/plexarm-plugin",
+        "source": "github"
+      },
+      "version": "1.17.0",
+      "websiteUrl": "https://plexarm.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.plexarm.com/mcp",
+          "headers": [
+            {
+              "description": "Bearer <your Plexarm API token>. Create one at https://plexarm.com/me; it is shown once.",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ],
+      "_meta": {
+        "io.modelcontextprotocol.registry/publisher-provided": {
+          "summary": "Plexarm is the operating system for self-organised AI agent teams: a hosted MCP server that holds the goals, initiatives and action items your agents and people work toward, with priorities, owners, dates and dependencies. It does not run agents. It is what they run on: every agent starts oriented, knows what is next and why, and closes with what was done \u2014 so progress toward the goal is tracked as it happens, not reconstructed later. It is for anyone coordinating work across many AI agents, repos and projects, and it connects to any MCP client with a token and a URL. You need a Plexarm account and a token: create a free account at plexarm.com, create a token at plexarm.com/me, and run /plexarm:connect to store it and check the connection. To install in Claude Code, type these at its prompt, one at a time: /plugin marketplace add natalabs/plexarm-plugin, then /plugin install plexarm@plexarm."
+        }
+      }
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-05T16:41:50.432159Z",
+        "publishedAt": "2026-11-05T16:41:50.432159Z",
+        "updatedAt": "2026-11-05T16:41:50.432159Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.plixana/crm",
+      "description": "Operate the Plixana CRM from any AI: contacts, deals, quotes, WhatsApp and metrics.",
+      "title": "Plixana",
+      "version": "1.0.1",
+      "websiteUrl": "https://plixana.com/conecta-tu-ia",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://plixana.com/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-04T00:27:45.164703Z",
+        "publishedAt": "2026-11-04T00:27:45.164703Z",
+        "updatedAt": "2026-11-04T00:27:45.164703Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.plixlab/plixlab",
+      "description": "Executable presentations: build, compute and share plixes, decks whose slides Python cells compute.",
+      "title": "Plixlab",
+      "version": "1.0.2",
+      "websiteUrl": "https://plixlab.com",
+      "icons": [
+        {
+          "src": "https://plixlab.com/mcp-icon.png",
+          "mimeType": "image/png"
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.plixlab.com"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-13T02:51:56.381072Z",
+        "publishedAt": "2026-10-13T02:51:56.381072Z",
+        "updatedAt": "2026-10-13T02:51:56.381072Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.plodovi/shop",
+      "description": "Fresh food from local Croatian producers: search, fill your basket and order delivery or pickup.",
+      "title": "Plodovi",
+      "version": "1.0.0",
+      "websiteUrl": "https://plodovi.com/ai-assistant",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.plodovi.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-29T20:10:18.073924Z",
+        "publishedAt": "2026-09-29T20:10:18.073924Z",
+        "updatedAt": "2026-09-29T20:10:18.073924Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.plotspeaks/plot-speaks",
+      "description": "Voice mysteries, history battles and trivia with your assistant as host. Sign in to keep progress.",
+      "title": "Plot Speaks",
+      "version": "0.6.0",
+      "websiteUrl": "https://plotspeaks.com",
+      "icons": [
+        {
+          "src": "https://plotspeaks.com/icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://account.plotspeaks.com/mcp"
+        },
+        {
+          "type": "streamable-http",
+          "url": "https://plotspeaks.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-28T17:41:59.485728Z",
+        "publishedAt": "2026-10-28T17:41:59.485728Z",
+        "updatedAt": "2026-10-28T17:41:59.485728Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.plsintro/plsintro",
+      "description": "Private intro network. Say what you need or offer, your agent finds the person, both accept.",
+      "title": "plsintro",
+      "version": "1.0.0",
+      "websiteUrl": "https://plsintro.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.plsintro.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-09T08:33:43.685458Z",
+        "publishedAt": "2026-10-09T08:33:43.685458Z",
+        "updatedAt": "2026-10-09T08:33:43.685458Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.plugcat/plugcat",
+      "description": "Check if a US bank, credit union or brokerage connects to Monarch, YNAB and other finance apps",
+      "title": "PlugCat",
+      "version": "1.0.0",
+      "websiteUrl": "https://plugcat.com/developers/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://plugcat.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-03T16:34:42.225365Z",
+        "publishedAt": "2026-11-03T16:34:42.225365Z",
+        "updatedAt": "2026-11-03T16:34:42.225365Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.plugmyai/plugmyai",
+      "description": "Plain-English directory of which apps connect to ChatGPT, Claude, Gemini and Grok, with steps.",
+      "title": "PlugMyAI",
+      "version": "1.0.0",
+      "websiteUrl": "https://plugmyai.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.plugmyai.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-17T14:44:52.486371Z",
+        "publishedAt": "2026-10-17T14:44:52.486371Z",
+        "updatedAt": "2026-10-17T14:44:52.486371Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.plumbregistry/directory",
+      "description": "Search and verify fire protection contractor licenses (TX SFMO, CA CSLB C-16) from state records.",
+      "title": "Plumb Registry",
+      "version": "1.0.0",
+      "websiteUrl": "https://plumbregistry.com/tools/ai-agents/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://plumbregistry.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-27T12:36:53.878257Z",
+        "publishedAt": "2026-10-27T12:36:53.878257Z",
+        "updatedAt": "2026-10-27T12:36:53.878257Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.plus234feed/mcp",
+      "description": "Nigerian news archive, NGX markets, naira rates, NBS statistics, legislators and 2027 elections.",
+      "title": "Plus234Feed: Nigerian News & Data Intelligence",
+      "version": "2.1.1",
+      "websiteUrl": "https://www.plus234feed.com/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.plus234feed.com/mcp",
+          "headers": [
+            {
+              "description": "Plus234Feed API key. Free key (100 tool calls a day) at https://www.plus234feed.com/mcp",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "X-API-Key"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-03T04:55:05.488484Z",
+        "publishedAt": "2026-11-03T04:55:05.488484Z",
+        "updatedAt": "2026-11-03T04:55:05.488484Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.plushcap/plushcap",
+      "description": "Research developer trends and competitor content across blogs, X, YouTube, and Hacker News.",
+      "title": "Plushcap",
+      "version": "2.0.0",
+      "websiteUrl": "https://www.plushcap.com/docs/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.plushcap.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-30T02:58:50.04239Z",
+        "publishedAt": "2026-10-30T02:58:50.04239Z",
+        "updatedAt": "2026-10-30T02:58:50.04239Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.plutus-cloud/plutus-cost-data",
+      "description": "Query cloud, AI and SaaS spend across 25+ providers: costs, budgets, anomalies, unit economics.",
+      "title": "Plutus",
+      "version": "2.0.0",
+      "websiteUrl": "https://plutus-cloud.com/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://console.plutus-cloud.com/api/mcp",
+          "headers": [
+            {
+              "description": "Optional. Clients that support OAuth should omit this and use the authorization-server metadata advertised at /.well-known/oauth-protected-resource/api/mcp instead. Clients without OAuth may send `Bearer <key>` using an MCP API key minted in the Plutus console at https://console.plutus-cloud.com/mcp-keys",
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-31T14:43:23.049491Z",
+        "publishedAt": "2026-08-31T14:43:23.049491Z",
+        "updatedAt": "2026-08-31T14:43:23.049491Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.plymove/mcp",
+      "description": "Pedagogical chess intelligence for AI agents: explain positions and games for a target Elo.",
+      "title": "PlyMove",
+      "version": "1.0.0",
+      "websiteUrl": "https://plymove.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.plymove.com/mcp",
+          "headers": [
+            {
+              "description": "Optional Bearer API key for prepaid access. Omit for x402 (HTTP 402 then pay).",
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-26T16:11:09.833037Z",
+        "publishedAt": "2026-08-26T16:11:09.833037Z",
+        "updatedAt": "2026-08-26T16:11:09.833037Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.plyparts/ply",
+      "description": "Custom 3D-printed parts: describe a part, upload a 3D file or pick a model, see a live price, order.",
+      "title": "ply 3D Printing",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.plyparts.com/ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.plyparts.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-26T21:38:36.061933Z",
+        "publishedAt": "2026-10-26T21:38:36.061933Z",
+        "updatedAt": "2026-10-26T21:38:36.061933Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.pmcareerdesk/interview-coach",
+      "description": "Resume, LinkedIn and interview practice tools for project, program and product managers.",
+      "title": "PM Career Desk",
+      "version": "1.0.0",
+      "websiteUrl": "https://pmcareerdesk.com/interview-coach/?c=directory-mcp-registry&utm_source=mcp-registry&utm_medium=directory",
+      "icons": [
+        {
+          "src": "https://app.pmcareerdesk.com/assets/icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://app.pmcareerdesk.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-25T23:37:15.144734Z",
+        "publishedAt": "2026-10-25T23:37:15.144734Z",
+        "updatedAt": "2026-10-25T23:37:15.144734Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.pnltoolkit/calculators",
+      "description": "Eight free investment and trading calculators with PNG charts and editable result links.",
+      "title": "PNL Toolkit",
+      "version": "1.1.0",
+      "websiteUrl": "https://pnltoolkit.com/for-agents",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://pnltoolkit.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-16T08:58:54.498822Z",
+        "publishedAt": "2026-10-16T08:58:54.498822Z",
+        "updatedAt": "2026-10-16T08:58:54.498822Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.po6/mailbox",
+      "description": "Give AI agents secure access to your email via private aliases with dedicated mailbox storage.",
+      "title": "PO6 Mailbox",
+      "repository": {
+        "url": "https://github.com/po6-com/po6_mail",
+        "source": "github",
+        "id": "1105672201"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://po6.com",
+      "icons": [
+        {
+          "src": "https://po6.com/logo-32.png",
+          "sizes": [
+            "32x32"
+          ]
+        },
+        {
+          "src": "https://po6.com/logo-128.png",
+          "sizes": [
+            "128x128"
+          ]
+        },
+        {
+          "src": "https://po6.com/logo-512.png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.po6.com"
+        }
+      ],
+      "_meta": {
+        "io.modelcontextprotocol.registry/publisher-provided": {
+          "authentication": {
+            "description": "Create an API key at https://po6.com/dashboard/mailbox",
+            "type": "bearer"
+          },
+          "categories": [
+            "email",
+            "productivity",
+            "communication"
+          ],
+          "keywords": [
+            "email",
+            "mailbox",
+            "inbox",
+            "email alias",
+            "privacy",
+            "email management",
+            "ai email assistant"
+          ]
+        }
+      }
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-02-14T17:16:55.524448Z",
+        "publishedAt": "2026-02-14T17:16:55.524448Z",
+        "updatedAt": "2026-02-14T17:16:55.524448Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.poachsearch/brand-check",
+      "description": "Find affiliates bidding on your brand in search ads, by country. First 100 searches free.",
+      "title": "PoachSearch Brand Check",
+      "version": "1.0.0",
+      "websiteUrl": "https://poachsearch.com/developers",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://poachsearch.com/mcp",
+          "headers": [
+            {
+              "description": "Bearer followed by your PoachSearch API key, issued after email verification.",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-19T12:45:47.907624Z",
+        "publishedAt": "2026-10-19T12:45:47.907624Z",
+        "updatedAt": "2026-10-19T12:45:47.907624Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.pocketbasecloud/mcp",
+      "description": "Manage PocketBase Cloud projects, instances, deploys, domains, collections and records.",
+      "title": "PocketBase Cloud",
+      "repository": {
+        "url": "https://github.com/pocketbasecloud/mcp",
+        "source": "github"
+      },
+      "version": "1.4.3",
+      "websiteUrl": "https://mcp.pocketbasecloud.com/",
+      "icons": [
+        {
+          "src": "https://raw.githubusercontent.com/pocketbasecloud/mcp/main/assets/logo.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        },
+        {
+          "src": "https://raw.githubusercontent.com/pocketbasecloud/mcp/main/assets/logo.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.pocketbasecloud.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-18T15:56:43.215757Z",
+        "publishedAt": "2026-10-18T15:56:43.215757Z",
+        "updatedAt": "2026-10-18T15:56:43.215757Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.pocketsmith/mcp",
+      "description": "Work with transactions, budgets, forecasts and insights from the PocketSmith personal finance tool.",
+      "title": "PocketSmith",
+      "version": "0.1.0",
+      "websiteUrl": "https://www.pocketsmith.com/mcp",
+      "icons": [
+        {
+          "src": "https://assets.pocketsmith.com/icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "1024x1024"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.pocketsmith.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-31T10:32:13.895329Z",
+        "publishedAt": "2026-10-31T10:32:13.895329Z",
+        "updatedAt": "2026-10-31T10:32:13.895329Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.pocketsmith/mcp-readonly",
+      "description": "Read-only: transactions, budgets, forecasts and insights from the PocketSmith personal finance tool.",
+      "title": "PocketSmith (read-only)",
+      "version": "0.1.0",
+      "websiteUrl": "https://www.pocketsmith.com/mcp",
+      "icons": [
+        {
+          "src": "https://assets.pocketsmith.com/icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "1024x1024"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp-readonly.pocketsmith.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-31T10:32:23.541013Z",
+        "publishedAt": "2026-10-31T10:32:23.541013Z",
+        "updatedAt": "2026-10-31T10:32:23.541013Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.podbenchmark/podbenchmark",
+      "description": "Compare print-on-demand supplier prices, shipping and delivered totals for the same product.",
+      "title": "POD Benchmark",
+      "repository": {
+        "url": "https://github.com/FilipLjubic/podbenchmark-cli",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://podbenchmark.com/tools/cli",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://podbenchmark.com/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-26T14:12:58.614046Z",
+        "publishedAt": "2026-10-26T14:12:58.614046Z",
+        "updatedAt": "2026-10-26T14:12:58.614046Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.podcaststotext/mcp",
+      "description": "Transcribe podcasts, YouTube and audio, then make show notes, chapters and translations.",
+      "title": "PodcastsToText",
+      "version": "2.2.0",
+      "websiteUrl": "https://podcaststotext.com/mcp",
+      "icons": [
+        {
+          "src": "https://podcaststotext.com/icons/android-chrome-512x512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://podcaststotext.com/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-03T17:46:25.119329Z",
+        "publishedAt": "2026-10-03T17:46:25.119329Z",
+        "updatedAt": "2026-10-03T17:46:25.119329Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.podgist/podgist",
+      "description": "Search, ask and order podcast transcripts; answers cite the episode and minute.",
+      "title": "Podgist",
+      "version": "1.1.1",
+      "websiteUrl": "https://www.podgist.com/api-docs",
+      "icons": [
+        {
+          "src": "https://www.podgist.com/assets/favicon-B3Isn5x6.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.podgist.com/mcp",
+          "headers": [
+            {
+              "description": "Bearer pgk_... Podgist API key. Optional: lookups (podcasts, episodes, feeds) are free.",
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-01T06:24:10.255857Z",
+        "publishedAt": "2026-11-01T06:24:10.255857Z",
+        "updatedAt": "2026-11-01T06:24:10.255857Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.podkitapp/podkit",
+      "description": "Podcast search, metadata, chapters, and transcripts for AI agents \u2014 from $15/mo",
+      "version": "0.1.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://podkitapp.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-14T11:30:50.304018Z",
+        "publishedAt": "2026-07-14T11:30:50.304018Z",
+        "updatedAt": "2026-07-14T11:30:50.304018Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.podlexicon/podlexicon",
+      "description": "Search and read AI summaries of 88,000+ podcast episodes across 150+ mostly long-form shows.",
+      "title": "PodLexicon",
+      "version": "1.0.3",
+      "websiteUrl": "https://podlexicon.com/agents",
+      "icons": [
+        {
+          "src": "https://podlexicon.com/Podlexicon.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://podlexicon.com/mcp/",
+          "headers": [
+            {
+              "description": "Optional PodLexicon API key. Without one the server allows 20 tool calls per day per IP; with one, 1,000 per day. Create a free account, then generate a key at https://podlexicon.com/developers.",
+              "isSecret": true,
+              "name": "X-API-Key"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-24T04:50:16.658881Z",
+        "publishedAt": "2026-10-24T04:50:16.658881Z",
+        "updatedAt": "2026-10-24T04:50:16.658881Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.podmule/podmule",
+      "description": "Search, draft and manage your podcast workspace from your agent.",
+      "title": "PodMule",
+      "repository": {
+        "url": "https://github.com/Squared-Lemons-Ltd/podmule-plugin",
+        "source": "github"
+      },
+      "version": "0.1.0",
+      "websiteUrl": "https://app.podmule.com/mcp-setup",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://app.podmule.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-18T13:09:47.459043Z",
+        "publishedAt": "2026-08-18T13:09:47.459043Z",
+        "updatedAt": "2026-08-18T13:09:47.459043Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.podseo/podseo",
+      "description": "Your podcast's search rankings, keywords, charts, reviews and connected analytics, read-only",
+      "title": "PodSEO",
+      "version": "1.0.0",
+      "websiteUrl": "https://podseo.com/features/ai-connections/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.podseo.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-25T16:54:52.90178Z",
+        "publishedAt": "2026-10-25T16:54:52.90178Z",
+        "updatedAt": "2026-10-25T16:54:52.90178Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+      "name": "com.pogobud/pogobud",
+      "description": "Pok\u00e9mon GO raid and Max Battle counters, trainers needed, events, Pok\u00e9mon and Rocket line-ups.",
+      "title": "PoGoBud",
+      "version": "1.0.0",
+      "websiteUrl": "https://pogobud.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://pogobud.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-08T17:27:49.336239Z",
+        "publishedAt": "2026-10-08T17:27:49.336239Z",
+        "updatedAt": "2026-10-08T17:27:49.336239Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "com.point-topic/point-topic-mcp-public",
+      "description": "Point Topic public MCP: UK broadband market reference data \u2014 ISPs, networks, links and standards.",
+      "title": "Point Topic \u2014 UK Broadband Market Reference",
+      "repository": {
+        "url": "https://github.com/Point-Topic/point-topic-mcp",
+        "source": "github"
+      },
+      "version": "0.1.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.point-topic.com/public"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-26T15:37:57.187903Z",
+        "publishedAt": "2026-08-26T15:37:57.187903Z",
+        "updatedAt": "2026-08-26T15:37:57.187903Z",
+        "isLatest": true
+      }
+    }
+  }
+]

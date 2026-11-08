@@ -18,7 +18,7 @@ INVOKE THIS SKILL when implementing human-in-the-loop patterns, pausing for appr
 **Tech:** [[Agents]], [[Architecture]], [[LangGraph]]
 
 ## Related Skills
-- **Complements:** [[architecture-patterns]], [[aws-serverless]], [[aws-serverless-eda]], [[cloudflare]]
-- **Alternate of:** [[langgraph-fundamentals]], [[langgraph-persistence]]
+- **Complements:** [[architecture-patterns]], [[aws-cdk-development]], [[aws-serverless]], [[cloudflare]]
+- **Alternate of:** [[langchain-architecture]], [[langgraph-fundamentals]]
 
 Real skill file: `skills/langgraph-human-in-the-loop/SKILL.md`

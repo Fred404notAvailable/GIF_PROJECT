@@ -18,7 +18,7 @@ Cloud infrastructure and DevOps workflow covering AWS, Azure, GCP, Kubernetes, T
 **Tech:** [[GitHub Actions]], [[AWS]], [[Azure]], [[Containers]], [[Kubernetes]]
 
 ## Related Skills
-- **Complements:** [[api-security-testing]], [[codeql]], [[database-design]], [[e2e-testing]]
+- **Complements:** [[api-security-testing]], [[database-design]], [[e2e-testing]], [[neon-postgres]]
 - **Alternate of:** [[azure-devops]], [[devops-deploy]], [[kubernetes-deployment]]
 
 Real skill file: `skills/cloud-devops/SKILL.md`

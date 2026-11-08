@@ -1,0 +1,3602 @@
+[
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.lamdis/exchange",
+      "description": "Pay people nearby for physical work: find out if something is true, or have it done.",
+      "title": "Lamdis Exchange",
+      "repository": {
+        "url": "https://github.com/lamdis-ai/lamdis-protocol",
+        "source": "github",
+        "id": "1299467296"
+      },
+      "version": "0.1.0",
+      "websiteUrl": "https://exchange.lamdis.ai/docs",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://exchange.lamdis.ai/mcp",
+          "headers": [
+            {
+              "description": "Optional. Bearer lam_sk_... agent key for the full buyer side, or an operator session token for the supply side. Leave it off for the eight guest tools.",
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-02T19:32:25.824955Z",
+        "publishedAt": "2026-09-02T19:32:25.824955Z",
+        "updatedAt": "2026-09-02T19:32:25.824955Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.lanmao/free-ai-credits",
+      "description": "Hand-verified free AI credits, API trials and free tiers. Read-only, no auth, updated daily.",
+      "title": "Lanmao Free AI Credits",
+      "version": "1.0.0",
+      "websiteUrl": "https://lanmao.ai/for-agents",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://lanmao.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-19T08:59:43.953363Z",
+        "publishedAt": "2026-10-19T08:59:43.953363Z",
+        "updatedAt": "2026-10-19T08:59:43.953363Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.lansy/desk",
+      "description": "Bot-free AI meeting notes, insights & coaching",
+      "title": "Lansy Desk",
+      "version": "1.0.0",
+      "websiteUrl": "https://lansy.ai/desk/ai",
+      "icons": [
+        {
+          "src": "https://lansy.ai/images/lansy-icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.ae.app.lansy.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-21T13:23:41.736229Z",
+        "publishedAt": "2026-10-21T13:23:41.736229Z",
+        "updatedAt": "2026-10-21T13:23:41.736229Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.last-price/pricing",
+      "description": "Compute and verify prices from an agent, metered per call. Works keyless on a demo tenant.",
+      "title": "Last Price",
+      "version": "0.10.0",
+      "websiteUrl": "https://last-price.ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.last-price.ai/api/mcp/rpc?profile=lean",
+          "headers": [
+            {
+              "description": "Optional. A Last Price API key (lp_...). Without one, compute_price and verify_price answer from the public demo and say so, pricing_conversation can prepare inputs but not compute, and browse_catalog lists the public catalog; with one, compute_price and verify_price run on your workspace. tools/list shows the tools that reach a price plus search_tools, which finds any of the 300+ others by task, and call_tool, which runs one. An agent can get a sandbox key with POST https://api.last-price.ai/api/agents/register.",
+              "isSecret": true,
+              "name": "x-api-key"
+            }
+          ]
+        },
+        {
+          "type": "streamable-http",
+          "url": "https://api.last-price.ai/api/mcp/rpc",
+          "headers": [
+            {
+              "description": "Optional. A Last Price API key (lp_...). With no profile named this address lists the same short list as the one above; add ?profile=full to list every tool (over 300). Every tool answers by name either way. Without a key, compute_price and verify_price answer from the public demo and say so; with one, every tool works on your workspace. An agent can get a sandbox key with POST https://api.last-price.ai/api/agents/register.",
+              "isSecret": true,
+              "name": "x-api-key"
+            }
+          ]
+        }
+      ],
+      "_meta": {
+        "io.modelcontextprotocol.registry/publisher-provided": {
+          "ai.last-price": {
+            "discovery": {
+              "agents_json": "https://api.last-price.ai/.well-known/agents.json",
+              "mcp_json": "https://api.last-price.ai/.well-known/mcp.json"
+            },
+            "keyless_tools": [
+              "accept_counter",
+              "browse_catalog",
+              "check_agent_readiness",
+              "compute_price",
+              "discover_offers",
+              "find_market_prices",
+              "find_product_prices",
+              "get_changelog",
+              "get_handover_page",
+              "get_negotiation",
+              "get_offer_terms",
+              "get_public_leaderboard",
+              "get_reel",
+              "get_rosetta_health",
+              "get_ucp_profile",
+              "get_x402_price_index",
+              "get_x402_voucher_status",
+              "list_canonical_schemas",
+              "list_hosted_demos",
+              "list_marketplace_listings",
+              "list_pricing_pipelines",
+              "list_reels",
+              "list_verification_strategies",
+              "make_offer",
+              "order_from_handover_business",
+              "pricing_conversation",
+              "read_payable_invoice",
+              "run_reference_pipeline",
+              "verify_price",
+              "verify_signed_quote",
+              "verify_webhook_signature"
+            ],
+            "license": "LicenseRef-Proprietary",
+            "license_note": "Hosted service. The source is not published under an open source licence; see LICENSE.",
+            "stdio": {
+              "args": [
+                "exec",
+                "ts-node",
+                "packages/mcp/index.ts"
+              ],
+              "command": "pnpm",
+              "cwd": "the repository root",
+              "env": {
+                "LASTPRICE_API_KEY": "API key lp_..., sent as x-api-key.",
+                "LASTPRICE_API_URL": "Base URL of the API. Set it to https://api.last-price.ai; the default is http://localhost:3000.",
+                "LASTPRICE_JWT": "JWT, sent as Authorization: Bearer. Takes precedence over the API key.",
+                "LASTPRICE_TENANT_ID": "Tenant UUID, sent as x-tenant-id, only for local development against a server with AUTH_REQUIRED unset.",
+                "LASTPRICE_TIMEOUT_MS": "Time limit for one tool call in milliseconds; past it the call answers a JSON-RPC timeout error (-32001). Default 30000."
+              },
+              "status": "Runs from a checkout of the repository; not yet published as a package."
+            },
+            "support": "support@last-price.ai"
+          }
+        }
+      }
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-29T16:53:15.824392Z",
+        "publishedAt": "2026-10-29T16:53:15.824392Z",
+        "updatedAt": "2026-10-29T16:53:15.824392Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.lateos/soar-record-gateway",
+      "description": "SOAR security playbooks for AI agents: fetch, full-text search, and count. Metered via Stripe.",
+      "title": "SOAR Record Gateway",
+      "repository": {
+        "url": "https://github.com/lateos-ai/website",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://lateos.ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://soar-api.nevada-f99.workers.dev/mcp",
+          "headers": [
+            {
+              "description": "SOAR API key formatted as 'Bearer soar_live_<key>'. Keys are issued per Stripe customer. No key? POST to the Payment-Required URL in an HTTP 402 MPP challenge from https://soar-api.nevada-f99.workers.dev/v1/records/fetch to subscribe via Stripe checkout (metered SOAR plan, $0.01/search, no upfront charge), then retrieve the issued key once from the credential_endpoint.",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-14T03:44:27.960723Z",
+        "publishedAt": "2026-08-14T03:44:27.960723Z",
+        "updatedAt": "2026-08-14T03:44:27.960723Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.latlong/map-mcp",
+      "description": "Turn CSV or Excel data into styled choropleth and categorical maps of India from plain language.",
+      "title": "LatLong Maps",
+      "version": "1.0",
+      "websiteUrl": "https://latlong.ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://geocp.latlong.ai/mcp/",
+          "headers": [
+            {
+              "description": "Your LatLong access token (JWT). Issued by the LatLong auth service; the server verifies it on every call.",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "X-Authorization-Token"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-02T10:30:33.4795Z",
+        "publishedAt": "2026-09-02T10:30:33.4795Z",
+        "updatedAt": "2026-09-02T10:30:33.4795Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.latticenet/latticenet",
+      "description": "Publish articles and notes under your own byline, to a readership of other AI agents.",
+      "title": "LatticeNet",
+      "repository": {
+        "url": "https://github.com/joshholly/latticenet-agent",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://latticenet.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-21T22:00:18.023225Z",
+        "publishedAt": "2026-08-21T22:00:18.023225Z",
+        "updatedAt": "2026-08-21T22:00:18.023225Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.lattiq/x402-trading-signals",
+      "description": "Regime-aware ES1/NQ futures trading signals. HMM + 15 quant strategies. x402 USDC micropayments.",
+      "title": "Lattiq x402 Trading Signals",
+      "repository": {
+        "url": "https://github.com/PoopsDavis/lattiq-mcp",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.lattiq.ai/mcp",
+          "headers": [
+            {
+              "description": "x402 payment header (USDC on Base). Required for paid tool calls.",
+              "isSecret": true,
+              "name": "X-PAYMENT"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-03-26T21:58:49.321402Z",
+        "publishedAt": "2026-03-26T21:58:49.321402Z",
+        "updatedAt": "2026-03-26T21:58:49.321402Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.law.mcp/lawyer-search",
+      "description": "Verified lawyer and attorney search, discovery, and matching for AI \u2014 991K+ US profiles.",
+      "title": "Law.AI \u2014 Lawyer Search",
+      "repository": {
+        "url": "https://github.com/risk-ai/lawai-mcp-server",
+        "source": "github"
+      },
+      "version": "0.2.3",
+      "websiteUrl": "https://law.ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.law.ai"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-05-29T16:12:44.195062Z",
+        "publishedAt": "2026-05-29T16:12:44.195062Z",
+        "updatedAt": "2026-05-29T16:12:44.195062Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.law/lawyer-search",
+      "description": "Verified lawyer and attorney search, discovery, and matching for AI \u2014 991K+ US profiles.",
+      "title": "Law.AI \u2014 Lawyer Search",
+      "repository": {
+        "url": "https://github.com/risk-ai/lawai-mcp-server",
+        "source": "github"
+      },
+      "version": "0.2.2",
+      "websiteUrl": "https://law.ai",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "lawai-mcp-server",
+          "version": "0.2.1",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.law.ai"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "deprecated",
+        "statusChangedAt": "2026-05-29T16:12:56.000452Z",
+        "statusMessage": "This server has been renamed to `ai.law.mcp/lawyer-search`. Please update your MCP client configuration. Same hosted endpoint (https://mcp.law.ai), same tools, same data \u2014 only the registry namespace has changed.",
+        "publishedAt": "2026-05-03T13:19:05.081549Z",
+        "updatedAt": "2026-05-29T16:12:56.000452Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.lazyads/mcp",
+      "description": "Hosted MCP for nine ad networks. BYOA, flat SaaS \u2014 no percent of spend, no fake ROAS.",
+      "title": "Lazy Ads",
+      "repository": {
+        "url": "https://github.com/camerondwills/lazyads-mcp",
+        "source": "github"
+      },
+      "version": "2.0.0",
+      "websiteUrl": "https://lazyads.ai/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.lazyads.ai/mcp",
+          "headers": [
+            {
+              "description": "Bearer token from Lazy Ads \u2192 Settings \u2192 API (any paid plan). Format: Bearer <api-key>. X-API-Key also accepted.",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-27T01:18:54.080538Z",
+        "publishedAt": "2026-08-27T01:18:54.080538Z",
+        "updatedAt": "2026-08-27T01:18:54.080538Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.lbrain/lbrain",
+      "description": "Local-first agent memory. Source, date, bind/abstain. Permanent name: lbrain.ai/claim.html",
+      "title": "LBrain",
+      "repository": {
+        "url": "https://github.com/metavolve-labs/lbrain-coding-agents",
+        "source": "github"
+      },
+      "version": "0.1.3",
+      "websiteUrl": "https://lbrain.ai",
+      "packages": [
+        {
+          "registryType": "pypi",
+          "identifier": "lbrain-coding-agents",
+          "version": "0.1.3",
+          "runtimeHint": "uvx",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-06T00:53:36.95789Z",
+        "publishedAt": "2026-09-06T00:53:36.95789Z",
+        "updatedAt": "2026-09-06T00:53:36.95789Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.leadgreen/green-token-index",
+      "description": "GPU energy per million output tokens by model, GPU and configuration, with grid carbon by country.",
+      "title": "Lead Green",
+      "repository": {
+        "url": "https://github.com/katonic-dev/leadgreen-ai",
+        "source": "github",
+        "subfolder": "leadgreen-mcp"
+      },
+      "version": "0.3.1",
+      "websiteUrl": "https://leadgreen.ai/mcp/",
+      "icons": [
+        {
+          "src": "https://leadgreen.ai/apple-touch-icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "180x180"
+          ]
+        }
+      ],
+      "packages": [
+        {
+          "registryType": "pypi",
+          "registryBaseUrl": "https://pypi.org",
+          "identifier": "leadgreen-mcp",
+          "version": "0.3.1",
+          "runtimeHint": "uvx",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-20T17:28:53.134293Z",
+        "publishedAt": "2026-10-20T17:28:53.134293Z",
+        "updatedAt": "2026-10-20T17:28:53.134293Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.leadlock/leadlock",
+      "description": "Voice agents that book into the software your clients actually run, built and audited from chat.",
+      "title": "Leadlock",
+      "version": "1.0.0",
+      "websiteUrl": "https://docs.leadlock.ai/mcp/",
+      "icons": [
+        {
+          "src": "https://www.leadlock.ai/favicon.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.leadlock.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-07T01:00:51.258572Z",
+        "publishedAt": "2026-11-07T01:00:51.258572Z",
+        "updatedAt": "2026-11-07T01:00:51.258572Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.leadmcp/leadmcp",
+      "description": "B2B contact database for AI agents: search, count, export and enrich 375M+ contacts.",
+      "title": "LeadMCP",
+      "version": "1.0.0",
+      "websiteUrl": "https://leadmcp.ai",
+      "icons": [
+        {
+          "src": "https://leadmcp.ai/icon.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.leadmcp.ai"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-12T04:44:56.75762Z",
+        "publishedAt": "2026-10-12T04:44:56.75762Z",
+        "updatedAt": "2026-10-12T04:44:56.75762Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.leapsteps/leapsteps",
+      "description": "Your LeapSteps to-do list, goals and focus timer: plan the day, add tasks and move goals forward.",
+      "title": "LeapSteps",
+      "version": "1.0.0",
+      "websiteUrl": "https://leapsteps.ai/ai-assistants",
+      "icons": [
+        {
+          "src": "https://leapsteps.ai/assets/img/apple-touch-icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "256x256"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://leapsteps.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-25T21:09:26.841527Z",
+        "publishedAt": "2026-10-25T21:09:26.841527Z",
+        "updatedAt": "2026-10-25T21:09:26.841527Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.leconfidant/le-confidant",
+      "description": "Statistics from your own WhatsApp chat analysis as numbers only, plus free WhatsApp text tools.",
+      "title": "Le Confidant",
+      "version": "0.4.0",
+      "websiteUrl": "https://leconfidant.ai/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://leconfidant.ai/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-01T14:05:41.702084Z",
+        "publishedAt": "2026-11-01T14:05:41.702084Z",
+        "updatedAt": "2026-11-01T14:05:41.702084Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.legitreviews/legitreviews",
+      "description": "Scores whether a business's Google Maps reviews are genuine. Your agent collects them, we judge.",
+      "title": "Is it legit? Reviews trust checker",
+      "version": "2.0.0",
+      "websiteUrl": "https://legitreviews.ai",
+      "icons": [
+        {
+          "src": "https://legitreviews.ai/icon-128.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "128x128"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://legitreviews.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-03T08:09:23.510452Z",
+        "publishedAt": "2026-11-03T08:09:23.510452Z",
+        "updatedAt": "2026-11-03T08:09:23.510452Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.lendb/lendb",
+      "description": "Find US mortgage loan officers for a borrower's situation and place. Free, lender-neutral, sourced.",
+      "title": "LenDb.ai",
+      "version": "1.1.0",
+      "websiteUrl": "https://lendb.ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://lendb.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-18T19:04:10.207778Z",
+        "publishedAt": "2026-10-18T19:04:10.207778Z",
+        "updatedAt": "2026-10-18T19:04:10.207778Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.lenshub/lenshub",
+      "description": "Team knowledge from 20 connectors, served to any MCP agent \u2014 classified, scored, access-controlled.",
+      "title": "LensHub",
+      "version": "0.4.1",
+      "websiteUrl": "https://www.lenshub.ai",
+      "icons": [
+        {
+          "src": "https://www.lenshub.ai/icon.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        },
+        {
+          "src": "https://www.lenshub.ai/icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "180x180"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://app.lenshub.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-11T17:44:09.113497Z",
+        "publishedAt": "2026-07-11T17:44:09.113497Z",
+        "updatedAt": "2026-07-11T17:44:09.113497Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.letsship/ship",
+      "description": "Assign Linear, Jira or GitHub issues to an AI coding agent team that plans, builds, reviews, tests.",
+      "title": "SHIP",
+      "repository": {
+        "url": "https://github.com/letsship/mcp",
+        "source": "github"
+      },
+      "version": "0.24.0",
+      "websiteUrl": "https://letsship.ai/docs/mcp",
+      "icons": [
+        {
+          "src": "https://letsship.ai/icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.letsship.ai/mcp",
+          "headers": [
+            {
+              "description": "A SHIP personal access token, sent as a bearer token. Create one at https://letsship.ai/settings/tokens. Leave it out to sign in with OAuth instead.",
+              "value": "Bearer {token}",
+              "isSecret": true,
+              "variables": {
+                "token": {
+                  "description": "The token value. It starts with pat_.",
+                  "isRequired": true,
+                  "isSecret": true,
+                  "placeholder": "pat_..."
+                }
+              },
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-12T13:24:10.416016Z",
+        "publishedAt": "2026-10-12T13:24:10.416016Z",
+        "updatedAt": "2026-10-12T13:24:10.416016Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.levelfour/levelfour-mcp",
+      "description": "Cloud, SaaS and AI spend in one system of record. Each saving applied for you or shipped as code.",
+      "version": "1.0.1",
+      "websiteUrl": "https://docs.levelfour.ai/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.levelfour.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-01T13:51:20.025132Z",
+        "publishedAt": "2026-11-01T13:51:20.025132Z",
+        "updatedAt": "2026-11-01T13:51:20.025132Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.lexiel/lexiel",
+      "description": "Verify legal citations and search case law and legislation from your AI assistant.",
+      "title": "Lexiel",
+      "version": "1.0.0",
+      "websiteUrl": "https://lexiel.ai/es/integraciones",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.lexiel.ai"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-05T14:53:35.141845Z",
+        "publishedAt": "2026-10-05T14:53:35.141845Z",
+        "updatedAt": "2026-10-05T14:53:35.141845Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.lfglabs/t3-watch",
+      "description": "An agent on call for the things nobody watches. Checks run free; your agent wakes only on a change.",
+      "title": "t3-watch",
+      "repository": {
+        "url": "https://github.com/sami-abdul/t3-watch",
+        "source": "github",
+        "id": "1420374175"
+      },
+      "version": "0.6.0",
+      "websiteUrl": "https://github.com/sami-abdul/t3-watch#readme",
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "@lfg-labs/t3-watch",
+          "version": "0.6.0",
+          "runtimeHint": "npx",
+          "transport": {
+            "type": "stdio"
+          },
+          "packageArguments": [
+            {
+              "type": "positional",
+              "value": "mcp"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-24T06:40:19.712908Z",
+        "publishedAt": "2026-10-24T06:40:19.712908Z",
+        "updatedAt": "2026-10-24T06:40:19.712908Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.lianex/lianex",
+      "description": "Compare prices on products sold in Australia \u2014 eBay, Amazon, JB Hi-Fi and more. Free, read-only.",
+      "title": "Lianex \u2014 Australian price comparison",
+      "version": "1.0.1",
+      "websiteUrl": "https://lianex.ai/developers",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.lianex.ai/api/public/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-25T00:25:14.496112Z",
+        "publishedAt": "2026-10-25T00:25:14.496112Z",
+        "updatedAt": "2026-10-25T00:25:14.496112Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.libelus/conector",
+      "description": "Andamento de processos pelo n\u00famero CNJ, prazos, CPF/CNPJ e jurisprud\u00eancia (planos).",
+      "title": "Libelus",
+      "version": "0.1.2",
+      "websiteUrl": "https://libelus.ai/conector",
+      "icons": [
+        {
+          "src": "https://libelus.ai/android-chrome-512x512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.libelus.ai"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-11T03:25:03.538702Z",
+        "publishedAt": "2026-10-11T03:25:03.538702Z",
+        "updatedAt": "2026-10-11T03:25:03.538702Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-07-09/server.schema.json",
+      "name": "ai.libers/libers-suite",
+      "description": "Website analyses and Knowledge Packs for the authenticated account via OAuth 2.1 + DCR.",
+      "version": "0.1.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.libers.ai/mcp/libers-suite"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-25T08:36:23.138683Z",
+        "publishedAt": "2026-07-25T08:36:23.138683Z",
+        "updatedAt": "2026-07-25T08:36:23.138683Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.licensy/mcp-server",
+      "description": "Real-time U.S. medical license verification across all 50 states + DC.",
+      "title": "Licensy",
+      "repository": {
+        "url": "https://github.com/licensyai/LicensyAI-MCP",
+        "source": "github"
+      },
+      "version": "0.1.0",
+      "websiteUrl": "https://licensy.ai/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.licensy.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-06-28T00:25:40.697917Z",
+        "publishedAt": "2026-06-28T00:25:40.697917Z",
+        "updatedAt": "2026-06-28T00:25:40.697917Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.lifeisagame/conquer-fear",
+      "description": "Fear ladders for your assistant: small exposure steps, logged attempts, real progress.",
+      "title": "Conquer Fear",
+      "version": "1.0.0",
+      "websiteUrl": "https://lifeisagame.ai/mcp/conquer-fear",
+      "icons": [
+        {
+          "src": "https://lifeisagame.ai/__l5e/assets-v1/bb2affb2-6806-4ac2-b56b-026d32200e0c/app-icon-conquer-fear-128.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "128x128"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.lifeisagame.ai/mcp/conquer-fear"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-11T18:46:00.266584Z",
+        "publishedAt": "2026-09-11T18:46:00.266584Z",
+        "updatedAt": "2026-09-11T18:46:00.266584Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.lifeisagame/signal-not-noise",
+      "description": "AI-driven daily-focus todo app on your phone (max 3/day). View & add todos from any MCP client.",
+      "title": "Signal not Noise",
+      "version": "1.0.2",
+      "websiteUrl": "https://lifeisagame.ai/signal",
+      "icons": [
+        {
+          "src": "https://signal.lifeisagame.ai/icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "128x128"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://signal.lifeisagame.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-10T23:36:20.605897Z",
+        "publishedAt": "2026-09-10T23:36:20.605897Z",
+        "updatedAt": "2026-09-10T23:36:20.605897Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.lifescenario/info",
+      "description": "For parents and teachers: SEL trait guides, practice scenarios, what-to-say guides (ages 6-14).",
+      "title": "Life Scenario",
+      "version": "1.3.0",
+      "websiteUrl": "https://lifescenario.ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://lifescenario.ai/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-19T15:27:02.094686Z",
+        "publishedAt": "2026-10-19T15:27:02.094686Z",
+        "updatedAt": "2026-10-19T15:27:02.094686Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.lightdrift/images",
+      "description": "Image search for AI agents: 1.85M openly licensed images with source, license and attribution.",
+      "title": "Lightdrift Images MCP",
+      "version": "1.3.1",
+      "websiteUrl": "https://lightdrift.ai",
+      "icons": [
+        {
+          "src": "https://lightdrift.ai/mark.png",
+          "mimeType": "image/png"
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://lightdrift.ai/mcp"
+        }
+      ],
+      "_meta": {
+        "io.modelcontextprotocol.registry/publisher-provided": {
+          "authentication": [
+            "OAuth",
+            "API key"
+          ],
+          "documentation": "https://docs.lightdrift.ai/guides/images-mcp",
+          "inputs": [
+            "natural-language text",
+            "image_base64 upload",
+            "public HTTPS image_url",
+            "image plus text",
+            "indexed asset ID for similarity"
+          ],
+          "pricing": "Monthly plans with credits: 1 credit per 10 results, minimum 1 per search. Free plan: 500 credits every month, text search only. Paid plans from USD 29/month add search by image, image plus text and find-similar. Metadata retrieval free. https://lightdrift.ai/pricing",
+          "searchArchitecture": "Joint image-and-caption embeddings, hybrid retrieval, caption text reranking",
+          "tools": [
+            "search_images",
+            "find_similar_images",
+            "get_image"
+          ]
+        }
+      }
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-28T02:54:53.829581Z",
+        "publishedAt": "2026-09-28T02:54:53.829581Z",
+        "updatedAt": "2026-09-28T02:54:53.829581Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.lightray/lightray",
+      "description": "Send a company name and city, get a report on its owners, directors, filings, courts and press.",
+      "title": "LightRay",
+      "version": "1.0.2",
+      "websiteUrl": "https://www.lightray.ai/claude?ref=RG",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://app.lightray.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-05T16:24:54.018704Z",
+        "publishedAt": "2026-11-05T16:24:54.018704Z",
+        "updatedAt": "2026-11-05T16:24:54.018704Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.limitguard.api/limitguard",
+      "description": "Lead validation over MCP: KVK/KBO register, EU VAT, sanctions and email checks with sources.",
+      "title": "Limitguard Lead Verification",
+      "repository": {
+        "url": "https://github.com/jwconsultancyteam/limitguard-mcp",
+        "source": "github"
+      },
+      "version": "2.11.9",
+      "websiteUrl": "https://limitguard.ai",
+      "icons": [
+        {
+          "src": "https://limitguard.ai/icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        },
+        {
+          "src": "https://limitguard.ai/assets/brand/mark.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ],
+          "theme": "light"
+        },
+        {
+          "src": "https://limitguard.ai/assets/brand/mark-dark.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ],
+          "theme": "dark"
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.limitguard.ai/mcp",
+          "headers": [
+            {
+              "description": "Bearer lg_live_... -- the full header value, 'Bearer ' included. Free key: POST https://api.limitguard.ai/v1/keys/create with an email.",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-14T18:34:17.209349Z",
+        "publishedAt": "2026-10-14T18:34:17.209349Z",
+        "updatedAt": "2026-10-14T18:34:17.209349Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.limpide/tools",
+      "description": "Verified maths exercises for tutors and their students, each answer key right by construction.",
+      "title": "Limpide tools",
+      "version": "1.0.0",
+      "websiteUrl": "https://tools.limpide.ai/en",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://tools.limpide.ai/mcp?via=registry"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-29T15:17:22.496793Z",
+        "publishedAt": "2026-10-29T15:17:22.496793Z",
+        "updatedAt": "2026-10-29T15:17:22.496793Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.limurse/limurse",
+      "description": "Find, book and pay creators: search, budget and brief, then start_booking opens the booking.",
+      "title": "Limurse",
+      "version": "1.0.1",
+      "websiteUrl": "https://limurse.ai/developers/mcp",
+      "icons": [
+        {
+          "src": "https://limurse.ai/assets/favicons/apple-icon-180x180.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "180x180"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.limurse.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-27T18:33:51.635319Z",
+        "publishedAt": "2026-10-27T18:33:51.635319Z",
+        "updatedAt": "2026-10-27T18:33:51.635319Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.limy/limy",
+      "description": "AI search visibility: brand mentions, citations, rankings, competitors and top cited sources.",
+      "title": "Limy",
+      "version": "1.0.0",
+      "websiteUrl": "https://docs.getlimy.ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.limy.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-07T11:18:41.893683Z",
+        "publishedAt": "2026-09-07T11:18:41.893683Z",
+        "updatedAt": "2026-09-07T11:18:41.893683Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.line9/diagrams",
+      "description": "Render Mermaid with Line9 layout in your assistant.",
+      "title": "Line9",
+      "version": "0.4.4",
+      "websiteUrl": "https://line9.ai/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.line9.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-17T21:07:01.500511Z",
+        "publishedAt": "2026-09-17T21:07:01.500511Z",
+        "updatedAt": "2026-09-17T21:07:01.500511Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.linkdeal.www/mcp",
+      "description": "Find B2B leads from LinkedIn engagement, enrich contacts and deliver to Slack.",
+      "title": "LinkDeal",
+      "repository": {
+        "url": "https://github.com/LinkDeal/mcp",
+        "source": "github"
+      },
+      "version": "1.0.4",
+      "remotes": [
+        {
+          "type": "sse",
+          "url": "https://app.linkdeal.ai/api/mcp",
+          "headers": [
+            {
+              "description": "Bearer token. Generate an API key at app.linkdeal.ai/settings. Keys start with ld_",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-17T12:57:07.70802Z",
+        "publishedAt": "2026-08-17T12:57:07.70802Z",
+        "updatedAt": "2026-08-17T12:57:07.70802Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.linkgents/linkgents",
+      "description": "Agents message each other and partners' agents. Claude Code, Codex (beta): memory, board, key vault.",
+      "title": "LinkGents",
+      "version": "1.0.3",
+      "websiteUrl": "https://linkgents.ai/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.linkgents.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-07T21:05:28.44372Z",
+        "publishedAt": "2026-11-07T21:05:28.44372Z",
+        "updatedAt": "2026-11-07T21:05:28.44372Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.linkguard/linkguard-mcp",
+      "description": "Backlink tools for AI assistants: redirect, Google index, and backlink health checks.",
+      "version": "0.1.0",
+      "packages": [
+        {
+          "registryType": "pypi",
+          "identifier": "linkguard-mcp",
+          "version": "0.1.0",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Your lg_ API key from https://linkguard.ai/dashboard/api-keys (one paid top-up unlocks it).",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "LINKGUARD_API_KEY"
+            },
+            {
+              "description": "Override the API base URL. Defaults to https://linkguard.ai.",
+              "format": "string",
+              "name": "LINKGUARD_API_URL"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-05-21T19:57:16.953951Z",
+        "publishedAt": "2026-05-21T19:57:16.953951Z",
+        "updatedAt": "2026-05-21T19:57:16.953951Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.linkitapp/linkit",
+      "description": "Turn what your AI makes into a shareable web page with its own short link.",
+      "title": "Linkit",
+      "version": "1.0.0",
+      "websiteUrl": "https://linkitapp.ai",
+      "icons": [
+        {
+          "src": "https://app.linkitapp.ai/icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://app.linkitapp.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-20T17:39:22.101358Z",
+        "publishedAt": "2026-10-20T17:39:22.101358Z",
+        "updatedAt": "2026-10-20T17:39:22.101358Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.linof/docs",
+      "description": "Linof turns family photos into a short film. Read Linof's docs and live prices. No sign-in.",
+      "title": "Linof docs",
+      "version": "1.0.0",
+      "websiteUrl": "https://linof.ai/developers",
+      "icons": [
+        {
+          "src": "https://linof.ai/icons/icon-512-v3.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        },
+        {
+          "src": "https://linof.ai/linof-mark.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://linof.ai/api/apps/6a562086cd3bd1e44e0d4c3d/functions/docsMcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-28T13:24:01.482688Z",
+        "publishedAt": "2026-10-28T13:24:01.482688Z",
+        "updatedAt": "2026-10-28T13:24:01.482688Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.liquidagent.api/liquid-agent",
+      "description": "Money tools for AI agents over x402: USDC bridge to 16 chains, Polymarket data, stocks, USDC gas.",
+      "title": "Liquid Agent",
+      "repository": {
+        "url": "https://github.com/LiquidAgent/liquidagentx402",
+        "source": "github"
+      },
+      "version": "1.7.0",
+      "websiteUrl": "https://api.liquidagent.ai/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.liquidagent.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-30T17:47:33.796061Z",
+        "publishedAt": "2026-09-30T17:47:33.796061Z",
+        "updatedAt": "2026-09-30T17:47:33.796061Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.liquidinference/liquid",
+      "description": "Auction exchange for LLM inference: browse models and prices, preview and buy answers.",
+      "title": "Liquid Inference",
+      "version": "3.6.0",
+      "websiteUrl": "https://liquidinference.ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://router.inference.ai.exchange/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-06T06:40:19.091977Z",
+        "publishedAt": "2026-11-06T06:40:19.091977Z",
+        "updatedAt": "2026-11-06T06:40:19.091977Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.listplus/listplus",
+      "description": "Check contact data with 100+ quality checks, find B2B contacts, fill work e-mail and mobile.",
+      "title": "ListPlus",
+      "version": "1.1.0",
+      "websiteUrl": "https://listplus.ai/a",
+      "icons": [
+        {
+          "src": "https://listplus.ai/icon-192x192.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "192x192"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://listplus.ai/mcp",
+          "headers": [
+            {
+              "description": "Optional: your ListPlus agent key (listplus.ai/app/agents). Clients that support OAuth sign in instead. Without either, the checks and the person search work; enriching needs one.",
+              "value": "Bearer {agent_key}",
+              "isSecret": true,
+              "variables": {
+                "agent_key": {
+                  "description": "Agent key, starts with lpk_",
+                  "isRequired": true,
+                  "isSecret": true,
+                  "placeholder": "lpk_\u2026"
+                }
+              },
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-07T08:52:44.223955Z",
+        "publishedAt": "2026-11-07T08:52:44.223955Z",
+        "updatedAt": "2026-11-07T08:52:44.223955Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.litescribe/litescribe",
+      "description": "Search and read your LiteScribe recordings: transcripts, summaries, action items, screenshots.",
+      "title": "LiteScribe",
+      "repository": {
+        "url": "https://github.com/ClintUK/litescribe-mcp",
+        "source": "github"
+      },
+      "version": "1.1.0",
+      "websiteUrl": "https://litescribe.ai/integrations/mcp/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.litescribe.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-06T23:01:10.796498Z",
+        "publishedAt": "2026-11-06T23:01:10.796498Z",
+        "updatedAt": "2026-11-06T23:01:10.796498Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.lithtrix/lithtrix-mcp",
+      "description": "Identity, memory, trust, and swarm primitives for AI agents. MIRC base always free.",
+      "title": "Lithtrix \u2014 Identity, Memory & Trust for AI Agents",
+      "repository": {
+        "url": "https://github.com/lithtrix/lithtrix-mcp",
+        "source": "github"
+      },
+      "version": "0.20.2",
+      "websiteUrl": "https://lithtrix.ai",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "lithtrix-mcp",
+          "version": "0.20.2",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Your Lithtrix API key (ltx_...). Get one free at https://lithtrix.ai/v1/register",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "LITHTRIX_API_KEY"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-06-20T07:55:20.564771Z",
+        "publishedAt": "2026-06-20T07:55:20.564771Z",
+        "updatedAt": "2026-06-20T07:55:20.564771Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.livecontext/livecontext",
+      "description": "Build and run AI workflows, agents, data tables and 1000+ API integrations from any MCP client.",
+      "title": "LiveContext",
+      "version": "1.0.0",
+      "websiteUrl": "https://livecontext.ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://livecontext.ai/mcp",
+          "headers": [
+            {
+              "description": "LiveContext API key (lc_live_...), created in Settings > MCP Server. A key can be scoped to a subset of tools.",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "X-API-Key"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-04T08:10:43.716465Z",
+        "publishedAt": "2026-11-04T08:10:43.716465Z",
+        "updatedAt": "2026-11-04T08:10:43.716465Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.livecrm/livecrm",
+      "description": "Salesforce & HubSpot: dedupe, normalize, enrich, assign, job change, create, mass update, segment",
+      "title": "LiveCRM",
+      "repository": {
+        "url": "https://github.com/Livecrm/livecrm-mcp",
+        "source": "github"
+      },
+      "version": "1.0.2",
+      "websiteUrl": "https://livecrm.ai/mcp",
+      "icons": [
+        {
+          "src": "https://livecrm.ai/assets/connector-icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "1024x1024"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.livecrm.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-14T00:50:20.547823Z",
+        "publishedAt": "2026-10-14T00:50:20.547823Z",
+        "updatedAt": "2026-10-14T00:50:20.547823Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.livegraph/livegraph",
+      "description": "Live, editable canvas for AI agents \u2014 author graphs via MCP, then watch and reroute runs live.",
+      "title": "LiveGraph",
+      "repository": {
+        "url": "https://github.com/homezloco/livegraph",
+        "source": "github"
+      },
+      "version": "0.1.1",
+      "websiteUrl": "https://livegraph.ai",
+      "icons": [
+        {
+          "src": "https://livegraph.ai/icon.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.livegraph.ai/mcp",
+          "headers": [
+            {
+              "description": "LiveGraph API key (required \u2014 anonymous calls get 401). Create one in Settings at https://livegraph.ai/settings",
+              "isRequired": true,
+              "value": "{x-api-key}",
+              "isSecret": true,
+              "variables": {
+                "x-api-key": {
+                  "description": "LiveGraph API key \u2014 create one in Settings at https://livegraph.ai/settings",
+                  "isSecret": true,
+                  "placeholder": "lgk_..."
+                }
+              },
+              "name": "x-api-key"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-02T21:47:25.593682Z",
+        "publishedAt": "2026-11-02T21:47:25.593682Z",
+        "updatedAt": "2026-11-02T21:47:25.593682Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.livingmeta/ai-in-research",
+      "description": "Read-only MCP over the LivingMeta AI-in-Research corpus: 12,400 papers, gaps, priority agenda.",
+      "title": "LivingMeta \u2014 AI in Research",
+      "version": "1.1.0",
+      "websiteUrl": "https://ai-in-research.livingmeta.ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://ai-in-research.livingmeta.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-22T07:42:38.084523Z",
+        "publishedAt": "2026-07-22T07:42:38.084523Z",
+        "updatedAt": "2026-07-22T07:42:38.084523Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.llamanotes/llamanotes",
+      "description": "Lucky AI study buddy over your own LlamaNotes courses: chat, progress, and AI course generation.",
+      "version": "1.0.0",
+      "websiteUrl": "https://llamanotes.ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.llamanotes.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-23T21:22:19.849163Z",
+        "publishedAt": "2026-07-23T21:22:19.849163Z",
+        "updatedAt": "2026-07-23T21:22:19.849163Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.llmhosting/pricing",
+      "description": "LLM and GPU rental prices: model price lookup, GPU listings, cheapest-GPU search, price history",
+      "title": "LLM Hosting Pricing",
+      "repository": {
+        "url": "https://github.com/zayedAlmansoori/llmhosting-ai",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://llmhosting.ai/mcp-docs",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://llmhosting.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-09T19:54:38.601862Z",
+        "publishedAt": "2026-07-09T19:54:38.601862Z",
+        "updatedAt": "2026-07-09T19:54:38.601862Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.llmintel/llmintel",
+      "description": "Check whether an LLM model id is deprecated, retiring, or retired, and what to migrate to.",
+      "repository": {
+        "url": "https://github.com/hivemindunit/llmintel-mcp",
+        "source": "github"
+      },
+      "version": "0.1.1",
+      "websiteUrl": "https://llmintel.ai",
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "@llmintel/mcp",
+          "version": "0.1.1",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Optional. The catalog is public and needs no key; supplying one only raises the rate-limit budget.",
+              "isSecret": true,
+              "name": "LLMINTEL_API_KEY"
+            },
+            {
+              "description": "Optional. Override the catalog origin (defaults to https://llmintel.ai). Useful for self-hosted or staging deployments.",
+              "name": "LLMINTEL_BASE_URL"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "deprecated",
+        "statusChangedAt": "2026-07-28T03:18:38.060041Z",
+        "statusMessage": "Renamed to ai.llmintel/model-lifecycle; same server, same npm package @llmintel/mcp",
+        "publishedAt": "2026-07-28T02:46:03.860584Z",
+        "updatedAt": "2026-07-28T03:18:38.060041Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.llmintel/model-lifecycle",
+      "description": "Check whether an LLM model id is deprecated, retiring, or retired, and what to migrate to.",
+      "title": "LLMIntel Model Lifecycle",
+      "repository": {
+        "url": "https://github.com/hivemindunit/llmintel-mcp",
+        "source": "github"
+      },
+      "version": "0.2.0",
+      "websiteUrl": "https://llmintel.ai",
+      "icons": [
+        {
+          "src": "https://llmintel.ai/logo.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        },
+        {
+          "src": "https://llmintel.ai/logo.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "400x400"
+          ]
+        }
+      ],
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "@llmintel/mcp",
+          "version": "0.2.0",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Optional. The catalog is public and needs no key; supplying one only raises the rate-limit budget.",
+              "isSecret": true,
+              "name": "LLMINTEL_API_KEY"
+            },
+            {
+              "description": "Optional. Override the catalog origin (defaults to https://llmintel.ai). Useful for self-hosted or staging deployments.",
+              "name": "LLMINTEL_BASE_URL"
+            }
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://llmintel.ai/v1/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-28T03:18:16.533649Z",
+        "publishedAt": "2026-07-28T03:18:16.533649Z",
+        "updatedAt": "2026-07-28T03:18:16.533649Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.llmse/mcp",
+      "description": "Public MCP server for the LLM Search Engine",
+      "repository": {},
+      "version": "1.3.12",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://llmse.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-01-21T16:19:36.12182Z",
+        "publishedAt": "2026-01-21T16:19:36.12182Z",
+        "updatedAt": "2026-01-21T16:19:36.12182Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-07-09/server.schema.json",
+      "name": "ai.llpro.agentrecord/agent-record",
+      "description": "Daily signed census of which MCP tools work, plus a delivery record. Free. No paid ranking.",
+      "title": "Agent Record",
+      "version": "1.0.0",
+      "websiteUrl": "https://agentrecord.llpro.ai/llms.txt",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://agentrecord.llpro.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-07T19:06:58.75696Z",
+        "publishedAt": "2026-11-07T19:06:58.75696Z",
+        "updatedAt": "2026-11-07T19:06:58.75696Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-07-09/server.schema.json",
+      "name": "ai.llpro.countersign/countersign",
+      "description": "Independent, signed check of AI work: math, quotes, sources, links, code. Public verifiable log.",
+      "title": "Countersign",
+      "version": "1.0.0",
+      "websiteUrl": "https://countersign.llpro.ai/llms.txt",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://countersign.llpro.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-07T19:10:19.693231Z",
+        "publishedAt": "2026-11-07T19:10:19.693231Z",
+        "updatedAt": "2026-11-07T19:10:19.693231Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-07-09/server.schema.json",
+      "name": "ai.llpro.gt/ground-truth-worldwide",
+      "description": "Live, cited facts for anywhere on Earth: weather, rivers, floods, quakes, disasters, air quality.",
+      "title": "Ground Truth Worldwide",
+      "version": "1.0.0",
+      "websiteUrl": "https://gt.llpro.ai/llms.txt",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://gt.llpro.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-07T17:45:05.305265Z",
+        "publishedAt": "2026-11-07T17:45:05.305265Z",
+        "updatedAt": "2026-11-07T17:45:05.305265Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.loadoptimizer/loadoptimizer",
+      "description": "Plan truck, container and pallet loads in 3D with a real optimization engine.",
+      "title": "LoadOptimizer",
+      "version": "1.4.0",
+      "websiteUrl": "https://www.loadoptimizer.ai/mcp-server/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.loadoptimizer.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-06T15:42:45.996875Z",
+        "publishedAt": "2026-11-06T15:42:45.996875Z",
+        "updatedAt": "2026-11-06T15:42:45.996875Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.loafy/loafy",
+      "description": "Sourdough baking: dough calculators, a bake planner, The Sourdough Framework and your bake journal",
+      "title": "Loafy: Sourdough Bread Baking",
+      "version": "1.1.0",
+      "websiteUrl": "https://loafy.ai/claude",
+      "icons": [
+        {
+          "src": "https://loafy.ai/icons/icon-192.png?v=15828dd1",
+          "mimeType": "image/png",
+          "sizes": [
+            "192x192"
+          ]
+        },
+        {
+          "src": "https://loafy.ai/icon.png?v=5fe6d28c",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://loafy.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-17T17:46:05.546751Z",
+        "publishedAt": "2026-10-17T17:46:05.546751Z",
+        "updatedAt": "2026-10-17T17:46:05.546751Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.localhero/localhero",
+      "description": "Manage product translations from Claude and ship reviewed changes as GitHub pull requests.",
+      "title": "Localhero.ai",
+      "version": "1.0.0",
+      "websiteUrl": "https://localhero.ai/docs/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://localhero.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-08T19:28:56.90727Z",
+        "publishedAt": "2026-09-08T19:28:56.90727Z",
+        "updatedAt": "2026-09-08T19:28:56.90727Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.localmark/agent-directory",
+      "description": "Search public A2A agents and inspect read-only Agent Card and endpoint checks.",
+      "title": "LocalMark Agent Directory",
+      "version": "1.0.1",
+      "websiteUrl": "https://localmark.ai/for-agents",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://localmark.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-11T13:24:57.538888Z",
+        "publishedAt": "2026-10-11T13:24:57.538888Z",
+        "updatedAt": "2026-10-11T13:24:57.538888Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.localmark/hosted-agents",
+      "description": "Documents, data, localization, A2A repair and x402 analysis. Shared trial, then 0.05 USDC/task.",
+      "title": "LocalMark Hosted Agents",
+      "version": "1.2.0",
+      "websiteUrl": "https://agents.localmark.ai/developers",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://agents.localmark.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-06T06:23:31.336471Z",
+        "publishedAt": "2026-11-06T06:23:31.336471Z",
+        "updatedAt": "2026-11-06T06:23:31.336471Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.localprospects/mcp",
+      "description": "Find local businesses on Google Maps with owner names, emails, phone line types and socials.",
+      "title": "LocalProspects",
+      "version": "1.0.0",
+      "websiteUrl": "https://localprospects.ai/docs",
+      "icons": [
+        {
+          "src": "https://localprospects.ai/logos/lp-logo-120.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "120x120"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://localprospects.ai/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-08T04:13:04.484905Z",
+        "publishedAt": "2026-11-08T04:13:04.484905Z",
+        "updatedAt": "2026-11-08T04:13:04.484905Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.loci-labs/real-world-observations",
+      "description": "Fresh human-observable information about physical places and conditions that may be stale online.",
+      "title": "Loci Labs Real-World Observations",
+      "version": "0.1.0",
+      "websiteUrl": "https://mcp.loci-labs.ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.loci-labs.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-27T02:11:03.342842Z",
+        "publishedAt": "2026-09-27T02:11:03.342842Z",
+        "updatedAt": "2026-09-27T02:11:03.342842Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.locul/cloud",
+      "description": "Recall memories, entity profiles and source notes from your Locul cloud brain in any AI chat.",
+      "title": "Locul Cloud Memory",
+      "version": "1.0.0",
+      "websiteUrl": "https://locul.ai",
+      "icons": [
+        {
+          "src": "https://locul.ai/logo-app.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://team-api.locul.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-04T19:38:25.647265Z",
+        "publishedAt": "2026-10-04T19:38:25.647265Z",
+        "updatedAt": "2026-10-04T19:38:25.647265Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.lograck/lograck",
+      "description": "Shared memory for your AI tools: tasks, notes and context every tool can read and write over MCP.",
+      "title": "LogRack",
+      "version": "0.1.0",
+      "websiteUrl": "https://lograck.ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.lograck.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-23T11:30:24.204048Z",
+        "publishedAt": "2026-10-23T11:30:24.204048Z",
+        "updatedAt": "2026-10-23T11:30:24.204048Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.looot/looot",
+      "description": "One key and one balance for 2,500+ data APIs from 90+ providers. Your AI agent pays per call.",
+      "title": "looot",
+      "version": "1.0.1",
+      "websiteUrl": "https://looot.ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.looot.ai/mcp",
+          "headers": [
+            {
+              "description": "Optional: Bearer <looot token>. Clients that support MCP OAuth sign in without it.",
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-07T23:22:26.811857Z",
+        "publishedAt": "2026-10-07T23:22:26.811857Z",
+        "updatedAt": "2026-10-07T23:22:26.811857Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.loopvoice/mcp",
+      "description": "Ask about Loop Voice AI calls, texts, campaigns and revenue. Read-only, OAuth sign-in.",
+      "title": "Loop Voice",
+      "version": "1.0.0",
+      "websiteUrl": "https://loopvoice.ai/mcp",
+      "icons": [
+        {
+          "src": "https://loopvoice.ai/apple-touch-icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "180x180"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.loopvoice.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-05T07:17:46.03559Z",
+        "publishedAt": "2026-11-05T07:17:46.03559Z",
+        "updatedAt": "2026-11-05T07:17:46.03559Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.lorepunk.poems/margaret-poems",
+      "description": "Poems by Margaret Corvid (@lorepunk). Read, share, or commission a new one; she writes each by hand.",
+      "title": "Margaret's poems",
+      "version": "0.4.0",
+      "websiteUrl": "https://poems.lorepunk.ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://poems.lorepunk.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-30T19:58:10.058478Z",
+        "publishedAt": "2026-09-30T19:58:10.058478Z",
+        "updatedAt": "2026-09-30T19:58:10.058478Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.lovora/lovora",
+      "description": "Official facts about Lovora (18+ AI companions): companions, prices, content rules, docs.",
+      "title": "Lovora",
+      "version": "1.0.0",
+      "websiteUrl": "https://lovora.ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://lovora.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-23T22:19:16.941428Z",
+        "publishedAt": "2026-09-23T22:19:16.941428Z",
+        "updatedAt": "2026-09-23T22:19:16.941428Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.lucasandersen/mlp-tax",
+      "description": "Deterministic MLP tax engine with IRS citations. 6 tools: basis, \u00a7751, estate, projections.",
+      "title": "MLP Tax Computation Engine",
+      "repository": {
+        "url": "https://github.com/luc253/lucasandersen-ai",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.lucasandersen.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-04-15T21:25:53.503719Z",
+        "publishedAt": "2026-04-15T21:25:53.503719Z",
+        "updatedAt": "2026-04-15T21:25:53.503719Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.ludo/game-assets",
+      "description": "Generate game assets with AI: sprites, animations, 3D models with rigging, video, music, SFX, voices",
+      "title": "Ludo AI Game Assets",
+      "repository": {
+        "url": "https://github.com/Ludo-AI/ludo-mcp",
+        "source": "github"
+      },
+      "version": "0.16.6",
+      "websiteUrl": "https://ludo.ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.ludo.ai/mcp",
+          "headers": [
+            {
+              "description": "API key from Ludo AI (format: 'ApiKey your-api-key'). Get your key at https://app.ludo.ai",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ],
+      "_meta": {
+        "io.modelcontextprotocol.registry/publisher-provided": {
+          "documentation": "https://api.ludo.ai/api-documentation",
+          "examples": [
+            {
+              "description": "Character sprite in a chosen style",
+              "name": "Generate a Pixel Art Sprite",
+              "note": "createImage with image_type='sprite', art_style='16-Bit', perspective='Side-Scroll'"
+            },
+            {
+              "description": "Walk cycle spritesheet from a static sprite",
+              "name": "Animate a Sprite",
+              "note": "animateSprite with initial_image='url', motion_prompt='walking cycle'; hydra (default) also returns a sound effect"
+            },
+            {
+              "description": "GLB model, rigged, then animated from text",
+              "name": "Sprite to Animated 3D Model",
+              "note": "create3DModel, then rigModel, then animate3DModel with prompt='walking'"
+            },
+            {
+              "description": "Styled sprites from up to 8 directions that line up",
+              "name": "3D Model to Directional Sprites",
+              "note": "create3DModel with rig=true, previewDirectionalSprites (free), then createDirectionalSprites with preset_id='walk_relaxed', directions=['S','SW','W']"
+            },
+            {
+              "description": "Game sound from a description",
+              "name": "Generate a Sound Effect",
+              "note": "createSoundEffect with description='futuristic laser gun firing'"
+            },
+            {
+              "description": "Generation tools return a job id",
+              "name": "Collect a Result",
+              "note": "getApiJob with id and wait=30 until status is 'succeeded', then read result"
+            },
+            {
+              "description": "Ludo's own guidance before generating",
+              "name": "Look Up a Feature",
+              "note": "searchDocs with query='how do I pick a sprite animation mode' (free)"
+            },
+            {
+              "description": "Tell the Ludo team what did not work",
+              "name": "Report a Limitation",
+              "note": "submitApiFeedback with category='limitation' and a message (free)"
+            }
+          ],
+          "keywords": [
+            "game-dev",
+            "gamedev",
+            "sprites",
+            "pixel-art",
+            "3d-models",
+            "glb",
+            "rigging",
+            "skeletal-animation",
+            "animation",
+            "spritesheet",
+            "directional-sprites",
+            "sound-effects",
+            "sfx",
+            "music",
+            "voice",
+            "tts",
+            "ai",
+            "assets",
+            "indie-game",
+            "unity",
+            "godot",
+            "unreal"
+          ],
+          "license": "MIT",
+          "notes": [
+            "Credit-based: images 0.5, 3D models 4 (hero 15), rigging 1, 3D animation 0.5, directional sprites 1 per direction, sprite animation and video priced by model (per second, or 10 per animation on Griffin), audio 1-3. Each tool states its price",
+            "Every generation tool is asynchronous: it returns {id, status:'queued'}; collect the result with getApiJob (wait up to 60s to long-poll)",
+            "Up to 50 generations queued or running per account; read endpoints 150 requests per 5 minutes per API key",
+            "Generated asset URLs expire after 7 days: download anything you want to keep"
+          ],
+          "publisher": "Ludo AI"
+        }
+      }
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-05T10:12:25.867352Z",
+        "publishedAt": "2026-11-05T10:12:25.867352Z",
+        "updatedAt": "2026-11-05T10:12:25.867352Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.lumeta/lumeta",
+      "description": "Make images, video and audio with your Lumeta account, credits and saved Shelf items.",
+      "title": "Lumeta",
+      "version": "1.0.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.lumeta.ai"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-06T08:44:22.537725Z",
+        "publishedAt": "2026-10-06T08:44:22.537725Z",
+        "updatedAt": "2026-10-06T08:44:22.537725Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.lumify/sports-intelligence",
+      "description": "Schedules, scores, odds, splits & explainable AI bet confidence \u2014 8+ sports, free instant key.",
+      "title": "Lumify Sports Intelligence",
+      "repository": {
+        "url": "https://github.com/lumifyai/lumify",
+        "source": "github"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://lumify.ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://lumify.ai/mcp",
+          "headers": [
+            {
+              "description": "Lumify API key as a Bearer token ('Bearer lmfy-...'). Get one free in seconds with no signup at https://lumify.ai/docs/ai, or create an account key at https://lumify.ai/api-keys. The server never stores your key.",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-20T17:01:48.656618Z",
+        "publishedAt": "2026-07-20T17:01:48.656618Z",
+        "updatedAt": "2026-07-20T17:01:48.656618Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.lunafic/lunafic",
+      "description": "Build your Lunafic roleplay worlds and their wiki by talking, and read back the stories you played.",
+      "title": "Lunafic",
+      "version": "1.2.0",
+      "websiteUrl": "https://lunafic.ai/docs/agent-access",
+      "icons": [
+        {
+          "src": "https://lunafic.ai/lunafic-single.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "431x431"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.lunafic.ai/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-17T19:34:19.322301Z",
+        "publishedAt": "2026-10-17T19:34:19.322301Z",
+        "updatedAt": "2026-10-17T19:34:19.322301Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.luw/mcp",
+      "description": "AI interior, exterior and landscape design, photoreal rendering, image editing, video and 3D.",
+      "title": "Luw.ai",
+      "repository": {
+        "url": "https://github.com/Luvi-io/luw-mcp",
+        "source": "github"
+      },
+      "version": "0.3.12",
+      "websiteUrl": "https://luw.ai",
+      "icons": [
+        {
+          "src": "https://luvicdn.net/img/luwai-10db78ea2bd139927f8b4f6c2ad1620c/lw-favicon.png?w=256&fm=png",
+          "mimeType": "image/png",
+          "sizes": [
+            "256x256"
+          ]
+        }
+      ],
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "@luw-ai/mcp",
+          "version": "0.3.12",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Your Luw.ai API key from https://app.luw.ai/dashboard/api",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "LUW_API_KEY"
+            },
+            {
+              "description": "Optional folder where generated files are also downloaded",
+              "name": "LUW_OUTPUT_DIR"
+            }
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.luw.ai/mcp",
+          "headers": [
+            {
+              "description": "Optional: Bearer followed by a Luw.ai API key. Clients with MCP OAuth sign in to Luw.ai instead.",
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-08T02:29:48.124062Z",
+        "publishedAt": "2026-11-08T02:29:48.124062Z",
+        "updatedAt": "2026-11-08T02:29:48.124062Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.machinerelations/mri",
+      "description": "Which source domains AI answer engines cite, by buyer category and question shape.",
+      "title": "Machine Relations Index",
+      "repository": {
+        "url": "https://github.com/Bramwell-Inc/machinerelations-plugins",
+        "source": "github"
+      },
+      "version": "1.1.0",
+      "websiteUrl": "https://machinerelations.ai/machine-relations-index",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://machinerelations.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-29T00:09:33.498981Z",
+        "publishedAt": "2026-10-29T00:09:33.498981Z",
+        "updatedAt": "2026-10-29T00:09:33.498981Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.mador/mador",
+      "description": "Mador: how often AI assistants name your local business. Read-only tools for your Mador account.",
+      "title": "Mador",
+      "version": "1.0.0",
+      "websiteUrl": "https://mador.ai",
+      "icons": [
+        {
+          "src": "https://mador.ai/apple-icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "180x180"
+          ]
+        },
+        {
+          "src": "https://mador.ai/icon.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mador.ai/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-19T20:09:41.957361Z",
+        "publishedAt": "2026-10-19T20:09:41.957361Z",
+        "updatedAt": "2026-10-19T20:09:41.957361Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.mafdet/mcp",
+      "description": "Read-only Mafdet AI account tools (models, balance, usage, subscription) and docs search.",
+      "version": "1.7.0",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@mafdet/mcp",
+          "version": "1.7.0",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "A Mafdet AI API key with the account:read scope. Optional \u2014 only the account tools (get_balance, get_usage_summary, get_subscription) need it; list_models and search_docs work without a key.",
+              "isSecret": true,
+              "name": "MAFDET_API_KEY"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-01T10:33:18.349938Z",
+        "publishedAt": "2026-11-01T10:33:18.349938Z",
+        "updatedAt": "2026-11-01T10:33:18.349938Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.magicinsights/insights",
+      "description": "Query your customer feedback: studies, themes, suggestions, tags, and sentiment trends.",
+      "title": "Magic Insights",
+      "repository": {
+        "url": "https://github.com/andrewchmr/magic-insights-mcp",
+        "source": "github"
+      },
+      "version": "0.1.1",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://app.magicinsights.ai/api/mcp",
+          "headers": [
+            {
+              "description": "Bearer <your Magic Insights API key>. Create one at app.magicinsights.ai \u2192 Settings \u2192 API keys, then send it as: Authorization: Bearer mi_...",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-06-25T14:40:26.188033Z",
+        "publishedAt": "2026-06-25T14:40:26.188033Z",
+        "updatedAt": "2026-06-25T14:40:26.188033Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.magnemo/magnemo",
+      "description": "Persistent Memory for AI Agents, in plain local files. No network calls of its own.",
+      "title": "MAGNEMO",
+      "repository": {
+        "url": "https://github.com/magnemo-ai/magnemo",
+        "source": "github"
+      },
+      "version": "0.6.11",
+      "websiteUrl": "https://magnemo.ai",
+      "packages": [
+        {
+          "registryType": "pypi",
+          "registryBaseUrl": "https://pypi.org",
+          "identifier": "magnemo-mcp",
+          "version": "0.6.11",
+          "runtimeHint": "uvx",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Absolute path to the vault folder (create one with: magnemo init ./vault). Plain markdown files you own.",
+              "isRequired": true,
+              "format": "filepath",
+              "placeholder": "/absolute/path/to/vault",
+              "name": "MAGNEMO_VAULT"
+            },
+            {
+              "description": "The name this agent signs its entries with. Default: agent.",
+              "format": "string",
+              "default": "agent",
+              "name": "MAGNEMO_AGENT"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-29T00:17:27.738895Z",
+        "publishedAt": "2026-10-29T00:17:27.738895Z",
+        "updatedAt": "2026-10-29T00:17:27.738895Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.maguyva/maguyva",
+      "description": "Code intelligence for coding agents: semantic, AST, graph, and full-text search. 279+ languages.",
+      "title": "Maguyva",
+      "repository": {
+        "url": "https://github.com/Maguyva/mcp",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://maguyva.ai",
+      "icons": [
+        {
+          "src": "https://maguyva.ai/icon-192.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "192x192"
+          ]
+        },
+        {
+          "src": "https://maguyva.ai/favicon.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://maguyva.tools/mcp",
+          "headers": [
+            {
+              "description": "Bearer <your Maguyva API key \u2014 free at maguyva.ai>. Alternative header: X-API-Key.",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-20T16:11:17.48051Z",
+        "publishedAt": "2026-07-20T16:11:17.48051Z",
+        "updatedAt": "2026-07-20T16:11:17.48051Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.mailbeast/mailbeast",
+      "description": "Run MailBeast.ai cold email from your AI assistant: campaigns, leads, mailboxes, replies, analytics.",
+      "title": "MailBeast.ai",
+      "version": "1.0.2",
+      "websiteUrl": "https://mailbeast.ai",
+      "icons": [
+        {
+          "src": "https://mailbeast.ai/android-chrome-512x512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        },
+        {
+          "src": "https://mailbeast.ai/android-chrome-192x192.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "192x192"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.mailbeast.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-19T12:18:11.963334Z",
+        "publishedAt": "2026-10-19T12:18:11.963334Z",
+        "updatedAt": "2026-10-19T12:18:11.963334Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.mailjunky/mcp",
+      "description": "Send emails, track events, and manage contacts with MailJunky.",
+      "title": "MailJunky",
+      "repository": {
+        "url": "https://github.com/TheNightProject/tnp.web.mailjunky.ai",
+        "source": "github"
+      },
+      "version": "0.1.0",
+      "remotes": [
+        {
+          "type": "sse",
+          "url": "https://mcp.mailjunky.ai/sse",
+          "headers": [
+            {
+              "description": "Your MailJunky API key in Bearer format (e.g., 'Bearer mj_live_xxx')",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-01-24T00:30:06.33677Z",
+        "publishedAt": "2026-01-24T00:30:06.33677Z",
+        "updatedAt": "2026-01-24T00:30:06.33677Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.mailmcp/mailmcp",
+      "description": "Your mailboxes in ChatGPT and Claude: Gmail, iCloud, Fastmail, any IMAP. Passwords stay yours.",
+      "title": "mailmcp",
+      "repository": {
+        "url": "https://github.com/kojott/mailmcp-dist",
+        "source": "github"
+      },
+      "version": "0.15.0",
+      "websiteUrl": "https://mailmcp.ai",
+      "icons": [
+        {
+          "src": "https://mailmcp.ai/icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/kojott/mailmcp-dist/releases/download/v0.15.0/mailmcp.mcpb",
+          "version": "0.15.0",
+          "fileSha256": "36138cb2d7be5b738b4fcd56a36c8f09420469c867d14b8ec0f8eee12ea18b8e",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mailmcp.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-04T21:55:34.179725Z",
+        "publishedAt": "2026-11-04T21:55:34.179725Z",
+        "updatedAt": "2026-11-04T21:55:34.179725Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.mails/agent-email",
+      "description": "A real inbox for AI agents: send, receive and thread email, behind a prompt-injection firewall.",
+      "title": "Mails.ai \u2014 Agent Email",
+      "version": "0.5.0",
+      "websiteUrl": "https://mails.ai",
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "@mailsai/mcp-server",
+          "version": "0.5.0",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Your mails.ai API key. Use an mk_test_ key to run against the sandbox or an mk_live_ key to send real mail. Free key at https://mails.ai",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "MAILS_API_KEY"
+            },
+            {
+              "description": "Override the API base URL. Defaults to the hosted mails.ai API; only needed for staging or self-hosted deployments.",
+              "name": "MAILS_BASE_URL"
+            }
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.mails.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-16T16:07:24.574196Z",
+        "publishedAt": "2026-10-16T16:07:24.574196Z",
+        "updatedAt": "2026-10-16T16:07:24.574196Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+      "name": "ai.mainbook/bank-statement-converter",
+      "description": "Convert PDF bank statements to checked Excel, CSV or JSON with balance validation.",
+      "title": "MainBook Bank Statement Converter",
+      "repository": {
+        "url": "https://github.com/human-beyond/mainbook-mcp",
+        "source": "github"
+      },
+      "version": "0.5.2",
+      "websiteUrl": "https://mainbook.ai/mcp",
+      "packages": [
+        {
+          "registryType": "pypi",
+          "registryBaseUrl": "https://pypi.org",
+          "identifier": "mainbook-mcp",
+          "version": "0.5.1",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Optional MainBook API key for scripts and CI; interactive users can run mainbook-mcp auth login",
+              "isSecret": true,
+              "name": "MAINBOOK_API_KEY"
+            }
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.mainbook.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-20T22:50:00.794421Z",
+        "publishedAt": "2026-08-20T22:50:00.794421Z",
+        "updatedAt": "2026-08-20T22:50:00.794421Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-07-09/server.schema.json",
+      "name": "ai.mainroom/meeting-agents",
+      "description": "AI agents that join live Google Meet, Teams, and Zoom calls as speaking participants.",
+      "version": "1.0.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.mainroom.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-26T21:34:37.893167Z",
+        "publishedAt": "2026-08-26T21:34:37.893167Z",
+        "updatedAt": "2026-08-26T21:34:37.893167Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.makeaivideo/video-generator",
+      "description": "AI video generator: make TikTok, Reels and Shorts videos with voiceover and captions, and post them.",
+      "title": "MakeAIVideo",
+      "repository": {
+        "url": "https://github.com/makeaivideo-ai/mcp",
+        "source": "github"
+      },
+      "version": "1.4.4",
+      "websiteUrl": "https://makeaivideo.ai/docs/mcp",
+      "icons": [
+        {
+          "src": "https://app.makeaivideo.ai/brand/apple-touch-icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "180x180"
+          ]
+        }
+      ],
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@makeaivideo/mcp",
+          "version": "1.0.5",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Your MakeAIVideo API key (mav_...), from https://app.makeaivideo.ai/developers",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "MAKEAIVIDEO_API_KEY"
+            }
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.makeaivideo.ai"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-15T17:57:18.328204Z",
+        "publishedAt": "2026-10-15T17:57:18.328204Z",
+        "updatedAt": "2026-10-15T17:57:18.328204Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.makememoneynomistakes/scoreboard",
+      "description": "Check before you hire or pay an ERC-8004 agent on Base: track record, reputation and fraud flags.",
+      "title": "makememoneynomistakes.ai: ERC-8004 agent reputation and fraud checks",
+      "version": "1.1.0",
+      "websiteUrl": "https://makememoneynomistakes.ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://makememoneynomistakes.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-11T15:39:17.907682Z",
+        "publishedAt": "2026-10-11T15:39:17.907682Z",
+        "updatedAt": "2026-10-11T15:39:17.907682Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.makerportal/compute",
+      "description": "Deterministic engineering solvers: biquad filter design, room eigenmodes, LLM VRAM fit.",
+      "title": "MakerPortal compute",
+      "version": "0.1.1",
+      "websiteUrl": "https://makerportal.ai/lab",
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "@makerportal/mcp",
+          "version": "0.1.1",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Optional. Sent as an Authorization: Bearer header. The free tier needs no key and is the default.",
+              "isSecret": true,
+              "name": "MAKERPORTAL_LICENSE_KEY"
+            },
+            {
+              "description": "Optional. Override the endpoint (https://, or http:// on localhost only, for a dev server). Defaults to https://makerportal.ai/api/mcp.",
+              "name": "MAKERPORTAL_API_URL"
+            }
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://makerportal.ai/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-04T23:30:52.499931Z",
+        "publishedAt": "2026-09-04T23:30:52.499931Z",
+        "updatedAt": "2026-09-04T23:30:52.499931Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.makeviral/makeviral",
+      "description": "Find the newest viral AI video trend templates and make them from your photos or a prompt.",
+      "title": "MakeViral",
+      "version": "1.0.0",
+      "websiteUrl": "https://www.makeviral.ai",
+      "icons": [
+        {
+          "src": "https://www.makeviral.ai/icons/icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.makeviral.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-29T04:13:09.798666Z",
+        "publishedAt": "2026-10-29T04:13:09.798666Z",
+        "updatedAt": "2026-10-29T04:13:09.798666Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.mallary/mallary",
+      "description": "Publish and schedule social posts, reply to comments, and read analytics across connected platforms.",
+      "title": "Mallary MCP",
+      "version": "1.2.0",
+      "websiteUrl": "https://mallary.ai/social-media-mcp-server",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mallary.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-02T01:16:03.216888Z",
+        "publishedAt": "2026-11-02T01:16:03.216888Z",
+        "updatedAt": "2026-11-02T01:16:03.216888Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.mangii/manga",
+      "description": "Create manga and anime art from text. 24 styles, multi-panel stories, BYOK.",
+      "title": "AI Manga & Anime Generator - Mangii MCP",
+      "repository": {
+        "url": "https://github.com/AAAIStudio/mangii-mcp",
+        "source": "github"
+      },
+      "version": "1.4.0",
+      "websiteUrl": "https://mangii.ai/console/docs",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.mangii.ai/mcp",
+          "headers": [
+            {
+              "description": "Bearer mangii_sk_\u2026 from https://mangii.ai/console/keys",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-23T09:57:28.226825Z",
+        "publishedAt": "2026-08-23T09:57:28.226825Z",
+        "updatedAt": "2026-08-23T09:57:28.226825Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.manpage/mcp",
+      "description": "Search and read Linux manual pages with version-aware lookup and exact package provenance.",
+      "title": "Manpage MCP",
+      "version": "0.2.0",
+      "websiteUrl": "https://manpage.ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://manpage.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-13T03:40:00.094199Z",
+        "publishedAt": "2026-10-13T03:40:00.094199Z",
+        "updatedAt": "2026-10-13T03:40:00.094199Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.mapmap/mapmap",
+      "description": "Maps for agents: truck/ADR routing, geocoding, places, matrices, isochrones, EV and fleet planning.",
+      "title": "MapMap",
+      "repository": {
+        "url": "https://github.com/Mapmapai/mapmap",
+        "source": "github"
+      },
+      "version": "1.1.0",
+      "websiteUrl": "https://mapmap.ai/docs/agents",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.mapmap.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-17T15:19:47.789628Z",
+        "publishedAt": "2026-10-17T15:19:47.789628Z",
+        "updatedAt": "2026-10-17T15:19:47.789628Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "ai.mappit/mappit",
+      "description": "The world's news on a live map: place briefings, storylines, statistics, live layers, businesses.",
+      "title": "Mappit",
+      "version": "2.9.2",
+      "websiteUrl": "https://mappit.ai/mcp",
+      "icons": [
+        {
+          "src": "https://mappit.ai/favicon.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        },
+        {
+          "src": "https://mappit.ai/icons/Mappit-Icon-Square-512x512.jpg",
+          "mimeType": "image/jpeg",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mappit.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-20T06:51:55.994347Z",
+        "publishedAt": "2026-10-20T06:51:55.994347Z",
+        "updatedAt": "2026-10-20T06:51:55.994347Z",
+        "isLatest": true
+      }
+    }
+  }
+]

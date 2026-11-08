@@ -18,7 +18,7 @@ Frontend development patterns for React, Next.js, state management, performance 
 **Tech:** [[UI & Design]], [[Architecture]], [[Next.js]], [[React]]
 
 ## Related Skills
-- **Complements:** [[architecture-patterns]], [[autonomous-agent-patterns]], [[event-store-design]], [[postgresql-table-design]]
-- **Alternate of:** [[react-best-practices]], [[tailwind-design-system]]
+- **Complements:** [[architecture-patterns]], [[autonomous-agent-patterns]], [[event-store-design]], [[langchain-architecture]]
+- **Alternate of:** [[server-actions]], [[tailwind-css-4]]
 
 Real skill file: `skills/frontend-patterns/SKILL.md`

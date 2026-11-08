@@ -18,7 +18,7 @@ Create LangChain agents with create_agent, define tools, and use middleware for 
 **Tech:** [[Agents]], [[LangChain]]
 
 ## Related Skills
-- **Complements:** [[cloudflare]], [[next-dev-loop]], [[react-native-best-practices]], [[secure-webapp]]
+- **Complements:** [[cloudflare]], [[convex]], [[next-dev-loop]], [[react-native-best-practices]]
 - **Alternate of:** [[langchain-architecture]], [[langfuse]]
 
 Real skill file: `skills/langchain-fundamentals/SKILL.md`

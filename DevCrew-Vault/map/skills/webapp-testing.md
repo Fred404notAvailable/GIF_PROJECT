@@ -18,7 +18,7 @@ Toolkit for interacting with and testing local web applications using Playwright
 **Tech:** [[TDD]], [[UI & Design]], [[Playwright]]
 
 ## Related Skills
-- **Complements:** [[agent-memory-systems]], [[api-design-principles]], [[ui-visual-validator]], [[web-tooling-storybook]]
+- **Complements:** [[agent-memory-systems]], [[angular-best-practices]], [[architecture-patterns]], [[ui-visual-validator]]
 - **Alternate of:** [[e2e-testing]], [[web-testing-playwright-e2e]]
 
 Real skill file: `skills/webapp-testing/SKILL.md`

@@ -19,6 +19,6 @@ Obtain or reuse a Prisma Postgres database and connect an application. Use when 
 
 ## Related Skills
 - **Complements:** [[convex]], [[database-design]], [[docker-compose-patterns]], [[firebase-security-rules-auditor]]
-- **Alternate of:** [[database-migration]], [[neon-postgres-branches]], [[supabase-postgres-best-practices]]
+- **Alternate of:** [[neon-postgres]], [[supabase-postgres-best-practices]]
 
 Real skill file: `skills/prisma-postgres-setup/SKILL.md`

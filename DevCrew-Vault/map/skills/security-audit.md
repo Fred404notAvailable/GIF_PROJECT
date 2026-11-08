@@ -18,7 +18,7 @@ Comprehensive security auditing workflow covering web application testing, API s
 **Tech:** [[Security Audit]], [[API Security]], [[GitHub Actions]], [[REST & API]], [[TDD]]
 
 ## Related Skills
-- **Complements:** [[api-design-principles]], [[e2e-testing]], [[neon-postgres]], [[stripe-best-practices]]
+- **Complements:** [[dotnet-backend-patterns]], [[e2e-testing]], [[server-actions]], [[stripe-best-practices]]
 - **Alternate of:** [[api-security]], [[api-security-testing]]
 
 Real skill file: `skills/security-audit/SKILL.md`

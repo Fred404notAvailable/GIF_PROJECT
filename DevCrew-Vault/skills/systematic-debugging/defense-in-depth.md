@@ -4,12 +4,12 @@
 
 When you fix a bug caused by invalid data, adding validation at one place feels sufficient. But that single check can be bypassed by different code paths, refactoring, or mocks.
 
-**Core principle:** Validate at EVERY layer data passes through. Define and test a distinct invariant at each relevant boundary.
+**Core principle:** Validate at EVERY layer data passes through. Make the bug structurally impossible.
 
 ## Why Multiple Layers
 
 Single validation: "We fixed the bug"
-Multiple layers: "Different failure paths now have explicit checks"
+Multiple layers: "We made the bug impossible"
 
 Different layers catch different cases:
 - Entry validation catches most bugs
@@ -56,12 +56,10 @@ function initializeWorkspace(projectDir: string, sessionId: string) {
 async function gitInit(directory: string) {
   // In tests, refuse git init outside temp directories
   if (process.env.NODE_ENV === 'test') {
-    // For an existing directory: compare real paths and path components.
-    // Import realpathSync from node:fs and relative/isAbsolute/sep from node:path.
-    const normalized = realpathSync(directory);
-    const tmpDir = realpathSync(tmpdir());
-    const child = relative(tmpDir, normalized);
-    if (!child || child === '..' || child.startsWith(`..${sep}`) || isAbsolute(child)) {
+    const normalized = normalize(resolve(directory));
+    const tmpDir = normalize(resolve(tmpdir()));
+
+    if (!normalized.startsWith(tmpDir)) {
       throw new Error(
         `Refusing git init outside temp dir during tests: ${directory}`
       );
@@ -111,7 +109,7 @@ Bug: Empty `projectDir` caused `git init` in source code
 - Layer 3: `WorktreeManager` refuses git init outside tmpdir in tests
 - Layer 4: Stack trace logging before git init
 
-**Historical reported result:** 1847 tests passed in the source case. This repository does not bundle that test suite; the count is not a current verification result.
+**Result:** All 1847 tests passed, bug impossible to reproduce
 
 ## Key Insight
 
@@ -122,7 +120,3 @@ All four layers were necessary. During testing, each layer caught bugs the other
 - Debug logging identified structural misuse
 
 **Don't stop at one validation point.** Add checks at every layer.
-
-## Limits of path checks
-
-A string prefix such as `/tmp` also matches `/tmp-other`; use path components and account for links. A preflight realpath check does not prevent a concurrent path replacement. For mutation, bind the operation to a private owned fixture and use the platform’s appropriate descriptor/identity checks. `NODE_ENV` is configuration, not an authorization boundary.

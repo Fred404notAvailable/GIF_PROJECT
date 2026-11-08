@@ -18,7 +18,7 @@ Use this skill when creating, modifying, or debugging Docker Compose configurati
 **Tech:** [[Docker]], [[Architecture]], [[Containers]], [[SQL & Database]], [[TDD]]
 
 ## Related Skills
-- **Complements:** [[neon-postgres-branches]], [[postgresql-table-design]], [[sql-injection-testing]], [[sql-optimization-patterns]]
+- **Complements:** [[architecture-patterns]], [[dotnet-backend-patterns]], [[neon-postgres-branches]], [[sql-optimization-patterns]]
 - **Alternate of:** [[docker-build-strategies]], [[kubernetes-deployment]]
 
 Real skill file: `skills/docker-compose-patterns/SKILL.md`

@@ -18,7 +18,7 @@ INVOKE THIS SKILL when your LangGraph needs to persist state, remember conversat
 **Tech:** [[Agents]], [[LangGraph]]
 
 ## Related Skills
-- **Complements:** [[cloudflare]], [[next-dev-loop]], [[react-native-best-practices]], [[secure-webapp]]
-- **Alternate of:** [[langgraph-fundamentals]], [[langgraph-human-in-the-loop]]
+- **Complements:** [[cloudflare]], [[convex]], [[next-dev-loop]], [[react-native-best-practices]]
+- **Alternate of:** [[langchain-architecture]], [[langgraph-fundamentals]]
 
 Real skill file: `skills/langgraph-persistence/SKILL.md`

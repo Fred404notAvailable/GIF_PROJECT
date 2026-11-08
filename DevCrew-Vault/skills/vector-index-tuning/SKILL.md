@@ -1,16 +1,13 @@
 ---
 name: vector-index-tuning
-description: "Optimize vector index performance for latency, recall, and memory. Use when tuning HNSW parameters, selecting quantization strategies, or scaling vector search infrastructure."
-risk: safe
-source: community
-date_added: "2026-02-27"
+description: Optimize vector index performance for latency, recall, and memory. Use when tuning HNSW parameters, selecting quantization strategies, or scaling vector search infrastructure.
 ---
 
 # Vector Index Tuning
 
 Guide to optimizing vector indexes for production performance.
 
-## Use this skill when
+## When to Use This Skill
 
 - Tuning HNSW parameters
 - Implementing quantization
@@ -19,32 +16,54 @@ Guide to optimizing vector indexes for production performance.
 - Balancing recall vs speed
 - Scaling to billions of vectors
 
-## Do not use this skill when
+## Core Concepts
 
-- You only need exact search on small datasets (use a flat index)
-- You lack workload metrics or ground truth to validate recall
-- You need end-to-end retrieval system design beyond index tuning
+### 1. Index Type Selection
 
-## Instructions
+```
+Data Size           Recommended Index
+────────────────────────────────────────
+< 10K vectors  →    Flat (exact search)
+10K - 1M       →    HNSW
+1M - 100M      →    HNSW + Quantization
+> 100M         →    IVF + PQ or DiskANN
+```
 
-1. Gather workload targets (latency, recall, QPS), data size, and memory budget.
-2. Choose an index type and establish a baseline with default parameters.
-3. Benchmark parameter sweeps using real queries and track recall, latency, and memory.
-4. Validate changes on a staging dataset before rolling out to production.
+### 2. HNSW Parameters
 
-Refer to `resources/implementation-playbook.md` for detailed patterns, checklists, and templates.
+| Parameter          | Default | Effect                                               |
+| ------------------ | ------- | ---------------------------------------------------- |
+| **M**              | 16      | Connections per node, ↑ = better recall, more memory |
+| **efConstruction** | 100     | Build quality, ↑ = better index, slower build        |
+| **efSearch**       | 50      | Search quality, ↑ = better recall, slower search     |
 
-## Safety
+### 3. Quantization Types
 
-- Avoid reindexing in production without a rollback plan.
-- Validate changes under realistic load before applying globally.
-- Track recall regressions and revert if quality drops.
+```
+Full Precision (FP32): 4 bytes × dimensions
+Half Precision (FP16): 2 bytes × dimensions
+INT8 Scalar:           1 byte × dimensions
+Product Quantization:  ~32-64 bytes total
+Binary:                dimensions/8 bytes
+```
 
-## Resources
+## Templates and detailed worked examples
 
-- `resources/implementation-playbook.md` for detailed patterns, checklists, and templates.
+Full template library and detailed worked examples live in `references/details.md`. Read that file when you need the concrete templates.
 
-## Limitations
-- Use this skill only when the task clearly matches the scope described above.
-- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
-- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
+## Best Practices
+
+### Do's
+
+- **Benchmark with real queries** - Synthetic may not represent production
+- **Monitor recall continuously** - Can degrade with data drift
+- **Start with defaults** - Tune only when needed
+- **Use quantization** - Significant memory savings
+- **Consider tiered storage** - Hot/cold data separation
+
+### Don'ts
+
+- **Don't over-optimize early** - Profile first
+- **Don't ignore build time** - Index updates have cost
+- **Don't forget reindexing** - Plan for maintenance
+- **Don't skip warming** - Cold indexes are slow

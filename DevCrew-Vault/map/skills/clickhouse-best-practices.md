@@ -15,9 +15,10 @@ MUST USE when reviewing ClickHouse schemas, queries, or configurations. Contains
 **Module:** [[Module 3 - Database, Vector & Storage Management]]  
 **Source:** [[src-clickhouse]]  
 **License:** [[lic-Apache-2.0]]  
-**Tech:** [[SQL & Database]]
+**Tech:** [[ClickHouse]], [[SQL & Database]]
 
 ## Related Skills
 - **Complements:** [[convex]], [[database-design]], [[docker-compose-patterns]], [[firebase-security-rules-auditor]]
+- **Alternate of:** [[supabase]]
 
 Real skill file: `skills/clickhouse-best-practices/SKILL.md`

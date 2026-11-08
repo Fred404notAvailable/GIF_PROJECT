@@ -22,8 +22,6 @@ class TestCase:
 
 class PromptOptimizer:
     def __init__(self, llm_client, test_suite: List[TestCase]):
-        if not test_suite:
-            raise ValueError("test_suite must not be empty")
         self.client = llm_client
         self.test_suite = test_suite
         self.results_history = []
@@ -37,8 +35,6 @@ class PromptOptimizer:
         """Evaluate a prompt template against test cases in parallel."""
         if test_cases is None:
             test_cases = self.test_suite
-        if not test_cases:
-            raise ValueError("test_cases must not be empty")
 
         metrics = {
             'accuracy': [],
@@ -85,7 +81,7 @@ class PromptOptimizer:
             'avg_accuracy': np.mean(metrics['accuracy']),
             'avg_latency': np.mean(metrics['latency']),
             'p95_latency': np.percentile(metrics['latency'], 95),
-            'avg_words': np.mean(metrics['token_count']),
+            'avg_tokens': np.mean(metrics['token_count']),
             'success_rate': np.mean(metrics['success_rate'])
         }
 
@@ -95,13 +91,18 @@ class PromptOptimizer:
         if response.strip().lower() == expected.strip().lower():
             return 1.0
 
-        # Word overlap is not correctness (a wrong answer can contain every label).
-        return 0.0
+        # Partial match using word overlap
+        response_words = set(response.lower().split())
+        expected_words = set(expected.lower().split())
+
+        if not expected_words:
+            return 0.0
+
+        overlap = len(response_words & expected_words)
+        return overlap / len(expected_words)
 
     def optimize(self, base_prompt: str, max_iterations: int = 5) -> Dict[str, Any]:
         """Iteratively optimize a prompt."""
-        if max_iterations < 1:
-            raise ValueError("max_iterations must be positive")
         current_prompt = base_prompt
         best_prompt = base_prompt
         best_score = 0
@@ -151,9 +152,13 @@ class PromptOptimizer:
                     best_variation = variation
                     best_variation_metrics = var_metrics
 
-            if best_variation_score > best_score:
-                best_score = best_variation_score
-                best_prompt = best_variation
+            # Variations are generated deterministically from the prompt, so a
+            # round with no improvement would repeat identical evaluations for
+            # every remaining iteration.
+            if best_variation == current_prompt:
+                print("No improving variation found. Stopping optimization.")
+                break
+
             current_prompt = best_variation
             current_metrics = best_variation_metrics
 

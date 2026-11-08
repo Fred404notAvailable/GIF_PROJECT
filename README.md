@@ -136,19 +136,52 @@ python tools/watcher.py related api-design-principles
 python tools/watcher.py tech PostgreSQL
 ```
 
-#### Equivalent SQL Queries
+### 9. MCP Server Catalog Workflow (Ingest, Vet, Approve, Configure)
 
-```sql
--- Query outgoing typed relationships
-SELECT relation, dst_slug, reason FROM skill_links WHERE src_slug = 'api-design-principles';
+The DevCrew Vault extends beyond static skills to curated live **Model Context Protocol (MCP)** servers, connecting live tool capabilities with the skills that teach them:
 
--- Query selected skills by technology
-SELECT t.slug FROM tech_tags t
-JOIN skill_modules sm ON t.slug = sm.slug
-WHERE t.tag = 'PostgreSQL' AND sm.status = 'selected';
+```bash
+# 1. Preview and sync real servers from official registry and reference implementations
+python tools/mcp_sync.py --dry-run
+python tools/mcp_sync.py
+
+# 2. Perform static security vetting, scoring, module assignment, and skill pairing
+python tools/mcp_vet.py
+
+# 3. Review candidate servers awaiting human decision
+# Open MCP-APPROVALS-NEEDED.md, review candidate versions, and add desired approvals
+# to DevCrew-Vault/catalog.yaml under `approvals: {<name>: <version>}`, then re-sync:
+python tools/mcp_sync.py
+python tools/mcp_vet.py
+
+# 4. Generate client configuration examples with pinned versions and secret placeholders
+python tools/mcp_config.py --crew backend
+
+# 5. Check and regenerate map layer with MCP nodes and pairs-with links
+python tools/build_map.py --check
+
+# 6. Run test suite
+pytest
 ```
 
-### 9. Query the SQLite registry directly
+#### Headless MCP CLI Queries
+
+```bash
+# List all ingested MCP servers with scores and capability classes
+python tools/watcher.py mcp-list
+
+# Show full details and vetting breakdown for a single MCP server
+python tools/watcher.py mcp-show modelcontextprotocol-fetch-mcp
+
+# Full-text search over MCP server titles, names, and descriptions
+python tools/watcher.py mcp-search "database postgres"
+
+# Find MCP servers that pair with a specific skill
+python tools/watcher.py mcp-pairs angular-best-practices
+```
+
+### 10. Query the SQLite registry directly
+
 
 ```bash
 sqlite3 DevCrew-Vault/registry.db "SELECT slug, validation_status FROM skills;"

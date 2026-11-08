@@ -15,10 +15,9 @@ Use when writing, reviewing, or debugging Terraform/OpenTofu modules, tests, CI,
 **Module:** [[Module 7 - DevOps, Containers & Cloud Automation]]  
 **Source:** [[src-terraform-skill]]  
 **License:** [[lic-Apache-2.0]]  
-**Tech:** [[Terraform]], [[TDD]]
+**Tech:** [[TDD]]
 
 ## Related Skills
-- **Complements:** [[api-design-principles]], [[api-security]], [[api-security-testing]], [[e2e-testing]]
-- **Alternate of:** [[terraform-policy]]
+- **Complements:** [[api-security]], [[api-security-testing]], [[architecture-patterns]], [[dotnet-backend-patterns]]
 
 Real skill file: `skills/terraform-skill/SKILL.md`

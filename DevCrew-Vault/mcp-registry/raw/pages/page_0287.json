@@ -1,0 +1,4132 @@
+[
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alik472/ai-watermark-remover",
+      "description": "Remove watermarks and overlays from images the user owns or has permission to edit.",
+      "title": "AI Watermark Remover",
+      "version": "1.0.0",
+      "websiteUrl": "https://aiwatermarkremover.com/api-docs#mcp",
+      "icons": [
+        {
+          "src": "https://aiwatermarkremover.com/logos/logo-256.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "256x256"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://aiwatermarkremover.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-26T05:56:29.999962Z",
+        "publishedAt": "2026-08-26T05:56:29.999962Z",
+        "updatedAt": "2026-08-26T05:56:29.999962Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alikup-ai/otgate",
+      "description": "Gates an LLM agent's writes to an OPC UA server on ranges, rate of change and live interlocks.",
+      "title": "otgate \u2014 OT policy gateway",
+      "repository": {
+        "url": "https://github.com/alikup-ai/otgate",
+        "source": "github"
+      },
+      "version": "0.1.0",
+      "websiteUrl": "https://github.com/alikup-ai/otgate",
+      "packages": [
+        {
+          "registryType": "pypi",
+          "identifier": "otgate",
+          "version": "0.1.0",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Backend to gate: 'fake' for the bundled in-memory reactor simulator, 'asyncua' for a real OPC UA server. Start with 'fake' \u2014 it needs no plant and no extra dependency.",
+              "default": "fake",
+              "name": "OTGATE_BACKEND"
+            },
+            {
+              "description": "Path to the policy YAML. Any tag not listed in it is denied by default.",
+              "default": "examples/reactor_policy.yaml",
+              "name": "OTGATE_POLICY"
+            },
+            {
+              "description": "Path to the append-only JSONL audit log. Every call, allowed or not, produces exactly one line.",
+              "default": "audit.jsonl",
+              "name": "OTGATE_AUDIT"
+            },
+            {
+              "description": "Set to 1 to run in shadow mode: allowed writes are recorded as 'WOULD execute' and never reach the backend. Use this to watch an agent for a while before letting it touch anything.",
+              "name": "OTGATE_SHADOW"
+            },
+            {
+              "description": "Path to a JSONL file that keeps the rate-of-change time base across restarts. Without it a restart loses the time base, and rate limits fall back to a one-interval allowance.",
+              "name": "OTGATE_RATE_HISTORY"
+            },
+            {
+              "description": "OPC UA endpoint, e.g. opc.tcp://localhost:4840. Required when OTGATE_BACKEND=asyncua.",
+              "name": "OTGATE_OPCUA_ENDPOINT"
+            }
+          ]
+        }
+      ],
+      "_meta": {
+        "io.modelcontextprotocol.registry/publisher-provided": {
+          "com.github": {
+            "serverDisplayName": "otgate"
+          }
+        }
+      }
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "deprecated",
+        "statusChangedAt": "2026-11-07T15:17:22.170207Z",
+        "statusMessage": "Renamed to io.github.alikup-ai/otgate-opcua for registry discoverability; same package, same project",
+        "publishedAt": "2026-11-07T15:05:25.054713Z",
+        "updatedAt": "2026-11-07T15:17:22.170207Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alikup-ai/otgate-opcua",
+      "description": "Gates an LLM agent's writes to an OPC UA server on ranges, rate of change and live interlocks.",
+      "title": "otgate \u2014 OT policy gateway",
+      "repository": {
+        "url": "https://github.com/alikup-ai/otgate",
+        "source": "github"
+      },
+      "version": "0.1.1",
+      "websiteUrl": "https://github.com/alikup-ai/otgate",
+      "packages": [
+        {
+          "registryType": "pypi",
+          "identifier": "otgate",
+          "version": "0.1.1",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Backend to gate: 'fake' for the bundled in-memory reactor simulator, 'asyncua' for a real OPC UA server. Start with 'fake' \u2014 it needs no plant and no extra dependency.",
+              "default": "fake",
+              "name": "OTGATE_BACKEND"
+            },
+            {
+              "description": "Path to the policy YAML. Any tag not listed in it is denied by default.",
+              "default": "examples/reactor_policy.yaml",
+              "name": "OTGATE_POLICY"
+            },
+            {
+              "description": "Path to the append-only JSONL audit log. Every call, allowed or not, produces exactly one line.",
+              "default": "audit.jsonl",
+              "name": "OTGATE_AUDIT"
+            },
+            {
+              "description": "Set to 1 to run in shadow mode: allowed writes are recorded as 'WOULD execute' and never reach the backend. Use this to watch an agent for a while before letting it touch anything.",
+              "name": "OTGATE_SHADOW"
+            },
+            {
+              "description": "Path to a JSONL file that keeps the rate-of-change time base across restarts. Without it a restart loses the time base, and rate limits fall back to a one-interval allowance.",
+              "name": "OTGATE_RATE_HISTORY"
+            },
+            {
+              "description": "OPC UA endpoint, e.g. opc.tcp://localhost:4840. Required when OTGATE_BACKEND=asyncua.",
+              "name": "OTGATE_OPCUA_ENDPOINT"
+            }
+          ]
+        }
+      ],
+      "_meta": {
+        "io.modelcontextprotocol.registry/publisher-provided": {
+          "com.github": {
+            "serverDisplayName": "otgate"
+          }
+        }
+      }
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-07T15:17:14.742805Z",
+        "publishedAt": "2026-11-07T15:17:14.742805Z",
+        "updatedAt": "2026-11-07T15:17:14.742805Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alimbenhelal-pro/alm-xpp-mcp",
+      "description": "D365 F&O: 90 AI tools over 200K+ objects, 25M+ cross-refs, 24M+ label translations.",
+      "title": "ALM X++ MCP Server",
+      "repository": {
+        "url": "https://github.com/alimbenhelal-pro/ALM-XPP-MCP",
+        "source": "github"
+      },
+      "version": "1.5.1",
+      "websiteUrl": "https://www.almxpp.com",
+      "icons": [
+        {
+          "src": "https://www.almxpp.com/img/logo.png",
+          "mimeType": "image/png",
+          "theme": "light"
+        }
+      ],
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "almxppmcp",
+          "version": "1.5.1",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Your ALM X++ license key -- request one at https://www.almxpp.com",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "ALMXPPMCP_API_KEY"
+            }
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.almxpp.com/mcp",
+          "variables": {
+            "apiKey": {
+              "description": "Your ALM X++ license key -- request one at https://www.almxpp.com"
+            }
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-21T13:00:44.037589Z",
+        "publishedAt": "2026-08-21T13:00:44.037589Z",
+        "updatedAt": "2026-08-21T13:00:44.037589Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alimohammadiamirhossein/deputy",
+      "description": "Claude Code helper: DeepSeek V4.1 Flash reviews Claude's code for bugs and gives second opinions",
+      "title": "Deputy",
+      "repository": {
+        "url": "https://github.com/alimohammadiamirhossein/deputy",
+        "source": "github",
+        "id": "1431818605"
+      },
+      "version": "0.3.1",
+      "websiteUrl": "https://github.com/alimohammadiamirhossein/deputy",
+      "packages": [
+        {
+          "registryType": "pypi",
+          "registryBaseUrl": "https://pypi.org",
+          "identifier": "deputy-cc",
+          "version": "0.3.1",
+          "runtimeHint": "uvx",
+          "transport": {
+            "type": "stdio"
+          },
+          "packageArguments": [
+            {
+              "type": "positional",
+              "value": "serve"
+            }
+          ],
+          "environmentVariables": [
+            {
+              "description": "deepinfra (DeepSeek V4.1 Flash) or xai (Grok, default model grok-4.3).",
+              "default": "deepinfra",
+              "choices": [
+                "deepinfra",
+                "xai"
+              ],
+              "name": "DEPUTY_PROVIDER"
+            },
+            {
+              "description": "DeepInfra API key (deepinfra.com, Dashboard > API Keys), for the default provider. Only sent to api.deepinfra.com.",
+              "isSecret": true,
+              "name": "DEEPINFRA_API_KEY"
+            },
+            {
+              "description": "xAI API key (console.x.ai), when DEPUTY_PROVIDER is xai. Only sent to api.x.ai.",
+              "isSecret": true,
+              "name": "XAI_API_KEY"
+            },
+            {
+              "description": "accuracy: Claude writes all code; Deputy reviews and consults. lean: fewest Claude tokens, little accuracy loss. balanced: Deputy takes mechanical work. partner: Deputy does all low-level work and gives ideas. savings: Deputy takes most coding.",
+              "default": "accuracy",
+              "choices": [
+                "accuracy",
+                "lean",
+                "balanced",
+                "partner",
+                "savings"
+              ],
+              "name": "DEPUTY_MODE"
+            },
+            {
+              "description": "How hard the helper model thinks.",
+              "default": "high",
+              "choices": [
+                "none",
+                "low",
+                "medium",
+                "high",
+                "max"
+              ],
+              "name": "DEPUTY_THINKING"
+            },
+            {
+              "description": "Model id served by the endpoint.",
+              "default": "deepseek-ai/DeepSeek-V4.1-Flash-1017",
+              "name": "DEPUTY_MODEL"
+            },
+            {
+              "description": "Any OpenAI-compatible endpoint (https, or http on localhost for a local model).",
+              "default": "https://api.deepinfra.com/v1/openai",
+              "name": "DEPUTY_BASE_URL"
+            },
+            {
+              "description": "Project folder Deputy may read and edit. Defaults to the client's project folder.",
+              "format": "filepath",
+              "name": "DEPUTY_WORKSPACE"
+            },
+            {
+              "description": "API key for a non-DeepInfra endpoint. Takes precedence over DEEPINFRA_API_KEY.",
+              "isSecret": true,
+              "name": "DEPUTY_API_KEY"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-27T01:37:33.669615Z",
+        "publishedAt": "2026-10-27T01:37:33.669615Z",
+        "updatedAt": "2026-10-27T01:37:33.669615Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.aliomraniH/mcp-assist-memory",
+      "description": "Coordination memory with verification: reconcile-against-GitHub, verdict freshness, provenance.",
+      "title": "MCP Assist \u2014 Coordination Memory",
+      "repository": {
+        "url": "https://github.com/aliomraniH/mcp-assist-memory",
+        "source": "github"
+      },
+      "version": "0.4.1",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp-assist-memory.replit.app/mcp",
+          "headers": [
+            {
+              "description": "Bearer <token> \u2014 operator-issued per-surface token; all MCP access requires it",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-12T06:08:17.37689Z",
+        "publishedAt": "2026-08-12T06:08:17.37689Z",
+        "updatedAt": "2026-08-12T06:08:17.37689Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alipajand/agent-readiness",
+      "description": "Deterministic, read-only audits of repo readiness for AI coding agents and of agent context files.",
+      "title": "Agent Readiness",
+      "repository": {
+        "url": "https://github.com/alipajand/agent-readiness-action",
+        "source": "github",
+        "subfolder": "integrations/mcp-package"
+      },
+      "version": "0.1.2",
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "@alipajand/agent-readiness-mcp",
+          "version": "0.1.2",
+          "runtimeHint": "npx",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-13T01:12:15.041156Z",
+        "publishedAt": "2026-10-13T01:12:15.041156Z",
+        "updatedAt": "2026-10-13T01:12:15.041156Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alipishbin77/aether",
+      "description": "Marketplace where AI agents hire other agents, paid per call in USDC. Plus LLM inference.",
+      "repository": {
+        "url": "https://github.com/alipishbin77/github-connector-test",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://appp.tail1cb552.ts.net",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://appp.tail1cb552.ts.net/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-01T07:27:39.810983Z",
+        "publishedAt": "2026-10-01T07:27:39.810983Z",
+        "updatedAt": "2026-10-01T07:27:39.810983Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alisaitteke/docker-mcp",
+      "description": "MCP server for managing Docker containers, images, networks, volumes, and registries",
+      "repository": {
+        "url": "https://github.com/alisaitteke/docker-mcp",
+        "source": "github"
+      },
+      "version": "0.2.4",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@alisaitteke/docker-mcp",
+          "version": "0.2.4",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-01-27T21:33:14.366166Z",
+        "publishedAt": "2026-01-27T21:33:14.366166Z",
+        "updatedAt": "2026-01-27T21:33:14.366166Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alisaitteke/noun-mcp",
+      "description": "Production MCP server for The Noun Project \u2014 search & download icons in Cursor/Claude with OAuth\u2026",
+      "repository": {
+        "url": "https://github.com/alisaitteke/noun-mcp",
+        "source": "github"
+      },
+      "version": "1.0.6",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@alisaitteke/noun-mcp",
+          "version": "1.0.6",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Consumer Key from The Noun Project API",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "NOUN_CONSUMER_KEY"
+            },
+            {
+              "description": "Consumer Secret from The Noun Project API",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "NOUN_CONSUMER_SECRET"
+            },
+            {
+              "description": "API tier: FREE (trial quotas) or PAID (Pay-Per-Use)",
+              "isRequired": true,
+              "format": "string",
+              "name": "NOUN_API_TIER"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-16T15:14:05.346785Z",
+        "publishedAt": "2026-09-16T15:14:05.346785Z",
+        "updatedAt": "2026-09-16T15:14:05.346785Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alisaitteke/npm-mcp",
+      "description": "MCP server for npm package management, security analysis, and compatibility checking",
+      "repository": {
+        "url": "https://github.com/alisaitteke/npm-mcp",
+        "source": "github"
+      },
+      "version": "0.0.3",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@alisaitteke/npm-mcp",
+          "version": "0.0.3",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-01-29T16:23:38.142311Z",
+        "publishedAt": "2026-01-29T16:23:38.142311Z",
+        "updatedAt": "2026-01-29T16:23:38.142311Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alisaitteke/photoshop-mcp",
+      "description": "MCP server for Adobe Photoshop \u2014 128 tools (generative AI + recipes), standalone web UI. Control Ph\u2026",
+      "repository": {
+        "url": "https://github.com/alisaitteke/photoshop-mcp",
+        "source": "github"
+      },
+      "version": "1.7.37",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@alisaitteke/photoshop-mcp",
+          "version": "1.7.37",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-15T20:06:36.037771Z",
+        "publishedAt": "2026-10-15T20:06:36.037771Z",
+        "updatedAt": "2026-10-15T20:06:36.037771Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alisonc6/smitty",
+      "description": "Family calendars, tasks, reminders, and pickup coordination for your AI assistant.",
+      "title": "SmittyHQ",
+      "version": "1.0.1",
+      "websiteUrl": "https://smittyhq.com/assistants",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.smittyhq.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-26T17:03:58.828062Z",
+        "publishedAt": "2026-10-26T17:03:58.828062Z",
+        "updatedAt": "2026-10-26T17:03:58.828062Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.aliveranme/stata-mcp",
+      "description": "\u901a\u8fc7 pystata \u9a71\u52a8\u771f\u5b9e Stata \u7684 MCP \u670d\u52a1\u5668\uff1a\u6570\u636e\u52a0\u8f7d/\u6e05\u6d17/\u5efa\u6a21/\u8bca\u65ad/\u56fe\u5f62\u5bfc\u51fa\uff0c75 \u4e2a\u5de5\u5177\u8986\u76d6\u5b8c\u6574\u8ba1\u91cf\u5de5\u4f5c\u6d41\u3002",
+      "title": "Stata MCP Server",
+      "repository": {
+        "url": "https://github.com/aliveranme/stata-mcp",
+        "source": "github"
+      },
+      "version": "1.0.10",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@aliveranme/stata-mcp",
+          "version": "1.0.10",
+          "runtimeHint": "npx",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Stata \u5b89\u88c5\u76ee\u5f55\uff08\u542b utilities/pystata\uff09\uff0c\u5982 /Applications/StataNow",
+              "isRequired": true,
+              "format": "filepath",
+              "name": "STATA_HOME"
+            },
+            {
+              "description": "Stata \u7248\u672c mp|se|be",
+              "format": "string",
+              "default": "mp",
+              "name": "STATA_EDITION"
+            },
+            {
+              "description": "\u8def\u5f84\u6c99\u7bb1\u767d\u540d\u5355\uff08\u5206\u53f7\u5206\u9694\uff09\uff1b\u53ef\u9009",
+              "format": "string",
+              "name": "STATA_ALLOWED_ROOTS"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-16T22:10:21.455623Z",
+        "publishedAt": "2026-08-16T22:10:21.455623Z",
+        "updatedAt": "2026-08-16T22:10:21.455623Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.allamiwayl-27/rabatrealestate-mcp",
+      "description": "Real estate MCP server for Morocco \u2014 search, valuation, market analysis, 17 tools.",
+      "title": "Real Estate Capitale MCP",
+      "repository": {
+        "url": "https://github.com/allamiwayl-27/rabatrealestate",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://realestatecapitale.ma",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://realestatecapitale.ma/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-25T17:09:59.006268Z",
+        "publishedAt": "2026-07-25T17:09:59.006268Z",
+        "updatedAt": "2026-07-25T17:09:59.006268Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.allchemylabs/aether-wcag-scanner",
+      "description": "WCAG 2.1 AA accessibility scanner (Playwright + axe-core) with grounded, browser-verified fixes.",
+      "title": "Aether WCAG Scanner",
+      "repository": {
+        "url": "https://github.com/allchemylabs/aether-wcag-scanner",
+        "source": "github"
+      },
+      "version": "1.0.8",
+      "websiteUrl": "https://allchemylabs.ai/beta/",
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "@allchemylabs/aether-wcag-scanner",
+          "version": "1.0.8",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Beta API key from https://beta.allchemylabs.ai/?src=registry (optional: without it the scanner runs fully offline with template fixes)",
+              "isSecret": true,
+              "name": "ALLCHEMY_API_KEY"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-21T03:04:15.96345Z",
+        "publishedAt": "2026-10-21T03:04:15.96345Z",
+        "updatedAt": "2026-10-21T03:04:15.96345Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+      "name": "io.github.allenlu0409/agent-lagoon-mcp",
+      "description": "Check your AI agent into a lobster resort archipelago. Chat, bottles, guilds. Watch live in 3D.",
+      "version": "0.4.0",
+      "websiteUrl": "https://agent-lagoon.com",
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "agent-lagoon-mcp",
+          "version": "0.4.0",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Lagoon server URL",
+              "format": "string",
+              "default": "https://agent-lagoon.com",
+              "name": "LAGOON_URL"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-01T06:53:07.805394Z",
+        "publishedAt": "2026-08-01T06:53:07.805394Z",
+        "updatedAt": "2026-08-01T06:53:07.805394Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alliecatowo/git-why",
+      "description": "Finds the Git commits that explain why code is the way it is: semantic and full-text history search.",
+      "title": "Git Why",
+      "repository": {
+        "url": "https://github.com/alliecatowo/git-why",
+        "source": "github"
+      },
+      "version": "0.2.0",
+      "websiteUrl": "https://alliecatowo.github.io/git-why/",
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "@alliecatowo/git-why",
+          "version": "0.2.0",
+          "runtimeHint": "npx",
+          "transport": {
+            "type": "stdio"
+          },
+          "packageArguments": [
+            {
+              "type": "positional",
+              "value": "mcp"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-04T19:18:24.766937Z",
+        "publishedAt": "2026-10-04T19:18:24.766937Z",
+        "updatedAt": "2026-10-04T19:18:24.766937Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.allooloo/acm-signals",
+      "description": "The ACM-68000 signal of a listed security in its home market: trading, not listed, read the filing.",
+      "title": "ACM-68000 signals for listed issuers",
+      "repository": {
+        "url": "https://github.com/allooloo/cm-kg",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://acm-200.ai/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.getissuer.ai/signals/mcp"
+        }
+      ],
+      "_meta": {
+        "io.modelcontextprotocol.registry/publisher-provided": {
+          "authentication": "none",
+          "note": "ACM-403 HALTED is advisory until the nodes carry a halt flag",
+          "operator": "Allooloo Technologies Corp.",
+          "pages": [
+            "https://acm-000.ai/",
+            "https://acm-200.ai/",
+            "https://acm-300.ai/",
+            "https://acm-403.ai/",
+            "https://acm-404.ai/",
+            "https://acm-451.ai/",
+            "https://acm-500.ai/"
+          ],
+          "payment": {
+            "asset": "USDC",
+            "free_reads_per_agent_per_day": 100,
+            "network": "eip155:8453",
+            "pricing": "https://allooloo.ai/x402/pricing.json",
+            "protocol": "x402",
+            "version": 2
+          },
+          "receipts": "every get_signal leaves an RCO receipt on https://mcp.rco-a2a.ai/mcp",
+          "routing": {
+            "gtins": "https://gtinfetch.ai/mcp",
+            "listed_issuers": "https://mcp.getissuer.ai/mcp",
+            "receipts": "https://mcp.rco-a2a.ai/mcp"
+          },
+          "standard": "ACM-68000 (Agentic KG Holdings, MIT) \u2014 https://acm-68000.org/",
+          "tools": [
+            "get_signal",
+            "list_signals"
+          ]
+        }
+      }
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-24T03:16:30.556902Z",
+        "publishedAt": "2026-10-24T03:16:30.556902Z",
+        "updatedAt": "2026-10-24T03:16:30.556902Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.allooloo/cm-kg",
+      "description": "KYP Agentic Trading: listed-issuer records served in-country, and AIO-10060 orderability outcomes.",
+      "title": "Capital Markets Agents: MCP+A2A",
+      "repository": {
+        "url": "https://github.com/allooloo/cm-kg",
+        "source": "github"
+      },
+      "version": "0.14.0",
+      "websiteUrl": "https://getissuer.ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.getissuer.ai/mcp"
+        }
+      ],
+      "_meta": {
+        "io.modelcontextprotocol.registry/publisher-provided": {
+          "access": "read-only, public-record only; no prices, quotes or licensed market data",
+          "agent_cards": "https://agent.getissuer.ai/.well-known/agent-card.json (apex) and one per node in nodes_live, named on its roster entry (list_nodes: agent_card)",
+          "authentication": "none",
+          "category": "agentic market dataset",
+          "confirmed": "Confirmed current by the operator, Sept 13 2026; records confirmed against the public filing, not signed by it.",
+          "description_of_record": "What: KYP Agentic Trading with the Capital Markets Knowledge Graph \u2014 one public-record file per listed company across the national markets on the roster (list_nodes), identity through disclosure trail, each field carrying its source and the date it was read, served from the issuer's own jurisdiction over the Model Context Protocol and the Agent-to-Agent protocol. Why: So an agent acting for a licensed capital markets participant with a Know Your Product (KYP) obligation hands back a fact that can be defended. The KYP model runs on this record. No prices, no quotes, no licensed data.",
+          "estate": "One regional door per market on Azure Container Apps, apex router on Cloudflare, an A2A Agent Card per node.",
+          "facts": "https://mcp.getissuer.ai/facts.json",
+          "install": "{\"mcpServers\":{\"getissuer\":{\"type\":\"http\",\"url\":\"https://mcp.getissuer.ai/mcp\"}}}",
+          "keywords": [
+            "agentic market dataset",
+            "capital markets",
+            "issuer record",
+            "ISIN",
+            "LEI",
+            "KYP",
+            "Australia",
+            "Austria",
+            "Belgium",
+            "Bermuda",
+            "Brazil",
+            "Canada",
+            "Cayman Islands",
+            "Czech Republic",
+            "Denmark",
+            "Finland",
+            "France",
+            "Germany",
+            "Greece",
+            "Hong Kong",
+            "India",
+            "Ireland",
+            "Italy",
+            "Japan",
+            "Jersey",
+            "Luxembourg",
+            "Mexico",
+            "Netherlands",
+            "Norway",
+            "Poland",
+            "Portugal",
+            "Singapore",
+            "South Korea",
+            "Spain",
+            "Sweden",
+            "Switzerland",
+            "Taiwan",
+            "United Arab Emirates",
+            "United Kingdom",
+            "United States"
+          ],
+          "llms_txt": "https://mcp.getissuer.ai/llms.txt",
+          "nodes_live": [
+            "ca-cm-kg",
+            "uk-cm-kg",
+            "au-cm-kg",
+            "sg-cm-kg",
+            "ch-cm-kg",
+            "de-cm-kg",
+            "fr-cm-kg",
+            "nl-cm-kg",
+            "hk-cm-kg",
+            "jp-cm-kg",
+            "kr-cm-kg",
+            "us-cm-kg",
+            "it-cm-kg",
+            "es-cm-kg",
+            "se-cm-kg",
+            "dk-cm-kg",
+            "no-cm-kg",
+            "fi-cm-kg",
+            "be-cm-kg",
+            "ie-cm-kg",
+            "at-cm-kg",
+            "pl-cm-kg",
+            "pt-cm-kg",
+            "lu-cm-kg",
+            "gr-cm-kg",
+            "cz-cm-kg",
+            "ky-cm-kg",
+            "bm-cm-kg",
+            "je-cm-kg",
+            "tw-cm-kg",
+            "ae-cm-kg",
+            "br-cm-kg",
+            "mx-cm-kg",
+            "in-cm-kg"
+          ],
+          "operator": "Allooloo Technologies Corp.",
+          "record_spec": "CMR v0 (cm-record.org, draft)",
+          "registries_gate": {
+            "auth_md": "https://agentic-registries.ai/auth.md",
+            "authorization_server": "https://agentic-registries.ai",
+            "grants": [
+              "client_credentials",
+              "urn:ietf:params:oauth:grant-type:jwt-bearer"
+            ],
+            "licensed_routes": [
+              "https://agentic-trades.ai/licensed/record/{node}/{exchange}/{code}",
+              "https://agentic-registries.ai/registry/whoami"
+            ],
+            "metadata": "https://agentic-registries.ai/.well-known/oauth-authorization-server",
+            "register": "https://agentic-registries.ai/oauth/register",
+            "token": "https://agentic-registries.ai/oauth/token"
+          },
+          "surfaces_version": "2026-10-31.1",
+          "tools": [
+            {
+              "description": "Find a listed company by ticker, ISIN or LEI: record summary, node, version.",
+              "name": "resolve_issuer"
+            },
+            {
+              "description": "The full Capital Markets Record, per-field source, reader and state.",
+              "name": "get_record"
+            },
+            {
+              "description": "Dated, URL'd disclosure events for an issuer since a date.",
+              "name": "list_events_since"
+            },
+            {
+              "description": "Sourced trade and former names.",
+              "name": "list_aliases"
+            },
+            {
+              "description": "The market nodes on the roster of record, and which are live.",
+              "name": "list_nodes"
+            },
+            {
+              "description": "AIO-10060 orderability outcome per client category: one ACM-68000 signal or the evidence gaps; signed, receipted.",
+              "name": "get_orderability"
+            }
+          ],
+          "x402": {
+            "endpoint": "https://agentic-x402.ai/api",
+            "jwks": "https://agentic-x402.ai/x402/jwks.json",
+            "network": "eip155:8453",
+            "price_usdc": "0.01",
+            "receipts": "https://agentic-x402.ai/x402/receipt/{nonce}",
+            "scheme": "exact (EIP-3009)",
+            "surface": "https://agentic-x402.ai/",
+            "trades_record_route": "https://agentic-trades.ai/x402/record/{node}/{exchange}/{code}"
+          }
+        }
+      }
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-31T17:55:43.135989Z",
+        "publishedAt": "2026-10-31T17:55:43.135989Z",
+        "updatedAt": "2026-10-31T17:55:43.135989Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.allooloo/eco",
+      "description": "Each market's disclosure regime as one sourced, signed object, with the issuer's ACM-68000 signal.",
+      "title": "Electronic Compliance Objects (49 markets)",
+      "repository": {
+        "url": "https://github.com/allooloo/cm-kg",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://allooloo.ai/markets",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.getissuer.ai/eco/mcp"
+        }
+      ],
+      "_meta": {
+        "io.modelcontextprotocol.registry/publisher-provided": {
+          "authentication": "none",
+          "keyring": "https://allooloo.ai/.well-known/jwks.json (kid allooloo-eco-2026-10)",
+          "operator": "Allooloo Technologies Corp.",
+          "pages": "https://<cc>-eco.ai/ (49)",
+          "payment": {
+            "asset": "USDC",
+            "free_reads_per_agent_per_day": 100,
+            "network": "eip155:8453",
+            "pricing": "https://allooloo.ai/x402/pricing.json",
+            "protocol": "x402",
+            "version": 2
+          },
+          "receipts": "every get_signal and resolve_issuer leaves an RCO receipt on https://mcp.rco-a2a.ai/mcp",
+          "routing": {
+            "gtins": "https://gtinfetch.ai/mcp",
+            "listed_issuers": "https://mcp.getissuer.ai/mcp",
+            "receipts": "https://mcp.rco-a2a.ai/mcp"
+          },
+          "standard": "ECO-10060 (Agentic KG Holdings, MIT) \u2014 https://eco-10060.org/",
+          "tools": [
+            "get_eco",
+            "get_signal",
+            "resolve_issuer",
+            "list_nodes"
+          ]
+        }
+      }
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-24T03:16:30.105789Z",
+        "publishedAt": "2026-10-24T03:16:30.105789Z",
+        "updatedAt": "2026-10-24T03:16:30.105789Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.allooloo/getasof",
+      "description": "The issuer record as of any date, from the sealed vintage: signed and receipted (RCO-10060).",
+      "title": "getasof: the As Of door",
+      "repository": {
+        "url": "https://github.com/allooloo/cm-kg",
+        "source": "github"
+      },
+      "version": "0.1.0",
+      "websiteUrl": "https://getasof.ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.getasof.ai/mcp"
+        }
+      ],
+      "_meta": {
+        "io.modelcontextprotocol.registry/publisher-provided": {
+          "access": "free reads; the x402 offer only when asked (x402-pay: 1); every read receipted at mcp.rco-records.ai",
+          "authentication": "none",
+          "category": "point-in-time issuer record (Data Vintage, Replay)",
+          "errors": [
+            "unknown_issuer",
+            "before_record",
+            "not_sealed",
+            "not_found"
+          ],
+          "keywords": [
+            "point-in-time",
+            "as of",
+            "backtest",
+            "data vintage",
+            "replay",
+            "issuer record",
+            "RCO-10060",
+            "receipt",
+            "capital markets"
+          ],
+          "operator": "Allooloo Technologies Corp.",
+          "same_router_as": "https://mcp.getissuer.ai/mcp (same index, no second copy of the history)",
+          "tools": [
+            "get_as_of",
+            "resolve_issuer",
+            "list_events_since",
+            "list_nodes"
+          ]
+        }
+      }
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-05T06:41:42.445696Z",
+        "publishedAt": "2026-11-05T06:41:42.445696Z",
+        "updatedAt": "2026-11-05T06:41:42.445696Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.allooloo/getauditor",
+      "description": "The auditor of an issuer and every change on the record, dated: signed and receipted (RCO-10060).",
+      "title": "getauditor: the Auditor door",
+      "repository": {
+        "url": "https://github.com/allooloo/cm-kg",
+        "source": "github"
+      },
+      "version": "0.1.0",
+      "websiteUrl": "https://getauditor.ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.getauditor.ai/mcp"
+        }
+      ],
+      "_meta": {
+        "io.modelcontextprotocol.registry/publisher-provided": {
+          "access": "free reads; the x402 offer only when asked (x402-pay: 1); every read receipted at mcp.rco-records.ai",
+          "authentication": "none",
+          "category": "issuer record door (from fields already on the record)",
+          "errors": [
+            "unknown_issuer",
+            "ambiguous",
+            "not_on_record",
+            "invalid_request"
+          ],
+          "keywords": [
+            "auditor",
+            "auditor change",
+            "audit firm",
+            "issuer record",
+            "RCO-10060",
+            "receipt",
+            "capital markets"
+          ],
+          "operator": "Allooloo Technologies Corp.",
+          "same_router_as": "https://mcp.getissuer.ai/mcp (same index)",
+          "tools": [
+            "get_auditor",
+            "resolve_issuer",
+            "list_nodes"
+          ]
+        }
+      }
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-05T07:50:00.087976Z",
+        "publishedAt": "2026-11-05T07:50:00.087976Z",
+        "updatedAt": "2026-11-05T07:50:00.087976Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.allooloo/getfilings",
+      "description": "The disclosures of an issuer in a date range, from the record: signed and receipted (RCO-10060).",
+      "title": "getfilings: the Filings door",
+      "repository": {
+        "url": "https://github.com/allooloo/cm-kg",
+        "source": "github"
+      },
+      "version": "0.1.0",
+      "websiteUrl": "https://getfilings.ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.getfilings.ai/mcp"
+        }
+      ],
+      "_meta": {
+        "io.modelcontextprotocol.registry/publisher-provided": {
+          "access": "free reads; the x402 offer only when asked (x402-pay: 1); every read receipted at mcp.rco-records.ai",
+          "authentication": "none",
+          "category": "issuer record door (from fields already on the record)",
+          "errors": [
+            "unknown_issuer",
+            "ambiguous",
+            "not_on_record",
+            "invalid_request"
+          ],
+          "keywords": [
+            "filings",
+            "disclosures",
+            "date range",
+            "issuer record",
+            "RCO-10060",
+            "receipt",
+            "capital markets"
+          ],
+          "operator": "Allooloo Technologies Corp.",
+          "same_router_as": "https://mcp.getissuer.ai/mcp (same index)",
+          "tools": [
+            "get_filings",
+            "resolve_issuer",
+            "list_nodes"
+          ]
+        }
+      }
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-05T07:49:59.64094Z",
+        "publishedAt": "2026-11-05T07:49:59.64094Z",
+        "updatedAt": "2026-11-05T07:49:59.64094Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.allooloo/getorderability",
+      "description": "AIO orderability: may a capital product be ordered for a client category? Signed by the home node.",
+      "title": "getorderability: AIO orderability door",
+      "repository": {
+        "url": "https://github.com/allooloo/cm-kg",
+        "source": "github"
+      },
+      "version": "0.1.0",
+      "websiteUrl": "https://getorderability.ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.getorderability.ai/mcp"
+        }
+      ],
+      "_meta": {
+        "io.modelcontextprotocol.registry/publisher-provided": {
+          "access": "read-only, public rule text and public record only; no prices",
+          "agent_card": "https://agent.getorderability.ai/.well-known/agent-card.json",
+          "authentication": "none",
+          "category": "orderability outcome (AIO-10060)",
+          "facts": "https://getorderability.ai/facts.json",
+          "install": {
+            "claude_code": "claude mcp add --transport http getorderability https://mcp.getorderability.ai/mcp"
+          },
+          "keywords": [
+            "AI orderability",
+            "AIO-10060",
+            "ACM-68000",
+            "orderability",
+            "product governance",
+            "target market",
+            "client category",
+            "KYP",
+            "PROD",
+            "MiFID II",
+            "FinSA",
+            "DDO",
+            "Reg BI",
+            "capital markets"
+          ],
+          "llms_txt": "https://getorderability.ai/llms.txt",
+          "not": "not advice, not an individual suitability assessment, not permission, not a venue and not an order",
+          "operator": "Allooloo Technologies Corp.",
+          "page": "https://getorderability.ai/",
+          "provenance": {
+            "chapter": "https://sm-eco-10060.org/market/",
+            "receipts": "https://mcp.rco-records.ai/mcp (writer: the node; the router writes its own receipt of the forward)",
+            "signals": "https://acm-68000.org/",
+            "signed": "EdDSA by the producing node (its /.well-known/jwks.json)",
+            "standard": "https://aio-10060.org/"
+          },
+          "same_router_as": "https://mcp.getissuer.ai/mcp (same index, no second store)",
+          "tools": [
+            {
+              "description": "The AIO-10060 outcome for one listed security and one client category of its home market: one ACM-68000 signal or the evidence gaps; signed by the node, receipted.",
+              "name": "get_orderability"
+            },
+            {
+              "description": "Find a listed company by ticker, ISIN or LEI.",
+              "name": "resolve_issuer"
+            },
+            {
+              "description": "The full Capital Markets Record from the owning node.",
+              "name": "get_record"
+            },
+            {
+              "description": "The ACM-68000 signal of a listed security in its home market.",
+              "name": "get_signal"
+            },
+            {
+              "description": "Sourced trade and former names.",
+              "name": "list_aliases"
+            },
+            {
+              "description": "Dated disclosure events since a date.",
+              "name": "list_events_since"
+            },
+            {
+              "description": "The market nodes on the roster of record.",
+              "name": "list_nodes"
+            }
+          ]
+        }
+      }
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-01T05:24:54.751668Z",
+        "publishedAt": "2026-11-01T05:24:54.751668Z",
+        "updatedAt": "2026-11-01T05:24:54.751668Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.allooloo/gettargetmarket",
+      "description": "Target market statements by ISIN: filed by the manufacturer, signed, receipted (AIO-10060 v1.2).",
+      "title": "gettargetmarket: the Target Market door",
+      "repository": {
+        "url": "https://github.com/allooloo/cm-kg",
+        "source": "github"
+      },
+      "version": "0.1.0",
+      "websiteUrl": "https://gettargetmarket.ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.gettargetmarket.ai/mcp"
+        }
+      ],
+      "_meta": {
+        "io.modelcontextprotocol.registry/publisher-provided": {
+          "access": "public statements; every read and filing receipted at mcp.rco-records.ai",
+          "authentication": "none for reads; a filer value (Bearer) for file_target_market",
+          "category": "target market statement (AIO-10060 v1.2 \u00a76)",
+          "keywords": [
+            "target market",
+            "manufacturer",
+            "product governance",
+            "MiFID II",
+            "PROD",
+            "AIO-10060",
+            "distributor",
+            "negative target market",
+            "capital markets"
+          ],
+          "operator": "Allooloo Technologies Corp.",
+          "same_router_as": "https://mcp.getissuer.ai/mcp (same index, no second store)",
+          "tools": [
+            "get_target_market",
+            "list_target_market_versions",
+            "verify_target_market",
+            "file_target_market"
+          ]
+        }
+      }
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-02T10:00:11.576003Z",
+        "publishedAt": "2026-11-02T10:00:11.576003Z",
+        "updatedAt": "2026-11-02T10:00:11.576003Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.allooloo/getticker",
+      "description": "The issuer behind a ticker: ISIN, LEI, listing and status, from the record: signed and receipted.",
+      "title": "getticker: the Ticker door",
+      "repository": {
+        "url": "https://github.com/allooloo/cm-kg",
+        "source": "github"
+      },
+      "version": "0.1.0",
+      "websiteUrl": "https://getticker.ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.getticker.ai/mcp"
+        }
+      ],
+      "_meta": {
+        "io.modelcontextprotocol.registry/publisher-provided": {
+          "access": "free reads; the x402 offer only when asked (x402-pay: 1); every read receipted at mcp.rco-records.ai",
+          "authentication": "none",
+          "category": "issuer record door (from fields already on the record)",
+          "errors": [
+            "unknown_issuer",
+            "ambiguous",
+            "not_on_record",
+            "invalid_request"
+          ],
+          "keywords": [
+            "ticker",
+            "ISIN",
+            "LEI",
+            "listing",
+            "symbol",
+            "RCO-10060",
+            "receipt",
+            "capital markets"
+          ],
+          "operator": "Allooloo Technologies Corp.",
+          "same_router_as": "https://mcp.getissuer.ai/mcp (same index)",
+          "tools": [
+            "get_ticker",
+            "resolve_issuer",
+            "list_nodes"
+          ]
+        }
+      }
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-05T07:49:59.866403Z",
+        "publishedAt": "2026-11-05T07:49:59.866403Z",
+        "updatedAt": "2026-11-05T07:49:59.866403Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.allooloo/issuerwire",
+      "description": "Issuerwire \u2014 capital markets news for AI agents, one signed row per filing; markets: see facts.json.",
+      "title": "Issuerwire \u2014 capital markets news for AI agents",
+      "version": "1.4.1",
+      "websiteUrl": "https://issuerwire.ai",
+      "icons": [
+        {
+          "src": "https://issuerwire.ai/icon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        },
+        {
+          "src": "https://issuerwire.ai/issuerwire-mark-256.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "256x256"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.issuerwire.ai/mcp"
+        },
+        {
+          "type": "streamable-http",
+          "url": "https://x402.a2a-amn.ai/mcp"
+        }
+      ],
+      "_meta": {
+        "io.modelcontextprotocol.registry/publisher-provided": {
+          "agent_card": "https://issuerwire.ai/.well-known/agent-card.json",
+          "auditor_access": "https://issuerwire.ai/auditor",
+          "contact": "mk@allooloo.ai",
+          "formerly": "io.github.greencore-solutions/issuerwire 1.1.0 (ISSUERWIRE-01) and io.github.greencore-solutions/a2a-amn (AgentMarketNews.ai, AMN-01, 2026-10-21); an Allooloo Technologies Corp. product by board decision 21 October 2026 \u2014 the door at mcp.issuerwire.ai is unchanged",
+          "keyring": "https://issuerwire.ai/.well-known/jwks.json",
+          "line": "Issuerwire \u2014 capital markets news served to AI agents. Filings read in every node market of the Capital Markets Knowledge Graph; the markets it shows are listed on issuerwire.ai/facts.json. One signed row per filing, source page on every row, the delta since your last read. MCP + A2A. Allooloo Technologies Corp.",
+          "markets": {
+            "count_of_record": "https://issuerwire.ai/facts.json (markets, markets_count, seeded_not_shown) \u2014 the same source the site and the agent card read; never typed here",
+            "reads": "every node market of the Capital Markets Knowledge Graph (getissuer list_nodes)",
+            "seeking_partner": [
+              "SA"
+            ],
+            "shown_rule": "a market shows after two consecutive green nights (stores read green, close PASS)"
+          },
+          "operator": "operated by Allooloo Technologies Corp.",
+          "publisher": "Allooloo Technologies Corp.",
+          "tools": [
+            "resolve_issuer",
+            "get_issuer",
+            "list_filings",
+            "get_delta",
+            "get_row",
+            "claim_row",
+            "create_order_intent",
+            "log_audit"
+          ]
+        }
+      }
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-25T05:15:23.273125Z",
+        "publishedAt": "2026-10-25T05:15:23.273125Z",
+        "updatedAt": "2026-10-25T05:15:23.273125Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.allooloo/rco-records",
+      "description": "The record of what the agent relied on: a signed, chained receipt per cleared read. Verify by id.",
+      "title": "RCO Records - Record of Cleared Orders",
+      "repository": {
+        "url": "https://github.com/allooloo/rco-records",
+        "source": "github"
+      },
+      "version": "2.3.1",
+      "websiteUrl": "https://rco-records.ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.rco-records.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-30T23:50:42.701804Z",
+        "publishedAt": "2026-10-30T23:50:42.701804Z",
+        "updatedAt": "2026-10-30T23:50:42.701804Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+      "name": "io.github.allthingsN/openmoney",
+      "description": "Neutral offers for AI agents: verified offers ranked by net value to the owner, signed and logged.",
+      "title": "OpenMoney",
+      "repository": {
+        "url": "https://github.com/allthingsN/openmoney.ai",
+        "source": "github",
+        "subfolder": "platform"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://openmoney.ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://openmoney.ai/mcp",
+          "headers": [
+            {
+              "description": "Bearer om_agent_... key. Without one, the server offers only om_register_agent, which returns a key.",
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-05T02:27:43.129294Z",
+        "publishedAt": "2026-11-05T02:27:43.129294Z",
+        "updatedAt": "2026-11-05T02:27:43.129294Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.allxsmith/bestax-mcp",
+      "description": "Props, examples, CSS variables and Agent Skills for bestax-bulma React components (Bulma v1)",
+      "title": "Bestax",
+      "repository": {
+        "url": "https://github.com/allxsmith/bestax",
+        "source": "github",
+        "id": "975765002",
+        "subfolder": "bestax-mcp"
+      },
+      "version": "1.18.33",
+      "websiteUrl": "https://bestax.io/docs/guides/llms#mcp-server",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "bestax-mcp",
+          "version": "1.18.33",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Skip comparing your installed @allxsmith/bestax-bulma version with the one the index documents",
+              "format": "boolean",
+              "name": "BESTAX_MCP_NO_VERSION_CHECK"
+            },
+            {
+              "description": "Your project directory, where the installed @allxsmith/bestax-bulma version is read from; defaults to the directory the server starts in",
+              "format": "filepath",
+              "name": "BESTAX_MCP_PROJECT_DIR"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-04T23:29:50.703107Z",
+        "publishedAt": "2026-11-04T23:29:50.703107Z",
+        "updatedAt": "2026-11-04T23:29:50.703107Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-07-09/server.schema.json",
+      "name": "io.github.almaestilo/newswake",
+      "description": "News momentum + what-changed outcome tools for agents. Signals + links, ~296 sources.",
+      "repository": {
+        "url": "https://github.com/almaestilo/newswake",
+        "source": "github"
+      },
+      "version": "0.1.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://newswake-ajq8t.ondigitalocean.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-29T04:20:40.462232Z",
+        "publishedAt": "2026-08-29T04:20:40.462232Z",
+        "updatedAt": "2026-08-29T04:20:40.462232Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.almega-ai/almega-mcp",
+      "description": "The immutable delegation frame for AI agents: gate any sensitive action, human-in-the-loop.",
+      "title": "Almega",
+      "version": "0.2.0",
+      "packages": [
+        {
+          "registryType": "pypi",
+          "registryBaseUrl": "https://pypi.org",
+          "identifier": "almega-mcp",
+          "version": "0.2.0",
+          "runtimeHint": "uvx",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Storage backend: 'memory' (default, zero-config) or 'stripe' (real Stripe Issuing test-mode virtual cards, no real money).",
+              "default": "memory",
+              "name": "ALMEGA_BACKEND"
+            },
+            {
+              "description": "Stripe TEST secret key (sk_test_...). Required only when ALMEGA_BACKEND=stripe. Almega refuses live keys.",
+              "isSecret": true,
+              "name": "STRIPE_SECRET_KEY"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-06-15T10:43:48.650596Z",
+        "publishedAt": "2026-06-15T10:43:48.650596Z",
+        "updatedAt": "2026-06-15T10:43:48.650596Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.almostjacked/fitness-tools",
+      "description": "Deterministic fitness calculators \u2014 TDEE, adaptive TDEE, body fat, 1RM, macros \u2014 with consensus.",
+      "title": "Fitness Tools",
+      "repository": {
+        "url": "https://github.com/almostjacked/fitness-tools",
+        "source": "github"
+      },
+      "version": "0.3.4",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@almostjacked/fitness-tools-mcp",
+          "version": "0.3.4",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://fitness-tools-mcp.ajwallacemusic.workers.dev/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-24T16:58:20.765892Z",
+        "publishedAt": "2026-07-24T16:58:20.765892Z",
+        "updatedAt": "2026-07-24T16:58:20.765892Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.almostjacked/health-mcp",
+      "description": "Your health data (weight, macros, weigh-ins) as MCP tools \u2014 in your own Supabase, zero custody.",
+      "title": "Health Data (your own Supabase)",
+      "repository": {
+        "url": "https://github.com/almostjacked/health-mcp",
+        "source": "github"
+      },
+      "version": "0.1.3",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@almostjacked/health-mcp",
+          "version": "0.1.3",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Your Supabase project URL",
+              "isRequired": true,
+              "name": "SUPABASE_URL"
+            },
+            {
+              "description": "A secret API key for your project",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "SUPABASE_SECRET_KEY"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-07T17:24:42.193844Z",
+        "publishedAt": "2026-08-07T17:24:42.193844Z",
+        "updatedAt": "2026-08-07T17:24:42.193844Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.almostjacked/hevy-mcp",
+      "description": "Create Hevy routines and analyze your training from chat. Unofficial; BYO Hevy PRO API key.",
+      "title": "Hevy (unofficial)",
+      "repository": {
+        "url": "https://github.com/almostjacked/hevy-mcp",
+        "source": "github"
+      },
+      "version": "0.1.0",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@almostjacked/hevy-mcp",
+          "version": "0.1.0",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://hevy-coach.ajwallacemusic.workers.dev/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-23T19:42:36.19984Z",
+        "publishedAt": "2026-07-23T19:42:36.19984Z",
+        "updatedAt": "2026-07-23T19:42:36.19984Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alokbarnwal/nse-public-mcp",
+      "description": "Analyze any Nifty 500 stock with AI \u2014 price action, demand zones, technicals & screener.",
+      "title": "Indian NSE Stock Insights",
+      "repository": {
+        "url": "https://github.com/alokbarnwal/nse-public-mcp",
+        "source": "github"
+      },
+      "version": "1.0.1",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://stockmcp.alokbarnwal.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-04-30T21:13:56.957873Z",
+        "publishedAt": "2026-04-30T21:13:56.957873Z",
+        "updatedAt": "2026-04-30T21:13:56.957873Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alondmnt/joplin-mcp",
+      "description": "FastMCP server exposing Joplin notes, notebooks, tags, and imports.",
+      "title": "Joplin MCP Server",
+      "repository": {
+        "url": "https://github.com/alondmnt/joplin-mcp",
+        "source": "github",
+        "id": "1014858649"
+      },
+      "version": "0.10.0",
+      "packages": [
+        {
+          "registryType": "pypi",
+          "registryBaseUrl": "https://pypi.org",
+          "identifier": "joplin-mcp",
+          "version": "0.10.0",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Web Clipper authentication token from a running Joplin instance",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "JOPLIN_TOKEN"
+            },
+            {
+              "description": "Optional override for the Joplin Web Clipper base URL (default http://localhost:41184)",
+              "format": "string",
+              "name": "JOPLIN_URL"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-12T08:35:18.993803Z",
+        "publishedAt": "2026-09-12T08:35:18.993803Z",
+        "updatedAt": "2026-09-12T08:35:18.993803Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alordincans/rankdelta",
+      "description": "Open-source AI SEO over MCP: audits, ranks, keywords, backlinks + AI visibility (GEO).",
+      "repository": {
+        "url": "https://github.com/rankdelta/rankdelta",
+        "source": "github"
+      },
+      "version": "0.3.1",
+      "websiteUrl": "https://rankdelta.ai",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.rankdelta.ai/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-28T12:32:36.528045Z",
+        "publishedAt": "2026-09-28T12:32:36.528045Z",
+        "updatedAt": "2026-09-28T12:32:36.528045Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.aloth/cred-1",
+      "description": "Domain credibility ratings from the CRED-1 dataset: check, batch check and search news domains",
+      "title": "CRED-1",
+      "repository": {
+        "url": "https://github.com/aloth/cred-1",
+        "source": "github",
+        "id": "1166468607"
+      },
+      "version": "2026.11.7",
+      "websiteUrl": "https://aloth.github.io/cred-1/",
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "@aloth/cred1",
+          "version": "2026.11.7",
+          "runtimeHint": "npx",
+          "transport": {
+            "type": "stdio"
+          },
+          "runtimeArguments": [
+            {
+              "type": "positional",
+              "value": "-y"
+            }
+          ],
+          "packageArguments": [
+            {
+              "type": "positional",
+              "value": "--mcp"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-07T12:56:46.162482Z",
+        "publishedAt": "2026-11-07T12:56:46.162482Z",
+        "updatedAt": "2026-11-07T12:56:46.162482Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.aloth/olcli",
+      "description": "Overleaf projects from an MCP client: files, compile and PDF, diff, comments and tracked changes",
+      "title": "olcli",
+      "repository": {
+        "url": "https://github.com/aloth/olcli",
+        "source": "github",
+        "id": "1147798916"
+      },
+      "version": "0.16.1",
+      "websiteUrl": "https://github.com/aloth/olcli/blob/main/docs/MCP.md",
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "@aloth/olcli",
+          "version": "0.16.1",
+          "runtimeHint": "npx",
+          "transport": {
+            "type": "stdio"
+          },
+          "runtimeArguments": [
+            {
+              "type": "positional",
+              "value": "-y"
+            },
+            {
+              "type": "positional",
+              "value": "--package"
+            }
+          ],
+          "packageArguments": [
+            {
+              "type": "positional",
+              "value": "olcli-mcp"
+            }
+          ],
+          "environmentVariables": [
+            {
+              "description": "Overleaf session cookie value (overleaf_session2 on overleaf.com)",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "OVERLEAF_SESSION"
+            },
+            {
+              "description": "Base URL of a self-hosted Overleaf instance",
+              "default": "https://www.overleaf.com",
+              "name": "OVERLEAF_BASE_URL"
+            },
+            {
+              "description": "Session cookie name, for self-hosted instances that use overleaf.sid",
+              "default": "overleaf_session2",
+              "name": "OVERLEAF_COOKIE_NAME"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-07T08:15:44.816799Z",
+        "publishedAt": "2026-11-07T08:15:44.816799Z",
+        "updatedAt": "2026-11-07T08:15:44.816799Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.aloth/roguegpt",
+      "description": "Store and retrieve controlled AI news stimuli with generation metadata for misinformation research",
+      "title": "RogueGPT",
+      "repository": {
+        "url": "https://github.com/aloth/RogueGPT",
+        "source": "github",
+        "id": "775684228"
+      },
+      "version": "1.5.0",
+      "websiteUrl": "https://aloth.github.io/RogueGPT/",
+      "packages": [
+        {
+          "registryType": "pypi",
+          "registryBaseUrl": "https://pypi.org",
+          "identifier": "roguegpt",
+          "version": "1.5.0",
+          "runtimeHint": "uvx",
+          "transport": {
+            "type": "stdio"
+          },
+          "runtimeArguments": [
+            {
+              "type": "named",
+              "name": "--from",
+              "value": "roguegpt[mcp]"
+            }
+          ],
+          "packageArguments": [
+            {
+              "type": "positional",
+              "value": "mcp"
+            }
+          ],
+          "environmentVariables": [
+            {
+              "description": "MongoDB connection string for the fragment store",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "ROGUEGPT_MONGO_URI"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-07T10:51:29.074203Z",
+        "publishedAt": "2026-11-07T10:51:29.074203Z",
+        "updatedAt": "2026-11-07T10:51:29.074203Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alpha-ai-labs/seo-agent",
+      "description": "Turn Search Console data into SEO actions, content, publishing, indexing, and AI insights.",
+      "title": "SEOPro AI",
+      "repository": {
+        "url": "https://github.com/alpha-ai-labs/seoproai-mcp",
+        "source": "github"
+      },
+      "version": "1.2.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.seoproai.co/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-07T06:58:19.220747Z",
+        "publishedAt": "2026-08-07T06:58:19.220747Z",
+        "updatedAt": "2026-08-07T06:58:19.220747Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alpha-nu/pensketch",
+      "description": "An MCP server for pensketch: check, render and rasterise hand-sketched diagrams.",
+      "title": "pensketch",
+      "version": "0.13.0",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@pensketch/mcp",
+          "version": "0.13.0",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-15T17:02:21.070209Z",
+        "publishedAt": "2026-09-15T17:02:21.070209Z",
+        "updatedAt": "2026-09-15T17:02:21.070209Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaonedev/ai-memory",
+      "description": "Persistent memory for any AI \u2014 zero token cost until recall",
+      "repository": {
+        "url": "https://github.com/alphaonedev/ai-memory-mcp",
+        "source": "github"
+      },
+      "version": "0.5.1",
+      "websiteUrl": "https://alphaonedev.github.io/ai-memory-mcp/",
+      "packages": [
+        {
+          "registryType": "oci",
+          "identifier": "ghcr.io/alphaonedev/ai-memory:0.5.1",
+          "runtimeHint": "docker",
+          "transport": {
+            "type": "stdio"
+          },
+          "packageArguments": [
+            {
+              "type": "positional",
+              "value": "mcp"
+            },
+            {
+              "description": "Feature tier: keyword, semantic, smart, autonomous",
+              "type": "named",
+              "name": "--tier",
+              "value": "semantic"
+            }
+          ],
+          "environmentVariables": [
+            {
+              "description": "Path to the SQLite database file",
+              "name": "AI_MEMORY_DB"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-04-08T18:38:08.925726Z",
+        "publishedAt": "2026-04-08T18:38:08.925726Z",
+        "updatedAt": "2026-04-08T18:38:08.925726Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-adaptive-batch-request-debouncer-skill",
+      "description": "Adaptive sliding window query debouncing and micro-batch coalescing engine optimizing LLM throughput",
+      "title": "GenPark Adaptive Batch Request Debouncer",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-adaptive-batch-request-debouncer-skill",
+        "source": "github",
+        "id": "1428014830"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-adaptive-batch-request-debouncer-skill/releases/download/v1.0.1/genpark-adaptive-batch-request-debouncer-skill-v1.0.1.mcpb",
+          "fileSha256": "bf6ae632552d316afea1478ef1f12954eeae2c0311dabed1fb7a161ce81ad7be",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-21T07:22:46.640982Z",
+        "publishedAt": "2026-10-21T07:22:46.640982Z",
+        "updatedAt": "2026-10-21T07:22:46.640982Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-adaptive-exponential-backoff-jitter-retry-skill",
+      "description": "Full jitter exponential backoff retry scheduling and half-open circuit breaker for LLM APIs",
+      "title": "GenPark Adaptive Exponential Backoff with Jitter Retry",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-adaptive-exponential-backoff-jitter-retry-skill",
+        "source": "github",
+        "id": "1425860393"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-adaptive-exponential-backoff-jitter-retry-skill/releases/download/v1.0.1/genpark-adaptive-exponential-backoff-jitter-retry-skill.mcpb",
+          "fileSha256": "4964a0f926c684c915087fb6296f00fb79d2d96320016551a479b0a246f15420",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-19T16:15:06.722939Z",
+        "publishedAt": "2026-10-19T16:15:06.722939Z",
+        "updatedAt": "2026-10-19T16:15:06.722939Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-agent-state-snapshot-time-travel-skill",
+      "description": "Agent conversation state snapshotting and time-travel rollback engine pruning divergent hallucinatio",
+      "title": "GenPark Agent State Snapshot & Time-Travel Skill",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-agent-state-snapshot-time-travel-skill",
+        "source": "github",
+        "id": "1426916681"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-agent-state-snapshot-time-travel-skill/releases/download/v1.0.1/genpark-agent-state-snapshot-time-travel-skill-v1.0.1.mcpb",
+          "fileSha256": "87f43da264370f5dfb3e380ba6960c641d02811abad60cf57fdec9b31b89a11d",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-20T11:28:55.760785Z",
+        "publishedAt": "2026-10-20T11:28:55.760785Z",
+        "updatedAt": "2026-10-20T11:28:55.760785Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-aho-corasick-multi-pattern-matcher-skill",
+      "description": "High-throughput Aho-Corasick automaton for simultaneous multi-keyword dictionary matching and conten",
+      "title": "GenPark Aho-Corasick Multi-Pattern Matcher",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-aho-corasick-multi-pattern-matcher-skill",
+        "source": "github",
+        "id": "1432226025"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-aho-corasick-multi-pattern-matcher-skill/releases/download/v1.0.1/genpark-aho-corasick-multi-pattern-matcher-skill-v1.0.1.mcpb",
+          "fileSha256": "ffda3d9e3ccb1ad163195e08fb867750d24cd23e58b76d45b04986b8cc1f6214",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-24T13:56:49.624451Z",
+        "publishedAt": "2026-10-24T13:56:49.624451Z",
+        "updatedAt": "2026-10-24T13:56:49.624451Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-ast-diff-semantic-pr-summarizer-skill",
+      "description": "Synthesize semantic AST delta trees across git diffs and classify breaking signature changes",
+      "title": "GenPark AST Diff Semantic PR Summarizer",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-ast-diff-semantic-pr-summarizer-skill",
+        "source": "github",
+        "id": "1425858705"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-ast-diff-semantic-pr-summarizer-skill/releases/download/v1.0.1/genpark-ast-diff-semantic-pr-summarizer-skill.mcpb",
+          "fileSha256": "e05123f92808010aa0803b678e98d563ac39344c1ff03c0734f4918f2e127f1a",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-19T16:14:42.035404Z",
+        "publishedAt": "2026-10-19T16:14:42.035404Z",
+        "updatedAt": "2026-10-19T16:14:42.035404Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-audio-packet-jitter-resilience-buffer-skill",
+      "description": "Adaptive WebRTC jitter buffer simulation and inter-arrival jitter telemetry",
+      "title": "GenPark Audio Packet Jitter Resilience Buffer",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-audio-packet-jitter-resilience-buffer-skill",
+        "source": "github",
+        "id": "1389565806"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-audio-packet-jitter-resilience-buffer-skill/releases/download/v1.0.1/genpark-jitter-buffer.mcpb",
+          "fileSha256": "32d68852b0eb13fb98ee1e0dc279f729893d9c2e7546ab2b51ea9401af58d79c",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-19T01:32:20.401297Z",
+        "publishedAt": "2026-10-19T01:32:20.401297Z",
+        "updatedAt": "2026-10-19T01:32:20.401297Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-bloom-filter-url-dedup-crawler-skill",
+      "description": "In-memory Bloom filter for URL and document hash deduplication preventing redundant web crawler inge",
+      "title": "GenPark Bloom Filter URL Dedup Crawler",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-bloom-filter-url-dedup-crawler-skill",
+        "source": "github",
+        "id": "1427968938"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-bloom-filter-url-dedup-crawler-skill/releases/download/v1.0.1/genpark-bloom-filter-url-dedup-crawler-skill-v1.0.1.mcpb",
+          "fileSha256": "41c5454d19b7b064a4af789c53a6c99ef0fbab52a01af3ec8c3ad1310e7f399c",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-21T07:07:11.265402Z",
+        "publishedAt": "2026-10-21T07:07:11.265402Z",
+        "updatedAt": "2026-10-21T07:07:11.265402Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-circuit-breaker-fault-sentinel-skill",
+      "description": "Three-state circuit breaker with failure rate tripping and automatic half-open probe recovery",
+      "title": "GenPark Circuit Breaker Fault Sentinel",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-circuit-breaker-fault-sentinel-skill",
+        "source": "github",
+        "id": "1431801558"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-circuit-breaker-fault-sentinel-skill/releases/download/v1.0.1/genpark-circuit-breaker-fault-sentinel-skill-v1.0.1.mcpb",
+          "fileSha256": "c817b714be5f60de12cb46ff53760cd0ae7c61a0b219e51c8e2582cea790eccf",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-24T04:23:12.015336Z",
+        "publishedAt": "2026-10-24T04:23:12.015336Z",
+        "updatedAt": "2026-10-24T04:23:12.015336Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-complex-financial-formula-audit-validator-skill",
+      "description": "Arithmetic consistency checks and cross-footing validation for financial statements",
+      "title": "GenPark Complex Financial Formula Audit Validator",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-complex-financial-formula-audit-validator-skill",
+        "source": "github",
+        "id": "1390167712"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-complex-financial-formula-audit-validator-skill/releases/download/v1.0.1/genpark-financial-audit.mcpb",
+          "fileSha256": "6da7dd84b00df4269df658e4b3df3869cba5ea9d6fed4657c78ef6afca1406ac",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-19T01:32:33.848664Z",
+        "publishedAt": "2026-10-19T01:32:33.848664Z",
+        "updatedAt": "2026-10-19T01:32:33.848664Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-concurrency-semaphore-guard-skill",
+      "description": "In-memory concurrency leaky-bucket and fair semaphore guard protecting downstream LLM APIs from rate",
+      "title": "GenPark Concurrency Semaphore Guard",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-concurrency-semaphore-guard-skill",
+        "source": "github",
+        "id": "1426924273"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-concurrency-semaphore-guard-skill/releases/download/v1.0.1/genpark-concurrency-semaphore-guard-skill-v1.0.1.mcpb",
+          "fileSha256": "0e8c26bfc731307a61d99fdfc162690a8b30d31316e75936a3ca5f57a61a8ebf",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-20T11:29:33.754808Z",
+        "publishedAt": "2026-10-20T11:29:33.754808Z",
+        "updatedAt": "2026-10-20T11:29:33.754808Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-consistent-hash-ring-router-skill",
+      "description": "Consistent hashing ring with virtual nodes for distributed LLM cache routing and agent partitioning",
+      "title": "GenPark Consistent Hash Ring Router",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-consistent-hash-ring-router-skill",
+        "source": "github",
+        "id": "1429683930"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-consistent-hash-ring-router-skill/releases/download/v1.0.1/genpark-consistent-hash-ring-router-skill-v1.0.1.mcpb",
+          "fileSha256": "7c71f11104d879fc09658cdeac5bc5ba847209660ab0fe417ede754719df13c2",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-24T01:44:45.385116Z",
+        "publishedAt": "2026-10-24T01:44:45.385116Z",
+        "updatedAt": "2026-10-24T01:44:45.385116Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-context-window-token-pruner-skill",
+      "description": "Priority-weighted context window token pruner and FIFO eviction engine protecting LLM prompt boundar",
+      "title": "GenPark Context Window Token Pruner",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-context-window-token-pruner-skill",
+        "source": "github",
+        "id": "1427972086"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-context-window-token-pruner-skill/releases/download/v1.0.1/genpark-context-window-token-pruner-skill-v1.0.1.mcpb",
+          "fileSha256": "2cbe305c79ff372331ce283ffaffb4997024ac5a2ab4c704225e0d23cf1ed29a",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-21T07:07:32.612255Z",
+        "publishedAt": "2026-10-21T07:07:32.612255Z",
+        "updatedAt": "2026-10-21T07:07:32.612255Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-conversational-barge-in-interruption-arbitrator-skill",
+      "description": "Arbitrate conversational interruptions with echo rules and playback truncation estimation",
+      "title": "GenPark Conversational Barge-In Interruption Arbitrator",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-conversational-barge-in-interruption-arbitrator-skill",
+        "source": "github",
+        "id": "1389567024"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-conversational-barge-in-interruption-arbitrator-skill/releases/download/v1.0.1/genpark-barge-in.mcpb",
+          "fileSha256": "17b947c38215904df01fa31e1cb2caa392ab1584d296a0094a197e8857818548",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-19T01:30:04.883534Z",
+        "publishedAt": "2026-10-19T01:30:04.883534Z",
+        "updatedAt": "2026-10-19T01:30:04.883534Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-cron-jitter-scheduler-agent-skill",
+      "description": "Crontab syntax parser and distributed jittered task scheduler preventing thundering herds in autonom",
+      "title": "GenPark Cron Jitter Scheduler Agent",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-cron-jitter-scheduler-agent-skill",
+        "source": "github",
+        "id": "1426883374"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-cron-jitter-scheduler-agent-skill/releases/download/v1.0.1/genpark-cron-jitter-scheduler-agent-skill-v1.0.1.mcpb",
+          "fileSha256": "4d7a87b247eb609718920e3c14114072c03024ebe6fe6904b6d54b013eb419e3",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-20T11:09:08.02878Z",
+        "publishedAt": "2026-10-20T11:09:08.02878Z",
+        "updatedAt": "2026-10-20T11:09:08.02878Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-distributed-deadlock-wait-for-graph-detector-skill",
+      "description": "Real-time Tarjan SCC cycle detection on lock Wait-For-Graphs with victim transaction arbitrator",
+      "title": "GenPark Distributed Deadlock Wait-For-Graph Detector",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-distributed-deadlock-wait-for-graph-detector-skill",
+        "source": "github",
+        "id": "1425571951"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-distributed-deadlock-wait-for-graph-detector-skill/releases/download/v1.0.1/genpark-distributed-deadlock-wait-for-graph-detector-skill.mcpb",
+          "fileSha256": "eed6a8f46a97c75243ef717d14fa17d24c3a8943317fb92022bb9a1bf040b4a3",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-19T12:24:36.105372Z",
+        "publishedAt": "2026-10-19T12:24:36.105372Z",
+        "updatedAt": "2026-10-19T12:24:36.105372Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-distributed-id-snowflake-generator-skill",
+      "description": "64-bit Twitter Snowflake-compatible distributed unique ID generator with clock backwards drift prote",
+      "title": "GenPark Distributed ID Snowflake Generator",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-distributed-id-snowflake-generator-skill",
+        "source": "github",
+        "id": "1431804351"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-distributed-id-snowflake-generator-skill/releases/download/v1.0.1/genpark-distributed-id-snowflake-generator-skill-v1.0.1.mcpb",
+          "fileSha256": "7c818c0c3a663eb27950ab2695a317b28f3a2978d906a89135cee32f2fec1f00",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-24T04:23:37.50091Z",
+        "publishedAt": "2026-10-24T04:23:37.50091Z",
+        "updatedAt": "2026-10-24T04:23:37.50091Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-distributed-lease-lock-coordinator-skill",
+      "description": "In-memory distributed lease lock with monotonically increasing fencing tokens preventing multi-agent",
+      "title": "GenPark Distributed Lease Lock Coordinator",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-distributed-lease-lock-coordinator-skill",
+        "source": "github",
+        "id": "1427074801"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-distributed-lease-lock-coordinator-skill/releases/download/v1.0.1/genpark-distributed-lease-lock-coordinator-skill-v1.0.1.mcpb",
+          "fileSha256": "d7690827f1d7136527d87b42935f35198274538f038610fd8a8e11542d06d989",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-20T13:41:42.263651Z",
+        "publishedAt": "2026-10-20T13:41:42.263651Z",
+        "updatedAt": "2026-10-20T13:41:42.263651Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-entropy-hallucination-detector-skill",
+      "description": "Token entropy and n-gram perplexity analyzer auditing LLM outputs for degenerate repetition loops an",
+      "title": "GenPark Entropy Hallucination Detector",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-entropy-hallucination-detector-skill",
+        "source": "github",
+        "id": "1426922503"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-entropy-hallucination-detector-skill/releases/download/v1.0.1/genpark-entropy-hallucination-detector-skill-v1.0.1.mcpb",
+          "fileSha256": "0f45f64151ca74d6ce3a43505ff6ef713a8bb09d1a2fa08ad3690733a2f316ed",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-20T11:29:26.000382Z",
+        "publishedAt": "2026-10-20T11:29:26.000382Z",
+        "updatedAt": "2026-10-20T11:29:26.000382Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-exponential-backoff-jitter-retry-skill",
+      "description": "Enterprise retry engine with full jitter, decorrelated jitter, and truncated exponential backoff for",
+      "title": "GenPark Exponential Backoff Jitter Retry",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-exponential-backoff-jitter-retry-skill",
+        "source": "github",
+        "id": "1429685084"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-exponential-backoff-jitter-retry-skill/releases/download/v1.0.1/genpark-exponential-backoff-jitter-retry-skill-v1.0.1.mcpb",
+          "fileSha256": "4c47d63f67f4db78b46defb5dd12eb67dcd09e1d3e3b9fe39f662ea79712b38c",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-24T01:44:51.598916Z",
+        "publishedAt": "2026-10-24T01:44:51.598916Z",
+        "updatedAt": "2026-10-24T01:44:51.598916Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-few-shot-mmr-diversity-selector-skill",
+      "description": "Maximal Marginal Relevance (MMR) exemplar selector optimizing semantic relevance and diversity for L",
+      "title": "GenPark Few-Shot MMR Diversity Selector",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-few-shot-mmr-diversity-selector-skill",
+        "source": "github",
+        "id": "1425888450"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-few-shot-mmr-diversity-selector-skill/releases/download/v1.0.1/genpark-few-shot-mmr-diversity-selector-skill-v1.0.1.mcpb",
+          "fileSha256": "796ad4c2e0405ef77985f6c60689173cb881588e2e41afddbad328df2806f689",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-20T01:00:50.452719Z",
+        "publishedAt": "2026-10-20T01:00:50.452719Z",
+        "updatedAt": "2026-10-20T01:00:50.452719Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-git-commit-conventional-semantic-linter-skill",
+      "description": "Conventional Commits 1.0.0 semantic linter and changelog grouping engine parsing breaking changes an",
+      "title": "GenPark Git Commit Conventional Semantic Linter",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-git-commit-conventional-semantic-linter-skill",
+        "source": "github",
+        "id": "1426885291"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-git-commit-conventional-semantic-linter-skill/releases/download/v1.0.1/genpark-git-commit-conventional-semantic-linter-skill-v1.0.1.mcpb",
+          "fileSha256": "82bfe72957e424e73a5e083dfdda48e7ffcc0d1232d2ae5059935ccc8d4ef164",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-20T11:09:21.665485Z",
+        "publishedAt": "2026-10-20T11:09:21.665485Z",
+        "updatedAt": "2026-10-20T11:09:21.665485Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-git-semantic-cherry-pick-conflict-resolver-skill",
+      "description": "Three-way AST hunk alignment and non-overlapping block conflict resolution for Git cherry-picks",
+      "title": "GenPark Git Semantic Cherry-Pick Conflict Resolver",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-git-semantic-cherry-pick-conflict-resolver-skill",
+        "source": "github",
+        "id": "1425568671"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-git-semantic-cherry-pick-conflict-resolver-skill/releases/download/v1.0.1/genpark-git-semantic-cherry-pick-conflict-resolver-skill.mcpb",
+          "fileSha256": "af26c656488ff53cfc89ddff9126f7261bcfa0210f831b356d9c8623448366a2",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-19T12:24:19.209992Z",
+        "publishedAt": "2026-10-19T12:24:19.209992Z",
+        "updatedAt": "2026-10-19T12:24:19.209992Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-graph-cycle-deadlock-detector-skill",
+      "description": "Tarjan strongly connected components cycle and deadlock detector for multi-agent DAG workflows",
+      "title": "GenPark Graph Cycle Deadlock Detector",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-graph-cycle-deadlock-detector-skill",
+        "source": "github",
+        "id": "1428016079"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-graph-cycle-deadlock-detector-skill/releases/download/v1.0.1/genpark-graph-cycle-deadlock-detector-skill-v1.0.1.mcpb",
+          "fileSha256": "211cb0e681d5a269c3be100bf2ebaee627ca4c982b317a392bff35aee78d0ae2",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-21T07:22:54.095663Z",
+        "publishedAt": "2026-10-21T07:22:54.095663Z",
+        "updatedAt": "2026-10-21T07:22:54.095663Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-hybrid-bounding-box-ocr-table-reconstructor-skill",
+      "description": "Spatial clustering 2D grid reconstructor converting OCR boxes into Markdown tables",
+      "title": "GenPark Hybrid Bounding Box OCR Table Reconstructor",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-hybrid-bounding-box-ocr-table-reconstructor-skill",
+        "source": "github",
+        "id": "1390166097"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-hybrid-bounding-box-ocr-table-reconstructor-skill/releases/download/v1.0.1/genpark-ocr-table.mcpb",
+          "fileSha256": "1d0c07e2243ff3f5ada26fbac491a40ffdcdf9c65bfb451943fc9f322a857224",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-19T01:31:32.209013Z",
+        "publishedAt": "2026-10-19T01:31:32.209013Z",
+        "updatedAt": "2026-10-19T01:31:32.209013Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-hyperloglog-cardinality-estimator-skill",
+      "description": "Pure Python 64-register HyperLogLog cardinality estimator for high-speed streaming distinct query es",
+      "title": "GenPark HyperLogLog Cardinality Estimator",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-hyperloglog-cardinality-estimator-skill",
+        "source": "github",
+        "id": "1362920010"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-hyperloglog-cardinality-estimator-skill/releases/download/v1.0.1/genpark-hyperloglog-cardinality-estimator-skill-v1.0.1.mcpb",
+          "fileSha256": "a2076dca82ec61521bda019d86503c48eafea7375fc61b904e8f4b742bcec37e",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-24T13:40:03.816044Z",
+        "publishedAt": "2026-10-24T13:40:03.816044Z",
+        "updatedAt": "2026-10-24T13:40:03.816044Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-jinja-like-prompt-template-renderer-skill",
+      "description": "Safe zero-dependency Jinja-like prompt template parser and renderer supporting for-loops, if-conditi",
+      "title": "GenPark Jinja-Like Prompt Template Renderer",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-jinja-like-prompt-template-renderer-skill",
+        "source": "github",
+        "id": "1426918565"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-jinja-like-prompt-template-renderer-skill/releases/download/v1.0.1/genpark-jinja-like-prompt-template-renderer-skill-v1.0.1.mcpb",
+          "fileSha256": "bb30d1f33ba749a7b889bfd00e8b8d1dc83536e1b50e73f1884e6b8432d5d7fb",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-20T11:29:06.436173Z",
+        "publishedAt": "2026-10-20T11:29:06.436173Z",
+        "updatedAt": "2026-10-20T11:29:06.436173Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-json-pointer-patch-delta-skill",
+      "description": "RFC 6901 / RFC 6902 compliant JSON Pointer and JSON Patch delta computation engine",
+      "title": "GenPark JSON Pointer Patch Delta",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-json-pointer-patch-delta-skill",
+        "source": "github",
+        "id": "1432214125"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-json-pointer-patch-delta-skill/releases/download/v1.0.1/genpark-json-pointer-patch-delta-skill-v1.0.1.mcpb",
+          "fileSha256": "6e02e3c541a53b57ce5759c904c02491f6a372e14d686b807a58e47cb720a959",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-24T13:39:56.021365Z",
+        "publishedAt": "2026-10-24T13:39:56.021365Z",
+        "updatedAt": "2026-10-24T13:39:56.021365Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-json-rpc-batch-pipelining-dispatcher-skill",
+      "description": "High-throughput JSON-RPC 2.0 batch pipelining and inter-tool parameter dependency resolver for Model",
+      "title": "GenPark JSON-RPC Batch Pipelining Dispatcher",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-json-rpc-batch-pipelining-dispatcher-skill",
+        "source": "github",
+        "id": "1427070692"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-json-rpc-batch-pipelining-dispatcher-skill/releases/download/v1.0.1/genpark-json-rpc-batch-pipelining-dispatcher-skill-v1.0.1.mcpb",
+          "fileSha256": "e3364c2afc0da474ad2dd60887122427fc22bfcc70d3eac64b5daf055c78cd74",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-20T13:41:18.364285Z",
+        "publishedAt": "2026-10-20T13:41:18.364285Z",
+        "updatedAt": "2026-10-20T13:41:18.364285Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-json-schema-contract-validator-skill",
+      "description": "Zero-dependency JSON schema subset validator ensuring LLM structured outputs strictly conform to con",
+      "title": "GenPark JSON Schema Contract Validator",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-json-schema-contract-validator-skill",
+        "source": "github",
+        "id": "1429686283"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-json-schema-contract-validator-skill/releases/download/v1.0.1/genpark-json-schema-contract-validator-skill-v1.0.1.mcpb",
+          "fileSha256": "7771366887e9d7a4f1eb8783a598c69abdca4746f0982a2ca4186190d7e80e44",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-24T01:44:58.236461Z",
+        "publishedAt": "2026-10-24T01:44:58.236461Z",
+        "updatedAt": "2026-10-24T01:44:58.236461Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-jwt-token-verifier-and-claims-auditor-skill",
+      "description": "Pure-Python zero-dependency JWT claims auditor and payload inspector enforcing expiry, audience, and",
+      "title": "GenPark JWT Token Verifier & Claims Auditor",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-jwt-token-verifier-and-claims-auditor-skill",
+        "source": "github",
+        "id": "1426884305"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-jwt-token-verifier-and-claims-auditor-skill/releases/download/v1.0.1/genpark-jwt-token-verifier-and-claims-auditor-skill-v1.0.1.mcpb",
+          "fileSha256": "f18cbfc5793ed78c3089c976950a95b4529b981b48f65621ddcc4a2f966519cc",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-20T11:09:15.598389Z",
+        "publishedAt": "2026-10-20T11:09:15.598389Z",
+        "updatedAt": "2026-10-20T11:09:15.598389Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-legal-clause-cross-reference-resolver-skill",
+      "description": "Extract contract defined terms, references, and audit clause dependency cycles",
+      "title": "GenPark Legal Clause Cross-Reference Resolver",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-legal-clause-cross-reference-resolver-skill",
+        "source": "github",
+        "id": "1390169086"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-legal-clause-cross-reference-resolver-skill/releases/download/v1.0.1/genpark-clause-references.mcpb",
+          "fileSha256": "7a135e62961d0813ed1a45d06e8df4996fe409e8bd3c274e311ee9c93b121512",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-19T01:32:41.144417Z",
+        "publishedAt": "2026-10-19T01:32:41.144417Z",
+        "updatedAt": "2026-10-19T01:32:41.144417Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-levenshtein-fuzzy-tool-matcher-skill",
+      "description": "Fast Levenshtein distance and fuzzy similarity matcher autocorrecting hallucinated LLM tool calls",
+      "title": "GenPark Levenshtein Fuzzy Tool Matcher",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-levenshtein-fuzzy-tool-matcher-skill",
+        "source": "github",
+        "id": "1431802975"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-levenshtein-fuzzy-tool-matcher-skill/releases/download/v1.0.1/genpark-levenshtein-fuzzy-tool-matcher-skill-v1.0.1.mcpb",
+          "fileSha256": "cbf87c3efc8813e67ad6d34cb329ce204c83c1187db46aeffb839d39ea842c98",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-24T04:23:23.982453Z",
+        "publishedAt": "2026-10-24T04:23:23.982453Z",
+        "updatedAt": "2026-10-24T04:23:23.982453Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-llm-token-bucket-sliding-window-rate-limiter-skill",
+      "description": "Adaptive multi-tier TPM/RPM rate limiter with smooth leaky bucket queuing and burst wait estimation",
+      "title": "GenPark LLM Token Bucket & Sliding Window Rate Limiter",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-llm-token-bucket-sliding-window-rate-limiter-skill",
+        "source": "github",
+        "id": "1425570260"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-llm-token-bucket-sliding-window-rate-limiter-skill/releases/download/v1.0.1/genpark-llm-token-bucket-sliding-window-rate-limiter-skill.mcpb",
+          "fileSha256": "ac3d5142de76b1064f27c6d11b5cfeac57b78901299e9a638a957b6bf54f1817",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-19T12:24:28.602124Z",
+        "publishedAt": "2026-10-19T12:24:28.602124Z",
+        "updatedAt": "2026-10-19T12:24:28.602124Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-llm-token-cost-budget-tracker-skill",
+      "description": "Multi-model LLM token cost budget ledger and burn rate forecaster enforcing spending limits and earl",
+      "title": "GenPark LLM Token Cost Budget Tracker",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-llm-token-cost-budget-tracker-skill",
+        "source": "github",
+        "id": "1426882292"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-llm-token-cost-budget-tracker-skill/releases/download/v1.0.1/genpark-llm-token-cost-budget-tracker-skill-v1.0.1.mcpb",
+          "fileSha256": "0a111b98cfcf96b6ea33dda7881270fa151b5dc85fe227e00833ca449d583508",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-20T11:09:00.061668Z",
+        "publishedAt": "2026-10-20T11:09:00.061668Z",
+        "updatedAt": "2026-10-20T11:09:00.061668Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-lru-ttl-multi-tier-cache-skill",
+      "description": "In-memory LRU cache with per-key TTL expiration, deterministic eviction, and hit/miss/stale telemetr",
+      "title": "GenPark LRU TTL Multi-Tier Cache",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-lru-ttl-multi-tier-cache-skill",
+        "source": "github",
+        "id": "1431802193"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-lru-ttl-multi-tier-cache-skill/releases/download/v1.0.1/genpark-lru-ttl-multi-tier-cache-skill-v1.0.1.mcpb",
+          "fileSha256": "676cd2b5eb12947400674526c654f97a997a8e73383a82fc30176441cd1db6a1",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-24T04:23:18.122937Z",
+        "publishedAt": "2026-10-24T04:23:18.122937Z",
+        "updatedAt": "2026-10-24T04:23:18.122937Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-markdown-mermaid-syntax-lint-healer-skill",
+      "description": "LLM output Mermaid diagram linting, unquoted bracket healing, and syntax normalization engine",
+      "title": "GenPark Markdown Mermaid Syntax Lint Healer",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-markdown-mermaid-syntax-lint-healer-skill",
+        "source": "github",
+        "id": "1425862695"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-markdown-mermaid-syntax-lint-healer-skill/releases/download/v1.0.1/genpark-markdown-mermaid-syntax-lint-healer-skill.mcpb",
+          "fileSha256": "1640fe961c9464778b3bf8c62f1a7d0a0662b0932058f6deda23e556773f0c90",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-19T16:15:40.733353Z",
+        "publishedAt": "2026-10-19T16:15:40.733353Z",
+        "updatedAt": "2026-10-19T16:15:40.733353Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-markdown-table-ast-normalizer-skill",
+      "description": "AST-based Markdown table normalizer rebalancing columns, padding, and exporting clean RFC 4180 CSV a",
+      "title": "GenPark Markdown Table AST Normalizer",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-markdown-table-ast-normalizer-skill",
+        "source": "github",
+        "id": "1427072866"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-markdown-table-ast-normalizer-skill/releases/download/v1.0.1/genpark-markdown-table-ast-normalizer-skill-v1.0.1.mcpb",
+          "fileSha256": "f87e7ae83665d16b70491702dbd92f2e1e1bfab3fb33fe84348da4af0c309e21",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-20T13:41:29.771535Z",
+        "publishedAt": "2026-10-20T13:41:29.771535Z",
+        "updatedAt": "2026-10-20T13:41:29.771535Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-merkle-dag-state-verifier-skill",
+      "description": "Cryptographic Merkle tree verification engine for agent state transitions, tool call histories, and ",
+      "title": "GenPark Merkle DAG State Verifier",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-merkle-dag-state-verifier-skill",
+        "source": "github",
+        "id": "1432227380"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-merkle-dag-state-verifier-skill/releases/download/v1.0.1/genpark-merkle-dag-state-verifier-skill-v1.0.1.mcpb",
+          "fileSha256": "8e16bb4190821fae9dadd6e6ac43dbbbd64131ddd8d7340110f2979e4a58202e",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-24T13:56:57.602946Z",
+        "publishedAt": "2026-10-24T13:56:57.602946Z",
+        "updatedAt": "2026-10-24T13:56:57.602946Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-multi-agent-borda-voting-consensus-skill",
+      "description": "Positional Borda Count voting and weighted multi-agent consensus engine resolving conflicting model ",
+      "title": "GenPark Multi-Agent Borda Voting Consensus",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-multi-agent-borda-voting-consensus-skill",
+        "source": "github",
+        "id": "1427066829"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-multi-agent-borda-voting-consensus-skill/releases/download/v1.0.1/genpark-multi-agent-borda-voting-consensus-skill-v1.0.1.mcpb",
+          "fileSha256": "f42c6194ba34c5f9326881702e85bb07b362faf06ce629d720b4adc9583a3135",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-20T13:41:01.023817Z",
+        "publishedAt": "2026-10-20T13:41:01.023817Z",
+        "updatedAt": "2026-10-20T13:41:01.023817Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-multi-source-openapi-router-mesh-skill",
+      "description": "Aggregates multiple OpenAPI specifications into a unified virtual routing mesh with service namespac",
+      "title": "GenPark Multi-Source OpenAPI Router Mesh",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-multi-source-openapi-router-mesh-skill",
+        "source": "github",
+        "id": "1426920532"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-multi-source-openapi-router-mesh-skill/releases/download/v1.0.1/genpark-multi-source-openapi-router-mesh-skill-v1.0.1.mcpb",
+          "fileSha256": "8770e69ef2c486eeb5d2ac50b42f372fc3f335565deaaf3451b572963fc69cd5",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-20T11:29:15.103957Z",
+        "publishedAt": "2026-10-20T11:29:15.103957Z",
+        "updatedAt": "2026-10-20T11:29:15.103957Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-multimodal-chart-data-point-extractor-skill",
+      "description": "Calibrate chart axes and convert bar or scatter pixel coordinates to data values",
+      "title": "GenPark Multimodal Chart Data Point Extractor",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-multimodal-chart-data-point-extractor-skill",
+        "source": "github",
+        "id": "1390170462"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-multimodal-chart-data-point-extractor-skill/releases/download/v1.0.1/genpark-chart-coordinates.mcpb",
+          "fileSha256": "ac2961862ebb10ec6ec58cf7a9983c2087acb35de3831339cb332cfc96eb0c7d",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-19T01:32:27.76407Z",
+        "publishedAt": "2026-10-19T01:32:27.76407Z",
+        "updatedAt": "2026-10-19T01:32:27.76407Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-openapi-spec-to-mcp-tool-synthesizer-skill",
+      "description": "Inspect OpenAPI 3.0 specs and synthesize schema-compliant Model Context Protocol tool declarations w",
+      "title": "GenPark OpenAPI Spec to MCP Tool Synthesizer",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-openapi-spec-to-mcp-tool-synthesizer-skill",
+        "source": "github",
+        "id": "1425884096"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-openapi-spec-to-mcp-tool-synthesizer-skill/releases/download/v1.0.1/genpark-openapi-spec-to-mcp-tool-synthesizer-skill-v1.0.1.mcpb",
+          "fileSha256": "be87df373de6a79a8673673b195666cfc210f70bf25b856dda27fa50d7da286d",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-20T01:00:18.312Z",
+        "publishedAt": "2026-10-20T01:00:18.312Z",
+        "updatedAt": "2026-10-20T01:00:18.312Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-pii-redactor-and-data-masker-skill",
+      "description": "Regex and Luhn heuristic PII redaction and tokenization engine sanitizing sensitive emails, phones, ",
+      "title": "GenPark PII Redactor & Data Masker",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-pii-redactor-and-data-masker-skill",
+        "source": "github",
+        "id": "1426886222"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-pii-redactor-and-data-masker-skill/releases/download/v1.0.1/genpark-pii-redactor-and-data-masker-skill-v1.0.1.mcpb",
+          "fileSha256": "a5dc768e5bce9a9bfccff01415ec7c6e16a04f976f892ef621d431c1f0e1840b",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-20T11:09:28.226593Z",
+        "publishedAt": "2026-10-20T11:09:28.226593Z",
+        "updatedAt": "2026-10-20T11:09:28.226593Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-priority-event-scheduler-queue-skill",
+      "description": "Min-heap priority event scheduler and delayed task dispatcher for asynchronous multi-agent coordinat",
+      "title": "GenPark Priority Event Scheduler Queue",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-priority-event-scheduler-queue-skill",
+        "source": "github",
+        "id": "1429687557"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-priority-event-scheduler-queue-skill/releases/download/v1.0.1/genpark-priority-event-scheduler-queue-skill-v1.0.1.mcpb",
+          "fileSha256": "b8bd1a66d93541b7cef98fe35aa0b64c8e8c597421037f485cfc840ac1573f7f",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-24T01:45:05.848466Z",
+        "publishedAt": "2026-10-24T01:45:05.848466Z",
+        "updatedAt": "2026-10-24T01:45:05.848466Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-prompt-drift-semantic-fingerprint-skill",
+      "description": "Prompt template drift and structural fingerprint sentinel detecting unauthorized prompt mutations an",
+      "title": "GenPark Prompt Drift Semantic Fingerprint",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-prompt-drift-semantic-fingerprint-skill",
+        "source": "github",
+        "id": "1427977452"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-prompt-drift-semantic-fingerprint-skill/releases/download/v1.0.1/genpark-prompt-drift-semantic-fingerprint-skill-v1.0.1.mcpb",
+          "fileSha256": "32341ff3fdaaaa05b1a270ef6248a4c19731e6dc7efc76e4a87578371f1c9964",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-21T07:07:39.165678Z",
+        "publishedAt": "2026-10-21T07:07:39.165678Z",
+        "updatedAt": "2026-10-21T07:07:39.165678Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-prompt-injection-canary-leak-sentinel-skill",
+      "description": "HMAC-signed zero-width invisible canary token generator and output response leak auditor",
+      "title": "GenPark Prompt Injection Canary Leak Sentinel",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-prompt-injection-canary-leak-sentinel-skill",
+        "source": "github",
+        "id": "1425573690"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-prompt-injection-canary-leak-sentinel-skill/releases/download/v1.0.1/genpark-prompt-injection-canary-leak-sentinel-skill.mcpb",
+          "fileSha256": "871afa453965e4d46c6d7cf7b375b7ef53165d53590fa1dbe0e0db59aa493b65",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-19T12:24:42.112486Z",
+        "publishedAt": "2026-10-19T12:24:42.112486Z",
+        "updatedAt": "2026-10-19T12:24:42.112486Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-rag-semantic-boundary-chunker-skill",
+      "description": "Semantic boundary preserving text chunker maintaining markdown headers, code fences, and paragraphs ",
+      "title": "GenPark RAG Semantic Boundary Chunker",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-rag-semantic-boundary-chunker-skill",
+        "source": "github",
+        "id": "1425887123"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-rag-semantic-boundary-chunker-skill/releases/download/v1.0.1/genpark-rag-semantic-boundary-chunker-skill-v1.0.1.mcpb",
+          "fileSha256": "4665d99e3ce9a3402fb8a5fa57e751e307c0fd202e06567c8390336e3227d008",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-20T01:00:31.839884Z",
+        "publishedAt": "2026-10-20T01:00:31.839884Z",
+        "updatedAt": "2026-10-20T01:00:31.839884Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-realtime-voice-agent-latency-telemetry-skill",
+      "description": "Voice pipeline timestamp telemetry profiler and percentile latency calculator",
+      "title": "GenPark Realtime Voice Agent Latency Telemetry",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-realtime-voice-agent-latency-telemetry-skill",
+        "source": "github",
+        "id": "1389569232"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-realtime-voice-agent-latency-telemetry-skill/releases/download/v1.0.1/genpark-voice-latency.mcpb",
+          "fileSha256": "ae137fa1d47d281567bb299027c25fa70dc98721ca3ceffdd4be06d79a0b39eb",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-19T01:31:27.589424Z",
+        "publishedAt": "2026-10-19T01:31:27.589424Z",
+        "updatedAt": "2026-10-19T01:31:27.589424Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-recursive-json-schema-healer-skill",
+      "description": "Recursive JSON schema validator and autonomous healer repairing type mismatches, missing defaults, a",
+      "title": "GenPark Recursive JSON Schema Healer",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-recursive-json-schema-healer-skill",
+        "source": "github",
+        "id": "1425885562"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-recursive-json-schema-healer-skill/releases/download/v1.0.1/genpark-recursive-json-schema-healer-skill-v1.0.1.mcpb",
+          "fileSha256": "64afeeae859dce537dab8d53ad9fc9322ab2e31416363f130c5cad91201c9518",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-20T01:00:25.488712Z",
+        "publishedAt": "2026-10-20T01:00:25.488712Z",
+        "updatedAt": "2026-10-20T01:00:25.488712Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-red-black-tree-index-skill",
+      "description": "Self-balancing Red-Black binary search tree engine for ordered indexing, range queries, and log-time",
+      "title": "GenPark Red-Black Tree Index",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-red-black-tree-index-skill",
+        "source": "github",
+        "id": "1432228694"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-red-black-tree-index-skill/releases/download/v1.0.1/genpark-red-black-tree-index-skill-v1.0.1.mcpb",
+          "fileSha256": "fce75fdd82b7f07d6c91bdb84ca0fe1831d2f55c91de8cfbbd2e7b8159d4e30c",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-24T13:57:05.661048Z",
+        "publishedAt": "2026-10-24T13:57:05.661048Z",
+        "updatedAt": "2026-10-24T13:57:05.661048Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-redact-unredact-session-vault-skill",
+      "description": "Bidirectional in-memory sensitive vault and surrogate token masker protecting credentials in LLM pro",
+      "title": "GenPark Redact Unredact Session Vault",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-redact-unredact-session-vault-skill",
+        "source": "github",
+        "id": "1427068682"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-redact-unredact-session-vault-skill/releases/download/v1.0.1/genpark-redact-unredact-session-vault-skill-v1.0.1.mcpb",
+          "fileSha256": "86cc3c012c3f8632c5209a1d8dcbfe9977717fb4eb7aca3be319d2402023d0ac",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-20T13:41:07.918263Z",
+        "publishedAt": "2026-10-20T13:41:07.918263Z",
+        "updatedAt": "2026-10-20T13:41:07.918263Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-reservoir-sampling-stream-auditor-skill",
+      "description": "O(k) space unbiased stream reservoir sampling and quantile estimation engine for LLM telemetry and h",
+      "title": "GenPark Reservoir Sampling Stream Auditor",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-reservoir-sampling-stream-auditor-skill",
+        "source": "github",
+        "id": "1432229970"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-reservoir-sampling-stream-auditor-skill/releases/download/v1.0.1/genpark-reservoir-sampling-stream-auditor-skill-v1.0.1.mcpb",
+          "fileSha256": "6646c03dacec154b051c6ce973a120912f434fa397a620eed789144154bb5142",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-24T13:57:15.618743Z",
+        "publishedAt": "2026-10-24T13:57:15.618743Z",
+        "updatedAt": "2026-10-24T13:57:15.618743Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-safe-eval-expression-ast-sandbox-skill",
+      "description": "Zero-dependency AST safe mathematical and boolean expression evaluator and validator",
+      "title": "GenPark Safe Eval Expression AST Sandbox",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-safe-eval-expression-ast-sandbox-skill",
+        "source": "github",
+        "id": "1428020313"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-safe-eval-expression-ast-sandbox-skill/releases/download/v1.0.1/genpark-safe-eval-expression-ast-sandbox-skill-v1.0.1.mcpb",
+          "fileSha256": "36f33616616c83940e342c9bea090ff604ef292d4607bcc1423d7ff24e7c6068",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-21T07:23:16.042406Z",
+        "publishedAt": "2026-10-21T07:23:16.042406Z",
+        "updatedAt": "2026-10-21T07:23:16.042406Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-secure-secret-token-redactor-skill",
+      "description": "High-speed regex and entropy-based scanner redacting API keys, JWT tokens, and credentials",
+      "title": "GenPark Secure Secret Token Redactor",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-secure-secret-token-redactor-skill",
+        "source": "github",
+        "id": "1431803677"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-secure-secret-token-redactor-skill/releases/download/v1.0.1/genpark-secure-secret-token-redactor-skill-v1.0.1.mcpb",
+          "fileSha256": "1fd8123d3633a706355ff91a8d9fdea5fb011ac4da92d8ffd7809bf57401d674",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-24T04:23:30.108785Z",
+        "publishedAt": "2026-10-24T04:23:30.108785Z",
+        "updatedAt": "2026-10-24T04:23:30.108785Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.alphaparkinc/genpark-semver-dependency-resolver-agent-skill",
+      "description": "Semantic Versioning 2.0.0 range matcher and dependency tree resolver for multi-agent toolkits and pl",
+      "title": "GenPark SemVer Dependency Resolver Agent",
+      "repository": {
+        "url": "https://github.com/alphaparkinc/genpark-semver-dependency-resolver-agent-skill",
+        "source": "github",
+        "id": "1427971098"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://genpark.ai/mcp",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/Alpha-Park/genpark-semver-dependency-resolver-agent-skill/releases/download/v1.0.1/genpark-semver-dependency-resolver-agent-skill-v1.0.1.mcpb",
+          "fileSha256": "4270425ea03db55730a738ed617f7ee0a6d04ce65aafbf6ea815484f56d7dccb",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-21T07:07:26.228451Z",
+        "publishedAt": "2026-10-21T07:07:26.228451Z",
+        "updatedAt": "2026-10-21T07:07:26.228451Z",
+        "isLatest": true
+      }
+    }
+  }
+]

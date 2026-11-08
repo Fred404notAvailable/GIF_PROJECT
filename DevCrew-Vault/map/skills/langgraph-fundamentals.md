@@ -18,7 +18,7 @@ INVOKE THIS SKILL when writing ANY LangGraph code. Covers StateGraph, state sche
 **Tech:** [[LangGraph]], [[Agents]]
 
 ## Related Skills
-- **Complements:** [[cloudflare]], [[next-dev-loop]], [[react-native-best-practices]], [[secure-webapp]]
+- **Complements:** [[cloudflare]], [[convex]], [[next-dev-loop]], [[react-native-best-practices]]
 - **Alternate of:** [[langgraph-human-in-the-loop]], [[langgraph-persistence]]
 
 Real skill file: `skills/langgraph-fundamentals/SKILL.md`

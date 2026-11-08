@@ -18,7 +18,6 @@ Rigorous visual validation expert specializing in UI testing, design system comp
 **Tech:** [[TDD]], [[UI & Design]]
 
 ## Related Skills
-- **Complements:** [[agent-memory-systems]], [[api-design-principles]], [[api-security]], [[webapp-testing]]
-- **Alternate of:** [[web-tooling-storybook]]
+- **Complements:** [[agent-memory-systems]], [[api-design-principles]], [[architecture-patterns]], [[webapp-testing]]
 
 Real skill file: `skills/ui-visual-validator/SKILL.md`

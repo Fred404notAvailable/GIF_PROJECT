@@ -1,7 +1,5 @@
 # GraphQL Schema Design Patterns
 
-These are independent schema excerpts: define missing root/types/scalars and resolver behavior before validation. Enforce object/field authorization server-side, use per-request/user-scoped DataLoaders, and cap query depth/cost/batch/pagination. @auth requires an implementation; declaring it does not enforce access.
-
 ## Schema Organization
 
 ### Modular Schema Structure
@@ -383,8 +381,8 @@ type User {
   email: String! @deprecated(reason: "Use emails field instead")
   emails: [String!]!
 
-  # Conditional inclusion
-  privateData: PrivateData # Authorization must be enforced in the resolver, not @include
+  # Owner-only data: check authorization in the resolver
+  privateData: PrivateData
 }
 
 # Query
@@ -526,14 +524,19 @@ def depth_limit_validator(max_depth: int):
 
 ```python
 def complexity_limit_validator(max_complexity: int):
+    # Checks each field's cost. A limit on the whole query needs a pass that
+    # sums these costs over the full document before execution.
     def calculate_complexity(node):
         # Each field = 1, lists multiply
         complexity = 1
         if is_list_field(node):
             complexity *= get_list_size_arg(node)
+        if complexity > max_complexity:
+            raise GraphQLError(
+                f"Query complexity {complexity} exceeds maximum {max_complexity}"
+            )
         return complexity
 
-    # Sketch only: integrate a full AST traversal and enforce max_complexity.
     return calculate_complexity
 ```
 

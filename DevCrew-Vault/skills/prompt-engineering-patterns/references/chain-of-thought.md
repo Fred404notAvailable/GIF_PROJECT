@@ -2,16 +2,12 @@
 
 ## Overview
 
-Chain-of-Thought (CoT) prompting elicits step-by-step reasoning from LLMs, which can improve performance depending on the model and task on complex reasoning, math, and logic tasks.
-
-The following are conceptual sketches, not a complete SDK. Missing helpers
-(`extract_final_answer`, `explore_branch`, etc.) must be implemented and tested.
-Sample agreement is not calibrated confidence, and model self-verification does
-not replace independent tests or tools. Respect model-specific reasoning APIs.
+Chain-of-Thought (CoT) prompting elicits step-by-step reasoning from LLMs, dramatically improving performance on complex reasoning, math, and logic tasks.
 
 ## Core Techniques
 
 ### Zero-Shot CoT
+
 Add a simple trigger phrase to elicit reasoning:
 
 ```python
@@ -34,6 +30,7 @@ prompt = zero_shot_cot(query)
 ```
 
 ### Few-Shot CoT
+
 Provide examples with explicit reasoning chains:
 
 ```python
@@ -58,20 +55,23 @@ A: Let's think step by step:"""
 ```
 
 ### Self-Consistency
+
 Generate multiple reasoning paths and take the majority vote:
 
 ```python
+import openai
 from collections import Counter
 
-def self_consistency_cot(client, query, n=5):
-    if n < 1:
-        raise ValueError("n must be positive")
+def self_consistency_cot(query, n=5, temperature=0.7):
     prompt = f"{query}\n\nLet's think step by step:"
 
     responses = []
     for _ in range(n):
-        # Supply an adapter for the chosen provider; parse a task-specific answer.
-        response = client.complete(prompt)
+        response = openai.ChatCompletion.create(
+            model="gpt-5.4",
+            messages=[{"role": "user", "content": prompt}],
+            temperature=temperature
+        )
         responses.append(extract_final_answer(response))
 
     # Take majority vote
@@ -80,7 +80,7 @@ def self_consistency_cot(client, query, n=5):
 
     return {
         'answer': final_answer,
-        'sample_agreement': answer_counts[final_answer] / n,
+        'confidence': answer_counts[final_answer] / n,
         'all_responses': responses
     }
 ```
@@ -88,6 +88,7 @@ def self_consistency_cot(client, query, n=5):
 ## Advanced Patterns
 
 ### Least-to-Most Prompting
+
 Break complex problems into simpler subproblems:
 
 ```python
@@ -128,6 +129,7 @@ Final Answer:"""
 ```
 
 ### Tree-of-Thought (ToT)
+
 Explore multiple reasoning branches:
 
 ```python
@@ -179,6 +181,7 @@ Score:"""
 ```
 
 ### Verification Step
+
 Add explicit verification to catch errors:
 
 ```python
@@ -223,6 +226,7 @@ Corrected solution:"""
 ## Domain-Specific CoT
 
 ### Math Problems
+
 ```python
 math_cot_template = """
 Problem: {problem}
@@ -251,6 +255,7 @@ Answer: {final_answer}
 ```
 
 ### Code Debugging
+
 ```python
 debug_cot_template = """
 Code with error:
@@ -281,6 +286,7 @@ Fixed code:
 ```
 
 ### Logical Reasoning
+
 ```python
 logic_cot_template = """
 Premises:
@@ -308,6 +314,7 @@ Answer: {final_answer}
 ## Performance Optimization
 
 ### Caching Reasoning Patterns
+
 ```python
 class ReasoningCache:
     def __init__(self):
@@ -331,6 +338,7 @@ class ReasoningCache:
 ```
 
 ### Adaptive Reasoning Depth
+
 ```python
 def adaptive_cot(problem, initial_depth=3):
     depth = initial_depth
@@ -364,7 +372,7 @@ def evaluate_cot_quality(reasoning_chain):
 ## Best Practices
 
 1. **Clear Step Markers**: Use numbered steps or clear delimiters
-2. **Explain Appropriately**: Request a concise rationale, assumptions and verifiable calculations, not hidden internal reasoning
+2. **Show All Work**: Don't skip steps, even obvious ones
 3. **Verify Calculations**: Add explicit verification steps
 4. **State Assumptions**: Make implicit assumptions explicit
 5. **Check Edge Cases**: Consider boundary conditions
@@ -381,6 +389,7 @@ def evaluate_cot_quality(reasoning_chain):
 ## When to Use CoT
 
 **Use CoT for:**
+
 - Math and arithmetic problems
 - Logical reasoning tasks
 - Multi-step planning
@@ -388,6 +397,7 @@ def evaluate_cot_quality(reasoning_chain):
 - Complex decision making
 
 **Skip CoT for:**
+
 - Simple factual queries
 - Direct lookups
 - Creative writing

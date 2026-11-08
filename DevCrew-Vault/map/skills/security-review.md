@@ -18,7 +18,7 @@ AI-powered codebase security scanner that reasons about code like a security res
 **Tech:** [[Code Review]], [[Observability]], [[REST & API]], [[SQL & Database]], [[SQL Injection]]
 
 ## Related Skills
-- **Complements:** [[api-design-principles]], [[application-performance-performance-optimization]], [[aws-serverless]], [[kubernetes-skill]]
-- **Alternate of:** [[sql-injection-testing]]
+- **Complements:** [[api-design-principles]], [[application-performance-performance-optimization]], [[kubernetes-skill]], [[nodejs-backend-patterns]]
+- **Alternate of:** [[owasp-audit]], [[sql-injection-testing]]
 
 Real skill file: `skills/security-review/SKILL.md`

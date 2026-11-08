@@ -1,0 +1,4758 @@
+[
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.foretak/registry-mcp",
+      "description": "The company registry MCP: brreg orgnr, Companies House, Bolagsverket organisationsnummer.",
+      "title": "registry-mcp \u2014 national company registries",
+      "repository": {
+        "url": "https://github.com/foretak/registry-mcp",
+        "source": "github"
+      },
+      "version": "0.4.2",
+      "websiteUrl": "https://api.foretak.dev",
+      "icons": [
+        {
+          "src": "https://api.foretak.dev/icon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "400x400"
+          ]
+        }
+      ],
+      "packages": [
+        {
+          "registryType": "pypi",
+          "registryBaseUrl": "https://pypi.org",
+          "identifier": "registry-mcp",
+          "version": "0.4.2",
+          "runtimeHint": "uvx",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Contact address sent in the User-Agent to the national registry, as Br\u00f8nn\u00f8ysundregistrene asks of API clients. Unset means an anonymous client, which may be blocked upstream.",
+              "format": "string",
+              "placeholder": "you@example.com",
+              "name": "REGISTRY_MCP_CONTACT_EMAIL"
+            },
+            {
+              "description": "Path to the local SQLite response cache (24 h TTL). Defaults to ./data/cache.sqlite3.",
+              "format": "filepath",
+              "placeholder": "./data/cache.sqlite3",
+              "name": "REGISTRY_MCP_CACHE_PATH"
+            },
+            {
+              "description": "Companies House REST API key, required for the United Kingdom (GB). Free from developer.company-information.service.gov.uk. Unset means GB lookups return an upstream_error naming this variable; every other country still answers.",
+              "format": "string",
+              "isSecret": true,
+              "name": "COMPANIES_HOUSE_API_KEY"
+            },
+            {
+              "description": "Bolagsverket OAuth 2 client id, required for Sweden (SE) together with BOLAGSVERKET_CLIENT_SECRET. Free, no contract: request both from Bolagsverket's kundanm\u00e4lan form. Unset means SE lookups return an upstream_error naming both variables; every other country still answers.",
+              "format": "string",
+              "isSecret": true,
+              "name": "BOLAGSVERKET_CLIENT_ID"
+            },
+            {
+              "description": "Bolagsverket OAuth 2 client secret, the other half of BOLAGSVERKET_CLIENT_ID. Both are needed before Sweden (SE) can answer.",
+              "format": "string",
+              "isSecret": true,
+              "name": "BOLAGSVERKET_CLIENT_SECRET"
+            },
+            {
+              "description": "Which Bolagsverket environment the Swedish credentials belong to: 'production' (default) or 'test'. It selects the data host and the token host as a pair, so the two can never be mixed.",
+              "format": "string",
+              "name": "BOLAGSVERKET_ENVIRONMENT"
+            }
+          ]
+        },
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "registry-mcp",
+          "version": "0.4.2",
+          "runtimeHint": "npx",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Contact address sent in the User-Agent to the national registry, as Br\u00f8nn\u00f8ysundregistrene asks of API clients. Unset means an anonymous client, which may be blocked upstream.",
+              "format": "string",
+              "placeholder": "you@example.com",
+              "name": "REGISTRY_MCP_CONTACT_EMAIL"
+            },
+            {
+              "description": "Companies House REST API key, required for the United Kingdom (GB). Free from developer.company-information.service.gov.uk. Unset means GB lookups return an upstream_error naming this variable; every other country still answers.",
+              "format": "string",
+              "isSecret": true,
+              "name": "COMPANIES_HOUSE_API_KEY"
+            },
+            {
+              "description": "Bolagsverket OAuth 2 client id, required for Sweden (SE) together with BOLAGSVERKET_CLIENT_SECRET. Free, no contract: request both from Bolagsverket's kundanm\u00e4lan form. Unset means SE lookups return an upstream_error naming both variables; every other country still answers.",
+              "format": "string",
+              "isSecret": true,
+              "name": "BOLAGSVERKET_CLIENT_ID"
+            },
+            {
+              "description": "Bolagsverket OAuth 2 client secret, the other half of BOLAGSVERKET_CLIENT_ID. Both are needed before Sweden (SE) can answer.",
+              "format": "string",
+              "isSecret": true,
+              "name": "BOLAGSVERKET_CLIENT_SECRET"
+            },
+            {
+              "description": "Which Bolagsverket environment the Swedish credentials belong to: 'production' (default) or 'test'. It selects the data host and the token host as a pair, so the two can never be mixed.",
+              "format": "string",
+              "name": "BOLAGSVERKET_ENVIRONMENT"
+            }
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.foretak.dev/mcp"
+        }
+      ],
+      "_meta": {
+        "io.modelcontextprotocol.registry/publisher-provided": {
+          "countries": [
+            "GB",
+            "NO",
+            "SE"
+          ],
+          "dataLicense": "NLOD 2.0 (Enhetsregisteret, Br\u00f8nn\u00f8ysundregistrene); Crown copyright, free to re-use (Companies House public register); free re-use, publisher names no licence (Bolagsverket/SCB high-value datasets, EU Open Data Directive)",
+          "documentation": {
+            "llmsFullTxt": "https://api.foretak.dev/llms-full.txt",
+            "llmsTxt": "https://api.foretak.dev/llms.txt",
+            "openapi": "https://api.foretak.dev/openapi.json"
+          },
+          "keywords": [
+            "brreg",
+            "br\u00f8nn\u00f8ysund",
+            "br\u00f8nn\u00f8ysundregistrene",
+            "enhetsregisteret",
+            "organisasjonsnummer",
+            "orgnr",
+            "org.nr",
+            "norway company lookup",
+            "norwegian business registry",
+            "foretak",
+            "companies house",
+            "companies house api",
+            "company number",
+            "company registration number",
+            "uk company lookup",
+            "uk company search",
+            "confirmation statement",
+            "company registry",
+            "company registry mcp",
+            "mcp",
+            "bolagsverket",
+            "organisationsnummer",
+            "swedish company lookup",
+            "swedish company number"
+          ],
+          "license": "MIT",
+          "schemaFetchedAt": "2026-09-03",
+          "tool": "registry-mcp T15c"
+        }
+      }
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-10T07:42:54.694094Z",
+        "publishedAt": "2026-09-10T07:42:54.694094Z",
+        "updatedAt": "2026-09-10T07:42:54.694094Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.forever-healthy/ai4l-library",
+      "description": "Local Markdown library of the papers an evidence review cites: metadata, abstract and full text",
+      "title": "AI4L Library",
+      "repository": {
+        "url": "https://github.com/forever-healthy/AI4L-library",
+        "source": "github"
+      },
+      "version": "0.1.12",
+      "websiteUrl": "https://github.com/forever-healthy/AI4L-library",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "ai4l-library",
+          "version": "0.1.12",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-07T22:33:50.356068Z",
+        "publishedAt": "2026-11-07T22:33:50.356068Z",
+        "updatedAt": "2026-11-07T22:33:50.356068Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.forever-healthy/evipedia-mcp",
+      "description": "MCP Server for evipedia.ai \u2014 evidence-based reviews of health & longevity interventions",
+      "title": "Evipedia",
+      "repository": {
+        "url": "https://github.com/forever-healthy/evipedia-mcp",
+        "source": "github"
+      },
+      "version": "0.1.30",
+      "websiteUrl": "https://evipedia.ai",
+      "icons": [
+        {
+          "src": "https://evipedia.ai/assets/favicon.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ]
+        },
+        {
+          "src": "https://evipedia.ai/assets/favicon-192.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "192x192"
+          ]
+        },
+        {
+          "src": "https://evipedia.ai/assets/favicon-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "evipedia-mcp",
+          "version": "0.1.30",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-09T12:47:47.472148Z",
+        "publishedAt": "2026-09-09T12:47:47.472148Z",
+        "updatedAt": "2026-09-09T12:47:47.472148Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.forever-healthy/fh-library",
+      "description": "Local Markdown library of the papers an evidence review cites: metadata, abstract and full text",
+      "title": "FH Library",
+      "repository": {
+        "url": "https://github.com/forever-healthy/fh-library",
+        "source": "github"
+      },
+      "version": "0.2.7",
+      "websiteUrl": "https://github.com/forever-healthy/fh-library",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "fh-library",
+          "version": "0.2.7",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-08T13:33:03.926585Z",
+        "publishedAt": "2026-11-08T13:33:03.926585Z",
+        "updatedAt": "2026-11-08T13:33:03.926585Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.forevercrab321-svg/leevar",
+      "description": "Grade an AI agent's transcripts on 18 reliability tests. Thin evidence is NOT TESTED, not guessed.",
+      "title": "LEEVAR reliability battery",
+      "repository": {
+        "url": "https://github.com/forevercrab321-svg/leevar-battery",
+        "source": "github",
+        "subfolder": "packages/mcp"
+      },
+      "version": "0.1.0",
+      "websiteUrl": "https://www.leevar.live/clinic",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/forevercrab321-svg/leevar-battery/releases/download/v0.1.0/leevar-mcp-0.1.0.mcpb",
+          "fileSha256": "e4d79b50a6d3bb32268c08b71b0bda06d352c4ba40e4ba41f8ac111fe592760d",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-28T03:07:39.514187Z",
+        "publishedAt": "2026-09-28T03:07:39.514187Z",
+        "updatedAt": "2026-09-28T03:07:39.514187Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.forgeagents-jp/oka-anywhere",
+      "description": "Cited answers in Claude or ChatGPT only from your office's procedures; says so when not covered.",
+      "title": "OKA Anywhere",
+      "repository": {
+        "url": "https://github.com/forgeagents-jp/oka-anywhere",
+        "source": "github"
+      },
+      "version": "1.1.0",
+      "websiteUrl": "https://forgeagentsio.com/oka.html",
+      "icons": [
+        {
+          "src": "https://forgeagentsio.com/oka-logo-400.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "400x400"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://console.forgeagentsai.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-20T21:39:01.608757Z",
+        "publishedAt": "2026-10-20T21:39:01.608757Z",
+        "updatedAt": "2026-10-20T21:39:01.608757Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.forgemeshlabs/affiliate-router-mcp",
+      "description": "Route x402 payments, Pyrimid affiliate splits, and referral links. Vendor-neutral, adapter-based.",
+      "repository": {
+        "url": "https://github.com/forgemeshlabs/affiliate-router-mcp",
+        "source": "github"
+      },
+      "version": "0.1.14",
+      "icons": [
+        {
+          "src": "https://forgemesh.io/favicon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "1254x1254"
+          ]
+        }
+      ],
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "affiliate-router-mcp",
+          "version": "0.1.14",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Dedicated low-balance Base wallet private key for x402 USDC micropayments. Do not use your primary wallet.",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "WALLET_PRIVATE_KEY"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-02T02:39:25.67121Z",
+        "publishedAt": "2026-11-02T02:39:25.67121Z",
+        "updatedAt": "2026-11-02T02:39:25.67121Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.forgemeshlabs/agent-readiness-mcp",
+      "description": "Agent Readiness MCP \u2014 the free Agent Readiness scanner as an MCP server. Measures your ASO Score.",
+      "repository": {
+        "url": "https://github.com/forgemeshlabs/agent-readiness-mcp",
+        "source": "github"
+      },
+      "version": "0.2.7",
+      "icons": [
+        {
+          "src": "https://forgemesh.io/favicon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "1254x1254"
+          ]
+        }
+      ],
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@forgemeshlabs/agent-readiness-mcp",
+          "version": "0.2.7",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-02T01:54:33.060911Z",
+        "publishedAt": "2026-11-02T01:54:33.060911Z",
+        "updatedAt": "2026-11-02T01:54:33.060911Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.forgemeshlabs/anomaly-mcp",
+      "description": "Real-time anomaly detection for blockchain, aviation, GitHub, mempool, and depeg signals.",
+      "repository": {
+        "url": "https://github.com/forgemeshlabs/anomaly-mcp",
+        "source": "github"
+      },
+      "version": "0.5.10",
+      "icons": [
+        {
+          "src": "https://forgemesh.io/favicon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "1254x1254"
+          ]
+        }
+      ],
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@forgemeshlabs/anomaly-mcp",
+          "version": "0.5.10",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Optional hosted API base URL override. Defaults to https://anomaly.forgemesh.io.",
+              "format": "string",
+              "name": "ANOMALY_API_BASE"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-02T02:39:27.208165Z",
+        "publishedAt": "2026-11-02T02:39:27.208165Z",
+        "updatedAt": "2026-11-02T02:39:27.208165Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.forgemeshlabs/aso-audit-mcp",
+      "description": "ASO Scanner \u2014 the free Agent Readiness scanner as an MCP server. Measures your ASO Score (Agent.",
+      "repository": {
+        "url": "https://github.com/forgemeshlabs/aso-audit-mcp",
+        "source": "github"
+      },
+      "version": "0.4.6",
+      "icons": [
+        {
+          "src": "https://forgemesh.io/favicon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "1254x1254"
+          ]
+        }
+      ],
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@forgemeshlabs/aso-audit-mcp",
+          "version": "0.4.6",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-02T02:39:20.144806Z",
+        "publishedAt": "2026-11-02T02:39:20.144806Z",
+        "updatedAt": "2026-11-02T02:39:20.144806Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.forgemeshlabs/aso-score-mcp",
+      "description": "ASO Score MCP \u2014 the free ASO Score scanner as an MCP server. Measures your ASO Score (Agent.",
+      "repository": {
+        "url": "https://github.com/forgemeshlabs/aso-score-mcp",
+        "source": "github"
+      },
+      "version": "0.2.7",
+      "icons": [
+        {
+          "src": "https://forgemesh.io/favicon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "1254x1254"
+          ]
+        }
+      ],
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@forgemeshlabs/aso-score-mcp",
+          "version": "0.2.7",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-02T02:39:21.557634Z",
+        "publishedAt": "2026-11-02T02:39:21.557634Z",
+        "updatedAt": "2026-11-02T02:39:21.557634Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.forgemeshlabs/coinopai-mcp",
+      "description": "Auditable market intelligence with calibrated forecast ranges, anomaly review, outcome.",
+      "repository": {
+        "url": "https://github.com/forgemeshlabs/coinopai-mcp",
+        "source": "github"
+      },
+      "version": "2.2.3",
+      "icons": [
+        {
+          "src": "https://forgemesh.io/favicon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "1254x1254"
+          ]
+        }
+      ],
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "coinopai-mcp",
+          "version": "2.2.3",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Dedicated low-balance Base wallet private key for x402 USDC micropayments. Do not use your primary wallet.",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "WALLET_PRIVATE_KEY"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-02T02:39:28.455158Z",
+        "publishedAt": "2026-11-02T02:39:28.455158Z",
+        "updatedAt": "2026-11-02T02:39:28.455158Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.forgemeshlabs/crypto-signals-mcp",
+      "description": "Crypto Signals by ForgeMesh: market intelligence, calibrated forecasts, whale flows, risk context.",
+      "repository": {
+        "url": "https://github.com/forgemeshlabs/crypto-signals-mcp",
+        "source": "github"
+      },
+      "version": "0.1.7",
+      "icons": [
+        {
+          "src": "https://forgemesh.io/favicon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "1254x1254"
+          ]
+        }
+      ],
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@forgemeshlabs/crypto-signals-mcp",
+          "version": "0.1.7",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Dedicated low-balance Base wallet private key for x402 USDC micropayments. Never use a primary wallet.",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "WALLET_PRIVATE_KEY"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-02T02:39:29.879442Z",
+        "publishedAt": "2026-11-02T02:39:29.879442Z",
+        "updatedAt": "2026-11-02T02:39:29.879442Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.forgemeshlabs/disruption-intelligence-mcp",
+      "description": "AI-native commercial disruption intelligence for MCP clients and x402-powered agents.",
+      "repository": {
+        "url": "https://github.com/forgemeshlabs/disruption-intelligence-mcp",
+        "source": "github"
+      },
+      "version": "0.1.11",
+      "icons": [
+        {
+          "src": "https://forgemesh.io/favicon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "1254x1254"
+          ]
+        }
+      ],
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@forgemeshlabs/disruption-intelligence-mcp",
+          "version": "0.1.11",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-02T02:39:31.36877Z",
+        "publishedAt": "2026-11-02T02:39:31.36877Z",
+        "updatedAt": "2026-11-02T02:39:31.36877Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.forgemeshlabs/gov-transparency-mcp",
+      "description": "Watch the watchers: congressional stock trades, federal contracts, campaign finance, lobbying, and.",
+      "repository": {
+        "url": "https://github.com/forgemeshlabs/gov-transparency-mcp",
+        "source": "github"
+      },
+      "version": "0.1.5",
+      "icons": [
+        {
+          "src": "https://forgemesh.io/favicon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "1254x1254"
+          ]
+        }
+      ],
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@forgemeshlabs/gov-transparency-mcp",
+          "version": "0.1.5",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-02T02:39:32.864539Z",
+        "publishedAt": "2026-11-02T02:39:32.864539Z",
+        "updatedAt": "2026-11-02T02:39:32.864539Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.forgemeshlabs/imagegen-mcp",
+      "description": "AI image generation MCP \u2014 generate, bg removal, 4x upscale, or full pro pipeline. USDC/Base.",
+      "repository": {
+        "url": "https://github.com/forgemeshlabs/imagegen-mcp",
+        "source": "github"
+      },
+      "version": "2.1.1",
+      "icons": [
+        {
+          "src": "https://forgemesh.io/favicon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "1254x1254"
+          ]
+        }
+      ],
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "forgemesh-imagegen",
+          "version": "2.1.1",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Base wallet private key for x402 USDC micropayments. Use a dedicated low-balance wallet.",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "WALLET_PRIVATE_KEY"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-02T02:39:34.08571Z",
+        "publishedAt": "2026-11-02T02:39:34.08571Z",
+        "updatedAt": "2026-11-02T02:39:34.08571Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.forgemeshlabs/kronos-forgemesh-mcp",
+      "description": "Kronos market intelligence with calibrated ranges, audits, and x402 payments on Base.",
+      "repository": {
+        "url": "https://github.com/forgemeshlabs/kronos-forgemesh-mcp",
+        "source": "github"
+      },
+      "version": "0.2.3",
+      "icons": [
+        {
+          "src": "https://forgemesh.io/favicon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "1254x1254"
+          ]
+        }
+      ],
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@forgemeshlabs/kronos-forgemesh-mcp",
+          "version": "0.2.3",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Dedicated low-balance Base wallet private key for x402 USDC payments.",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "WALLET_PRIVATE_KEY"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-02T02:39:35.650998Z",
+        "publishedAt": "2026-11-02T02:39:35.650998Z",
+        "updatedAt": "2026-11-02T02:39:35.650998Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.forgemeshlabs/library-mcp",
+      "description": "A paid public-domain knowledge base for AI agents: full-text search, book metadata, chapters.",
+      "title": "ForgeMesh Library MCP",
+      "repository": {
+        "url": "https://github.com/forgemeshlabs/library-mcp",
+        "source": "github"
+      },
+      "version": "0.1.8",
+      "websiteUrl": "https://library.forgemesh.io",
+      "icons": [
+        {
+          "src": "https://forgemesh.io/favicon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "1254x1254"
+          ]
+        }
+      ],
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@forgemeshlabs/library-mcp",
+          "version": "0.1.8",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Dedicated low-balance Base wallet private key for x402 USDC micropayments. Required for all 8 tools (there are no free tools in this package). Never use your primary wallet.",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "WALLET_PRIVATE_KEY"
+            },
+            {
+              "description": "Library API origin override. Defaults to https://library.forgemesh.io.",
+              "format": "string",
+              "name": "LIBRARY_BASE_URL"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-02T02:39:37.153733Z",
+        "publishedAt": "2026-11-02T02:39:37.153733Z",
+        "updatedAt": "2026-11-02T02:39:37.153733Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.forgemeshlabs/seo-authority-mcp",
+      "description": "SEO authority, keyword, competitor, content, site-audit, and internal-link tools with optional.",
+      "repository": {
+        "url": "https://github.com/forgemeshlabs/seo-authority-mcp",
+        "source": "github"
+      },
+      "version": "0.1.5",
+      "icons": [
+        {
+          "src": "https://forgemesh.io/favicon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "1254x1254"
+          ]
+        }
+      ],
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@forgemeshlabs/seo-authority-mcp",
+          "version": "0.1.5",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Optional EVM wallet private key for automatic x402 USDC settlement.",
+              "format": "string",
+              "isSecret": true,
+              "name": "SEO_X402_PRIVATE_KEY"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-26T13:45:14.525319Z",
+        "publishedAt": "2026-10-26T13:45:14.525319Z",
+        "updatedAt": "2026-10-26T13:45:14.525319Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.forgemeshlabs/shopscout-mcp",
+      "description": "Let your agent shop and compare: Shopify catalog search, offer ranking, shipping plans. $0.01/call.",
+      "repository": {
+        "url": "https://github.com/forgemeshlabs/shopscout-mcp",
+        "source": "github"
+      },
+      "version": "0.3.3",
+      "websiteUrl": "https://forgemesh.io/shopscout",
+      "icons": [
+        {
+          "src": "https://forgemesh.io/favicon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "1254x1254"
+          ]
+        }
+      ],
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@forgemeshlabs/shopscout-mcp",
+          "version": "0.3.3",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Optional. Private key of a dedicated low-balance Base wallet holding USDC; pays $0.01 per paid tool call via x402. Without it paid tools return the 402 challenge as data.",
+              "format": "string",
+              "isSecret": true,
+              "name": "WALLET_PRIVATE_KEY"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-02T02:39:38.562532Z",
+        "publishedAt": "2026-11-02T02:39:38.562532Z",
+        "updatedAt": "2026-11-02T02:39:38.562532Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.forgemeshlabs/travel-agent-mcp",
+      "description": "Free travel tools plus live x402 Travel Pulse, day trips, weekends, weather, creator, and mobility.",
+      "repository": {
+        "url": "https://github.com/forgemeshlabs/travel-agent-mcp",
+        "source": "github"
+      },
+      "version": "0.2.6",
+      "icons": [
+        {
+          "src": "https://forgemesh.io/favicon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "1254x1254"
+          ]
+        }
+      ],
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@forgemeshlabs/travel-agent-mcp",
+          "version": "0.2.6",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-26T13:45:15.082003Z",
+        "publishedAt": "2026-10-26T13:45:15.082003Z",
+        "updatedAt": "2026-10-26T13:45:15.082003Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.forgemeshlabs/travel-assistant-mcp",
+      "description": "No-key travel MCP for Claude Desktop, Codex-style agents, Hermes, and other clients.",
+      "repository": {
+        "url": "https://github.com/forgemeshlabs/travel-assistant-mcp",
+        "source": "github"
+      },
+      "version": "0.2.6",
+      "icons": [
+        {
+          "src": "https://forgemesh.io/favicon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "1254x1254"
+          ]
+        }
+      ],
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@forgemeshlabs/travel-assistant-mcp",
+          "version": "0.2.6",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-26T13:45:15.97159Z",
+        "publishedAt": "2026-10-26T13:45:15.97159Z",
+        "updatedAt": "2026-10-26T13:45:15.97159Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.forgemeshlabs/utility-grid-mcp",
+      "description": "Discover and call 400+ practical APIs through seven MCP tools with free search and x402 payments.",
+      "title": "ForgeMesh Utility Grid MCP",
+      "repository": {
+        "url": "https://github.com/forgemeshlabs/utility-grid-mcp",
+        "source": "github"
+      },
+      "version": "0.1.8",
+      "websiteUrl": "https://x402.forgemesh.io",
+      "icons": [
+        {
+          "src": "https://forgemesh.io/favicon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "1254x1254"
+          ]
+        }
+      ],
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@forgemeshlabs/utility-grid-mcp",
+          "version": "0.1.8",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Dedicated low-balance Base wallet private key for x402 USDC micropayments. Only required for the 3 paid tools (call_endpoint, daily_402, agent_service_directory) \u2014 the 3 discovery tools work without it. Never use your primary wallet.",
+              "format": "string",
+              "isSecret": true,
+              "name": "WALLET_PRIVATE_KEY"
+            },
+            {
+              "description": "Utility Grid API origin override. Defaults to https://x402.forgemesh.io.",
+              "format": "string",
+              "name": "UTILITY_GRID_BASE_URL"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-02T02:39:40.095665Z",
+        "publishedAt": "2026-11-02T02:39:40.095665Z",
+        "updatedAt": "2026-11-02T02:39:40.095665Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.forgemeshlabs/voice-mcp",
+      "description": "Give Your Agent A Voice: x402 pay-per-call speech with 20 voices, 10 personas, 31 languages.",
+      "repository": {
+        "url": "https://github.com/forgemeshlabs/voice-mcp",
+        "source": "github"
+      },
+      "version": "0.2.7",
+      "websiteUrl": "https://voice.forgemesh.io",
+      "icons": [
+        {
+          "src": "https://forgemesh.io/favicon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "1254x1254"
+          ]
+        }
+      ],
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@forgemeshlabs/voice-mcp",
+          "version": "0.2.7",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-02T02:39:24.403891Z",
+        "publishedAt": "2026-11-02T02:39:24.403891Z",
+        "updatedAt": "2026-11-02T02:39:24.403891Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.forgemeshlabs/x402-ads-mcp",
+      "description": "x402 ad recommendations, intent analytics, and machine-commerce demand reports.",
+      "repository": {
+        "url": "https://github.com/forgemeshlabs/x402-ads-mcp",
+        "source": "github"
+      },
+      "version": "0.2.6",
+      "icons": [
+        {
+          "src": "https://forgemesh.io/favicon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "1254x1254"
+          ]
+        }
+      ],
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@forgemeshlabs/x402-ads-mcp",
+          "version": "0.2.6",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Optional dedicated low-balance Base wallet private key for settling paid x402 analytics calls. Without it, paid tools return the x402 payment challenge instead of settling.",
+              "format": "string",
+              "isSecret": true,
+              "name": "WALLET_PRIVATE_KEY"
+            },
+            {
+              "description": "Optional publisher key from ads.forgemesh.io. Makes get_intent_report free for your registered services.",
+              "format": "string",
+              "isSecret": true,
+              "name": "X402_ADS_PUBLISHER_KEY"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-02T02:39:22.996559Z",
+        "publishedAt": "2026-11-02T02:39:22.996559Z",
+        "updatedAt": "2026-11-02T02:39:22.996559Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.forgemeshlabs/x402-notary-mcp",
+      "description": "Cryptographic receipts for AI outputs on Base or Solana via x402.",
+      "title": "x402 Notary MCP",
+      "repository": {
+        "url": "https://github.com/forgemeshlabs/x402-notary-mcp",
+        "source": "github"
+      },
+      "version": "0.1.12",
+      "websiteUrl": "https://notary.forgemesh.io",
+      "icons": [
+        {
+          "src": "https://forgemesh.io/favicon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "1254x1254"
+          ]
+        }
+      ],
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@forgemeshlabs/x402-notary-mcp",
+          "version": "0.1.12",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Dedicated low-balance Base wallet private key for x402 USDC micropayments. Optional \u2014 verification tools work without it. Never use your primary wallet.",
+              "format": "string",
+              "isSecret": true,
+              "name": "WALLET_PRIVATE_KEY"
+            },
+            {
+              "description": "Payment rail: base or solana. Defaults to base, or solana when NOTARY_BASE_URL contains notary-solana.",
+              "format": "string",
+              "name": "NOTARY_RAIL"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-02T02:39:41.643617Z",
+        "publishedAt": "2026-11-02T02:39:41.643617Z",
+        "updatedAt": "2026-11-02T02:39:41.643617Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.forgemeshlabs/x402-scan-mcp",
+      "description": "x402 Endpoint Scanner \u2014 a free local health probe for x402 paid endpoints as an MCP server.",
+      "repository": {
+        "url": "https://github.com/forgemeshlabs/x402-scan-mcp",
+        "source": "github"
+      },
+      "version": "0.1.9",
+      "icons": [
+        {
+          "src": "https://forgemesh.io/favicon.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "1254x1254"
+          ]
+        }
+      ],
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@forgemeshlabs/x402-scan-mcp",
+          "version": "0.1.9",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-02T02:39:43.232468Z",
+        "publishedAt": "2026-11-02T02:39:43.232468Z",
+        "updatedAt": "2026-11-02T02:39:43.232468Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.forgeopslabs/appstore-mcp",
+      "description": "MCP server for the Apple App Store Connect API - 114 annotated tools, optional read-only mode.",
+      "title": "App Store Connect",
+      "repository": {
+        "url": "https://github.com/forgeopslabs/appstore-mcp",
+        "source": "github"
+      },
+      "version": "0.3.1",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/forgeopslabs/appstore-mcp/releases/download/v0.3.1/appstore-mcp.mcpb",
+          "fileSha256": "1fa5828df5b9750302cdee4c081c0a84b2a66fd740e76a1e5e9c737801f93409",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "App Store Connect issuer UUID (Users and Access -> Integrations).",
+              "isRequired": true,
+              "format": "string",
+              "name": "ASC_ISSUER_ID"
+            },
+            {
+              "description": "The App Store Connect API key's Key ID.",
+              "isRequired": true,
+              "format": "string",
+              "name": "ASC_KEY_ID"
+            },
+            {
+              "description": "Path to the downloaded .p8 private key (or use ASC_PRIVATE_KEY for inline PEM).",
+              "format": "string",
+              "name": "ASC_PRIVATE_KEY_PATH"
+            },
+            {
+              "description": "Inline .p8 PEM contents (alternative to ASC_PRIVATE_KEY_PATH).",
+              "format": "string",
+              "isSecret": true,
+              "name": "ASC_PRIVATE_KEY"
+            },
+            {
+              "description": "Set to 1 to serve only tools that cannot modify the account.",
+              "format": "string",
+              "name": "ASC_READ_ONLY"
+            },
+            {
+              "description": "Comma-separated tool groups to serve (e.g. 'core' or 'testflight,provisioning'). Defaults to all.",
+              "format": "string",
+              "name": "ASC_TOOLS"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-06T11:33:57.122836Z",
+        "publishedAt": "2026-08-06T11:33:57.122836Z",
+        "updatedAt": "2026-08-06T11:33:57.122836Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.forgeorbital/forge-ai-accountability",
+      "description": "Demo of Forge decision accountability on fictional Acme Mutual: signed, replayable records.",
+      "title": "Forge AI Accountability",
+      "version": "1.30.0",
+      "websiteUrl": "https://forgeorbital.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://demo.forgeorbital.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-02T17:07:57.369769Z",
+        "publishedAt": "2026-11-02T17:07:57.369769Z",
+        "updatedAt": "2026-11-02T17:07:57.369769Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.forgeprint/forgeprint",
+      "description": "Resolve a developer profile to exactly one project blueprint and return its CI-tested setup recipe.",
+      "title": "Forgeprint",
+      "repository": {
+        "url": "https://github.com/forgeprint/forgeprint",
+        "source": "github"
+      },
+      "version": "0.4.5",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "forgeprint-mcp",
+          "version": "0.4.5",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-06T04:57:19.327104Z",
+        "publishedAt": "2026-10-06T04:57:19.327104Z",
+        "updatedAt": "2026-10-06T04:57:19.327104Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.forkflux/forkflux-mcp",
+      "description": "Self-hosted multi-agent collaboration and audit layer for AI-assisted engineering teams",
+      "repository": {
+        "url": "https://github.com/forkflux/forkflux",
+        "source": "github",
+        "subfolder": "packages/mcp"
+      },
+      "version": "0.6.0",
+      "packages": [
+        {
+          "registryType": "pypi",
+          "identifier": "forkflux-mcp",
+          "version": "0.6.0",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Your API key for the service",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "FORKFLUX_API_KEY"
+            },
+            {
+              "description": "Your API URL for the service. Defaults to http://localhost:8000/api/v1 if not set.",
+              "format": "string",
+              "name": "FORKFLUX_API_URL"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-01T17:58:56.492722Z",
+        "publishedAt": "2026-08-01T17:58:56.492722Z",
+        "updatedAt": "2026-08-01T17:58:56.492722Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.formbaseso/formbase-mcp",
+      "description": "Collect verified customer information with one request",
+      "title": "formbase",
+      "repository": {
+        "url": "https://github.com/formbaseso/formbase-mcp",
+        "source": "github"
+      },
+      "version": "1.0.2",
+      "websiteUrl": "https://formbase.so",
+      "icons": [
+        {
+          "src": "https://formbase.so/assets/logo-light.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "256x256"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.formbase.so/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-03T10:39:12.311446Z",
+        "publishedAt": "2026-10-03T10:39:12.311446Z",
+        "updatedAt": "2026-10-03T10:39:12.311446Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.formfeed-dev/formfeed",
+      "description": "Render PDFs and images from templates, validate data and convert Office files to PDF.",
+      "title": "Formfeed",
+      "repository": {
+        "url": "https://github.com/formfeed-dev/formfeed",
+        "source": "github",
+        "subfolder": "packages/mcp"
+      },
+      "version": "0.3.23",
+      "websiteUrl": "https://docs.formfeed.dev/integrations/mcp",
+      "icons": [
+        {
+          "src": "https://formfeed.dev/favicon.svg",
+          "mimeType": "image/svg+xml"
+        },
+        {
+          "src": "https://formfeed.dev/brand/formfeed-512.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@formfeed/mcp",
+          "version": "0.3.23",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Formfeed API key: ff_test_\u2026 renders for free (with a test mark on the Free plan), ff_live_\u2026 consumes units. Without one, only validate_template with html and check_invoice work",
+              "isSecret": true,
+              "name": "FORMFEED_API_KEY"
+            },
+            {
+              "description": "API region of the workspace",
+              "default": "eu",
+              "choices": [
+                "eu",
+                "us"
+              ],
+              "name": "FORMFEED_REGION"
+            }
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.formfeed.dev/mcp",
+          "headers": [
+            {
+              "description": "Bearer followed by a Formfeed API key (ff_test_\u2026 or ff_live_\u2026); without it the client signs in with your Formfeed account (OAuth) and you choose the workspace",
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        },
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.formfeed.dev/mcp/{workspace_id}",
+          "variables": {
+            "workspace_id": {
+              "description": "Workspace id from the Formfeed app, for a connection that should work in another workspace than the one chosen at sign-in (OAuth)",
+              "isRequired": true
+            }
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-02T00:24:54.377599Z",
+        "publishedAt": "2026-11-02T00:24:54.377599Z",
+        "updatedAt": "2026-11-02T00:24:54.377599Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.formhaus-dev/formhaus",
+      "description": "Validate Formhaus form definitions and simulate multi-step paths against the real engine.",
+      "title": "Formhaus",
+      "repository": {
+        "url": "https://github.com/formhaus-dev/formhaus",
+        "source": "github",
+        "subfolder": "packages/mcp"
+      },
+      "version": "0.15.3",
+      "websiteUrl": "https://formhaus.dev/guide/mcp.html",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@formhaus/mcp",
+          "version": "0.15.3",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-02T20:11:32.250603Z",
+        "publishedAt": "2026-11-02T20:11:32.250603Z",
+        "updatedAt": "2026-11-02T20:11:32.250603Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.formray/tachyon",
+      "description": "Read-only NVIDIA GPU monitor: bottlenecks, VRAM forecast, crash diagnosis, pre-render check, jobs.",
+      "title": "Tachyon GPU monitor",
+      "repository": {
+        "url": "https://github.com/formray/tachyon",
+        "source": "github"
+      },
+      "version": "1.2.0",
+      "websiteUrl": "https://github.com/formray/tachyon",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/formray/tachyon/releases/download/v1.2.0/tachyon-1.2.0-windows-x64.mcpb",
+          "version": "1.2.0",
+          "fileSha256": "f37a87a4200f4cd33f0caf8e641ba64d87cf3d958c923d4493245257143bb59e",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-29T09:04:23.684166Z",
+        "publishedAt": "2026-10-29T09:04:23.684166Z",
+        "updatedAt": "2026-10-29T09:04:23.684166Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.formstep/formstep-mcp",
+      "description": "Request information without the back-and-forth",
+      "title": "Formstep",
+      "repository": {
+        "url": "https://github.com/formstep/formstep-mcp",
+        "source": "github"
+      },
+      "version": "1.2.1",
+      "websiteUrl": "https://formstep.io",
+      "icons": [
+        {
+          "src": "https://formstep.io/assets/logo-light.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "256x256"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.formstep.io/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-01T09:18:54.243787Z",
+        "publishedAt": "2026-11-01T09:18:54.243787Z",
+        "updatedAt": "2026-11-01T09:18:54.243787Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+      "name": "io.github.formulahendry/code-runner",
+      "description": "Code Runner MCP Server which can run code in various programming languages.",
+      "repository": {
+        "url": "https://github.com/formulahendry/mcp-server-code-runner",
+        "source": "github"
+      },
+      "version": "0.1.9",
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "mcp-server-code-runner",
+          "version": "0.1.8",
+          "transport": {
+            "type": "stdio"
+          }
+        },
+        {
+          "registryType": "oci",
+          "identifier": "docker.io/formulahendry/mcp-server-code-runner:0.1.8",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2025-09-25T12:04:21.598191Z",
+        "publishedAt": "2025-09-25T12:04:21.598191Z",
+        "updatedAt": "2025-09-25T12:04:21.598191Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+      "name": "io.github.formulahendry/mcp-server-mcp-registry",
+      "description": "MCP Server for MCP Registry to discover and search for available MCP servers in the registry",
+      "repository": {
+        "url": "https://github.com/formulahendry/mcp-server-mcp-registry",
+        "source": "github"
+      },
+      "version": "0.1.0",
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "mcp-server-mcp-registry",
+          "version": "0.1.0",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2025-09-14T07:16:07.571743Z",
+        "publishedAt": "2025-09-14T07:16:07.571743Z",
+        "updatedAt": "2025-09-14T07:16:07.571743Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+      "name": "io.github.formulahendry/spec-driven-development",
+      "description": "MCP Server that facilitates spec-driven development workflows, not just Vibe Coding.",
+      "repository": {
+        "url": "https://github.com/formulahendry/mcp-server-spec-driven-development",
+        "source": "github"
+      },
+      "version": "0.1.1",
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "mcp-server-spec-driven-development",
+          "version": "0.1.1",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2025-09-26T06:51:26.732082Z",
+        "publishedAt": "2025-09-26T06:51:26.732082Z",
+        "updatedAt": "2025-09-26T06:51:26.732082Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.fortuneflick/agentisend",
+      "description": "Email API for apps and AI agents: budgets per key, a kill switch, refusals that name the fix.",
+      "title": "AgentiSend",
+      "repository": {
+        "url": "https://github.com/fortuneflick/agentisend-claude-plugin",
+        "source": "github"
+      },
+      "version": "0.1.4",
+      "websiteUrl": "https://agentisend.com/docs/guides/mcp",
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "@agentisend/mcp-server",
+          "version": "0.1.4",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Your AgentiSend API key. Read from the environment only, never passed as an argument, because process arguments are visible to every other process on the machine.",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "AGENTISEND_API_KEY"
+            },
+            {
+              "description": "The hosted endpoint this launcher proxies to. Defaults to https://api.agentisend.com/mcp.",
+              "format": "string",
+              "default": "https://api.agentisend.com/mcp",
+              "name": "AGENTISEND_MCP_URL"
+            }
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.agentisend.com/mcp",
+          "headers": [
+            {
+              "description": "Bearer <your API key>. OAuth 2.1 reaches the same tools with the same ceilings.",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-31T00:31:30.732408Z",
+        "publishedAt": "2026-10-31T00:31:30.732408Z",
+        "updatedAt": "2026-10-31T00:31:30.732408Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.fortuneflick/postdashpro",
+      "description": "Social post scheduling for AI agents: queue or draft posts to 12 connected networks.",
+      "title": "PostDashPro",
+      "repository": {
+        "url": "https://github.com/fortuneflick/postdashpro-claude-plugin",
+        "source": "github"
+      },
+      "version": "1.3.0",
+      "websiteUrl": "https://postdashpro.com/guide",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://postdashpro.com/api/mcp",
+          "headers": [
+            {
+              "description": "Optional. Clients that support OAuth sign in instead; otherwise send Bearer <your PostDashPro API key>, created under Settings, API & Webhooks.",
+              "format": "string",
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-19T07:24:50.866501Z",
+        "publishedAt": "2026-09-19T07:24:50.866501Z",
+        "updatedAt": "2026-09-19T07:24:50.866501Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.fortunesayspump/nibgate",
+      "description": "x402 paid content and Nib Tips with pending holds, refunds, public ledger, pricing, and reputation.",
+      "repository": {
+        "url": "https://github.com/fortunesayspump/nibgate",
+        "source": "github"
+      },
+      "version": "0.2.14",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.nibgate.xyz/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-24T08:45:33.459048Z",
+        "publishedAt": "2026-10-24T08:45:33.459048Z",
+        "updatedAt": "2026-10-24T08:45:33.459048Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.forum-labs/payfetch",
+      "description": "x402 paying-fetch client for AI agents. Spending caps, approval, receipts. Non-custodial.",
+      "repository": {
+        "url": "https://github.com/forum-labs/payfetch",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@forum-labs/payfetch",
+          "version": "1.0.0",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "0x-hex EVM private key for a DEDICATED low-balance wallet. Set exactly ONE signer source.",
+              "format": "string",
+              "isSecret": true,
+              "name": "PAYFETCH_PRIVATE_KEY"
+            },
+            {
+              "description": "Path to a chmod-600 file holding a 0x-hex key (signer alt).",
+              "format": "string",
+              "name": "PAYFETCH_KEY_FILE"
+            },
+            {
+              "description": "Coinbase CDP server-wallet key id (YOUR account).",
+              "format": "string",
+              "isSecret": true,
+              "name": "PAYFETCH_CDP_API_KEY_ID"
+            },
+            {
+              "description": "Coinbase CDP API key secret.",
+              "format": "string",
+              "isSecret": true,
+              "name": "PAYFETCH_CDP_API_KEY_SECRET"
+            },
+            {
+              "description": "Coinbase CDP wallet secret.",
+              "format": "string",
+              "isSecret": true,
+              "name": "PAYFETCH_CDP_WALLET_SECRET"
+            },
+            {
+              "description": "Optional named CDP EVM account.",
+              "format": "string",
+              "name": "PAYFETCH_CDP_ACCOUNT_NAME"
+            },
+            {
+              "description": "Ledger/state/config root. Default ~/.payfetch.",
+              "format": "string",
+              "name": "PAYFETCH_DATA_DIR"
+            },
+            {
+              "description": "Any value -> receipts test:true, Base mainnet refused (Sepolia only).",
+              "format": "string",
+              "name": "PAYFETCH_TEST_MODE"
+            },
+            {
+              "description": "Set to 1 to grant approval authority (never with a queue-capable mode).",
+              "format": "string",
+              "name": "PAYFETCH_APPROVER"
+            },
+            {
+              "description": "Optional via= attribution slug sent on guard calls only.",
+              "format": "string",
+              "name": "PAYFETCH_VIA"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-06T18:30:03.440542Z",
+        "publishedAt": "2026-07-06T18:30:03.440542Z",
+        "updatedAt": "2026-07-06T18:30:03.440542Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.foster-ops/tcmb-exchange-rates",
+      "description": "Unofficial access to CBRT/TCMB daily exchange rates: latest, history since 1996, conversion.",
+      "title": "T\u00fcrkiye Central Bank (TCMB) Exchange Rates",
+      "version": "1.0.0",
+      "websiteUrl": "https://foster-mcp.esakiz.workers.dev/llms.txt",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://foster-mcp.esakiz.workers.dev/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-28T20:57:32.350717Z",
+        "publishedAt": "2026-10-28T20:57:32.350717Z",
+        "updatedAt": "2026-10-28T20:57:32.350717Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.foster-ops/turkey-business-calendar",
+      "description": "T\u00fcrkiye public holidays (incl. half-day eves, Diyanet dates) and business-day math, 2022\u20132035.",
+      "title": "T\u00fcrkiye Business Days & Public Holidays",
+      "version": "1.0.0",
+      "websiteUrl": "https://foster-mcp.esakiz.workers.dev/llms.txt",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://foster-mcp.esakiz.workers.dev/calendar/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-28T21:38:01.78414Z",
+        "publishedAt": "2026-10-28T21:38:01.78414Z",
+        "updatedAt": "2026-10-28T21:38:01.78414Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.foster-ops/turkey-identifier-validation",
+      "description": "Checksum validation of Turkish IBANs, tax numbers (VKN) and national IDs (TCKN). Nothing stored.",
+      "title": "Turkish IBAN, Tax Number & National ID Validation",
+      "version": "1.0.0",
+      "websiteUrl": "https://foster-mcp.esakiz.workers.dev/llms.txt",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://foster-mcp.esakiz.workers.dev/validate/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-28T21:55:40.151366Z",
+        "publishedAt": "2026-10-28T21:55:40.151366Z",
+        "updatedAt": "2026-10-28T21:55:40.151366Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.founder-OmniPA/unboxapi",
+      "description": "REST-to-MCP for UK hospitality. Safety proxy: circuit-breakers, rate limits, whitelists. Apache 2.0.",
+      "title": "UnboxAPI \u2014 Hospitality Reservation MCP Server",
+      "version": "0.1.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://unboxapi.pro/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-05-27T11:05:18.805528Z",
+        "publishedAt": "2026-05-27T11:05:18.805528Z",
+        "updatedAt": "2026-05-27T11:05:18.805528Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.founder-ship-it/slipmark",
+      "description": "Record AI agent verdicts bound to file hashes; refuse ones whose files or instructions changed.",
+      "title": "Slipmark",
+      "repository": {
+        "url": "https://github.com/founder-ship-it/Slipmark",
+        "source": "github"
+      },
+      "version": "0.6.2",
+      "websiteUrl": "https://www.replyintelligencegroup.co.uk/products/slipmark",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "slipmark",
+          "version": "0.6.2",
+          "transport": {
+            "type": "stdio"
+          },
+          "packageArguments": [
+            {
+              "description": "Runs the MCP server",
+              "type": "positional",
+              "value": "mcp"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-02T11:55:48.532925Z",
+        "publishedAt": "2026-11-02T11:55:48.532925Z",
+        "updatedAt": "2026-11-02T11:55:48.532925Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.founders-loralabs/premiss",
+      "description": "Create Python strategies and backtest crypto, stocks and ETFs in Claude. Premiss account required.",
+      "title": "Premiss",
+      "version": "0.2.1",
+      "websiteUrl": "https://app.premissai.com/integrations",
+      "icons": [
+        {
+          "src": "https://raw.githubusercontent.com/founders-loralabs/premiss-claude-plugin/main/assets/premiss.png",
+          "mimeType": "image/png"
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://app.premissai.com/api/mcp/claude"
+        }
+      ],
+      "_meta": {
+        "io.modelcontextprotocol.registry/publisher-provided": {
+          "authentication": "OAuth with a Premiss account and explicit workspace consent.",
+          "contactEmail": "founders@loralabs.co",
+          "description": "Turn a trading idea into a strategy you can test and improve. Create and edit custom Python strategies, explore Premiss-supported crypto, stock and ETF markets, run historical backtests, inspect trades and equity curves, and compare results with buy and hold. Save strategies and research notes in your private Premiss workspace. This endpoint supports Claude and Claude Code. Available history and timeframes vary by market. Historical results do not predict future returns.",
+          "privacyPolicyUrl": "https://premissai.com/legal/privacy",
+          "supportUrl": "https://app.premissai.com/support",
+          "supportedClients": [
+            "Claude",
+            "Claude Code"
+          ]
+        }
+      }
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-03T17:03:43.707188Z",
+        "publishedAt": "2026-10-03T17:03:43.707188Z",
+        "updatedAt": "2026-10-03T17:03:43.707188Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.foundrole/jobs-mcp-proxy",
+      "description": "AI job search and tracker: jobs near you and remote, pay vs market, ghost-job risk, resume checker.",
+      "title": "FoundRole \u2014 AI Job Search & Application Tracker MCP for Claude & ChatGPT",
+      "repository": {
+        "url": "https://github.com/foundrole/jobs-mcp-proxy",
+        "source": "github"
+      },
+      "version": "1.1.19",
+      "websiteUrl": "https://www.foundrole.com/ai-search-mcp",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@foundrole/ai-job-search-mcp",
+          "version": "1.1.19",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.foundrole.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-31T20:10:38.627686Z",
+        "publishedAt": "2026-10-31T20:10:38.627686Z",
+        "updatedAt": "2026-10-31T20:10:38.627686Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.fouomene/mcp-server-geodata-placefinder",
+      "description": "MCP GeoData Placefinder: search places, reverse geocode, and find nearby locations.",
+      "repository": {
+        "url": "https://github.com/fouomene/geodataplacefinder",
+        "source": "github",
+        "subfolder": "mcp-server"
+      },
+      "version": "2.0.0",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "mcp-server-geodata-placefinder",
+          "version": "2.0.0",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-05-25T01:09:32.041879Z",
+        "publishedAt": "2026-05-25T01:09:32.041879Z",
+        "updatedAt": "2026-05-25T01:09:32.041879Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.fourleafai/clover-public",
+      "description": "Job search and interview prep MCP. 15 tools, OAuth 2.1, cross-LLM. four-leaf.ai.",
+      "repository": {
+        "url": "https://github.com/fourleafai/clover-public",
+        "source": "github"
+      },
+      "version": "1.1.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://four-leaf.ai/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-21T19:09:32.67749Z",
+        "publishedAt": "2026-09-21T19:09:32.67749Z",
+        "updatedAt": "2026-09-21T19:09:32.67749Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.foxdavidson/property-mortgage-mcp",
+      "description": "UK mortgage calculators: stamp duty, MCOB 3A HNW qualification, and bridging loan cost.",
+      "repository": {
+        "url": "https://github.com/foxdavidson/property-mortgage-mcp",
+        "source": "github"
+      },
+      "version": "0.2.0",
+      "websiteUrl": "https://www.foxdavidson.co.uk/calculators/",
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "@foxdavidson/property-mortgage-mcp",
+          "version": "0.2.0",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://fd-property-mortgage-mcp.fdcommercial-uk.workers.dev/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-06-09T05:38:11.589843Z",
+        "publishedAt": "2026-06-09T05:38:11.589843Z",
+        "updatedAt": "2026-06-09T05:38:11.589843Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-10-17/server.schema.json",
+      "name": "io.github.foxintheloop/uptier",
+      "description": "MCP-powered To-Do application with intelligent task prioritization",
+      "repository": {
+        "url": "https://github.com/foxintheloop/UpTier",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@foxintheloop/uptier-mcp",
+          "version": "1.0.0",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2025-12-15T19:17:38.481374Z",
+        "publishedAt": "2025-12-15T19:17:38.481374Z",
+        "updatedAt": "2025-12-15T19:17:38.481374Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-10-17/server.schema.json",
+      "name": "io.github.foxitsoftware/foxit-pdf-api-mcp-server",
+      "description": "MCP server that exposes Foxit PDF API capabilities via stdio.",
+      "title": "Foxit PDF API MCP Server",
+      "repository": {
+        "url": "https://github.com/foxitsoftware/foxit-pdf-api-mcp-server",
+        "source": "github"
+      },
+      "version": "0.2.4",
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "@foxitsoftware/foxit-pdf-api-mcp-server",
+          "version": "0.2.3",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Foxit PDF Services host, e.g. https://na1.fusion.foxit.com/pdf-services",
+              "isRequired": true,
+              "name": "FOXIT_CLOUD_API_HOST"
+            },
+            {
+              "description": "Client ID for Foxit PDF API from foxit developer portal(https://developer-api.foxit.com/)",
+              "isRequired": true,
+              "name": "FOXIT_CLOUD_API_CLIENT_ID"
+            },
+            {
+              "description": "Client secret for Foxit PDF API from foxit developer portal(https://developer-api.foxit.com/)",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "FOXIT_CLOUD_API_CLIENT_SECRET"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2025-12-16T06:18:50.500818Z",
+        "publishedAt": "2025-12-16T06:18:50.500818Z",
+        "updatedAt": "2025-12-16T06:18:50.500818Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-10-17/server.schema.json",
+      "name": "io.github.foxxx009/x402-tools-mcp",
+      "description": "Pay-per-call research tools for AI agents, paid via x402 USDC. Remote MCP, one free tool.",
+      "title": "x402 Tools",
+      "repository": {
+        "url": "https://github.com/foxxx009/x402-tools-mcp",
+        "source": "github"
+      },
+      "version": "1.1.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://fitze-x402-seller.app.workbuddy.host/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-22T11:20:04.434429Z",
+        "publishedAt": "2026-09-22T11:20:04.434429Z",
+        "updatedAt": "2026-09-22T11:20:04.434429Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.fpetitit/mcpcheckup",
+      "description": "Scans remote MCP servers for protocol, security, and TLS issues; exposes scan tools via MCP.",
+      "repository": {
+        "url": "https://github.com/fpetitit/mcpcheck",
+        "source": "github"
+      },
+      "version": "0.1.0",
+      "websiteUrl": "https://mcpcheckup.xyz",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcpcheckup.xyz/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-06-21T15:06:58.233715Z",
+        "publishedAt": "2026-06-21T15:06:58.233715Z",
+        "updatedAt": "2026-06-21T15:06:58.233715Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.fpointerdev/codey-cms",
+      "description": "Discover, evaluate, install, and validate generated websites for the self-hosted CodeY CMS.",
+      "title": "CodeY CMS",
+      "repository": {
+        "url": "https://github.com/fpointerdev/codey-cms",
+        "source": "github",
+        "id": "1286093970",
+        "subfolder": "integrations/codey-cms-mcp"
+      },
+      "version": "0.1.1",
+      "websiteUrl": "https://usecodey.com/cms",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "codey-cms-mcp",
+          "version": "0.1.1",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-04T20:37:16.666727Z",
+        "publishedAt": "2026-09-04T20:37:16.666727Z",
+        "updatedAt": "2026-09-04T20:37:16.666727Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.fr0ster/mcp-abap-adt",
+      "description": "MCP server for SAP ABAP ADT over HTTP, RFC or SNC: repository analysis and RAP/classic ABAP CRUD",
+      "repository": {
+        "url": "https://github.com/fr0ster/mcp-abap-adt",
+        "source": "github"
+      },
+      "version": "23.1.0",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@mcp-abap-adt/core",
+          "version": "23.1.0",
+          "transport": {
+            "type": "stdio"
+          },
+          "packageArguments": [
+            {
+              "description": "Named destination: service-keys/<name>.json and sessions/<name>.env under AUTH_BROKER_PATH or the platform directory, read field by field. The working directory's .env is not loaded.",
+              "format": "string",
+              "type": "named",
+              "name": "--mcp"
+            }
+          ],
+          "environmentVariables": [
+            {
+              "description": "Path to the .env file that states the destination (the same as the --env-path argument). The file states SAP_URL and SAP_AUTH_TYPE (basic, snc or jwt); a jwt file also states SAP_GRANT_TYPE (authorization_code or none). Without this or --mcp, the server starts in tool-inspection-only mode: nothing is read from the working directory, and SAP_* variables in the process environment alone form no destination.",
+              "format": "string",
+              "placeholder": "/path/to/system.env",
+              "name": "MCP_ENV_PATH"
+            },
+            {
+              "description": "Base directory of service-keys/ and sessions/ for a named destination chosen with the --mcp argument (one directory; a list is not split). Default: ~/.config/mcp-abap-adt (Documents\\mcp-abap-adt on Windows).",
+              "format": "string",
+              "placeholder": "/path/to/mcp-abap-adt",
+              "name": "AUTH_BROKER_PATH"
+            },
+            {
+              "description": "Browser for a JWT login: chrome, edge, firefox, system, headless or none.",
+              "format": "string",
+              "default": "system",
+              "choices": [
+                "chrome",
+                "edge",
+                "firefox",
+                "system",
+                "headless",
+                "none"
+              ],
+              "name": "MCP_BROWSER"
+            },
+            {
+              "description": "Callback port of the JWT browser login, 1-65535.",
+              "format": "number",
+              "default": "61001",
+              "name": "MCP_BROWSER_AUTH_PORT"
+            },
+            {
+              "description": "Write a named destination's session to disk (sessions/<name>.env) instead of keeping it in memory.",
+              "format": "boolean",
+              "default": "false",
+              "name": "MCP_UNSAFE"
+            },
+            {
+              "description": "Connection type: http or rfc. SNC needs rfc (and the SAP NW RFC SDK).",
+              "format": "string",
+              "default": "http",
+              "choices": [
+                "http",
+                "rfc"
+              ],
+              "name": "SAP_CONNECTION_TYPE"
+            },
+            {
+              "description": "System type, required (here or as --system-type; no default, never guessed): the tools offered (e.g. Programs are onprem-only), the connector, and how the system's answers are read. Without it a destination does not start.",
+              "isRequired": true,
+              "format": "string",
+              "choices": [
+                "cloud",
+                "onprem",
+                "legacy"
+              ],
+              "name": "SAP_SYSTEM_TYPE"
+            },
+            {
+              "description": "Logon language (ISO code, e.g. 'en', 'de').",
+              "format": "string",
+              "default": "en",
+              "name": "SAP_LANGUAGE"
+            },
+            {
+              "description": "System context for on-prem create/update operations (system id).",
+              "format": "string",
+              "name": "SAP_MASTER_SYSTEM"
+            },
+            {
+              "description": "Responsible user for on-prem create/update operations.",
+              "format": "string",
+              "name": "SAP_RESPONSIBLE"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-03T08:42:28.265048Z",
+        "publishedAt": "2026-11-03T08:42:28.265048Z",
+        "updatedAt": "2026-11-03T08:42:28.265048Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.fr0ster/mcp-abap-adt-compact",
+      "description": "Compact MCP server for SAP ABAP ADT over HTTP, RFC or SNC: one tool per operation, object in args",
+      "repository": {
+        "url": "https://github.com/fr0ster/mcp-abap-adt",
+        "source": "github"
+      },
+      "version": "23.1.0",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@mcp-abap-adt/compact",
+          "version": "23.1.0",
+          "transport": {
+            "type": "stdio"
+          },
+          "packageArguments": [
+            {
+              "description": "Named destination: service-keys/<name>.json and sessions/<name>.env under AUTH_BROKER_PATH or the platform directory, read field by field. The working directory's .env is not loaded.",
+              "format": "string",
+              "type": "named",
+              "name": "--mcp"
+            }
+          ],
+          "environmentVariables": [
+            {
+              "description": "Path to the .env file that states the destination (the same as the --env-path argument). The file states SAP_URL and SAP_AUTH_TYPE (basic, snc or jwt); a jwt file also states SAP_GRANT_TYPE (authorization_code or none). Without this or --mcp, the server starts in tool-inspection-only mode: nothing is read from the working directory, and SAP_* variables in the process environment alone form no destination.",
+              "format": "string",
+              "placeholder": "/path/to/system.env",
+              "name": "MCP_ENV_PATH"
+            },
+            {
+              "description": "Base directory of service-keys/ and sessions/ for a named destination chosen with the --mcp argument (one directory; a list is not split). Default: ~/.config/mcp-abap-adt (Documents\\mcp-abap-adt on Windows).",
+              "format": "string",
+              "placeholder": "/path/to/mcp-abap-adt",
+              "name": "AUTH_BROKER_PATH"
+            },
+            {
+              "description": "Browser for a JWT login: chrome, edge, firefox, system, headless or none.",
+              "format": "string",
+              "default": "system",
+              "choices": [
+                "chrome",
+                "edge",
+                "firefox",
+                "system",
+                "headless",
+                "none"
+              ],
+              "name": "MCP_BROWSER"
+            },
+            {
+              "description": "Callback port of the JWT browser login, 1-65535.",
+              "format": "number",
+              "default": "61001",
+              "name": "MCP_BROWSER_AUTH_PORT"
+            },
+            {
+              "description": "Write a named destination's session to disk (sessions/<name>.env) instead of keeping it in memory.",
+              "format": "boolean",
+              "default": "false",
+              "name": "MCP_UNSAFE"
+            },
+            {
+              "description": "Connection type: http or rfc. SNC needs rfc (and the SAP NW RFC SDK).",
+              "format": "string",
+              "default": "http",
+              "choices": [
+                "http",
+                "rfc"
+              ],
+              "name": "SAP_CONNECTION_TYPE"
+            },
+            {
+              "description": "System type, required (here or as --system-type; no default, never guessed): the tools offered (e.g. Programs are onprem-only), the connector, and how the system's answers are read. Without it a destination does not start.",
+              "isRequired": true,
+              "format": "string",
+              "choices": [
+                "cloud",
+                "onprem",
+                "legacy"
+              ],
+              "name": "SAP_SYSTEM_TYPE"
+            },
+            {
+              "description": "Logon language (ISO code, e.g. 'en', 'de').",
+              "format": "string",
+              "default": "en",
+              "name": "SAP_LANGUAGE"
+            },
+            {
+              "description": "System context for on-prem create/update operations (system id).",
+              "format": "string",
+              "name": "SAP_MASTER_SYSTEM"
+            },
+            {
+              "description": "Responsible user for on-prem create/update operations.",
+              "format": "string",
+              "name": "SAP_RESPONSIBLE"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-03T08:42:32.563759Z",
+        "publishedAt": "2026-11-03T08:42:32.563759Z",
+        "updatedAt": "2026-11-03T08:42:32.563759Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.fr0ster/mcp-abap-adt-compact-http",
+      "description": "Compact MCP server for SAP ABAP ADT over Streamable HTTP: x-sap-* header credentials",
+      "repository": {
+        "url": "https://github.com/fr0ster/mcp-abap-adt",
+        "source": "github"
+      },
+      "version": "20.0.0",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@mcp-abap-adt/compact-http",
+          "version": "20.0.0",
+          "transport": {
+            "type": "streamable-http",
+            "url": "http://localhost:{MCP_HTTP_PORT}/mcp/stream/http",
+            "headers": [
+              {
+                "description": "The SAP system's URL, e.g. https://my-system.example.com.",
+                "isRequired": true,
+                "format": "string",
+                "name": "x-sap-url"
+              },
+              {
+                "description": "The SAP client (optional), e.g. 100.",
+                "format": "string",
+                "name": "x-sap-client"
+              },
+              {
+                "description": "The user of a basic logon, with x-sap-password.",
+                "format": "string",
+                "name": "x-sap-login"
+              },
+              {
+                "description": "The password of a basic logon, with x-sap-login.",
+                "format": "string",
+                "isSecret": true,
+                "name": "x-sap-password"
+              },
+              {
+                "description": "A token you hold, sent as a Bearer token (used as it is; the server cannot renew it). Instead of x-sap-login and x-sap-password.",
+                "format": "string",
+                "isSecret": true,
+                "name": "x-sap-jwt-token"
+              }
+            ]
+          },
+          "environmentVariables": [
+            {
+              "description": "System type, required (here or as --system-type; no default, never guessed, no request header states it): the tools offered, the connector, and how the system's answers are read. Without it the server does not start.",
+              "isRequired": true,
+              "format": "string",
+              "choices": [
+                "cloud",
+                "onprem",
+                "legacy"
+              ],
+              "name": "SAP_SYSTEM_TYPE"
+            },
+            {
+              "description": "Host to listen on: 127.0.0.1 (this machine only) or 0.0.0.0 (every interface).",
+              "format": "string",
+              "default": "127.0.0.1",
+              "name": "MCP_HTTP_HOST"
+            },
+            {
+              "description": "Port to listen on, 1-65535.",
+              "format": "number",
+              "default": "3000",
+              "name": "MCP_HTTP_PORT"
+            },
+            {
+              "description": "System context for on-prem create/update operations (system id), when no x-sap-master-system header states it.",
+              "format": "string",
+              "name": "SAP_MASTER_SYSTEM"
+            },
+            {
+              "description": "Responsible user for on-prem create/update operations, when no x-sap-responsible header (or x-sap-login) states it.",
+              "format": "string",
+              "name": "SAP_RESPONSIBLE"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-22T18:07:14.964949Z",
+        "publishedAt": "2026-10-22T18:07:14.964949Z",
+        "updatedAt": "2026-10-22T18:07:14.964949Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.fr0ster/mcp-abap-adt-compact-http-ro",
+      "description": "Read-only compact MCP server for SAP ABAP ADT over Streamable HTTP: x-sap-* headers",
+      "repository": {
+        "url": "https://github.com/fr0ster/mcp-abap-adt",
+        "source": "github"
+      },
+      "version": "20.0.0",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@mcp-abap-adt/compact-http-ro",
+          "version": "20.0.0",
+          "transport": {
+            "type": "streamable-http",
+            "url": "http://localhost:{MCP_HTTP_PORT}/mcp/stream/http",
+            "headers": [
+              {
+                "description": "The SAP system's URL, e.g. https://my-system.example.com.",
+                "isRequired": true,
+                "format": "string",
+                "name": "x-sap-url"
+              },
+              {
+                "description": "The SAP client (optional), e.g. 100.",
+                "format": "string",
+                "name": "x-sap-client"
+              },
+              {
+                "description": "The user of a basic logon, with x-sap-password.",
+                "format": "string",
+                "name": "x-sap-login"
+              },
+              {
+                "description": "The password of a basic logon, with x-sap-login.",
+                "format": "string",
+                "isSecret": true,
+                "name": "x-sap-password"
+              },
+              {
+                "description": "A token you hold, sent as a Bearer token (used as it is; the server cannot renew it). Instead of x-sap-login and x-sap-password.",
+                "format": "string",
+                "isSecret": true,
+                "name": "x-sap-jwt-token"
+              }
+            ]
+          },
+          "environmentVariables": [
+            {
+              "description": "System type, required (here or as --system-type; no default, never guessed, no request header states it): the tools offered, the connector, and how the system's answers are read. Without it the server does not start.",
+              "isRequired": true,
+              "format": "string",
+              "choices": [
+                "cloud",
+                "onprem",
+                "legacy"
+              ],
+              "name": "SAP_SYSTEM_TYPE"
+            },
+            {
+              "description": "Host to listen on: 127.0.0.1 (this machine only) or 0.0.0.0 (every interface).",
+              "format": "string",
+              "default": "127.0.0.1",
+              "name": "MCP_HTTP_HOST"
+            },
+            {
+              "description": "Port to listen on, 1-65535.",
+              "format": "number",
+              "default": "3000",
+              "name": "MCP_HTTP_PORT"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-22T18:07:21.645334Z",
+        "publishedAt": "2026-10-22T18:07:21.645334Z",
+        "updatedAt": "2026-10-22T18:07:21.645334Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.fr0ster/mcp-abap-adt-compact-ro",
+      "description": "Read-only compact MCP server for SAP ABAP ADT: the compact tools that change nothing",
+      "repository": {
+        "url": "https://github.com/fr0ster/mcp-abap-adt",
+        "source": "github"
+      },
+      "version": "20.0.0",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@mcp-abap-adt/compact-ro",
+          "version": "20.0.0",
+          "transport": {
+            "type": "stdio"
+          },
+          "packageArguments": [
+            {
+              "description": "Named destination: service-keys/<name>.json and sessions/<name>.env under AUTH_BROKER_PATH or the platform directory, read field by field. The working directory's .env is not loaded.",
+              "format": "string",
+              "type": "named",
+              "name": "--mcp"
+            }
+          ],
+          "environmentVariables": [
+            {
+              "description": "Path to the .env file that states the destination (the same as the --env-path argument). The file states SAP_URL and SAP_AUTH_TYPE (basic, snc or jwt); a jwt file also states SAP_GRANT_TYPE (authorization_code or none). Without this or --mcp, the server starts in tool-inspection-only mode: nothing is read from the working directory, and SAP_* variables in the process environment alone form no destination.",
+              "format": "string",
+              "placeholder": "/path/to/system.env",
+              "name": "MCP_ENV_PATH"
+            },
+            {
+              "description": "Base directory of service-keys/ and sessions/ for a named destination chosen with the --mcp argument (one directory; a list is not split). Default: ~/.config/mcp-abap-adt (Documents\\mcp-abap-adt on Windows).",
+              "format": "string",
+              "placeholder": "/path/to/mcp-abap-adt",
+              "name": "AUTH_BROKER_PATH"
+            },
+            {
+              "description": "Browser for a JWT login: chrome, edge, firefox, system, headless or none.",
+              "format": "string",
+              "default": "system",
+              "choices": [
+                "chrome",
+                "edge",
+                "firefox",
+                "system",
+                "headless",
+                "none"
+              ],
+              "name": "MCP_BROWSER"
+            },
+            {
+              "description": "Callback port of the JWT browser login, 1-65535.",
+              "format": "number",
+              "default": "61001",
+              "name": "MCP_BROWSER_AUTH_PORT"
+            },
+            {
+              "description": "Write a named destination's session to disk (sessions/<name>.env) instead of keeping it in memory.",
+              "format": "boolean",
+              "default": "false",
+              "name": "MCP_UNSAFE"
+            },
+            {
+              "description": "Connection type: http or rfc. SNC needs rfc (and the SAP NW RFC SDK).",
+              "format": "string",
+              "default": "http",
+              "choices": [
+                "http",
+                "rfc"
+              ],
+              "name": "SAP_CONNECTION_TYPE"
+            },
+            {
+              "description": "System type, required (here or as --system-type; no default, never guessed): the tools offered (e.g. Programs are onprem-only), the connector, and how the system's answers are read. Without it a destination does not start.",
+              "isRequired": true,
+              "format": "string",
+              "choices": [
+                "cloud",
+                "onprem",
+                "legacy"
+              ],
+              "name": "SAP_SYSTEM_TYPE"
+            },
+            {
+              "description": "Logon language (ISO code, e.g. 'en', 'de').",
+              "format": "string",
+              "default": "en",
+              "name": "SAP_LANGUAGE"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-22T18:07:06.259609Z",
+        "publishedAt": "2026-10-22T18:07:06.259609Z",
+        "updatedAt": "2026-10-22T18:07:06.259609Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.fr0ster/mcp-abap-adt-compact-sse",
+      "description": "Compact MCP server for SAP ABAP ADT over HTTP+SSE: x-sap-* header credentials",
+      "repository": {
+        "url": "https://github.com/fr0ster/mcp-abap-adt",
+        "source": "github"
+      },
+      "version": "20.0.0",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@mcp-abap-adt/compact-sse",
+          "version": "20.0.0",
+          "transport": {
+            "type": "sse",
+            "url": "http://localhost:{MCP_SSE_PORT}/sse",
+            "headers": [
+              {
+                "description": "The SAP system's URL, e.g. https://my-system.example.com.",
+                "isRequired": true,
+                "format": "string",
+                "name": "x-sap-url"
+              },
+              {
+                "description": "The SAP client (optional), e.g. 100.",
+                "format": "string",
+                "name": "x-sap-client"
+              },
+              {
+                "description": "The user of a basic logon, with x-sap-password.",
+                "format": "string",
+                "name": "x-sap-login"
+              },
+              {
+                "description": "The password of a basic logon, with x-sap-login.",
+                "format": "string",
+                "isSecret": true,
+                "name": "x-sap-password"
+              },
+              {
+                "description": "A token you hold, sent as a Bearer token (used as it is; the server cannot renew it). Instead of x-sap-login and x-sap-password.",
+                "format": "string",
+                "isSecret": true,
+                "name": "x-sap-jwt-token"
+              }
+            ]
+          },
+          "environmentVariables": [
+            {
+              "description": "System type, required (here or as --system-type; no default, never guessed, no request header states it): the tools offered, the connector, and how the system's answers are read. Without it the server does not start.",
+              "isRequired": true,
+              "format": "string",
+              "choices": [
+                "cloud",
+                "onprem",
+                "legacy"
+              ],
+              "name": "SAP_SYSTEM_TYPE"
+            },
+            {
+              "description": "Host to listen on: 127.0.0.1 (this machine only) or 0.0.0.0 (every interface).",
+              "format": "string",
+              "default": "127.0.0.1",
+              "name": "MCP_SSE_HOST"
+            },
+            {
+              "description": "Port to listen on, 1-65535.",
+              "format": "number",
+              "default": "3001",
+              "name": "MCP_SSE_PORT"
+            },
+            {
+              "description": "System context for on-prem create/update operations (system id), when no x-sap-master-system header states it.",
+              "format": "string",
+              "name": "SAP_MASTER_SYSTEM"
+            },
+            {
+              "description": "Responsible user for on-prem create/update operations, when no x-sap-responsible header (or x-sap-login) states it.",
+              "format": "string",
+              "name": "SAP_RESPONSIBLE"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-22T18:07:28.887519Z",
+        "publishedAt": "2026-10-22T18:07:28.887519Z",
+        "updatedAt": "2026-10-22T18:07:28.887519Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.fr0ster/mcp-abap-adt-compact-sse-ro",
+      "description": "Read-only compact MCP server for SAP ABAP ADT over HTTP+SSE: x-sap-* header credentials",
+      "repository": {
+        "url": "https://github.com/fr0ster/mcp-abap-adt",
+        "source": "github"
+      },
+      "version": "20.0.0",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@mcp-abap-adt/compact-sse-ro",
+          "version": "20.0.0",
+          "transport": {
+            "type": "sse",
+            "url": "http://localhost:{MCP_SSE_PORT}/sse",
+            "headers": [
+              {
+                "description": "The SAP system's URL, e.g. https://my-system.example.com.",
+                "isRequired": true,
+                "format": "string",
+                "name": "x-sap-url"
+              },
+              {
+                "description": "The SAP client (optional), e.g. 100.",
+                "format": "string",
+                "name": "x-sap-client"
+              },
+              {
+                "description": "The user of a basic logon, with x-sap-password.",
+                "format": "string",
+                "name": "x-sap-login"
+              },
+              {
+                "description": "The password of a basic logon, with x-sap-login.",
+                "format": "string",
+                "isSecret": true,
+                "name": "x-sap-password"
+              },
+              {
+                "description": "A token you hold, sent as a Bearer token (used as it is; the server cannot renew it). Instead of x-sap-login and x-sap-password.",
+                "format": "string",
+                "isSecret": true,
+                "name": "x-sap-jwt-token"
+              }
+            ]
+          },
+          "environmentVariables": [
+            {
+              "description": "System type, required (here or as --system-type; no default, never guessed, no request header states it): the tools offered, the connector, and how the system's answers are read. Without it the server does not start.",
+              "isRequired": true,
+              "format": "string",
+              "choices": [
+                "cloud",
+                "onprem",
+                "legacy"
+              ],
+              "name": "SAP_SYSTEM_TYPE"
+            },
+            {
+              "description": "Host to listen on: 127.0.0.1 (this machine only) or 0.0.0.0 (every interface).",
+              "format": "string",
+              "default": "127.0.0.1",
+              "name": "MCP_SSE_HOST"
+            },
+            {
+              "description": "Port to listen on, 1-65535.",
+              "format": "number",
+              "default": "3001",
+              "name": "MCP_SSE_PORT"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-22T18:07:33.956053Z",
+        "publishedAt": "2026-10-22T18:07:33.956053Z",
+        "updatedAt": "2026-10-22T18:07:33.956053Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.fr0ster/mcp-abap-adt-http",
+      "description": "MCP server for SAP ABAP ADT over Streamable HTTP: credentials from x-sap-* headers per request",
+      "repository": {
+        "url": "https://github.com/fr0ster/mcp-abap-adt",
+        "source": "github"
+      },
+      "version": "20.0.0",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@mcp-abap-adt/http",
+          "version": "20.0.0",
+          "transport": {
+            "type": "streamable-http",
+            "url": "http://localhost:{MCP_HTTP_PORT}/mcp/stream/http",
+            "headers": [
+              {
+                "description": "The SAP system's URL, e.g. https://my-system.example.com.",
+                "isRequired": true,
+                "format": "string",
+                "name": "x-sap-url"
+              },
+              {
+                "description": "The SAP client (optional), e.g. 100.",
+                "format": "string",
+                "name": "x-sap-client"
+              },
+              {
+                "description": "The user of a basic logon, with x-sap-password.",
+                "format": "string",
+                "name": "x-sap-login"
+              },
+              {
+                "description": "The password of a basic logon, with x-sap-login.",
+                "format": "string",
+                "isSecret": true,
+                "name": "x-sap-password"
+              },
+              {
+                "description": "A token you hold, sent as a Bearer token (used as it is; the server cannot renew it). Instead of x-sap-login and x-sap-password.",
+                "format": "string",
+                "isSecret": true,
+                "name": "x-sap-jwt-token"
+              }
+            ]
+          },
+          "environmentVariables": [
+            {
+              "description": "System type, required (here or as --system-type; no default, never guessed, no request header states it): the tools offered, the connector, and how the system's answers are read. Without it the server does not start.",
+              "isRequired": true,
+              "format": "string",
+              "choices": [
+                "cloud",
+                "onprem",
+                "legacy"
+              ],
+              "name": "SAP_SYSTEM_TYPE"
+            },
+            {
+              "description": "Host to listen on: 127.0.0.1 (this machine only) or 0.0.0.0 (every interface).",
+              "format": "string",
+              "default": "127.0.0.1",
+              "name": "MCP_HTTP_HOST"
+            },
+            {
+              "description": "Port to listen on, 1-65535.",
+              "format": "number",
+              "default": "3000",
+              "name": "MCP_HTTP_PORT"
+            },
+            {
+              "description": "System context for on-prem create/update operations (system id), when no x-sap-master-system header states it.",
+              "format": "string",
+              "name": "SAP_MASTER_SYSTEM"
+            },
+            {
+              "description": "Responsible user for on-prem create/update operations, when no x-sap-responsible header (or x-sap-login) states it.",
+              "format": "string",
+              "name": "SAP_RESPONSIBLE"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-22T18:07:09.337516Z",
+        "publishedAt": "2026-10-22T18:07:09.337516Z",
+        "updatedAt": "2026-10-22T18:07:09.337516Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.fr0ster/mcp-abap-adt-http-ro",
+      "description": "Read-only MCP server for SAP ABAP ADT over Streamable HTTP: x-sap-* header credentials",
+      "repository": {
+        "url": "https://github.com/fr0ster/mcp-abap-adt",
+        "source": "github"
+      },
+      "version": "20.0.0",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@mcp-abap-adt/http-ro",
+          "version": "20.0.0",
+          "transport": {
+            "type": "streamable-http",
+            "url": "http://localhost:{MCP_HTTP_PORT}/mcp/stream/http",
+            "headers": [
+              {
+                "description": "The SAP system's URL, e.g. https://my-system.example.com.",
+                "isRequired": true,
+                "format": "string",
+                "name": "x-sap-url"
+              },
+              {
+                "description": "The SAP client (optional), e.g. 100.",
+                "format": "string",
+                "name": "x-sap-client"
+              },
+              {
+                "description": "The user of a basic logon, with x-sap-password.",
+                "format": "string",
+                "name": "x-sap-login"
+              },
+              {
+                "description": "The password of a basic logon, with x-sap-login.",
+                "format": "string",
+                "isSecret": true,
+                "name": "x-sap-password"
+              },
+              {
+                "description": "A token you hold, sent as a Bearer token (used as it is; the server cannot renew it). Instead of x-sap-login and x-sap-password.",
+                "format": "string",
+                "isSecret": true,
+                "name": "x-sap-jwt-token"
+              }
+            ]
+          },
+          "environmentVariables": [
+            {
+              "description": "System type, required (here or as --system-type; no default, never guessed, no request header states it): the tools offered, the connector, and how the system's answers are read. Without it the server does not start.",
+              "isRequired": true,
+              "format": "string",
+              "choices": [
+                "cloud",
+                "onprem",
+                "legacy"
+              ],
+              "name": "SAP_SYSTEM_TYPE"
+            },
+            {
+              "description": "Host to listen on: 127.0.0.1 (this machine only) or 0.0.0.0 (every interface).",
+              "format": "string",
+              "default": "127.0.0.1",
+              "name": "MCP_HTTP_HOST"
+            },
+            {
+              "description": "Port to listen on, 1-65535.",
+              "format": "number",
+              "default": "3000",
+              "name": "MCP_HTTP_PORT"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-22T18:07:20.093Z",
+        "publishedAt": "2026-10-22T18:07:20.093Z",
+        "updatedAt": "2026-10-22T18:07:20.093Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.fr0ster/mcp-abap-adt-ro",
+      "description": "Read-only MCP server for SAP ABAP ADT over HTTP, RFC or SNC: the readonly, system and search tools",
+      "repository": {
+        "url": "https://github.com/fr0ster/mcp-abap-adt",
+        "source": "github"
+      },
+      "version": "20.0.0",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@mcp-abap-adt/core-ro",
+          "version": "20.0.0",
+          "transport": {
+            "type": "stdio"
+          },
+          "packageArguments": [
+            {
+              "description": "Named destination: service-keys/<name>.json and sessions/<name>.env under AUTH_BROKER_PATH or the platform directory, read field by field. The working directory's .env is not loaded.",
+              "format": "string",
+              "type": "named",
+              "name": "--mcp"
+            }
+          ],
+          "environmentVariables": [
+            {
+              "description": "Path to the .env file that states the destination (the same as the --env-path argument). The file states SAP_URL and SAP_AUTH_TYPE (basic, snc or jwt); a jwt file also states SAP_GRANT_TYPE (authorization_code or none). Without this or --mcp, the server starts in tool-inspection-only mode: nothing is read from the working directory, and SAP_* variables in the process environment alone form no destination.",
+              "format": "string",
+              "placeholder": "/path/to/system.env",
+              "name": "MCP_ENV_PATH"
+            },
+            {
+              "description": "Base directory of service-keys/ and sessions/ for a named destination chosen with the --mcp argument (one directory; a list is not split). Default: ~/.config/mcp-abap-adt (Documents\\mcp-abap-adt on Windows).",
+              "format": "string",
+              "placeholder": "/path/to/mcp-abap-adt",
+              "name": "AUTH_BROKER_PATH"
+            },
+            {
+              "description": "Browser for a JWT login: chrome, edge, firefox, system, headless or none.",
+              "format": "string",
+              "default": "system",
+              "choices": [
+                "chrome",
+                "edge",
+                "firefox",
+                "system",
+                "headless",
+                "none"
+              ],
+              "name": "MCP_BROWSER"
+            },
+            {
+              "description": "Callback port of the JWT browser login, 1-65535.",
+              "format": "number",
+              "default": "61001",
+              "name": "MCP_BROWSER_AUTH_PORT"
+            },
+            {
+              "description": "Write a named destination's session to disk (sessions/<name>.env) instead of keeping it in memory.",
+              "format": "boolean",
+              "default": "false",
+              "name": "MCP_UNSAFE"
+            },
+            {
+              "description": "Connection type: http or rfc. SNC needs rfc (and the SAP NW RFC SDK).",
+              "format": "string",
+              "default": "http",
+              "choices": [
+                "http",
+                "rfc"
+              ],
+              "name": "SAP_CONNECTION_TYPE"
+            },
+            {
+              "description": "System type, required (here or as --system-type; no default, never guessed): the tools offered (e.g. Programs are onprem-only), the connector, and how the system's answers are read. Without it a destination does not start.",
+              "isRequired": true,
+              "format": "string",
+              "choices": [
+                "cloud",
+                "onprem",
+                "legacy"
+              ],
+              "name": "SAP_SYSTEM_TYPE"
+            },
+            {
+              "description": "Logon language (ISO code, e.g. 'en', 'de').",
+              "format": "string",
+              "default": "en",
+              "name": "SAP_LANGUAGE"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-22T18:06:57.069286Z",
+        "publishedAt": "2026-10-22T18:06:57.069286Z",
+        "updatedAt": "2026-10-22T18:06:57.069286Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.fr0ster/mcp-abap-adt-sse",
+      "description": "MCP server for SAP ABAP ADT over HTTP+SSE: credentials from the x-sap-* headers of each connection",
+      "repository": {
+        "url": "https://github.com/fr0ster/mcp-abap-adt",
+        "source": "github"
+      },
+      "version": "20.0.0",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@mcp-abap-adt/sse",
+          "version": "20.0.0",
+          "transport": {
+            "type": "sse",
+            "url": "http://localhost:{MCP_SSE_PORT}/sse",
+            "headers": [
+              {
+                "description": "The SAP system's URL, e.g. https://my-system.example.com.",
+                "isRequired": true,
+                "format": "string",
+                "name": "x-sap-url"
+              },
+              {
+                "description": "The SAP client (optional), e.g. 100.",
+                "format": "string",
+                "name": "x-sap-client"
+              },
+              {
+                "description": "The user of a basic logon, with x-sap-password.",
+                "format": "string",
+                "name": "x-sap-login"
+              },
+              {
+                "description": "The password of a basic logon, with x-sap-login.",
+                "format": "string",
+                "isSecret": true,
+                "name": "x-sap-password"
+              },
+              {
+                "description": "A token you hold, sent as a Bearer token (used as it is; the server cannot renew it). Instead of x-sap-login and x-sap-password.",
+                "format": "string",
+                "isSecret": true,
+                "name": "x-sap-jwt-token"
+              }
+            ]
+          },
+          "environmentVariables": [
+            {
+              "description": "System type, required (here or as --system-type; no default, never guessed, no request header states it): the tools offered, the connector, and how the system's answers are read. Without it the server does not start.",
+              "isRequired": true,
+              "format": "string",
+              "choices": [
+                "cloud",
+                "onprem",
+                "legacy"
+              ],
+              "name": "SAP_SYSTEM_TYPE"
+            },
+            {
+              "description": "Host to listen on: 127.0.0.1 (this machine only) or 0.0.0.0 (every interface).",
+              "format": "string",
+              "default": "127.0.0.1",
+              "name": "MCP_SSE_HOST"
+            },
+            {
+              "description": "Port to listen on, 1-65535.",
+              "format": "number",
+              "default": "3001",
+              "name": "MCP_SSE_PORT"
+            },
+            {
+              "description": "System context for on-prem create/update operations (system id), when no x-sap-master-system header states it.",
+              "format": "string",
+              "name": "SAP_MASTER_SYSTEM"
+            },
+            {
+              "description": "Responsible user for on-prem create/update operations, when no x-sap-responsible header (or x-sap-login) states it.",
+              "format": "string",
+              "name": "SAP_RESPONSIBLE"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-22T18:07:26.068135Z",
+        "publishedAt": "2026-10-22T18:07:26.068135Z",
+        "updatedAt": "2026-10-22T18:07:26.068135Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.fr0ster/mcp-abap-adt-sse-ro",
+      "description": "Read-only MCP server for SAP ABAP ADT over HTTP+SSE: x-sap-* header credentials",
+      "repository": {
+        "url": "https://github.com/fr0ster/mcp-abap-adt",
+        "source": "github"
+      },
+      "version": "20.0.0",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@mcp-abap-adt/sse-ro",
+          "version": "20.0.0",
+          "transport": {
+            "type": "sse",
+            "url": "http://localhost:{MCP_SSE_PORT}/sse",
+            "headers": [
+              {
+                "description": "The SAP system's URL, e.g. https://my-system.example.com.",
+                "isRequired": true,
+                "format": "string",
+                "name": "x-sap-url"
+              },
+              {
+                "description": "The SAP client (optional), e.g. 100.",
+                "format": "string",
+                "name": "x-sap-client"
+              },
+              {
+                "description": "The user of a basic logon, with x-sap-password.",
+                "format": "string",
+                "name": "x-sap-login"
+              },
+              {
+                "description": "The password of a basic logon, with x-sap-login.",
+                "format": "string",
+                "isSecret": true,
+                "name": "x-sap-password"
+              },
+              {
+                "description": "A token you hold, sent as a Bearer token (used as it is; the server cannot renew it). Instead of x-sap-login and x-sap-password.",
+                "format": "string",
+                "isSecret": true,
+                "name": "x-sap-jwt-token"
+              }
+            ]
+          },
+          "environmentVariables": [
+            {
+              "description": "System type, required (here or as --system-type; no default, never guessed, no request header states it): the tools offered, the connector, and how the system's answers are read. Without it the server does not start.",
+              "isRequired": true,
+              "format": "string",
+              "choices": [
+                "cloud",
+                "onprem",
+                "legacy"
+              ],
+              "name": "SAP_SYSTEM_TYPE"
+            },
+            {
+              "description": "Host to listen on: 127.0.0.1 (this machine only) or 0.0.0.0 (every interface).",
+              "format": "string",
+              "default": "127.0.0.1",
+              "name": "MCP_SSE_HOST"
+            },
+            {
+              "description": "Port to listen on, 1-65535.",
+              "format": "number",
+              "default": "3001",
+              "name": "MCP_SSE_PORT"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-22T18:07:32.059275Z",
+        "publishedAt": "2026-10-22T18:07:32.059275Z",
+        "updatedAt": "2026-10-22T18:07:32.059275Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.fr1sk/tmux-mcp",
+      "description": "MCP server for tmux \u2014 browse sessions, capture output, send commands.",
+      "title": "tmux-mcp",
+      "repository": {
+        "url": "https://github.com/fr1sk/tmux-mcp.git",
+        "source": "github"
+      },
+      "version": "0.3.3",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@fr1sk/tmux-mcp",
+          "version": "0.3.3",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-04-17T07:55:57.332308Z",
+        "publishedAt": "2026-04-17T07:55:57.332308Z",
+        "updatedAt": "2026-04-17T07:55:57.332308Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.fr33dr4g0n/agentry-observability",
+      "description": "Canonical Agentry discovery for coding agents: analytics, errors, deploys, and automation.",
+      "title": "Agentry.sh Observability",
+      "repository": {
+        "url": "https://github.com/fr33dr4g0n/agentry-public",
+        "source": "github",
+        "id": "1239325672",
+        "subfolder": "packages/mcp"
+      },
+      "version": "0.1.0",
+      "websiteUrl": "https://agentry.sh/?distribution_surface=mcp_registry",
+      "icons": [
+        {
+          "src": "https://agentry.sh/brand/agentry-icon-white-bg-black.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        },
+        {
+          "src": "https://agentry.sh/brand/agentry-lockup-light.svg",
+          "mimeType": "image/svg+xml",
+          "sizes": [
+            "any"
+          ],
+          "theme": "dark"
+        }
+      ],
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@agentrysh/mcp",
+          "version": "0.1.0",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-13T09:32:38.58794Z",
+        "publishedAt": "2026-07-13T09:32:38.58794Z",
+        "updatedAt": "2026-07-13T09:32:38.58794Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.fr3on/dike",
+      "description": "Grounded MENA legal search, reasoning, citation resolution, and citation-graph traversal.",
+      "title": "Dike",
+      "repository": {
+        "url": "https://github.com/dikeai/plugins",
+        "source": "github",
+        "subfolder": "dike-legal-search"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://dike.it.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.dike.it.com/mcp",
+          "headers": [
+            {
+              "description": "Bearer token: your Dike API key, e.g. \"Bearer dk_live_...\". Get one at https://dike.it.com/developers/.",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-13T10:23:43.251754Z",
+        "publishedAt": "2026-09-13T10:23:43.251754Z",
+        "updatedAt": "2026-09-13T10:23:43.251754Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.francemazzi/frasma",
+      "description": "Read-only Frasma MCP: profile, knowledge search, diagnostic handoff. No email.",
+      "title": "Frasma",
+      "repository": {
+        "url": "https://github.com/francemazzi/frasma",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://www.frasma.org/for-agents",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://www.frasma.org/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-25T14:59:25.368944Z",
+        "publishedAt": "2026-08-25T14:59:25.368944Z",
+        "updatedAt": "2026-08-25T14:59:25.368944Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.francesco0242/matchcn",
+      "description": "Semantic index across shadcn-format component registries: find components by what they do.",
+      "repository": {
+        "url": "https://github.com/francesco0242/matchcn",
+        "source": "github"
+      },
+      "version": "0.2.2",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "matchcn",
+          "version": "0.2.2",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-23T22:29:11.05176Z",
+        "publishedAt": "2026-09-23T22:29:11.05176Z",
+        "updatedAt": "2026-09-23T22:29:11.05176Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.francescoveryra-dot/iaf-agent-bridge",
+      "description": "MCP server that sends work to Cursor Agent over ACP and returns the session id needed to continue.",
+      "title": "IAF Agent Bridge",
+      "repository": {
+        "url": "https://github.com/francescoveryra-dot/IAF-Agent-Bridge",
+        "source": "github"
+      },
+      "version": "1.1.0",
+      "websiteUrl": "https://github.com/francescoveryra-dot/IAF-Agent-Bridge",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "iaf-agent-bridge",
+          "version": "1.1.0",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-03T22:37:37.085799Z",
+        "publishedAt": "2026-10-03T22:37:37.085799Z",
+        "updatedAt": "2026-10-03T22:37:37.085799Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
+      "name": "io.github.francisco-perez-sorrosal/cv",
+      "description": "An MCP server that provides access to Francisco Perez-Sorrosal's CV",
+      "repository": {
+        "url": "https://github.com/francisco-perez-sorrosal/cv.git",
+        "source": "github"
+      },
+      "version": "0.0.3",
+      "packages": [
+        {
+          "registryType": "mcpb",
+          "identifier": "https://github.com/francisco-perez-sorrosal/cv/releases/download/v0.0.3/fps-cv-mcp-0.0.3.mcpb",
+          "fileSha256": "d9835e29ee1a95759219f23bb988f71cb9d419b631754fc0ad8ab43b5ff0042e",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2025-10-08T19:16:22.808746Z",
+        "publishedAt": "2025-10-08T19:16:22.808746Z",
+        "updatedAt": "2025-10-08T19:16:22.808746Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.francofuji/cemis-directorio",
+      "description": "Directorio de empresas cubanas, oportunidades de negocio y reformas econ\u00f3micas 2026 (cemis.io)",
+      "version": "1.1.0",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mcp.cemis.io/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-10T19:23:16.450332Z",
+        "publishedAt": "2026-09-10T19:23:16.450332Z",
+        "updatedAt": "2026-09-10T19:23:16.450332Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.francofuji/uncorreotemporal-mcp-server",
+      "description": "Temporary email for AI agents: create inboxes, wait for emails, extract OTPs, verify signups.",
+      "title": "UnCorreoTemporal",
+      "repository": {
+        "url": "https://github.com/francofuji/uncorreotemporal-mcp-server",
+        "source": "github"
+      },
+      "version": "0.1.1",
+      "packages": [
+        {
+          "registryType": "pypi",
+          "identifier": "uncorreotemporal-mcp",
+          "version": "0.1.1",
+          "runtimeHint": "uvx",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Your UnCorreoTemporal API key (get one at https://uncorreotemporal.com). Format: uct_...",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "UCT_API_KEY"
+            },
+            {
+              "description": "API base URL. Defaults to https://uncorreotemporal.com",
+              "format": "string",
+              "name": "UCT_API_BASE"
+            },
+            {
+              "description": "Transport mode: stdio (default), streamable-http, or sse",
+              "format": "string",
+              "name": "UCT_MCP_TRANSPORT"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-04-19T00:22:01.748025Z",
+        "publishedAt": "2026-04-19T00:22:01.748025Z",
+        "updatedAt": "2026-04-19T00:22:01.748025Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.francosmit94-web/aether",
+      "description": "Base token risk (honeypot sim), prices, balances, Basenames, tx data. Pay-per-call in USDC via x402.",
+      "title": "Aether: Base onchain data & token risk (x402)",
+      "version": "4.0.0",
+      "websiteUrl": "https://aether-x402.vercel.app/status",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://aether-x402.vercel.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-02T12:54:14.738445Z",
+        "publishedAt": "2026-10-02T12:54:14.738445Z",
+        "updatedAt": "2026-10-02T12:54:14.738445Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.frangelbarrera/osint-agent-skills",
+      "description": "OSINT MCP server \u2014 23 tools: DNS, WHOIS, Shodan, breaches, GEOINT, crypto. Works with Claude Code.",
+      "repository": {
+        "url": "https://github.com/frangelbarrera/osint-agent-skills",
+        "source": "github"
+      },
+      "version": "1.4.1",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "@frangelbarrera/osint-agent-skills",
+          "version": "1.4.1",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-06-29T19:23:39.362858Z",
+        "publishedAt": "2026-06-29T19:23:39.362858Z",
+        "updatedAt": "2026-06-29T19:23:39.362858Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.frank-bot07/usrcp",
+      "description": "Encrypted local ledger of structured user state, shared across every MCP-aware AI tool.",
+      "title": "USRCP \u2014 User Context Protocol",
+      "repository": {
+        "url": "https://github.com/frank-bot07/usrcp",
+        "source": "github"
+      },
+      "version": "0.2.8",
+      "websiteUrl": "https://usrcp.dev",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "usrcp",
+          "version": "0.2.8",
+          "transport": {
+            "type": "stdio"
+          },
+          "packageArguments": [
+            {
+              "type": "positional",
+              "value": "serve",
+              "valueHint": "command"
+            }
+          ],
+          "environmentVariables": [
+            {
+              "description": "Passphrase used to derive the ledger encryption key. Omit it if the passphrase is stored in the OS keychain via `usrcp keychain store`.",
+              "isSecret": true,
+              "name": "USRCP_PASSPHRASE"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-16T05:49:24.044959Z",
+        "publishedAt": "2026-10-16T05:49:24.044959Z",
+        "updatedAt": "2026-10-16T05:49:24.044959Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.frankbongo/bagiq",
+      "description": "Analyse disc golf bag gaps and overlap, recommend discs, and open an interactive Bag Map.",
+      "title": "BagIQ MCP",
+      "version": "1.0.0",
+      "websiteUrl": "https://bagiq.app",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://data.bagiq.app/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-06T23:21:39.478035Z",
+        "publishedAt": "2026-09-06T23:21:39.478035Z",
+        "updatedAt": "2026-09-06T23:21:39.478035Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.frankbongo/disc-golf-england",
+      "description": "EDGA Tour results, policies, club templates, course search and course-development guidance.",
+      "title": "Disc Golf England (EDGA)",
+      "repository": {
+        "url": "https://github.com/frankbongo/DiscGolfEngland",
+        "source": "github"
+      },
+      "version": "1.6.9",
+      "websiteUrl": "https://discgolfengland.com/mcp/",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://discgolfengland.com/wp-json/edga/v1/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-08T21:49:24.951221Z",
+        "publishedAt": "2026-10-08T21:49:24.951221Z",
+        "updatedAt": "2026-10-08T21:49:24.951221Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.frankbongo/discgolfapi",
+      "description": "Search disc golf courses worldwide, find nearby courses, and retrieve course details and updates.",
+      "title": "DiscGolfAPI MCP",
+      "version": "1.0.0",
+      "websiteUrl": "https://discgolfapi.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://io.discgolfapi.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-06T23:21:35.679399Z",
+        "publishedAt": "2026-09-06T23:21:35.679399Z",
+        "updatedAt": "2026-09-06T23:21:35.679399Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.frankbongo/golfwithdiscs-discfinder",
+      "description": "Search current disc golf retailer inventory across 50+ shops by mould, plastic, price, and country.",
+      "title": "Golf With Discs DiscFinder MCP",
+      "repository": {
+        "url": "https://github.com/frankbongo/golfwithdiscs-code",
+        "source": "github",
+        "id": "1148377350",
+        "subfolder": "worker"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://golfwithdiscs.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://finder.golfwithdiscs.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-12T20:22:03.959637Z",
+        "publishedAt": "2026-09-12T20:22:03.959637Z",
+        "updatedAt": "2026-09-12T20:22:03.959637Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.frankbongo/thedisclist",
+      "description": "Search disc golf discs, compare flight ratings, and find similar alternatives across brands.",
+      "title": "TheDiscList Public MCP",
+      "version": "1.0.0",
+      "websiteUrl": "https://thedisclist.com",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://api.thedisclist.com/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-06T23:21:37.459701Z",
+        "publishedAt": "2026-09-06T23:21:37.459701Z",
+        "updatedAt": "2026-09-06T23:21:37.459701Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-07-09/server.schema.json",
+      "name": "io.github.frankchu91/mindbase",
+      "description": "LLM-maintained personal wiki: cross-references sources, flags contradictions. Local markdown.",
+      "repository": {
+        "url": "https://github.com/frankchu91/mindbase",
+        "source": "github"
+      },
+      "version": "0.1.3",
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "mindbase-mcp",
+          "version": "0.1.3",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Data directory for projects and wiki files (default: ~/mindbase-data)",
+              "format": "string",
+              "name": "MINDBASE_DATA_DIR"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-07-25T02:22:47.241904Z",
+        "publishedAt": "2026-07-25T02:22:47.241904Z",
+        "updatedAt": "2026-07-25T02:22:47.241904Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.frankjie3-create/quietproof",
+      "description": "29 deterministic read-only audits + free discovery tools; paid per call in USDC on Base via x402.",
+      "title": "QuietProof",
+      "version": "0.1.0",
+      "websiteUrl": "https://quietproof-x402.quietproof-x402.workers.dev",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://quietproof-x402.quietproof-x402.workers.dev/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-01T15:31:54.471102Z",
+        "publishedAt": "2026-11-01T15:31:54.471102Z",
+        "updatedAt": "2026-11-01T15:31:54.471102Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.franklinnolasco7/quickshell-mcp",
+      "description": "Source-grounded Quickshell, QML, and Qt documentation, examples, and real-world implementations.",
+      "title": "Quickshell MCP",
+      "repository": {
+        "url": "https://github.com/franklinnolasco7/quickshell-mcp",
+        "source": "github"
+      },
+      "version": "2.17.0",
+      "packages": [
+        {
+          "registryType": "pypi",
+          "identifier": "quickshell-mcp",
+          "version": "2.17.0",
+          "transport": {
+            "type": "stdio"
+          }
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-08-30T19:10:39.955896Z",
+        "publishedAt": "2026-08-30T19:10:39.955896Z",
+        "updatedAt": "2026-08-30T19:10:39.955896Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.franktherecensor-hash/freshgate",
+      "description": "Paid MCP tool that checks whether a web page has changed. $0.001 per check via x402 on Base.",
+      "title": "FreshGate",
+      "repository": {
+        "url": "https://github.com/franktherecensor-hash/freshgate",
+        "source": "github"
+      },
+      "version": "0.4.0",
+      "remotes": [
+        {
+          "type": "sse",
+          "url": "https://freshgate-api.franktherecensor.workers.dev/paid-mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-14T17:44:55.826644Z",
+        "publishedAt": "2026-09-14T17:44:55.826644Z",
+        "updatedAt": "2026-09-14T17:44:55.826644Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.franzfarian/mavens-mcp",
+      "description": "Review connected software projects, submit local findings and read reports with explicit approval.",
+      "title": "MAVENS.mcp",
+      "version": "0.2.4",
+      "websiteUrl": "https://mavens.it/mcp/",
+      "icons": [
+        {
+          "src": "https://mavens.it/images/mavens-logo-white-blackbackground.png",
+          "mimeType": "image/png",
+          "sizes": [
+            "512x512"
+          ]
+        }
+      ],
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://mavens.it/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-29T06:08:06.348099Z",
+        "publishedAt": "2026-09-29T06:08:06.348099Z",
+        "updatedAt": "2026-09-29T06:08:06.348099Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.franzsy5/luvvoice-mcp",
+      "description": "Text-to-speech with 200+ voices in 70+ languages. Requires a LuvVoice API token.",
+      "title": "LuvVoice Text-to-Speech",
+      "version": "1.0.2",
+      "websiteUrl": "https://luvvoice.com/mcp",
+      "packages": [
+        {
+          "registryType": "npm",
+          "registryBaseUrl": "https://registry.npmjs.org",
+          "identifier": "luvvoice-mcp",
+          "version": "1.0.2",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Create your API token at https://luvvoice.com/dashboard/api-tokens. An API-enabled LuvVoice plan is required.",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "LUVVOICE_API_TOKEN"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-15T02:30:29.260706Z",
+        "publishedAt": "2026-10-15T02:30:29.260706Z",
+        "updatedAt": "2026-10-15T02:30:29.260706Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.fraudlabspro/mcp-fraudlabspro",
+      "description": "Fraud Prevention MCP server using FraudLabs Pro API.",
+      "repository": {
+        "url": "https://github.com/fraudlabspro/mcp-fraudlabspro",
+        "source": "github"
+      },
+      "version": "1.1.1",
+      "packages": [
+        {
+          "registryType": "pypi",
+          "identifier": "mcp-fraudlabspro",
+          "version": "1.1.1",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Your FraudLabs Pro API key.",
+              "isRequired": true,
+              "format": "string",
+              "isSecret": true,
+              "name": "FRAUDLABSPRO_API_KEY"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-05-26T00:55:12.488966Z",
+        "publishedAt": "2026-05-26T00:55:12.488966Z",
+        "updatedAt": "2026-05-26T00:55:12.488966Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.fredericmagnathy-ops/alpnai",
+      "description": "Agent cost, latency and quality analysis, report delivery and order status. Crypto payments paused.",
+      "title": "ALPNAI \u2014 Agent Performance Tools",
+      "version": "0.1.1",
+      "websiteUrl": "https://alpnai.com/en/docs/mcp",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://alpnai.com/api/mcp",
+          "headers": [
+            {
+              "description": "Active ALPNAI agent key from https://alpnai.com/start. Required for performance tools.",
+              "value": "Bearer {agent_key}",
+              "variables": {
+                "agent_key": {
+                  "description": "ALPNAI agent key",
+                  "isRequired": true,
+                  "isSecret": true
+                }
+              },
+              "name": "Authorization"
+            }
+          ]
+        }
+      ],
+      "_meta": {
+        "io.modelcontextprotocol.registry/publisher-provided": {
+          "com.alpnai": {
+            "cryptoPurchases": "sandbox-only",
+            "discoveryMethod": "server/discover",
+            "documentationUrl": "https://alpnai.com/en/docs",
+            "freeTools": [
+              "audit_agent_costs",
+              "analyze_agent_latency",
+              "check_agent_quality"
+            ],
+            "integrationRepository": "https://github.com/fredericmagnathy-ops/alpnai-agent-kit",
+            "keyRequestUrl": "https://alpnai.com/start",
+            "liveCryptoPaymentsEnabled": false,
+            "orderFollowUp": {
+              "input": "order_id",
+              "requires": "original active agent key",
+              "submitsPayment": false,
+              "tool": "get_order"
+            },
+            "projectsSubscription": "Separate human website subscription through Stripe; not purchased via MCP.",
+            "supportedProtocolVersions": [
+              "2026-07-28",
+              "2025-11-25",
+              "2025-06-18",
+              "2025-03-26"
+            ]
+          }
+        }
+      }
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-15T03:22:39.106918Z",
+        "publishedAt": "2026-09-15T03:22:39.106918Z",
+        "updatedAt": "2026-09-15T03:22:39.106918Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.fredpsantos33/iteratools",
+      "description": "40+ pay-per-use tools for AI agents: search, TTS, QR, PDF, scraping, image gen. x402.",
+      "repository": {
+        "url": "https://github.com/fredpsantos33/iteratools-mcp",
+        "source": "github"
+      },
+      "version": "1.0.5",
+      "packages": [
+        {
+          "registryType": "npm",
+          "identifier": "iteratools-mcp",
+          "version": "1.0.5",
+          "transport": {
+            "type": "stdio"
+          },
+          "environmentVariables": [
+            {
+              "description": "Your IteraTools API key from iteratools.com",
+              "format": "string",
+              "isSecret": true,
+              "name": "ITERATOOLS_API_KEY"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-03-13T00:29:47.264591Z",
+        "publishedAt": "2026-03-13T00:29:47.264591Z",
+        "updatedAt": "2026-03-13T00:29:47.264591Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.fredxhansson-cmyk/compera",
+      "description": "Live Swedish price & service comparison (products, broadband, mobile, electricity, loans)",
+      "title": "Compera",
+      "repository": {
+        "url": "https://github.com/fredxhansson-cmyk/compera-mcp",
+        "source": "github"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://compera.se",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://compera.se/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-09-12T16:29:07.138872Z",
+        "publishedAt": "2026-09-12T16:29:07.138872Z",
+        "updatedAt": "2026-09-12T16:29:07.138872Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.fredxhansson-cmyk/fuze",
+      "description": "No-code web scraping & data-extraction Apify actors: scrape and enrich web data at scale.",
+      "title": "Fuze Data Tools",
+      "repository": {
+        "url": "https://github.com/fredxhansson-cmyk/fuze",
+        "source": "github"
+      },
+      "version": "1.0.0",
+      "websiteUrl": "https://datatools-hub.vercel.app",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://datatools-hub.vercel.app/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-12T12:49:55.019348Z",
+        "publishedAt": "2026-10-12T12:49:55.019348Z",
+        "updatedAt": "2026-10-12T12:49:55.019348Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.fredxhansson-cmyk/noniner",
+      "description": "No-code web scraping & data-extraction Apify actors: scrape and enrich web data at scale.",
+      "title": "No Niner Data Tools",
+      "repository": {
+        "url": "https://github.com/fredxhansson-cmyk/noniner",
+        "source": "github"
+      },
+      "version": "1.0.1",
+      "websiteUrl": "https://noniner.io",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://noniner.io/api/mcp"
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-10-14T05:44:47.193798Z",
+        "publishedAt": "2026-10-14T05:44:47.193798Z",
+        "updatedAt": "2026-10-14T05:44:47.193798Z",
+        "isLatest": true
+      }
+    }
+  },
+  {
+    "server": {
+      "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+      "name": "io.github.fredyee/hallucc",
+      "description": "Fact-check LLM outputs with cited sources. API key: aihcc.cloud/keys.",
+      "title": "HallucC \u2014 Hallucination & Safety Guardian",
+      "repository": {
+        "url": "https://github.com/fredyee/hallucc-mcp",
+        "source": "github",
+        "id": "1369242104"
+      },
+      "version": "0.1.11",
+      "websiteUrl": "https://aihcc.cloud",
+      "remotes": [
+        {
+          "type": "streamable-http",
+          "url": "https://aihcc.cloud/mcp",
+          "headers": [
+            {
+              "description": "Bearer <HallucC API key> \u2014 create at aihcc.cloud/keys after signup; free daily quota included\uff08\u6ce8\u518c\u540e\u4e8e /keys \u9875\u521b\u5efa\uff0c\u514d\u8d39\u5957\u9910\u6bcf\u65e5\u6709\u989d\u5ea6\uff09",
+              "isRequired": true,
+              "isSecret": true,
+              "name": "Authorization"
+            }
+          ]
+        }
+      ]
+    },
+    "_meta": {
+      "io.modelcontextprotocol.registry/official": {
+        "status": "active",
+        "statusChangedAt": "2026-11-05T09:30:40.9988Z",
+        "publishedAt": "2026-11-05T09:30:40.9988Z",
+        "updatedAt": "2026-11-05T09:30:40.9988Z",
+        "isLatest": true
+      }
+    }
+  }
+]

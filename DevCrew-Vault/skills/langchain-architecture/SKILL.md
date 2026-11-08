@@ -1,42 +1,13 @@
 ---
 name: langchain-architecture
-description: "Master the LangChain framework for building sophisticated LLM applications with agents, chains, memory, and tool integration."
-risk: critical
-source: community
-date_added: "2026-02-27"
+description: Design LLM applications using LangChain 1.x and LangGraph for agents, memory, and tool integration. Use when building LangChain applications, implementing AI agents, or creating complex LLM workflows.
 ---
-## Supporting material availability
 
-This catalog copy contains the inline guidance below, but does not include the following supporting paths. They are external prerequisites, not bundled files:
+# LangChain & LangGraph Architecture
 
-- `<support-root>/references/agents.md`
-- `<support-root>/references/memory.md`
-- `<support-root>/references/chains.md`
-- `<support-root>/references/document-processing.md`
-- `<support-root>/references/callbacks.md`
-- `<support-root>/assets/agent-template.py`
-- `<support-root>/assets/memory-config.yaml`
-- `<support-root>/assets/chain-example.py`
+Master modern LangChain 1.x and LangGraph for building sophisticated LLM applications with agents, state management, memory, and tool integration.
 
-Ask for the original supporting material or an existing installation before using a step that depends on these paths; this catalog does not identify a verified download source for them. Resolve each path relative to that installation, inspect its contents, and verify any applicable license and execution prerequisites. Do not run a command or claim a referenced procedure was followed until its required file exists. Do not fabricate the missing scripts or treat an unrelated file with the same name as equivalent. Independent steps fully documented here can proceed within the user’s authorized scope; report any dependent step as unavailable.
-
-
-# LangChain Architecture
-
-Master the LangChain framework for building sophisticated LLM applications with agents, chains, memory, and tool integration.
-
-## Do not use this skill when
-
-- The task is unrelated to langchain architecture
-- You need a different domain or tool outside this scope
-
-## Instructions
-
-- Clarify goals, constraints, and required inputs.
-- Apply relevant best practices and validate outcomes.
-- Provide actionable steps and verification.
-
-## Use this skill when
+## When to Use This Skill
 
 - Building autonomous AI agents with tool access
 - Implementing complex multi-step LLM workflows
@@ -46,130 +17,108 @@ Master the LangChain framework for building sophisticated LLM applications with 
 - Implementing document processing pipelines
 - Building production-grade LLM applications
 
+## Package Structure (LangChain 1.x)
+
+```
+langchain (1.2.x)         # High-level orchestration
+langchain-core (1.2.x)    # Core abstractions (messages, prompts, tools)
+langchain-community       # Third-party integrations
+langgraph                 # Agent orchestration and state management
+langchain-openai          # OpenAI integrations
+langchain-anthropic       # Anthropic/Claude integrations
+langchain-voyageai        # Voyage AI embeddings
+langchain-pinecone        # Pinecone vector store
+```
+
 ## Core Concepts
 
-### 1. Agents
-Autonomous systems that use LLMs to decide which actions to take.
+### 1. LangGraph Agents
 
-**Agent Types:**
-- **ReAct**: Reasoning + Acting in interleaved manner
-- **OpenAI Functions**: Leverages function calling API
-- **Structured Chat**: Handles multi-input tools
-- **Conversational**: Optimized for chat interfaces
-- **Self-Ask with Search**: Decomposes complex queries
+LangGraph is the standard for building agents in 2026. It provides:
 
-### 2. Chains
-Sequences of calls to LLMs or other utilities.
+**Key Features:**
 
-**Chain Types:**
-- **LLMChain**: Basic prompt + LLM combination
-- **SequentialChain**: Multiple chains in sequence
-- **RouterChain**: Routes inputs to specialized chains
-- **TransformChain**: Data transformations between steps
-- **MapReduceChain**: Parallel processing with aggregation
+- **StateGraph**: Explicit state management with typed state
+- **Durable Execution**: Agents persist through failures
+- **Human-in-the-Loop**: Inspect and modify state at any point
+- **Memory**: Short-term and long-term memory across sessions
+- **Checkpointing**: Save and resume agent state
 
-### 3. Memory
-Systems for maintaining context across interactions.
+**Agent Patterns:**
 
-**Memory Types:**
-- **ConversationBufferMemory**: Stores all messages
-- **ConversationSummaryMemory**: Summarizes older messages
-- **ConversationBufferWindowMemory**: Keeps last N messages
-- **EntityMemory**: Tracks information about entities
-- **VectorStoreMemory**: Semantic similarity retrieval
+- **ReAct**: Reasoning + Acting with `create_react_agent`
+- **Plan-and-Execute**: Separate planning and execution nodes
+- **Multi-Agent**: Supervisor routing between specialized agents
+- **Tool-Calling**: Structured tool invocation with Pydantic schemas
+
+### 2. State Management
+
+LangGraph uses TypedDict for explicit state:
+
+```python
+from typing import Annotated, TypedDict
+from langgraph.graph import MessagesState
+
+# Simple message-based state
+class AgentState(MessagesState):
+    """Extends MessagesState with custom fields."""
+    context: Annotated[list, "retrieved documents"]
+
+# Custom state for complex agents
+class CustomState(TypedDict):
+    messages: Annotated[list, "conversation history"]
+    context: Annotated[dict, "retrieved context"]
+    current_step: str
+    results: list
+```
+
+### 3. Memory Systems
+
+Modern memory implementations:
+
+- **ConversationBufferMemory**: Stores all messages (short conversations)
+- **ConversationSummaryMemory**: Summarizes older messages (long conversations)
+- **ConversationTokenBufferMemory**: Token-based windowing
+- **VectorStoreRetrieverMemory**: Semantic similarity retrieval
+- **LangGraph Checkpointers**: Persistent state across sessions
 
 ### 4. Document Processing
-Loading, transforming, and storing documents for retrieval.
+
+Loading, transforming, and storing documents:
 
 **Components:**
+
 - **Document Loaders**: Load from various sources
 - **Text Splitters**: Chunk documents intelligently
 - **Vector Stores**: Store and retrieve embeddings
 - **Retrievers**: Fetch relevant documents
-- **Indexes**: Organize documents for efficient access
 
-### 5. Callbacks
-Hooks for logging, monitoring, and debugging.
+### 5. Callbacks & Tracing
 
-**Use Cases:**
+LangSmith is the standard for observability:
+
 - Request/response logging
 - Token usage tracking
 - Latency monitoring
-- Error handling
-- Custom metrics collection
-
-## Version and execution scope
-
-The inline code uses legacy LangChain APIs/imports. LangChain v1 moved legacy chains and related functionality into langchain-classic; do not install latest and assume these snippets run unchanged. For new code use the official v1 migration guide and supported agent/state APIs: https://docs.langchain.com/oss/python/migrate/langchain-v1 . Pin compatible provider packages and verify their imports. Tools below are placeholders, not real database/email integrations; never report an email sent without a verified authorized side effect. Bound iterations, tokens and paid tools; isolate tenant memory and treat retrieved text as untrusted. Logs must redact prompts, results and credentials.
+- Error tracking
+- Trace visualization
 
 ## Quick Start
 
+### Modern ReAct Agent with LangGraph
+
 ```python
-from langchain.agents import AgentType, initialize_agent, load_tools
-from langchain.llms import OpenAI
-from langchain.memory import ConversationBufferMemory
+from langgraph.prebuilt import create_react_agent
+from langgraph.checkpoint.memory import MemorySaver
+from langchain_anthropic import ChatAnthropic
+from langchain_core.tools import tool
+import ast
+import operator
 
-# Initialize LLM
-llm = OpenAI(temperature=0)
+# Initialize LLM (Claude Sonnet 5 recommended)
+llm = ChatAnthropic(model="claude-sonnet-5")
 
-# Load tools
-tools = load_tools(["serpapi", "llm-math"], llm=llm)
-
-# Add memory
-memory = ConversationBufferMemory(memory_key="chat_history")
-
-# Create agent
-agent = initialize_agent(
-    tools,
-    llm,
-    agent=AgentType.CONVERSATIONAL_REACT_DESCRIPTION,
-    memory=memory,
-    verbose=True
-)
-
-# Run agent
-result = agent.run("What's the weather in SF? Then calculate 25 * 4")
-```
-
-## Architecture Patterns
-
-### Pattern 1: RAG with LangChain
-```python
-from langchain.chains import RetrievalQA
-from langchain.document_loaders import TextLoader
-from langchain.text_splitter import CharacterTextSplitter
-from langchain.vectorstores import Chroma
-from langchain.embeddings import OpenAIEmbeddings
-
-# Load and process documents
-loader = TextLoader('documents.txt')
-documents = loader.load()
-
-text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
-texts = text_splitter.split_documents(documents)
-
-# Create vector store
-embeddings = OpenAIEmbeddings()
-vectorstore = Chroma.from_documents(texts, embeddings)
-
-# Create retrieval chain
-qa_chain = RetrievalQA.from_chain_type(
-    llm=llm,
-    chain_type="stuff",
-    retriever=vectorstore.as_retriever(),
-    return_source_documents=True
-)
-
-# Query
-result = qa_chain({"query": "What is the main topic?"})
-```
-
-### Pattern 2: Custom Agent with Tools
-```python
-from langchain.agents import Tool, AgentExecutor
-from langchain.agents.react.base import ReActDocstoreAgent
-from langchain.tools import tool
-
+# Define tools with Pydantic schemas
 @tool
 def search_database(query: str) -> str:
     """Search internal database for information."""
@@ -177,201 +126,148 @@ def search_database(query: str) -> str:
     return f"Results for: {query}"
 
 @tool
-def send_email(recipient: str, content: str) -> str:
-    """Send an email to specified recipient."""
-    # Email sending logic
-    raise NotImplementedError("Configure an authorized email adapter and verify delivery before reporting success")
+def calculate(expression: str) -> str:
+    """Safely evaluate a mathematical expression.
 
-tools = [search_database, send_email]
+    Supports: +, -, *, /, **, %, parentheses
+    Example: '(2 + 3) * 4' returns '20'
+    """
+    # Safe math evaluation using ast
+    allowed_operators = {
+        ast.Add: operator.add,
+        ast.Sub: operator.sub,
+        ast.Mult: operator.mul,
+        ast.Div: operator.truediv,
+        ast.Pow: operator.pow,
+        ast.Mod: operator.mod,
+        ast.USub: operator.neg,
+    }
 
-agent = initialize_agent(
-    tools,
+    def _eval(node):
+        if isinstance(node, ast.Constant):
+            return node.value
+        elif isinstance(node, ast.BinOp):
+            left = _eval(node.left)
+            right = _eval(node.right)
+            return allowed_operators[type(node.op)](left, right)
+        elif isinstance(node, ast.UnaryOp):
+            operand = _eval(node.operand)
+            return allowed_operators[type(node.op)](operand)
+        else:
+            raise ValueError(f"Unsupported operation: {type(node)}")
+
+    try:
+        tree = ast.parse(expression, mode='eval')
+        return str(_eval(tree.body))
+    except Exception as e:
+        return f"Error: {e}"
+
+tools = [search_database, calculate]
+
+# Create checkpointer for memory persistence
+checkpointer = MemorySaver()
+
+# Create ReAct agent
+agent = create_react_agent(
     llm,
-    agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
-    verbose=True
+    tools,
+    checkpointer=checkpointer
+)
+
+# Run agent with thread ID for memory
+config = {"configurable": {"thread_id": "user-123"}}
+result = await agent.ainvoke(
+    {"messages": [("user", "Search for Python tutorials and calculate 25 * 4")]},
+    config=config
 )
 ```
 
-### Pattern 3: Multi-Step Chain
-```python
-from langchain.chains import LLMChain, SequentialChain
-from langchain.prompts import PromptTemplate
+## Detailed patterns and worked examples
 
-# Step 1: Extract key information
-extract_prompt = PromptTemplate(
-    input_variables=["text"],
-    template="Extract key entities from: {text}\n\nEntities:"
-)
-extract_chain = LLMChain(llm=llm, prompt=extract_prompt, output_key="entities")
-
-# Step 2: Analyze entities
-analyze_prompt = PromptTemplate(
-    input_variables=["entities"],
-    template="Analyze these entities: {entities}\n\nAnalysis:"
-)
-analyze_chain = LLMChain(llm=llm, prompt=analyze_prompt, output_key="analysis")
-
-# Step 3: Generate summary
-summary_prompt = PromptTemplate(
-    input_variables=["entities", "analysis"],
-    template="Summarize:\nEntities: {entities}\nAnalysis: {analysis}\n\nSummary:"
-)
-summary_chain = LLMChain(llm=llm, prompt=summary_prompt, output_key="summary")
-
-# Combine into sequential chain
-overall_chain = SequentialChain(
-    chains=[extract_chain, analyze_chain, summary_chain],
-    input_variables=["text"],
-    output_variables=["entities", "analysis", "summary"],
-    verbose=True
-)
-```
-
-## Memory Management Best Practices
-
-### Choosing the Right Memory Type
-```python
-# For short conversations (< 10 messages)
-from langchain.memory import ConversationBufferMemory
-memory = ConversationBufferMemory()
-
-# For long conversations (summarize old messages)
-from langchain.memory import ConversationSummaryMemory
-memory = ConversationSummaryMemory(llm=llm)
-
-# For sliding window (last N messages)
-from langchain.memory import ConversationBufferWindowMemory
-memory = ConversationBufferWindowMemory(k=5)
-
-# For entity tracking
-from langchain.memory import ConversationEntityMemory
-memory = ConversationEntityMemory(llm=llm)
-
-# For semantic retrieval of relevant history
-from langchain.memory import VectorStoreRetrieverMemory
-memory = VectorStoreRetrieverMemory(retriever=retriever)
-```
-
-## Callback System
-
-### Custom Callback Handler
-```python
-from langchain.callbacks.base import BaseCallbackHandler
-
-class CustomCallbackHandler(BaseCallbackHandler):
-    def on_llm_start(self, serialized, prompts, **kwargs):
-        print("LLM started")
-
-    def on_llm_end(self, response, **kwargs):
-        print("LLM ended")
-
-    def on_llm_error(self, error, **kwargs):
-        print(f"LLM error: {error}")
-
-    def on_chain_start(self, serialized, inputs, **kwargs):
-        print("Chain started")
-
-    def on_agent_action(self, action, **kwargs):
-        print("Agent action selected")
-
-# Use callback
-agent.run("query", callbacks=[CustomCallbackHandler()])
-```
+Detailed pattern documentation lives in `references/details.md`. Read that file when the navigation tier above is insufficient.
 
 ## Testing Strategies
 
 ```python
 import pytest
-from unittest.mock import Mock
+from unittest.mock import AsyncMock, patch
 
-def test_agent_tool_selection():
-    # Mock LLM to return specific tool selection
-    mock_llm = Mock()
-    mock_llm.predict.return_value = "Action: search_database\nAction Input: test query"
+@pytest.mark.asyncio
+async def test_agent_tool_selection():
+    """Test agent selects correct tool."""
+    with patch.object(llm, 'ainvoke') as mock_llm:
+        mock_llm.return_value = AsyncMock(content="Using search_database")
 
-    agent = initialize_agent(tools, mock_llm, agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION)
+        result = await agent.ainvoke({
+            "messages": [("user", "search for documents")]
+        })
 
-    result = agent.run("test query")
+        # Verify tool was called
+        assert "search_database" in str(result)
 
-    # Verify correct tool was selected
-    # Assert the actual selected tool invocation with a compatible fake model/tool spy;
-    # call arguments to the model only show the prompt, not tool execution.
+@pytest.mark.asyncio
+async def test_memory_persistence():
+    """Test memory persists across invocations."""
+    config = {"configurable": {"thread_id": "test-thread"}}
 
-def test_memory_persistence():
-    memory = ConversationBufferMemory()
+    # First message
+    await agent.ainvoke(
+        {"messages": [("user", "Remember: the code is 12345")]},
+        config
+    )
 
-    memory.save_context({"input": "Hi"}, {"output": "Hello!"})
+    # Second message should remember
+    result = await agent.ainvoke(
+        {"messages": [("user", "What was the code?")]},
+        config
+    )
 
-    assert "Hi" in memory.load_memory_variables({})['history']
-    assert "Hello!" in memory.load_memory_variables({})['history']
+    assert "12345" in result["messages"][-1].content
 ```
 
 ## Performance Optimization
 
-### 1. Caching
-```python
-from langchain.cache import InMemoryCache
-import langchain
+### 1. Caching with Redis
 
-langchain.llm_cache = InMemoryCache()
+```python
+from langchain_community.cache import RedisCache
+from langchain_core.globals import set_llm_cache
+import redis
+
+redis_client = redis.Redis.from_url("redis://localhost:6379")
+set_llm_cache(RedisCache(redis_client))
 ```
 
-### 2. Batch Processing
+### 2. Async Batch Processing
+
 ```python
-# Process multiple documents in parallel
-from langchain.document_loaders import DirectoryLoader
-from concurrent.futures import ThreadPoolExecutor
+import asyncio
+from langchain_core.documents import Document
 
-loader = DirectoryLoader('./docs')
-docs = loader.load()
+async def process_documents(documents: list[Document]) -> list:
+    """Process documents in parallel."""
+    tasks = [process_single(doc) for doc in documents]
+    return await asyncio.gather(*tasks)
 
-def process_doc(doc):
-    return text_splitter.split_documents([doc])
-
-with ThreadPoolExecutor(max_workers=4) as executor:
-    split_docs = list(executor.map(process_doc, docs))
+async def process_single(doc: Document) -> dict:
+    """Process a single document."""
+    chunks = text_splitter.split_documents([doc])
+    embeddings = await embeddings_model.aembed_documents(
+        [c.page_content for c in chunks]
+    )
+    return {"doc_id": doc.metadata.get("id"), "embeddings": embeddings}
 ```
 
-### 3. Streaming Responses
+### 3. Connection Pooling
+
 ```python
-from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
+from langchain_pinecone import PineconeVectorStore
+from pinecone import Pinecone
 
-llm = OpenAI(streaming=True, callbacks=[StreamingStdOutCallbackHandler()])
+# Reuse Pinecone client
+pc = Pinecone(api_key=os.environ["PINECONE_API_KEY"])
+index = pc.Index("my-index")
+
+# Create vector store with existing index
+vectorstore = PineconeVectorStore(index=index, embedding=embeddings)
 ```
-
-## Resources
-
-- **references/agents.md**: Deep dive on agent architectures
-- **references/memory.md**: Memory system patterns
-- **references/chains.md**: Chain composition strategies
-- **references/document-processing.md**: Document loading and indexing
-- **references/callbacks.md**: Monitoring and observability
-- **assets/agent-template.py**: Production-ready agent template
-- **assets/memory-config.yaml**: Memory configuration examples
-- **assets/chain-example.py**: Complex chain examples
-
-## Common Pitfalls
-
-1. **Memory Overflow**: Not managing conversation history length
-2. **Tool Selection Errors**: Poor tool descriptions confuse agents
-3. **Context Window Exceeded**: Exceeding LLM token limits
-4. **No Error Handling**: Not catching and handling agent failures
-5. **Inefficient Retrieval**: Not optimizing vector store queries
-
-## Production Checklist
-
-- [ ] Implement proper error handling
-- [ ] Add request/response logging
-- [ ] Monitor token usage and costs
-- [ ] Set timeout limits for agent execution
-- [ ] Implement rate limiting
-- [ ] Add input validation
-- [ ] Test with edge cases
-- [ ] Set up observability (callbacks)
-- [ ] Implement fallback strategies
-- [ ] Version control prompts and configurations
-
-## Limitations
-- Use this skill only when the task clearly matches the scope described above.
-- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
-- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.

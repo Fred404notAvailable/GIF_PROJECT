@@ -18,7 +18,7 @@ API security testing workflow for REST and GraphQL APIs covering authentication,
 **Tech:** [[REST & API]], [[API Security]], [[GitHub Actions]], [[Security Audit]], [[TDD]]
 
 ## Related Skills
-- **Complements:** [[api-design-principles]], [[e2e-testing]], [[neon-postgres]], [[stripe-best-practices]]
+- **Complements:** [[dotnet-backend-patterns]], [[e2e-testing]], [[server-actions]], [[stripe-best-practices]]
 - **Alternate of:** [[api-security]], [[security-audit]]
 
 Real skill file: `skills/api-security-testing/SKILL.md`
