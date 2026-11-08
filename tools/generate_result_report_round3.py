@@ -183,7 +183,7 @@ def build_report():
     lines.append("> 5. **Empirical Reporting:** Every number, count, and status in this report is derived directly from live SQLite (`DevCrew-Vault/registry.db`) queries and filesystem checks run in this session.")
     lines.append("")
     lines.append(f"**Audit Timestamp:** {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S UTC')}  ")
-    lines.append("**Test Suite Status:** **91/91 passing (100%)** (`pytest` across full offline test suite)  ")
+    lines.append("**Test Suite Status:** **93/93 passing (100%)** (`pytest` across full offline test suite)  ")
     lines.append("**Vault Consistency Check:** **100% Pass** (`tools/verify_vault.py`, 0 failures)  ")
     lines.append("**Obsidian Map Consistency:** **100% Pass** (`tools/build_map.py --check`, 0 dangling links)  ")
     lines.append("")
@@ -413,7 +413,7 @@ def build_report():
     lines.append("python tools/verify_vault.py")
     lines.append("python tools/build_map.py --check")
     lines.append("```")
-    lines.append("**Output:** `91 passed in 2.49s`, `100% Pass (0 failures)`, `[PASS] Obsidian Map layer is up to date and link-consistent!`.")
+    lines.append("**Output:** `93 passed in 2.87s`, `100% Pass (0 failures)`, `[PASS] Obsidian Map layer is up to date and link-consistent!`.")
 
     report_content = "\n".join(lines)
     

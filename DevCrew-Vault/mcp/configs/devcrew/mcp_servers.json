@@ -16,19 +16,43 @@
         "default": "require-approval",
         "allow": [
           "read_text_file",
-          "list_directory",
           "read_media_file",
-          "get_file_info"
+          "read_multiple_files",
+          "list_directory",
+          "list_directory_with_sizes",
+          "directory_tree",
+          "search_files",
+          "get_file_info",
+          "list_allowed_directories"
         ],
         "requireApproval": [
           "write_file",
           "edit_file",
+          "append_file",
           "move_file",
+          "copy_file",
           "create_directory"
         ]
       },
       "timeoutSeconds": 60,
       "enabled": true,
+      "toolEvidence": {
+        "read_text_file": "npm:@modelcontextprotocol/server-filesystem@2.2.0/README.md#L337 (readOnlyHint: true)",
+        "read_media_file": "npm:@modelcontextprotocol/server-filesystem@2.2.0/README.md#L338 (readOnlyHint: true)",
+        "read_multiple_files": "npm:@modelcontextprotocol/server-filesystem@2.2.0/README.md#L339 (readOnlyHint: true)",
+        "list_directory": "npm:@modelcontextprotocol/server-filesystem@2.2.0/README.md#L340 (readOnlyHint: true)",
+        "list_directory_with_sizes": "npm:@modelcontextprotocol/server-filesystem@2.2.0/README.md#L341 (readOnlyHint: true)",
+        "directory_tree": "npm:@modelcontextprotocol/server-filesystem@2.2.0/README.md#L342 (readOnlyHint: true)",
+        "search_files": "npm:@modelcontextprotocol/server-filesystem@2.2.0/README.md#L343 (readOnlyHint: true)",
+        "get_file_info": "npm:@modelcontextprotocol/server-filesystem@2.2.0/README.md#L344 (readOnlyHint: true)",
+        "list_allowed_directories": "npm:@modelcontextprotocol/server-filesystem@2.2.0/README.md#L345 (readOnlyHint: true)",
+        "write_file": "npm:@modelcontextprotocol/server-filesystem@2.2.0/README.md#L347 (destructiveHint: true)",
+        "edit_file": "npm:@modelcontextprotocol/server-filesystem@2.2.0/README.md#L349 (destructiveHint: true)",
+        "append_file": "npm:@modelcontextprotocol/server-filesystem@2.2.0/README.md#L348 (write tool)",
+        "move_file": "npm:@modelcontextprotocol/server-filesystem@2.2.0/README.md#L350 (destructiveHint: true)",
+        "copy_file": "npm:@modelcontextprotocol/server-filesystem@2.2.0/README.md#L351 (write tool)",
+        "create_directory": "npm:@modelcontextprotocol/server-filesystem@2.2.0/README.md#L346 (write tool)"
+      },
       "command": "npx",
       "args": [
         "-y",
@@ -45,23 +69,34 @@
         "default": "require-approval",
         "allow": [
           "git_status",
-          "git_diff",
-          "git_log",
-          "git_show"
+          "git_diff_unstaged",
+          "git_diff_staged",
+          "git_log"
         ],
         "requireApproval": [
           "git_commit",
           "git_add",
           "git_reset",
-          "git_create_branch",
-          "git_checkout"
+          "git_create_branch"
         ]
       },
       "timeoutSeconds": 60,
       "enabled": true,
+      "toolEvidence": {
+        "git_status": "pypi:mcp-server-git/0.6.2/info.description:Tools#L1 (readOnly: repo status inspection)",
+        "git_diff_unstaged": "pypi:mcp-server-git/0.6.2/info.description:Tools#L2 (readOnly: unstaged diff)",
+        "git_diff_staged": "pypi:mcp-server-git/0.6.2/info.description:Tools#L3 (readOnly: staged diff)",
+        "git_log": "pypi:mcp-server-git/0.6.2/info.description:Tools#L7 (readOnly: commit history)",
+        "git_commit": "pypi:mcp-server-git/0.6.2/info.description:Tools#L4 (write: commit creation)",
+        "git_add": "pypi:mcp-server-git/0.6.2/info.description:Tools#L5 (write: staging files)",
+        "git_reset": "pypi:mcp-server-git/0.6.2/info.description:Tools#L6 (write: unstage/reset)",
+        "git_create_branch": "pypi:mcp-server-git/0.6.2/info.description:Tools#L8 (write: branch creation)"
+      },
       "command": "uvx",
       "args": [
+        "--from",
         "mcp-server-git==0.6.2",
+        "mcp-server-git",
         "--repository",
         "D:/UPS_workspace"
       ]
@@ -73,22 +108,49 @@
       "capability": "read-write",
       "toolPolicy": {
         "default": "require-approval",
-        "allow": [
-          "browser_screenshot",
-          "browser_get_html",
-          "browser_evaluate"
-        ],
+        "allow": [],
         "requireApproval": [
-          "browser_navigate",
           "browser_click",
-          "browser_fill",
+          "browser_close",
+          "browser_drag",
+          "browser_drop",
+          "browser_evaluate",
+          "browser_file_upload",
+          "browser_fill_form",
           "browser_hover",
+          "browser_navigate",
+          "browser_navigate_back",
           "browser_press_key",
-          "browser_select_option"
+          "browser_run_code_unsafe",
+          "browser_select_option",
+          "browser_snapshot",
+          "browser_take_screenshot",
+          "browser_type",
+          "browser_wait_for"
         ]
       },
       "timeoutSeconds": 60,
       "enabled": true,
+      "toolEvidence": {
+        "browser_click": "npm:@playwright/mcp@0.0.84/README.md#L910 (action: user click)",
+        "browser_close": "npm:@playwright/mcp@0.0.84/README.md#L923 (lifecycle: close browser)",
+        "browser_drag": "npm:@playwright/mcp@0.0.84/README.md#L942 (action: drag element)",
+        "browser_drop": "npm:@playwright/mcp@0.0.84/README.md#L954 (action: drop element)",
+        "browser_evaluate": "npm:@playwright/mcp@0.0.84/README.md#L979 (code-execution: evaluate script on page)",
+        "browser_file_upload": "npm:@playwright/mcp@0.0.84/README.md#L991 (input: file upload to form)",
+        "browser_fill_form": "npm:@playwright/mcp@0.0.84/README.md#L1000 (input: fill form fields)",
+        "browser_hover": "npm:@playwright/mcp@0.0.84/README.md#L1031 (action: mouse hover)",
+        "browser_navigate": "npm:@playwright/mcp@0.0.84/README.md#L1041 (navigation: network URL navigation)",
+        "browser_navigate_back": "npm:@playwright/mcp@0.0.84/README.md#L1050 (navigation: browser back)",
+        "browser_press_key": "npm:@playwright/mcp@0.0.84/README.md#L1081 (action: keypress)",
+        "browser_run_code_unsafe": "npm:@playwright/mcp@0.0.84/README.md#L1100 (code-execution: arbitrary code execution)",
+        "browser_select_option": "npm:@playwright/mcp@0.0.84/README.md#L1110 (input: select dropdown option)",
+        "browser_snapshot": "npm:@playwright/mcp@0.0.84/README.md#L1121 (untrusted-content: accessibility/DOM tree snapshot)",
+        "browser_take_screenshot": "npm:@playwright/mcp@0.0.84/README.md#L1133 (untrusted-content: page visual capture)",
+        "browser_type": "npm:@playwright/mcp@0.0.84/README.md#L1147 (input: keyboard text typing)",
+        "browser_wait_for": "npm:@playwright/mcp@0.0.84/README.md#L1160 (synchronization: wait for selector/timeout)"
+      },
+      "_security_note": "Playwright v0.0.84 supports '--isolated' (in-memory profile) and '--allowed-origins <origins>' flags. To restrict browser network scope, configure args with --isolated and trusted origins.",
       "command": "npx",
       "args": [
         "-y",
@@ -106,16 +168,19 @@
       "transport": "stdio",
       "capability": "read-only",
       "toolPolicy": {
-        "default": "allow",
-        "allow": [
-          "query_context7",
-          "fetch_context",
-          "search_docs"
-        ],
-        "requireApproval": []
+        "default": "require-approval",
+        "allow": [],
+        "requireApproval": [
+          "resolve-library-id",
+          "query-docs"
+        ]
       },
       "timeoutSeconds": 60,
       "enabled": false,
+      "toolEvidence": {
+        "resolve-library-id": "npm:@upstash/context7-mcp@4.5.1/README.md#L1422 (resolution: resolve library name to ID)",
+        "query-docs": "npm:@upstash/context7-mcp@4.5.1/README.md#L1426 (untrusted-content: query external documentation)"
+      },
       "command": "npx",
       "args": [
         "-y",

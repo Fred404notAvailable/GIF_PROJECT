@@ -165,3 +165,4 @@ servers_for_skills(skill_slugs: list[str]) -> list[str]
   2. Configured in `mcp_servers.json`.
   3. Fully resolved and `enabled = True`.
 - Unapproved servers are never returned.
+

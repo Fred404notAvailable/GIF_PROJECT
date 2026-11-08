@@ -222,27 +222,101 @@ def test_tool_gating_hook():
     # Read tools are allowed without human gate for filesystem
     assert loader.gate("filesystem", "read_text_file") == "allow"
     assert loader.gate("filesystem", "list_directory") == "allow"
+    assert loader.gate("filesystem", "get_file_info") == "allow"
 
     # Write tools must ALWAYS require approval
     assert loader.gate("filesystem", "write_file") == "require_approval"
     assert loader.gate("filesystem", "edit_file") == "require_approval"
+    assert loader.gate("filesystem", "append_file") == "require_approval"
     assert loader.gate("filesystem", "create_directory") == "require_approval"
 
-    # Git mutation tools require approval
+    # Git verified tools: status/diff/log allowed; mutating tools require approval
     assert loader.gate("git", "git_status") == "allow"
-    assert loader.gate("git", "git_diff") == "allow"
+    assert loader.gate("git", "git_diff_unstaged") == "allow"
+    assert loader.gate("git", "git_diff_staged") == "allow"
+    assert loader.gate("git", "git_log") == "allow"
     assert loader.gate("git", "git_commit") == "require_approval"
-    assert loader.gate("git", "git_push") == "require_approval"
+    assert loader.gate("git", "git_add") == "require_approval"
+    assert loader.gate("git", "git_reset") == "require_approval"
+    assert loader.gate("git", "git_create_branch") == "require_approval"
 
-    # Playwright navigation requires approval
-    assert loader.gate("playwright-mcp", "browser_screenshot") == "allow"
+    # Invariant: Code execution tools NEVER in allow
+    assert loader.gate("playwright-mcp", "browser_evaluate") == "require_approval"
+    assert loader.gate("playwright-mcp", "browser_run_code_unsafe") == "require_approval"
+
+    # Invariant: Untrusted web content tools require approval by default
+    assert loader.gate("playwright-mcp", "browser_snapshot") == "require_approval"
+    assert loader.gate("playwright-mcp", "browser_take_screenshot") == "require_approval"
+    assert loader.gate("playwright-mcp", "browser_get_html") == "require_approval"
     assert loader.gate("playwright-mcp", "browser_navigate") == "require_approval"
+
+    # Context7 policy: default is require-approval; when disabled by missing key, gate returns deny
+    assert loader.active_servers["context7"]["toolPolicy"]["default"] == "require-approval"
+    assert loader.gate("context7", "query-docs") == "deny"  # disabled server returns deny
 
     # Unknown tool defaults to require_approval
     assert loader.gate("filesystem", "unknown_custom_tool") == "require_approval"
 
     # Unapproved or non-existent server denied
     assert loader.gate("non_existent_server", "any_tool") == "deny"
+
+
+def test_tool_evidence_and_static_verification():
+    cfg, _, _ = generate_configs_for_crew(crew="devcrew", dry_run=True)
+    servers = cfg["servers"]
+
+    # Playwright allow list must be empty (all actions require approval)
+    assert servers["playwright-mcp"]["toolPolicy"]["allow"] == []
+    assert "_security_note" in servers["playwright-mcp"]
+    assert "--isolated" in servers["playwright-mcp"]["_security_note"]
+    assert "--allowed-origins" in servers["playwright-mcp"]["_security_note"]
+
+    # Context7 default is require-approval and allow list is empty
+    assert servers["context7"]["toolPolicy"]["default"] == "require-approval"
+    assert servers["context7"]["toolPolicy"]["allow"] == []
+
+    # All servers have toolEvidence recorded with static file/line references
+    for sname in ("filesystem", "git", "playwright-mcp", "context7"):
+        evidence = servers[sname].get("toolEvidence")
+        assert evidence is not None, f"Server {sname} missing toolEvidence"
+        assert len(evidence) > 0
+        for tool_name, ev_ref in evidence.items():
+            assert "#L" in ev_ref or ":" in ev_ref
+
+
+def test_git_uvx_pinning_and_repo_validation(tmp_path: Path):
+    cfg, claude_exp, cursor_exp = generate_configs_for_crew(crew="devcrew", dry_run=True)
+    git_srv = cfg["servers"]["git"]
+
+    # Verify uvx syntax: uvx --from mcp-server-git==<ver> mcp-server-git --repository <path>
+    assert git_srv["command"] == "uvx"
+    assert git_srv["args"][:3] == ["--from", f"mcp-server-git=={git_srv['version']}", "mcp-server-git"]
+    assert "--repository" in git_srv["args"]
+
+    assert claude_exp["mcpServers"]["git"]["command"] == "uvx"
+    assert claude_exp["mcpServers"]["git"]["args"][:3] == ["--from", f"mcp-server-git=={git_srv['version']}", "mcp-server-git"]
+
+    # Test loader repo validation: directory inside workspaceRoot that lacks .git disables git server
+    ws_root = Path(cfg["workspaceRoot"])
+    non_git_subdir = ws_root / "test_non_git_subproject"
+    non_git_subdir.mkdir(parents=True, exist_ok=True)
+    try:
+        fake_config = tmp_path / "mcp_servers.json"
+        fake_payload = dict(cfg)
+        fake_payload["servers"] = dict(cfg["servers"])
+        fake_payload["servers"]["git"] = dict(git_srv)
+        fake_payload["servers"]["git"]["args"] = [
+            "--from", f"mcp-server-git=={git_srv['version']}", "mcp-server-git", "--repository", str(non_git_subdir).replace("\\", "/")
+        ]
+        fake_config.write_text(json.dumps(fake_payload), encoding="utf-8")
+
+        loader = MCPSafeLoader(crew="devcrew", config_path=fake_config)
+        loader.load()
+        assert loader.active_servers["git"]["enabled"] is False
+        assert "not an initialized git repository" in loader.disabled_reasons["git"]
+    finally:
+        if non_git_subdir.exists():
+            shutil.rmtree(non_git_subdir, ignore_errors=True)
 
 
 # ---------------------------------------------------------------------------

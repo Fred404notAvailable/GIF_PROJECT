@@ -253,6 +253,36 @@ class MCPSafeLoader:
                 self.active_servers[short_name] = srv_copy
                 continue
 
+            # Check git server repository path
+            if short_name == "git" or (reg_name and reg_name.endswith("/git")):
+                repo_path_str = str(ws_root)
+                for idx, a in enumerate(args):
+                    if a == "--repository" and idx + 1 < len(args):
+                        repo_path_str = args[idx + 1]
+                        break
+                repo_path = Path(repo_path_str).resolve()
+                if not repo_path.exists():
+                    reason = f"Git repository path '{repo_path}' does not exist."
+                    print(f"[MCPLoader:WARN] Server '{short_name}' disabled: {reason}")
+                    srv_copy = dict(srv)
+                    srv_copy["enabled"] = False
+                    srv_copy["_disabled_reason"] = reason
+                    self.disabled_reasons[short_name] = reason
+                    self.active_servers[short_name] = srv_copy
+                    continue
+                if not (repo_path / ".git").exists():
+                    reason = (
+                        f"Git repository path '{repo_path}' exists but is not an initialized git repository "
+                        f"(missing .git directory). Please run 'git init {repo_path}' to enable git server."
+                    )
+                    print(f"[MCPLoader:WARN] Server '{short_name}' disabled: {reason}")
+                    srv_copy = dict(srv)
+                    srv_copy["enabled"] = False
+                    srv_copy["_disabled_reason"] = reason
+                    self.disabled_reasons[short_name] = reason
+                    self.active_servers[short_name] = srv_copy
+                    continue
+
             # Copy and enable
             srv_copy = dict(srv)
             srv_copy["env"] = resolved_env
@@ -291,10 +321,16 @@ class MCPSafeLoader:
         allow_list = set(policy.get("allow") or [])
         require_approval_list = set(policy.get("requireApproval") or [])
 
-        # Safety Check: Write tools must NEVER be in allow
+        # Invariant 1: Code execution / script evaluation tools must NEVER execute without human gate
+        is_code_exec = any(kw in tool.lower() for kw in ("eval", "exec", "run_code", "script"))
+
+        # Invariant 2: Tools returning untrusted external web content must require approval by default
+        is_untrusted_web = any(kw in tool.lower() for kw in ("get_html", "snapshot", "fetch", "scrape", "crawl"))
+
+        # Invariant 3: Write tools must NEVER be in allow
         is_write_tool = any(kw in tool.lower() for kw in WRITE_TOOL_KEYWORDS)
 
-        if tool in require_approval_list or is_write_tool:
+        if tool in require_approval_list or is_write_tool or is_code_exec or is_untrusted_web:
             decision = "require_approval"
         elif tool in allow_list:
             if srv.get("capability") == "destructive":
@@ -461,3 +497,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+

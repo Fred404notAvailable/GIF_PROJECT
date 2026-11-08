@@ -46,6 +46,60 @@ SECRET_PATTERN = re.compile(
 
 HEADER_COMMENT = "// Generated example. Review the exact command before running it."
 
+# Statically verified tool lists with exact evidence references (file + line / section)
+TOOL_EVIDENCE: dict[str, dict[str, str]] = {
+    "filesystem": {
+        "read_text_file": "npm:@modelcontextprotocol/server-filesystem@2.2.0/README.md#L337 (readOnlyHint: true)",
+        "read_media_file": "npm:@modelcontextprotocol/server-filesystem@2.2.0/README.md#L338 (readOnlyHint: true)",
+        "read_multiple_files": "npm:@modelcontextprotocol/server-filesystem@2.2.0/README.md#L339 (readOnlyHint: true)",
+        "list_directory": "npm:@modelcontextprotocol/server-filesystem@2.2.0/README.md#L340 (readOnlyHint: true)",
+        "list_directory_with_sizes": "npm:@modelcontextprotocol/server-filesystem@2.2.0/README.md#L341 (readOnlyHint: true)",
+        "directory_tree": "npm:@modelcontextprotocol/server-filesystem@2.2.0/README.md#L342 (readOnlyHint: true)",
+        "search_files": "npm:@modelcontextprotocol/server-filesystem@2.2.0/README.md#L343 (readOnlyHint: true)",
+        "get_file_info": "npm:@modelcontextprotocol/server-filesystem@2.2.0/README.md#L344 (readOnlyHint: true)",
+        "list_allowed_directories": "npm:@modelcontextprotocol/server-filesystem@2.2.0/README.md#L345 (readOnlyHint: true)",
+        "write_file": "npm:@modelcontextprotocol/server-filesystem@2.2.0/README.md#L347 (destructiveHint: true)",
+        "edit_file": "npm:@modelcontextprotocol/server-filesystem@2.2.0/README.md#L349 (destructiveHint: true)",
+        "append_file": "npm:@modelcontextprotocol/server-filesystem@2.2.0/README.md#L348 (write tool)",
+        "move_file": "npm:@modelcontextprotocol/server-filesystem@2.2.0/README.md#L350 (destructiveHint: true)",
+        "copy_file": "npm:@modelcontextprotocol/server-filesystem@2.2.0/README.md#L351 (write tool)",
+        "create_directory": "npm:@modelcontextprotocol/server-filesystem@2.2.0/README.md#L346 (write tool)",
+    },
+    "git": {
+        "git_status": "pypi:mcp-server-git/0.6.2/info.description:Tools#L1 (readOnly: repo status inspection)",
+        "git_diff_unstaged": "pypi:mcp-server-git/0.6.2/info.description:Tools#L2 (readOnly: unstaged diff)",
+        "git_diff_staged": "pypi:mcp-server-git/0.6.2/info.description:Tools#L3 (readOnly: staged diff)",
+        "git_log": "pypi:mcp-server-git/0.6.2/info.description:Tools#L7 (readOnly: commit history)",
+        "git_commit": "pypi:mcp-server-git/0.6.2/info.description:Tools#L4 (write: commit creation)",
+        "git_add": "pypi:mcp-server-git/0.6.2/info.description:Tools#L5 (write: staging files)",
+        "git_reset": "pypi:mcp-server-git/0.6.2/info.description:Tools#L6 (write: unstage/reset)",
+        "git_create_branch": "pypi:mcp-server-git/0.6.2/info.description:Tools#L8 (write: branch creation)",
+    },
+    "playwright-mcp": {
+        "browser_click": "npm:@playwright/mcp@0.0.84/README.md#L910 (action: user click)",
+        "browser_close": "npm:@playwright/mcp@0.0.84/README.md#L923 (lifecycle: close browser)",
+        "browser_drag": "npm:@playwright/mcp@0.0.84/README.md#L942 (action: drag element)",
+        "browser_drop": "npm:@playwright/mcp@0.0.84/README.md#L954 (action: drop element)",
+        "browser_evaluate": "npm:@playwright/mcp@0.0.84/README.md#L979 (code-execution: evaluate script on page)",
+        "browser_file_upload": "npm:@playwright/mcp@0.0.84/README.md#L991 (input: file upload to form)",
+        "browser_fill_form": "npm:@playwright/mcp@0.0.84/README.md#L1000 (input: fill form fields)",
+        "browser_hover": "npm:@playwright/mcp@0.0.84/README.md#L1031 (action: mouse hover)",
+        "browser_navigate": "npm:@playwright/mcp@0.0.84/README.md#L1041 (navigation: network URL navigation)",
+        "browser_navigate_back": "npm:@playwright/mcp@0.0.84/README.md#L1050 (navigation: browser back)",
+        "browser_press_key": "npm:@playwright/mcp@0.0.84/README.md#L1081 (action: keypress)",
+        "browser_run_code_unsafe": "npm:@playwright/mcp@0.0.84/README.md#L1100 (code-execution: arbitrary code execution)",
+        "browser_select_option": "npm:@playwright/mcp@0.0.84/README.md#L1110 (input: select dropdown option)",
+        "browser_snapshot": "npm:@playwright/mcp@0.0.84/README.md#L1121 (untrusted-content: accessibility/DOM tree snapshot)",
+        "browser_take_screenshot": "npm:@playwright/mcp@0.0.84/README.md#L1133 (untrusted-content: page visual capture)",
+        "browser_type": "npm:@playwright/mcp@0.0.84/README.md#L1147 (input: keyboard text typing)",
+        "browser_wait_for": "npm:@playwright/mcp@0.0.84/README.md#L1160 (synchronization: wait for selector/timeout)",
+    },
+    "context7": {
+        "resolve-library-id": "npm:@upstash/context7-mcp@4.5.1/README.md#L1422 (resolution: resolve library name to ID)",
+        "query-docs": "npm:@upstash/context7-mcp@4.5.1/README.md#L1426 (untrusted-content: query external documentation)",
+    },
+}
+
 
 def get_server_command_and_args(server: dict[str, Any]) -> tuple[str, list[str], dict[str, str], str | None]:
     """Legacy helper: derive client command, arguments, environment placeholders, and optional note."""
@@ -251,52 +305,72 @@ def build_server_config(
     url: str | None = None
 
     # Derive toolPolicy based on server identity and capability
+    tool_evidence: dict[str, str] = {}
+    sec_note: str | None = None
+
     if short_key == "filesystem" or reg_name.endswith("/filesystem"):
         command = "npx"
         args = ["-y", f"@modelcontextprotocol/server-filesystem@{approved_ver}", workspace_root]
         capability = "read-write"
+        tool_evidence = TOOL_EVIDENCE["filesystem"]
         tool_policy = {
             "default": "require-approval",
-            "allow": ["read_text_file", "list_directory", "read_media_file", "get_file_info"],
-            "requireApproval": ["write_file", "edit_file", "move_file", "create_directory"],
+            "allow": [
+                "read_text_file",
+                "read_media_file",
+                "read_multiple_files",
+                "list_directory",
+                "list_directory_with_sizes",
+                "directory_tree",
+                "search_files",
+                "get_file_info",
+                "list_allowed_directories",
+            ],
+            "requireApproval": [
+                "write_file",
+                "edit_file",
+                "append_file",
+                "move_file",
+                "copy_file",
+                "create_directory",
+            ],
         }
     elif short_key == "git" or reg_name.endswith("/git"):
         command = "uvx"
-        args = [f"mcp-server-git=={approved_ver}", "--repository", workspace_root]
+        args = ["--from", f"mcp-server-git=={approved_ver}", "mcp-server-git", "--repository", workspace_root]
         capability = "read-write"
-        req_approval = ["git_commit", "git_add", "git_reset", "git_create_branch", "git_checkout"]
-        if allow_push:
-            req_approval.append("git_push")
+        tool_evidence = TOOL_EVIDENCE["git"]
         tool_policy = {
             "default": "require-approval",
-            "allow": ["git_status", "git_diff", "git_log", "git_show"],
-            "requireApproval": req_approval,
+            "allow": ["git_status", "git_diff_unstaged", "git_diff_staged", "git_log"],
+            "requireApproval": ["git_commit", "git_add", "git_reset", "git_create_branch"],
         }
     elif "playwright" in short_key.lower():
         command = "npx"
         args = ["-y", f"@playwright/mcp@{approved_ver}"]
         capability = "read-write"
+        tool_evidence = TOOL_EVIDENCE["playwright-mcp"]
+        sec_note = (
+            "Playwright v0.0.84 supports '--isolated' (in-memory profile) and '--allowed-origins <origins>' flags. "
+            "To restrict browser network scope, configure args with --isolated and trusted origins."
+        )
+        # Per security invariants: tools executing code or returning untrusted content must require approval
         tool_policy = {
             "default": "require-approval",
-            "allow": ["browser_screenshot", "browser_get_html", "browser_evaluate"],
-            "requireApproval": [
-                "browser_navigate",
-                "browser_click",
-                "browser_fill",
-                "browser_hover",
-                "browser_press_key",
-                "browser_select_option",
-            ],
+            "allow": [],
+            "requireApproval": sorted(list(tool_evidence.keys())),
         }
     elif "context7" in short_key.lower():
         command = "npx"
         args = ["-y", f"@upstash/context7-mcp@{approved_ver}"]
         capability = "read-only"
         env["CONTEXT7_API_KEY"] = "${CONTEXT7_API_KEY}"
+        tool_evidence = TOOL_EVIDENCE["context7"]
+        # Per requirement 3: for servers with unverified tool names or untrusted retrieval, default is require-approval
         tool_policy = {
-            "default": "allow",
-            "allow": ["query_context7", "fetch_context", "search_docs"],
-            "requireApproval": [],
+            "default": "require-approval",
+            "allow": [],
+            "requireApproval": ["resolve-library-id", "query-docs"],
         }
     else:
         # Fallback for arbitrary server
@@ -309,7 +383,7 @@ def build_server_config(
                 args = ["-y", f"{identifier}@{approved_ver}"]
             elif pkg_type == "pypi":
                 command = "uvx"
-                args = [f"{identifier}=={approved_ver}"]
+                args = ["--from", f"{identifier}=={approved_ver}", identifier]
             else:
                 command = "docker"
                 args = ["run", "-i", "--rm", f"{identifier}:{approved_ver}"]
@@ -324,7 +398,7 @@ def build_server_config(
                     headers[h["name"]] = f"${{{h['name'].upper()}}}"
 
         tool_policy = {
-            "default": "allow" if capability == "read-only" else "require-approval",
+            "default": "require-approval",
             "allow": [],
             "requireApproval": [],
         }
@@ -348,6 +422,10 @@ def build_server_config(
         "enabled": enabled,
     }
 
+    if tool_evidence:
+        server_entry["toolEvidence"] = tool_evidence
+    if sec_note:
+        server_entry["_security_note"] = sec_note
     if command:
         server_entry["command"] = command
         server_entry["args"] = args

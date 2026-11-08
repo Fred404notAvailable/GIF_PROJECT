@@ -73,3 +73,4 @@ In addition to the primary `mcp_servers.json` format, DevCrew generates exports 
 - `DevCrew-Vault/mcp/configs/devcrew/exports/claude-desktop.json`
 - `DevCrew-Vault/mcp/configs/devcrew/exports/cursor.json`
 Both exports parameterize secrets and carry the header comment `_generated: "Review before copying into your client config"`.
+
