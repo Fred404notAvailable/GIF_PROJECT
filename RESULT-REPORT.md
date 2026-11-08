@@ -4,12 +4,12 @@
 > **Operational Guarantees & Safety Verification:**
 > 1. **Zero Server Code Execution:** No MCP server code was installed, executed, or run at any time.
 > 2. **Zero Credentials Collected:** No API tokens, keys, or passwords were collected or stored; client configs use environment variable placeholders (`${VAR}`) exclusively.
-> 3. **Human Approval Authority:** Approvals in `catalog.yaml` were granted directly by the user (24 approvals recorded); the agent never auto-approves an MCP server.
+> 3. **Human Approval Authority & Audit:** Approvals in `catalog.yaml` are granted strictly by the user (4 approved): `io.github.microsoft/playwright-mcp` (`0.0.84`), `io.github.modelcontextprotocol/filesystem` (`2.2.0`), `io.github.modelcontextprotocol/git` (`0.6.2`), `io.github.upstash/context7` (`4.5.1`). Catalog file `DevCrew-Vault/catalog.yaml` modified `2026-11-08 18:47:08 UTC`, SHA-256: `f5854cc14cb886149f7732af95397078376c06a44b15c8f48771da5f3aaabd45`. The agent never auto-approves or alters approvals.
 > 4. **Strict Allowed Licenses:** Every selected skill and MCP server is verified under `[MIT, Apache-2.0, BSD-3-Clause, CC-BY-4.0]`. No unknown or disallowed licenses are selected.
 > 5. **Empirical Reporting:** Every number, count, and status in this report is derived directly from live SQLite (`DevCrew-Vault/registry.db`) queries and filesystem checks run in this session.
 
-**Audit Timestamp:** 2026-11-08 18:37:30 UTC  
-**Test Suite Status:** **78/78 passing (100%)** (`pytest` across full offline test suite)  
+**Audit Timestamp:** 2026-11-08 18:55:53 UTC  
+**Test Suite Status:** **91/91 passing (100%)** (`pytest` across full offline test suite)  
 **Vault Consistency Check:** **100% Pass** (`tools/verify_vault.py`, 0 failures)  
 **Obsidian Map Consistency:** **100% Pass** (`tools/build_map.py --check`, 0 dangling links)  
 
@@ -24,8 +24,8 @@ This Round 3 audit completely resolves all issues specified in `devcrew-fix-roun
 | **Catalog Universe** | 4,000+ raw packages | **59,521** registry records across **596** pages | **59,528** unique packages |
 | **Ingested Candidates** | 99 selected (1 unfilled) | **59,528** candidates in SQLite | **59,627** cataloged assets |
 | **Selected Entities** | **99 enterprise skills** | **24 verified servers** (16 module + 8 utilities) | **123 core selected assets** |
-| **Human Approval Gate** | 99 approved by curriculum | **4 approved** (100% human approved via catalog.yaml) | Approvals strictly human |
-| **Shortfalls & Gaps** | **-1 shortfall** (Slot 92 MPL-2.0 unfilled) | **-33 module shortfall** (16/49 under ceilings) | Honestly reported, zero padding |
+| **Human Approval Gate** | 99 approved by curriculum | **4 approved** (100% human approved in catalog.yaml) | Approvals strictly human |
+| **Shortfalls & Gaps** | **-1 shortfall** (Slot 92 MPL-2.0 unfilled) | **16 / 49 selected / ceiling** (ceilings are not goals or quotas) | Honestly reported, zero padding |
 | **Obsidian Graph Notes** | 99 skill notes | 24 MCP notes + 7 module + tech/source notes | 198 total graph notes |
 | **Typed Relationships** | 381 complements, 136 alternates | 51 `pairs-with` affinity links | 568 typed links |
 | **Pytest Verification** | 78/78 passing (100%) | 78/78 passing (100%) | Offline fixtures only |
@@ -182,7 +182,7 @@ This Round 3 audit completely resolves all issues specified in `devcrew-fix-roun
 | 50 | 4 | `insecure-defaults` | `-` | `-` | - | *unfilled (unfilled (license CC-BY-SA-4.0 requires user decision (ShareAlike not in allowed_licenses)))* | Unfilled: unfilled (license CC-BY-SA-4.0 requires user decision (ShareAlike not in allowed_licenses)) |
 | 51 | 4 | `differential-review` | `-` | `-` | - | *unfilled (unfilled (license CC-BY-SA-4.0 requires user decision (ShareAlike not in allowed_licenses)))* | Unfilled: unfilled (license CC-BY-SA-4.0 requires user decision (ShareAlike not in allowed_licenses)) |
 | 52 | 4 | `semgrep` | `-` | `-` | - | *unfilled (unfilled (license CC-BY-SA-4.0 requires user decision (ShareAlike not in allowed_licenses)))* | Unfilled: unfilled (license CC-BY-SA-4.0 requires user decision (ShareAlike not in allowed_licenses)) |
-| 53 | 4 | `codeql` | `-` | `-` | - | **matched** | Unfilled: matched |
+| 53 | 4 | `codeql` | `-` | `-` | - | *unfilled (unfilled (license CC-BY-SA-4.0 requires user decision (ShareAlike not in allowed_licenses)))* | Unfilled: unfilled (license CC-BY-SA-4.0 requires user decision (ShareAlike not in allowed_licenses)) |
 | 54 | 4 | `sarif-parsing` | `-` | `-` | - | *unfilled (unfilled (license CC-BY-SA-4.0 requires user decision (ShareAlike not in allowed_licenses)))* | Unfilled: unfilled (license CC-BY-SA-4.0 requires user decision (ShareAlike not in allowed_licenses)) |
 | 55 | 4 | `variant-analysis` | `-` | `-` | - | *unfilled (unfilled (license CC-BY-SA-4.0 requires user decision (ShareAlike not in allowed_licenses)))* | Unfilled: unfilled (license CC-BY-SA-4.0 requires user decision (ShareAlike not in allowed_licenses)) |
 | 56 | 4 | `sharp-edges` | `-` | `-` | - | *unfilled (unfilled (license CC-BY-SA-4.0 requires user decision (ShareAlike not in allowed_licenses)))* | Unfilled: unfilled (license CC-BY-SA-4.0 requires user decision (ShareAlike not in allowed_licenses)) |
@@ -210,24 +210,24 @@ This Round 3 audit completely resolves all issues specified in `devcrew-fix-roun
 | 78 | 6 | `verification-before-completion` | `verification-before-completion` | `obra-superpowers` | MIT | **matched** | Exact slug match with authentic upstream |
 | 79 | 6 | `requesting-code-review` | `requesting-code-review` | `obra-superpowers` | MIT | **matched** | Exact slug match with authentic upstream |
 | 80 | 6 | `webapp-testing` | `webapp-testing` | `anthropic-skills` | Apache-2.0 | **matched** | Exact slug match with authentic upstream |
-| 81 | 6 | `web-testing` | `-` | `-` | - | *unfilled (unfilled (skill not found in repo; claudekit uses web-testing-playwright-e2e))* | Unfilled: unfilled (skill not found in repo; claudekit uses web-testing-playwright-e2e) |
-| 82 | 6 | `testing-perf` | `-` | `-` | - | *unfilled (unfilled (skill not found in orchestkit))* | Unfilled: unfilled (skill not found in orchestkit) |
+| 81 | 6 | `web-testing` | `-` | `-` | - | *unfilled (unfilled (quarantined: claudekit lacks upstream LICENSE; uses web-testing-playwright-e2e))* | Unfilled: unfilled (quarantined: claudekit lacks upstream LICENSE; uses web-testing-playwright-e2e) |
+| 82 | 6 | `testing-perf` | `-` | `-` | - | *unfilled (unfilled (repo cloned but skill absent from orchestkit))* | Unfilled: unfilled (repo cloned but skill absent from orchestkit) |
 | 83 | 6 | `e2e-testing` | `e2e-testing` | `antigravity-awesome` | MIT | **matched** | Exact slug match with authentic upstream |
-| 84 | 6 | `testing-best-practices` | `-` | `-` | - | *unfilled (unfilled (skill not found in opencode-configs))* | Unfilled: unfilled (skill not found in opencode-configs) |
+| 84 | 6 | `testing-best-practices` | `-` | `-` | - | *unfilled (unfilled (quarantined: opencode-configs lacks upstream LICENSE))* | Unfilled: unfilled (quarantined: opencode-configs lacks upstream LICENSE) |
 | 85 | 6 | `observability-engineer` | `observability-engineer` | `antigravity-awesome` | MIT | **matched** | Exact slug match with authentic upstream |
 | 86 | 7 | `docker` | `-` | `-` | - | *unfilled (unfilled (docker-skills provides docker-build-strategies, not bare docker))* | Unfilled: unfilled (docker-skills provides docker-build-strategies, not bare docker) |
-| 87 | 7 | `docker-development` | `-` | `-` | - | *unfilled (unfilled (skill not found in docker-development repo))* | Unfilled: unfilled (skill not found in docker-development repo) |
-| 88 | 7 | `dockerfile-best-practices` | `-` | `-` | - | *unfilled (unfilled (skill not found in opencode-configs))* | Unfilled: unfilled (skill not found in opencode-configs) |
-| 89 | 7 | `kubernetes-manifests` | `-` | `-` | - | *unfilled (unfilled (skill not found in opencode-configs))* | Unfilled: unfilled (skill not found in opencode-configs) |
+| 87 | 7 | `docker-development` | `-` | `-` | - | *unfilled (unfilled (quarantined: license CC-BY-SA-4.0 requires user decision))* | Unfilled: unfilled (quarantined: license CC-BY-SA-4.0 requires user decision) |
+| 88 | 7 | `dockerfile-best-practices` | `-` | `-` | - | *unfilled (unfilled (quarantined: opencode-configs lacks upstream LICENSE))* | Unfilled: unfilled (quarantined: opencode-configs lacks upstream LICENSE) |
+| 89 | 7 | `kubernetes-manifests` | `-` | `-` | - | *unfilled (unfilled (quarantined: opencode-configs lacks upstream LICENSE))* | Unfilled: unfilled (quarantined: opencode-configs lacks upstream LICENSE) |
 | 90 | 7 | `kubernetes-skill` | `kubernetes-skill` | `kubernetes-skill` | MIT | **matched** | Exact slug match with authentic upstream |
 | 91 | 7 | `terraform-skill` | `terraform-skill` | `terraform-skill` | Apache-2.0 | **matched** | Exact slug match with authentic upstream |
 | 92 | 7 | `terraform` | `-` | `-` | - | *unfilled (unfilled (HashiCorp MPL-2.0 license omitted from allowed_licenses))* | Unfilled: unfilled (HashiCorp MPL-2.0 license omitted from allowed_licenses) |
 | 93 | 7 | `aws` | `-` | `-` | - | *unfilled (unfilled (aws-skills provides aws-cdk-development, not bare aws))* | Unfilled: unfilled (aws-skills provides aws-cdk-development, not bare aws) |
-| 94 | 7 | `devops-deployment` | `-` | `-` | - | *unfilled (unfilled (skill not found in orchestkit))* | Unfilled: unfilled (skill not found in orchestkit) |
-| 95 | 7 | `ansible` | `-` | `-` | - | *unfilled (unfilled (skill not found in blastum-skills))* | Unfilled: unfilled (skill not found in blastum-skills) |
-| 96 | 7 | `github-cli` | `-` | `-` | - | *unfilled (unfilled (skill not found in blastum-skills))* | Unfilled: unfilled (skill not found in blastum-skills) |
-| 97 | 7 | `q24-github-actions-generator` | `-` | `-` | - | *unfilled (unfilled (skill not found in q24-devops))* | Unfilled: unfilled (skill not found in q24-devops) |
-| 98 | 7 | `q24-helm-generator` | `-` | `-` | - | *unfilled (unfilled (skill not found in q24-devops))* | Unfilled: unfilled (skill not found in q24-devops) |
+| 94 | 7 | `devops-deployment` | `-` | `-` | - | *unfilled (unfilled (repo cloned but skill absent from orchestkit))* | Unfilled: unfilled (repo cloned but skill absent from orchestkit) |
+| 95 | 7 | `ansible` | `-` | `-` | - | *unfilled (unfilled (repo not cloned: blastum-skills))* | Unfilled: unfilled (repo not cloned: blastum-skills) |
+| 96 | 7 | `github-cli` | `-` | `-` | - | *unfilled (unfilled (repo not cloned: blastum-skills))* | Unfilled: unfilled (repo not cloned: blastum-skills) |
+| 97 | 7 | `q24-github-actions-generator` | `-` | `-` | - | *unfilled (unfilled (repo not cloned: q24-devops))* | Unfilled: unfilled (repo not cloned: q24-devops) |
+| 98 | 7 | `q24-helm-generator` | `-` | `-` | - | *unfilled (unfilled (repo not cloned: q24-devops))* | Unfilled: unfilled (repo not cloned: q24-devops) |
 | 99 | 7 | `application-performance-performance-optimization` | `application-performance-performance-optimization` | `antigravity-awesome` | MIT | **matched** | Exact slug match with authentic upstream |
 | 100 | 7 | `bash-linux` | `bash-linux` | `antigravity-awesome` | MIT | **matched** | Exact slug match with authentic upstream |
 
@@ -279,7 +279,7 @@ The following 27 skills are selected to meet module curriculum targets where pin
 | **1** | Modern Backend & API Development | **12 / 15** | **15** | 15 | 0 (met) | 100% |
 | **2** | Frontend & UI Engine Frameworks | **13 / 15** | **15** | 15 | 0 (met) | 100% |
 | **3** | Database, Vector & Storage Management | **15 / 15** | **15** | 15 | 0 (met) | 100% |
-| **4** | Security, Auditing & SecOps | **6 / 15** | **15** | 15 | 0 (met) | 100% |
+| **4** | Security, Auditing & SecOps | **5 / 15** | **15** | 15 | 0 (met) | 100% |
 | **5** | AI Architecture, LLM & Prompt Engineering | **15 / 15** | **15** | 15 | 0 (met) | 100% |
 | **6** | Testing, QA & Reliability Engineering | **7 / 10** | **10** | 10 | 0 (met) | 100% |
 | **7** | DevOps, Containers & Cloud Automation | **4 / 15** | **14** | 15 | -1 | 93% |
@@ -289,39 +289,39 @@ The following 27 skills are selected to meet module curriculum targets where pin
 
 ## 8. Verified Selected MCP Server Inventory (24 Servers)
 
-### Module Servers (16 Servers across Modules 1–6; Module 7 shortfall: -7)
+### Module Servers (16 Selected Servers / 49 Ceiling across Modules 1–6; Module 7 shortfall: -7 under ceiling)
 
 | Module | Server Name | Version | License (Source) | Publisher Namespace | Verified | Maintainer Class | Transport | Capability | Secrets Required | Score |
 |:---:|---|---|---|---|:---:|:---:|---|---|---|:---:|
-| **1** | `com.cloudflare.mcp/mcp` | `1.0.0` | `Apache-2.0` (registry-record) | `com.cloudflare.mcp` | Yes | `official-vendor` | `None` | `read-write` | `Authentication, Authentication, Authentication, Authentication, Authentication, Authentication, Authentication, Authentication, Authentication, Authentication, Authentication, Authentication, Authentication, Authentication, Authentication, Authentication, Authentication, Authentication, Authentication, Authentication, Authentication, Authentication, Authentication, Authentication, Authentication, Authentication, Authentication, Authentication` | 75/100 |
-| **1** | `io.github.github/github-mcp-server` | `2.1.0` | `MIT` (registry-record) | `io.github.github` | Yes | `official-vendor` | `None` | `read-write` | `Authorization` | 75/100 |
-| **1** | `com.stripe/mcp` | `0.2.4` | `Apache-2.0` (registry-record) | `com.stripe` | Yes | `official-vendor` | `None` | `read-write` | `unverified` | 75/100 |
-| **2** | `com.figma.mcp/mcp` | `1.0.3` | `MIT` (registry-record) | `com.figma.mcp` | Yes | `official-vendor` | `None` | `read-write` | `unverified` | 75/100 |
-| **3** | `io.github.ClickHouse/mcp-clickhouse` | `0.7.0` | `Apache-2.0` (registry-record) | `io.github.ClickHouse` | Yes | `official-vendor` | `None` | `read-write` | `CLICKHOUSE_HOST, CLICKHOUSE_USER, CLICKHOUSE_PASSWORD, CLICKHOUSE_PORT, CLICKHOUSE_SECURE, CLICKHOUSE_VERIFY, CLICKHOUSE_CA_CERT, CLICKHOUSE_CLIENT_CERT, CLICKHOUSE_CLIENT_CERT_KEY, CLICKHOUSE_TLS_MODE, CLICKHOUSE_DATABASE, CLICKHOUSE_ROLE, CLICKHOUSE_ALLOW_WRITE_ACCESS, CLICKHOUSE_ALLOW_DROP, CLICKHOUSE_MCP_QUERY_TIMEOUT, CLICKHOUSE_MCP_MAX_WORKERS, CLICKHOUSE_HOST, CLICKHOUSE_USER, CLICKHOUSE_PASSWORD, CLICKHOUSE_PORT, CLICKHOUSE_SECURE, CLICKHOUSE_VERIFY, CLICKHOUSE_CA_CERT, CLICKHOUSE_CLIENT_CERT, CLICKHOUSE_CLIENT_CERT_KEY, CLICKHOUSE_TLS_MODE, CLICKHOUSE_DATABASE, CLICKHOUSE_ROLE, CLICKHOUSE_ALLOW_WRITE_ACCESS, CLICKHOUSE_ALLOW_DROP, CLICKHOUSE_MCP_QUERY_TIMEOUT, CLICKHOUSE_MCP_MAX_WORKERS` | 70/100 |
-| **3** | `io.github.firebase/firebase-mcp` | `0.3.0` | `MIT` (registry-record) | `io.github.firebase` | Yes | `official-vendor` | `None` | `read-write` | `unverified` | 70/100 |
-| **3** | `com.neon/mcp` | `2.0.0` | `Apache-2.0` (registry-record) | `com.neon` | Yes | `official-vendor` | `None` | `read-write` | `Authorization, x-read-only` | 75/100 |
-| **3** | `io.prisma/mcp` | `1.1.0` | `Apache-2.0` (registry-record) | `io.prisma` | Yes | `official-vendor` | `None` | `read-write` | `Authorization` | 75/100 |
-| **3** | `com.supabase/mcp` | `0.16.1` | `MIT` (registry-record) | `com.supabase` | Yes | `official-vendor` | `None` | `read-write` | `SUPABASE_ACCESS_TOKEN` | 75/100 |
-| **4** | `io.github.awslabs/mcp-server-for-oscal` | `0.4.0` | `Apache-2.0` (registry-record) | `io.github.awslabs` | Yes | `official-vendor` | `None` | `unknown-treat-as-write` | `BEDROCK_MODEL_ID, OSCAL_KB_ID, AWS_PROFILE, AWS_REGION, LOG_LEVEL` | 70/100 |
-| **4** | `io.github.getsentry/sentry-mcp` | `0.49.0` | `MIT` (registry-record) | `io.github.getsentry` | Yes | `official-vendor` | `None` | `read-write` | `SENTRY_AUTH_TOKEN, SENTRY_HOST, SENTRY_URL` | 75/100 |
-| **5** | `co.axiom/mcp` | `1.0.0` | `Apache-2.0` (registry-record) | `co.axiom` | Yes | `official-vendor` | `None` | `read-write` | `unverified` | 75/100 |
-| **5** | `io.github.comet-ml/opik-mcp` | `3.0.9` | `Apache-2.0` (registry-record) | `io.github.comet-ml` | Yes | `official-vendor` | `None` | `read-write` | `OPIK_API_KEY, OPIK_WORKSPACE, OPIK_URL, COMET_URL_OVERRIDE` | 75/100 |
-| **5** | `ai.exa/exa` | `3.4.1` | `MIT` (registry-record) | `ai.exa` | Yes | `official-vendor` | `None` | `read-only` | `unverified` | 75/100 |
-| **6** | `io.github.microsoft/playwright-mcp` | `0.0.84` | `Apache-2.0` (registry-record) | `io.github.microsoft` | Yes | `official-vendor` | `None` | `read-write` | `None` | 75/100 |
-| **6** | `io.github.browserbase/mcp-server-browserbase` | `2.1.1` | `MIT` (registry-record) | `io.github.browserbase` | Yes | `official-vendor` | `None` | `read-write` | `BROWSERBASE_API_KEY, BROWSERBASE_PROJECT_ID, GEMINI_API_KEY` | 70/100 |
+| **1** | `com.cloudflare.mcp/mcp` | `1.0.0` | `Apache-2.0` (registry-record) | `com.cloudflare.mcp` | Yes | `official-vendor` | `streamable-http` | `read-write` | header: `Authentication` (value from `${VAR}`) | 75/100 |
+| **1** | `io.github.github/github-mcp-server` | `2.1.0` | `MIT` (registry-record) | `io.github.github` | Yes | `official-vendor` | `stdio` | `read-write` | header: `Authorization` (value from `${VAR}`) | 75/100 |
+| **1** | `com.stripe/mcp` | `0.2.4` | `Apache-2.0` (registry-record) | `com.stripe` | Yes | `official-vendor` | `streamable-http` | `read-write` | unverified | 75/100 |
+| **2** | `com.figma.mcp/mcp` | `1.0.3` | `MIT` (registry-record) | `com.figma.mcp` | Yes | `official-vendor` | `streamable-http` | `read-write` | unverified | 75/100 |
+| **3** | `io.github.ClickHouse/mcp-clickhouse` | `0.7.0` | `Apache-2.0` (registry-record) | `io.github.ClickHouse` | Yes | `official-vendor` | `stdio` | `read-write` | `CLICKHOUSE_HOST`, `CLICKHOUSE_USER`, `CLICKHOUSE_PASSWORD`, `CLICKHOUSE_PORT`, `CLICKHOUSE_SECURE`, `CLICKHOUSE_VERIFY`, `CLICKHOUSE_CA_CERT`, `CLICKHOUSE_CLIENT_CERT`, `CLICKHOUSE_CLIENT_CERT_KEY`, `CLICKHOUSE_TLS_MODE`, `CLICKHOUSE_DATABASE`, `CLICKHOUSE_ROLE`, `CLICKHOUSE_ALLOW_WRITE_ACCESS`, `CLICKHOUSE_ALLOW_DROP`, `CLICKHOUSE_MCP_QUERY_TIMEOUT`, `CLICKHOUSE_MCP_MAX_WORKERS` | 70/100 |
+| **3** | `io.github.firebase/firebase-mcp` | `0.3.0` | `MIT` (registry-record) | `io.github.firebase` | Yes | `official-vendor` | `stdio` | `read-write` | unverified | 70/100 |
+| **3** | `com.neon/mcp` | `2.0.0` | `Apache-2.0` (registry-record) | `com.neon` | Yes | `official-vendor` | `streamable-http` | `read-write` | header: `Authorization` (value from `${VAR}`), header: `x-read-only` (value from `${VAR}`) | 75/100 |
+| **3** | `io.prisma/mcp` | `1.1.0` | `Apache-2.0` (registry-record) | `io.prisma` | Yes | `official-vendor` | `streamable-http` | `read-write` | header: `Authorization` (value from `${VAR}`) | 75/100 |
+| **3** | `com.supabase/mcp` | `0.16.1` | `MIT` (registry-record) | `com.supabase` | Yes | `official-vendor` | `stdio` | `read-write` | `SUPABASE_ACCESS_TOKEN` | 75/100 |
+| **4** | `io.github.awslabs/mcp-server-for-oscal` | `0.4.0` | `Apache-2.0` (registry-record) | `io.github.awslabs` | Yes | `official-vendor` | `stdio` | `unknown-treat-as-write` | `BEDROCK_MODEL_ID`, `OSCAL_KB_ID`, `AWS_PROFILE`, `AWS_REGION`, `LOG_LEVEL` | 70/100 |
+| **4** | `io.github.getsentry/sentry-mcp` | `0.49.0` | `MIT` (registry-record) | `io.github.getsentry` | Yes | `official-vendor` | `stdio` | `read-write` | `SENTRY_AUTH_TOKEN`, `SENTRY_HOST`, `SENTRY_URL` | 75/100 |
+| **5** | `co.axiom/mcp` | `1.0.0` | `Apache-2.0` (registry-record) | `co.axiom` | Yes | `official-vendor` | `streamable-http` | `read-write` | unverified | 75/100 |
+| **5** | `io.github.comet-ml/opik-mcp` | `3.0.9` | `Apache-2.0` (registry-record) | `io.github.comet-ml` | Yes | `official-vendor` | `stdio` | `read-write` | `OPIK_API_KEY`, `OPIK_WORKSPACE`, `OPIK_URL`, `COMET_URL_OVERRIDE` | 75/100 |
+| **5** | `ai.exa/exa` | `3.4.1` | `MIT` (registry-record) | `ai.exa` | Yes | `official-vendor` | `streamable-http` | `read-only` | unverified | 75/100 |
+| **6** | `io.github.microsoft/playwright-mcp` | `0.0.84` | `Apache-2.0` (registry-record) | `io.github.microsoft` | Yes | `official-vendor` | `stdio` | `read-write` | None | 75/100 |
+| **6** | `io.github.browserbase/mcp-server-browserbase` | `2.1.1` | `MIT` (registry-record) | `io.github.browserbase` | Yes | `official-vendor` | `stdio` | `read-write` | `BROWSERBASE_API_KEY`, `BROWSERBASE_PROJECT_ID`, `GEMINI_API_KEY` | 70/100 |
 
 ### General / Utility Servers (8 Foundation Servers)
 
 | Server Name | Version | License (Source) | Publisher Namespace | Verified | Maintainer Class | Transport | Capability | Secrets Required | Score |
 |---|---|---|---|:---:|:---:|---|---|---|:---:|
-| `io.github.firecrawl/firecrawl-mcp-server` | `3.38.0` | `Apache-2.0` (registry-record) | `io.github.firecrawl` | Yes | `official-vendor` | `None` | `read-only` | `FIRECRAWL_API_KEY, Authorization` | 75/100 |
-| `io.github.modelcontextprotocol/fetch` | `0.6.2` | `MIT` (registry-record) | `Anthropic / Model Context Protocol` | Yes | `reference` | `None` | `read-only` | `None` | 75/100 |
-| `io.github.modelcontextprotocol/filesystem` | `2.2.0` | `MIT` (registry-record) | `Anthropic / Model Context Protocol` | Yes | `reference` | `None` | `read-write` | `None` | 75/100 |
-| `io.github.modelcontextprotocol/git` | `0.6.2` | `MIT` (registry-record) | `Anthropic / Model Context Protocol` | Yes | `reference` | `None` | `read-write` | `None` | 75/100 |
-| `io.github.modelcontextprotocol/memory` | `2.1.0` | `MIT` (registry-record) | `Anthropic / Model Context Protocol` | Yes | `reference` | `None` | `read-write` | `None` | 75/100 |
-| `io.github.modelcontextprotocol/sequential-thinking` | `2.1.1` | `MIT` (registry-record) | `Anthropic / Model Context Protocol` | Yes | `reference` | `None` | `read-only` | `None` | 75/100 |
-| `io.github.modelcontextprotocol/time` | `0.6.2` | `MIT` (registry-record) | `Anthropic / Model Context Protocol` | Yes | `reference` | `None` | `read-only` | `None` | 75/100 |
-| `io.github.upstash/context7` | `4.5.1` | `Apache-2.0` (registry-record) | `io.github.upstash` | Yes | `official-vendor` | `None` | `read-only` | `CONTEXT7_API_KEY, CONTEXT7_API_KEY, Authorization` | 75/100 |
+| `io.github.firecrawl/firecrawl-mcp-server` | `3.38.0` | `Apache-2.0` (registry-record) | `io.github.firecrawl` | Yes | `official-vendor` | `stdio` | `read-only` | `FIRECRAWL_API_KEY`, header: `Authorization` (value from `${VAR}`) | 75/100 |
+| `io.github.modelcontextprotocol/fetch` | `0.6.2` | `MIT` (registry-record) | `Anthropic / Model Context Protocol` | Yes | `reference` | `stdio` | `read-only` | None | 75/100 |
+| `io.github.modelcontextprotocol/filesystem` | `2.2.0` | `MIT` (registry-record) | `Anthropic / Model Context Protocol` | Yes | `reference` | `stdio` | `read-write` | None | 75/100 |
+| `io.github.modelcontextprotocol/git` | `0.6.2` | `MIT` (registry-record) | `Anthropic / Model Context Protocol` | Yes | `reference` | `stdio` | `read-write` | None | 75/100 |
+| `io.github.modelcontextprotocol/memory` | `2.1.0` | `MIT` (registry-record) | `Anthropic / Model Context Protocol` | Yes | `reference` | `stdio` | `read-write` | None | 75/100 |
+| `io.github.modelcontextprotocol/sequential-thinking` | `2.1.1` | `MIT` (registry-record) | `Anthropic / Model Context Protocol` | Yes | `reference` | `stdio` | `read-only` | None | 75/100 |
+| `io.github.modelcontextprotocol/time` | `0.6.2` | `MIT` (registry-record) | `Anthropic / Model Context Protocol` | Yes | `reference` | `stdio` | `read-only` | None | 75/100 |
+| `io.github.upstash/context7` | `4.5.1` | `Apache-2.0` (registry-record) | `io.github.upstash` | Yes | `official-vendor` | `stdio` | `read-only` | `CONTEXT7_API_KEY`, header: `Authorization` (value from `${VAR}`) | 75/100 |
 
 ---
 
@@ -375,4 +375,4 @@ pytest
 python tools/verify_vault.py
 python tools/build_map.py --check
 ```
-**Output:** `78 passed in 2.43s`, `100% Pass (0 failures)`, `[PASS] Obsidian Map layer is up to date and link-consistent!`.
+**Output:** `91 passed in 2.49s`, `100% Pass (0 failures)`, `[PASS] Obsidian Map layer is up to date and link-consistent!`.

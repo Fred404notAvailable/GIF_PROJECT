@@ -241,6 +241,51 @@ The `catalog.yaml` file contains:
 
 ---
 
+## MCP Server Configuration & Safe Loader
+
+DevCrew AI generates and enforces schema-validated MCP configurations for agent runtimes (LangGraph state machines, human approval gates, Docker sandboxes).
+
+### Approved Servers (catalog.yaml)
+1. `io.github.modelcontextprotocol/filesystem` (`2.2.0`): Local filesystem operations scoped strictly to `d:/UPS_workspace`. Mutating tools (`write_file`, `edit_file`, etc.) require explicit human approval.
+2. `io.github.modelcontextprotocol/git` (`0.6.2`): Local git operations scoped to `d:/UPS_workspace`. Mutating tools (`git_commit`, `git_push`, `git_reset`, etc.) require human approval.
+3. `io.github.microsoft/playwright-mcp` (`0.0.84`): Local browser automation for E2E testing. Navigation is gated by human approval; web page text is untrusted.
+4. `io.github.upstash/context7` (`4.5.1`): Read-only documentation and context retriever. Requires `${CONTEXT7_API_KEY}`.
+
+### Quick Start: Generate and Load MCP Configurations
+
+1. **Configure Environment Secrets (Optional):**
+   Create a `.env.mcp` file in the project root with your Upstash Context7 API key (or leave it unset to keep Context7 disabled without failing the whole configuration):
+   ```bash
+   # .env.mcp (git-ignored)
+   CONTEXT7_API_KEY="your_api_key_here"
+   ```
+
+2. **Preview Configuration (Dry-Run):**
+   ```bash
+   python tools/mcp_config.py --crew devcrew --dry-run
+   ```
+
+3. **Generate Configuration and Host Exports:**
+   ```bash
+   python tools/mcp_config.py --crew devcrew
+   ```
+   Generates:
+   - `DevCrew-Vault/mcp/configs/devcrew/mcp_servers.json` (DevCrew schema-validated runtime config)
+   - `DevCrew-Vault/mcp/configs/devcrew/exports/claude-desktop.json` (Claude Desktop format)
+   - `DevCrew-Vault/mcp/configs/devcrew/exports/cursor.json` (Cursor IDE format)
+
+4. **Verify Consistency & Drift Check:**
+   ```bash
+   python tools/mcp_config.py --crew devcrew --check
+   ```
+
+5. **Validate with Runtime Safe Loader:**
+   ```bash
+   python tools/mcp_loader.py --crew devcrew --validate
+   ```
+
+---
+
 ## Layout
 
 ```

@@ -1,0 +1,135 @@
+{
+  "schemaVersion": 1,
+  "crew": "devcrew",
+  "generatedFrom": {
+    "catalogSha256": "f5854cc14cb886149f7732af95397078376c06a44b15c8f48771da5f3aaabd45",
+    "registrySnapshot": "2026-11-08T14:42:52.456312+00:00"
+  },
+  "workspaceRoot": "D:/UPS_workspace",
+  "servers": {
+    "filesystem": {
+      "registryName": "io.github.modelcontextprotocol/filesystem",
+      "version": "2.2.0",
+      "transport": "stdio",
+      "capability": "read-write",
+      "toolPolicy": {
+        "default": "require-approval",
+        "allow": [
+          "read_text_file",
+          "list_directory",
+          "read_media_file",
+          "get_file_info"
+        ],
+        "requireApproval": [
+          "write_file",
+          "edit_file",
+          "move_file",
+          "create_directory"
+        ]
+      },
+      "timeoutSeconds": 60,
+      "enabled": true,
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem@2.2.0",
+        "D:/UPS_workspace"
+      ]
+    },
+    "git": {
+      "registryName": "io.github.modelcontextprotocol/git",
+      "version": "0.6.2",
+      "transport": "stdio",
+      "capability": "read-write",
+      "toolPolicy": {
+        "default": "require-approval",
+        "allow": [
+          "git_status",
+          "git_diff",
+          "git_log",
+          "git_show"
+        ],
+        "requireApproval": [
+          "git_commit",
+          "git_add",
+          "git_reset",
+          "git_create_branch",
+          "git_checkout"
+        ]
+      },
+      "timeoutSeconds": 60,
+      "enabled": true,
+      "command": "uvx",
+      "args": [
+        "mcp-server-git==0.6.2",
+        "--repository",
+        "D:/UPS_workspace"
+      ]
+    },
+    "playwright-mcp": {
+      "registryName": "io.github.microsoft/playwright-mcp",
+      "version": "0.0.84",
+      "transport": "stdio",
+      "capability": "read-write",
+      "toolPolicy": {
+        "default": "require-approval",
+        "allow": [
+          "browser_screenshot",
+          "browser_get_html",
+          "browser_evaluate"
+        ],
+        "requireApproval": [
+          "browser_navigate",
+          "browser_click",
+          "browser_fill",
+          "browser_hover",
+          "browser_press_key",
+          "browser_select_option"
+        ]
+      },
+      "timeoutSeconds": 60,
+      "enabled": true,
+      "command": "npx",
+      "args": [
+        "-y",
+        "@playwright/mcp@0.0.84"
+      ],
+      "pairedSkills": [
+        "e2e-testing",
+        "web-testing-playwright-e2e",
+        "webapp-testing"
+      ]
+    },
+    "context7": {
+      "registryName": "io.github.upstash/context7",
+      "version": "4.5.1",
+      "transport": "stdio",
+      "capability": "read-only",
+      "toolPolicy": {
+        "default": "allow",
+        "allow": [
+          "query_context7",
+          "fetch_context",
+          "search_docs"
+        ],
+        "requireApproval": []
+      },
+      "timeoutSeconds": 60,
+      "enabled": false,
+      "command": "npx",
+      "args": [
+        "-y",
+        "@upstash/context7-mcp@4.5.1"
+      ],
+      "env": {
+        "CONTEXT7_API_KEY": "${CONTEXT7_API_KEY}"
+      },
+      "pairedSkills": [
+        "autonomous-agent-patterns",
+        "next-dev-loop",
+        "secure-webapp"
+      ],
+      "_comment": "Disabled: missing environment variable(s): CONTEXT7_API_KEY"
+    }
+  }
+}

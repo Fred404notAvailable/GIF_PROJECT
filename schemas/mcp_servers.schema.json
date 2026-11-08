@@ -1,0 +1,126 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DevCrewMCPServersConfig",
+  "description": "DevCrew AI safe MCP client servers configuration schema.",
+  "type": "object",
+  "required": ["schemaVersion", "crew", "generatedFrom", "workspaceRoot", "servers"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "type": "integer",
+      "enum": [1]
+    },
+    "crew": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_-]+$"
+    },
+    "generatedFrom": {
+      "type": "object",
+      "required": ["catalogSha256", "registrySnapshot"],
+      "additionalProperties": false,
+      "properties": {
+        "catalogSha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "registrySnapshot": {
+          "type": "string"
+        }
+      }
+    },
+    "workspaceRoot": {
+      "type": "string",
+      "minLength": 3
+    },
+    "servers": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["registryName", "version", "transport", "capability", "toolPolicy", "timeoutSeconds", "enabled"],
+        "additionalProperties": false,
+        "properties": {
+          "registryName": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string",
+            "pattern": "^[0-9]+(\\.[0-9]+)*(-[a-zA-Z0-9.]+)?$"
+          },
+          "transport": {
+            "type": "string",
+            "enum": ["stdio", "streamable-http", "sse"]
+          },
+          "command": {
+            "type": "string"
+          },
+          "args": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "headers": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "env": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "capability": {
+            "type": "string",
+            "enum": ["read-only", "read-write", "destructive", "unknown-treat-as-write"]
+          },
+          "toolPolicy": {
+            "type": "object",
+            "required": ["default", "allow", "requireApproval"],
+            "additionalProperties": false,
+            "properties": {
+              "default": {
+                "type": "string",
+                "enum": ["require-approval", "allow", "deny"]
+              },
+              "allow": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "requireApproval": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "timeoutSeconds": {
+            "type": "integer",
+            "minimum": 5,
+            "maximum": 600
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "pairedSkills": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "_comment": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
